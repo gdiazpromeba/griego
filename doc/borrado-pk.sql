@@ -1,0 +1,39 @@
+//borra PK's
+alter table COLUMNAS drop CONSTRAINT  PK_COLUMNAS
+go
+alter table COMBOS drop CONSTRAINT _ANONYMOUS_CONSTRAINT_145
+go
+alter table COMBOS_VALORES drop CONSTRAINT _ANONYMOUS_CONSTRAINT_146
+go
+alter table DESINENCIAS drop CONSTRAINT _ANONYMOUS_CONSTRAINT_123
+go
+drop table DESINENCIAS_SUSTANTIVOS_CABECERA
+go
+alter table DICCIONARIO drop constraint _ANONYMOUS_CONSTRAINT_133
+go
+drop table DICCIONARIO_PREPOSICIONALES
+go
+alter table IRR_INFINITIVOS drop constraint _ANONYMOUS_CONSTRAINT_165
+go
+alter table IRR_PARTICIPIOS_ENTEROS drop constraint _ANONYMOUS_CONSTRAINT_161
+go
+alter table IRR_SUSTANTIVOS drop constraint _ANONYMOUS_CONSTRAINT_147
+go
+alter table IRR_VERBOS drop constraint PK_IRR_VERBOS
+go
+alter table IRR_VERBOS_INDIVIDUALES drop constraint _ANONYMOUS_CONSTRAINT_164
+go
+alter table PREPOSICIONES drop constraint _ANONYMOUS_CONSTRAINT_150
+go
+alter table SUBSTRACTOR_PREFIJOS drop constraint _ANONYMOUS_CONSTRAINT_137
+go
+alter table SUSTANTIVOS drop constraint _ANONYMOUS_CONSTRAINT_148
+go
+drop table TEMAS_SUSTANTIVOS
+go
+alter table TEST_VERBOS drop constraint PK_TEST_VERBOS
+go
+alter table TIPOS_SUSTANTIVO drop constraint _ANONYMOUS_CONSTRAINT_152
+go
+alter table TIPOS_VERBO drop constraint _ANONYMOUS_CONSTRAINT_124
+go

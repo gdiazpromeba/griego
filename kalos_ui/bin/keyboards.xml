@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Mongo Aurelio (My Own) -->
+<keyboards>
+	<keyboard name="Belgian">
+		<keystroke name="/">
+			<combination key=":" modifier="shift" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="&lt;" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="EQUALS" modifier="" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="$" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="&amp;" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="EQUALS" modifier="shift" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key=")" modifier="" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="(" modifier="" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="Canadian French">
+		<keystroke name="/">
+			<combination key="3" modifier="shift" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="#" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="EQUALS" modifier="" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="#" modifier="shift" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="EQUALS" modifier="shift" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="Danish">
+		<keystroke name="/">
+			<combination key="7" modifier="shift" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="&lt;" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="'" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="´" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="+" modifier="" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="Estonian 102">
+		<keystroke name="/">
+			<combination key="7" modifier="shift" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="6" modifier="shift" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="½" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="5" modifier="shift" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="4" modifier="shift" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="-" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="Dutch">
+		<keystroke name="/">
+			<combination key="/" modifier="" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="/" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="-" modifier="shift" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="*" modifier="" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="*" modifier="shift" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="+" modifier="" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="7" modifier="shift" />
+		</keystroke>
+	</keyboard>	
+	<keyboard name="Finnish">
+		<keystroke name="/">
+			<combination key="7" modifier="shift" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="+" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="'" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="&gt;" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="+" modifier="" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="French">
+		<keystroke name="/">
+			<combination key=":" modifier="shift" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="_" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="EQUALS" modifier="" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="*" modifier="" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="-" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="EQUALS" modifier="shift" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key=")" modifier="" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="(" modifier="" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="German">
+		<keystroke name="/">
+			<combination key="7" modifier="shift" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="ß" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="+" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="&lt;" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="+" modifier="" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="Greek">
+		<keystroke name="/">
+			<combination key="SLASH" modifier="" />
+			<combination key="DIVIDE" modifier="" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="BACK_SLASH" modifier="" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="EQUALS" modifier="" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="9" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="EQUALS" modifier="shift" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="Greek Latin">
+		<keystroke name="/">
+			<combination key="SLASH" modifier="" />
+			<combination key="DIVIDE" modifier="" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="BACK_SLASH" modifier="" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="EQUALS" modifier="" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="BACK_SLASH" modifier="shift" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="EQUALS" modifier="shift" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="Italian">
+		<keystroke name="/">
+			<combination key="7" modifier="shift" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="BACK_SLASH" modifier="" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="+" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="BACK_SLASH" modifier="shift" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="+" modifier="" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="Portuguese">
+		<keystroke name="/">
+			<combination key="7" modifier="shift" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="BACK_SLASH" modifier="" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="+" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="BACK_SLASH" modifier="shift" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="+" modifier="" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="Portuguese Brazilian ABNT">
+		<keystroke name="/">
+			<combination key="SLASH" modifier="" />
+			<combination key="DIVIDE" modifier="" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="BACK_SLASH" modifier="" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="EQUALS" modifier="" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="BACK_SLASH" modifier="shift" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="EQUALS" modifier="shift" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="Spanish">
+		<keystroke name="/">
+			<combination key="7" modifier="shift" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="º" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="+" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="1" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="+" modifier="" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="Spanish Variation">
+		<keystroke name="/">
+			<combination key="3" modifier="shift" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="'" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="EQUALS" modifier="" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="-" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="1" modifier="ctrl alt" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="+" modifier="" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="5" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="4" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="United Kingdom">
+		<keystroke name="/">
+			<combination key="SLASH" modifier="" />
+			<combination key="DIVIDE" modifier="" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="BACK_SLASH" modifier="" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="EQUALS" modifier="" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="BACK_SLASH" modifier="shift" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="EQUALS" modifier="shift" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="US-Dvorak">
+		<keystroke name="/">
+			<combination key="SLASH" modifier="" />
+			<combination key="DIVIDE" modifier="" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="BACK_SLASH" modifier="" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="EQUALS" modifier="" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="BACK_SLASH" modifier="shift" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="EQUALS" modifier="shift" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="US-English">
+		<keystroke name="/">
+			<combination key="SLASH" modifier="" />
+			<combination key="DIVIDE" modifier="" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="BACK_SLASH" modifier="" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="EQUALS" modifier="" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="BACK_SLASH" modifier="shift" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="EQUALS" modifier="shift" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+	<keyboard name="US-International">
+		<keystroke name="/">
+			<combination key="SLASH" modifier="" />
+			<combination key="DIVIDE" modifier="" />
+		</keystroke>
+		<keystroke name="\">
+			<combination key="BACK_SLASH" modifier="" />
+		</keystroke>
+		<keystroke name="=">
+			<combination key="EQUALS" modifier="" />
+		</keystroke>
+		<keystroke name="*">
+			<combination key="8" modifier="shift" />
+		</keystroke>
+		<keystroke name="|">
+			<combination key="BACK_SLASH" modifier="shift" />
+		</keystroke>
+		<keystroke name="+">
+			<combination key="EQUALS" modifier="shift" />
+		</keystroke>
+		<keystroke name=")">
+			<combination key="0" modifier="shift" />
+		</keystroke>
+		<keystroke name="(">
+			<combination key="9" modifier="shift" />
+		</keystroke>
+		<keystroke name="_">
+			<combination key="MINUS" modifier="shift" />
+		</keystroke>
+	</keyboard>
+</keyboards>

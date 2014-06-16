@@ -1,0 +1,4 @@
+eComp: EQ, BuildComp: EQ, DistributionComp: GE, RevisionComp: GE, Exist: present
+2014-04-12 23:52:19, Info                  CBS    Appl: detectParent: package: Package_for_KB2773072_SP1~31bf3856ad364e35~x86~~6.1.1.5, no parent found, go absent
+2014-04-12 23:52:19, Info                  CBS    Appl: detect Parent, Package: Package_for_KB2773072_SP1~31bf3856ad364e35~x86~~6.1.1.5, Parent: Microsoft-Windows-ParentalControls-Package~31bf3856ad364e35~x86~zh-CN~6.1.7601.17514, Disposition = Staged, VersionComp: EQ, ServiceComp: EQ, BuildComp: EQ, DistributionComp: GE, RevisionComp: GE, Exist: present
+2014-04-12 23:52:19, Info                  CBS    Appl: detectParent: package: Package_for_KB2773072_SP1~31bf3856ad364e35~x86~~6.1.1.5, no parent found, go abs

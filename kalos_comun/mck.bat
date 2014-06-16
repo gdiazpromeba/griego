@@ -1,0 +1,1 @@
+java -jar lib/mckoidb.jar -u gonzalo -p manuela

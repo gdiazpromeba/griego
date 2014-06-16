@@ -1,0 +1,7 @@
+  La parte de PayPal que permite recibir donaciones contiene una clave pública y cosas que no sé cómo meter en
+xml, así que lo que voy a hacer es tomar mis archivos xml, hacer la transformación a html manualmente, pegar la sección de html que permite aceptar la donación, y subir directamente esos archivos html al sitio.
+  
+  Para transformar manualmente se necesita tener xalan.jar y xerces.jar en un directorio o en el classpath, java en el classpath, y llamar al siguiente comando:
+
+  C:\test>java -cp xalan.jar;xerces.jar org.apache.xalan.xslt.Process -in datos_indice_en.xml -xsl kalos_indice.xsl    -out resultado.html
+

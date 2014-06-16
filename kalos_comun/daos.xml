@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+
+	<bean id="kalosDataSource" class="kalos.datos.modulos.FuenteDeDatosKalos" destroy-method="close">
+		<property name="driverClassName" value="com.mckoi.JDBCDriver" />
+		<property name="url" value="jdbc:mckoi://localhost/" />
+		<property name="username" value="gonzalo" />
+		<property name="password" value="ymcsngm" />
+	</bean>
+	
+
+	<!--  DAO's -->
+
+	<bean id="adjetivoDAO" class="kalos.datos.dao.AdjetivoDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+	<bean id="adverbiosDAO" class="kalos.datos.dao.AdverbiosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+	
+	<bean id="adjetivosComoNominalesDAO" class="kalos.datos.dao.AdjetivosComoNominalesDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+
+
+	<bean id="combosDAO" class="kalos.datos.dao.CombosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+	<bean id="conjuncionesDAO" class="kalos.datos.dao.ConjuncionesDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="cubosTipoPartDAO" class="kalos.datos.dao.CubosTipoPartDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+
+	<bean id="desinSustDAO" class="kalos.datos.dao.DesinSustDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+	<bean id="desinInfinitivosDAO" class="kalos.datos.dao.DesinInfintivosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+	
+	<bean id="desinVerbosDAO" class="kalos.datos.dao.DesinVerbosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+
+	<bean id="diccionarioDAO" class="kalos.datos.dao.DiccionarioDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+	<bean id="encParticulasDAO" class="kalos.datos.dao.EncParticulasDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+	
+	<bean id="interjeccionesDAO" class="kalos.datos.dao.InterjeccionesDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+
+	<bean id="irrAdjetivosEnterosDAO" class="kalos.datos.dao.IrrAdjetivosEnterosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+	<bean id="irrAdjetivosIndividualesDAO" class="kalos.datos.dao.IrrAdjetivosIndividualesDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+
+	<bean id="irrInfinitivosDAO" class="kalos.datos.dao.IrrInfinitivosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="irrParticipiosEnterosDAO" class="kalos.datos.dao.IrrParticipiosEnterosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="irrParticipiosSimplesDAO" class="kalos.datos.dao.IrrParticipiosSimplesDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+
+	<bean id="irrSustantivosDAO" class="kalos.datos.dao.IrrSustantivosDAOImpl">
+		<property name="dataSource">
+			<ref local="kalosDataSource" />
+		</property>
+	</bean>
+
+	<bean id="irrVerbosDAO" class="kalos.datos.dao.IrrVerbosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="irrVerbosIndividualesDAO" class="kalos.datos.dao.IrrVerbosIndividualesDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+	<bean id="particulasDAO" class="kalos.datos.dao.ParticulasDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>	
+	
+	<bean id="preposicionesDAO" class="kalos.datos.dao.PreposicionesDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>	
+
+	<bean id="preposicionesEnVerbosDAO" class="kalos.datos.dao.PreposicionesEnVerbosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+
+	<bean id="seguridadDAO" class="kalos.datos.dao.SeguridadDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="significadoDAO" class="kalos.datos.dao.SignificadoDAOImpl">
+		<property name="dataSource">
+			<ref local="kalosDataSource" />
+		</property>
+	</bean>
+
+	<bean id="substractorPrefijosDAO" class="kalos.datos.dao.SubstractorPrefijosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="sustantivosDAO" class="kalos.datos.dao.SustantivosDAOImpl">
+		<property name="dataSource">
+			<ref local="kalosDataSource" />
+		</property>
+	</bean>
+	
+	
+	<bean id="temasTermRegNominalDAO" class="kalos.datos.dao.TemasTermRegNominalDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="termRegSustantivoDAO" class="kalos.datos.dao.TermRegSustantivoDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+	
+
+	<bean id="termRegVerboDAO" class="kalos.datos.dao.TermRegVerboDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="termRegInfinitivoDAO" class="kalos.datos.dao.TermRegInfinitivoDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="testAdjetivosDAO" class="kalos.datos.dao.TestAdjetivosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="testInfinitivosDAO" class="kalos.datos.dao.TestInfinitivosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="testParticipiosDAO" class="kalos.datos.dao.TestParticipiosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="testSustantivosDAO" class="kalos.datos.dao.TestSustantivosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+
+	<bean id="testVerbosDAO" class="kalos.datos.dao.TestVerbosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+
+
+	<bean id="transParticipiosDAO" class="kalos.datos.dao.TransParticipiosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+
+	<bean id="tiposAdjetivoDAO" class="kalos.datos.dao.TiposAdjetivoDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="tiposSustantivoDAO" class="kalos.datos.dao.TiposSustantivoDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="tiposVerboDAO" class="kalos.datos.dao.TiposVerboDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="verbalizadorParticipiosDAO" class="kalos.datos.dao.VerbalizadorParticipiosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="verbosDAO" class="kalos.datos.dao.VerbosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="verbosCompuestosDAO" class="kalos.datos.dao.VerbosCompuestosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+
+
+</beans>

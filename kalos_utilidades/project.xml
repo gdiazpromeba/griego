@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://maven.apache.org/maven-v3_0_0.xsd">
+	<pomVersion>3</pomVersion>
+	<name>kalos-utilidades</name>
+	<groupId>kalos-utilidades</groupId>
+	<artifactId>kalos-utilidades</artifactId>
+	<currentVersion>1.0.0</currentVersion>
+	<organization>
+		<name>Kallistos corporation</name>
+		<url>http://www.classicgreek.net</url>
+	</organization>
+	<inceptionYear>2005</inceptionYear>
+	<package>kalos.utilidades</package>
+	<!-- 
+		<url>http://tendev-l2.turner.com/NightlyBuilds/${pom.artifactId}</url>
+		<issueTrackingUrl>http://ide-ondemand.turner.com</issueTrackingUrl>
+		<siteAddress>tendev-l2.turner.com</siteAddress>
+		<siteDirectory>/home/testprod/webapps/NightlyBuilds/webapp/${pom.artifactId}</siteDirectory>
+		<repository>
+		<connection>scm:cvs:pserver:anonymous@orbitdev-web1.turner.com:/home/cvs/repository:${pom.groupId}/${pom.artifactId}</connection>
+		<developerConnection>scm:cvs:pserver:${user.name}@orbitdev-web1.turner.com:/home/cvs/repository:${pom.groupId}/${pom.artifactId}</developerConnection>
+		<url>http://orbitdev-web1.turner.com/viewcvs/</url>
+		</repository>
+	-->
+	<developers>
+		<developer>
+			<name>Gonzalo Díaz</name>
+			<id>gdiaz</id>
+			<email>gonzalo_diaz@yahoo.com</email>
+			<organization>Kallistos Corporation</organization>
+			<roles>
+				<role>Software Engineer</role>
+			</roles>
+			<timezone>-5</timezone>
+		</developer>
+	</developers>
+	<!-- 
+		<licenses>
+		<license>
+		<url>/LICENSE.txt</url>
+		<distribution>repo</distribution>
+		</license>
+		</licenses>
+	-->
+	<dependencies>
+
+
+
+
+
+		<dependency>
+			<groupId>biblioteca-datos</groupId>
+			<artifactId>biblioteca-datos</artifactId>
+			<version>1.0.0</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.6.1</version>
+			<type>jar</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.1</version>
+			<type>jar</type>
+		</dependency>		
+		
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.2.1</version>
+			<type>jar</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.1</version>
+			<type>jar</type>
+		</dependency>		
+				
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.0.4</version>
+			<type>jar</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>1.2</version>
+			<type>jar</type>
+		</dependency>		
+
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.4</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>forms</groupId>
+			<artifactId>forms</artifactId>
+			<version>1.0.5</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>foxtrot</groupId>
+			<artifactId>foxtrot</artifactId>
+			<version>2.0</version>
+			<type>jar</type>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.5</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>looks</groupId>
+			<artifactId>looks</artifactId>
+			<version>1.3.1</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>mckoi</groupId>
+			<artifactId>mckoi</artifactId>
+			<version>1.0.2</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>1.2.1</version>
+			<type>jar</type>
+		</dependency>
+
+
+	</dependencies>
+	<build>
+		<nagEmailAddress>${nagEmailAddress}</nagEmailAddress>
+		<sourceDirectory>${maven.src.dir}</sourceDirectory>
+		<!-- 
+			<unitTestSourceDirectory>test</unitTestSourceDirectory>
+			<unitTest>
+			<includes>
+			<include>**/*Test.java</include>
+			<include>${basedir}/WEB-INF/applicationContext.xml</include>
+			</includes>
+			<resources>
+			<resource>
+			<directory>${basedir}/config/test</directory>
+			<targetPath>${maven.test.dest}</targetPath>
+			<includes>
+			<include>**</include>
+			</includes>
+			</resource>
+			</resources>
+			</unitTest>
+		-->
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>${basedir}/config</directory>
+				<includes>
+					<include>*.properties</include>
+					<include>*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+	<reports>
+		<report>maven-changelog-plugin</report>
+		<report>maven-changes-plugin</report>
+		<report>maven-checkstyle-plugin</report>
+		<report>maven-developer-activity-plugin</report>
+		<report>maven-file-activity-plugin</report>
+		<report>maven-javadoc-plugin</report>
+		<report>maven-jcoverage-plugin</report>
+		<report>maven-jdepend-plugin</report>
+		<report>maven-junit-report-plugin</report>
+		<report>maven-jxr-plugin</report>
+		<report>maven-license-plugin</report>
+		<report>maven-linkcheck-plugin</report>
+		<report>maven-pmd-plugin</report>
+		<report>maven-tasklist-plugin</report>
+	</reports>
+	<versions>
+		<version>
+			<id>1.0.0</id>
+			<name>1.0.0</name>
+			<tag>kalos_utilidades_1_0_0</tag>
+		</version>
+	</versions>
+</project>

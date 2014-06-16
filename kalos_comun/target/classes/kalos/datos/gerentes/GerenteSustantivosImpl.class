@@ -1,0 +1,100 @@
+E02280-12B3-4E0B-937B-6747F6ACB286}\ProxyStubClsid" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{00020424-0000-0000-C000-000000000046}" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{DDE02280-12B3-4E0B-937B-6747F6ACB286}" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="IUpdateServiceRegistration" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{DDE02280-12B3-4E0B-937B-6747F6ACB286}\TypeLib" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{B596CC9F-56E5-419E-A622-E01BB457431E}" operationHint="replace" owner="true" />
+      <registryValue name="Version" valueType="REG_SZ" value="2.0" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{23857E3C-02BA-44A3-9423-B1C900805F37}\ProxyStubClsid32" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{00020424-0000-0000-C000-000000000046}" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{23857E3C-02BA-44A3-9423-B1C900805F37}\ProxyStubClsid" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{00020424-0000-0000-C000-000000000046}" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{23857E3C-02BA-44A3-9423-B1C900805F37}" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="IUpdateServiceManager" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{23857E3C-02BA-44A3-9423-B1C900805F37}\TypeLib" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{B596CC9F-56E5-419E-A622-E01BB457431E}" operationHint="replace" owner="true" />
+      <registryValue name="Version" valueType="REG_SZ" value="2.0" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{0BB8531D-7E8D-424F-986C-A0B8F60A3E7B}\ProxyStubClsid32" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{00020424-0000-0000-C000-000000000046}" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{0BB8531D-7E8D-424F-986C-A0B8F60A3E7B}\ProxyStubClsid" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{00020424-0000-0000-C000-000000000046}" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{0BB8531D-7E8D-424F-986C-A0B8F60A3E7B}" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="IUpdateServiceManager2" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{0BB8531D-7E8D-424F-986C-A0B8F60A3E7B}\TypeLib" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{B596CC9F-56E5-419E-A622-E01BB457431E}" operationHint="replace" owner="true" />
+      <registryValue name="Version" valueType="REG_SZ" value="2.0" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{85713FA1-7796-4FA2-BE3B-E2D6124DD373}" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="IWindowsUpdateAgentInfo" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{85713FA1-7796-4FA2-BE3B-E2D6124DD373}\ProxyStubClsid32" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{00020424-0000-0000-C000-000000000046}" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{85713FA1-7796-4FA2-BE3B-E2D6124DD373}\ProxyStubClsid" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{00020424-0000-0000-C000-000000000046}" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{85713FA1-7796-4FA2-BE3B-E2D6124DD373}\TypeLib" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{B596CC9F-56E5-419E-A622-E01BB457431E}" operationHint="replace" owner="true" />
+      <registryValue name="Version" valueType="REG_SZ" value="2.0" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{144FE9B0-D23D-4A8B-8634-FB4457533B7A}\TypeLib" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{B596CC9F-56E5-419E-A622-E01BB457431E}" operationHint="replace" owner="true" />
+      <registryValue name="Version" valueType="REG_SZ" value="2.0" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{144FE9B0-D23D-4A8B-8634-FB4457533B7A}\ProxyStubClsid32" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{00020424-0000-0000-C000-000000000046}" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{144FE9B0-D23D-4A8B-8634-FB4457533B7A}" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="IUpdate2" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{144FE9B0-D23D-4A8B-8634-FB4457533B7A}\ProxyStubClsid" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{00020424-0000-0000-C000-000000000046}" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{112EDA6B-95B3-476F-9D90-AEE82C6B8181}\TypeLib" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{B596CC9F-56E5-419E-A622-E01BB457431E}" operationHint="replace" owner="true" />
+      <registryValue name="Version" valueType="REG_SZ" value="2.0" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{112EDA6B-95B3-476F-9D90-AEE82C6B8181}\ProxyStubClsid32" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{00020424-0000-0000-C000-000000000046}" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{112EDA6B-95B3-476F-9D90-AEE82C6B8181}" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="IUpdate3" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{112EDA6B-95B3-476F-9D90-AEE82C6B8181}\ProxyStubClsid" owner="false">
+      <registryValue name="" valueType="REG_SZ" value="{00020424-0000-0000-C000-000000000046}" operationHint="replace" owner="true" />
+      <securityDescriptor name="WRP_REGKEY_DEFAULT_SDDL" />
+    </registryKey>
+    <registryKey keyName="HKEY_CLASSES_ROOT\Interface\{27e94b0d-5139-49a2-9a61-93522dc54652}\TypeLib" owner="false">
+      <registryValue name="" va

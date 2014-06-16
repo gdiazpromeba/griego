@@ -1,0 +1,2 @@
+-Se normalizó la tabla de verbos compuestos con preposición.
+- se corrigió las irregularidades del nombre *I)HSOU=J

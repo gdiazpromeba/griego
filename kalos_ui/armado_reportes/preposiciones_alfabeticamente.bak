@@ -1,0 +1,294 @@
+
+
+<pre>
+CALL SYSCS_UTIL.SYSCS_INVALIDATE_STORED_STATEMENTS()
+</pre>
+
+
+<!-- 
+  DESCRIBE WHY THE CHANGE WAS MADE.
+
+  For instance:
+
+  The previous behavior violated the JDBC standard. The new behavior
+  is correct.
+-->
+
+
+<h4>Rationale for Change</h4>
+
+<p>
+The new SYSCS_UTIL.SYSCS_INVALIDATE_STORED_STATEMENTS procedure was
+introduced as a workaround when Derby bugs break metadata queries and triggers.
+</p>
+
+
+
+</div>
+<hr>
+<h3>
+<a name="Note for DERBY-5546"></a>Note for DERBY-5546</h3>
+<div>
+
+<!-- 
+  SUMMARIZE THE ISSUE. This is a one line, one sentence summary of the
+  issue. It serves as the title for the issue in the Issues section of
+  the full Release Notes.
+
+  For instance:
+
+  Applications may no longer open two InputStreams on the same ResultSet column.
+-->
+
+
+<h4>Summary of Change</h4>
+
+<p>
+ResultSet#updateBigDecimal on a REAL or DOUBLE column now does underflow checking.
+</p>
+
+
+<!-- 
+  DESCRIBE WHAT IT IS THAT THE USER ACTUALLY SEES WHEN THE PROBLEM OCCURS.
+
+  For instance:
+
+  In the previous release, applications were able to open two
+  InputStreams on the same column. Depending on how these streams
+  interacted, the value siphoned out of the column was erratic. Now
+  Derby raises a SQLException when the application attempts to create
+  the second InputStream.
+-->
+
+
+<h4>Symptoms Seen by Applications Affected by Change</h4>
+
+<p>
+Using ResultSet#updateBigDecimal will throw SQL error 22003 in applications
+that didn't use to throw.
+</p>
+
+
+<!-- 
+  OPTIONAL: DESCRIBE INCOMPATIBILITIES WITH PREVIOUS RELEASE, IF ANY.
+
+  For instance:
+
+  Applications which open two InputStreams on the ResultSet column now
+  fail.
+-->
+
+
+<h4>Incompatibilities with Previous Release</h4>
+
+<p>
+If the application performs ResultSet#updateBigDecimal on a REAL or a
+DOUBLE column with a value that is too small to be represented in
+Derby and didn't include code to handle SQLDataException 22003, it
+would now need to handle this (and possibly update the value with 0.0
+itself if that is the desired behavior).
+</p>
+
+
+<!-- 
+  DESCRIBE WHY THE CHANGE WAS MADE.
+
+  For instance:
+
+  The previous behavior violated the JDBC standard. The new behavior
+  is correct.
+-->
+
+
+<h4>Rationale for Change</h4>
+
+<p>
+To make Derby behavior more consistent and to reliably detect underflow behavior.
+</p>
+
+
+<!-- 
+  OPTIONAL: DESCRIBE HOW TO REVERT TO THE PREVIOUS BEHAVIOR OR
+  OTHERWISE AVOID THE INCOMPATIBILITIES INTRODUCED BY THIS CHANGE.
+
+  For instance:
+
+  Users must recode applications which open multiple streams on the same column.
+-->
+
+
+<h4>Application Changes Required</h4>
+
+<p>
+If the application would sometimes try to perform ResultSet#updateBigDecimal with a number that can't be represented by REAL or DOUBLE, as the case may be, an exception handler may have to be added.
+</p>
+
+
+
+</div>
+<hr>
+<h3>
+<a name="Note for DERBY-5232"></a>Note for DERBY-5232</h3>
+<div>
+
+<!-- 
+  SUMMARIZE THE ISSUE. This is a one line, one sentence summary of the
+  issue. It serves as the title for the issue in the Issues section of
+  the full Release Notes.
+
+  For instance:
+
+  Applications may no longer open two InputStreams on the same ResultSet column.
+-->
+
+
+<h4>Summary of Change</h4>
+
+<p>
+Derby will create readme files in the database directories.
+</p>
+
+
+<!-- 
+  DESCRIBE WHAT IT IS THAT THE USER ACTUALLY SEES WHEN THE PROBLEM OCCURS.
+
+  For instance:
+
+  In the previous release, applications were able to open two
+  InputStreams on the same column. Depending on how these streams
+  interacted, the value siphoned out of the column was erratic. Now
+  Derby raises a SQLException when the application attempts to create
+  the second InputStream.
+-->
+
+
+<h4>Symptoms Seen by Applications Affected by Change</h4>
+
+<p>
+A database created with Derby 10.10, or upgraded to 10.10, will contain readme files named README_DO_NOT_TOUCH_FILES.txt in the top-level database directory and in the subdirectories seg0 and log.
+</p>
+
+
+<!-- 
+  DESCRIBE WHY THE CHANGE WAS MADE.
+
+  For instance:
+
+  The previous behavior violated the JDBC standard. The new behavior
+  is correct.
+-->
+
+
+<h4>Rationale for Change</h4>
+
+<p>
+Unintentional editing of the database files by the users can leave the database in a non-recoverable state. To caution users against such an action, a database created with 10.10 or upgraded to Derby 10.10 will have three readme files which will warn users against touching any files in the various database directories. These readme files are in the top-level database directory and in the subdirectories seg0 and log.
+</p>
+
+
+
+</div>
+<hr>
+<h3>
+<a name="Note for DERBY-3398"></a>Note for DERBY-3398</h3>
+<div>
+
+<!-- 
+  SUMMARIZE THE ISSUE. This is a one line, one sentence summary of the
+  issue. It serves as the title for the issue in the Issues section of
+  the full Release Notes.
+
+  For instance:
+
+  Applications may no longer open two InputStreams on the same ResultSet column.
+-->
+
+
+<h4>Summary of Change</h4>
+
+<p>
+Legacy DB2 compatibility limits on REAL and DOUBLE values have been
+lifted.  
+</p>
+
+
+<!-- 
+  DESCRIBE WHAT IT IS THAT THE USER ACTUALLY SEES WHEN THE PROBLEM OCCURS.
+
+  For instance:
+
+  In the previous release, applications were able to open two
+  InputStreams on the same column. Depending on how these streams
+  interacted, the value siphoned out of the column was erratic. Now
+  Derby raises a SQLException when the application attempts to create
+  the second InputStream.
+-->
+
+
+<h4>Symptoms Seen by Applications Affected by Change</h4>
+
+<p>
+SQLDataException 22003 may not be raised for applications which use
+float and double Java values outside DB2's limits for SQL REAL and
+DOUBLE.
+</p>
+
+
+<p>
+In soft upgrade mode, the checking of the limits is still in place,
+but is deferred from ResultSet#updateXXX to ResultSet#updateRow.
+</p>
+
+
+<!-- 
+  OPTIONAL: DESCRIBE INCOMPATIBILITIES WITH PREVIOUS RELEASE, IF ANY.
+
+  For instance:
+
+  Applications which open two InputStreams on the ResultSet column now
+  fail.
+-->
+
+
+<h4>Incompatibilities with Previous Release</h4>
+
+<p>
+The application cannot rely on Derby to detect when values outside the
+legacy DB2 limits are used.  These limits are:
+<pre>
+    float DB2_SMALLEST_REAL = -3.402E+38f;
+    float DB2_LARGEST_REAL  = +3.402E+38f;
+    float DB2_SMALLEST_POSITIVE_REAL = +1.175E-37f;
+    float DB2_LARGEST_NEGATIVE_REAL  = -1.175E-37f;
+
+    double DB2_SMALLEST_DOUBLE = -1.79769E+308d;
+    double DB2_LARGEST_DOUBLE  = +1.79769E+308d;
+    double DB2_SMALLEST_POSITIVE_DOUBLE = +2.225E-307d;
+    double DB2_LARGEST_NEGATIVE_DOUBLE  = -2.225E-307d;
+</pre>
+
+</p>
+
+
+<p>
+In soft upgrade mode, the place where the limits are checked has changed, cf. above.
+</p>
+
+<!-- 
+  DESCRIBE WHY THE CHANGE WAS MADE.
+
+  For instance:
+
+  The previous behavior violated the JDBC standard. The new behavior
+  is correct.
+-->
+
+
+<h4>Rationale for Change</h4>
+
+<p>
+We do this to allow applications to store a wider range of the
+Java floating point number types in Derby.
+It lets the application use Derby for all Java float and
+double values with the exception of NaN (not a number), -0.0
+(normalized to +0.0) and +/- infinity as defined in the 

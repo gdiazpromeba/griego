@@ -1,0 +1,16 @@
+-comprobar el número de versión en el archivo build.xml del proyecto kalos_ui
+-comprobar que haya un directorio c:\temp, preferentemente vacío
+-limpiar la tabla SEGURIDAD de la base de datos, y cerrar la base de datos
+-ejecutar "test" (tarea de Ant)
+-ejecutar la tarea "distribucionZip" - el resultado queda en c:\kalos\instalacion\Output
+
+-con el cmd, ir a c:\kalos\instalacion y tipear 
+  launch4j kalos.cfg
+-ejecutar "distribucionWin" (tarea de Ant)
+- desde el Windows Explorer, ejecutar "compile" sobre el archivo c:\kalos\instalacion\instalacion.iss
+-el archivo resultado queda en c:\kalos\instalacion\Output
+
+-ejecutar "distribucionMac" (tarea de Ant)
+-apretar el botón secundario del mouse sobre c:\temp\macintosh\kalos[xxx].app, seleccionar Stuffit/Compress With options, luego "continue". En la lista de formatos, elegir "stuffit".
+-el archivo resutado queda en c:\temp\macintosh
+

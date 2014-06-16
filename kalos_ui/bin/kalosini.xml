@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<kalos>
+  <claserecursos valor="kalos.recursos.abm,kalos.recursos.basico"/>
+  <debug>true</debug>
+  <version>NUMERO_DE_VERSION</version>
+  <ultimo_idioma valor="en"/>
+  <idioma_significados valor="en"/>
+  <ultimo_teclado>US-International</ultimo_teclado>
+  <font name="Arial Unicode MS" size="12" sizeDiccionario="12" sizeAM="12" sizeFlexion="12">
+    <muestraMakrones>true</muestraMakrones>
+  </font>
+  <registrado nombre=""/>
+  <analisis-morfologico maximo-formas="100"/>
+</kalos>

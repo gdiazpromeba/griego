@@ -1,0 +1,133 @@
+odo) {
+			Modo modo = (Modo) enumeracion;
+			switch (modo) {
+			case Indicativo:
+				return Recursos.getCadena("indicativo");
+			case Subjuntivo:
+				return Recursos.getCadena("subjuntivo");
+			case Optativo:
+				return Recursos.getCadena("optativo");
+			case Imperativo:
+				return Recursos.getCadena("imperativo");
+			}
+			throw new RuntimeException("modo no encontrado");
+		} else if (enumeracion instanceof TipoPalabra) {
+			TipoPalabra tipp = (TipoPalabra) enumeracion;
+			switch (tipp) {
+			case Adjetivo:
+				return Recursos.getCadena("adjetivo");
+			case Adverbio:
+				return Recursos.getCadena("adverbio");
+			case Sustantivo:
+				return Recursos.getCadena("sustantivo");
+			case Verbo:
+				return Recursos.getCadena("verbo");
+			case Infinitivo:
+				return Recursos.getCadena("infinitivo");
+			case Participio:
+				return Recursos.getCadena("participio");
+			case Articulo:
+				return Recursos.getCadena("articulo");
+			case PronombrePersonal:
+				return Recursos.getCadena("pronombre_personal");
+			case PronombreRelativo:
+				return Recursos.getCadena("pronombre_relativo");
+			case Conjuncion:
+			    return Recursos.getCadena("conjuncion");
+            case Preposicion:
+                return Recursos.getCadena("preposicion");
+            case PronombreReflexivo:
+                return Recursos.getCadena("pronombre_reflexivo");
+            case PronombreInterrogativo:
+                return Recursos.getCadena("pronombre_interrogativo");
+            case Interjeccion:
+                return Recursos.getCadena("interjeccion");
+            case PronombreIndefinido:
+                return Recursos.getCadena("pronombre_indefinido");
+			}
+			throw new RuntimeException("tipo de palabra no encontrado");
+		} else if (enumeracion instanceof Tiempo) {
+			Tiempo tipp = (Tiempo) enumeracion;
+			switch (tipp) {
+			case Presente:
+				return Recursos.getCadena("presente");
+			case Imperfecto:
+				return Recursos.getCadena("imperfecto");
+			case Futuro:
+				return Recursos.getCadena("futuro");
+			case Aoristo:
+				return Recursos.getCadena("aoristo");
+			case Perfecto:
+				return Recursos.getCadena("perfecto");
+			case Pluscuamperfecto:
+				return Recursos.getCadena("pluscuamperfecto");
+			}
+			throw new RuntimeException("tiempo no encontrado");
+		} else if (enumeracion instanceof TiempoSegundos) {
+			TiempoSegundos tis = (TiempoSegundos) enumeracion;
+			switch (tis) {
+			case Presente:
+				return Recursos.getCadena("presente");
+			case Imperfecto:
+				return Recursos.getCadena("imperfecto");
+			case Futuro:
+				return Recursos.getCadena("futuro");
+			case FuturoSegundo:
+				return Recursos.getCadena("futuro_segundo");
+			case Aoristo:
+				return Recursos.getCadena("aoristo");
+			case AoristoSegundo:
+				return Recursos.getCadena("aoristo_segundo");
+			case Perfecto:
+				return Recursos.getCadena("perfecto");
+			case PerfectoSegundo:
+				return Recursos.getCadena("perfecto_segundo");
+			case Pluscuamperfecto:
+				return Recursos.getCadena("pluscuamperfecto");
+			case PluscuamperfectoSegundo:
+				return Recursos.getCadena("pluscuamperfecto_segundo");
+			}
+			throw new RuntimeException("tiempo no encontrado");
+		} else if (enumeracion instanceof AspectosSegundos) {
+			AspectosSegundos tis = (AspectosSegundos) enumeracion;
+			switch (tis) {
+			case Infectivo:
+				return Recursos.getCadena("infectivo");
+			case Futuro:
+				return Recursos.getCadena("futuro");
+			case FuturoSegundo:
+				return Recursos.getCadena("futuro_segundo");
+			case Confectivo:
+				return Recursos.getCadena("confectivo");
+			case ConfectivoSegundo:
+				return Recursos.getCadena("confectivo_segundo");
+			case Perfectivo:
+				return Recursos.getCadena("perfectivo");
+			case PerfectivoSegundo:
+				return Recursos.getCadena("perfectivo_segundo");
+			}
+			throw new RuntimeException("tiempo no encontrado");			
+		} else if (enumeracion instanceof Persona) {
+			Persona tipp = (Persona) enumeracion;
+			switch (tipp) {
+			case _1ps:
+				return Recursos.getCadena("1ps");
+			case _2ps:
+				return Recursos.getCadena("2ps");
+			case _3ps:
+				return Recursos.getCadena("3ps");
+			case _1pp:
+				return Recursos.getCadena("1pp");
+			case _2pp:
+				return Recursos.getCadena("2pp");
+			case _3pp:
+				return Recursos.getCadena("3pp");
+			case _2pd:
+				return Recursos.getCadena("2pd");
+			case _3pd:
+				return Recursos.getCadena("3pd");
+			}
+			throw new RuntimeException("persona no encontrada");
+		} else if (enumeracion instanceof Contraccion) {
+			Contraccion contr = (Contraccion) enumeracion;
+			switch (cont

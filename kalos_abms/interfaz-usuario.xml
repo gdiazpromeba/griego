@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="abmAdjetivos" class="kalos.utilidades.abms.adjetivos.ABMAdjetivos">
+		<constructor-arg ref="detalleAdjetivos" />
+		<constructor-arg ref="fabricaControles"/>
+		<constructor-arg ref="abmIrrAdjetivosEnteros" />
+		<constructor-arg ref="abmIrrAdjetivosIndividuales" />
+		<property name="declinaAdjetivos" ref="declinaAdjetivos"/>
+		<property name="gerenteSignificados" ref="gerenteSignificados"/>
+		<property name="gerenteAdjetivos" ref="gerenteAdjetivos"/>
+		<property name="creadorTableModelsGrilla" ref="creadorTableModelsGrilla"/>		
+	</bean>
+
+	<bean id="abmConjunciones" class="kalos.utilidades.abms.conjunciones.ABMConjunciones">
+		<constructor-arg ref="detalleConjunciones" />
+		<property name="gerenteSignificados" ref="gerenteSignificados"/>
+		<property name="gerenteConjunciones" ref="gerenteConjunciones"/>
+	</bean>
+		
+
+	<bean id="abmDesinSust" class="kalos.utilidades.abms.sustantivos.ABMDesinSust">
+		<constructor-arg ref="detalleDesinSust" />
+		<constructor-arg ref="fabricaControles" />
+		<property name="gerenteDesinSust" ref="gerenteDesinSust" />
+	</bean>
+
+	
+	<bean id="abmIrrAdjetivosEnteros" class="kalos.utilidades.abms.adjetivos.ABMSIrrAdjetivosEnteros">
+		<constructor-arg ref="detalleIrrAdjetivosEnteros" />
+		<property name="gerenteIrrAdjetivosEnteros"  ref="gerenteIrrAdjetivosEnteros" />
+		<property name="declina"  ref="declina" />
+	</bean>
+	
+	<bean id="abmIrrAdjetivosIndividuales" class="kalos.utilidades.abms.adjetivos.ABMSIrrAdjetivosIndividuales">
+		<constructor-arg ref="detalleIrrAdjetivosIndividuales" />
+		<constructor-arg ref="fabricaControles" />
+		<property name="gerenteIrrAdjetivosIndividuales"  ref="gerenteIrrAdjetivosIndividuales" />
+		<property name="declina"  ref="declina" />
+	</bean>
+	
+
+	
+	<bean id="abmVerbos" class="kalos.utilidades.abms.verbos.ABMVerbos">
+		<constructor-arg ref="detalleVerbos"/>
+		<constructor-arg ref="fabricaControles"/>
+		<property name="verbos" ref="verbos"/>
+		<property name="gerenteVerbos" ref="gerenteVerbos"/>
+		<property name="gerenteIrrVerbos" ref="gerenteIrrVerbos"/>
+		<property name="gerenteIrrVerbosIndividuales" ref="gerenteIrrVerbosIndividuales"/>
+		<property name="gerentePreposicionesEnVerbos" ref="gerentePreposicionesEnVerbos"/>
+		<property name="gerenteSignificados" ref="gerenteSignificados"/>
+		<property name="creadorTableModelsGrilla" ref="creadorTableModelsGrilla"/>
+	    <property name="gerentePreposiciones" ref="gerentePreposiciones"/>
+	    <property name="utilidadReportes" ref="utilidadReportes"/>
+	</bean>
+
+	<bean id="abmAdverbios" class="kalos.utilidades.abms.adverbios.ABMAdverbios">
+		<constructor-arg ref="detalleAdverbios" />
+		<constructor-arg ref="fabricaControles"/>
+		<property name="gerenteSignificados" ref="gerenteSignificados"/>
+		<property name="gerenteAdverbios" ref="gerenteAdverbios"/>
+	</bean>
+	
+	<bean id="abmInterjecciones" class="kalos.utilidades.abms.interjecciones.ABMInterjecciones">
+		<constructor-arg ref="detalleInterjecciones" />
+		<constructor-arg ref="fabricaControles"/>
+		<property name="gerenteSignificados" ref="gerenteSignificados"/>
+		<property name="gerenteInterjecciones" ref="gerenteInterjecciones"/>
+	</bean>
+	
+	
+	<bean id="abmIrrSustantivos" class="kalos.utilidades.abms.sustantivos.ABMIrrSustantivos">
+		<constructor-arg ref="detalleIrrSustantivos"/>
+		<property name="gerenteSustantivos" ref="gerenteSustantivos"/>
+		<property name="gerenteIrrSustantivos" ref="gerenteIrrSustantivos"/>
+	</bean>		
+	
+	<bean id="abmPreposiciones" class="kalos.utilidades.abms.preposiciones.ABMPreposiciones">
+		<constructor-arg ref="detallePreposiciones" />
+		<property name="gerenteSignificados" ref="gerenteSignificados"/>
+		<property name="gerentePreposiciones" ref="gerentePreposiciones"/>
+	</bean>	
+	
+	<bean id="abmParticulas" class="kalos.utilidades.abms.particulas.ABMParticulas">
+		<constructor-arg ref="detalleParticulas" />
+		<constructor-arg ref="gerenteEncParticulas" />
+		<property name="gerenteSignificados" ref="gerenteSignificados"/>
+		<property name="gerenteParticulas" ref="gerenteParticulas"/>
+	</bean>		
+		
+	<bean id="abmSustantivos" class="kalos.utilidades.abms.sustantivos.ABMSustantivos">
+		<constructor-arg ref="detalleSustantivos"/>
+		<constructor-arg ref="fabricaControles"/>
+		<property name="declina" ref="declina"/>
+		<property name="gerenteSignificados" ref="gerenteSignificados"/>
+		<property name="gerenteSustantivos" ref="gerenteSustantivos"/>
+		<property name="gerenteTiposSustantivo" ref="gerenteTiposSustantivo"/>
+		<property name="creadorTableModelsGrilla" ref="creadorTableModelsGrilla"/>				
+	    <property name="utilidadReportes" ref="utilidadReportes"/>		
+	</bean>	
+
+
+	<bean id="detalleIrrAdjetivosEnteros" class="kalos.utilidades.abms.adjetivos.DetalleIrrAdjetivosEnteros">
+		<property name="fabricaControles" ref="fabricaControles" />
+		<property name="gerenteTiposSustantivo" ref="gerenteTiposSustantivo" />
+		<property name="declina" ref="declina" />
+	</bean>
+
+	<bean id="detalleIrrAdjetivosIndividuales" class="kalos.utilidades.abms.adjetivos.DetalleIrrAdjetivosIndividuales">
+		<property name="fabricaControles" ref="fabricaControles" />
+	</bean>
+	
+
+	<bean id="detalleAdjetivos" class="kalos.utilidades.abms.adjetivos.DetalleAdjetivos">
+		<property name="fabricaControles" ref="fabricaControles" />
+	</bean>
+
+
+	<bean id="detalleAdverbios" class="kalos.utilidades.abms.adverbios.DetalleAdverbios">
+		<property name="fabricaControles" ref="fabricaControles" />
+	</bean>
+	
+	<bean id="detalleInterjecciones" class="kalos.utilidades.abms.interjecciones.DetalleInterjecciones">
+		<property name="fabricaControles" ref="fabricaControles" />
+	</bean>
+	
+	
+	<bean id="detalleConjunciones" class="kalos.utilidades.abms.conjunciones.DetalleConjunciones">
+		<property name="fabricaControles" ref="fabricaControles" />
+	</bean>
+
+	<bean id="detallePreposiciones" class="kalos.utilidades.abms.preposiciones.DetallePreposiciones">
+		<property name="fabricaControles" ref="fabricaControles" />
+	</bean>
+	
+	<bean id="detalleParticulas" class="kalos.utilidades.abms.particulas.DetalleParticulas">
+		<constructor-arg ref="gerenteEncParticulas" />
+		<property name="fabricaControles" ref="fabricaControles" />
+	</bean>			
+				
+
+	<bean id="detalleVerbos" class="kalos.utilidades.abms.verbos.DetalleVerbos">
+		<property name="fabricaControles">
+			<ref local="fabricaControles" />
+		</property>
+	</bean>
+	
+
+	<bean id="detalleDesinSust" class="kalos.utilidades.abms.sustantivos.DetalleDesinSust">
+		<property name="fabricaControles" ref="fabricaControles" />
+		<property name="declinaNominal" ref="declina" />
+	</bean>
+	
+	<bean id="detalleIrrSustantivos" class="kalos.utilidades.abms.sustantivos.DetalleIrrSustantivos">
+		<property name="gerenteSustantivos" ref="gerenteSustantivos"/>
+	</bean>	
+
+	<bean id="detalleSustantivos" class="kalos.utilidades.abms.sustantivos.DetalleSustantivos">
+		<property name="fabricaControles" ref="fabricaControles"/>
+		<property name="gerenteTiposSustantivo" ref="gerenteTiposSustantivo"/>		
+	</bean>
+
+
+	<bean id="fabricaControles" class="kalos.visual.controles.FabricaControles">
+		<property name="combosDAO" ref="combosDAO" />
+		<property name="gerenteTiposAdjetivo" ref="gerenteTiposAdjetivo" />
+		<property name="gerenteTiposSustantivo" ref="gerenteTiposSustantivo" />
+		<property name="gerenteTiposVerbo" ref="gerenteTiposVerbo" />
+	</bean>	
+
+
+
+</beans>
