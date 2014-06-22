@@ -4,5 +4,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/kalos_comun"/>
+	<classpathentry kind="lib" path="C:/kalos/bibliotecas/log4j/jars/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="C:/kalos/bibliotecas/forms/jars/forms-1.0.7.jar"/>
+	<classpathentry kind="lib" path="C:/kalos/bibliotecas/foxtrot/jars/foxtrot-core-3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

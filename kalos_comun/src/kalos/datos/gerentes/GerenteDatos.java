@@ -1,1 +1,27 @@
-¨ÿŸ›‹ÿ’‹vÿ‘†kÿ–‡gÿ hÿª•lÿ®—kÿ®–jÿª•lÿ¤”rÿ¡–}ÿ¤‹ÿ­©™ÿº¶¥ÿÆÁ°ÿËÇ¸ÿÇÅ¸ÿµ´¨ÿ—–ˆÿxtbÿhaIÿncEÿqOÿ[ÿ˜‡bÿ¥’kÿ¤‘lÿ£‘lÿ nÿŸnÿœ‹iÿŒjÿ¢“sÿ«¡‰ÿ·³¥ÿ¾À¹ÿÀÃÀÿ¿Â¿ÿÁÃ¾ÿÇÆÁÿÑÑËÿáàÜÿññğÿùùøÿıııÿïïîÿØØÑÿº¸«ÿ—‚ÿˆ|_ÿ€oJÿ‚mCÿuGÿ™€Pÿ„RÿƒQÿ™Rÿ“€Vÿ_ÿ‘‡jÿšvÿ¥œ‚ÿ¯¦Œÿ·®–ÿ¸±œÿ®©–ÿ™•‚ÿ‚|hÿtmUÿvkOÿ€sSÿŠ|Zÿ€]ÿ›lÿ›Œlÿ™‹lÿ–Šmÿ•‰nÿ”‡lÿ–‹oÿŸ•|ÿ¯¨•ÿÀ¼°ÿÆÅ¼ÿ¾½³ÿ°­¡ÿ¦¢“ÿ¦¢”ÿ²°¤ÿÇÇ¿ÿßßÛÿğğîÿüûûÿööõÿçèåÿÌÉ¿ÿ«¤ÿbÿ~lDÿ{f:ÿ„nBÿ{Oÿ•€Tÿ”Tÿ‘~Uÿ~Wÿ[ÿ`ÿ”†fÿšŒkÿŸ‘pÿ¢•uÿ¤–xÿ ”wÿ–rÿŒƒkÿ…|dÿ„y^ÿ‡z[ÿ‹|[ÿŒ}Yÿ‘‡lÿ‘†kÿ„iÿ„hÿ‘†kÿ“‰pÿ˜‘{ÿ¤‹ÿµ° ÿÄÀ±ÿÆÁ°ÿ·¯šÿ¡—~ÿ‘†kÿ…lÿ›—„ÿµ´¨ÿÒÓÌÿííëÿÿÿÿÿÿÿÿÿùúùÿâàÙÿÃ¼«ÿ¤˜|ÿ[ÿ†tMÿˆwQÿ[ÿ‘‚^ÿ€\ÿ[ÿ[ÿ[ÿ[ÿ[ÿ[ÿ[ÿ~Yÿ}Xÿ[ÿaÿ„hÿ‘†kÿ„gÿ`ÿ[ÿ}Wÿ†gÿ‡~eÿ‡|aÿ‰}_ÿƒeÿ˜uÿ¢Šÿ­«ÿ¸µ¨ÿ¾¹©ÿ¹±šÿ©œÿ–‡eÿ‰zWÿ†zZÿ“Œtÿ­«œÿÍÎÆÿîïíÿÿÿÿÿÿÿÿÿÿÿÿÿôòîÿÜÖÊÿÃ¹¥ÿ­¢‡ÿ‘uÿ“‰mÿ‘†jÿƒcÿ}Yÿ{TÿŒzRÿ‰xQÿ†vQÿ‚rNÿoKÿ|mIÿyjEÿyiDÿ}nIÿ„uSÿŒ~_ÿ“†fÿ•†eÿ“ƒ_ÿ‘€Zÿ~Wÿ}wa
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+
+package kalos.datos.gerentes;
+
+import java.util.List;
+
+import kalos.datos.dao.CubosTipoPartDAO;
+
+// Referenced classes of package kalos.E.E:
+//            RA
+
+public class Gerentes implements RA
+{
+
+
+    public List seleccionaTodos(){
+        return A.seleccionaTodos();
+    }
+
+    public void setCubosTipoPartDAO(CubosTipoPartDAO za){
+	ctp = za;
+    }
+
+    private CubosTipoPartDAO ctp;
+}

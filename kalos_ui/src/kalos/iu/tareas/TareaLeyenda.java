@@ -1,11 +1,11 @@
 package kalos.iu.tareas;
 
+
+
 import kalos.iu.PanelProgreso;
 import kalos.recursos.Recursos;
-
+import foxtrot.*;
 import org.apache.log4j.Logger;
-
-import foxtrot.Task;
 
 public class TareaLeyenda extends Task{
 

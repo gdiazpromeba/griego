@@ -1,4 +1,16 @@
 kalos
+  D analisismorfologici
+    L negocio
+      L AMAdjetivos
   E datos
+    C dao
+      ZA CubosTipoPart
+    D adaptadores
+      N  AdaptadorGerenteEncParticulas
+    E gerentes
+      k GerenteEncParticulas
+      c GerenteCubosTipoPartImpl
   H flexion
    O CreadorTableModelsGrilla
+  J  bibliotecadatos
+    B   FuenteDatosCacheable        

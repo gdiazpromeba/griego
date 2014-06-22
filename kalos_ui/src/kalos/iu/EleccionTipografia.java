@@ -101,7 +101,7 @@ public class EleccionTipografia extends JDialog {
 		StringBuffer sb=new StringBuffer();
 		sb.append("\tColumn VI\n");
 		sb.append("\n");
-		sb.append("Silenus:\t" + OpPalabras.strBetaAUnicode("KAI\\ PW=J A)KOU/SW MHDENO\\J FWNH\\N KLU/WN") + ";\n");
+		sb.append("Silenus:\t" + OpPalabras.strBetaAUnicode("KAI\\ PW=J etiqueta)KOU/SW MHDENO\\J FWNH\\N KLU/WN") + ";\n");
 		sb.append("Chorus:\t" + OpPalabras.strBetaAUnicode("E)MOI\\ PIQOU=") + ".\n");
 		
 		texto.setText(sb.toString());
