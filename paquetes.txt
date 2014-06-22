@@ -11,6 +11,7 @@ kalos
       k GerenteEncParticulas
       c GerenteCubosTipoPartImpl
   H flexion
-   O CreadorTableModelsGrilla
+   O CreadorTableModelsBasicos
+   
   J  bibliotecadatos
     B   FuenteDatosCacheable        
