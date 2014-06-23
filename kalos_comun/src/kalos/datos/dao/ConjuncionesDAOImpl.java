@@ -23,6 +23,7 @@ import kalos.E.C.A.B;
 import kalos.E.C.A.D;
 import kalos.K.Q;
 import kalos.beans.Significado;
+import kalos.datos.dao.comunes.ModificaCodigoIndividual;
 import kalos.enumeraciones.Idioma;
 import kalos.enumeraciones.Particularidad;
 import kalos.enumeraciones.SubtipoConjuncion;
@@ -193,8 +194,8 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport
             e.setCodigo(resultset.getInt("CODIGO"));
             e.setForma(resultset.getString("FORMA"));
             e.setPartic(X.getEnum(resultset.getString("PARTIC")));
-            e.setTipo(kalos.B.D.getEnum(resultset.getString("TIPO")));
-            e.setSubtipo(kalos.B.L.getEnum(resultset.getString("SUBTIPO")));
+            e.setTipo(TipoConjuncion.getEnum(resultset.getString("TIPO")));
+            e.setSubtipo(SubtipoConjuncion.getEnum(resultset.getString("SUBTIPO")));
             e.setParte(resultset.getInt("PARTE") == 1);
             return e;
         }
@@ -429,12 +430,12 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport
 
     public List seleccionaTodos()
     {
-        return O.execute();
+        return selTodasConSignificado.execute();
     }
 
     public List seleccionaConjuncionesNoAcentuables()
     {
-        return W.execute();
+        return selSinAcento.execute();
     }
 
     public List getRegistros(List list)
@@ -545,24 +546,24 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport
         return list;
     }
 
-    public List seleccionaPorSubtipo(L l)
+    public List seleccionaPorSubtipo(SubtipoConjuncion stc)
     {
-        List list = J.execute(new Object[] {
-            kalos.B.L.getCadena(l)
+        List list = selIdsPorSubtipo.execute(new Object[] {
+            SubtipoConjuncion.getCadena(stc)
         });
         return list;
     }
 
     public List seleccionaPorFormaParaAM(String s)
     {
-        return S.execute(new Object[] {
+        return selPorForma.execute(new Object[] {
             s
         });
     }
 
     public kalos.beans.ConjuncionBean  seleccionaInidvidual(String s)
     {
-        List list = F.execute(new Object[] {
+        List list = selPorIdConSig.execute(new Object[] {
             s
         });
         if(list.size() == 0)
@@ -573,7 +574,7 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport
 
     public kalos.beans.ConjuncionBean  seleccionaInidvidualParaAM(String s)
     {
-        List list = G.execute(new Object[] {
+        List list = selPorId.execute(new Object[] {
             s
         });
         if(list.size() == 0)
@@ -585,22 +586,22 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport
     public void inserta(kalos.beans.ConjuncionBean  e)
     {
         String s = kalos.E.A.A.getHashableId();
-        M.update(new Object[] {
-            s, Integer.valueOf(e.getCodigo()), e.getForma(), kalos.B.D.getCadena(e.getTipo()), kalos.B.L.getCadena(e.getSubtipo()), Integer.valueOf(e.isParte() ? 1 : 0), X.getString(e.getPartic())
+        insert.update(new Object[] {
+            s, Integer.valueOf(e.getCodigo()), e.getForma(), TipoConjuncion.getCadena(e.getTipo()), SubtipoConjuncion.getCadena(e.getSubtipo()), Integer.valueOf(e.isParte() ? 1 : 0), X.getString(e.getPartic())
         });
         e.setId(s);
     }
 
     public void modifica(kalos.beans.ConjuncionBean e)
     {
-        E.update(new Object[] {
-            Integer.valueOf(e.getCodigo()), e.getForma(), kalos.B.D.getCadena(e.getTipo()), kalos.B.L.getCadena(e.getSubtipo()), Integer.valueOf(e.isParte() ? 1 : 0), X.getString(e.getPartic()), e.getId()
+        update.update(new Object[] {
+            Integer.valueOf(e.getCodigo()), e.getForma(), TipoConjuncion.getCadena(e.getTipo()), SubtipoConjuncion.getCadena(e.getSubtipo()), Integer.valueOf(e.isParte() ? 1 : 0), X.getString(e.getPartic()), e.getId()
         });
     }
 
     public void modificaCodigoIndividual(String s, int i)
     {
-        R.update(new Object[] {
+        modificaCodigoIndividual.update(new Object[] {
             Integer.valueOf(i), s
         });
     }
@@ -617,16 +618,16 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport
     {
         super.initDao();
         C();
-        S = new SelectPorForma(getDataSource());
-        F = new SelectPorIdConSignificado(getDataSource());
-        G = new SelectPorId(getDataSource());
-        W = new SelectSinAcento(getDataSource());
-        O = new SelectTodasConSignificado(getDataSource());
-        J = new SelectIdsPorSubtipo(getDataSource());
-        M = new Insert(getDataSource());
+        selPorForma = new SelectPorForma(getDataSource());
+        selPorIdConSig = new SelectPorIdConSignificado(getDataSource());
+        selPorId = new SelectPorId(getDataSource());
+        selSinAcento = new SelectSinAcento(getDataSource());
+        selTodasConSignificado = new SelectTodasConSignificado(getDataSource());
+        selIdsPorSubtipo = new SelectIdsPorSubtipo(getDataSource());
+        insert = new Insert(getDataSource());
         K = new D(getDataSource(), DELETE_SQL);
-        E = new Update(getDataSource());
-        R = new A(getDataSource(), UPDATE_CODIGO_SQL);
+        update = new Update(getDataSource());
+        modificaCodigoIndividual = new ModificaCodigoIndividual(getDataSource(), UPDATE_CODIGO_SQL);
     }
 
     static String B()
@@ -682,14 +683,15 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport
     private static String UPDATE_CODIGO_SQL;
     private static String UPDATE_SQL;
     private static String DELETE_SQL;
-    private SelectTodasConSignificado O;
-    private SelectSinAcento W;
-    SelectIdsPorSubtipo J;
-    private SelectPorForma S;
-    private SelectPorIdConSignificado F;
-    private SelectPorId G;
-    private Insert M;
-    private Update E;
+    private SelectTodasConSignificado selTodasConSignificado;
+    private SelectSinAcento selSinAcento;
+    SelectIdsPorSubtipo selIdsPorSubtipo;
+    private SelectPorForma selPorForma;
+    private SelectPorIdConSignificado selPorIdConSig;
+    private SelectPorId selPorId;
+    private Insert insert;
+    private Update update;
+    private ModificaCodigoIndividual modificaCodigoIndividual;
     private A R;
     private D K;
 }
