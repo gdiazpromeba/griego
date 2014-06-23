@@ -1,9 +1,16 @@
 kalos
+  B enumeraciones
+    D TipoConjuncion
+    L SubtipoConjuncion
+  C recursos
+    A Configuracion
   D analisismorfologici
     L negocio
       L AMAdjetivos
   E datos
     C dao
+      d  ConjuncionesDao
+      e  ConjuncionesDaoImpl
       ZA CubosTipoPart
     D adaptadores
       N  AdaptadorGerenteEncParticulas
@@ -15,3 +22,6 @@ kalos
    
   J  bibliotecadatos
     B   FuenteDatosCacheable        
+  K  beans
+    E (o e) Conjuncion
+    Q (o q) Significado
