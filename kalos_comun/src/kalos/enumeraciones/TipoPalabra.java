@@ -13,7 +13,16 @@ package kalos.enumeraciones;
 public enum TipoPalabra{
 	Sustantivo, Adjetivo, Adverbio, Articulo, Verbo, Participio, Infinitivo,
 	PronombrePersonal, PronombreRelativo, Conjuncion, Preposicion,
-	PronombreReflexivo, PronombreIndefinido, Interjeccion, PronombreInterrogativo
+	PronombreReflexivo, PronombreIndefinido, Interjeccion, PronombreInterrogativo;
+	
+	public static TipoPalabra getEnum(String tp){
+	    throw new RuntimeException("aún no implementado");
+	}
+	
+	public static String getString(TipoPalabra tp){
+	    throw new RuntimeException("aún no implementado");
+	}
+	
 	
       
 }
