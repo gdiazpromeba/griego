@@ -6,6 +6,7 @@ package kalos.datos.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,7 +16,10 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 
+import kalos.beans.AdjetivoBean;
+import kalos.beans.ConjuncionBean;
 import kalos.beans.Significado;
+import kalos.datos.dao.AdjetivoDAOImpl.SeleccionPorIds;
 import kalos.datos.dao.AdverbiosDAOImpl.SeleccionAbstracta;
 import kalos.datos.dao.AdverbiosDAOImpl.SeleccionPorIdConSignificado;
 import kalos.datos.dao.comunes.Borrado;
@@ -27,6 +31,7 @@ import kalos.enumeraciones.Particularidad;
 import kalos.enumeraciones.SubtipoConjuncion;
 import kalos.enumeraciones.TipoConjuncion;
 import kalos.recursos.Configuracion;
+import kalos.utils.Listas;
 
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -70,7 +75,7 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
 	}
     }
 
-    class SeleccionPorIds extends SeleccionAbstracta {
+    class SeleccionPorIds extends SeleccionAbstractasinSignificado {
 
 	public SeleccionPorIds(DataSource datasource, String s) {
 	    super(datasource, s);
@@ -84,15 +89,13 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
 
 	public SeleccionPorIdConSignificado(DataSource datasource, String sql) {
 	    super(datasource, sql);
-	    declareParameter(new SqlParameter(1));
 	}
     }
 
-    class SelectPorForma extends Selecciona {
+    class SelectPorForma extends SeleccionAbstractasinSignificado {
 
-	public SelectPorForma(DataSource datasource) {
-	    super(datasource, SELECT_POR_FORMA_SQL);
-	    declareParameter(new SqlParameter(12));
+	public SelectPorForma(DataSource datasource, String sql) {
+	    super(datasource, sql);
 	}
     }
 
@@ -105,7 +108,7 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
 
 
 
-    class SelectSinAcento extends Seleccion {
+    class SelectSinAcento extends SeleccionAbstractasinSignificado {
 
 	public SelectSinAcento(DataSource datasource) {
 	    super(datasource, SELECT_SIN_ACENTO_SQL);
@@ -113,7 +116,7 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
     }
 
 
-    class SelectTodasConSignificado extends SeleccionConSiginificado {
+    class SelectTodasConSignificado extends SeleccionAbstracta {
 
 
 	public SelectTodasConSignificado(DataSource datasource) {
@@ -136,9 +139,10 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
 	    return e;
 	}
 	
-	public SeleccionAbstractaSinSignificado(DataSource datasource, String s) {
+	public SeleccionAbstractasinSignificado(DataSource datasource, String s) {
 	    super(datasource, s);
 	}
+	
     }
     
     abstract class SeleccionAbstracta extends MappingSqlQuery {
@@ -163,7 +167,7 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
 	    return e;
 	}
 
-	public SeleccionConSiginificado(DataSource datasource, String s) {
+	public SeleccionAbstracta(DataSource datasource, String s) {
 	    super(datasource, s);
 	}
     }
@@ -360,56 +364,49 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
 	return selSinAcento.execute();
     }
 
-    public List getRegistros(List list) {
-	ArrayList arraylist = new ArrayList();
-	int i = list.size();
-	int j = 0;
-	char c = '\u03E8';
-	for (; i > 0; i -= c) {
-	    List list1 = list.subList(j, Math.min(j + c, list.size()));
-	    StringBuffer stringbuffer = new StringBuffer(500);
-	    String s1;
-	    for (Iterator iterator = list1.iterator(); iterator.hasNext(); stringbuffer.append((new StringBuilder())
-		    .append("'").append(s1).append("',").toString()))
-		s1 = (String) iterator.next();
-
-	    stringbuffer.deleteCharAt(stringbuffer.length() - 1);
-	    String s = SELECT_POR_VARIOS_IDS_CON_SIG_SQL.replaceFirst("\\?", stringbuffer.toString());
-	    SeleccionPorIdConSignificado _ll = new SeleccionPorIdConSignificado(getDataSource(), s);
-	    List list2 = _ll.execute();
-	    arraylist.addAll(list2);
-	    j += c;
+    
+    public List<ConjuncionBean> getRegistros(List<String> ids) {
+	List<List<String>> segmentos = Listas.segmentos(ids, 500);
+	List<ConjuncionBean> resultado = new ArrayList<ConjuncionBean>();
+	for (List<String> segmento : segmentos) {
+	    StringBuffer idsSeparadosComa = new StringBuffer(500);
+	    for (String id : segmento) {
+		idsSeparadosComa.append("'" + id + "',");
+	    }
+	    if (idsSeparadosComa.length() > 0) {
+		idsSeparadosComa.deleteCharAt(idsSeparadosComa.length() - 1);
+	    }
+	    String sql = SELECT_POR_VARIOS_IDS_CON_SIG_SQL.replaceFirst("\\?", idsSeparadosComa.toString());
+	    SeleccionPorIdConSignificado seleccionPorIds = new SeleccionPorIdConSignificado(getDataSource(), sql);
+	    List<ConjuncionBean> adjs = seleccionPorIds.execute();
+	    resultado.addAll(adjs);
 	}
-
-	return arraylist;
+	return resultado;
     }
+    
 
-    public List getRegistrosSinSignificado(List list) {
-	ArrayList arraylist = new ArrayList();
-	int i = list.size();
-	int j = 0;
-	char c = '\u03E8';
-	for (; i > 0; i -= c) {
-	    List list1 = list.subList(j, Math.min(j + c, list.size()));
-	    StringBuffer stringbuffer = new StringBuffer(500);
-	    String s1;
-	    for (Iterator iterator = list1.iterator(); iterator.hasNext(); stringbuffer.append((new StringBuilder())
-		    .append("'").append(s1).append("',").toString()))
-		s1 = (String) iterator.next();
-
-	    stringbuffer.deleteCharAt(stringbuffer.length() - 1);
-	    String s = SELECT_POR_VARIOS_IDS_SQL.replaceFirst("\\?", stringbuffer.toString());
-	    SeleccionPorIds _lh = new SeleccionPorIds(getDataSource(), s);
-	    List list2 = _lh.execute();
-	    arraylist.addAll(list2);
-	    j += c;
+    public List<ConjuncionBean> getRegistrosSinSignificado(List<String> ids) {
+	List<List<String>> segmentos = Listas.segmentos(ids, 500);
+	List<ConjuncionBean> resultado = new ArrayList<ConjuncionBean>();
+	for (List<String> segmento : segmentos) {
+	    StringBuffer idsSeparadosComa = new StringBuffer(500);
+	    for (String id : segmento) {
+		idsSeparadosComa.append("'" + id + "',");
+	    }
+	    if (idsSeparadosComa.length() > 0) {
+		idsSeparadosComa.deleteCharAt(idsSeparadosComa.length() - 1);
+	    }
+	    String sql = SELECT_POR_VARIOS_IDS_SQL.replaceFirst("\\?", idsSeparadosComa.toString());
+	    SeleccionPorIds seleccionPorIds = new SeleccionPorIds(getDataSource(), sql);
+	    List<ConjuncionBean> adjs = seleccionPorIds.execute();
+	    resultado.addAll(adjs);
 	}
-
-	return arraylist;
-    }
+	return resultado;
+    }    
+    
 
     public List seleccionaPorForma(String s, LugarSubcadena h1) {
-	String s1;
+	String s1="";
 	switch (h1) {
 	case Principio: // '\001'
 	    s1 = (new StringBuilder()).append("'").append(s).append("%'").toString();
@@ -479,7 +476,6 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
 
     public void initDao() throws Exception {
 	super.initDao();
-	selPorForma = new SelectPorForma(getDataSource());
 	selPorIdConSig = new SeleccionPorIdConSignificado(getDataSource(), SELECT_POR_ID_CON_SIG_SQL);
 	selPorId = new SeleccionPorIds(getDataSource(), SELECT_POR_ID_SQL);
 	selSinAcento = new SelectSinAcento(getDataSource());
