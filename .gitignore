@@ -1,3 +1,4 @@
 **/*.class
 kalos_comun/data/*
 kalos_comun/data.zip
+kalos_comun/bin/*
