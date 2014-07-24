@@ -35,7 +35,7 @@ import org.springframework.jdbc.object.SqlUpdate;
  * @version $Revision: 1.1 $
  */
 @SuppressWarnings("unchecked")
-public class SignificadoDAOImpl extends JdbcDaoSupport implements SignificadoDAO {
+public class SignificadoDAOImpl extends JdbcDaoSupport implements  SignificadoDAO {
 
 	private static String SELECCION_POR_REFERENTE_SQL;
 	private static String SELECCION_INDIVIDUAL_SQL;
@@ -133,6 +133,10 @@ public class SignificadoDAOImpl extends JdbcDaoSupport implements SignificadoDAO
 	/* (non-Javadoc)
 	 * @see kalos.dao.SignificadoDAO#getPorReferente(java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see kalos.datos.dao.SignificadoDAO#getPorReferente(java.lang.String)
+	 */
+	@Override
 	public List<Significado> getPorReferente(String referenteId) {
 		return seleccionPorReferente.execute(new Object[] { referenteId });
 	}
@@ -150,6 +154,10 @@ public class SignificadoDAOImpl extends JdbcDaoSupport implements SignificadoDAO
 	/* (non-Javadoc)
 	 * @see kalos.dao.SignificadoDAO#getInidvidual(java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see kalos.datos.dao.SignificadoDAO#getInidvidual(java.lang.String)
+	 */
+	@Override
 	public Significado getInidvidual(String significadoId) {
 		List<Significado> lstAux = seleccionIndividual.execute(new Object[] { significadoId });
 		if (lstAux.size() == 0)
@@ -174,6 +182,10 @@ public class SignificadoDAOImpl extends JdbcDaoSupport implements SignificadoDAO
 	/* (non-Javadoc)
 	 * @see kalos.dao.SignificadoDAO#inserta(kalos.beans.Significado)
 	 */
+	/* (non-Javadoc)
+	 * @see kalos.datos.dao.SignificadoDAO#inserta(kalos.beans.Significado)
+	 */
+	@Override
 	public void inserta(Significado si) {
 		String pk = kalos.datos.util.DBUtil.getHashableId();
 		insercion.update(new Object[] { pk, si.getIdioma(), si.getReferenteId(), si.getValor() });
@@ -197,6 +209,10 @@ public class SignificadoDAOImpl extends JdbcDaoSupport implements SignificadoDAO
 	/* (non-Javadoc)
 	 * @see kalos.dao.SignificadoDAO#modifica(kalos.beans.Significado)
 	 */
+	/* (non-Javadoc)
+	 * @see kalos.datos.dao.SignificadoDAO#modifica(kalos.beans.Significado)
+	 */
+	@Override
 	public void modifica(Significado si) {
 		modificacion.update(new Object[] { si.getIdioma(), si.getReferenteId(), si.getValor(),
 		//where
@@ -216,6 +232,10 @@ public class SignificadoDAOImpl extends JdbcDaoSupport implements SignificadoDAO
 	/* (non-Javadoc)
 	 * @see kalos.dao.SignificadoDAO#borra(java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see kalos.datos.dao.SignificadoDAO#borra(java.lang.String)
+	 */
+	@Override
 	public void borra(String significadoId) {
 		borrado.update(new Object[] { significadoId });
 	}

@@ -6,22 +6,22 @@ package kalos.datos.gerentes;
 
 import java.util.List;
 
+import kalos.beans.CubosTipoPartBean;
 import kalos.datos.dao.CubosTipoPartDAO;
 
 // Referenced classes of package kalos.E.E:
 //            RA
 
-public class Gerentes implements RA
-{
-
-
-    public List seleccionaTodos(){
-        return A.seleccionaTodos();
-    }
-
-    public void setCubosTipoPartDAO(CubosTipoPartDAO za){
-	ctp = za;
-    }
+public class GerenteDatos implements GerenteCubosTipoPart {
 
     private CubosTipoPartDAO ctp;
+
+    public List<CubosTipoPartBean> seleccionaTodos() {
+	return ctp.seleccionaTodos();
+    }
+
+    public void setCubosTipoPartDAO(CubosTipoPartDAO ctp) {
+	this.ctp = ctp;
+    }
+
 }

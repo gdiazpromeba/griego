@@ -2,6 +2,7 @@ kalos
   B enumeraciones
     D TipoConjuncion
     L SubtipoConjuncion
+    E Acento
   C recursos
     A Configuracion
   D analisismorfologici
@@ -12,11 +13,14 @@ kalos
       d  ConjuncionesDao
       e  ConjuncionesDaoImpl
       ZA CubosTipoPart
+      k  DesinSustDaoImpl
+      Q  DesinSustDao
     D adaptadores
       N  AdaptadorGerenteEncParticulas
     E gerentes
       k GerenteEncParticulas
       c GerenteCubosTipoPartImpl
+      RA GerenteCubosTipoPart (una interfaz)
   H flexion
    O CreadorTableModelsBasicos
    
