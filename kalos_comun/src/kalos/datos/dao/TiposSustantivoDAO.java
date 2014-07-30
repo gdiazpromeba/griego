@@ -22,7 +22,7 @@ public interface TiposSustantivoDAO {
 	 * devuelve un bean de tipo dado el el tipo entero en lugar del de 32 caracteres
 	 * @return
 	 */
-	public abstract TipoSustantivo seleccionaIndividual(int tipoEntero);
+    public abstract TipoSustantivo seleccionaIndividual(int tipoEntero);
     
     public abstract TipoSustantivo seleccionaIndividual(String id);
 }

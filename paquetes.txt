@@ -15,6 +15,10 @@ kalos
       ZA CubosTipoPart
       k  DesinSustDaoImpl
       Q  DesinSustDao
+      MA DesinVerbosDaoImpl
+      P  DesinVerbosDao
+      KA TipoSustantivoDAOImpl
+      O  TipoSustantivoDAO
     D adaptadores
       N  AdaptadorGerenteEncParticulas
     E gerentes
