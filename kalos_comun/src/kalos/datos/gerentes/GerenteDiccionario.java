@@ -14,11 +14,7 @@ public interface GerenteDiccionario {
 	 */
 	public abstract void ordena(String letra);
 	
-	/**
-	 * ordena alfabéticamente todas las entradas del diccionario
-	 *
-	 */
-	public abstract void ordena();
+	
 
 	/**
 	 * modifica el código de una entrada (usado en reordenamientos)

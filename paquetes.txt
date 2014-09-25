@@ -3,6 +3,7 @@ kalos
     D TipoConjuncion
     L SubtipoConjuncion
     E Acento
+    h
   C recursos
     A Configuracion
   D analisismorfologici
@@ -14,11 +15,13 @@ kalos
       e  ConjuncionesDaoImpl
       ZA CubosTipoPart
       k  DesinSustDaoImpl
+      M  GerenteDiccionarioImpl
       Q  DesinSustDao
       MA DesinVerbosDaoImpl
       P  DesinVerbosDao
       KA TipoSustantivoDAOImpl
       O  TipoSustantivoDAO
+      u  GerenteOrdenable
     D adaptadores
       N  AdaptadorGerenteEncParticulas
     E gerentes
