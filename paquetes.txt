@@ -22,6 +22,8 @@ kalos
       KA TipoSustantivoDAOImpl
       O  TipoSustantivoDAO
       u  GerenteOrdenable
+      G  TransParticipiosDaoImpl
+      X  TransParticipiosDAO
     D adaptadores
       N  AdaptadorGerenteEncParticulas
     E gerentes
