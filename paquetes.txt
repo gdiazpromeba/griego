@@ -30,6 +30,8 @@ kalos
       c PreposicionesDAO
       y IrrParticipiosEnterosDaoImpl
       IA IrrParticipiosEnterosDao
+      RA IrrParticipiosSimplesDAOImpl
+      g IrrParticipiosSimplesDAO
     D adaptadores
       N  AdaptadorGerenteEncParticulas
     E gerentes
