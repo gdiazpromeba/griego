@@ -59,20 +59,36 @@ public class EncParticulasDAOImpl extends JdbcDaoSupport implements EncParticula
 	DELETE_SQL = localStringBuffer.toString();
     }
 
+    /* (non-Javadoc)
+     * @see kalos.datos.dao.EncParticulasDAO#seleccionaEncParticulasTodos()
+     */
+    @Override
     public List<EncParticulaBean> seleccionaEncParticulasTodos() {
 	return seleccion.execute();
     }
 
+    /* (non-Javadoc)
+     * @see kalos.datos.dao.EncParticulasDAO#inserta(kalos.beans.EncParticulaBean)
+     */
+    @Override
     public void inserta(EncParticulaBean paramf) {
 	String str = kalos.datos.util.DBUtil.getHashableId();
 	insercion.update(new Object[] { str, TipoPalabra.getString(paramf.getTipoPalabra()), paramf.getForma() });
 	paramf.setId(str);
     }
 
+    /* (non-Javadoc)
+     * @see kalos.datos.dao.EncParticulasDAO#modifica(kalos.beans.ParticulaBean)
+     */
+    @Override
     public void modifica(ParticulaBean paraml) {
 	modificacion.update(new Object[] { TipoPalabra.getString(paraml.getParticulaTipo()), paraml.getForma(), paraml.getId() });
     }
 
+    /* (non-Javadoc)
+     * @see kalos.datos.dao.EncParticulasDAO#borra(java.lang.String)
+     */
+    @Override
     public void borra(String paramString) {
 	this.borrado.update(new Object[] { paramString });
     }

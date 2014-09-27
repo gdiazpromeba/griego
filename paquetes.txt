@@ -26,6 +26,8 @@ kalos
       X  TransParticipiosDAO
       Q EncParticulasDaoImpl
       QA EncParticulasDao
+      Y PreposicionesDAOImpl
+      c PreposicionesDAO
     D adaptadores
       N  AdaptadorGerenteEncParticulas
     E gerentes
@@ -40,3 +42,4 @@ kalos
   K  beans
     E (o e) Conjuncion
     Q (o q) Significado
+    C PreposicionBean
