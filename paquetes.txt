@@ -28,6 +28,8 @@ kalos
       QA EncParticulasDao
       Y PreposicionesDAOImpl
       c PreposicionesDAO
+      y IrrParticipiosEnterosDaoImpl
+      IA IrrParticipiosEnterosDao
     D adaptadores
       N  AdaptadorGerenteEncParticulas
     E gerentes
