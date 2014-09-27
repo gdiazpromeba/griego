@@ -62,7 +62,7 @@ public class GerenteSeguridadImpl implements GerenteSeguridad {
 	 * @param args
 	 */
 	public static void main(String[] args){
-		System.out.println(new GerenteSeguridadImpl().generaClave("Jim Bennett"));
+		System.out.println(new GerenteSeguridadImpl().generaClave("Philip Schwartz"));
 	}
 	
 	/**

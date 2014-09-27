@@ -24,6 +24,8 @@ kalos
       u  GerenteOrdenable
       G  TransParticipiosDaoImpl
       X  TransParticipiosDAO
+      Q EncParticulasDaoImpl
+      QA EncParticulasDao
     D adaptadores
       N  AdaptadorGerenteEncParticulas
     E gerentes
