@@ -32,6 +32,10 @@ kalos
       IA IrrParticipiosEnterosDao
       RA IrrParticipiosSimplesDAOImpl
       g IrrParticipiosSimplesDAO
+      ea IrrSustantivosDaoImpl
+      v IrrSustantivosDao
+      T IrrVerbosIndividualesDAOImpl
+      BA IrrVerbosIndividualesDAO
     D adaptadores
       N  AdaptadorGerenteEncParticulas
     E gerentes

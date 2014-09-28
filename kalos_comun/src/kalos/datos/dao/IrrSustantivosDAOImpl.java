@@ -1,1 +1,291 @@
- the F4 key.Show shelf alignment menu.Enables a menu that allows changing the side the shelf is aligned to.መደርደሪያ በጠቅታ ጊዜ እንዲያንስ አይፍቀዱ።አንዲት አስቀድሞ ገባሪ የሆነ ከእሱ ጋር የተጎዳኘ መስኮት ያለው የመደርደሪያ ንጥል ጠቅ ከተደረገ መደርደሪያው መስኮት እንዳያሳንስ ይከልክሉ።ለተነኪ ነጥቦች ጠቋሚ መረጃን አሳይ።ማያ ገጹ ላይ ስላሉ የንኪኪ ነጥቦች መረጃ የሚዘረዝር ብቅ-ባይ ማሳያ በላይኛው ግራ ጥግ ላይ ያነቃል።Allow a window to be side maximized to several widths.Allow a window to be side maximized to several widths. The width is selected based on how far beyond the edge of the screen a window is dragged.NaCl ሶኬት ኤ ፒ አይ።መተግበሪያዎች NaCl ሶኬት ኤ ፒ አይን እንዲጠቀሙ ያስችላል። የNaCl ተሰኪዎችን ለመሞከር ብቻ ይጠቀሙ።የቁንጥጫ ልኬት ለውጥን ያንቁ።ቁንጥጫን በመጠቀም የሙከራ የሆነ ልኬትን ያነቃል።የፒንች ምናባዊ መመልከቻ አንቃ።በሚጎላበት ወቅት ቋሚ ቦታ ያላቸው ክፍሎች እና የተመጠኑ ማሸብለያ አሞሌዎች ከዚህ መመልከቻ ጋር ይያያዛሉ።Enable contacts integration.Enables downloading Google contacts and displaying them in the App Launcher.የመመልከቻ ዲበ መለያን አንቃገጾች የአቀማመጥ ስፋትን እና የተጠቃሚን ማጉያ ባህሪያት እንዲያቀናብሩ ለማስቻል የመመልከቻ ዲበ መለያን መቆጣጠርን ያነቃሉ።Disable full history syncAllows you to see and delete history entries from your signed-in devices at chrome://history.በሃርድዌር የተጣደፈ የቪዲዮ ማንነትን የማያሳውቅ መግለጥን ያሰናክሉ።ሲገኝ በሃርድዌር የተጣደፈ የቪዲዮ ስወር መግለጥን ያሰናክላል።በድምደ ሞደም ተያያዦች መካከል መቀያየርን ያነቃል።ተጠቃሚው ከበይነገጹ ሆኖ በድምጸ ሞደም ተያያዦች መካከል እንዲቀያየር ያስችለዋል። ማስጠንቀቂያ፦ የSprint ድምጸ ሞደም ተያያዡ ነባር የሆነ የSprint ዕቅድ ላላቸው ተጠቃሚዎች ብቻ ነው የሚሰራው።በቅንብሮች ምናሌ ውስጥ የጡባዊ ጣቢያ ጠይቅ አማራጩን አንቃ።ተጠቃሚው የጡባዊ ጣቢያውን እንዲጠይቅ ያስችለዋል። የድር ይዘት አብዛኛውን ጊዜ ለጡባዊ መሣሪያዎች ይመቻቻል። ይህ አማራጭ ሲመረጥ ጡባዊ መሣሪያ መሆኑን ለማመልከት ተወካዩ የተጠቃሚ ሕብረቁምፊ ይቀየራል። ከአሁኑ ትር በኋላ ለጡባዊ የተመቻቸ የድር ይዘት ይመጣል።ለተጠቀለሉ መተግበሪያዎች ማረምን ያንቁ።እንደ Inspect Element ያሉ የተጠቀለሉ መተግበሪያዎች የአውድ ምናሌ አማራጮችን ማረም ያነቃል።የይለፍ ቃል ማመንጨትን ያንቁ።Chrome የመለያ ፈጠራ ገጾችን ሲያገኝ ተጠቃሚው የይለፍ ቃላትን እንዲያመነጭ ያስችለዋል።የይለፍ ቃላት ራስ-መሙላት የሚዛመድ የይፋዊ ቅጥያ ጎራ።ተጠቃሚው ከተመሳሳይ ይፋዊ ቅጥያ መመዝገቢያ ጎራ ጋር ለሚዛመዱ ጎራዎች የተጠቃሚ ስም/የይለፍ ቃል ቅልቅሎችን እንዲመርጥ የሚፈቅዱ ባህሪያትን ያነቃል ወይም ያሰናክላል።የይለፍ ቃል አስተዳዳሪ ዳግም ማረጋገጥን አሰናክልተጠቃሚው በይለፍ ቃላት ገጹ ላይ የይለፍ ቃላትን ከመግለጹ በፊት የስርዓተ ክወናው ይለፍ ቃል እንዲሰጥ መጠየቅን አሰናክል።የአፈጻጸም ክትትልን ያነቃልከአፈጻጸም ጋር የተገናኙ የልኬቶች እና ክስተቶች መሰብሰብን ያንቁና ይህን ውሂብ በግራፊክ መልክ የማሳየት አማራጭ ያቅርቡ። ውሂብን ለመመልከት chrome://performance ይጎብኙ።የበለጸጉ ማሳወቂያዎችን አንቃበበለጸጉ አብነቶች የተሰሩ ማሳወቂያዎችን ያነቃል። ሁለቱም የኤች ቲ ኤም ኤል 5 ማሳወቂያዎች እና የመተግበሪያ ማሳወቂያዎች በአዲሱ የማሳወቂያ ማዕከሉ ነው የሚታዩት።የማሳወቂያዎች የሙከራ በይነገጽ አንቃገና ለመላክ ዝግጁ ያልሆኑ በግንባታ/በመጽዳት ላይ ላሉ የተለያዩ የማሳወቂያ ማዕከል ባህሪያት ስራ ላይ የሚውል።ማሳወቂያ ማዕከል ባህሪለማሳወቂያ ማዕከሉ የስርዓት ደረጃ አዶ ባህሪውን ይቀይረዋል።በጭራሽ አታሳይሁልጊዜ አሳይያልታዩ ማሳወቂያዎች ካሉ ብቻ አሳይየተመሳሰሉ ማሳወቂያዎችን አንቃየሙከራ የተመሳሰሉ ማሳወቂያዎችን ያንቁ።Enable App Launcher syncEnable experimental App Launcher sync.የማያ ገጽ ምስል ማንሳት ድጋፍ በgetUserMedia() ውስጥ ያንቁ።ድረ-ገጾች በgetUserMedia() ኤ ፒ አዩ በኩል የማያ ገጹ ይዘቶች መዳረሻ እንዲጠይቁ ያስችላቸዋል።ከQTKit ይልቅ የMac OS X AVFoundation ኤፒአይዎችን መጠቀምን አንቃ።በOS X >= 10.7 ላይ ቪዲዮን ለመቅረጽ እና የቪዲዮ መሣሪያ መከታተልን ለማንቃት የAVFoundation መጠቀምን ያንቁ። አለበለዚያ QTKit ስራ ላይ ይውላል።የapps-devtool መተግበሪያን አንቃ።መተግበሪያዎችን /ቅጥያዎችን የሚገነባ መተግበሪያ።Impl-side paintingከነቃ ማቅለም ከዋናው ክር ተከታታይ ይልቅ በተለየ ተከታታይ ላይ ነው የሚደረገው።Deadline scheduling.If enabled, latency in the Renderer may improve if the various stages of rendering are fast enough to beat a deadline. Requires threaded compositing.UI deadline scheduling.If enabled, latency in the Browser may improve if the various stages of rendering are fast enough to beat a deadline. Requires threaded compositiing.የኤል ሲ ዲ ጽሑፍ ማጥራትከተሰናከለ የተጣደፈ ጥንቅር በሚሰራበት ጊዜ ጽሑፍ ከኤል ሲ ዲ (ንዑስ ፒክሰል) ይልቅ በግርጥነት ማጣራት ተሰርቶ ይታያል።የተወከለ አዘጋጅ (AKA Übercompositor)።ከነቃ፣ አዘጋጁ ሁለቱንም የውህደት ማለፊያዎች በማዋሃድ መቀላቀልን ለአሳሹ ይወክላል።የካርታ-ምስል ራስተር ሰሪ (ዜሮ-ቅጂ በመባልም የሚታወቅ)ከነቃ የራስተር ክሮች በቀጥታ ወደ የጂፒዩ ማህደረ ትውስታ ይጽፋሉ።በፍላጎት አካባቢ ላይ ከፍተኛው የስድሮች ብዛት።በፍላጎት አካባቢ ላይ ከፍተኛው የሰድር ብዛት ይግለጹ።እንደወረደ64128256512የትር መያዝ ማተለቅ ጥራት።የሚተልቁ ከሆኑ የተያዙ ምስሎች የጥራት ቅንብሩን ይገልጻል።የትር መያዝ ማሳነስ ጥራት።የሚቀነሱ ከሆኑ የተያዙ ምስሎች የጥራት ቅንብሩን ይገልጻል።ፈጣንጥሩምርጥነባሪ የሰድር ስፋትነባሪ የሰድር ስፋቱን ይግለጹ።እንደወረደ1282565121024ነባሪ የሰድር ቁመትነባሪ የሰድር ቁመቱን ይግለጹ።እንደወረደ1282565121024የራስተር ተከታታዮች ቁጥርየራስተር ተከታታዮቹን ቁጥር ይግለጹ።እንደወረደ1234የ Syncfs አቃፊ ክወናን ያንቁ።ለአመሳስል ስርዓተ ፋይል የአቃፊ ድጋፍን ያነቃል።የትርጉም ቅንብሮችን አንቃ።ተጠቃሚው የትኛው ቋንቋ ሊተረጎም በሚችልበት chrome://settings/languages ውስጥ የተርጉም ቅንብሮችን ያንቁ።በእያንዳንዱ ዳግም ማስጀመር ላይ የመተግበሪያ አስጀማሪው ጭነት ሁነታ ዳግም ያስጀምሩት።በእያንዳንዱ ዳግም ጅምር ላይ የመተግበሪያ አስጀማሪ ጭነት ሁኔታን ዳግም ያስጀምሩ። ይህ ዕልባት ተዋቅሮ ሳለ Chrome በሚጀምርበት እያንዳንዱ ጊዜ ላይ አስጀማሪውን መጫኑን ይረሳል። ይሄ የመተግበሪያ አስጀማሪ ጭነት ፍሰቱን ለመሞከር ያገለግላል።የመተግበሪያ አስጀማሪውን አንቃ።የመተግበሪያ አስጀማሪውን ያንቁ። ሲነቃ የስርዓተ ክወና አቋራጮች በመተግበሪያ አስጀማሪው ላይ ያክላል።Enable the App Launcher start page.Enable the App Launcher start page. If enabled, App Launcher will show a start page in addition to the apps grid.Enable App Launcher folders.Enable App Launcher folders. If enabled, the user will be able to create folders in the App Launcher by dragging an app on top of another app.Enable voice search in the App Launcher.Enable voice search in the App Launcher. If enabled, the user will be able to search by speech.የመተግበሪያ መረጃ መገናኛውን አንቃ።የመተግበሪያ መረጃ መገናኛውን ያንቁ። ከነቃ ተጠቃሚው ለተመረጠው መተግበሪያ የመተግበሪያ መረጃ መገናኛው እንዲታይ በመተግበሪያው አስጀማሪ ውስጥ ካለው የአውድ ምናሌ ላይ «የመተግበሪያ መረጃ»ን መምረጥ ይችላል።የሙከራ መተግበሪያ አስጀማሪውን አንቃ።የመተግበሪያው አስጀማሪ የሙከራ ስሪቱን ያንቁ።የአምሳያ ማመሳሰል አሰናክል።የተጠቃሚ መለያ ምስል በተለያዩ የChromeOS መሣሪያዎች ላይ ማመሳሰልን ያሰናክሉ።HiDPI SupportIf enabled, application size and layout will adapt to the operating system's DPI settings.የተጣደፈ ተሸብላይ ክፍለ ገጸ-ድሮችን ያንቁ።ሊሸበለሉ ለሚችሉ ክፍለ ገጸ-ድሮች የተጣደፈ ማዋሃድን ያነቃል።ለክፍለ ገጸ-ድሮች የተዋሃደ ማሸብለልን ያንቁ።በማዋሃጃው የተጣደፈ ማሸብለል ለክፍለ ገጸ ድሮች ያንቁ።የሙከራ ስሉጥ ተስተናጋጅ መተግበሪያዎችን ያንቁ።አንድ የሙከራ እና ይበልጥ የተሳለጠ የተስተናገደ መተግበሪያ ተሞክሮ ያነቃል።የሙከራ ጊዜያዊ መተግበሪያዎችን ያንቁ።Chrome ውስጥ ሳይጫኑ በሚጀመሩ ጊዜያዊ መተግበሪያዎች ላይ መሞከርን ያነቃል።የሙከራ ሊገናኙ የሚችሉ ጊዜያዊ መተግበሪያዎችን ያንቁ።ከገጽ አገናኞች ላይ ጊዜያዊ መተግበሪያዎችን በመልቀቅ ሙከራን ያነቃል። ለምሳሌ፣ በGoogle የፍለጋ ውጤቶች ውስጥ ወዳሉት የChrome የድር ማከማቻ መተግበሪያ ዝርዝር ገጾች የሚወስዱ አገናኞች ወደ ዝርዝር ገጹ ከመዳሰስ ይልቅ መተግበሪያውን ያስጀምራሉ።የServiceWorker ድጋፍን ያንቁ።ServiceWorker የመረጃ ጥያቄዎችን መጥለፍ የሚችል አዲስ የድር ሰራተኛ አይነት ነው። ተጨማሪ መረጃ ለማግኘት https://github.com/slightlyoff/ServiceWorkerን ይመልከቱ።አዲሱን የትርጉም ተጠቃሚ ተሞክሮ ያንቁ።አዲሱን የትርጉም ዓረፋ የተጠቃሚ ተሞክሮ ማንቃት በመረጃ አሞሌው ፋንታ የቀረበ ነው።በእይዎች ውስጥ በሬክታንግል-የተመሰረተ ኢላማን ያሰናክሉበእይዎች ውስጥ በሬክታንግል-የተመሰረተ ኢላማን ያሰናክሉ። በሬክታንግል-የተመሰረተ ኢላማ የንኪ አካባቢ በአራት መዓዘን ሲወከል የአንድ ምልክትን ይበልጥ ሊሆን የሚችለውን ኢላማ ለመወሰን ግምታዊ የችግር አፈታት ስልትን ይጠቀማል።ለመተግበሪያዎች በመጀመሪያው-ቀለም-ላይ-አሳይን አንቃ።ከመጀመሪያው ቀለም በኋላ የመተግበሪያ መስኮቶችን አሳይ። መስኮቶች ንብረቶችን በተመሳሳይ ጊዜ ለሚጭኑ መተግበሪያዎች በጣም ዘግይ
+package kalos.datos.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import kalos.beans.IrrSustantivoBean;
+import kalos.datos.dao.comunes.Borrado;
+import kalos.enumeraciones.Caso;
+import kalos.enumeraciones.Numero;
+import kalos.enumeraciones.Particularidad;
+import kalos.utils.Listas;
+
+import org.springframework.jdbc.core.SqlParameter;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.object.MappingSqlQuery;
+import org.springframework.jdbc.object.SqlUpdate;
+
+public class IrrSustantivosDAOImpl extends JdbcDaoSupport implements IrrSustantivosDAO {
+    private static String SEL_POR_SUSTANTIVO_SQL;
+    private static String SEL_POR_SUSTANTIVOS_SQL;
+    private static String SEL_POR_SUST_Y_PARTIC_SQL;
+    private static String SEL_POR_FORMA_SQL;
+    private static String SEL_PARTICS_POR_SUST_SQL;
+    private static String INSERT_SQL;
+    private static String UPDATE_SQL;
+    private static String DELETE_SQL;
+    private SeleccionPorId seleccionPorId;
+    private SeleccionPorIdYPartic seleccionPorIdYPartic;
+    private SeleccionPorForma seleccionPorForma;
+    private SeleccionPartics seleccionPartics;
+    private Insercion insercion;
+    private Modificacion modificacion;
+    private Borrado borrado;
+
+    private void puebla() {
+	StringBuffer localStringBuffer = new StringBuffer(200);
+	localStringBuffer.append("SELECT   \n");
+	localStringBuffer.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
+	localStringBuffer.append("  IRR.SUSTANTIVO_ID,   \n");
+	localStringBuffer.append("  IRR.PARTICULARIDAD,   \n");
+	localStringBuffer.append("  IRR.CASO,   \n");
+	localStringBuffer.append("  IRR.NUMERO,   \n");
+	localStringBuffer.append("  IRR.SUBINDICE,   \n");
+	localStringBuffer.append("  IRR.FORMA   \n");
+	localStringBuffer.append("FROM        \n");
+	localStringBuffer.append("  IRR_SUSTANTIVOS IRR       \n");
+	localStringBuffer.append("WHERE  \n");
+	localStringBuffer.append("  IRR.SUSTANTIVO_ID=?    \n");
+	SEL_POR_SUSTANTIVO_SQL = localStringBuffer.toString();
+	localStringBuffer = new StringBuffer(200);
+	localStringBuffer.append("SELECT   \n");
+	localStringBuffer.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
+	localStringBuffer.append("  IRR.SUSTANTIVO_ID,   \n");
+	localStringBuffer.append("  IRR.PARTICULARIDAD,   \n");
+	localStringBuffer.append("  IRR.CASO,   \n");
+	localStringBuffer.append("  IRR.NUMERO,   \n");
+	localStringBuffer.append("  IRR.SUBINDICE,   \n");
+	localStringBuffer.append("  IRR.FORMA   \n");
+	localStringBuffer.append("FROM        \n");
+	localStringBuffer.append("  IRR_SUSTANTIVOS IRR       \n");
+	localStringBuffer.append("WHERE  \n");
+	localStringBuffer.append("  IRR.IRR_SUSTANTIVO_ID IN (?)    \n");
+	SEL_POR_SUSTANTIVOS_SQL = localStringBuffer.toString();
+	localStringBuffer = new StringBuffer(200);
+	localStringBuffer.append("SELECT   \n");
+	localStringBuffer.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
+	localStringBuffer.append("  IRR.SUSTANTIVO_ID,   \n");
+	localStringBuffer.append("  IRR.PARTICULARIDAD,   \n");
+	localStringBuffer.append("  IRR.CASO,   \n");
+	localStringBuffer.append("  IRR.NUMERO,   \n");
+	localStringBuffer.append("  IRR.SUBINDICE,   \n");
+	localStringBuffer.append("  IRR.FORMA   \n");
+	localStringBuffer.append("FROM        \n");
+	localStringBuffer.append("  IRR_SUSTANTIVOS IRR       \n");
+	localStringBuffer.append("WHERE  \n");
+	localStringBuffer.append("  IRR.SUSTANTIVO_ID=?    \n");
+	localStringBuffer.append("  AND IRR.PARTICULARIDAD=?    \n");
+	SEL_POR_SUST_Y_PARTIC_SQL = localStringBuffer.toString();
+	localStringBuffer = new StringBuffer(200);
+	localStringBuffer.append("SELECT   \n");
+	localStringBuffer.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
+	localStringBuffer.append("  IRR.SUSTANTIVO_ID,   \n");
+	localStringBuffer.append("  IRR.PARTICULARIDAD,   \n");
+	localStringBuffer.append("  IRR.CASO,   \n");
+	localStringBuffer.append("  IRR.NUMERO,   \n");
+	localStringBuffer.append("  IRR.SUBINDICE,   \n");
+	localStringBuffer.append("  IRR.FORMA   \n");
+	localStringBuffer.append("FROM        \n");
+	localStringBuffer.append("  IRR_SUSTANTIVOS IRR       \n");
+	localStringBuffer.append("WHERE  \n");
+	localStringBuffer.append("  IRR.FORMA=?    \n");
+	SEL_POR_FORMA_SQL = localStringBuffer.toString();
+	localStringBuffer = new StringBuffer(200);
+	localStringBuffer.append("SELECT DISTINCT  \n");
+	localStringBuffer.append("  IRR.PARTICULARIDAD  \n");
+	localStringBuffer.append("FROM  \n");
+	localStringBuffer.append("  IRR_SUSTANTIVOS IRR  \n");
+	localStringBuffer.append("  INNER JOIN PARTICULARIDADES PAR ON IRR.PARTICULARIDAD=PAR.PARTIC  \n");
+	localStringBuffer.append("WHERE   \n");
+	localStringBuffer.append("  SUSTANTIVO_ID=? \n");
+	localStringBuffer.append("ORDER BY \n");
+	localStringBuffer.append("  PAR.ORDEN \n");
+	SEL_PARTICS_POR_SUST_SQL = localStringBuffer.toString();
+	localStringBuffer = new StringBuffer(200);
+	localStringBuffer.append("INSERT INTO IRR_SUSTANTIVOS (   \n");
+	localStringBuffer.append("  IRR_SUSTANTIVO_ID,   \n");
+	localStringBuffer.append("  SUSTANTIVO_ID,   \n");
+	localStringBuffer.append("  PARTICULARIDAD,   \n");
+	localStringBuffer.append("  CASO,   \n");
+	localStringBuffer.append("  NUMERO,   \n");
+	localStringBuffer.append("  SUBINDICE,   \n");
+	localStringBuffer.append("  FORMA   \n");
+	localStringBuffer.append(") VALUES (        \n");
+	localStringBuffer.append("  ?,?,?,?,?,?,?      \n");
+	localStringBuffer.append(")  \n");
+	INSERT_SQL = localStringBuffer.toString();
+	localStringBuffer = new StringBuffer(200);
+	localStringBuffer.append("UPDATE IRR_SUSTANTIVOS SET   \n");
+	localStringBuffer.append("  SUSTANTIVO_ID=?,   \n");
+	localStringBuffer.append("  PARTICULARIDAD=?,   \n");
+	localStringBuffer.append("  CASO=?,   \n");
+	localStringBuffer.append("  NUMERO=?,   \n");
+	localStringBuffer.append("  SUBINDICE=?,   \n");
+	localStringBuffer.append("  FORMA=?   \n");
+	localStringBuffer.append("WHERE    \n");
+	localStringBuffer.append("  IRR_SUSTANTIVO_ID=?   \n");
+	UPDATE_SQL = localStringBuffer.toString();
+	localStringBuffer = new StringBuffer(200);
+	localStringBuffer.append("DELETE FROM IRR_SUSTANTIVOS \n");
+	localStringBuffer.append("WHERE    \n");
+	localStringBuffer.append("  IRR_SUSTANTIVO_ID=?   \n");
+	DELETE_SQL = localStringBuffer.toString();
+    }
+
+    public List<String> seleccionaPartics(String paramString) {
+	List localList = this.seleccionPartics.execute(new Object[] { paramString });
+	return localList;
+    }
+
+    public List<IrrSustantivoBean> seleccionaPorId(String paramString) {
+	List localList = this.seleccionPorId.execute(new Object[] { paramString });
+	return localList;
+    }
+
+    public List<IrrSustantivoBean> seleccionaPorIdyPartic(String paramString, Particularidad paramX) {
+	List localList = this.seleccionPorIdYPartic.execute(new Object[] { paramString, Particularidad.getString(paramX) });
+	return localList;
+    }
+
+
+    
+    public List<IrrSustantivoBean> getRegistros(List<String> ids) {
+	List<List<String>> listaDeListas =  Listas.segmentos(ids, 500);
+	List<IrrSustantivoBean> beans = new ArrayList<IrrSustantivoBean>();
+	for (List<String> listaDeIds : listaDeListas) {
+	    StringBuffer sb = new StringBuffer(500);
+	    for (String id : listaDeIds) {
+		sb.append("'").append(id).append("',");
+	    }
+	    String sql = SEL_POR_SUSTANTIVOS_SQL.replaceFirst("\\?", sb.toString());
+	    SeleccionPorSustantivos sel= new SeleccionPorSustantivos(getDataSource(), sql);
+	    List<IrrSustantivoBean> segmBeans = sel.execute();
+	    beans.addAll(segmBeans);
+	} 
+	return beans;
+    }    
+
+    public List<IrrSustantivoBean> seleccionaPorForma(String paramString) {
+	List localList = this.seleccionPorForma.execute(new Object[] { paramString });
+	return localList;
+    }
+
+    public void inserta(IrrSustantivoBean paramU) {
+	String str = kalos.datos.util.DBUtil.getHashableId();
+	this.insercion.update(new Object[] { str, paramU.getSustantivoId(),
+		Particularidad.getString(paramU.getParticularidad()), Integer.valueOf(Caso.getInt(paramU.getCaso())),
+		Integer.valueOf(Numero.getInt(paramU.getNumero())), Integer.valueOf(paramU.getSubindice()),
+		paramU.getForma() });
+	paramU.setId(str);
+    }
+
+    public void actualiza(IrrSustantivoBean paramU) {
+	this.modificacion.update(new Object[] { paramU.getSustantivoId(), Particularidad.getString(paramU.getParticularidad()),
+		Integer.valueOf(Caso.getInt(paramU.getCaso())), Integer.valueOf(Numero.getInt(paramU.getNumero())),
+		Integer.valueOf(paramU.getSubindice()), paramU.getForma(), paramU.getId() });
+    }
+
+    public void borra(String paramString) {
+	this.borrado.update(new Object[] { paramString });
+    }
+
+    public void initDao() throws Exception {
+	super.initDao();
+	puebla();
+	this.insercion = new Insercion(getDataSource());
+	this.modificacion = new Modificacion(getDataSource());
+	this.borrado = new Borrado(getDataSource(), DELETE_SQL);
+	this.seleccionPorId = new SeleccionPorId(getDataSource());
+	this.seleccionPorForma = new SeleccionPorForma(getDataSource());
+	this.seleccionPartics = new SeleccionPartics(getDataSource());
+	this.seleccionPorIdYPartic = new SeleccionPorIdYPartic(getDataSource());
+    }
+
+    private class Modificacion extends SqlUpdate {
+	public Modificacion(DataSource paramDataSource) {
+	    super(paramDataSource, UPDATE_SQL);
+	    declareParameter(new SqlParameter(1));
+	    declareParameter(new SqlParameter(1));
+	    declareParameter(new SqlParameter(4));
+	    declareParameter(new SqlParameter(4));
+	    declareParameter(new SqlParameter(4));
+	    declareParameter(new SqlParameter(12));
+	    declareParameter(new SqlParameter(1));
+	}
+    }
+
+    private class Insercion extends SqlUpdate {
+	public Insercion(DataSource paramDataSource) {
+	    super(paramDataSource, INSERT_SQL);
+	    declareParameter(new SqlParameter(1));
+	    declareParameter(new SqlParameter(1));
+	    declareParameter(new SqlParameter(1));
+	    declareParameter(new SqlParameter(4));
+	    declareParameter(new SqlParameter(4));
+	    declareParameter(new SqlParameter(4));
+	    declareParameter(new SqlParameter(12));
+	}
+    }
+
+    private class SeleccionPartics extends MappingSqlQuery {
+	public SeleccionPartics(DataSource paramDataSource) {
+	    super(paramDataSource, SEL_PARTICS_POR_SUST_SQL);
+	    declareParameter(new SqlParameter(1));
+	}
+
+	protected Object mapRow(ResultSet paramResultSet, int paramInt) throws SQLException {
+	    String str = paramResultSet.getString("PARTICULARIDAD");
+	    return str;
+	}
+    }
+
+    private class SeleccionPorForma extends SeleccionAbstracta {
+	public SeleccionPorForma(DataSource paramDataSource) {
+	    super(paramDataSource, SEL_POR_FORMA_SQL);
+	    declareParameter(new SqlParameter(12));
+	}
+    }
+
+    private class SeleccionPorIdYPartic extends SeleccionAbstracta {
+	public SeleccionPorIdYPartic(DataSource paramDataSource) {
+	    super(paramDataSource, SEL_POR_SUST_Y_PARTIC_SQL);
+	    declareParameter(new SqlParameter(1));
+	    declareParameter(new SqlParameter(1));
+	}
+    }
+
+    private class SeleccionPorSustantivos extends SeleccionAbstracta {
+	public SeleccionPorSustantivos(DataSource paramDataSource, String paramString) {
+	    super(paramDataSource, paramString);
+	}
+    }
+
+    private class SeleccionPorId extends SeleccionAbstracta {
+	public SeleccionPorId(DataSource paramDataSource) {
+	    super(paramDataSource, SEL_POR_SUSTANTIVO_SQL);
+	    declareParameter(new SqlParameter(1));
+	}
+    }
+
+    private abstract class SeleccionAbstracta extends MappingSqlQuery {
+	public SeleccionAbstracta(DataSource paramDataSource, String paramString) {
+	    super(paramDataSource, paramString);
+	}
+
+	protected Object mapRow(ResultSet paramResultSet, int paramInt) throws SQLException {
+	    IrrSustantivoBean localU = new IrrSustantivoBean();
+	    localU.setId(paramResultSet.getString("IRR_SUSTANTIVO_ID"));
+	    localU.setSustantivoId(paramResultSet.getString("SUSTANTIVO_ID"));
+	    localU.setParticularidad(Particularidad.getEnum(paramResultSet.getString("PARTICULARIDAD")));
+	    localU.setCaso(Caso.getEnum(paramResultSet.getInt("CASO")));
+	    localU.setNumero(Numero.getEnum(paramResultSet.getInt("NUMERO")));
+	    localU.setSubindice(paramResultSet.getInt("SUBINDICE"));
+	    localU.setForma(paramResultSet.getString("FORMA"));
+	    return localU;
+	}
+    }
+}
