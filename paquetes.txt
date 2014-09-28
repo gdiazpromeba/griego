@@ -36,6 +36,8 @@ kalos
       v IrrSustantivosDao
       T IrrVerbosIndividualesDAOImpl
       BA IrrVerbosIndividualesDAO
+      b SustantivosDAOImpl
+      $A SustantivosDAO
     D adaptadores
       N  AdaptadorGerenteEncParticulas
     E gerentes
