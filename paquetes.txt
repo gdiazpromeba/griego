@@ -38,6 +38,10 @@ kalos
       BA IrrVerbosIndividualesDAO
       b SustantivosDAOImpl
       $A SustantivosDAO
+      PA PreposicionesEnVerbosDAOImpl
+      HA PreposicionesEnVerbosDAO
+      V TermRegSustantivoDAOImpl
+      S TermRegSustantivoDAO
     D adaptadores
       N  AdaptadorGerenteEncParticulas
     E gerentes
