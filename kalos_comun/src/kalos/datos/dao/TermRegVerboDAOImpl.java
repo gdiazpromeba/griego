@@ -28,6 +28,7 @@ import kalos.enumeraciones.Acento;
 import kalos.enumeraciones.FuerteDebil;
 import kalos.enumeraciones.Modo;
 import kalos.enumeraciones.Persona;
+import kalos.enumeraciones.Silaba;
 import kalos.enumeraciones.Tiempo;
 import kalos.enumeraciones.Voz;
 
@@ -81,7 +82,7 @@ public class TermRegVerboDAOImpl extends JdbcDaoSupport implements TermRegVerboD
 			bean.setTipoDesinencia(rs.getInt("TIPO_DESINENCIA"));
 			bean.setTerminacion(rs.getString("TERMINACION"));
 			bean.setRegEx(rs.getString("REGEX_TERM"));
-			bean.setSilaba(rs.getInt("SILABA"));
+			bean.setSilaba(Silaba.getEnum(rs.getInt("SILABA")));
 			bean.setAcento(Acento.getEnum(rs.getInt("ACENTO")));
 			return bean;
 		}

@@ -1,281 +1,371 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) 
+//Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+//Jad home page: http://www.kpdus.com/jad.html
+//Decompiler options: packimports(3) 
 
 package kalos.beans;
 
 import java.util.List;
 
 import kalos.enumeraciones.Acento;
-import kalos.enumeraciones.Aspecto;
+import kalos.enumeraciones.Aumento;
 import kalos.enumeraciones.Contraccion;
 import kalos.enumeraciones.FuerteDebil;
+import kalos.enumeraciones.Modo;
 import kalos.enumeraciones.Particularidad;
+import kalos.enumeraciones.Persona;
+import kalos.enumeraciones.Propagacion;
+import kalos.enumeraciones.Silaba;
+import kalos.enumeraciones.Tiempo;
 import kalos.enumeraciones.TiempoOAspecto;
 import kalos.enumeraciones.Voz;
-import kalos.operaciones.OpBeans;
 
-// Referenced classes of package kalos.K:
-//            G
+//Referenced classes of package kalos.K:
+//         L
 
 public class TermRegVerbo implements TermRegVerbal {
 
-	public int hashCode() {
-		if (CF == null)
-			CF = Integer.valueOf(cadena());
-		return CF.intValue();
-	}
+    public Aumento getAumento() {
+	return J;
+    }
 
-	public boolean equals(Object obj) {
-		if (obj instanceof TermRegVerbo)
-			return hashCode() == obj.hashCode();
-		else
-			return false;
-	}
+    public void setAumento(Aumento s) {
+	J = s;
+    }
 
-	private int cadena() {
-		StringBuffer stringbuffer = new StringBuffer();
-		stringbuffer.append(CA);
-		stringbuffer.append("|");
-		stringbuffer.append(D2);
-		stringbuffer.append("|");
-		stringbuffer.append(C6);
-		stringbuffer.append("|");
-		stringbuffer.append(C2);
-		stringbuffer.append("|");
-		stringbuffer.append(C5);
-		stringbuffer.append("|");
-		stringbuffer.append(C9);
-		stringbuffer.append("|");
-		stringbuffer.append(D6);
-		stringbuffer.append("|");
-		stringbuffer.append(D3);
-		stringbuffer.append("|");
-		stringbuffer.append(CB);
-		stringbuffer.append("|");
-		stringbuffer.append(D5);
-		stringbuffer.append("|");
-		stringbuffer.append(D0);
-		stringbuffer.append("|");
-		stringbuffer.append(C4);
-		stringbuffer.append("|");
-		stringbuffer.append(D4);
-		stringbuffer.append("|");
-		stringbuffer.append(CD);
-		stringbuffer.append("|");
-		stringbuffer.append(C3);
-		stringbuffer.append("|");
-		stringbuffer.append(C7);
-		stringbuffer.append("|");
-		stringbuffer.append(C8);
-		return stringbuffer.toString().hashCode();
-	}
+    public Contraccion getContraccion() {
+	return N;
+    }
 
-	public String getTemaPropuesto() {
-		return C3;
-	}
+    public void setContraccion(Contraccion c) {
+	N = c;
+    }
 
-	public void setTemaPropuesto(String s) {
-		C3 = s;
-		CF = null;
-	}
+    public FuerteDebil getFuerte() {
+	return A;
+    }
 
-	public String getFormaDestransformada() {
-		return D1;
-	}
+    public void setFuerte(FuerteDebil p) {
+	A = p;
+    }
 
-	public void setFormaDestransformada(String s) {
-		D1 = s;
-		CF = null;
-	}
+    public String getId() {
+	return id;
+    }
 
-	public Acento getAcento() {
-		return D3;
-	}
+    public void setId(String s) {
+	id = s;
+    }
 
-	public void setAcento(Acento e) {
-		D3 = e;
-		CF = null;
-	}
+    public int getJuego() {
+	return I;
+    }
 
-	public FuerteDebil getFuerte() {
-		return C6;
-	}
+    public void setJuego(int i) {
+	I = i;
+    }
 
-	public void setFuerte(FuerteDebil p) {
-		C6 = p;
-		CF = null;
-	}
+    public Modo getModo() {
+	return F;
+    }
 
-	public String getRegEx() {
-		return C9;
-	}
+    public void setModo(Modo p) {
+	F = p;
+    }
 
-	public void setRegEx(String s) {
-		C9 = s;
-		CF = null;
-	}
+    public Particularidad getPartic() {
+	return G;
+    }
 
-	public int getSilaba() {
-		return D6;
-	}
+    public void setPartic(Particularidad x) {
+	G = x;
+    }
 
-	public void setSilaba(int i) {
-		D6 = i;
-		CF = null;
-	}
+    public Propagacion getPropagacion() {
+	return Q;
+    }
 
-	public int getTipoDesinencia() {
-		return C2;
-	}
+    public void setPropagacion(Propagacion d) {
+	Q = d;
+    }
 
-	public void setTipoDesinencia(int i) {
-		C2 = i;
-		CF = null;
-	}
+    public boolean isReduplicacion() {
+	return R;
+    }
 
-	public Voz getVoz() {
-		return CA;
-	}
+    public void setReduplicacion(boolean flag) {
+	R = flag;
+    }
 
-	public void setVoz(Voz z) {
-		CA = z;
-		CF = null;
-	}
+    public int getSubPart() {
+	return E;
+    }
 
-	public String getTerminacion() {
-		return C5;
-	}
+    public void setSubPart(int i) {
+	E = i;
+    }
 
-	public void setTerminacion(String s) {
-		C5 = s;
-		CF = null;
-	}
+    public String getTema() {
+	return C;
+    }
 
-	public String getFormaOriginal() {
-		return D5;
-	}
+    public void setTema(String s) {
+	C = s;
+    }
 
-	public void setFormaOriginal(String s) {
-		D5 = s;
-		CF = null;
-	}
+    public Tiempo getTiempo() {
+	return B;
+    }
 
-	public int getTipoVerboExtendido() {
-		return D0;
-	}
+    public void setTiempo(Tiempo j) {
+	B = j;
+    }
 
-	public void setTipoVerboExtendido(int i) {
-		D0 = i;
-		CF = null;
-	}
+    public Tiempo getTiempoJuego() {
+	return P;
+    }
 
-	public String getFormaOriginalCompuesta() {
-		return C4;
-	}
+    public void setTiempoJuego(Tiempo j) {
+	P = j;
+    }
 
-	public void setFormaOriginalCompuesta(String s) {
-		C4 = s;
-		CF = null;
-	}
+    public String getVerboId() {
+	return D;
+    }
 
-	public List getPreposiciones() {
-		return D4;
-	}
+    public void setVerboId(String s) {
+	D = s;
+    }
 
-	public void setPreposiciones(List list) {
-		D4 = list;
-		CF = null;
-	}
+    public Voz getVoz() {
+	return L;
+    }
 
-	public String getFormaADestransformar() {
-		return CD;
-	}
+    public void setVoz(Voz z) {
+	L = z;
+    }
 
-	public void setFormaADestransformar(String s) {
-		CD = s;
-		CF = null;
-	}
+    public Voz getVozJuego() {
+	return K;
+    }
 
-	public String getIdVerbo() {
-		return C7;
-	}
+    public void setVozJuego(Voz z) {
+	K = z;
+    }
 
-	public void setIdVerbo(String s) {
-		C7 = s;
-		CF = null;
-	}
+    public boolean isCompuesto() {
+	return O;
+    }
 
-	public Particularidad getParticularidad() {
-		return C8;
-	}
+    public void setCompuesto(boolean flag) {
+	O = flag;
+    }
 
-	public void setParticularidad(Particularidad x) {
-		C8 = x;
-		CF = null;
-	}
+    public int hashCode() {
+	int i = 1;
+	i = 31 * i + (id != null ? id.hashCode() : 0);
+	return i;
+    }
 
-	public TiempoOAspecto getAspecto() {
-		return D2;
-	}
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	TermRegVerbo s = (TermRegVerbo) obj;
+	if (id == null) {
+	    if (s.id != null)
+		return false;
+	} else if (!id.equals(s.id))
+	    return false;
+	return true;
+    }
 
-	public TiempoOAspecto getTiempoOAspecto() {
-		return getAspecto();
-	}
+    public boolean isPats() {
+	return H;
+    }
 
-	public void setAspecto(Aspecto k) {
-		D2 = k;
-		CF = null;
-	}
+    public void setPats(boolean flag) {
+	H = flag;
+    }
 
-	public Contraccion getContraccionGeneradora() {
-		return CB;
-	}
+    private String id;
+    private String D;
+    private String C;
+    private Particularidad G;
+    private int E;
+    private Modo F;
+    private Tiempo B;
+    private Voz L;
+    private FuerteDebil A;
+    private Contraccion N;
+    private Aumento J;
+    private boolean R;
+    private int I;
+    private Tiempo P;
+    private Voz K;
+    private Propagacion Q;
+    private boolean H;
+    private boolean O;
+    private int tipoDesinencia;
+    private String formaDestransformada;
+    private int tipoVerboExtendido;
+    private String terminacion;
+    private String formaADestransformar;
+    private List<String> preposiciones;
+    private TiempoOAspecto tiempoOAspecto;
+    private String formaOriginalCompuesta;
+    private String formaOriginal;
+    private String idVerbo;
+    private Particularidad particularidad;
+    private String idVerboCompuesto;
+    private Persona persona;
+    
+    public Persona getPersona() {
+        return persona;
+    }
 
-	public void setContraccionGeneradora(Contraccion c) {
-		CB = c;
-		CF = null;
-	}
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
 
-	public boolean isCompuesto() {
-		return CE;
-	}
+    public String getRegEx() {
+        return regEx;
+    }
 
-	public void setCompuesto(boolean flag) {
-		CE = flag;
-	}
+    public void setRegEx(String regex) {
+        this.regEx = regex;
+    }
 
-	public String getIdVerboCompuesto() {
-		return CC;
-	}
+    public Silaba getSilaba() {
+        return silaba;
+    }
 
-	public void setIdVerboCompuesto(String s) {
-		CC = s;
-	}
+    public void setSilaba(Silaba silaba) {
+        this.silaba = silaba;
+    }
 
-	public TermRegVerbo clona() {
-		return (TermRegVerbo) OpBeans.clona(this);
-	}
+    public Acento getAcento() {
+        return acento;
+    }
 
-	private Voz CA;
-	private TiempoOAspecto D2;
-	private FuerteDebil C6;
-	private int C2;
-	private String C5;
-	private String C9;
-	private int D6;
-	private Acento D3;
-	private Contraccion CB;
-	private String D5;
-	private int D0;
-	private String C4;
-	private List D4;
-	private String CD;
-	private String D1;
-	private String C3;
-	private String C7;
-	private Particularidad C8;
-	private boolean CE;
-	private String CC;
-	Integer CF;
+    public void setAcento(Acento acento) {
+        this.acento = acento;
+    }
+
+    private String regEx;
+    private Silaba silaba;
+    private Acento acento;
+    
+    
+    public String getIdVerboCompuesto() {
+        return idVerboCompuesto;
+    }
+
+    public void setIdVerboCompuesto(String idVerboCompuesto) {
+        this.idVerboCompuesto = idVerboCompuesto;
+    }
+
+    public Particularidad getParticularidad() {
+        return particularidad;
+    }
+
+    public void setParticularidad(Particularidad particularidad) {
+        this.particularidad = particularidad;
+    }
+
+    public String getIdVerbo() {
+        return idVerbo;
+    }
+
+    public void setIdVerbo(String idVerbo) {
+        this.idVerbo = idVerbo;
+    }
+
+    public String getFormaOriginal() {
+        return formaOriginal;
+    }
+
+    public void setFormaOriginal(String formaOriginal) {
+        this.formaOriginal = formaOriginal;
+    }
+
+    public String getFormaOriginalCompuesta() {
+        return formaOriginalCompuesta;
+    }
+
+    public void setFormaOriginalCompuesta(String formaOriginalCompuesta) {
+        this.formaOriginalCompuesta = formaOriginalCompuesta;
+    }
+
+    public TiempoOAspecto getTiempoOAspecto() {
+        return tiempoOAspecto;
+    }
+
+    public void setTiempoOAspecto(TiempoOAspecto tiempoOAspecto) {
+        this.tiempoOAspecto = tiempoOAspecto;
+    }
+
+    public List<String> getPreposiciones() {
+        return preposiciones;
+    }
+
+    public void setPreposiciones(List<String> preposiciones) {
+        this.preposiciones = preposiciones;
+    }
+
+    public String getFormaADestransformar() {
+        return formaADestransformar;
+    }
+
+    public void setFormaADestransformar(String formaADestransformar) {
+        this.formaADestransformar = formaADestransformar;
+    }
+
+    public String getTerminacion() {
+        return terminacion;
+    }
+
+    public void setTerminacion(String terminacion) {
+        this.terminacion = terminacion;
+    }
+
+    public int getTipoVerboExtendido() {
+        return tipoVerboExtendido;
+    }
+
+    public void setTipoVerboExtendido(int tipoVerboExtendido) {
+        this.tipoVerboExtendido = tipoVerboExtendido;
+    }
+
+    public String getFormaDestransformada() {
+        return formaDestransformada;
+    }
+
+    public void setFormaDestransformada(String formaDestransformada) {
+        this.formaDestransformada = formaDestransformada;
+    }
+
+    public int getTipoDesinencia() {
+        return tipoDesinencia;
+    }
+
+    public void setTipoDesinencia(int tipoDesinencia) {
+        this.tipoDesinencia = tipoDesinencia;
+    }
+
+    @Override
+    public TermRegVerbal clona() {
+	try {
+	    return (TermRegVerbal)this.clone();
+	} catch (CloneNotSupportedException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return null;
+	}
+    }
+
+    
+    
 }
