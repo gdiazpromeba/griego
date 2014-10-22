@@ -71,3 +71,4 @@ kalos
     M TestAdjetivosBean
     H VerboSimpleCompuesto
     h VerboBean
+    j ResultadoUniversal
