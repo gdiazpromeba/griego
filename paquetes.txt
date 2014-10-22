@@ -56,6 +56,9 @@ kalos
       k GerenteEncParticulas
       c GerenteCubosTipoPartImpl
       RA GerenteCubosTipoPart (una interfaz)
+      FA GerenteAdjetivosImpl
+  G
+    A OpBeans
   H flexion
    O CreadorTableModelsBasicos
    
