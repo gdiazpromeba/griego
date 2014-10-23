@@ -57,6 +57,12 @@ kalos
       c GerenteCubosTipoPartImpl
       RA GerenteCubosTipoPart (una interfaz)
       FA GerenteAdjetivosImpl
+      R  GerenteTiposSustantivoImpl
+      h  GerenteTiposSustantivo
+      gA GerenteSustantivosImpl
+      J  GerenteSustantivos
+      JA GerenteOrdenable
+      
   G
     A OpBeans
   H flexion
