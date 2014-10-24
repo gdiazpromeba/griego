@@ -4,14 +4,23 @@ kalos
     L SubtipoConjuncion
     E Acento
     F ValorExplosion
+    X Particularidades
+    J Tiempos
+    W TiempoSegundos
+    K Aspecto
+    R AspectoSegundos
+    
   C recursos
     A Configuracion
     E UtilidadRecursos
     A dto
       A DTOExplosion
+    F Recursos
   D analisismorfologici
     L negocio
       L AMAdjetivos
+
+      
   E datos
     C dao
       d  ConjuncionesDao
@@ -85,6 +94,10 @@ kalos
     A OpBeans
   H flexion
    O CreadorTableModelsBasicos
+   K UtilidadReportes
+   C UtilidadesTM
+   N CeldaReporte
+   A ClaveFlexion
    
   J  bibliotecadatos
     B   FuenteDatosCacheable        
