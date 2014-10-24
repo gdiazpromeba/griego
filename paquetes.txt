@@ -62,6 +62,8 @@ kalos
       gA GerenteSustantivosImpl
       J  GerenteSustantivos
       JA GerenteOrdenable
+      g  GerenteVerbosImpl
+      P  GerenteVerbos
       
   G
     A OpBeans

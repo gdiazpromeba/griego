@@ -5,10 +5,13 @@ import java.util.List;
 import kalos.beans.VerbalizadorBean;
 import kalos.datos.dao.VerbalizadorParticipiosDAO;
 
-public class GerenteVerbalizadorParticipiosImpl implements GerenteVerbalizadorParticipios {
+public class GerenteVerbalizadorParticipiosImpl implements GerenteVerbalizadorParticipios  {
 	
 	private VerbalizadorParticipiosDAO verbalizadorParticipiosDAO;
 	
+	/* (non-Javadoc)
+	 * @see kalos.datos.gerentes.GerenteVerbalizadorParticipios#seleccionaPorTerminacionGenitivo(java.lang.String)
+	 */
 	/* (non-Javadoc)
 	 * @see kalos.datos.gerentes.GerenteVerbalizadorParticipios#seleccionaPorTerminacionGenitivo(java.lang.String)
 	 */
@@ -19,12 +22,15 @@ public class GerenteVerbalizadorParticipiosImpl implements GerenteVerbalizadorPa
 	/* (non-Javadoc)
 	 * @see kalos.datos.gerentes.GerenteVerbalizadorParticipios#seleccionaPorTerminacionNominativo(java.lang.String)
 	 */
+	/* (non-Javadoc)
+	 * @see kalos.datos.gerentes.GerenteVerbalizadorParticipios#seleccionaPorTerminacionNominativo(java.lang.String)
+	 */
 	public List<VerbalizadorBean> seleccionaPorTerminacionNominativo(String terminacionNominativo){
 		return verbalizadorParticipiosDAO.seleccionaPorTerminacionNominativo(terminacionNominativo);
 	}
 
-	/**
-	 * @param verbalizadorParticipiosDAO The verbalizadorParticipiosDAO to set.
+	/* (non-Javadoc)
+	 * @see kalos.datos.gerentes.GerenteVerbalizadorParticipios#setVerbalizadorParticipiosDAO(kalos.datos.dao.VerbalizadorParticipiosDAO)
 	 */
 	public void setVerbalizadorParticipiosDAO(VerbalizadorParticipiosDAO verbalizadorParticipiosDAO) {
 		this.verbalizadorParticipiosDAO = verbalizadorParticipiosDAO;
