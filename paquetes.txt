@@ -52,18 +52,31 @@ kalos
       W VerbosDAO
     D adaptadores
       N  AdaptadorGerenteEncParticulas
+      J  AdaptadorGerenteAdjetivos
+      M  AdaptadorGerenteIrrSustantivos
+      H  AdaptadorGerenteInterjecciones
+      L  AdaptadorGerenteDiccionario
     E gerentes
-      k GerenteEncParticulas
-      c GerenteCubosTipoPartImpl
+      c  GerenteCubosTipoPartImpl
+      s  GerenteEncParticulas
       RA GerenteCubosTipoPart (una interfaz)
       FA GerenteAdjetivosImpl
+      f  GerenteAdjetivos
       R  GerenteTiposSustantivoImpl
       h  GerenteTiposSustantivo
       gA GerenteSustantivosImpl
       J  GerenteSustantivos
-      JA GerenteOrdenable
+      JA(1) GerenteOrdenable
       g  GerenteVerbosImpl
       P  GerenteVerbos
+      SA GerenteIrrSustantivos
+      X  SelectorTodos
+      i o i(1)  GerenteInterjeccionesDAOImpl
+      JA GerenteInterjeccionesDAO
+      m  GerenteDiccionarioDAO
+      Z  GerenteDiccionarioDAOImpl
+      
+      
       
   G
     A OpBeans
