@@ -3,9 +3,12 @@ kalos
     D TipoConjuncion
     L SubtipoConjuncion
     E Acento
-    h
+    F ValorExplosion
   C recursos
     A Configuracion
+    E UtilidadRecursos
+    A dto
+      A DTOExplosion
   D analisismorfologici
     L negocio
       L AMAdjetivos
