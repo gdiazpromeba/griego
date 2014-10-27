@@ -13,7 +13,8 @@ kalos
     p Modo
     S Aumento
     P FuerteDebil
-    
+    I CompLetras
+    H TipoVerbo
   C recursos
     A Configuracion
     E UtilidadRecursos
@@ -110,6 +111,7 @@ kalos
        B CoordenadasOc
        C Ocurrencia
      A Verbos
+     D Infinitivos
    
   J  bibliotecadatos
     B   FuenteDatosCacheable        
@@ -132,4 +134,5 @@ kalos
     N OpLetrasUnicode
     A OpBeans
     F TiposVerbo
+    I OpPalabras
     
