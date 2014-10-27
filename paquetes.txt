@@ -5,10 +5,14 @@ kalos
     E Acento
     F ValorExplosion
     X Particularidades
-    J Tiempos
+    j Tiempos
     W TiempoSegundos
     K Aspecto
     R AspectoSegundos
+    Z Voz
+    p Modo
+    S Aumento
+    P FuerteDebil
     
   C recursos
     A Configuracion
@@ -88,16 +92,24 @@ kalos
       m  GerenteDiccionarioDAO
       Z  GerenteDiccionarioDAOImpl
       
-      
-      
-  G
-    A OpBeans
   H flexion
+   A utils
+     A UtilListas
    O CreadorTableModelsBasicos
    K UtilidadReportes
    C UtilidadesTM
    N CeldaReporte
    A ClaveFlexion
+   B Preposiciones
+   B conjugacion 
+     A negocio
+       E ManejaDesinenciasInfinitivo
+       F ManejaDesinenciasVerbo
+       A OcurrenciaInfinitivo
+       D Desinencia
+       B CoordenadasOc
+       C Ocurrencia
+     A Verbos
    
   J  bibliotecadatos
     B   FuenteDatosCacheable        
@@ -109,3 +121,15 @@ kalos
     H VerboSimpleCompuesto
     h VerboBean
     j ResultadoUniversal
+    S IrrVerbo
+    q IrrVerboIndividual
+  F fonts
+    F CaracterGriegoFactory
+    A CarPos
+    D TipoLetra
+  G operaciones
+    M OpLetras
+    N OpLetrasUnicode
+    A OpBeans
+    F TiposVerbo
+    

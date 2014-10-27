@@ -17,7 +17,7 @@ public class UtilListas {
 	 * @param valores
 	 * @param derivadas
 	 */
-	public static <E> void distribuye(List<E> original, String propiedad, Object[] valores, List<E>[] derivadas){
+    public static <E> void distribuye(List<E> original, String propiedad, Object[] valores, List<E>[] derivadas){
 		for (E bean: original){
 			Object valorOriginal=OpBeans.getPropiedadObject(bean, propiedad);
 			for (int i=0; i<valores.length; i++){
