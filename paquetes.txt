@@ -17,6 +17,7 @@ kalos
     H TipoVerbo
     C PosicionConcuerda
     m AcentoConcuerda
+    A Genero
   C recursos
     A Configuracion
     E UtilidadRecursos
@@ -76,6 +77,10 @@ kalos
       H  AdaptadorGerenteInterjecciones
       L  AdaptadorGerenteDiccionario
       I  AdaptadorGerenteDesinSust
+      D  AdaptadorGerenteIrrAdjetivosEnteros
+      F  AdaptadorGerenteIrrAdjetivosIndividuales
+      
+      
     E gerentes
       c  GerenteCubosTipoPartImpl
       s  GerenteEncParticulas
@@ -118,6 +123,9 @@ kalos
    C declinacion
      L ManejaDesinenciasSustantivo
      J DesinenciasSustantivo
+     A DeclinaAdjetivos
+     B OcAdjetivo
+     D OcNominal
    
   J  bibliotecadatos
     B   FuenteDatosCacheable    
@@ -144,4 +152,7 @@ kalos
     A OpBeans
     F TiposVerbo
     I OpPalabras
+    D AnalisisAcento
+    B AACacheable
+      
     
