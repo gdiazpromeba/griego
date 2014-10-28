@@ -39,7 +39,7 @@ public enum PosicionConcuerda {
 		  case 6:
 			  return NGSing;
 		  default:
-			  throw new RuntimeException("no hay AcentoConcuerda número " + valor);
+			  throw new RuntimeException("no hay PosicionConcuerda número " + valor);
 		}
 	}	
 	

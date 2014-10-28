@@ -15,6 +15,8 @@ kalos
     P FuerteDebil
     I CompLetras
     H TipoVerbo
+    C PosicionConcuerda
+    m AcentoConcuerda
   C recursos
     A Configuracion
     E UtilidadRecursos
@@ -73,6 +75,7 @@ kalos
       M  AdaptadorGerenteIrrSustantivos
       H  AdaptadorGerenteInterjecciones
       L  AdaptadorGerenteDiccionario
+      I  AdaptadorGerenteDesinSust
     E gerentes
       c  GerenteCubosTipoPartImpl
       s  GerenteEncParticulas
@@ -112,9 +115,13 @@ kalos
        C Ocurrencia
      A Verbos
      D Infinitivos
+   C declinacion
+     L ManejaDesinenciasSustantivo
+     J DesinenciasSustantivo
    
   J  bibliotecadatos
-    B   FuenteDatosCacheable        
+    B   FuenteDatosCacheable    
+    A   JerarquiaBeans
   K  beans
     E (o e) Conjuncion
     Q (o q) Significado
@@ -125,6 +132,8 @@ kalos
     j ResultadoUniversal
     S IrrVerbo
     q IrrVerboIndividual
+    A DesinSust
+    e TipoJerarquico
   F fonts
     F CaracterGriegoFactory
     A CarPos
