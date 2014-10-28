@@ -20,6 +20,10 @@ kalos
     m AcentoConcuerda
     A Genero
     a Caso
+    U TiempoOAspecto
+    A utils
+      A TransformadorTiempoAspecto
+    
   C recursos
     A Configuracion
     E UtilidadRecursos
@@ -146,6 +150,7 @@ kalos
     q IrrVerboIndividual
     A DesinSust
     e TipoJerarquico
+    y IrrInfinitivo
   F fonts
     F CaracterGriegoFactory
     A CarPos
