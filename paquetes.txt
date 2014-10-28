@@ -18,6 +18,7 @@ kalos
     C PosicionConcuerda
     m AcentoConcuerda
     A Genero
+    a Caso
   C recursos
     A Configuracion
     E UtilidadRecursos
@@ -126,6 +127,7 @@ kalos
      A DeclinaAdjetivos
      B OcAdjetivo
      D OcNominal
+     C ProblemaSugiriendoTipoAdjetivo
    
   J  bibliotecadatos
     B   FuenteDatosCacheable    
@@ -153,6 +155,8 @@ kalos
     F TiposVerbo
     I OpPalabras
     D AnalisisAcento
+      D.A sugeridos.silaba
+      D.G sugeridos.silabaB1
     B AACacheable
       
     
