@@ -7,7 +7,8 @@ kalos
     X Particularidades
     j Tiempos
     W TiempoSegundos
-    K Aspecto
+    K EnuExplosiones
+    k Aspecto
     R AspectoSegundos
     Z Voz
     p Modo
@@ -128,6 +129,7 @@ kalos
      B OcAdjetivo
      D OcNominal
      C ProblemaSugiriendoTipoAdjetivo
+     F OcParticipio
    
   J  bibliotecadatos
     B   FuenteDatosCacheable    
