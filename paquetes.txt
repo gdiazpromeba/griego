@@ -1,5 +1,6 @@
 kalos
   B enumeraciones
+    _ Persona
     D TipoConjuncion
     L SubtipoConjuncion
     E Acento
@@ -106,6 +107,8 @@ kalos
       JA GerenteInterjeccionesDAO
       m  GerenteDiccionarioDAO
       Z  GerenteDiccionarioDAOImpl
+      z  GerenteDesinVerbos
+      O  GerenteDesinInfinitivos
       
   H flexion
    A utils
