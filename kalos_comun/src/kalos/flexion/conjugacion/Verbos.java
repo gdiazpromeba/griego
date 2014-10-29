@@ -145,7 +145,7 @@ public class Verbos {
     }
 
     public String sugiereSufijoContracto(String paramString) {
-	if (paramString.endsWith("desinenciaComida/W")) {
+	if (paramString.endsWith("A/W")) {
 	    return "-W=";
 	}
 	if (paramString.endsWith("E/W")) {
@@ -154,7 +154,7 @@ public class Verbos {
 	if (paramString.endsWith("O/W")) {
 	    return "-W=";
 	}
-	if (paramString.endsWith("desinenciaComida/OMAI")) {
+	if (paramString.endsWith("A/OMAI")) {
 	    return "-W=MAI";
 	}
 	if (paramString.endsWith("E/OMAI")) {
