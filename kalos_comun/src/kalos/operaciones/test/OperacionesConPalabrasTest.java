@@ -55,15 +55,15 @@ public class OperacionesConPalabrasTest extends TestCase     implements  CompLet
         A("TI_MA", "WN", -1, Acento.Ninguno, "TI_MW=N");
         A("TI_MA", "W", 0, Acento.Ninguno, "TI_MW=");
         A("TI_MA", "OIO", -2, Acento.Ninguno, "TI_MW|=O");
-        A("A)GGELE", "ON", -1, Acento.Ninguno, "A)GGELOU=N");
-        A("A)LHQE", "I", -1, Acento.Ninguno, "A)LHQEI=");
-        A("A)LHQE", "I", 3, Acento.Ninguno, "A)LHQEI=");
+        A("desinenciaComida)GGELE", "ON", -1, Acento.Ninguno, "desinenciaComida)GGELOU=N");
+        A("desinenciaComida)LHQE", "I", -1, Acento.Ninguno, "desinenciaComida)LHQEI=");
+        A("desinenciaComida)LHQE", "I", 3, Acento.Ninguno, "desinenciaComida)LHQEI=");
         A("OI)", "E", 0, Acento.Ninguno, "OI)=E");
     }
 
     public void testBetaACompleto()
     {
-        String s = "*A)/BDHRA";
+        String s = "*desinenciaComida)/BDHRA";
         String s1 = OpPalabras.strBetaACompleto(s);
         String s2 = new String(new char[] {
             '\u5F04', '\u03B2', '\u03B4', '\u03B7', '\u03C1', '\u23B1'
@@ -81,7 +81,7 @@ public class OperacionesConPalabrasTest extends TestCase     implements  CompLet
 
     public void testConversionIdaYVuelta()
     {
-        A("*A)/BDHRA");
+        A("*desinenciaComida)/BDHRA");
         A("*GADEI/RA");
     }
 

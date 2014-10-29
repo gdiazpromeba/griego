@@ -36,14 +36,14 @@ import kalos.operaciones.OpPalabras;
 import kalos.operaciones.TiposVerbo;
 
 public class Verbos {
-    private GerenteIrrVerbos P;
-    private GerenteIrrVerbosIndividuales M;
-    private GerenteVerbos Q;
+    private GerenteIrrVerbos gerIrrVerbos;
+    private GerenteIrrVerbosIndividuales getIrrVerbosIndiv;
+    private GerenteVerbos gerenteVerbos;
     private GerenteTiposVerbo S;
     private GerenteVerbosCompuestos E;
-    private GerentePreposicionesEnVerbos K;
-    private Preposiciones R;
-    private ManejaDesinenciasVerbo D;
+    private GerentePreposicionesEnVerbos gerPreposicionesEnVerbos;
+    private Preposiciones preposiciones;
+    private ManejaDesinenciasVerbo manejaDesinenciasVerbo;
     private CacheFlexionVerbos L;
     private Object[][] O = { { Modo.Indicativo, Tiempo.Presente }, { Modo.Subjuntivo, Tiempo.Presente },
 	    { Modo.Optativo, Tiempo.Presente }, { Modo.Imperativo, Tiempo.Presente } };
@@ -145,7 +145,7 @@ public class Verbos {
     }
 
     public String sugiereSufijoContracto(String paramString) {
-	if (paramString.endsWith("A/W")) {
+	if (paramString.endsWith("desinenciaComida/W")) {
 	    return "-W=";
 	}
 	if (paramString.endsWith("E/W")) {
@@ -154,7 +154,7 @@ public class Verbos {
 	if (paramString.endsWith("O/W")) {
 	    return "-W=";
 	}
-	if (paramString.endsWith("A/OMAI")) {
+	if (paramString.endsWith("desinenciaComida/OMAI")) {
 	    return "-W=MAI";
 	}
 	if (paramString.endsWith("E/OMAI")) {
@@ -503,7 +503,7 @@ public class Verbos {
 	paramStringBuffer.append(str);
     }
 
-    private void C(Ocurrencia paramC, List<IrrVerbo> paramList, List<IrrVerboIndividual> paramList1,
+    private void C(Ocurrencia oc, List<IrrVerbo> paramList, List<IrrVerboIndividual> paramList1,
 	    List<String> paramList2) {
 	Iterator<IrrVerbo> localIterator = paramList.iterator();
 	while (localIterator.hasNext()) {
@@ -512,42 +512,42 @@ public class Verbos {
 	    if (irrVerbo.isCompuesto()) {
 		localList = null;
 	    }
-	    String str1 = null;
-	    String str2 = null;
-	    str2 = irrVerbo.getTema();
-	    str1 = OpPalabras.aumenta(irrVerbo.getTema(), irrVerbo.getAumento());
-	    String str3 = irrVerbo.getModo().equals(Modo.Indicativo) ? str1 : str2;
-	    B(paramC, str2, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+	    String temaAum = null;
+	    String temaIrr = null;
+	    temaIrr = irrVerbo.getTema();
+	    temaAum = OpPalabras.aumenta(irrVerbo.getTema(), irrVerbo.getAumento());
+	    String tema = irrVerbo.getModo().equals(Modo.Indicativo) ? temaAum : temaIrr;
+	    pueblaPersonas(oc, temaIrr, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 		    irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(), irrVerbo.getTiempoJuego(),
 		    false, localList, irrVerbo.getSubPart());
 	    switch (irrVerbo.getPropagacion()) {
 	    case Ninguna:
 		break;
 	    case haciaModoYVoz:
-		A(paramC, str3, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+		pueblaYModoYVoz(oc, tema, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
 			irrVerbo.getTiempoJuego(), false, localList, irrVerbo.getSubPart());
 		break;
 	    case haciaLaVoz:
-		A(paramC, str1, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+		pueblaYVoz(oc, temaAum, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
 			irrVerbo.getTiempoJuego(), false, localList, irrVerbo.getSubPart());
 		break;
 	    case haciaElModo:
-		A(paramC, str1, str2, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+		pueblaYModo(oc, temaAum, temaIrr, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
 			irrVerbo.getTiempoJuego(), false, localList, irrVerbo.getSubPart());
 	    }
 	    if (irrVerbo.isPats()) {
-		B(paramC, str1, irrVerbo.getVoz(), irrVerbo.getModo(), Tiempo.Imperfecto, irrVerbo.getFuerte(),
+		pueblaPersonas(oc, temaAum, irrVerbo.getVoz(), irrVerbo.getModo(), Tiempo.Imperfecto, irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(), Tiempo.Imperfecto,
 			false, localList, irrVerbo.getSubPart());
-		A(paramC, str1, irrVerbo.getVoz(), irrVerbo.getModo(), Tiempo.Imperfecto, irrVerbo.getFuerte(),
+		pueblaYModoYVoz(oc, temaAum, irrVerbo.getVoz(), irrVerbo.getModo(), Tiempo.Imperfecto, irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(), Tiempo.Imperfecto,
 			false, localList, irrVerbo.getSubPart());
 	    }
 	}
-	A(paramC, paramList1, Aspecto.Infectivo, paramList2);
+	A(oc, paramList1, Aspecto.Infectivo, paramList2);
     }
 
     private void A(Ocurrencia paramC, List<IrrVerboIndividual> paramList, Aspecto paramk, List<String> paramList1) {
@@ -559,7 +559,7 @@ public class Verbos {
 		localList = null;
 	    }
 	    String str = localq.getForma();
-	    str = this.R.une(str, localList, !localq.isRespetaAcento());
+	    str = this.preposiciones.une(str, localList, !localq.isRespetaAcento());
 	    paramC.agregaFormaIndividual(localq.getVoz(), localq.getModo(), localq.getTiempo(), localq.getFuerte(),
 		    localq.getPersona(), str, localq.getSubPart());
 	}
@@ -574,24 +574,24 @@ public class Verbos {
 		localList = null;
 	    }
 	    String str = irrVerbo.getTema();
-	    B(paramC, str, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+	    pueblaPersonas(paramC, str, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 		    irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(), irrVerbo.getTiempoJuego(),
 		    false, localList, irrVerbo.getSubPart());
 	    switch (irrVerbo.getPropagacion()) {
 	    case Ninguna:
 		break;
 	    case haciaModoYVoz:
-		A(paramC, str, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+		pueblaYModoYVoz(paramC, str, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
 			irrVerbo.getTiempoJuego(), false, localList, irrVerbo.getSubPart());
 		break;
 	    case haciaLaVoz:
-		A(paramC, str, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+		pueblaYVoz(paramC, str, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
 			irrVerbo.getTiempoJuego(), false, localList, irrVerbo.getSubPart());
 		break;
 	    case haciaElModo:
-		A(paramC, str, str, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+		pueblaYModo(paramC, str, str, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
 			irrVerbo.getTiempoJuego(), false, localList, irrVerbo.getSubPart());
 	    }
@@ -611,24 +611,24 @@ public class Verbos {
 	    String str1 = OpPalabras.aumenta(irrVerbo.getTema(), irrVerbo.getAumento());
 	    String str2 = irrVerbo.getTema();
 	    String str3 = irrVerbo.getModo().equals(Modo.Indicativo) ? str1 : str2;
-	    B(paramC, str3, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+	    pueblaPersonas(paramC, str3, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 		    irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(), irrVerbo.getTiempoJuego(),
 		    false, localList, irrVerbo.getSubPart());
 	    switch (irrVerbo.getPropagacion()) {
 	    case Ninguna:
 		break;
 	    case haciaModoYVoz:
-		A(paramC, str3, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+		pueblaYModoYVoz(paramC, str3, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
 			irrVerbo.getTiempoJuego(), false, localList, irrVerbo.getSubPart());
 		break;
 	    case haciaLaVoz:
-		A(paramC, str1, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+		pueblaYVoz(paramC, str1, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
 			irrVerbo.getTiempoJuego(), false, localList, irrVerbo.getSubPart());
 		break;
 	    case haciaElModo:
-		A(paramC, str1, str2, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+		pueblaYModo(paramC, str1, str2, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
 			irrVerbo.getTiempoJuego(), false, localList, irrVerbo.getSubPart());
 	    }
@@ -636,7 +636,7 @@ public class Verbos {
 	A(paramC, paramList1, Aspecto.Confectivo, paramList2);
     }
 
-    private void A(Ocurrencia paramC, List<IrrVerbo> paramList, List<IrrVerboIndividual> paramList1, int paramInt,
+    private void A(Ocurrencia paramC, List<IrrVerbo> paramList, List<IrrVerboIndividual> paramList1, int tipo,
 	    List<String> paramList2) {
 	Iterator<IrrVerbo> localIterator = paramList.iterator();
 	while (localIterator.hasNext()) {
@@ -645,41 +645,41 @@ public class Verbos {
 	    if (irrVerbo.isCompuesto()) {
 		localList = null;
 	    }
-	    String str1 = irrVerbo.getTema();
+	    String temaIrr = irrVerbo.getTema();
 	    if (irrVerbo.isReduplicacion()) {
-		str1 = OpPalabras.reduplica(str1);
+		temaIrr = OpPalabras.reduplica(temaIrr);
 	    }
-	    String str2 = OpPalabras.aumenta(str1, irrVerbo.getAumento());
-	    String str3 = irrVerbo.getModo().equals(Modo.Indicativo) ? str2 : str1;
-	    boolean bool = (TiposVerbo.esLiquido(paramInt)) && (str1.charAt(str1.length() - 1) == 'σ');
-	    B(paramC, str1, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+	    String str2 = OpPalabras.aumenta(temaIrr, irrVerbo.getAumento());
+	    String str3 = irrVerbo.getModo().equals(Modo.Indicativo) ? str2 : temaIrr;
+	    boolean liquidoEnS = (TiposVerbo.esLiquido(tipo)) && (temaIrr.charAt(temaIrr.length() - 1) == 'σ');
+	    pueblaPersonas(paramC, temaIrr, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 		    irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(), irrVerbo.getTiempoJuego(),
-		    bool, localList, irrVerbo.getSubPart());
+		    liquidoEnS, localList, irrVerbo.getSubPart());
 	    switch (irrVerbo.getPropagacion()) {
 	    case Ninguna:
 		break;
 	    case haciaModoYVoz:
-		A(paramC, str3, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+		pueblaYModoYVoz(paramC, str3, irrVerbo.getVoz(), irrVerbo.getModo(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
-			irrVerbo.getTiempoJuego(), bool, localList, irrVerbo.getSubPart());
+			irrVerbo.getTiempoJuego(), liquidoEnS, localList, irrVerbo.getSubPart());
 		break;
 	    case haciaLaVoz:
-		A(paramC, str1, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+		pueblaYVoz(paramC, temaIrr, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
-			irrVerbo.getTiempoJuego(), bool, localList, irrVerbo.getSubPart());
+			irrVerbo.getTiempoJuego(), liquidoEnS, localList, irrVerbo.getSubPart());
 		break;
 	    case haciaElModo:
-		A(paramC, str2, str1, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
+		pueblaYModo(paramC, str2, temaIrr, irrVerbo.getVoz(), irrVerbo.getTiempo(), irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
-			irrVerbo.getTiempoJuego(), bool, localList, irrVerbo.getSubPart());
+			irrVerbo.getTiempoJuego(), liquidoEnS, localList, irrVerbo.getSubPart());
 	    }
 	    if (irrVerbo.isPats()) {
-		B(paramC, str2, irrVerbo.getVoz(), irrVerbo.getModo(), Tiempo.Pluscuamperfecto, irrVerbo.getFuerte(),
+		pueblaPersonas(paramC, str2, irrVerbo.getVoz(), irrVerbo.getModo(), Tiempo.Pluscuamperfecto, irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
-			Tiempo.Pluscuamperfecto, bool, localList, irrVerbo.getSubPart());
-		A(paramC, str2, irrVerbo.getVoz(), irrVerbo.getModo(), Tiempo.Pluscuamperfecto, irrVerbo.getFuerte(),
+			Tiempo.Pluscuamperfecto, liquidoEnS, localList, irrVerbo.getSubPart());
+		pueblaYModoYVoz(paramC, str2, irrVerbo.getVoz(), irrVerbo.getModo(), Tiempo.Pluscuamperfecto, irrVerbo.getFuerte(),
 			irrVerbo.getContraccion(), irrVerbo.getJuego(), irrVerbo.getVozJuego(),
-			Tiempo.Pluscuamperfecto, bool, localList, irrVerbo.getSubPart());
+			Tiempo.Pluscuamperfecto, liquidoEnS, localList, irrVerbo.getSubPart());
 	    }
 	}
 	A(paramC, paramList1, Aspecto.Perfectivo, paramList2);
@@ -716,35 +716,35 @@ public class Verbos {
 		    if (paramj == null) {
 			paramj = localj;
 		    }
-		    B(paramC, str, localZ1, localp, localj, FuerteDebil.Debil, paramc, paramInt, localZ2, paramj,
+		    pueblaPersonas(paramC, str, localZ1, localp, localj, FuerteDebil.Debil, paramc, paramInt, localZ2, paramj,
 			    paramBoolean2, paramList, 0);
 		}
 	    }
 	}
     }
 
-    private void B(Ocurrencia oc, String paramString, Voz voz, Modo modo, Tiempo tiempo, FuerteDebil fuerte, Contraccion contraccion, int paramInt1, Voz paramZ2, Tiempo paramj2, boolean paramBoolean, List<String> paramList, int paramInt2){
+    private void pueblaPersonas(Ocurrencia oc, String tema, Voz voz, Modo modo, Tiempo tiempo, FuerteDebil fuerte, Contraccion contraccion, int paramInt1, Voz jvoz, Tiempo jtie, boolean liquidoEnS, List<String> paramList, int paramInt2){
     for (Persona local_ :Persona.values()){
-      Desinencia [] arrayOfD = this.D.getDesinencias(paramInt1, paramZ2, modo, paramj2, fuerte, local_);
-      if (arrayOfD != null) {
-        for (int k = 0; k < arrayOfD.length; k++)
+      Desinencia [] desinencias = this.manejaDesinenciasVerbo.getDesinencias(paramInt1, jvoz, modo, jtie, fuerte, local_);
+      if (desinencias != null) {
+        for (int k = 0; k < desinencias.length; k++)
         {
-          String str1 = arrayOfD[k].cadena;
-          _A.A(paramBoolean, paramString, str1);
-          paramString = _A.B;
-          str1 = _A.A;
-          int m = arrayOfD[k].getPosicion();
-          Acento localE = arrayOfD[k].getTipoAcento();
-          if (str1.equals("&"))
+          String des = desinencias[k].cadena;
+          Verbos.Comedor.come(liquidoEnS, tema, des);
+          tema = Comedor.temaComido;
+          des = Comedor.desinenciaComida;
+          int m = desinencias[k].getPosicion();
+          Acento localE = desinencias[k].getTipoAcento();
+          if (des.equals("&"))
           {
-            oc.agregaFormaIndividual(voz, modo, tiempo, fuerte, local_, this.R.une(paramString, paramList, true), paramInt2);
+            oc.agregaFormaIndividual(voz, modo, tiempo, fuerte, local_, this.preposiciones.une(tema, paramList, true), paramInt2);
             break;
           }
-          String str2 = OpPalabras.contraeGenerica(paramString, str1, contraccion, m, localE);
+          String str2 = OpPalabras.contraeGenerica(tema, des, contraccion, m, localE);
           if (str2 != null)
           {
             boolean bool = (m == 0) && (contraccion != Contraccion.vocalica);
-            str2 = this.R.une(str2, paramList, bool);
+            str2 = this.preposiciones.une(str2, paramList, bool);
             oc.agregaFormaIndividual(voz, modo, tiempo, fuerte, local_, str2, paramInt2);
           }
         }
@@ -752,39 +752,39 @@ public class Verbos {
     }
   }
 
-    private void A(Ocurrencia paramC, String paramString, Voz paramZ1, Modo paramp, Tiempo paramj1, FuerteDebil paramP,
-	    Contraccion paramc, int paramInt1, Voz paramZ2, Tiempo paramj2, boolean paramBoolean,
+    private void pueblaYModoYVoz(Ocurrencia paramC, String paramString, Voz paramZ1, Modo paramp, Tiempo paramj1, FuerteDebil paramP,
+	    Contraccion paramc, int paramInt1, Voz paramZ2, Tiempo paramj2, boolean liquidoEnS,
 	    List<String> paramList, int paramInt2) {
 	int i = (paramZ1.equals(Voz.Activa)) && (paramZ2.equals(Voz.Media)) ? 1 : 0;
 	if ((i == 0) && (paramZ1 == Voz.Activa)) {
-	    B(paramC, paramString, Voz.Media, paramp, paramj1, paramP, paramc, paramInt1, Voz.Media, paramj2,
-		    paramBoolean, paramList, paramInt2);
+	    pueblaPersonas(paramC, paramString, Voz.Media, paramp, paramj1, paramP, paramc, paramInt1, Voz.Media, paramj2,
+		    liquidoEnS, paramList, paramInt2);
 	}
     }
 
-    private void A(Ocurrencia paramC, String paramString1, String paramString2, Voz paramZ1, Tiempo paramj1,
-	    FuerteDebil paramP, Contraccion paramc, int paramInt1, Voz paramZ2, Tiempo paramj2, boolean paramBoolean,
+    private void pueblaYModo(Ocurrencia oc, String paramString1, String paramString2, Voz paramZ1, Tiempo paramj1,
+	    FuerteDebil paramP, Contraccion paramc, int paramInt1, Voz paramZ2, Tiempo paramj2, boolean liquidoEnS,
 	    List<String> paramList, int paramInt2) {
 	int i = (paramZ1.equals(Voz.Activa)) && (paramZ2.equals(Voz.Media)) ? 1 : 0;
 	if ((i == 0) && (paramZ1 == Voz.Activa)) {
-	    B(paramC, paramString1, Voz.Media, Modo.Indicativo, paramj1, paramP, paramc, paramInt1, Voz.Media, paramj2,
-		    paramBoolean, paramList, paramInt2);
+	    pueblaPersonas(oc, paramString1, Voz.Media, Modo.Indicativo, paramj1, paramP, paramc, paramInt1, Voz.Media, paramj2,
+		    liquidoEnS, paramList, paramInt2);
 	}
 	for (int j = 2; j <= 4; j++) {
 	    Modo localp = Modo.getEnum(j);
-	    B(paramC, paramString2, Voz.Activa, localp, paramj1, paramP, paramc, paramInt1, paramZ2, paramj2,
-		    paramBoolean, paramList, paramInt2);
-	    A(paramC, paramString2, paramZ1, localp, paramj1, paramP, paramc, paramInt1, paramZ2, paramj2,
-		    paramBoolean, paramList, paramInt2);
+	    pueblaPersonas(oc, paramString2, Voz.Activa, localp, paramj1, paramP, paramc, paramInt1, paramZ2, paramj2,
+		    liquidoEnS, paramList, paramInt2);
+	    pueblaYModoYVoz(oc, paramString2, paramZ1, localp, paramj1, paramP, paramc, paramInt1, paramZ2, paramj2,
+		    liquidoEnS, paramList, paramInt2);
 	}
     }
 
-    private void A(Ocurrencia paramC, String paramString, Voz paramZ1, Tiempo paramj1, FuerteDebil paramP,
-	    Contraccion paramc, int paramInt1, Voz paramZ2, Tiempo paramj2, boolean paramBoolean,
+    private void pueblaYVoz(Ocurrencia paramC, String paramString, Voz paramZ1, Tiempo tiempo, FuerteDebil fuerte,
+	    Contraccion contraccion, int paramInt1, Voz paramZ2, Tiempo paramj2, boolean paramBoolean,
 	    List<String> paramList, int paramInt2) {
 	for (int i = 2; i <= 4; i++) {
-	    Modo localp = Modo.getEnum(i);
-	    B(paramC, paramString, paramZ1, localp, paramj1, paramP, paramc, paramInt1, paramZ2, paramj2, paramBoolean,
+	    Modo modo = Modo.getEnum(i);
+	    pueblaPersonas(paramC, paramString, paramZ1, modo, tiempo, fuerte, contraccion, paramInt1, paramZ2, paramj2, paramBoolean,
 		    paramList, paramInt2);
 	}
     }
@@ -802,33 +802,33 @@ public class Verbos {
 	    }
 	}
 	oc = new Ocurrencia();
-	VerboBean localh = verboBean;
-	List<String> localList = null;
+	VerboBean bean = verboBean;
+	List<String> preps = null;
 	if (verboBean.isCompuesto()) {
 	    VerboSimpleCompuesto localH = this.E.seleccionaPorVerboCompuesto(verboBean.getId());
-	    localh = this.Q.seleccionaIndividualSinSignificado(localH.getIdVerboSimple());
+	    bean = this.gerenteVerbos.seleccionaIndividualSinSignificado(localH.getIdVerboSimple());
 	    if (verboBean.isCompuesto()) {
-		localList = this.K.seleccionaPorVerbo(verboBean.getId());
-		for (int i = 0; i < localList.size(); i++) {
-		    localList.set(i, OpPalabras.strBetaACompleto((String) localList.get(i)));
+		preps = this.gerPreposicionesEnVerbos.seleccionaPorVerbo(verboBean.getId());
+		for (int i = 0; i < preps.size(); i++) {
+		    preps.set(i, OpPalabras.strBetaACompleto((String) preps.get(i)));
 		}
 	    }
 	}
-	if ((!localh.isDibujado()) && (partic.equals(localh.getParticularidad()))) {
-	    conjugaPorDefecto(oc, localh, localList);
+	if ((!bean.isDibujado()) && (partic.equals(bean.getParticularidad()))) {
+	    conjugaPorDefecto(oc, bean, preps);
 	}
-	A(oc, localh, partic, localList);
+	pueblaIrrs(oc, bean, partic, preps);
 	if (verboBean.isCompuesto()) {
-	    A(oc, verboBean, partic, null);
+	    pueblaIrrs(oc, verboBean, partic, null);
 	}
 	this.L.setOcurrencia(verboBean.getId(), partic, oc);
 	return oc;
     }
 
-    private void A(Ocurrencia paramC, VerboBean verboBean, Particularidad partic, List<String> paramList) {
-	List<IrrVerbo> localList1 = this.P.seleccionaPorVerboPartic(verboBean.getId(), partic);
+    private void pueblaIrrs(Ocurrencia oc, VerboBean verboBean, Particularidad partic, List<String> preps) {
+	List<IrrVerbo> localList1 = this.gerIrrVerbos.seleccionaPorVerboPartic(verboBean.getId(), partic);
 	OpBeans.pasaDeBetaACompleto(localList1, new String[] { "tema" });
-	List<IrrVerboIndividual> localList2 = this.M.seleccionaPorVerboPartic(verboBean.getId(), partic);
+	List<IrrVerboIndividual> localList2 = this.getIrrVerbosIndiv.seleccionaPorVerboPartic(verboBean.getId(), partic);
 	OpBeans.pasaDeBetaACompleto(localList2, new String[] { "forma" });
 	List<IrrVerbo> localArrayList1 = new ArrayList<IrrVerbo>();
 	List<IrrVerbo> localArrayList2 = new ArrayList<IrrVerbo>();
@@ -840,10 +840,10 @@ public class Verbos {
 	List<IrrVerboIndividual> localArrayList8 = new ArrayList<IrrVerboIndividual>();
 	distribuyeIrregularidades(localList1, localList2, localArrayList1, localArrayList2, localArrayList3,
 		localArrayList4, localArrayList5, localArrayList6, localArrayList7, localArrayList8);
-	C(paramC, localArrayList1, localArrayList5, paramList);
-	B(paramC, localArrayList2, localArrayList6, paramList);
-	A(paramC, localArrayList3, localArrayList7, paramList);
-	A(paramC, localArrayList4, localArrayList8, verboBean.getTipoVerbo(), paramList);
+	C(oc, localArrayList1, localArrayList5, preps);
+	B(oc, localArrayList2, localArrayList6, preps);
+	A(oc, localArrayList3, localArrayList7, preps);
+	A(oc, localArrayList4, localArrayList8, verboBean.getTipoVerbo(), preps);
     }
 
     @SuppressWarnings("unchecked")
@@ -860,19 +860,19 @@ public class Verbos {
     }
 
     public GerenteIrrVerbos getGerenteIrrVerbos() {
-	return this.P;
+	return this.gerIrrVerbos;
     }
 
     public void setGerenteIrrVerbos(GerenteIrrVerbos paramy) {
-	this.P = paramy;
+	this.gerIrrVerbos = paramy;
     }
 
     public GerenteVerbos getGerenteVerbos() {
-	return this.Q;
+	return this.gerenteVerbos;
     }
 
     public void setGerenteVerbos(GerenteVerbos paramP) {
-	this.Q = paramP;
+	this.gerenteVerbos = paramP;
     }
 
     public GerenteTiposVerbo getGerenteTiposVerbo() {
@@ -885,23 +885,23 @@ public class Verbos {
     }
 
     public GerenteIrrVerbosIndividuales getGerenteIrrVerbosIndividuales() {
-	return this.M;
+	return this.getIrrVerbosIndiv;
     }
 
     public void setGerenteIrrVerbosIndividuales(GerenteIrrVerbosIndividuales paramW) {
-	this.M = paramW;
+	this.getIrrVerbosIndiv = paramW;
     }
 
     public void setGerentePreposicionesEnVerbos(GerentePreposicionesEnVerbos paramfA) {
-	this.K = paramfA;
+	this.gerPreposicionesEnVerbos = paramfA;
     }
 
     public void setPreposiciones(Preposiciones paramB) {
-	this.R = paramB;
+	this.preposiciones = paramB;
     }
 
     public void setManejaDesinenciasVerbo(ManejaDesinenciasVerbo paramF) {
-	this.D = paramF;
+	this.manejaDesinenciasVerbo = paramF;
     }
 
     public void setGerenteVerbosCompuestos(GerenteVerbosCompuestos paramU) {
@@ -916,22 +916,22 @@ public class Verbos {
 	return this.L;
     }
 
-    private static class _A {
-	static String B;
-	static String A;
+    public static class Comedor {
+	static String temaComido;
+	static String desinenciaComida;
 
-	static void A(boolean paramBoolean, String paramString1, String paramString2) {
-	    B = paramString1;
-	    A = paramString2;
-	    if (paramBoolean) {
-		int i = paramString1.charAt(paramString1.length() - 1);
-		int j = paramString2.charAt(0);
+	static void come(boolean liquidoEnS, String tema, String des) {
+	    temaComido = tema;
+	    desinenciaComida = des;
+	    if (liquidoEnS) {
+		int i = tema.charAt(tema.length() - 1);
+		int j = des.charAt(0);
 		if (i == 963) {
 		    if (j == 963) {
-			A = paramString2.substring(1);
+			desinenciaComida = des.substring(1);
 		    }
 		} else if ((i == 956) && (j != 956)) {
-		    B = paramString1.substring(0, paramString1.length() - 1);
+		    temaComido = tema.substring(0, tema.length() - 1);
 		}
 	    }
 	}

@@ -1483,7 +1483,7 @@ public class OpPalabras {
 	 * @param palabra
 	 *            el array de contracciones
 	 * 
-	 * @return tiene la forma, por ejemplo, {"B", "M", "YAI"}, {..., ..., ... },
+	 * @return tiene la forma, por ejemplo, {"temaComido", "M", "YAI"}, {..., ..., ... },
 	 *         etc
 	 * 
 	 */
@@ -1735,19 +1735,19 @@ public class OpPalabras {
 
 	{ "D", "K", "K" }, { "Q", "K", "K" }, { "T", "K", "K" },
 
-	{ "B", "M", "MM" }, { "P", "M", "MM" }, { "F", "M", "MM" },
+	{ "temaComido", "M", "MM" }, { "P", "M", "MM" }, { "F", "M", "MM" },
 
-	{ "B", "SQ", "FQ" }, { "P", "SQ", "FQ" }, { "F", "SQ", "FQ" },
+	{ "temaComido", "SQ", "FQ" }, { "P", "SQ", "FQ" }, { "F", "SQ", "FQ" },
 
-	{ "B", "S", "Y" }, { "P", "S", "Y" }, { "F", "S", "Y" },
+	{ "temaComido", "S", "Y" }, { "P", "S", "Y" }, { "F", "S", "Y" },
 
-	{ "B", "J", "Y" }, { "P", "J", "Y" }, { "F", "J", "Y" },
+	{ "temaComido", "J", "Y" }, { "P", "J", "Y" }, { "F", "J", "Y" },
 
-	{ "B", "T", "PT" }, { "P", "T", "PT" }, { "F", "T", "PT" },
+	{ "temaComido", "T", "PT" }, { "P", "T", "PT" }, { "F", "T", "PT" },
 
-	{ "B", "Q", "FQ" }, { "P", "Q", "FQ" }, { "F", "Q", "FQ" },
+	{ "temaComido", "Q", "FQ" }, { "P", "Q", "FQ" }, { "F", "Q", "FQ" },
 
-	{ "B", "K", "F" }, { "P", "K", "F" }, { "F", "K", "F" },
+	{ "temaComido", "K", "F" }, { "P", "K", "F" }, { "F", "K", "F" },
 
 	// sigma-theta pierde la sigma después de lambda, rho o nu
 			{ "L", "SQ", "LQ" }, { "R", "SQ", "RQ" }, { "N", "SQ", "NQ" },

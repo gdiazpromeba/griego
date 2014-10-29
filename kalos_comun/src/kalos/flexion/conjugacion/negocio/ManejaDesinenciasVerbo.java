@@ -62,9 +62,9 @@ public class ManejaDesinenciasVerbo
     try
     {
       if (this.B[paramInt1][i][j][k][m][n] == null) {
-        this.B[paramInt1][i][j][k][m][n] = new ArrayList();
+        this.temaComido[paramInt1][i][j][k][m][n] = new ArrayList();
       }
-      this.B[paramInt1][i][j][k][m][n].add(new D(paramString, paramInt2, paramE, paramInt1));
+      this.temaComido[paramInt1][i][j][k][m][n].add(new D(paramString, paramInt2, paramE, paramInt1));
     }
     catch (Exception localException)
     {
