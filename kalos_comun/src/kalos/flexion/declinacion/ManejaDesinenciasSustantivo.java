@@ -51,8 +51,8 @@ public class ManejaDesinenciasSustantivo {
 	}
     }
 
-    private DesinenciaSustantivo cargaIndividual(String forma, Acento acento, int i, Contraccion contraccion, OrigenTema origenTema,
-	    int j, int k) {
+    private DesinenciaSustantivo cargaIndividual(String forma, Acento acento, int i, Contraccion contraccion,
+	    OrigenTema origenTema, int j, int k) {
 	DesinenciaSustantivo desinenciaSustantivo = new DesinenciaSustantivo(forma, acento, i, contraccion, origenTema,
 		j, k);
 	if (setDesinenciasSustantivo.contains(desinenciaSustantivo)) {
@@ -103,10 +103,11 @@ public class ManejaDesinenciasSustantivo {
 		List<DesinenciaSustantivo> lstDes = desinencias[i][l][k];
 		if (lstDes == null) {
 		    lstDes = new ArrayList<DesinenciaSustantivo>();
-		    desinencias[i][l][k] =  lstDes;
+		    desinencias[i][l][k] = lstDes;
 		}
-		lstDes.add(cargaIndividual(OpPalabras.strBetaACompleto(a2.getDesinencia()), a2.getAcento(), a2.getSilaba(),
-			a2.getContraccion(), a2.getOrigenTema(), PosicionConcuerda.getInt(a2.getPosicionConcuerda()),
+		lstDes.add(cargaIndividual(OpPalabras.strBetaACompleto(a2.getDesinencia()), a2.getAcento(),
+			a2.getSilaba(), a2.getContraccion(), a2.getOrigenTema(),
+			PosicionConcuerda.getInt(a2.getPosicionConcuerda()),
 			AcentoConcuerda.getInt(a2.getAcentoConcuerda())));
 	    }
 	}

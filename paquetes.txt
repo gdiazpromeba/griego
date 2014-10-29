@@ -31,6 +31,7 @@ kalos
     A dto
       A DTOExplosion
     F Recursos
+    D CadenasEnum
   D analisismorfologici
     L negocio
       L AMAdjetivos
@@ -119,6 +120,7 @@ kalos
    N CeldaReporte
    A ClaveFlexion
    B Preposiciones
+   M ProveedorDMNominal
    B conjugacion 
      A negocio
        E ManejaDesinenciasInfinitivo
@@ -131,6 +133,7 @@ kalos
      D Infinitivos
    C declinacion
      L ManejaDesinenciasSustantivo
+     I Participios
      J DesinenciasSustantivo
      A DeclinaAdjetivos
      B OcAdjetivo

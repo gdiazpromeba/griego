@@ -31,7 +31,8 @@ public class OcAdjetivo {
 	return localD.getPrimeraForma(parama, paramn);
     }
 
-    public void setFormaIndividual(GradoComparacion parami, Genero genero, Caso parama, Numero paramn, String paramString) {
+    public void setFormaIndividual(GradoComparacion parami, Genero genero, Caso parama, Numero paramn,
+	    String paramString) {
 	Map<Genero, OcNominal> localObject = this.ocurrencias.get(parami);
 	if (localObject == null) {
 	    localObject = new HashMap<Genero, OcNominal>();
@@ -45,8 +46,8 @@ public class OcAdjetivo {
 	localD.setFormaIndividual(parama, paramn, paramString);
     }
 
-    public void setFormaIndividual(GradoComparacion parami, Genero paramA, Caso parama, Numero paramn, String paramString,
-	    int paramInt) {
+    public void setFormaIndividual(GradoComparacion parami, Genero paramA, Caso parama, Numero paramn,
+	    String paramString, int paramInt) {
 	Map<Genero, OcNominal> localObject = this.ocurrencias.get(parami);
 	if (localObject == null) {
 	    localObject = new HashMap<Genero, OcNominal>();
@@ -116,7 +117,8 @@ public class OcAdjetivo {
 	localObject.put(paramA, paramD);
     }
 
-    public String getFormaSubindiceOPrimera(GradoComparacion parami, Genero paramA, Caso parama, Numero paramn, int indice) {
+    public String getFormaSubindiceOPrimera(GradoComparacion parami, Genero paramA, Caso parama, Numero paramn,
+	    int indice) {
 	int i = cantidadDeFormas(parami, paramA, parama, paramn);
 	String str = null;
 	if (indice >= i) {
