@@ -24,7 +24,7 @@ kalos
     U TiempoOAspecto
     A utils
       A TransformadorTiempoAspecto
-    
+    M 
   C recursos
     A Configuracion
     E UtilidadRecursos
@@ -115,12 +115,17 @@ kalos
    A utils
      A UtilListas
    O CreadorTableModelsBasicos
+   F CreadorTableModelsReporte
    K UtilidadReportes
    C UtilidadesTM
    N CeldaReporte
    A ClaveFlexion
    B Preposiciones
    M ProveedorDMNominal
+   E ProveedorDMInterjecciones
+   L ProveedorDMParticulas
+   H ProveedorDMConjunciones
+   I ProveedorDMPreposiciones
    B conjugacion 
      A negocio
        E ManejaDesinenciasInfinitivo
