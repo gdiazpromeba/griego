@@ -24,7 +24,9 @@ kalos
     U TiempoOAspecto
     A utils
       A TransformadorTiempoAspecto
-    M 
+    l TipoPalabra
+    M Reportes
+    O Espiritu
   C recursos
     A Configuracion
     E UtilidadRecursos
@@ -110,6 +112,7 @@ kalos
       Z  GerenteDiccionarioDAOImpl
       z  GerenteDesinVerbos
       O  GerenteDesinInfinitivos
+      VA GerenteParticulas
       
   H flexion
    A utils
@@ -162,6 +165,7 @@ kalos
     A DesinSust
     e TipoJerarquico
     y IrrInfinitivo
+    r SubstractorPrefijosBean
   F fonts
     F CaracterGriegoFactory
     A CarPos
@@ -176,5 +180,15 @@ kalos
       D.A sugeridos.silaba
       D.G sugeridos.silabaB1
     B AACacheable
+ D  analisismorfologico
+    A negocio
+      I AMVerbos
+      N ExtractorPrefijos
+      A ArbolPreposiciones
+      M TemaConPreps B=resto A=preps
+      G ArbolPreposiciones
+        
+    B test
+      G AMVerbosTest
       
     
