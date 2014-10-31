@@ -27,6 +27,7 @@ kalos
     l TipoPalabra
     M Reportes
     O Espiritu
+    Y Beta
   C recursos
     A Configuracion
     E UtilidadRecursos
@@ -174,6 +175,8 @@ kalos
     _ TermRegSustantivo
     o TipoSustantivo
     i SustantivoBean
+    a TestParticipioBean
+    J TestVerboBean
   F fonts
     F CaracterGriegoFactory
     A CarPos
@@ -211,6 +214,15 @@ kalos
       A AMInterjecciones
             
     B test
-      G AMVerbosTest
+      G TestSimples 
+      F AMInfinitivosTest
+      B AMParticipiosTest
+      A AMAdjetivosTest
+      C TiposAdjetivoTest
+      E AMSustantivosTest
+      H TiposSustantivoTest
+      D AMVerbosTest 
+      
+      
       
     
