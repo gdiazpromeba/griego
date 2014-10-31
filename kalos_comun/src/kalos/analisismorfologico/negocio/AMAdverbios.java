@@ -54,7 +54,7 @@ public class AMAdverbios implements AnalizadorMorfologico, ApplicationContextAwa
 	
 	
 
-    public long buscaCanonica(String[] entradas, HashSet<ResultadoUniversal> setResultado, AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
+    public long buscaCanonica(String[] entradas, Set<ResultadoUniversal> setResultado, AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
         cargaDependencias();
 
         long tiempoInicial = System.currentTimeMillis();

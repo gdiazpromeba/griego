@@ -109,7 +109,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
      *            la conexion
      */
 
-    public long buscaCanonica(String[] entradas, HashSet<ResultadoUniversal> setResultado, AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
+    public long buscaCanonica(String[] entradas, Set<ResultadoUniversal> setResultado, AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
         cargaDependencias();
     	Set<TermRegSustantivo> setPaso1 = new HashSet<TermRegSustantivo>();
         Set<TermRegAdjetivo> termsAdj ;

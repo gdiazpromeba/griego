@@ -143,7 +143,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 	 * @param setResultado  resultado final
 	 */
 
-	public long buscaCanonica(String[] entradas, HashSet<ResultadoUniversal> setResultado, AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
+	public long buscaCanonica(String[] entradas, Set<ResultadoUniversal> setResultado, AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
 //		cargaDependencias();
 		Set<TermRegSustantivo> setPaso1 = new LinkedHashSet<TermRegSustantivo>();
 		Set<TermRegParticipio> setPaso2 = new LinkedHashSet<TermRegParticipio>();
@@ -309,7 +309,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 	 * @param setNomGen
 	 * @param resultados
 	 */
-	private void revisaIrrParticipiosEnteros(List<TermRegParticipio> setNomGen, HashSet<ResultadoUniversal> resultados, boolean debug) {
+	private void revisaIrrParticipiosEnteros(List<TermRegParticipio> setNomGen, Set<ResultadoUniversal> resultados, boolean debug) {
 		StringBuffer sbDebug = new StringBuffer();
 		List<TermRegParticipio> quitados = new ArrayList<TermRegParticipio>(); //lista de los regNomGen quitados y agregados a resultados (para debug solamente)
 		//maps para cachear búsquedas

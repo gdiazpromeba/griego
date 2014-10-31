@@ -41,7 +41,7 @@ public class AMInfinitivos implements AnalizadorMorfologico {
     private GerenteVerbos gerenteVerbos;
     private ExtractorPrefijos extractorPrefijos;
 
-    public long buscaCanonica(String[] entradas, HashSet<ResultadoUniversal> resultados, AACacheable cacheAA,
+    public long buscaCanonica(String[] entradas, Set<ResultadoUniversal> resultados, AACacheable cacheAA,
 	    boolean paramBoolean1, boolean paramBoolean2) {
 	Set<TermRegInfinitivo> setPaso1=new LinkedHashSet<TermRegInfinitivo>();
 	Set<TermRegInfinitivo> termsRegInf = new LinkedHashSet<TermRegInfinitivo>();

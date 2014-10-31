@@ -47,7 +47,7 @@ public class AMSustantivosTest extends TestCase implements CompLetras {
 
 
   public static void main(String[] args){
-  	new AMVerbosTest("testTabla");
+  	new AMSustantivosTest("testTabla");
   }
   
   private static long tiempoAcumulado=0;	

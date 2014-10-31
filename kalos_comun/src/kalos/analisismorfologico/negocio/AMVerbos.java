@@ -72,7 +72,7 @@ public class AMVerbos implements AnalizadorMorfologico{
 	 * @param debug             si debug es verdadero, imprimer mensajes de debug a System.out
 	 * @return
 	 */
-	public long buscaCanonica(String[] entradas, HashSet<ResultadoUniversal> setResultado, AACacheable cacheAA, boolean validarConFlexion, boolean debug)   {
+	public long buscaCanonica(String[] entradas, Set<ResultadoUniversal> setResultado, AACacheable cacheAA, boolean validarConFlexion, boolean debug)   {
 		long tiempoInicial=System.currentTimeMillis();
 		Set<TermRegVerbo> setPaso1=new LinkedHashSet<TermRegVerbo>();
 		Set<TermRegVerbo> setPaso2=new LinkedHashSet<TermRegVerbo>();

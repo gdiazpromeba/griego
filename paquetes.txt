@@ -158,7 +158,7 @@ kalos
     B   FuenteDatosCacheable    
     A   JerarquiaBeans
   K  beans
-    E (o e) Conjuncion
+    E Conjuncion
     Q (o q) Significado
     C PreposicionBean
     M TestAdjetivosBean
@@ -171,6 +171,9 @@ kalos
     e TipoJerarquico
     y IrrInfinitivo
     r SubstractorPrefijosBean
+    _ TermRegSustantivo
+    o TipoSustantivo
+    i SustantivoBean
   F fonts
     F CaracterGriegoFactory
     A CarPos
@@ -192,11 +195,21 @@ kalos
       P AMVerbal
       J AMInfinitivos
       C AMUtil
+      O AMAdverbios
+      H AMConjunciones
+      D AMParticipios
+      E AMPreposiciones
+      S AMParticulas  
+      R AMNominal
       N ExtractorPrefijos
-      A ArbolPreposiciones
+        ArbolPreposiciones
       M TemaConPreps B=resto A=preps
       G ArbolPreposiciones
-        
+      F AMSustantivos
+      K AnalizadorMorfologico
+      Q ObjYDest
+      A AMInterjecciones
+            
     B test
       G AMVerbosTest
       

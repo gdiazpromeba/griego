@@ -110,7 +110,7 @@ public class AMVerbal {
      * @param serResultado
      * @param lstIrr
      */
-    public void comparaConTemasSemirreconstruidos(HashSet<ResultadoUniversal> setResultado, List<TermRegVerbal> lstIrr,
+    public void comparaConTemasSemirreconstruidos(Set<ResultadoUniversal> setResultado, List<TermRegVerbal> lstIrr,
 	    boolean infinitivo, boolean debug) {
 	Set<TermRegVerbal> setIrr = new HashSet<TermRegVerbal>(lstIrr);
 	Map<String, VerboBean> mapEntradasVerbo = new HashMap<String, VerboBean>();
@@ -1242,7 +1242,7 @@ public class AMVerbal {
 
 		// les caía en la preposición sean incluidas
 		trvNuevo.setFormaOriginal(arrTcp[i].resto);
-		List preposiciones = new ArrayList();
+		List<String> preposiciones = new ArrayList<String>();
 		for (int e = 0; e < arrTcp[i].preps.size(); e++) {
 		    preposiciones.add(arrTcp[i].preps.get(e));
 		}
