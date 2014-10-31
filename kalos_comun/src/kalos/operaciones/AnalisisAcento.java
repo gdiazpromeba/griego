@@ -19,8 +19,8 @@ public class AnalisisAcento {
 	public int silabaB1;
 	public boolean licitoEstricto;
 	public int indiceLetraAcentuada;
-	public int E;
-	public boolean C;
+	//public int E;
+	public boolean esTipoAcentonaturalDadaPosicion;
 
 	public Actual() {
 	    indiceLetraAcentuada = -1;
@@ -80,7 +80,7 @@ public class AnalisisAcento {
 	d.actuales.indiceLetraAcentuada = ((Integer) aobj[1]).intValue();
 	d.analizaSilabas();
 	d.actuales.silabaB1 = d.averiguaSilabaB1();
-	d.actuales.C = d.esNaturalDadaPosicion();
+	d.actuales.esTipoAcentonaturalDadaPosicion = d.esNaturalDadaPosicion();
 	d.sugiere();
 	d.averiguaLicitoEstricto();
 	return d;
@@ -105,10 +105,10 @@ public class AnalisisAcento {
 	    i += ao[j].getCadena().length();
 	    j++;
 	} while (true);
-	d.actuales.E = d.averiguaSilabaB1();
+	//d.actuales.E = d.averiguaSilabaB1();
 	d.sugiere();
 	d.averiguaLicitoEstricto();
-	d.actuales.C = d.esNaturalDadaPosicion();
+	d.actuales.esTipoAcentonaturalDadaPosicion = d.esNaturalDadaPosicion();
 	return d;
     }
 

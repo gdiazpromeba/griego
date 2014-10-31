@@ -113,6 +113,11 @@ kalos
       z  GerenteDesinVerbos
       O  GerenteDesinInfinitivos
       VA GerenteParticulas
+      IA GerenteTermRegInfinitivo
+      aA GerenteIrrInfinitivos
+      ha GerenteTiposVerbo
+      p  GerenteTiposVerboImpl
+
       
   H flexion
    A utils
@@ -179,10 +184,14 @@ kalos
     D AnalisisAcento
       D.A sugeridos.silaba
       D.G sugeridos.silabaB1
+      D.B tipoAcento
     B AACacheable
  D  analisismorfologico
     A negocio
       I AMVerbos
+      P AMVerbal
+      J AMInfinitivos
+      C AMUtil
       N ExtractorPrefijos
       A ArbolPreposiciones
       M TemaConPreps B=resto A=preps

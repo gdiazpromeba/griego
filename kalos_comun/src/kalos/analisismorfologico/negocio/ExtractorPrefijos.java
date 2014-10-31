@@ -4,28 +4,18 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import kalos.B.O;
-import kalos.E.E.OA;
-import kalos.F.A;
-import kalos.G.D;
-import kalos.G.D._A;
-import kalos.G.I;
-import kalos.K.r;
+
 import kalos.beans.SubstractorPrefijosBean;
 import kalos.datos.gerentes.GerenteSubstractorPrefijos;
 import kalos.enumeraciones.Espiritu;
 import kalos.fonts.CarPos;
 import kalos.operaciones.AnalisisAcento;
 import kalos.operaciones.OpLetras;
-import kalos.operaciones.OpLetrasUnicode;
 import kalos.operaciones.OpPalabras;
 
 public class ExtractorPrefijos {
-    public static final int C = 0;
-    public static final int F = 1;
-    public static final int B = 2;
-    public static final int E = 3;
-    public static final int D = 4;
+    public static final int NADA = 0;
+    public static final int TODOS_LOS_NODOS = 1;
     private GerenteSubstractorPrefijos gerenteSubstractorPrefijos;
 
     public GerenteSubstractorPrefijos getGerenteSubstractorPrefijos() {
@@ -37,7 +27,7 @@ public class ExtractorPrefijos {
     }
 
     public TemaConPreps[] averiguaPreposiciones(String paramString, int paramInt1, int paramInt2) {
-	ArbolPreposiciones localG = sustraePrefijos(new TemaConPreps(paramString).resto, paramInt2);
+	ArbolPreposiciones localG = creaArbol(new TemaConPreps(paramString), paramInt2);
 	Object[] arrayOfObject;
 	switch (paramInt1) {
 	case 1:
@@ -67,7 +57,7 @@ public class ExtractorPrefijos {
 	return arrayOfM;
     }
 
-    private ArbolPreposiciones A(TemaConPreps temPreps, int hasta) {
+    private ArbolPreposiciones creaArbol(TemaConPreps temPreps, int hasta) {
 	int j = 0;
 	ArbolPreposiciones arbol = new ArbolPreposiciones(temPreps);
 	int i;

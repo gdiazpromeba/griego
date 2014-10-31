@@ -78,7 +78,7 @@ public class TermRegParticipio implements TermRegNominal, TermRegVerbal {
 		stringbuffer.append("|");
 		stringbuffer.append(numero);
 		stringbuffer.append("|");
-		stringbuffer.append(A5);
+		stringbuffer.append(preposiciones);
 		stringbuffer.append("|");
 		stringbuffer.append(B5);
 		stringbuffer.append("|");
@@ -304,12 +304,12 @@ public class TermRegParticipio implements TermRegNominal, TermRegVerbal {
 		x = null;
 	}
 
-	public List getPreposiciones() {
-		return A5;
+	public List<String> getPreposiciones() {
+		return preposiciones;
 	}
 
-	public void setPreposiciones(List list) {
-		A5 = list;
+	public void setPreposiciones(List<String> list) {
+		preposiciones = list;
 		x = null;
 	}
 
@@ -484,7 +484,7 @@ public class TermRegParticipio implements TermRegNominal, TermRegVerbal {
 	private String l;
 	private Voz A3;
 	private TiempoOAspecto BA;
-	private List A5;
+	private List<String> preposiciones;
 	private Particularidad B5;
 	private int C1;
 	private int a;

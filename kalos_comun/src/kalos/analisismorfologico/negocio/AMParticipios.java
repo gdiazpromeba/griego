@@ -48,6 +48,7 @@ import kalos.enumeraciones.Numero;
 import kalos.enumeraciones.Particularidad;
 import kalos.enumeraciones.TipoPalabra;
 import kalos.enumeraciones.Voz;
+import kalos.enumeraciones.utils.TransformadorTiempoAspecto;
 import kalos.flexion.declinacion.OcParticipio;
 import kalos.flexion.declinacion.Participios;
 import kalos.operaciones.AACacheable;
@@ -563,7 +564,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 
 			Particularidad particIrr = trp.getParticularidad();
 			Particularidad particCanonica = regDic.getParticularidad();
-			Aspecto aspecto = trp.getAspecto();
+			Aspecto aspecto = TransformadorTiempoAspecto.comoAspecto(trp.getAspecto());
 			Voz voz = trp.getVoz();
 			FuerteDebil fuerte = trp.getFuerte();
 			List<String> preposiciones = trp.getPreposiciones();
@@ -968,7 +969,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 		//la tabla deben ser los mismos que los del registro a tratar
 		Voz vozReg = reconstruido.getVoz();
 		FuerteDebil fuerteReg = reconstruido.getFuerte();
-		Aspecto aspectoReg = reconstruido.getAspecto();
+		Aspecto aspectoReg = TransformadorTiempoAspecto.comoAspecto(reconstruido.getAspecto());
 		Genero generoReg = reconstruido.getGenero();
 		Voz vozTabla =  deTablaTrans.getVoz();
 		Aspecto aspectoTabla = deTablaTrans.getAspecto();
@@ -1060,7 +1061,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 				Voz voz = reg.getVoz();
 				if (pasivar && voz.equals(Voz.Media))
 					voz = Voz.Activa;
-				Aspecto aspecto = reg.getAspecto();
+				Aspecto aspecto = TransformadorTiempoAspecto.comoAspecto(reg.getAspecto());
 				FuerteDebil fuerte = reg.getFuerte();
 				Caso caso2 = reg.getCaso();
 				Genero genero = reg.getGenero();

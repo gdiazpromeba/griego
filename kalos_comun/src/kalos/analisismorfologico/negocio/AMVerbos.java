@@ -94,7 +94,7 @@ public class AMVerbos implements AnalizadorMorfologico{
 //		amUtil.conservaSolo(setPaso1, new String[]{"tiempo", "persona", "voz"}, new Object[]{Tiempo.Pluscuamperfecto, Persona._3ps, Voz.Media});
 		amVerbal.extiendeTipos(setPaso1, setPaso2, debug);   //expansión de los "nodos" de paso 1, según  pertenezcan a ciertas terminaciones
 //		amUtil.conservaSolo(setPaso2, new String[]{"tiempo", "tipoDesinencia"}, new Object[]{Tiempo.Pluscuamperfecto, 10 });
-		amVerbal.averiguaPreposiciones(setPaso2, setPaso2_5, extractorPrefijos.TODOS_LOS_NODOS,cacheExtraccionPrefijos, debug); //averiguación de preposiciones
+		amVerbal.averiguaPreposiciones(setPaso2, setPaso2_5, ExtractorPrefijos.TODOS_LOS_NODOS,cacheExtraccionPrefijos, debug); //averiguación de preposiciones
 		amUtil.incorporaADestransformar(setPaso2_5, debug);
 		amUtil.desTransformacionesTemas(setPaso2_5, setPaso3, temIrr, debug); //des-transformación de aumentos y reduplicaciones
 		amVerbal.incorporaTemaPropuestoReconstruidos(setPaso3, temIrr, debug);
