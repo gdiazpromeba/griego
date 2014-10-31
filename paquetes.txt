@@ -177,6 +177,7 @@ kalos
     i SustantivoBean
     a TestParticipioBean
     J TestVerboBean
+    I ValorCombo
   F fonts
     F CaracterGriegoFactory
     A CarPos
@@ -222,14 +223,35 @@ kalos
       E AMSustantivosTest
       H TiposSustantivoTest
       D AMVerbosTest 
-  B visual
-    B controles
-      A botones
-        A BotonQuita
-        B BotonBuscar
-        C BotonDetalle
-        D BotonCopia
-     
+  A kalos
+    B visual
+      B controles
+        A botones
+          A BotonQuita
+          B BotonBuscar
+          C BotonDetalle
+          D BotonCopia
+        J combos
+          D ComboEnumeracion
+          C ComboGenerico
+          E RendererComboGenerico
+          
+    A renderers
+      A RendererICeldaReporte
+      B FRGenerico
+        _K trTEXTO_GRIEGO_SIN_MAKRONES
+        _C trBOOLEAN_SINO
+        _O trSTRING_NUMERICA
+        _M trTEXTO_GRIEGO
+        _E trTEXTO_LATINO
+        _D trTIPO
+        _I trCONTA_VERVERBO
+        _H trVERBO_FACIL
+        _G trDECLINACION
+        _B trPREPOSICIONES
+        _F trENUMERACION
+        _L trNODO
+    
       
       
       
