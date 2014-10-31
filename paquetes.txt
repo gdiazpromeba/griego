@@ -222,6 +222,14 @@ kalos
       E AMSustantivosTest
       H TiposSustantivoTest
       D AMVerbosTest 
+  B visual
+    B controles
+      A botones
+        A BotonQuita
+        B BotonBuscar
+        C BotonDetalle
+        D BotonCopia
+     
       
       
       
