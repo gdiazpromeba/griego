@@ -2,10 +2,11 @@ package kalos.visual.controles.combos;
 
 import java.util.Iterator;
 import java.util.List;
+
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import kalos.K.I;
+
 import kalos.beans.ValorCombo;
 
 public class ComboGenerico
@@ -21,16 +22,16 @@ public class ComboGenerico
       localDefaultComboBoxModel.addElement(localI);
     }
     setModel(localDefaultComboBoxModel);
-    setRenderer(new E());
+    setRenderer(new RendererComboGenerico());
   }
   
   public void setClave(Object paramObject)
   {
-    ComboBoxModel localComboBoxModel = getModel();
+    ComboBoxModel<ValorCombo> localComboBoxModel = getModel();
     Object localObject;
     for (int i = 0; i < localComboBoxModel.getSize(); i++)
     {
-      I localI = (I)localComboBoxModel.getElementAt(i);
+      ValorCombo localI = localComboBoxModel.getElementAt(i);
       localObject = localI.getClaveValor();
       if (localI.getTipoClave() == 2) {
         localObject = Integer.valueOf(Integer.parseInt((String)localObject));
@@ -46,15 +47,15 @@ public class ComboGenerico
     localStringBuffer.append("los valores presentes son:  \n");
     for (int j = 0; j < localComboBoxModel.getSize(); j++)
     {
-      localObject = (I)localComboBoxModel.getElementAt(j);
-      localStringBuffer.append(((I)localObject).getClaveValor() + "-");
+      ValorCombo vc = (ValorCombo)localComboBoxModel.getElementAt(j);
+      localStringBuffer.append(vc.getClaveValor() + "-");
     }
     throw new RuntimeException(localStringBuffer.toString());
   }
   
   public Object getClaveValorSeleccionada()
   {
-    I localI = (I)getSelectedItem();
+    ValorCombo localI = (ValorCombo)getSelectedItem();
     if (localI == null) {
       return null;
     }

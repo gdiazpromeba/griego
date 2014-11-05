@@ -73,7 +73,7 @@ kalos
       HA PreposicionesEnVerbosDAO
       V TermRegSustantivoDAOImpl
       S TermRegSustantivoDAO
-      CA TestAdjetivosDAOImpl
+      cA TestAdjetivosDAOImpl
       h  TestAdjetivosDAO
       F VerbalizadorParticipiosDAOImpl
       x VerbalizadorParticipiosDAO
@@ -81,6 +81,9 @@ kalos
       i VerbosCompuestosDAO
       L o l VerbosDAOImpl
       W VerbosDAO
+      CA CombosDAOImpl
+      dA CombosDAO
+      
     D adaptadores
       N  AdaptadorGerenteEncParticulas
       J  AdaptadorGerenteAdjetivos
@@ -118,6 +121,7 @@ kalos
       aA GerenteIrrInfinitivos
       ha GerenteTiposVerbo
       p  GerenteTiposVerboImpl
+      KA GerenteSeguridad
 
       
   H flexion
@@ -225,6 +229,7 @@ kalos
       D AMVerbosTest 
   A kalos
     B visual
+      A FabricaControles
       B controles
         A botones
           A BotonQuita
@@ -235,6 +240,8 @@ kalos
           D ComboEnumeracion
           C ComboGenerico
           E RendererComboGenerico
+          B ComboLetras
+          A RendererComboEnumeraciones
           
     A renderers
       A RendererICeldaReporte
@@ -254,5 +261,30 @@ kalos
     
       
       
+ kalos
+   A iu
+     Comienzo
+     A Caratula
+     B PanelProgreso
+     C Menues
+     D EleccionTipografia
+     
+     A registro
+       A VentanaRegistro
+       B VentanaMolesta
+       C PanelRegistro
+       
+     B jasper
+       C FuenteJasperTM
+       A JRViewerKalos
+       B UtilidadesJasper
+       
+       
+     C analisismorfologico
+      A PanelAM
+      B DetalleAM
       
-    
+     F flexion
+       
+       B ParametrosReporte
+     
