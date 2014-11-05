@@ -2,43 +2,33 @@
 // Jad home page: http://www.kpdus.com/jad.html
 // Decompiler options: packimports(3) 
 
-package kalos.A.B.B;
+package kalos.visual.controles.botones;
 
 import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+
 import javax.swing.JButton;
-import kalos.C.B;
-import kalos.C.F;
 
-public class C extends JButton
-{
+import kalos.recursos.Recursos;
 
-    public C()
-    {
-        super(F.C.getImagen("detalle16.gif"));
-        setPreferredSize(new Dimension(22, 22));
-        setMaximumSize(new Dimension(22, 22));
-        A();
+public class BotonDetalle extends JButton {
+
+    public BotonDetalle() {
+	super(Recursos.cargador.getImagen("detalle16.gif"));
+	setPreferredSize(new Dimension(22, 22));
+	setMaximumSize(new Dimension(22, 22));
+	boton = this;
+	manejaEventos();
     }
 
-    private void A()
-    {
-        addComponentListener(new ComponentAdapter() {
+    BotonDetalle boton;
 
-            public void componentResized(ComponentEvent componentevent)
-            {
-                A.setSize(new Dimension(22, 22));
-            }
-
-            final C A;
-
-            
-            {
-                A = C.this;
-                super();
-            }
-        }
-);
+    private void manejaEventos() {
+	addComponentListener(new ComponentAdapter() {
+	    public void componentResized(ComponentEvent componentevent) {
+		boton.setSize(new Dimension(22, 22));
+	    }
+	});
     }
 }

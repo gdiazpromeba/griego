@@ -122,6 +122,7 @@ kalos
       ha GerenteTiposVerbo
       p  GerenteTiposVerboImpl
       KA GerenteSeguridad
+      bA o BA Reseleccionable
 
       
   H flexion
@@ -229,8 +230,8 @@ kalos
       D AMVerbosTest 
   A kalos
     B visual
-      A FabricaControles
       B controles
+        A FabricaControles
         A botones
           A BotonQuita
           B BotonBuscar
@@ -242,6 +243,12 @@ kalos
           E RendererComboGenerico
           B ComboLetras
           A RendererComboEnumeraciones
+        F selectores
+          B jerarquicos
+            A SelectorActivoBeans
+            C SelectorJerarquicoBeans
+            B DialogSelectorJerarquico
+            
           
     A renderers
       A RendererICeldaReporte
