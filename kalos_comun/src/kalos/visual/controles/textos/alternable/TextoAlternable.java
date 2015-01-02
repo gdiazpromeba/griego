@@ -17,6 +17,7 @@ import javax.swing.event.DocumentListener;
 import kalos.enumeraciones.LugarSubcadena;
 import kalos.enumeraciones.uLetras;
 import kalos.operaciones.OpPalabras;
+import kalos.recursos.Configuracion;
 import kalos.recursos.Recursos;
 import kalos.visual.controles.menues.FabricaMenues;
 import kalos.visual.controles.textos.teclas.ManejaInputMap;
@@ -27,7 +28,7 @@ import com.jgoodies.forms.layout.FormLayout;
 
 /**
  * Control de texto que permite ingresar una palabra en griego,
- * con o sin diacríticos. Permite especificar si se debe hacer una 
+ * con o sin diacrï¿½ticos. Permite especificar si se debe hacer una 
  * correspondencia exacta o parcial (principio, medio, fin) del 
  * texto ingresado
  */
@@ -35,8 +36,8 @@ import com.jgoodies.forms.layout.FormLayout;
 public class TextoAlternable extends JPanel {
   /**
    * txtSinNada se usa cuando se emplea el teclado de sistema.
-   * txtConDiacriticos se usa cuando se quiere insertar diacríticos
-   * txtSinDiacriticos se usa cuando no se desea insertr diacríticos
+   * txtConDiacriticos se usa cuando se quiere insertar diacrï¿½ticos
+   * txtSinDiacriticos se usa cuando no se desea insertr diacrï¿½ticos
    */
   private JTextField texto=new JTextField();
   private boolean esBeta;
@@ -49,7 +50,7 @@ public class TextoAlternable extends JPanel {
   
   
   /**
-   * cadena completa única, considerando que la inserción unicode se hace cargo de largas y breves
+   * cadena completa ï¿½nica, considerando que la inserciï¿½n unicode se hace cargo de largas y breves
    */
   private String cadenaCompleta=null;
   
@@ -162,7 +163,7 @@ public class TextoAlternable extends JPanel {
 
   
   /**
-   * agrega los controles al panel. El texto que se decide agregar está dado
+   * agrega los controles al panel. El texto que se decide agregar estï¿½ dado
    * por la variable global "elTexto"
    *
    */
@@ -183,9 +184,9 @@ public class TextoAlternable extends JPanel {
     
     texto.setFont(Recursos.getFontGriegaFormularios());
 
-	//en los "looks and feels" Kunststoff y Aqua, cuanto inserto una mayúscula 
-	//con espíritu y acento al principio de la palabra, los diacríticos quedan un poco comidos.
-	//La clase TextUIBasica soluciona el problema para los looks and feels básicos, pero un intento similar para Kunststoff falla.
+	//en los "looks and feels" Kunststoff y Aqua, cuanto inserto una mayï¿½scula 
+	//con espï¿½ritu y acento al principio de la palabra, los diacrï¿½ticos quedan un poco comidos.
+	//La clase TextUIBasica soluciona el problema para los looks and feels bï¿½sicos, pero un intento similar para Kunststoff falla.
 	texto.setUI(new TextUIBasica());
 
 
@@ -195,7 +196,7 @@ public class TextoAlternable extends JPanel {
     builder.add(alfa, cc.xy(5, 1));
     
     
-    //el combo de posición depende de un parámetro
+    //el combo de posiciï¿½n depende de un parï¿½metro
     if (permitePosicion) {
     	builder.add(cmbPosicion,                               cc.xy(7, 1));
     }
@@ -214,7 +215,7 @@ public class TextoAlternable extends JPanel {
   
   
 	/**
-	 * Se activa al parder el foco, y realiza algunas correcciones automáticamente
+	 * Se activa al parder el foco, y realiza algunas correcciones automï¿½ticamente
 	 */
 	public void correccionAutomatica(){
 	  StringBuffer unicode=new StringBuffer(getText());

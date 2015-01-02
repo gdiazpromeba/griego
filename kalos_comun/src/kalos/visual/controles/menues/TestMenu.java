@@ -1,4 +1,18 @@
-TRONGS (NUMERO_STRONG, BETA, DERIVATION, STRONGS_DEF, KJV_DEF, ENCONTRO_ALGO, FRANCES, CASTELLANO, KJV_FRANCES) VALUES (3966, 'PATRIA/RCHJ', 'from <strongsref language="GREEK" strongs="3965"/> and <strongsref language="GREEK" strongs="757"/>;', 'a progenitor ("patriarch")', ':--patriarch.', 2, 'patriarche.', 'patriarca.', 'patriarche, fondateur d\'une tribu.
-des douze fils de Jacob, fondateurs des tribus d\'Israël.
-Abraham, Isaac et Jacob.');
-INSERT 
+package kalos.A.B.D;
+
+import javax.swing.JFrame;
+
+public class TestMenu
+{
+
+
+
+    public static void main(String args[])
+    {
+        JFrame jframe = new JFrame();
+        jframe.add(new kalos.A.B.E.A());
+        jframe.pack();
+        jframe.setLocationRelativeTo(null);
+        jframe.setVisible(true);
+    }
+}
