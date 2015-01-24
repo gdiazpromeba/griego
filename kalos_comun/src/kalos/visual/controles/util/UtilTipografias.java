@@ -1,1 +1,24 @@
-pplied to the week and month selector column.$True if showing days of week header.True if showing grid lines.0True if showing the next/previous month buttons.True if showing the title.!Format for month title in header.The style applied to the title.Calendar"The style applied to today's date..The current date as displayed by the Calendar.The month to be displayed."The style applied to weekend days.LA new request was routed to an app domain that has already started shutdown.2Only config files can be accessed by this feature.’Redirect failed because authentication ticket could not be stored in a cookie or URL due to configuration restrictions. Set EnableCrossAppRedirect to true in the <forms> configuration section in order to enable the ticket to be transferred to external locations via the URL.@Setting CausesValidation on DataControlButtons is not supported.ISetting CausesValidation on DataControlPagerLinkButtons is not supported.ÄA button that causes validation in {0} '{1}' is attempting to use the container {0} as the post back target.  The button should either turn off validation or use itself as the post back container.)'{0}' cannot have children of type '{1}'.JResponse.End cannot be executed
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+
+package kalos.visual.controles.util;
+
+import java.awt.*;
+import javax.swing.JTable;
+
+public class UtilTipografias {
+
+    public static void cambiaTamaÃ±oEnTabla(JTable jtable, float f) {
+	Font font = cambiaTamaF1oEnComponente(jtable, f);
+	FontMetrics fontmetrics = jtable.getFontMetrics(font);
+	jtable.setRowHeight(fontmetrics.getMaxAscent() + fontmetrics.getMaxDescent() + 4);
+    }
+
+    public static Font cambiaTamaF1oEnComponente(Component component, float f) {
+	Font font = component.getFont();
+	Font font1 = new Font(font.getName(), font.getStyle(), (int) f);
+	component.setFont(font1);
+	return font1;
+    }
+}

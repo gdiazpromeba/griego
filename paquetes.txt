@@ -252,6 +252,9 @@ kalos
             A SelectorActivoBeans
             C SelectorJerarquicoBeans
             B DialogSelectorJerarquico
+		G util
+		  A TipografiaCambiable
+		  B UtilTipografias
 		H listas
 		  A filtroenumeraciones
 		I  scroll
@@ -264,7 +267,7 @@ kalos
 	    A SustantivosPM
 		B PagingModel
 		C PreposicionPM
-	    D ConjuncionesPM
+	    
 		E InterjeccionesPM
 		F IrrAdjetivoEnteroPM
 		G IrrVerboIndividualPM
@@ -274,7 +277,7 @@ kalos
 		K AdverbiosPM
 		L IrrVerbosPM
 		M IrrSustantivosPM
-		
+		Q ConjuncionesPM
 		
     A GerenteDeApariencias
 	B ShowUIDefaults
