@@ -124,13 +124,13 @@ public class Comienzo
         C.setLocationRelativeTo(null);
         C.setVisible(true);
         O();
-        E.H.addActionListener(new _A());
+        E.fuenteDatosCacheable.addActionListener(new _A());
     }
 
     private static void O()
     {
-        E.F.setEnabled(false);
-        E.H.setEnabled(false);
+        E.beans.setEnabled(false);
+        E.fuenteDatosCacheable.setEnabled(false);
         (new Thread() {
 
             public void run()
@@ -187,8 +187,8 @@ public class Comienzo
 ).start();
                 kalos.iu.Comienzo.F().setMensajeProgreso(kalos.C.F.getCadena("progreso.creando_control_eventos"));
                 new kalos.iu.E(kalos.iu.Comienzo.D(), kalos.iu.Comienzo.L());
-                kalos.iu.Comienzo.F().H.setEnabled(true);
-                kalos.iu.Comienzo.F().F.setEnabled(true);
+                kalos.iu.Comienzo.F().fuenteDatosCacheable.setEnabled(true);
+                kalos.iu.Comienzo.F().beans.setEnabled(true);
                 kalos.iu.Comienzo.F().E.setEnabled(true);
                 kalos.iu.Comienzo.F().setMensajeProgreso("");
                 Comienzo.T();
@@ -208,16 +208,16 @@ public class Comienzo
     private static void S()
     {
         if(kalos.C.A.getUltimoIdioma().equals("en"))
-            E.F.setSelectedIndex(0);
+            E.beans.setSelectedIndex(0);
         else
         if(kalos.C.A.getUltimoIdioma().equals("es"))
-            E.F.setSelectedIndex(1);
+            E.beans.setSelectedIndex(1);
         else
         if(kalos.C.A.getUltimoIdioma().equals("fr"))
-            E.F.setSelectedIndex(2);
+            E.beans.setSelectedIndex(2);
         else
         if(kalos.C.A.getUltimoIdioma().equals("pr"))
-            E.F.setSelectedIndex(3);
+            E.beans.setSelectedIndex(3);
     }
 
     private static void R()
@@ -245,7 +245,7 @@ public class Comienzo
 
     private static void C()
     {
-        E.F.addItemListener(new ItemListener() {
+        E.beans.addItemListener(new ItemListener() {
 
             public void itemStateChanged(ItemEvent itemevent)
             {
@@ -297,7 +297,7 @@ public class Comienzo
 
     private static void K()
     {
-        switch(E.F.getSelectedIndex())
+        switch(E.beans.getSelectedIndex())
         {
         case 0: // '\0'
             kalos.C.A.setUltimoIdioma("en");
@@ -320,9 +320,9 @@ public class Comienzo
             break;
         }
         kalos.C.F.cambiaLocale(kalos.C.A.getUltimoIdioma());
-        E.H.setText(kalos.C.F.getCadena("comenzar"));
-        E.H.repaint();
-        E.H.revalidate();
+        E.fuenteDatosCacheable.setText(kalos.C.F.getCadena("comenzar"));
+        E.fuenteDatosCacheable.repaint();
+        E.fuenteDatosCacheable.revalidate();
         O();
     }
 

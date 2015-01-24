@@ -183,6 +183,7 @@ kalos
     a TestParticipioBean
     J TestVerboBean
     I ValorCombo
+	U IrrSustantivoBean
   F fonts
     F CaracterGriegoFactory
     A CarPos
@@ -228,10 +229,13 @@ kalos
       E AMSustantivosTest
       H TiposSustantivoTest
       D AMVerbosTest 
-  A kalos
-    B visual
+ kalos
+    A visual
       B controles
         A FabricaControles
+		A textos
+		  D textarea
+		    A AreaTextoVertical
         A botones
           A BotonQuita
           B BotonBuscar
@@ -248,6 +252,33 @@ kalos
             A SelectorActivoBeans
             C SelectorJerarquicoBeans
             B DialogSelectorJerarquico
+		H listas
+		  A filtroenumeraciones
+		I  scroll
+		  B BarraScroll
+		    
+	    D menues
+	      A TestMenu
+		  B FabricaMenues
+      C modelos
+	    A SustantivosPM
+		B PagingModel
+		C PreposicionPM
+	    D ConjuncionesPM
+		E InterjeccionesPM
+		F IrrAdjetivoEnteroPM
+		G IrrVerboIndividualPM
+		H ParticulaPM
+		I DesinSustPM
+		J AdjetivosPM
+		K AdverbiosPM
+		L IrrVerbosPM
+		M IrrSustantivosPM
+		
+		
+    A GerenteDeApariencias
+	B ShowUIDefaults
+		  
             
           
     A renderers
