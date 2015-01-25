@@ -262,12 +262,16 @@ kalos
 		  B UtilTipografias
 		H listas
 		  A filtroenumeraciones
+		    A  EnumSeleccionada
+			B  FiltroEnumeraciones (o viceversa con A)
 		I  scroll
 		  B BarraScroll
 		    
 	    D menues
 	      A TestMenu
 		  B FabricaMenues
+		E deslizador
+		  A Deslizador
       C modelos
 	    A SustantivosPM
 		B PagingModel
