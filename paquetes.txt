@@ -244,6 +244,8 @@ kalos
           B BotonBuscar
           C BotonDetalle
           D BotonCopia
+		C ventanas
+		  C AceptarCancelar
 
 		    
         J combos
@@ -253,10 +255,13 @@ kalos
           B ComboLetras
           A RendererComboEnumeraciones
         F selectores
+		  A tabulares
           B jerarquicos
             A SelectorActivoBeans
             C SelectorJerarquicoBeans
             B DialogSelectorJerarquico
+		  A DialogSelectorBeans
+		
 		G util
 		  A TipografiaCambiable
 		  B UtilTipografias

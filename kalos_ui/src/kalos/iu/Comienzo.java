@@ -189,7 +189,7 @@ public class Comienzo
                 new kalos.iu.E(kalos.iu.Comienzo.D(), kalos.iu.Comienzo.L());
                 kalos.iu.Comienzo.F().fuenteDatosCacheable.setEnabled(true);
                 kalos.iu.Comienzo.F().beans.setEnabled(true);
-                kalos.iu.Comienzo.F().E.setEnabled(true);
+                kalos.iu.Comienzo.F().botAceptar.setEnabled(true);
                 kalos.iu.Comienzo.F().setMensajeProgreso("");
                 Comienzo.T();
             }
@@ -223,23 +223,23 @@ public class Comienzo
     private static void R()
     {
         if(kalos.C.A.getIdiomaSignificados().equals("en"))
-            E.E.setSelectedIndex(0);
+            E.botAceptar.setSelectedIndex(0);
         else
         if(kalos.C.A.getIdiomaSignificados().equals("es"))
-            E.E.setSelectedIndex(1);
+            E.botAceptar.setSelectedIndex(1);
         else
         if(kalos.C.A.getIdiomaSignificados().equals("fr"))
-            E.E.setSelectedIndex(2);
+            E.botAceptar.setSelectedIndex(2);
     }
 
     private static void H()
     {
-        E.B.setSelectedItem(kalos.C.A.getUltimoTeclado());
+        E.textPane.setSelectedItem(kalos.C.A.getUltimoTeclado());
     }
 
     private static void B()
     {
-        kalos.C.A.setUltimoTeclado((String)E.B.getSelectedItem());
+        kalos.C.A.setUltimoTeclado((String)E.textPane.getSelectedItem());
         kalos.C.A.reescribeIni();
     }
 
@@ -261,7 +261,7 @@ public class Comienzo
 
         }
 );
-        E.E.addItemListener(new ItemListener() {
+        E.botAceptar.addItemListener(new ItemListener() {
 
             public void itemStateChanged(ItemEvent itemevent)
             {
@@ -277,7 +277,7 @@ public class Comienzo
 
         }
 );
-        E.B.addItemListener(new ItemListener() {
+        E.textPane.addItemListener(new ItemListener() {
 
             public void itemStateChanged(ItemEvent itemevent)
             {
@@ -328,7 +328,7 @@ public class Comienzo
 
     private static void N()
     {
-        switch(E.E.getSelectedIndex())
+        switch(E.botAceptar.getSelectedIndex())
         {
         case 0: // '\0'
             kalos.C.A.setIdiomaSignificados("en");

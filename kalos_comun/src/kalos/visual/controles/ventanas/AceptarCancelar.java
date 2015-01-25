@@ -1,9 +1,7 @@
-/*
- * Created on Apr 2, 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+
 package kalos.visual.controles.ventanas;
 
 import java.awt.BorderLayout;
@@ -25,138 +23,122 @@ import kalos.recursos.Recursos;
 
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 
-/**
- * ventana con botones de aceptar y cancelar.
- * los controles específicos van a un panel llamado panelCentral
- * Una variable "aceptó" indica cuál de los botones se apretó
- * @author gdiaz
- *
- */
 public abstract class AceptarCancelar extends JDialog {
 
-	JTextPane texto;
-	protected JButton botAceptar=new JButton(Recursos.getCadena("aceptar"));
-	protected JButton botCancelar=new JButton(Recursos.getCadena("cancelar"));
-	private JPanel panelCentral=new JPanel();
-	protected boolean acepto;
-	/**
-	 * evita que redirija los métodos de "agregar" y "setLayout" al panel central hasta que yo quiera hacerlo
-	 */
-	private boolean comenzarAInterceptar=false;
-	
+    private void disposicion() {
+	ButtonBarBuilder buttonbarbuilder = new ButtonBarBuilder();
+	buttonbarbuilder.addGlue();
+	buttonbarbuilder.addGriddedButtons(new JButton[] { botAceptar, botCancelar });
+	buttonbarbuilder.setDefaultDialogBorder();
+	setLayout(new BorderLayout());
+	add(buttonbarbuilder.getPanel(), "South");
+	add(panel, "Center");
+	botAceptar.addActionListener(new ActionListener() {
 
-	private void inicializacion(){
-        ButtonBarBuilder builder = new ButtonBarBuilder();
-        builder.addGlue();
-        builder.addGriddedButtons(new JButton[] {botAceptar, botCancelar});
-        builder.setDefaultDialogBorder();
-		//setLocationRelativeTo(padre);
-		setLayout(new BorderLayout());
-		add(builder.getPanel(), BorderLayout.SOUTH);
-		add(panelCentral, BorderLayout.CENTER);
-		
-		botAceptar.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent ev){
-				aceptar();
-				if (acepto)
-					setVisible(false);
-			}
-		});
-		
-		botCancelar.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent ev){
-				cancelar();
-				setVisible(false);
-			}
-		});
-		
-		   this.addWindowListener(new WindowAdapter() {
-		      public void windowClosing(WindowEvent e) {
-		        cancelar();
-		      }
-		    });
-		   comenzarAInterceptar=true;
-	}
-	
-	
-	public AceptarCancelar(JFrame frame) {
-		super(frame);
-		inicializacion();
+	    public void actionPerformed(ActionEvent actionevent) {
+		aceptar();
+		if (acepta)
+		    panel.setVisible(false);
+	    }
 
-	}
-	
-	public AceptarCancelar() {
-		super();
-		inicializacion();
+	});
+	botCancelar.addActionListener(new ActionListener() {
 
-	}
-	
-	public boolean isAcepto(){
-		return acepto;
-	}
-	
-	
-	protected abstract void aceptar();
-	protected abstract void cancelar();
-	
+	    public void actionPerformed(ActionEvent actionevent) {
+		cancelar();
+		panel.setVisible(false);
+	    }
 
-	
-	public void setLayout(LayoutManager lam){
-		if (!comenzarAInterceptar){
-			Container contentPane=null;
-			try{
-			  contentPane=getContentPane();
-			}catch(Exception ex){}
-			if (contentPane!=null)
-				contentPane.setLayout(lam);
-			else
-			  super.setLayout(lam); 
-		}else{
-		  panelCentral.setLayout(lam);//éste es mi código
-		}
-	}
-	
-	public Component add(Component componente){
-		if (!comenzarAInterceptar)
-			if (getContentPane()!=null)
-			  return super.getContentPane().add(componente);
-			else
-			  return super.add(componente);
-		else
-			return panelCentral.add(componente);
-	}
-	
-	public void add(Component componente, Object constraints){
-		if (!comenzarAInterceptar){
-			boolean pudeAgregar=true;
-			try{
-				super.getContentPane().add(componente, constraints);
-				
-			}catch(Exception ex){
-				pudeAgregar=false;
-			}
-			if (!pudeAgregar)
-				super.add(componente, constraints);
-			
-			   
-		}else 
-			panelCentral.add(componente, constraints);
-	}
-	
-	public void setAceptarhabilitado(boolean valor){
-		botAceptar.setEnabled(valor);
-	}
-	
-	/**
-	 * devuelve el panel central
-	 * @return
-	 */
-	public JPanel getPanelCentral(){
-		return this.panelCentral;
-	}
-	
-	
-	
+	});
+	addWindowListener(new WindowAdapter() {
 
+	    public void windowClosing(WindowEvent windowevent) {
+		cancelar();
+	    }
 
+	});
+	tieneContainer = true;
+    }
+
+    public AceptarCancelar(JFrame jframe) {
+	super(jframe);
+	botAceptar = new JButton(Recursos.getCadena("aceptar"));
+	botCancelar = new JButton(Recursos.getCadena("cancelar"));
+	panel = new JPanel();
+	tieneContainer = false;
+	disposicion();
+    }
+
+    public AceptarCancelar() {
+	botAceptar = new JButton(Recursos.getCadena("aceptar"));
+	botCancelar = new JButton(Recursos.getCadena("cancelar"));
+	panel = new JPanel();
+	tieneContainer = false;
+	disposicion();
+    }
+
+    public boolean isAcepto() {
+	return acepta;
+    }
+
+    protected abstract void aceptar();
+
+    protected abstract void cancelar();
+
+    public void setLayout(LayoutManager layoutmanager) {
+	if (!tieneContainer) {
+	    Container container = null;
+	    try {
+		container = getContentPane();
+	    } catch (Exception exception) {
+	    }
+	    if (container != null)
+		container.setLayout(layoutmanager);
+	    else
+		super.setLayout(layoutmanager);
+	} else {
+	    panel.setLayout(layoutmanager);
+	}
+    }
+
+    public Component add(Component component) {
+	if (!tieneContainer) {
+	    if (getContentPane() != null)
+		return super.getContentPane().add(component);
+	    else
+		return super.add(component);
+	} else {
+	    return panel.add(component);
+	}
+    }
+
+    public void add(Component component, Object obj) {
+	if (!tieneContainer) {
+	    boolean flag = true;
+	    try {
+		super.getContentPane().add(component, obj);
+	    } catch (Exception exception) {
+		flag = false;
+	    }
+	    if (!flag)
+		super.add(component, obj);
+	} else {
+	    panel.add(component, obj);
+	}
+    }
+
+    public void setAceptarhabilitado(boolean flag) {
+	botAceptar.setEnabled(flag);
+    }
+
+    public JPanel getPanelCentral() {
+	return panel;
+    }
+
+    JTextPane textPane;
+    protected JButton botAceptar;
+    protected JButton botCancelar;
+    private JPanel panel;
+    protected boolean acepta;
+    private boolean tieneContainer;
 }

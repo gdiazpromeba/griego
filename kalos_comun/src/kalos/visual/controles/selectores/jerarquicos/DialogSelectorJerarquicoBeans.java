@@ -7,6 +7,7 @@ package kalos.visual.controles.selectores.jerarquicos;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.util.Map;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,9 +17,11 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
+
 import kalos.A.B.F.A;
 import kalos.C.F;
 import kalos.K.e;
+import kalos.recursos.Recursos;
 
 public class DialogSelectorJerarquico extends SelectorActivoBeans
 {
@@ -125,7 +128,7 @@ public class DialogSelectorJerarquico extends SelectorActivoBeans
 
     public void mensajeVacio()
     {
-        JOptionPane.showMessageDialog(this, F.getCadena("no_puede_ser_vacio"), F.getCadena("busqueda"), 0);
+        JOptionPane.showMessageDialog(this, F.getCadena("no_puede_ser_vacio"), Recursos.getCadena("busqueda"), 0);
     }
 
     public void fonts()
