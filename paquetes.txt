@@ -234,6 +234,9 @@ kalos
       B controles
         A FabricaControles
 		A textos
+		  C beta
+		    A TextoNulable
+		    B TextoBeta
 		  D textarea
 		    A AreaTextoVertical
         A botones
@@ -241,6 +244,8 @@ kalos
           B BotonBuscar
           C BotonDetalle
           D BotonCopia
+
+		    
         J combos
           D ComboEnumeracion
           C ComboGenerico
