@@ -72,7 +72,7 @@ public class VentanaMolesta extends JPanel {
 			TimerTask timertask = new TimerTask() {
 
 				public void run() {
-					kalos.iu.A.B.A(A).panelRegistro.setEnabled(true);
+					kalos.iu.A.B.setListaSeleccionable(A).panelRegistro.setEnabled(true);
 					A.repaint();
 				}
 

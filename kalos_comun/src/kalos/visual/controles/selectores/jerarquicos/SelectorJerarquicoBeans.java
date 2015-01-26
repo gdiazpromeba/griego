@@ -1,153 +1,115 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+
 package kalos.visual.controles.selectores.jerarquicos;
 
 import java.util.List;
 
+import javax.swing.JTextField;
+
+import kalos.C.F;
+import kalos.J.A;
+import kalos.K.e;
 import kalos.beans.TipoJerarquico;
 import kalos.bibliotecadatos.JerarquiaBeans;
 import kalos.bibliotecadatos.ListaSeleccionable;
 import kalos.operaciones.OpBeans;
+import kalos.recursos.Configuracion;
 import kalos.recursos.Recursos;
 import kalos.visual.controles.selectores.DialogSelectorBeans;
 
-/**
- * Se utiliza para vincular datos de tipo jerárquico
- * (árbol) con un resultset principal.
- * Los clientes que lo usan normalmente van a querer no sólo un
- * registro seleccionado, sino sus ancestros o descendientes
- */
-@SuppressWarnings("unchecked")
-public class SelectorJerarquicoBeans<T extends TipoJerarquico> extends SelectorActivoBeans<T> {
-	private List<T> seleccionadoEHijos;
+// Referenced classes of package kalos.A.B.F.B:
+//            A, B
 
-	private List<T> seleccionadoYAncestros;
+public class SelectorJerarquicoBeans extends SelectorActivoBeans {
 
-	String cadenaEtiquetaDescripcion;
+    public SelectorJerarquicoBeans(boolean flag, boolean flag1, boolean flag2, JerarquiaBeans jerBeans, boolean flag3, String s) {
+	super(null, flag, flag1, flag3, false, "desClave");
+	jerarquiaBeans = jerBeans;
+	super.listaSeleccionable = new ListaSeleccionable(jerarquiaBeans.getBeans());
+	P = flag2;
+	if (!flag1)
+	    C();
+    }
 
-	private boolean soloHojas;
+    protected DialogSelectorBeans muestraDialog() {
+	return new DialogSelectorJerarquico(Q, jerarquiaBeans, N, P);
+    }
 
-	protected String tituloDialog;
+    private void C() {
+	String s;
+	if (!P) {
+	    s = null;
+	} else {
+	    List list = jerarquiaBeans.getHojas((String) null);
+	    TipoJerarquico e1 = (TipoJerarquico) list.get(0);
+	    s = OpBeans.getId(e1);
+	}
+	fuerzaSeleccion(s);
+	seleccionadoEHijos = jerarquiaBeans.getHojas(s);
+	seleccionadoYAncestros = jerarquiaBeans.getRegistroYAncestros(s);
+    }
 
-	protected JerarquiaBeans<T> jerBeans;
+    public void muestraDialog() {
+	K = A();
+	K.setSize(540, 380);
+	K.setLocationRelativeTo(null);
+	K.setModal(true);
+	String s = jerarquiaBeans.getPK();
+	((B) K).setSeleccionado(s);
+	K.setVisible(true);
+	if (K.isAcepto()) {
+	    fuerzaSeleccion(K.getPK());
+	    seleccionadoEHijos = ((B) K).getHojasDeSeleccion();
+	    seleccionadoYAncestros = ((B) K).getSeleccionadoYAncestros();
+	    B.setText(B());
+	}
+	K.dispose();
+    }
 
-	public SelectorJerarquicoBeans(boolean editable, boolean puedeSerNulo,
-			boolean soloHojas, JerarquiaBeans<T> dmJerarquico, boolean griego,
-			String tituloDialog) {
-		super(null, editable, puedeSerNulo, griego, false, "desClave");
-		this.jerBeans = dmJerarquico;
-		super.beans = new ListaSeleccionable(jerBeans.getBeans());
-		this.soloHojas = soloHojas;
-		if (!puedeSerNulo)
-			seleccionInicial();
+    protected String B() {
+	StringBuffer stringbuffer = new StringBuffer();
+	seleccionadoYAncestros = jerarquiaBeans.getRegistroYAncestros(jerarquiaBeans.getPK());
+	for (int i = 0; i < seleccionadoYAncestros.size(); i++) {
+	    TipoJerarquico e1 = (TipoJerarquico) seleccionadoYAncestros.get(i);
+	    String s = Configuracion.getPropiedad(e1, H);
+	    stringbuffer.append(Recursos.getCadena(s));
+	    if (i < seleccionadoYAncestros.size() - 1)
+		stringbuffer.append("/");
 	}
 
-	protected DialogSelectorBeans<T> creaDialog() {
-		return new DialogSelectorJerarquicoBeans<T>(tituloDialog, jerBeans,
-				cadenaEtiquetaDescripcion, soloHojas);
-	}
-	
-	
-	/**
-	 * Indica lo que se muestra al principio, incluso antes de que la ventana de selección siquiera se 
-	 * haya utilizado.
-	 * si la selección no puede ser nula, hay que encargarse de mostrar algo.
-	 * Esto será la raíz (si se puede seleccionar nodos no-hoja) o el primer nodo hoja disponible
-	 *
-	 */
-	private void seleccionInicial(){
-		String idASeleccionar;
-		if (!soloHojas){
-			idASeleccionar=null;//significa que seleccionamos la raíz
-		}else{ //
-			List<T> hojas=jerBeans.getHojas((String)null);
-			T primeraHoja=hojas.get(0);
-			idASeleccionar=OpBeans.getId(primeraHoja);
-		}
-		fuerzaSeleccion(idASeleccionar); 
-		seleccionadoEHijos=jerBeans.getHojas((String)idASeleccionar);
-		seleccionadoYAncestros=jerBeans.getRegistroYAncestros((String)idASeleccionar);
-	}
-	
+	return stringbuffer.toString();
+    }
 
-	/**
-	 * Muestra la dialog con el tree. 
-	 * Al volver (de Aceptar) fuerza la selección en el 
-	 * datamodule interno y puebla los dos arrays de Registros "ancestros" y "descendientes"
-	 */
-	public void muestraDialog() {
-		dialog = creaDialog();
-		dialog.setSize(540, 380); //áureo
-		dialog.setLocationRelativeTo(null);
-		dialog.setModal(true);
-		String pk = jerBeans.getPK();
-		((DialogSelectorJerarquicoBeans) dialog).setSeleccionado(pk);
-		dialog.setVisible(true);
-		if (dialog.isAcepto()) {
-			fuerzaSeleccion(dialog.getPK());
-			seleccionadoEHijos = ((DialogSelectorJerarquicoBeans) dialog)
-					.getHojasDeSeleccion();
-			seleccionadoYAncestros = ((DialogSelectorJerarquicoBeans) dialog)
-					.getSeleccionadoYAncestros();
-			txtDescripcion.setText(getDescripcion());
-		}
-		dialog.dispose();
-	}
+    public void fuerzaSeleccion(String s) {
+	jerarquiaBeans.setPK(s);
+	B.setText(B());
+	super.listaSeleccionable.setPK(s);
+    }
 
-	/**
-	 * crea una String que consiste en todos los valores de descripción concatenados por barras "/", 
-	 * desde la raíz hasta el nodo seleccionado
-	 */
-	protected String getDescripcion() {
-		StringBuffer sb = new StringBuffer();
-		seleccionadoYAncestros = jerBeans.getRegistroYAncestros(jerBeans.getPK());
-		for (int i = 0; i < seleccionadoYAncestros.size(); i++) {
-			T bean = seleccionadoYAncestros.get(i);
-			String contenidoDescripcion = OpBeans.getPropiedad(bean,
-					columnaDescripcion);
-			sb.append(Recursos.getCadena(contenidoDescripcion));
-			if (i < seleccionadoYAncestros.size() - 1)
-				sb.append("/");
-		}
-		return sb.toString();
-	}
+    public String getIdSeleccionado() {
+	return jerarquiaBeans.getPK();
+    }
 
-	@Override
-	public void fuerzaSeleccion(String pk) {
-		jerBeans.setPK(pk);
-		txtDescripcion.setText(getDescripcion());
-		super.beans.setPK(pk);
-	}
+    public int getEnteroSeleccionado() {
+	jerarquiaBeans.getPK();
+	TipoJerarquico e1 = (TipoJerarquico) getBeanSeleccionado();
+	return e1.getValorEntero();
+    }
 
-	@Override
-	public String getIdSeleccionado() {
-		return jerBeans.getPK();
-	}
-	
-	
-	/**
-	 * Los tipos jerárquicos tienen un "valor entero", que es una clave legible, paralela a la real.
-	 * Eso es lo que devuelvo aqué.
-	 * @return  el valore entero seleccionado en ese momento 
-	 */
-	public int getEnteroSeleccionado(){
-		jerBeans.getPK();
-		TipoJerarquico bean=(TipoJerarquico)getBeanSeleccionado();
-		return bean.getValorEntero();
-	}
+    public List getSeleccionadoEHijos() {
+	return seleccionadoEHijos;
+    }
 
-	/**
-	 * Devuelve el registro seleccionado más sus descendientes
-	 * @return
-	 */
-	public List<T> getSeleccionadoEHijos() {
-		return seleccionadoEHijos;
-	}
+    public List getSeleccionadoYAncestros() {
+	return seleccionadoYAncestros;
+    }
 
-	/**
-	 * Devuelve el registro seleccionado más sus ancestros
-	 * @return
-	 */
-	public List<T> getSeleccionadoYAncestros() {
-		return seleccionadoYAncestros;
-	}
-
+    private List seleccionadoEHijos;
+    private List seleccionadoYAncestros;
+    String N;
+    private boolean P;
+    protected String Q;
+    protected JerarquiaBeans jerarquiaBeans;
 }

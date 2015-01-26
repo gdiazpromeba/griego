@@ -85,14 +85,17 @@ kalos
       dA CombosDAO
       
     D adaptadores
-      N  AdaptadorGerenteEncParticulas
+	  D  AdaptadorGerenteIrrAdjetivosEnteros
+	  F  AdaptadorGerenteIrrAdjetivosIndividuales
+	  G  AdaptadorGerenteVerbos
+	  H  AdaptadorGerenteInterjecciones
+	  I  AdaptadorGerenteDesinSust
       J  AdaptadorGerenteAdjetivos
+	  L  AdaptadorGerenteDiccionario
       M  AdaptadorGerenteIrrSustantivos
-      H  AdaptadorGerenteInterjecciones
-      L  AdaptadorGerenteDiccionario
-      I  AdaptadorGerenteDesinSust
-      D  AdaptadorGerenteIrrAdjetivosEnteros
-      F  AdaptadorGerenteIrrAdjetivosIndividuales
+      N  AdaptadorGerenteEncParticulas
+      
+      
       
       
     E gerentes
@@ -163,6 +166,7 @@ kalos
   J  bibliotecadatos
     B   FuenteDatosCacheable    
     A   JerarquiaBeans
+	C ListaSeleccionable
   K  beans
     E Conjuncion
     Q (o q) Significado
@@ -234,12 +238,18 @@ kalos
       B controles
         A FabricaControles
 		A textos
+		  A teclas
+		    
+		  B alternable
+		    A TextUIBasica
+			B TextoAlternable
+			C MiFieldView
 		  C beta
 		    A TextoNulable
 		    B TextoBeta
 		  D textarea
 		    A AreaTextoVertical
-        A botones
+        B botones
           A BotonQuita
           B BotonBuscar
           C BotonDetalle
@@ -256,6 +266,13 @@ kalos
           A RendererComboEnumeraciones
         F selectores
 		  A tabulares
+		    A DialogSelectorTabular
+			B SelectorTabular
+			C SelectorActivoBeansTabular
+			A verbos
+			  B SelectorVerbos
+			  A DialogSelectorVerbos
+			
           B jerarquicos
             A SelectorActivoBeans
             C SelectorJerarquicoBeans

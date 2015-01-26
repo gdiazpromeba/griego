@@ -137,15 +137,15 @@ public class Comienzo
             {
                 kalos.iu.Comienzo.F().setMensajeProgreso(kalos.C.F.getCadena("progreso.creando_contexto"));
                 if(kalos.C.A.isDebug())
-                    kalos.iu.Comienzo.A(Comienzo.creaContexto());
+                    kalos.iu.Comienzo.setListaSeleccionable(Comienzo.creaContexto());
                 else
-                    kalos.iu.Comienzo.A(Comienzo.creaContextoClasspath());
+                    kalos.iu.Comienzo.setListaSeleccionable(Comienzo.creaContextoClasspath());
                 kalos.iu.Comienzo.F().setMensajeProgreso(kalos.C.F.getCadena("progreso.creando_controles_visuales"));
-                kalos.iu.Comienzo.A((kalos.iu.D.A)Comienzo.J().getBean("panelResultadosDiccionario"));
-                kalos.iu.Comienzo.A((kalos.iu.C.A)Comienzo.J().getBean("panelResultadosAM"));
+                kalos.iu.Comienzo.setListaSeleccionable((kalos.iu.D.A)Comienzo.J().getBean("panelResultadosDiccionario"));
+                kalos.iu.Comienzo.setListaSeleccionable((kalos.iu.C.A)Comienzo.J().getBean("panelResultadosAM"));
                 kalos.iu.Comienzo.M().setApplicationContext(Comienzo.J());
-                kalos.iu.Comienzo.A((B)Comienzo.J().getBean("panelProgreso"));
-                kalos.iu.Comienzo.A((kalos.iu.F.A)Comienzo.J().getBean("panelTablaFlexion"));
+                kalos.iu.Comienzo.setListaSeleccionable((B)Comienzo.J().getBean("panelProgreso"));
+                kalos.iu.Comienzo.setListaSeleccionable((kalos.iu.F.A)Comienzo.J().getBean("panelTablaFlexion"));
                 kalos.iu.Comienzo.L().setApplicationContext(Comienzo.J());
                 (new Thread() {
 

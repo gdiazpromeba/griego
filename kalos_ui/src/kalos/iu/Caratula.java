@@ -102,7 +102,7 @@ public class Caratula extends JPanel {
 		botSelTipog.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent actionevent) {
-				A.A(A);
+				A.setListaSeleccionable(A);
 			}
 
 		});

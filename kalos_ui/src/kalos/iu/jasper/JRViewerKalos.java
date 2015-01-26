@@ -97,7 +97,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			if (isRenderImage())
 				super.paintComponent(g1);
 			else
-				B.A((Graphics2D) g1.create());
+				B.setListaSeleccionable((Graphics2D) g1.create());
 		}
 
 		public boolean isRenderImage() {
@@ -312,7 +312,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		E();
 		I();
 		G();
-		A(jasperprint);
+		setListaSeleccionable(jasperprint);
 		V.setSelectedIndex(Y);
 		A();
 		addHyperlinkListener(this);
@@ -418,7 +418,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			JRPrintAnchorIndex jrprintanchorindex = (JRPrintAnchorIndex) map
 					.get(jrprinthyperlink.getHyperlinkAnchor());
 			if (jrprintanchorindex.getPageIndex() != C) {
-				A(jrprintanchorindex.getPageIndex());
+				setListaSeleccionable(jrprintanchorindex.getPageIndex());
 				F();
 			}
 			Container container1 = B.getParent();
@@ -685,7 +685,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		z.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent actionevent) {
-				A.A(actionevent);
+				A.setListaSeleccionable(actionevent);
 			}
 
 		});
@@ -766,7 +766,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		V.addItemListener(new ItemListener() {
 
 			public void itemStateChanged(ItemEvent itemevent) {
-				A.A(itemevent);
+				A.setListaSeleccionable(itemevent);
 			}
 
 		});
@@ -776,7 +776,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		X.addComponentListener(new ComponentAdapter() {
 
 			public void componentResized(ComponentEvent componentevent) {
-				A.A(componentevent);
+				A.setListaSeleccionable(componentevent);
 			}
 
 		});
@@ -800,7 +800,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			}
 
 			public void mouseReleased(MouseEvent mouseevent) {
-				A.A(mouseevent);
+				A.setListaSeleccionable(mouseevent);
 			}
 
 		});
@@ -1014,7 +1014,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 					JasperPrintManager.printReport(A.A5, true);
 				} catch (Exception exception) {
 					exception.printStackTrace();
-					JOptionPane.showMessageDialog(A, Configuracion. A.A("error.printing"));
+					JOptionPane.showMessageDialog(A, Configuracion. A.setListaSeleccionable("error.printing"));
 				}
 			}
 
@@ -1023,7 +1023,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 	}
 
 	void D(ActionEvent actionevent) {
-		A(A5.getPages().size() - 1);
+		setListaSeleccionable(A5.getPages().size() - 1);
 		F();
 	}
 
@@ -1224,7 +1224,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		}
 		J.removeAll();
 		o = new HashMap();
-		D();
+		getListaSeleccionable();
 		if (!flag) {
 			K.setIcon(null);
 			X.validate();
@@ -1292,7 +1292,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 	protected String B(JRPrintHyperlink jrprinthyperlink) {
 		String s1 = jrprinthyperlink.getHyperlinkTooltip();
 		if (s1 == null)
-			s1 = A(jrprinthyperlink);
+			s1 = setListaSeleccionable(jrprinthyperlink);
 		return s1;
 	}
 

@@ -32,15 +32,15 @@ public class DialogSelectorJerarquico extends SelectorActivoBeans
         j = new JLabel("");
         setTitle(s);
         l = a;
-        A(a.getBeans());
+        setListaSeleccionable(a.getBeans());
         i = flag;
         h.setModel(a.getTreeModel());
         h.setShowsRootHandles(true);
         h.setEditable(false);
         h.setCellRenderer(kalos.A.A.B.obtieneRendererNodo());
         JScrollPane jscrollpane = new JScrollPane();
-        I.removeAll();
-        I.add(jscrollpane);
+        applicationContext.removeAll();
+        applicationContext.add(jscrollpane);
         jscrollpane.setViewportView(h);
         h.addTreeSelectionListener(new TreeSelectionListener() {
 
@@ -78,7 +78,7 @@ public class DialogSelectorJerarquico extends SelectorActivoBeans
         gridbagconstraints.gridx = 0;
         gridbagconstraints.gridy = 1;
         gridbagconstraints.fill = 2;
-        K.add(j, gridbagconstraints);
+        dialogSelectorBeans.add(j, gridbagconstraints);
     }
 
     public void limpieza()

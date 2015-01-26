@@ -33,91 +33,89 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * <p>Title: Kalos</p>
- * <p>Description: Greek verb conjugation and research tool</p>
- * <p>Copyright: Copyright (c) 2001</p>
- * <p>Company: </p>
+ * <p>
+ * Title: Kalos
+ * </p>
+ * <p>
+ * Description: Greek verb conjugation and research tool
+ * </p>
+ * <p>
+ * Copyright: Copyright (c) 2001
+ * </p>
+ * <p>
+ * Company:
+ * </p>
+ * 
  * @author not attributable
  * @version 1.0
  */
 
 public class DialogSelectorEncParticula extends DialogSelectorTabular {
-	
-	BotonBuscar butBuscarTodos = new BotonBuscar();
-    private GerenteEncParticulas gerenteEncParticulas ;
-	
-	
-	/**
-	 * @param conPreposicionales se refiere a si el resultado s'olo devuelve verbos que tengan formas preposicionales, o todos lo verbos
-	 */
-	public DialogSelectorEncParticula(GerenteEncParticulas gerenteEncParticulas) {
-		super(
-                new String[] { "forma", "tipoPalabra" },
-                new int[] { 30, 90},
-                new String[] { FRGenericos.TEXTO_LATINO, FRGenericos.ENUMERACION},
-                new String[] { "forma", "tipo_de_palabra" }
-                );
-        
-//        this.tiposSustantivo = fac.getSelectorTiposSustantivo(true, false, false);
-        this.gerenteEncParticulas= gerenteEncParticulas;
-                        
-		setTitle(Recursos.getCadena("encabezado"));
-		//panel de búsqueda
-		panBusqueda.setLayout(new GridBagLayout());
-		panBusqueda.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
-		
-		
-		FormLayout layout=new FormLayout(
-				"right:pref, 3dlu, right:pref", // cols
-			    "15dlu" // rows
-		);
-		
-		panBusqueda.setLayout(new BorderLayout());
-	    PanelBuilder builder = new PanelBuilder(layout);
-	    builder.setDefaultDialogBorder();
-	    CellConstraints cc = new CellConstraints();
 
-	     
-	    builder.addLabel(Recursos.getCadena("todo"),        cc.xy(1,  1));
-	    builder.add(butBuscarTodos,               cc.xy(3,  1));
-	    
-	    panBusqueda.add(builder.getPanel());
-		
-		//eventos de búsqueda
-		butBuscarTodos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                cargaBeansEnTablaTodos();
-			}
-		});
-		
-	}
-	
-	
-	
-	
-	
+    BotonBuscar butBuscarTodos = new BotonBuscar();
+    private GerenteEncParticulas gerenteEncParticulas;
+
+    /**
+     * @param conPreposicionales
+     *            se refiere a si el resultado s'olo devuelve verbos que tengan
+     *            formas preposicionales, o todos lo verbos
+     */
+    public DialogSelectorEncParticula(GerenteEncParticulas gerenteEncParticulas) {
+	super(new String[] { "forma", "tipoPalabra" }, new int[] { 30, 90 }, new String[] { FRGenericos.TEXTO_LATINO,
+		FRGenericos.ENUMERACION }, new String[] { "forma", "tipo_de_palabra" });
+
+	// this.tiposSustantivo = fac.getSelectorTiposSustantivo(true, false,
+	// false);
+	this.gerenteEncParticulas = gerenteEncParticulas;
+
+	setTitle(Recursos.getCadena("encabezado"));
+	// panel de búsqueda
+	panBusqueda.setLayout(new GridBagLayout());
+	panBusqueda.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+
+	FormLayout layout = new FormLayout("right:pref, 3dlu, right:pref", // cols
+		"15dlu" // rows
+	);
+
+	panBusqueda.setLayout(new BorderLayout());
+	PanelBuilder builder = new PanelBuilder(layout);
+	builder.setDefaultDialogBorder();
+	CellConstraints cc = new CellConstraints();
+
+	builder.addLabel(Recursos.getCadena("todo"), cc.xy(1, 1));
+	builder.add(butBuscarTodos, cc.xy(3, 1));
+
+	panBusqueda.add(builder.getPanel());
+
+	// eventos de búsqueda
+	butBuscarTodos.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		cargaBeansEnTablaTodos();
+	    }
+	});
+
+    }
+
     protected void cargaBeansEnTablaTodos() {
-        preparaColumnas();
-    	AdaptadorGerenteEncParticulas apv=new AdaptadorGerenteEncParticulas(gerenteEncParticulas);
-        apv.seleccionaTodos();
-        pagingModel=new EncParticulasPM(apv, 100);
-        tablemodelATabla();
-	}
-    
-	
-	public void fonts(){}
-	public void limpieza(){}
-	
-	
-	public void llenaCampos(){}
-	
-	
-	
+	preparaColumnas();
+	AdaptadorGerenteEncParticulas apv = new AdaptadorGerenteEncParticulas(gerenteEncParticulas);
+	apv.seleccionaTodos();
+	pagingModel = new EncParticulasPM(apv, 100);
+	tablemodelATabla();
+    }
 
-	
-	public void mensajeVacio(){
-		JOptionPane.showMessageDialog(this, Recursos.getCadena("no_puede_ser_vacio"), Recursos.getCadena("busqueda"), JOptionPane.OK_OPTION);
-	}
-	
-	
+    public void fonts() {
+    }
+
+    public void limpieza() {
+    }
+
+    public void llenaCampos() {
+    }
+
+    public void mensajeVacio() {
+	JOptionPane.showMessageDialog(this, Recursos.getCadena("no_puede_ser_vacio"), Recursos.getCadena("busqueda"),
+		JOptionPane.OK_OPTION);
+    }
+
 }
