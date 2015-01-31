@@ -75,7 +75,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -87,7 +86,7 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    private TextoAlternable textoEntrada = new TextoAlternable();
+    private TextoAlternable textoEntrada = new TextoAlternable(false);
     private ComboEnumeracion ignorar = new ComboEnumeracion(Ignorancia.TodosLosDiacriticos);
     private JTable tabla = new JTable();
     private AMVerbos amVerbos;
