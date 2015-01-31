@@ -1,5 +1,11 @@
 package kalos.enumeraciones;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
+
 import kalos.recursos.CadenasEnum;
 
 /**
@@ -47,6 +53,20 @@ public enum TipoPalabra {
 
     public static String getString(TipoPalabra tp) {
 	return CadenasEnum.getCadena(tp);
+    }
+    
+    /**
+     * esto probablemente no está bien. No entiendo qué transformación de Enunms está ocurriendo acá
+     * @param lista
+     * @return
+     */
+    public static List<TipoPalabra> getTiposPalabra(List<Enum<?>> lista){
+	List<TipoPalabra> result=new ArrayList<TipoPalabra>();
+	for (Iterator<Enum<?>> iterator = lista.iterator(); iterator.hasNext();) {
+	    Enum<?> enum1 =  iterator.next();
+	    result.add((TipoPalabra)enum1);
+	}
+	return result;
     }
 
 }

@@ -10,12 +10,12 @@ import javax.swing.JTable;
 public class UtilTipografias {
 
     public static void cambiaTamañoEnTabla(JTable jtable, float f) {
-	Font font = cambiaTamaF1oEnComponente(jtable, f);
+	Font font = cambiaTamañoEnComponente(jtable, f);
 	FontMetrics fontmetrics = jtable.getFontMetrics(font);
 	jtable.setRowHeight(fontmetrics.getMaxAscent() + fontmetrics.getMaxDescent() + 4);
     }
 
-    public static Font cambiaTamaF1oEnComponente(Component component, float f) {
+    public static Font cambiaTamañoEnComponente(Component component, float f) {
 	Font font = component.getFont();
 	Font font1 = new Font(font.getName(), font.getStyle(), (int) f);
 	component.setFont(font1);
