@@ -6,25 +6,19 @@ package kalos.visual.controles.selectores.jerarquicos;
 
 import java.util.List;
 
-import javax.swing.JTextField;
-
-import kalos.C.F;
-import kalos.J.A;
-import kalos.K.e;
 import kalos.beans.TipoJerarquico;
 import kalos.bibliotecadatos.JerarquiaBeans;
 import kalos.bibliotecadatos.ListaSeleccionable;
 import kalos.operaciones.OpBeans;
-import kalos.recursos.Configuracion;
 import kalos.recursos.Recursos;
-import kalos.visual.controles.selectores.DialogSelectorBeans;
 
 // Referenced classes of package kalos.A.B.F.B:
 //            A, B
 
 public class SelectorJerarquicoBeans extends SelectorActivoBeans {
 
-    public SelectorJerarquicoBeans(boolean flag, boolean flag1, boolean flag2, JerarquiaBeans jerBeans, boolean flag3, String s) {
+    public SelectorJerarquicoBeans(boolean flag, boolean flag1, boolean flag2, JerarquiaBeans jerBeans, boolean flag3,
+	    String s) {
 	super(null, flag, flag1, flag3, false, "desClave");
 	jerarquiaBeans = jerBeans;
 	super.listaSeleccionable = new ListaSeleccionable(jerarquiaBeans.getBeans());
@@ -33,8 +27,8 @@ public class SelectorJerarquicoBeans extends SelectorActivoBeans {
 	    C();
     }
 
-    protected DialogSelectorBeans muestraDialog() {
-	return new DialogSelectorJerarquico(Q, jerarquiaBeans, N, P);
+    protected DialogSelectorJerarquicoBeans getDialog() {
+	return new DialogSelectorJerarquicoBeans(Q, jerarquiaBeans, N, P);
     }
 
     private void C() {
@@ -52,28 +46,28 @@ public class SelectorJerarquicoBeans extends SelectorActivoBeans {
     }
 
     public void muestraDialog() {
-	K = A();
-	K.setSize(540, 380);
-	K.setLocationRelativeTo(null);
-	K.setModal(true);
+	dialogSelectorBeans = getDialog();
+	dialogSelectorBeans.setSize(540, 380);
+	dialogSelectorBeans.setLocationRelativeTo(null);
+	dialogSelectorBeans.setModal(true);
 	String s = jerarquiaBeans.getPK();
-	((B) K).setSeleccionado(s);
-	K.setVisible(true);
-	if (K.isAcepto()) {
-	    fuerzaSeleccion(K.getPK());
-	    seleccionadoEHijos = ((B) K).getHojasDeSeleccion();
-	    seleccionadoYAncestros = ((B) K).getSeleccionadoYAncestros();
-	    B.setText(B());
+	((DialogSelectorJerarquicoBeans) dialogSelectorBeans).setSeleccionado(s);
+	dialogSelectorBeans.setVisible(true);
+	if (dialogSelectorBeans.isAcepto()) {
+	    fuerzaSeleccion(dialogSelectorBeans.getPK());
+	    seleccionadoEHijos = ((DialogSelectorJerarquicoBeans) dialogSelectorBeans).getHojasDeSeleccion();
+	    seleccionadoYAncestros = ((DialogSelectorJerarquicoBeans) dialogSelectorBeans).getSeleccionadoYAncestros();
+	    textoDescripcion.setText(cadenaPathSeleccionado());
 	}
-	K.dispose();
+	dialogSelectorBeans.dispose();
     }
 
-    protected String B() {
+    protected String cadenaPathSeleccionado() {
 	StringBuffer stringbuffer = new StringBuffer();
 	seleccionadoYAncestros = jerarquiaBeans.getRegistroYAncestros(jerarquiaBeans.getPK());
 	for (int i = 0; i < seleccionadoYAncestros.size(); i++) {
 	    TipoJerarquico e1 = (TipoJerarquico) seleccionadoYAncestros.get(i);
-	    String s = Configuracion.getPropiedad(e1, H);
+	    String s = OpBeans.getPropiedad(e1, H);
 	    stringbuffer.append(Recursos.getCadena(s));
 	    if (i < seleccionadoYAncestros.size() - 1)
 		stringbuffer.append("/");
@@ -84,7 +78,7 @@ public class SelectorJerarquicoBeans extends SelectorActivoBeans {
 
     public void fuerzaSeleccion(String s) {
 	jerarquiaBeans.setPK(s);
-	B.setText(B());
+	textoDescripcion.setText(cadenaPathSeleccionado());
 	super.listaSeleccionable.setPK(s);
     }
 

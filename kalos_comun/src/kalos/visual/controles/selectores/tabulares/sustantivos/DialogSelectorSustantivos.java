@@ -41,7 +41,7 @@ import com.jgoodies.forms.layout.FormLayout;
 public class DialogSelectorSustantivos extends DialogSelectorTabular {
 	
 //	selección de la forma de diccionario
-	TextoAlternable talBuscarDiccionarioSubcadena = new TextoAlternable();
+	TextoAlternable talBuscarDiccionarioSubcadena = new TextoAlternable(false);
 	BotonBuscar butBuscarDiccionarioSubcadena = new BotonBuscar();
 	ComboLetras cmbLetras = new ComboLetras();
 	BotonBuscar butBuscarDiccionarioLetra = new BotonBuscar();

@@ -22,7 +22,7 @@ public abstract class DialogSelectorBeans extends AceptarCancelar {
 	centerPanel = new JPanel();
 	northPanel = new JPanel();
 	southPanel = new JPanel();
-	centerSouthPanel = new JPanel();
+	panBusqueda = new JPanel();
 	listaSeleccionable = new ListaSeleccionable(null);
 	setDefaultCloseOperation(1);
 	setLayout(new BorderLayout());
@@ -32,11 +32,11 @@ public abstract class DialogSelectorBeans extends AceptarCancelar {
 	add(northPanel, "North");
 	add(southPanel, "South");
 	southPanel.setLayout(new BorderLayout());
-	southPanel.add(centerSouthPanel, "Center");
+	southPanel.add(panBusqueda, "Center");
 	northPanel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 	northPanel.setLayout(new GridBagLayout());
-	centerSouthPanel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
-	centerSouthPanel.setLayout(new GridBagLayout());
+	panBusqueda.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+	panBusqueda.setLayout(new GridBagLayout());
     }
 
     protected void cancelar() {
@@ -91,6 +91,6 @@ public abstract class DialogSelectorBeans extends AceptarCancelar {
     protected JPanel centerPanel;
     protected JPanel northPanel;
     private JPanel southPanel;
-    protected JPanel centerSouthPanel;
+    protected JPanel panBusqueda;
     protected ListaSeleccionable listaSeleccionable;
 }

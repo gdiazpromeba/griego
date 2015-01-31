@@ -4,34 +4,31 @@
 
 package kalos.visual.controles.selectores.tabulares;
 
-import javax.swing.JTextField;
-import kalos.A.B.F.A;
-import kalos.E.E.c;
+import kalos.datos.gerentes.SeleccionadorUno;
+import kalos.datos.gerentes.SeleccionadorUnoTodos;
+import kalos.operaciones.OpBeans;
 
 // Referenced classes of package kalos.A.B.F.A:
 //            B
 
-public abstract class SelectorActivoBeansTabular extends SelectorTabular
-{
+public abstract class SelectorActivoBeansTabular extends SelectorTabular {
 
-    public SelectorActivoBeansTabular(c c, boolean flag, boolean flag1, boolean flag2, boolean flag3, String s)
-    {
-        super(c, flag, flag1, flag2, flag3, s);
+    public SelectorActivoBeansTabular(SeleccionadorUno c, boolean flag, boolean flag1, boolean flag2,
+	    boolean flag3, String s) {
+	super(c, flag, flag1, flag2, flag3, s);
     }
 
-    public void muestraDialog()
-    {
-        J = A();
-        J.setSize(540, 380);
-        J.setLocationRelativeTo(null);
-        J.setModal(true);
-        J.setVisible(true);
-        if(J.isAcepto())
-        {
-            Object obj = J.getBeanSeleccionado();
-            L = obj;
-            super.B.setText(kalos.G.A.getPropiedad(obj, H));
-        }
-        J.dispose();
+    public void muestraDialog() {
+	dialog = getDialog();
+	dialog.setSize(540, 380);
+	dialog.setLocationRelativeTo(null);
+	dialog.setModal(true);
+	dialog.setVisible(true);
+	if (dialog.isAcepto()) {
+	    Object obj = dialog.getBeanSeleccionado();
+	    L = obj;
+	    super.B.setText(OpBeans.getPropiedad(obj, H));
+	}
+	dialog.dispose();
     }
 }

@@ -11,7 +11,7 @@ import kalos.datos.dao.EncParticulasDAO;
 
 import org.springframework.beans.factory.InitializingBean;
 
-public class GerenteEncParticulas implements InitializingBean, SelectorTodos {
+public class GerenteEncParticulas implements InitializingBean, SeleccionadorUnoTodos {
     private Map<String, EncParticulaBean> mapEncPart = new HashMap<String, EncParticulaBean>();
     private EncParticulasDAO encParticulasDAO;
 

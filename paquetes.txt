@@ -126,6 +126,8 @@ kalos
       p  GerenteTiposVerboImpl
       KA GerenteSeguridad
       bA o BA Reseleccionable
+	  c  SelecccionadorUno
+	  k  SeleccionadorUnoTodos
 
       
   H flexion
@@ -272,11 +274,16 @@ kalos
 			A verbos
 			  B SelectorVerbos
 			  A DialogSelectorVerbos
-			
+			B encparticulas
+			  A SelectorEncParticula
+			  b DialogSelectorEncParticula
+			C sustantivos
+			  A SelectorSutantivos
+			  B DialogSelectorSustantivos
           B jerarquicos
             A SelectorActivoBeans
             C SelectorJerarquicoBeans
-            B DialogSelectorJerarquico
+            B DialogSelectorJerarquicoBeans
 		  A DialogSelectorBeans
 		
 		G util
@@ -315,21 +322,21 @@ kalos
 		  
             
           
-    A renderers
-      A RendererICeldaReporte
-      B FRGenerico
-        _K trTEXTO_GRIEGO_SIN_MAKRONES
-        _C trBOOLEAN_SINO
-        _O trSTRING_NUMERICA
-        _M trTEXTO_GRIEGO
-        _E trTEXTO_LATINO
-        _D trTIPO
-        _I trCONTA_VERVERBO
-        _H trVERBO_FACIL
-        _G trDECLINACION
-        _B trPREPOSICIONES
-        _F trENUMERACION
-        _L trNODO
+      A renderers
+        A RendererICeldaReporte
+        B FRGenerico
+         _K trTEXTO_GRIEGO_SIN_MAKRONES
+         _C trBOOLEAN_SINO
+         _O trSTRING_NUMERICA
+         _M trTEXTO_GRIEGO
+         _E trTEXTO_LATINO
+         _D trTIPO
+         _I trCONTA_VERVERBO
+         _H trVERBO_FACIL
+         _G trDECLINACION
+         _B trPREPOSICIONES
+         _F trENUMERACION
+         _L trNODO
     
       
       

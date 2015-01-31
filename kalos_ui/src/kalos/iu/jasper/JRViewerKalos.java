@@ -401,7 +401,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			break;
 
 		case 2: // '\002'
-			if (B()) {
+			if (cadenaPathSeleccionado()) {
 				System.out.println((new StringBuilder())
 						.append("Hyperlink reference : ")
 						.append(jrprinthyperlink.getHyperlinkReference())
@@ -419,7 +419,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 					.get(jrprinthyperlink.getHyperlinkAnchor());
 			if (jrprintanchorindex.getPageIndex() != C) {
 				setListaSeleccionable(jrprintanchorindex.getPageIndex());
-				F();
+				preparaColumnas();
 			}
 			Container container1 = B.getParent();
 			if (!(container1 instanceof JViewport))
@@ -447,7 +447,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			if (i1 < 1 || i1 > A5.getPages().size() || i1 == C + 1)
 				break;
 			A(i1 - 1);
-			F();
+			preparaColumnas();
 			Container container = B.getParent();
 			if (container instanceof JViewport) {
 				JViewport jviewport = (JViewport) container;
@@ -456,7 +456,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			break;
 
 		case 5: // '\005'
-			if (B()) {
+			if (cadenaPathSeleccionado()) {
 				System.out.println((new StringBuilder())
 						.append("Hyperlink reference : ")
 						.append(jrprinthyperlink.getHyperlinkReference())
@@ -471,7 +471,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			break;
 
 		case 6: // '\006'
-			if (B()) {
+			if (cadenaPathSeleccionado()) {
 				System.out.println((new StringBuilder())
 						.append("Hyperlink reference : ")
 						.append(jrprinthyperlink.getHyperlinkReference())
@@ -487,7 +487,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			break;
 
 		case 7: // '\007'
-			if (B()) {
+			if (cadenaPathSeleccionado()) {
 				System.out.println((new StringBuilder())
 						.append("Hyperlink of type ")
 						.append(jrprinthyperlink.getLinkType()).toString());
@@ -558,7 +558,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		u.setLayout(new FlowLayout(0, 0, 2));
 		O.setIcon(new ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/save.GIF")));
-		O.setToolTipText(A("save"));
+		O.setToolTipText(buscaPorLetra("save"));
 		O.setMargin(new Insets(2, 2, 2, 2));
 		O.setMaximumSize(new Dimension(23, 23));
 		O.setMinimumSize(new Dimension(23, 23));
@@ -572,7 +572,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		u.add(O);
 		Q.setIcon(new ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/print.GIF")));
-		Q.setToolTipText(A("print"));
+		Q.setToolTipText(buscaPorLetra("print"));
 		Q.setMargin(new Insets(2, 2, 2, 2));
 		Q.setMaximumSize(new Dimension(23, 23));
 		Q.setMinimumSize(new Dimension(23, 23));
@@ -587,7 +587,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		u.add(Q);
 		a.setIcon(new ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/reload.GIF")));
-		a.setToolTipText(A("reload"));
+		a.setToolTipText(buscaPorLetra("reload"));
 		a.setMargin(new Insets(2, 2, 2, 2));
 		a.setMaximumSize(new Dimension(23, 23));
 		a.setMinimumSize(new Dimension(23, 23));
@@ -603,7 +603,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		T.setMaximumSize(new Dimension(10, 10));
 		u.add(T);
 		t.setIcon(new ImageIcon(getClass().getResource("/net/sf/jasperreports/view/images/first.GIF")));
-		t.setToolTipText(A("first.page"));
+		t.setToolTipText(buscaPorLetra("first.page"));
 		t.setMargin(new Insets(2, 2, 2, 2));
 		t.setMaximumSize(new Dimension(23, 23));
 		t.setMinimumSize(new Dimension(23, 23));
@@ -618,7 +618,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		u.add(t);
 		BA.setIcon(new ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/previous.GIF")));
-		BA.setToolTipText(A("previous.page"));
+		BA.setToolTipText(buscaPorLetra("previous.page"));
 		BA.setMargin(new Insets(2, 2, 2, 2));
 		BA.setMaximumSize(new Dimension(23, 23));
 		BA.setMinimumSize(new Dimension(23, 23));
@@ -633,7 +633,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		u.add(BA);
 		B5.setIcon(new ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/next.GIF")));
-		B5.setToolTipText(A("next.page"));
+		B5.setToolTipText(buscaPorLetra("next.page"));
 		B5.setMargin(new Insets(2, 2, 2, 2));
 		B5.setMaximumSize(new Dimension(23, 23));
 		B5.setMinimumSize(new Dimension(23, 23));
@@ -648,7 +648,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		u.add(B5);
 		N.setIcon(new ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/last.GIF")));
-		N.setToolTipText(A("last.page"));
+		N.setToolTipText(buscaPorLetra("last.page"));
 		N.setMargin(new Insets(2, 2, 2, 2));
 		N.setMaximumSize(new Dimension(23, 23));
 		N.setMinimumSize(new Dimension(23, 23));
@@ -661,7 +661,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 
 		});
 		u.add(N);
-		I.setToolTipText(A("go.to.page"));
+		I.setToolTipText(buscaPorLetra("go.to.page"));
 		I.setMaximumSize(new Dimension(40, 23));
 		I.setMinimumSize(new Dimension(40, 23));
 		I.setPreferredSize(new Dimension(40, 23));
@@ -677,7 +677,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		u.add(R);
 		z.setIcon(new ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/actualsize.GIF")));
-		z.setToolTipText(A("actual.size"));
+		z.setToolTipText(buscaPorLetra("actual.size"));
 		z.setMargin(new Insets(2, 2, 2, 2));
 		z.setMaximumSize(new Dimension(23, 23));
 		z.setMinimumSize(new Dimension(23, 23));
@@ -692,7 +692,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		u.add(z);
 		AA.setIcon(new ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/fitpage.GIF")));
-		AA.setToolTipText(A("fit.page"));
+		AA.setToolTipText(buscaPorLetra("fit.page"));
 		AA.setMargin(new Insets(2, 2, 2, 2));
 		AA.setMaximumSize(new Dimension(23, 23));
 		AA.setMinimumSize(new Dimension(23, 23));
@@ -707,7 +707,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		u.add(AA);
 		F.setIcon(new ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/fitwidth.GIF")));
-		F.setToolTipText(A("fit.width"));
+		F.setToolTipText(buscaPorLetra("fit.width"));
 		F.setMargin(new Insets(2, 2, 2, 2));
 		F.setMaximumSize(new Dimension(23, 23));
 		F.setMinimumSize(new Dimension(23, 23));
@@ -723,7 +723,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		u.add(P);
 		G.setIcon(new ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/zoomin.GIF")));
-		G.setToolTipText(A("zoom.in"));
+		G.setToolTipText(buscaPorLetra("zoom.in"));
 		G.setMargin(new Insets(2, 2, 2, 2));
 		G.setMaximumSize(new Dimension(23, 23));
 		G.setMinimumSize(new Dimension(23, 23));
@@ -738,7 +738,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		u.add(G);
 		s.setIcon(new ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/zoomout.GIF")));
-		s.setToolTipText(A("zoom.out"));
+		s.setToolTipText(buscaPorLetra("zoom.out"));
 		s.setMargin(new Insets(2, 2, 2, 2));
 		s.setMaximumSize(new Dimension(23, 23));
 		s.setMinimumSize(new Dimension(23, 23));
@@ -752,7 +752,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 		});
 		u.add(s);
 		V.setEditable(true);
-		V.setToolTipText(A("zoom.ratio"));
+		V.setToolTipText(buscaPorLetra("zoom.ratio"));
 		V.setMaximumSize(new Dimension(80, 23));
 		V.setMinimumSize(new Dimension(80, 23));
 		V.setPreferredSize(new Dimension(80, 23));
@@ -886,7 +886,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			int i1 = Integer.parseInt(I.getText());
 			if (i1 != C + 1 && i1 > 0 && i1 <= A5.getPages().size()) {
 				A(i1 - 1);
-				F();
+				preparaColumnas();
 			}
 		} catch (NumberFormatException numberformatexception) {
 		}
@@ -970,7 +970,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 				((JRSaveContributor) (obj)).save(A5, file);
 			} catch (JRException jrexception) {
 				jrexception.printStackTrace();
-				JOptionPane.showMessageDialog(this, A("error.saving"));
+				JOptionPane.showMessageDialog(this, buscaPorLetra("error.saving"));
 			}
 		}
 	}
@@ -1024,22 +1024,22 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 
 	void D(ActionEvent actionevent) {
 		setListaSeleccionable(A5.getPages().size() - 1);
-		F();
+		preparaColumnas();
 	}
 
 	void L(ActionEvent actionevent) {
 		A(C + 1);
-		F();
+		preparaColumnas();
 	}
 
 	void K(ActionEvent actionevent) {
 		A(C - 1);
-		F();
+		preparaColumnas();
 	}
 
 	void G(ActionEvent actionevent) {
 		A(0);
-		F();
+		preparaColumnas();
 	}
 
 	void H(ActionEvent actionevent) {
@@ -1050,8 +1050,8 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 				jrexception.printStackTrace();
 				A5 = null;
 				A(0);
-				F();
-				JOptionPane.showMessageDialog(this, A("error.loading"));
+				preparaColumnas();
+				JOptionPane.showMessageDialog(this, buscaPorLetra("error.loading"));
 			}
 			A4 = 0.0F;
 			U = 0.0F;
@@ -1109,7 +1109,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 
 		} catch (JRException jrexception) {
 			jrexception.printStackTrace();
-			JOptionPane.showMessageDialog(this, A("error.hyperlink"));
+			JOptionPane.showMessageDialog(this, buscaPorLetra("error.hyperlink"));
 		}
 	}
 
@@ -1122,7 +1122,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			N.setEnabled(C < A5.getPages().size() - 1);
 			I.setEnabled(t.isEnabled() || N.isEnabled());
 			I.setText((new StringBuilder()).append("").append(C + 1).toString());
-			A.setText(MessageFormat.format(A("page"), new Object[] {
+			A.setText(MessageFormat.format(buscaPorLetra("page"), new Object[] {
 					new Integer(C + 1), new Integer(A5.getPages().size()) }));
 		} else {
 			t.setEnabled(false);
@@ -1178,7 +1178,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			s.setEnabled(false);
 			V.setEnabled(false);
 			if (A5 != null)
-				JOptionPane.showMessageDialog(this, A("no.pages"));
+				JOptionPane.showMessageDialog(this, buscaPorLetra("no.pages"));
 			return;
 		}
 		W.setVisible(true);
@@ -1375,7 +1375,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			if (A4 != f1) {
 				A4 = f1;
 				U = (A4 * (float) b) / 72F;
-				F();
+				preparaColumnas();
 			}
 		}
 	}
@@ -1387,7 +1387,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			V.getEditor().setItem(
 					(new StringBuilder()).append(q.format(A4 * 100F))
 							.append("%").toString());
-			F();
+			preparaColumnas();
 		}
 	}
 
@@ -1418,7 +1418,7 @@ public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
 			A3.exportReport();
 		} catch (Exception exception) {
 			exception.printStackTrace();
-			JOptionPane.showMessageDialog(this, A("error.displaying"));
+			JOptionPane.showMessageDialog(this, buscaPorLetra("error.displaying"));
 		}
 	}
 

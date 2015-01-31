@@ -8,7 +8,7 @@ import kalos.beans.TipoJerarquico;
 import kalos.enumeraciones.LugarSubcadena;
 import kalos.enumeraciones.Particularidad;
 
-public interface GerenteSustantivos extends GerenteOrdenable{
+public interface GerenteSustantivos extends GerenteOrdenable, SeleccionadorUno{
 
 	public List<Particularidad> seleccionaPartics(String sustantivoId);
 
