@@ -20,7 +20,7 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
-public class DetallelDiccionario extends JPanel implements TipografiaCambiable{
+public class DetalleDiccionario extends JPanel implements TipografiaCambiable{
 
 //	private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -28,7 +28,7 @@ public class DetallelDiccionario extends JPanel implements TipografiaCambiable{
 	private JLabel tipoPalabra=new JLabel();
 	private JTextArea significado=new JTextArea();
 	
-	public DetallelDiccionario() {
+	public DetalleDiccionario() {
         significado.setLineWrap(true);
         significado.setWrapStyleWord(true);
 		disposicion();

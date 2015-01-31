@@ -1,33 +1,36 @@
 kalos
   B enumeraciones
     _ Persona
-    D TipoConjuncion
-    L SubtipoConjuncion
-    E Acento
-    F ValorExplosion
-    X Particularidades
-    j Tiempos
-    W TiempoSegundos
-    K EnuExplosiones
-    k Aspecto
-    R AspectoSegundos
-    Z Voz
-    p Modo
-    S Aumento
-    P FuerteDebil
-    I CompLetras
-    H TipoVerbo
-    C PosicionConcuerda
-    m AcentoConcuerda
-    A Genero
-    a Caso
-    U TiempoOAspecto
     A utils
       A TransformadorTiempoAspecto
-    l TipoPalabra
-    M Reportes
-    O Espiritu
+	
+    A Genero
+    a Caso
+	C PosicionConcuerda
+    D TipoConjuncion    
+	E Acento
+	F ValorExplosion
+	H TipoVerbo
+	I CompLetras
+    j Tiempos
+	k Aspecto
+	K EnuExplosiones
+	l TipoPalabra
+	L SubtipoConjuncion
+    m AcentoConcuerda
+	M Reportes
+	N EntradaDiccionario
+	O Espiritu
+	p Modo
+	P FuerteDebil
+	R AspectoSegundos
+	S Aumento
+	U TiempoOAspecto
+	W TiempoSegundos
+    X Particularidades
     Y Beta
+    Z Voz
+	
   C recursos
     A Configuracion
     E UtilidadRecursos
@@ -258,6 +261,7 @@ kalos
           D BotonCopia
 		C ventanas
 		  C AceptarCancelar
+		  D DialogErrores
 
 		    
         J combos
@@ -362,7 +366,15 @@ kalos
      C analisismorfologico
       A PanelAM
       B DetalleAM
-      
+	 
+	 D diccionario
+	   A PanelDiccionario
+	   B DetalleDiccionario
+	 E tareas
+        A TareaHabilitaComponentes
+		B TareaDiccionario
+		F TareaOcultaProgreso
+		G TareaLeyenda
      F flexion
        
        B ParametrosReporte
