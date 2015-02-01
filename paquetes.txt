@@ -10,6 +10,7 @@ kalos
     D TipoConjuncion    
 	E Acento
 	F ValorExplosion
+	h LugarSubcadena D
 	H TipoVerbo
 	I CompLetras
     j Tiempos
@@ -345,7 +346,7 @@ kalos
       
       
  kalos
-   A iu
+    iu
      Comienzo
      A Caratula
      B PanelProgreso
@@ -373,9 +374,11 @@ kalos
 	 E tareas
         A TareaHabilitaComponentes
 		B TareaDiccionario
+		E TareaCuadro
 		F TareaOcultaProgreso
 		G TareaLeyenda
      F flexion
-       
+       A PanelFlexion
        B ParametrosReporte
+	   C PanelFlexionNorte
      
