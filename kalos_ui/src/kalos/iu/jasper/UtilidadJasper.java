@@ -69,7 +69,7 @@ public class UtilidadJasper {
 			net.sf.jasperreports.engine.JasperPrint jasperprint = JasperFillManager
 					.fillReport(jasperreport, map, new JRTableModelDataSource(
 							defaulttablemodel));
-			JRviewerKalos a = new JRviewerKalos(jasperprint);
+			JRViewerKalos a = new JRViewerKalos(jasperprint);
 			return a;
 		} catch (JRException jrexception) {
 			A.error("error al crear el visor de jasper", jrexception);

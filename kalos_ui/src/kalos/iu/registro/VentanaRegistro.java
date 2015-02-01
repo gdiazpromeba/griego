@@ -1,6 +1,7 @@
-/*
- * Created on Apr 11, 2005
- */
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+
 package kalos.iu.registro;
 
 import java.awt.BorderLayout;
@@ -15,128 +16,104 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import org.apache.log4j.Logger;
-
 import kalos.datos.gerentes.GerenteSeguridad;
 import kalos.recursos.Configuracion;
 import kalos.recursos.Recursos;
 
-/**
- * @author D9104575
- * 
- * TODO To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Style - Code Templates
- */
+import org.apache.log4j.Logger;
+
+// Referenced classes of package kalos.iu.A:
+//            C
+
 public class VentanaRegistro extends JDialog {
 
-    private PanelRegistro panelRegistro=new PanelRegistro();
-
-	private GerenteSeguridad gerenteSeguridad;
-	
-	JPanel panelTransparente=new JPanel();
-	private Logger logger=Logger.getLogger(VentanaRegistro.class.getName());
-
-	public VentanaRegistro(GerenteSeguridad gerenteSeguridad) {
-		this.gerenteSeguridad = gerenteSeguridad;
-		this.setTitle(Recursos.getCadena("registro"));
+	public VentanaRegistro(GerenteSeguridad gerSeg) {
+		panelRegistro = new PanelRegistro();
+		logger = Logger.getLogger(VentanaRegistro.class);
+		gerenteSeguridad = gerSeg;
+		setTitle(Recursos.getCadena("registro"));
 		disposicion();
 		panelRegistro.butIngresarClave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ev) {
+
+			public void actionPerformed(ActionEvent actionevent) {
 				ingresaClave();
 			}
+
 		});
-		
-		
 		panelRegistro.todaviaNo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ev) {
+
+			public void actionPerformed(ActionEvent actionevent) {
 				quitaMolestia();
 			}
-		});		
-		
 
+		});
 	}
 
-	public void muestraMolestia(JPanel panel) {
+	public void muestraMolestia(JPanel jpanel) {
 		Configuracion.aumentaVecesVentana();
-		if ((Configuracion.getVecesVentana() %3) == 0){
-			JFrame fra = (JFrame) SwingUtilities.getWindowAncestor(panel);
-			// quitaMolestia(panel);
-			// this.setVisible(true);
+		if (Configuracion.getVecesVentana() % 3L == 0L) {
+			JFrame jframe = (JFrame) SwingUtilities.getWindowAncestor(jpanel);
 			panelRegistro.reinicializaClave();
-			JDialog ventana=new JDialog();
-			ventana.setLayout(new BorderLayout());
-			ventana.setUndecorated(true);
-			ventana.setModal(true);
-			ventana.add(this);
-			ventana.setLocationRelativeTo(fra);
-			ventana.setBounds(fra.getWidth()/2, fra.getHeight()/2, ventana.getWidth(), ventana.getHeight());
-			ventana.pack();
-			
-
-			
-			panelRegistro.todaviaNo.setEnabled(false);
+			JDialog jdialog = new JDialog();
+			jdialog.setLayout(new BorderLayout());
+			jdialog.setUndecorated(true);
+			jdialog.setModal(true);
+			jdialog.add(this);
+			jdialog.setLocationRelativeTo(jframe);
+			jdialog.setBounds(jframe.getWidth() / 2, jframe.getHeight() / 2, jdialog.getWidth(),
+					jdialog.getHeight());
+			jdialog.pack();
+			panelRegistro.butIngresarClave.setEnabled(false);
 			repaint();
-			Timer timer=new Timer();
-			TimerTask tarea=new TimerTask(){
-				public void run(){
-					panelRegistro.todaviaNo.setEnabled(true);
+			Timer timer = new Timer();
+			TimerTask timertask = new TimerTask() {
+
+				public void run() {
+					panelRegistro.butIngresarClave.setEnabled(true);
 					repaint();
 				}
+
 			};
-			timer.schedule(tarea, 5000);
-			
-			
-			ventana.setVisible(true);
+			timer.schedule(timertask, 5000L);
+			jdialog.setVisible(true);
 		}
 	}
 
-	/**
-	 * quita la pantalla de la capa superior del panel de contenido del JFrame
-	 * la aplicación
-	 * 
-	 * @param panel
-	 */
 	public void quitaMolestia() {
-	  dispose();
+		dispose();
 	}
 
 	void disposicion() {
 		setLayout(new BorderLayout());
 		add(panelRegistro);
 		repaint();
-		// revalidate();
 	}
-
-	// public VentanaMolesta(JFrame padre){
-	// super(Recursos.getCadena("registro"),
-	// FabricaDeIconos.getImageIcon("item_configuracion_despues"));
-	// recargaPanel();
-
-	//        
-	// }
 
 	private void ingresaClave() {
 		logger.debug("en ingresaClave");
 		panelRegistro.getClave();
 		logger.debug("registrando ...");
-		boolean activacion=gerenteSeguridad.registra(panelRegistro.getNombre(), panelRegistro.getClave());
-		logger.debug("registró con activación=" + activacion);
-		if (activacion){
+		boolean flag = gerenteSeguridad.registra(panelRegistro.getNombre(), panelRegistro.getClave());
+		logger.debug((new StringBuilder()).append("registró con activación=").append(flag)
+				.toString());
+		if (flag) {
 			JOptionPane.showMessageDialog(this, Recursos.getCadena("gracias_por_haber_comprado"));
-			logger.debug("estableciendo el nombre "+ panelRegistro.getNombre());
+			logger.debug((new StringBuilder()).append("estableciendo el nombre ")
+					.append(panelRegistro.getNombre()).toString());
 			Configuracion.setNombre(panelRegistro.getNombre());
 			logger.debug("quitando molestia");
 			quitaMolestia();
-		}else{
-			logger.debug("no hubo activación");
+		} else {
+			logger.debug("no hubo activaci\363n");
 			JOptionPane.showMessageDialog(this, Recursos.getCadena("clave_incorrecta"));
 		}
 	}
 
-	/**
-	 * @return the gerenteSeguridad
-	 */
 	public GerenteSeguridad getGerenteSeguridad() {
 		return gerenteSeguridad;
 	}
+
+	private PanelRegistro panelRegistro;
+	private GerenteSeguridad gerenteSeguridad;
+	private Logger logger;
 }

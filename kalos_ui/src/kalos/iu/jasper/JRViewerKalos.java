@@ -1,81 +1,91 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) 
+/*
+ * JasperReports - Free Java Reporting Library.
+ * Copyright (C) 2001 - 2009 Jaspersoft Corporation. All rights reserved.
+ * http://www.jaspersoft.com
+ *
+ * Unless you have purchased a commercial license agreement from Jaspersoft,
+ * the following license terms apply:
+ *
+ * This program is part of JasperReports.
+ *
+ * JasperReports is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * JasperReports is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with JasperReports. If not, see <http://www.gnu.org/licenses/>.
+ */
 
+/*
+ * Contributors:
+ * Ryan Johnson - delscovich@users.sourceforge.net
+ * Carlton Moore - cmoore79@users.sourceforge.net
+ *  Petr Michalek - pmichalek@users.sourceforge.net
+ */
 package kalos.iu.jasper;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.Insets;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
-import java.io.PrintStream;
-import java.lang.reflect.Method;
+import java.lang.reflect.Constructor;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import javax.swing.ComboBoxEditor;
-import javax.swing.ComboBoxModel;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 import javax.swing.JViewport;
-import javax.swing.border.LineBorder;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 
-import kalos.recursos.Configuracion;
-
+import net.sf.jasperreports.engine.JRConstants;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JRImageMapRenderer;
 import net.sf.jasperreports.engine.JRPrintAnchorIndex;
 import net.sf.jasperreports.engine.JRPrintElement;
+import net.sf.jasperreports.engine.JRPrintFrame;
 import net.sf.jasperreports.engine.JRPrintHyperlink;
 import net.sf.jasperreports.engine.JRPrintImage;
 import net.sf.jasperreports.engine.JRPrintImageAreaHyperlink;
 import net.sf.jasperreports.engine.JRPrintPage;
+import net.sf.jasperreports.engine.JRRenderable;
 import net.sf.jasperreports.engine.JRRuntimeException;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
@@ -88,1411 +98,1852 @@ import net.sf.jasperreports.engine.util.JRProperties;
 import net.sf.jasperreports.engine.xml.JRPrintXmlLoader;
 import net.sf.jasperreports.view.JRHyperlinkListener;
 import net.sf.jasperreports.view.JRSaveContributor;
+import net.sf.jasperreports.view.JRViewer;
 import net.sf.jasperreports.view.save.JRPrintSaveContributor;
 
-public class JRViewerKalos extends JPanel implements JRHyperlinkListener {
-	class _A extends JLabel {
+import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
 
-		public void paintComponent(Graphics g1) {
-			if (isRenderImage())
-				super.paintComponent(g1);
-			else
-				B.setListaSeleccionable((Graphics2D) g1.create());
+/**
+ * @author Teodor Danciu (teodord@users.sourceforge.net)
+ * @version $Id: JRViewer.java 4005 2010-10-25 07:28:52Z teodord $
+ */
+public class JRViewerKalos extends javax.swing.JPanel implements JRHyperlinkListener {
+	private static final Logger log = Logger.getLogger(JRViewerKalos.class);
+
+	private static final long serialVersionUID = JRConstants.SERIAL_VERSION_UID;
+
+	/**
+	 * Maximum size (in pixels) of a buffered image that would be used by
+	 * {@link JRViewer JRViewer} to render a report page.
+	 * <p>
+	 * If rendering a report page would require an image larger than this
+	 * threshold (i.e. image width x image height > maximum size), the report
+	 * page will be rendered directly on the viewer component.
+	 * </p>
+	 * <p>
+	 * If this property is zero or negative, buffered images will never be user
+	 * to render a report page. By default, this property is set to 0.
+	 * </p>
+	 */
+	public static final String VIEWER_RENDER_BUFFER_MAX_SIZE = JRProperties.PROPERTY_PREFIX
+			+ "viewer.render.buffer.max.size";
+
+	/**
+	 *
+	 */
+	protected static final int TYPE_FILE_NAME = 1;
+	protected static final int TYPE_INPUT_STREAM = 2;
+	protected static final int TYPE_OBJECT = 3;
+
+	/**
+	 * The DPI of the generated report.
+	 */
+	public static final int REPORT_RESOLUTION = 72;
+
+	protected final float MIN_ZOOM = 0.5f;
+	protected final float MAX_ZOOM = 10f;
+	protected int zooms[] = { 50, 75, 100, 125, 150, 175, 200, 250, 400, 800 };
+	protected int defaultZoomIndex = 2;
+
+	protected int type = TYPE_FILE_NAME;
+	protected boolean isXML;
+	protected String reportFileName;
+	protected SimpleFileResolver fileResolver;
+	JasperPrint jasperPrint;
+	private int pageIndex;
+	private boolean pageError;
+	protected float zoom;
+
+	private JRGraphics2DExporter exporter;
+
+	/**
+	 * the screen resolution.
+	 */
+	private int screenResolution = REPORT_RESOLUTION;
+
+	/**
+	 * the zoom ration adjusted to the screen resolution.
+	 */
+	protected float realZoom;
+
+	private DecimalFormat zoomDecimalFormat = new DecimalFormat("#.##");
+	private ResourceBundle resourceBundle;
+
+	private int downX;
+	private int downY;
+
+	private java.util.List hyperlinkListeners = new ArrayList();
+	private Map linksMap = new HashMap();
+	private MouseListener mouseListener = new java.awt.event.MouseAdapter() {
+		public void mouseClicked(java.awt.event.MouseEvent evt) {
+			hyperlinkClicked(evt);
+		}
+	};
+
+	protected KeyListener keyNavigationListener = new KeyListener() {
+		public void keyTyped(KeyEvent evt) {
 		}
 
-		public boolean isRenderImage() {
-			return C;
+		public void keyPressed(KeyEvent evt) {
+			keyNavigate(evt);
 		}
 
-		public void setRenderImage(boolean flag) {
-			C = flag;
+		public void keyReleased(KeyEvent evt) {
 		}
+	};
 
-		private boolean C;
-		A B;
-		final A A;
+	protected List saveContributors = new ArrayList();
+	protected File lastFolder;
+	protected JRSaveContributor lastSaveContributor;
 
-		public _A(A a2) {
-			A = A.this;
-			super();
-			B = null;
-			B = a2;
-		}
+	/** Creates new form JRViewer */
+	public JRViewerKalos(String fileName, boolean isXML) throws JRException {
+		this(fileName, isXML, null);
 	}
 
-	protected class _B extends JPanel implements MouseListener,
-			MouseMotionListener {
-
-		public String getToolTipText(MouseEvent mouseevent) {
-			String s1 = null;
-			JRPrintImageAreaHyperlink jrprintimageareahyperlink = A(mouseevent);
-			if (jrprintimageareahyperlink != null)
-				s1 = A.B(jrprintimageareahyperlink.getHyperlink());
-			if (s1 == null)
-				s1 = super.getToolTipText(mouseevent);
-			return s1;
-		}
-
-		public void mouseDragged(MouseEvent mouseevent) {
-		}
-
-		public void mouseMoved(MouseEvent mouseevent) {
-			JRPrintImageAreaHyperlink jrprintimageareahyperlink = A(mouseevent);
-			if (jrprintimageareahyperlink != null
-					&& jrprintimageareahyperlink.getHyperlink()
-							.getHyperlinkType() != 1)
-				mouseevent.getComponent().setCursor(
-						Cursor.getPredefinedCursor(12));
-			else
-				mouseevent.getComponent().setCursor(Cursor.getDefaultCursor());
-		}
-
-		protected JRPrintImageAreaHyperlink A(MouseEvent mouseevent) {
-			return A((int) ((float) mouseevent.getX() / A.U),
-					(int) ((float) mouseevent.getY() / A.U));
-		}
-
-		protected JRPrintImageAreaHyperlink A(int i1, int j1) {
-			JRPrintImageAreaHyperlink jrprintimageareahyperlink = null;
-			Iterator iterator = B.iterator();
-			do {
-				if (jrprintimageareahyperlink != null || !iterator.hasNext())
-					break;
-				JRPrintImageAreaHyperlink jrprintimageareahyperlink1 = (JRPrintImageAreaHyperlink) iterator
-						.next();
-				if (jrprintimageareahyperlink1.getArea().containsPoint(i1, j1))
-					jrprintimageareahyperlink = jrprintimageareahyperlink1;
-			} while (true);
-			return jrprintimageareahyperlink;
-		}
-
-		public void mouseClicked(MouseEvent mouseevent) {
-			JRPrintImageAreaHyperlink jrprintimageareahyperlink = A(mouseevent);
-			if (jrprintimageareahyperlink != null)
-				A.C(jrprintimageareahyperlink.getHyperlink());
-		}
-
-		public void mouseEntered(MouseEvent mouseevent) {
-		}
-
-		public void mouseExited(MouseEvent mouseevent) {
-		}
-
-		public void mousePressed(MouseEvent mouseevent) {
-		}
-
-		public void mouseReleased(MouseEvent mouseevent) {
-		}
-
-		protected final java.util.List B;
-		final A A;
-
-		public _B(Rectangle rectangle, JRImageMapRenderer jrimagemaprenderer) {
-			A = A.this;
-			super();
-			try {
-				B = jrimagemaprenderer.getImageAreaHyperlinks(rectangle);
-			} catch (JRException jrexception) {
-				throw new JRRuntimeException(jrexception);
-			}
-			addMouseListener(this);
-			addMouseMotionListener(this);
-		}
+	/** Creates new form JRViewer */
+	public JRViewerKalos(InputStream is, boolean isXML) throws JRException {
+		this(is, isXML, null);
 	}
 
-	public JRViewerKalos(String s1, boolean flag) throws JRException {
-		this(s1, flag, ((Locale) (null)));
+	/** Creates new form JRViewer */
+	public JRViewerKalos(JasperPrint jrPrint) {
+		this(jrPrint, null);
 	}
 
-	public JRViewerKalos(InputStream inputstream, boolean flag) throws JRException {
-		this(inputstream, flag, ((Locale) (null)));
+	/** Creates new form JRViewer */
+	public JRViewerKalos(String fileName, boolean isXML, Locale locale) throws JRException {
+		this(fileName, isXML, locale, null);
 	}
 
-	public JRViewerKalos(JasperPrint jasperprint) {
-		this(jasperprint, ((Locale) (null)));
+	/** Creates new form JRViewer */
+	public JRViewerKalos(InputStream is, boolean isXML, Locale locale) throws JRException {
+		this(is, isXML, locale, null);
 	}
 
-	public JRViewerKalos(String s1, boolean flag, Locale locale) throws JRException {
-		this(s1, flag, locale, null);
+	/** Creates new form JRViewer */
+	public JRViewerKalos(JasperPrint jrPrint, Locale locale) {
+		this(jrPrint, locale, null);
 	}
 
-	public JRViewerKalos(InputStream inputstream, boolean flag, Locale locale)
+	/** Creates new form JRViewer */
+	public JRViewerKalos(String fileName, boolean isXML, Locale locale, ResourceBundle resBundle)
 			throws JRException {
-		this(inputstream, flag, locale, null);
-	}
+		initResources(locale, resBundle);
 
-	public JRViewerKalos(JasperPrint jasperprint, Locale locale) {
-		this(jasperprint, locale, ((ResourceBundle) (null)));
-	}
+		setScreenDetails();
 
-	public JRViewerKalos(String s1, boolean flag, Locale locale,
-			ResourceBundle resourcebundle) throws JRException {
-		n = 0.5F;
-		w = 10F;
-		Y = 2;
-		C0 = 1;
-		S = false;
-		A2 = null;
-		A5 = null;
-		C = 0;
-		A4 = 0.0F;
-		A3 = null;
-		b = 72;
-		U = 0.0F;
-		q = new DecimalFormat("#.##");
-		_ = null;
-		d = 0;
-		c = 0;
-		H = new ArrayList();
-		o = new HashMap();
-		i = new ArrayList();
-		A(locale, resourcebundle);
-		E();
-		I();
-		G();
-		A(s1, flag);
-		V.setSelectedIndex(Y);
-		A();
+		setZooms();
+
+		initComponents();
+
+		loadReport(fileName, isXML);
+
+		cmbZoom.setSelectedIndex(defaultZoomIndex);
+
+		initSaveContributors();
+
 		addHyperlinkListener(this);
 	}
 
-	public JRViewerKalos(InputStream inputstream, boolean flag, Locale locale,
-			ResourceBundle resourcebundle) throws JRException {
-		n = 0.5F;
-		w = 10F;
-		Y = 2;
-		C0 = 1;
-		S = false;
-		A2 = null;
-		A5 = null;
-		C = 0;
-		A4 = 0.0F;
-		A3 = null;
-		b = 72;
-		U = 0.0F;
-		q = new DecimalFormat("#.##");
-		_ = null;
-		d = 0;
-		c = 0;
-		H = new ArrayList();
-		o = new HashMap();
-		i = new ArrayList();
-		A(locale, resourcebundle);
-		E();
-		I();
-		G();
-		A(inputstream, flag);
-		V.setSelectedIndex(Y);
-		A();
+	/** Creates new form JRViewer */
+	public JRViewerKalos(InputStream is, boolean isXML, Locale locale, ResourceBundle resBundle)
+			throws JRException {
+		initResources(locale, resBundle);
+
+		setScreenDetails();
+
+		setZooms();
+
+		initComponents();
+
+		loadReport(is, isXML);
+
+		cmbZoom.setSelectedIndex(defaultZoomIndex);
+
+		initSaveContributors();
+
 		addHyperlinkListener(this);
 	}
 
-	public JRViewerKalos(JasperPrint jasperprint, Locale locale,
-			ResourceBundle resourcebundle) {
-		n = 0.5F;
-		w = 10F;
-		Y = 2;
-		C0 = 1;
-		S = false;
-		A2 = null;
-		A5 = null;
-		C = 0;
-		A4 = 0.0F;
-		A3 = null;
-		b = 72;
-		U = 0.0F;
-		q = new DecimalFormat("#.##");
-		_ = null;
-		d = 0;
-		c = 0;
-		H = new ArrayList();
-		o = new HashMap();
-		i = new ArrayList();
-		A(locale, resourcebundle);
-		E();
-		I();
-		G();
-		setListaSeleccionable(jasperprint);
-		V.setSelectedIndex(Y);
-		A();
+	/** Creates new form JRViewer */
+	public JRViewerKalos(JasperPrint jrPrint, Locale locale, ResourceBundle resBundle) {
+		initResources(locale, resBundle);
+
+		setScreenDetails();
+
+		setZooms();
+
+		initComponents();
+
+		loadReport(jrPrint);
+
+		cmbZoom.setSelectedIndex(defaultZoomIndex);
+
+		initSaveContributors();
+
 		addHyperlinkListener(this);
 	}
 
-	private void E() {
-		b = Toolkit.getDefaultToolkit().getScreenResolution();
+	private void setScreenDetails() {
+		screenResolution = Toolkit.getDefaultToolkit().getScreenResolution();
 	}
 
+	/**
+	 *
+	 */
 	public void clear() {
-		A(this);
-		A5 = null;
+		emptyContainer(this);
+		jasperPrint = null;
 	}
 
-	protected void I() {
+	/**
+	 *
+	 */
+	protected void setZooms() {
 	}
 
-	public void addSaveContributor(JRSaveContributor jrsavecontributor) {
-		i.add(jrsavecontributor);
+	/**
+	 *
+	 */
+	public void addSaveContributor(JRSaveContributor contributor) {
+		saveContributors.add(contributor);
 	}
 
-	public void removeSaveContributor(JRSaveContributor jrsavecontributor) {
-		i.remove(jrsavecontributor);
+	/**
+	 *
+	 */
+	public void removeSaveContributor(JRSaveContributor contributor) {
+		saveContributors.remove(contributor);
 	}
 
+	/**
+	 *
+	 */
 	public JRSaveContributor[] getSaveContributors() {
-		return (JRSaveContributor[]) (JRSaveContributor[]) i
-				.toArray(new JRSaveContributor[i.size()]);
+		return (JRSaveContributor[]) saveContributors
+				.toArray(new JRSaveContributor[saveContributors.size()]);
 	}
 
-	public void addHyperlinkListener(JRHyperlinkListener jrhyperlinklistener) {
-		H.add(jrhyperlinklistener);
+	/**
+	 * Replaces the save contributors with the ones provided as parameter.
+	 */
+	public void setSaveContributors(JRSaveContributor[] saveContribs) {
+		this.saveContributors = new ArrayList();
+		if (saveContribs != null) {
+			this.saveContributors.addAll(Arrays.asList(saveContribs));
+		}
 	}
 
-	public void removeHyperlinkListener(JRHyperlinkListener jrhyperlinklistener) {
-		H.remove(jrhyperlinklistener);
+	/**
+	 *
+	 */
+	public void addHyperlinkListener(JRHyperlinkListener listener) {
+		hyperlinkListeners.add(listener);
 	}
 
+	/**
+	 *
+	 */
+	public void removeHyperlinkListener(JRHyperlinkListener listener) {
+		hyperlinkListeners.remove(listener);
+	}
+
+	/**
+	 *
+	 */
 	public JRHyperlinkListener[] getHyperlinkListeners() {
-		return (JRHyperlinkListener[]) (JRHyperlinkListener[]) H
-				.toArray(new JRHyperlinkListener[H.size()]);
+		return (JRHyperlinkListener[]) hyperlinkListeners
+				.toArray(new JRHyperlinkListener[hyperlinkListeners.size()]);
 	}
 
-	protected void A(Locale locale, ResourceBundle resourcebundle) {
-		if (locale != null)
+	/**
+	 *
+	 */
+	protected void initResources(Locale locale, ResourceBundle resBundle) {
+		if (locale != null) {
 			setLocale(locale);
-		else
+		} else {
 			setLocale(Locale.getDefault());
-		if (resourcebundle == null)
-			_ = ResourceBundle.getBundle("net/sf/jasperreports/view/viewer",
+		}
+		if (resBundle == null) {
+			this.resourceBundle = ResourceBundle.getBundle("net/sf/jasperreports/view/viewer",
 					getLocale());
-		else
-			_ = resourcebundle;
+		} else {
+			this.resourceBundle = resBundle;
+		}
 	}
 
-	protected String A(String s1) {
-		return _.getString(s1);
+	/**
+	 *
+	 */
+	protected String getBundleString(String key) {
+		return resourceBundle.getString(key);
 	}
 
-	protected void A() {
-		String as[] = {
+	/**
+	 *
+	 */
+	protected void initSaveContributors() {
+		final String[] DEFAULT_CONTRIBUTORS = {
+				"net.sf.jasperreports.view.save.JRPrintSaveContributor",
 				"net.sf.jasperreports.view.save.JRPdfSaveContributor",
 				"net.sf.jasperreports.view.save.JRRtfSaveContributor",
+				"net.sf.jasperreports.view.save.JROdtSaveContributor",
+				"net.sf.jasperreports.view.save.JRDocxSaveContributor",
 				"net.sf.jasperreports.view.save.JRHtmlSaveContributor",
 				"net.sf.jasperreports.view.save.JRSingleSheetXlsSaveContributor",
 				"net.sf.jasperreports.view.save.JRMultipleSheetsXlsSaveContributor",
 				"net.sf.jasperreports.view.save.JRCsvSaveContributor",
 				"net.sf.jasperreports.view.save.JRXmlSaveContributor",
 				"net.sf.jasperreports.view.save.JREmbeddedImagesXmlSaveContributor" };
-		for (int i1 = 0; i1 < as.length; i1++)
-			try {
-				Class class1 = JRClassLoader.loadClassForName(as[i1]);
-				Method method = class1.getMethod("getInstance", (Class[]) null);
-				JRSaveContributor jrsavecontributor = (JRSaveContributor) method
-						.invoke(null, (Object[]) null);
-				i.add(jrsavecontributor);
-			} catch (Exception exception) {
-			}
 
+		for (int i = 0; i < DEFAULT_CONTRIBUTORS.length; i++) {
+			try {
+				Class saveContribClass = JRClassLoader.loadClassForName(DEFAULT_CONTRIBUTORS[i]);
+				Constructor constructor = saveContribClass.getConstructor(new Class[] {
+						Locale.class, ResourceBundle.class });
+				JRSaveContributor saveContrib = (JRSaveContributor) constructor
+						.newInstance(new Object[] { getLocale(), resourceBundle });
+				saveContributors.add(saveContrib);
+			} catch (Exception e) {
+			}
+		}
 	}
 
-	public void gotoHyperlink(JRPrintHyperlink jrprinthyperlink) {
-		switch (jrprinthyperlink.getHyperlinkType()) {
-		case 1: // '\001'
-		default:
-			break;
-
-		case 2: // '\002'
-			if (cadenaPathSeleccionado()) {
-				System.out.println((new StringBuilder())
-						.append("Hyperlink reference : ")
-						.append(jrprinthyperlink.getHyperlinkReference())
-						.toString());
-				System.out
-						.println("Implement your own JRHyperlinkListener to manage this type of event.");
-			}
-			break;
-
-		case 3: // '\003'
-			if (jrprinthyperlink.getHyperlinkAnchor() == null)
-				break;
-			Map map = A5.getAnchorIndexes();
-			JRPrintAnchorIndex jrprintanchorindex = (JRPrintAnchorIndex) map
-					.get(jrprinthyperlink.getHyperlinkAnchor());
-			if (jrprintanchorindex.getPageIndex() != C) {
-				setListaSeleccionable(jrprintanchorindex.getPageIndex());
-				preparaColumnas();
-			}
-			Container container1 = B.getParent();
-			if (!(container1 instanceof JViewport))
-				break;
-			JViewport jviewport1 = (JViewport) container1;
-			int j1 = (int) ((float) jrprintanchorindex.getElementAbsoluteX() * U);
-			int k1 = (int) ((float) jrprintanchorindex.getElementAbsoluteY() * U);
-			int l1 = B.getWidth() - jviewport1.getWidth();
-			int i2 = B.getHeight() - jviewport1.getHeight();
-			if (j1 < 0)
-				j1 = 0;
-			if (j1 > l1)
-				j1 = l1;
-			if (k1 < 0)
-				k1 = 0;
-			if (k1 > i2)
-				k1 = i2;
-			jviewport1.setViewPosition(new Point(j1, k1));
-			break;
-
-		case 4: // '\004'
-			int i1 = C + 1;
-			if (jrprinthyperlink.getHyperlinkPage() != null)
-				i1 = jrprinthyperlink.getHyperlinkPage().intValue();
-			if (i1 < 1 || i1 > A5.getPages().size() || i1 == C + 1)
-				break;
-			A(i1 - 1);
-			preparaColumnas();
-			Container container = B.getParent();
-			if (container instanceof JViewport) {
-				JViewport jviewport = (JViewport) container;
-				jviewport.setViewPosition(new Point(0, 0));
-			}
-			break;
-
-		case 5: // '\005'
-			if (cadenaPathSeleccionado()) {
-				System.out.println((new StringBuilder())
-						.append("Hyperlink reference : ")
-						.append(jrprinthyperlink.getHyperlinkReference())
-						.toString());
-				System.out.println((new StringBuilder())
-						.append("Hyperlink anchor    : ")
-						.append(jrprinthyperlink.getHyperlinkAnchor())
-						.toString());
-				System.out
-						.println("Implement your own JRHyperlinkListener to manage this type of event.");
-			}
-			break;
-
-		case 6: // '\006'
-			if (cadenaPathSeleccionado()) {
-				System.out.println((new StringBuilder())
-						.append("Hyperlink reference : ")
-						.append(jrprinthyperlink.getHyperlinkReference())
-						.toString());
-				System.out
-						.println((new StringBuilder())
-								.append("Hyperlink page      : ")
-								.append(jrprinthyperlink.getHyperlinkPage())
-								.toString());
-				System.out
-						.println("Implement your own JRHyperlinkListener to manage this type of event.");
-			}
-			break;
-
-		case 7: // '\007'
-			if (cadenaPathSeleccionado()) {
-				System.out.println((new StringBuilder())
-						.append("Hyperlink of type ")
-						.append(jrprinthyperlink.getLinkType()).toString());
+	/**
+	 *
+	 */
+	public void gotoHyperlink(JRPrintHyperlink hyperlink) {
+		switch (hyperlink.getHyperlinkType()) {
+		case 2: // reference
+		{
+			if (isOnlyHyperlinkListener()) {
+				System.out.println("Hyperlink reference : " + hyperlink.getHyperlinkReference());
 				System.out
 						.println("Implement your own JRHyperlinkListener to manage this type of event.");
 			}
 			break;
 		}
+		case 3: // local anchor
+		{
+			if (hyperlink.getHyperlinkAnchor() != null) {
+				Map anchorIndexes = jasperPrint.getAnchorIndexes();
+				JRPrintAnchorIndex anchorIndex = (JRPrintAnchorIndex) anchorIndexes.get(hyperlink
+						.getHyperlinkAnchor());
+				if (anchorIndex.getPageIndex() != pageIndex) {
+					setPageIndex(anchorIndex.getPageIndex());
+					refreshPage();
+				}
+				Container container = pnlInScroll.getParent();
+				if (container instanceof JViewport) {
+					JViewport viewport = (JViewport) container;
+
+					int newX = (int) (anchorIndex.getElementAbsoluteX() * realZoom);
+					int newY = (int) (anchorIndex.getElementAbsoluteY() * realZoom);
+
+					int maxX = pnlInScroll.getWidth() - viewport.getWidth();
+					int maxY = pnlInScroll.getHeight() - viewport.getHeight();
+
+					if (newX < 0) {
+						newX = 0;
+					}
+					if (newX > maxX) {
+						newX = maxX;
+					}
+					if (newY < 0) {
+						newY = 0;
+					}
+					if (newY > maxY) {
+						newY = maxY;
+					}
+
+					viewport.setViewPosition(new Point(newX, newY));
+				}
+			}
+
+			break;
+		}
+		case 4: // local page
+		{
+			int page = pageIndex + 1;
+			if (hyperlink.getHyperlinkPage() != null) {
+				page = hyperlink.getHyperlinkPage().intValue();
+			}
+
+			if (page >= 1 && page <= jasperPrint.getPages().size() && page != pageIndex + 1) {
+				setPageIndex(page - 1);
+				refreshPage();
+				Container container = pnlInScroll.getParent();
+				if (container instanceof JViewport) {
+					JViewport viewport = (JViewport) container;
+					viewport.setViewPosition(new Point(0, 0));
+				}
+			}
+
+			break;
+		}
+		case 5: // remote anchor
+		{
+			if (isOnlyHyperlinkListener()) {
+				System.out.println("Hyperlink reference : " + hyperlink.getHyperlinkReference());
+				System.out.println("Hyperlink anchor    : " + hyperlink.getHyperlinkAnchor());
+				System.out
+						.println("Implement your own JRHyperlinkListener to manage this type of event.");
+			}
+			break;
+		}
+		case 6: // remote page
+		{
+			if (isOnlyHyperlinkListener()) {
+				System.out.println("Hyperlink reference : " + hyperlink.getHyperlinkReference());
+				System.out.println("Hyperlink page      : " + hyperlink.getHyperlinkPage());
+				System.out
+						.println("Implement your own JRHyperlinkListener to manage this type of event.");
+			}
+			break;
+		}
+		case 7: // custom
+		{
+			if (isOnlyHyperlinkListener()) {
+				System.out.println("Hyperlink of type " + hyperlink.getLinkType());
+				System.out
+						.println("Implement your own JRHyperlinkListener to manage this type of event.");
+			}
+			break;
+		}
+		case 1: // none
+		default: {
+			break;
+		}
+		}
 	}
 
-	protected boolean B() {
-		int i1;
-		if (H == null) {
-			i1 = 0;
+	protected boolean isOnlyHyperlinkListener() {
+		int listenerCount;
+		if (hyperlinkListeners == null) {
+			listenerCount = 0;
 		} else {
-			i1 = H.size();
-			if (H.contains(this))
-				i1--;
+			listenerCount = hyperlinkListeners.size();
+			if (hyperlinkListeners.contains(this)) {
+				--listenerCount;
+			}
 		}
-		return i1 == 0;
+		return listenerCount == 0;
 	}
 
-	private void G() {
-		u = new JPanel();
-		O = new JButton();
-		Q = new JButton();
-		a = new JButton();
-		T = new JPanel();
-		t = new JButton();
-		BA = new JButton();
-		B5 = new JButton();
-		N = new JButton();
-		I = new JTextField();
-		R = new JPanel();
-		z = new JToggleButton();
-		AA = new JToggleButton();
-		F = new JToggleButton();
-		P = new JPanel();
-		G = new JButton();
-		s = new JButton();
-		V = new JComboBox();
-		DefaultComboBoxModel defaultcomboboxmodel = new DefaultComboBoxModel();
-		for (int i1 = 0; i1 < Z.length; i1++)
-			defaultcomboboxmodel.addElement((new StringBuilder()).append("")
-					.append(Z[i1]).append("%").toString());
+	/**
+	 * This method is called from within the constructor to initialize the form.
+	 * WARNING: Do NOT modify this code. The content of this method is always
+	 * regenerated by the Form Editor.
+	 */
+	// <editor-fold defaultstate="collapsed"
+	// desc=" Generated Code ">//GEN-BEGIN:initComponents
+	private void initComponents() {
+		java.awt.GridBagConstraints gridBagConstraints;
 
-		V.setModel(defaultcomboboxmodel);
-		X = new JPanel();
-		D = new JScrollPane();
-		D.getHorizontalScrollBar().setUnitIncrement(5);
-		D.getVerticalScrollBar().setUnitIncrement(5);
-		B = new JPanel();
-		W = new JPanel();
-		m = new JPanel();
-		J = new JPanel();
-		l = new JPanel();
-		k = new JPanel();
-		j = new JPanel();
-		h = new JPanel();
-		r = new JLabel();
-		f = new JPanel();
-		K = new _A(this);
-		p = new JPanel();
-		A = new JLabel();
-		setLayout(new BorderLayout());
-		setMinimumSize(new Dimension(450, 150));
-		setPreferredSize(new Dimension(450, 150));
-		u.setLayout(new FlowLayout(0, 0, 2));
-		O.setIcon(new ImageIcon(getClass().getResource(
+		tlbToolBar = new javax.swing.JPanel();
+		btnSave = new javax.swing.JButton();
+		btnPrint = new javax.swing.JButton();
+		btnReload = new javax.swing.JButton();
+		pnlSep01 = new javax.swing.JPanel();
+		btnFirst = new javax.swing.JButton();
+		btnPrevious = new javax.swing.JButton();
+		btnNext = new javax.swing.JButton();
+		btnLast = new javax.swing.JButton();
+		txtGoTo = new javax.swing.JTextField();
+		pnlSep02 = new javax.swing.JPanel();
+		btnActualSize = new javax.swing.JToggleButton();
+		btnFitPage = new javax.swing.JToggleButton();
+		btnFitWidth = new javax.swing.JToggleButton();
+		pnlSep03 = new javax.swing.JPanel();
+		btnZoomIn = new javax.swing.JButton();
+		btnZoomOut = new javax.swing.JButton();
+		cmbZoom = new javax.swing.JComboBox();
+		DefaultComboBoxModel model = new DefaultComboBoxModel();
+		for (int i = 0; i < zooms.length; i++) {
+			model.addElement("" + zooms[i] + "%");
+		}
+		cmbZoom.setModel(model);
+
+		pnlMain = new javax.swing.JPanel();
+		scrollPane = new javax.swing.JScrollPane();
+		scrollPane.getHorizontalScrollBar().setUnitIncrement(5);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(5);
+
+		pnlInScroll = new javax.swing.JPanel();
+		pnlPage = new javax.swing.JPanel();
+		jPanel4 = new javax.swing.JPanel();
+		pnlLinks = new javax.swing.JPanel();
+		jPanel5 = new javax.swing.JPanel();
+		jPanel6 = new javax.swing.JPanel();
+		jPanel7 = new javax.swing.JPanel();
+		jPanel8 = new javax.swing.JPanel();
+		jLabel1 = new javax.swing.JLabel();
+		jPanel9 = new javax.swing.JPanel();
+		lblPage = new PageRenderer(this);
+		pnlStatus = new javax.swing.JPanel();
+		lblStatus = new javax.swing.JLabel();
+
+		setLayout(new java.awt.BorderLayout());
+
+		setMinimumSize(new java.awt.Dimension(450, 150));
+		setPreferredSize(new java.awt.Dimension(450, 150));
+		tlbToolBar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 2));
+
+		btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/save.GIF")));
-		O.setToolTipText(buscaPorLetra("save"));
-		O.setMargin(new Insets(2, 2, 2, 2));
-		O.setMaximumSize(new Dimension(23, 23));
-		O.setMinimumSize(new Dimension(23, 23));
-		O.setPreferredSize(new Dimension(23, 23));
-		O.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent actionevent) {
-				A.N(actionevent);
+		btnSave.setToolTipText(getBundleString("save"));
+		btnSave.setMargin(new java.awt.Insets(2, 2, 2, 2));
+		btnSave.setMaximumSize(new java.awt.Dimension(23, 23));
+		btnSave.setMinimumSize(new java.awt.Dimension(23, 23));
+		btnSave.setPreferredSize(new java.awt.Dimension(23, 23));
+		btnSave.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnSaveActionPerformed(evt);
 			}
 		});
-		u.add(O);
-		Q.setIcon(new ImageIcon(getClass().getResource(
+		btnSave.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(btnSave);
+
+		btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/print.GIF")));
-		Q.setToolTipText(buscaPorLetra("print"));
-		Q.setMargin(new Insets(2, 2, 2, 2));
-		Q.setMaximumSize(new Dimension(23, 23));
-		Q.setMinimumSize(new Dimension(23, 23));
-		Q.setPreferredSize(new Dimension(23, 23));
-		Q.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent actionevent) {
-				A.E(actionevent);
+		btnPrint.setToolTipText(getBundleString("print"));
+		btnPrint.setMargin(new java.awt.Insets(2, 2, 2, 2));
+		btnPrint.setMaximumSize(new java.awt.Dimension(23, 23));
+		btnPrint.setMinimumSize(new java.awt.Dimension(23, 23));
+		btnPrint.setPreferredSize(new java.awt.Dimension(23, 23));
+		btnPrint.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnPrintActionPerformed(evt);
 			}
-
 		});
-		u.add(Q);
-		a.setIcon(new ImageIcon(getClass().getResource(
+		btnPrint.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(btnPrint);
+
+		btnReload.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/reload.GIF")));
-		a.setToolTipText(buscaPorLetra("reload"));
-		a.setMargin(new Insets(2, 2, 2, 2));
-		a.setMaximumSize(new Dimension(23, 23));
-		a.setMinimumSize(new Dimension(23, 23));
-		a.setPreferredSize(new Dimension(23, 23));
-		a.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent actionevent) {
-				A.H(actionevent);
+		btnReload.setToolTipText(getBundleString("reload"));
+		btnReload.setMargin(new java.awt.Insets(2, 2, 2, 2));
+		btnReload.setMaximumSize(new java.awt.Dimension(23, 23));
+		btnReload.setMinimumSize(new java.awt.Dimension(23, 23));
+		btnReload.setPreferredSize(new java.awt.Dimension(23, 23));
+		btnReload.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnReloadActionPerformed(evt);
 			}
-
 		});
-		u.add(a);
-		T.setMaximumSize(new Dimension(10, 10));
-		u.add(T);
-		t.setIcon(new ImageIcon(getClass().getResource("/net/sf/jasperreports/view/images/first.GIF")));
-		t.setToolTipText(buscaPorLetra("first.page"));
-		t.setMargin(new Insets(2, 2, 2, 2));
-		t.setMaximumSize(new Dimension(23, 23));
-		t.setMinimumSize(new Dimension(23, 23));
-		t.setPreferredSize(new Dimension(23, 23));
-		t.addActionListener(new ActionListener() {
+		btnReload.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(btnReload);
 
-			public void actionPerformed(ActionEvent actionevent) {
-				A.G(actionevent);
+		pnlSep01.setMaximumSize(new java.awt.Dimension(10, 10));
+		tlbToolBar.add(pnlSep01);
+
+		btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource(
+				"/net/sf/jasperreports/view/images/first.GIF")));
+		btnFirst.setToolTipText(getBundleString("first.page"));
+		btnFirst.setMargin(new java.awt.Insets(2, 2, 2, 2));
+		btnFirst.setMaximumSize(new java.awt.Dimension(23, 23));
+		btnFirst.setMinimumSize(new java.awt.Dimension(23, 23));
+		btnFirst.setPreferredSize(new java.awt.Dimension(23, 23));
+		btnFirst.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnFirstActionPerformed(evt);
 			}
-
 		});
-		u.add(t);
-		BA.setIcon(new ImageIcon(getClass().getResource(
+		btnFirst.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(btnFirst);
+
+		btnPrevious.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/previous.GIF")));
-		BA.setToolTipText(buscaPorLetra("previous.page"));
-		BA.setMargin(new Insets(2, 2, 2, 2));
-		BA.setMaximumSize(new Dimension(23, 23));
-		BA.setMinimumSize(new Dimension(23, 23));
-		BA.setPreferredSize(new Dimension(23, 23));
-		BA.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent actionevent) {
-				A.K(actionevent);
+		btnPrevious.setToolTipText(getBundleString("previous.page"));
+		btnPrevious.setMargin(new java.awt.Insets(2, 2, 2, 2));
+		btnPrevious.setMaximumSize(new java.awt.Dimension(23, 23));
+		btnPrevious.setMinimumSize(new java.awt.Dimension(23, 23));
+		btnPrevious.setPreferredSize(new java.awt.Dimension(23, 23));
+		btnPrevious.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnPreviousActionPerformed(evt);
 			}
-
 		});
-		u.add(BA);
-		B5.setIcon(new ImageIcon(getClass().getResource(
+		btnPrevious.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(btnPrevious);
+
+		btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/next.GIF")));
-		B5.setToolTipText(buscaPorLetra("next.page"));
-		B5.setMargin(new Insets(2, 2, 2, 2));
-		B5.setMaximumSize(new Dimension(23, 23));
-		B5.setMinimumSize(new Dimension(23, 23));
-		B5.setPreferredSize(new Dimension(23, 23));
-		B5.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent actionevent) {
-				A.L(actionevent);
+		btnNext.setToolTipText(getBundleString("next.page"));
+		btnNext.setMargin(new java.awt.Insets(2, 2, 2, 2));
+		btnNext.setMaximumSize(new java.awt.Dimension(23, 23));
+		btnNext.setMinimumSize(new java.awt.Dimension(23, 23));
+		btnNext.setPreferredSize(new java.awt.Dimension(23, 23));
+		btnNext.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnNextActionPerformed(evt);
 			}
-
 		});
-		u.add(B5);
-		N.setIcon(new ImageIcon(getClass().getResource(
+		btnNext.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(btnNext);
+
+		btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/last.GIF")));
-		N.setToolTipText(buscaPorLetra("last.page"));
-		N.setMargin(new Insets(2, 2, 2, 2));
-		N.setMaximumSize(new Dimension(23, 23));
-		N.setMinimumSize(new Dimension(23, 23));
-		N.setPreferredSize(new Dimension(23, 23));
-		N.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent actionevent) {
-				A.D(actionevent);
+		btnLast.setToolTipText(getBundleString("last.page"));
+		btnLast.setMargin(new java.awt.Insets(2, 2, 2, 2));
+		btnLast.setMaximumSize(new java.awt.Dimension(23, 23));
+		btnLast.setMinimumSize(new java.awt.Dimension(23, 23));
+		btnLast.setPreferredSize(new java.awt.Dimension(23, 23));
+		btnLast.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnLastActionPerformed(evt);
 			}
-
 		});
-		u.add(N);
-		I.setToolTipText(buscaPorLetra("go.to.page"));
-		I.setMaximumSize(new Dimension(40, 23));
-		I.setMinimumSize(new Dimension(40, 23));
-		I.setPreferredSize(new Dimension(40, 23));
-		I.addActionListener(new ActionListener() {
+		btnLast.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(btnLast);
 
-			public void actionPerformed(ActionEvent actionevent) {
-				A.M(actionevent);
+		txtGoTo.setToolTipText(getBundleString("go.to.page"));
+		txtGoTo.setMaximumSize(new java.awt.Dimension(40, 23));
+		txtGoTo.setMinimumSize(new java.awt.Dimension(40, 23));
+		txtGoTo.setPreferredSize(new java.awt.Dimension(40, 23));
+		txtGoTo.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				txtGoToActionPerformed(evt);
 			}
-
 		});
-		u.add(I);
-		R.setMaximumSize(new Dimension(10, 10));
-		u.add(R);
-		z.setIcon(new ImageIcon(getClass().getResource(
+		txtGoTo.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(txtGoTo);
+
+		pnlSep02.setMaximumSize(new java.awt.Dimension(10, 10));
+		tlbToolBar.add(pnlSep02);
+
+		btnActualSize.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/actualsize.GIF")));
-		z.setToolTipText(buscaPorLetra("actual.size"));
-		z.setMargin(new Insets(2, 2, 2, 2));
-		z.setMaximumSize(new Dimension(23, 23));
-		z.setMinimumSize(new Dimension(23, 23));
-		z.setPreferredSize(new Dimension(23, 23));
-		z.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent actionevent) {
-				A.setListaSeleccionable(actionevent);
+		btnActualSize.setToolTipText(getBundleString("actual.size"));
+		btnActualSize.setMargin(new java.awt.Insets(2, 2, 2, 2));
+		btnActualSize.setMaximumSize(new java.awt.Dimension(23, 23));
+		btnActualSize.setMinimumSize(new java.awt.Dimension(23, 23));
+		btnActualSize.setPreferredSize(new java.awt.Dimension(23, 23));
+		btnActualSize.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnActualSizeActionPerformed(evt);
 			}
-
 		});
-		u.add(z);
-		AA.setIcon(new ImageIcon(getClass().getResource(
+		btnActualSize.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(btnActualSize);
+
+		btnFitPage.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/fitpage.GIF")));
-		AA.setToolTipText(buscaPorLetra("fit.page"));
-		AA.setMargin(new Insets(2, 2, 2, 2));
-		AA.setMaximumSize(new Dimension(23, 23));
-		AA.setMinimumSize(new Dimension(23, 23));
-		AA.setPreferredSize(new Dimension(23, 23));
-		AA.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent actionevent) {
-				A.F(actionevent);
+		btnFitPage.setToolTipText(getBundleString("fit.page"));
+		btnFitPage.setMargin(new java.awt.Insets(2, 2, 2, 2));
+		btnFitPage.setMaximumSize(new java.awt.Dimension(23, 23));
+		btnFitPage.setMinimumSize(new java.awt.Dimension(23, 23));
+		btnFitPage.setPreferredSize(new java.awt.Dimension(23, 23));
+		btnFitPage.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnFitPageActionPerformed(evt);
 			}
-
 		});
-		u.add(AA);
-		F.setIcon(new ImageIcon(getClass().getResource(
+		btnFitPage.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(btnFitPage);
+
+		btnFitWidth.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/fitwidth.GIF")));
-		F.setToolTipText(buscaPorLetra("fit.width"));
-		F.setMargin(new Insets(2, 2, 2, 2));
-		F.setMaximumSize(new Dimension(23, 23));
-		F.setMinimumSize(new Dimension(23, 23));
-		F.setPreferredSize(new Dimension(23, 23));
-		F.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent actionevent) {
-				A.J(actionevent);
+		btnFitWidth.setToolTipText(getBundleString("fit.width"));
+		btnFitWidth.setMargin(new java.awt.Insets(2, 2, 2, 2));
+		btnFitWidth.setMaximumSize(new java.awt.Dimension(23, 23));
+		btnFitWidth.setMinimumSize(new java.awt.Dimension(23, 23));
+		btnFitWidth.setPreferredSize(new java.awt.Dimension(23, 23));
+		btnFitWidth.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnFitWidthActionPerformed(evt);
 			}
 		});
-		u.add(F);
-		P.setMaximumSize(new Dimension(10, 10));
-		u.add(P);
-		G.setIcon(new ImageIcon(getClass().getResource(
+		btnFitWidth.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(btnFitWidth);
+
+		pnlSep03.setMaximumSize(new java.awt.Dimension(10, 10));
+		tlbToolBar.add(pnlSep03);
+
+		btnZoomIn.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/zoomin.GIF")));
-		G.setToolTipText(buscaPorLetra("zoom.in"));
-		G.setMargin(new Insets(2, 2, 2, 2));
-		G.setMaximumSize(new Dimension(23, 23));
-		G.setMinimumSize(new Dimension(23, 23));
-		G.setPreferredSize(new Dimension(23, 23));
-		G.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent actionevent) {
-				A.C(actionevent);
+		btnZoomIn.setToolTipText(getBundleString("zoom.in"));
+		btnZoomIn.setMargin(new java.awt.Insets(2, 2, 2, 2));
+		btnZoomIn.setMaximumSize(new java.awt.Dimension(23, 23));
+		btnZoomIn.setMinimumSize(new java.awt.Dimension(23, 23));
+		btnZoomIn.setPreferredSize(new java.awt.Dimension(23, 23));
+		btnZoomIn.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnZoomInActionPerformed(evt);
 			}
-
 		});
-		u.add(G);
-		s.setIcon(new ImageIcon(getClass().getResource(
+		btnZoomIn.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(btnZoomIn);
+
+		btnZoomOut.setIcon(new javax.swing.ImageIcon(getClass().getResource(
 				"/net/sf/jasperreports/view/images/zoomout.GIF")));
-		s.setToolTipText(buscaPorLetra("zoom.out"));
-		s.setMargin(new Insets(2, 2, 2, 2));
-		s.setMaximumSize(new Dimension(23, 23));
-		s.setMinimumSize(new Dimension(23, 23));
-		s.setPreferredSize(new Dimension(23, 23));
-		s.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent actionevent) {
-				A.B(actionevent);
+		btnZoomOut.setToolTipText(getBundleString("zoom.out"));
+		btnZoomOut.setMargin(new java.awt.Insets(2, 2, 2, 2));
+		btnZoomOut.setMaximumSize(new java.awt.Dimension(23, 23));
+		btnZoomOut.setMinimumSize(new java.awt.Dimension(23, 23));
+		btnZoomOut.setPreferredSize(new java.awt.Dimension(23, 23));
+		btnZoomOut.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				btnZoomOutActionPerformed(evt);
 			}
-
 		});
-		u.add(s);
-		V.setEditable(true);
-		V.setToolTipText(buscaPorLetra("zoom.ratio"));
-		V.setMaximumSize(new Dimension(80, 23));
-		V.setMinimumSize(new Dimension(80, 23));
-		V.setPreferredSize(new Dimension(80, 23));
-		V.addActionListener(new ActionListener() {
+		btnZoomOut.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(btnZoomOut);
 
-			public void actionPerformed(ActionEvent actionevent) {
-				A.I(actionevent);
+		cmbZoom.setEditable(true);
+		cmbZoom.setToolTipText(getBundleString("zoom.ratio"));
+		cmbZoom.setMaximumSize(new java.awt.Dimension(80, 23));
+		cmbZoom.setMinimumSize(new java.awt.Dimension(80, 23));
+		cmbZoom.setPreferredSize(new java.awt.Dimension(80, 23));
+		cmbZoom.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				cmbZoomActionPerformed(evt);
 			}
-
 		});
-		V.addItemListener(new ItemListener() {
-
-			public void itemStateChanged(ItemEvent itemevent) {
-				A.setListaSeleccionable(itemevent);
+		cmbZoom.addItemListener(new java.awt.event.ItemListener() {
+			public void itemStateChanged(java.awt.event.ItemEvent evt) {
+				cmbZoomItemStateChanged(evt);
 			}
-
 		});
-		u.add(V);
-		add(u, "North");
-		X.setLayout(new BorderLayout());
-		X.addComponentListener(new ComponentAdapter() {
+		cmbZoom.addKeyListener(keyNavigationListener);
+		tlbToolBar.add(cmbZoom);
 
-			public void componentResized(ComponentEvent componentevent) {
-				A.setListaSeleccionable(componentevent);
+		add(tlbToolBar, java.awt.BorderLayout.NORTH);
+
+		pnlMain.setLayout(new java.awt.BorderLayout());
+		pnlMain.addComponentListener(new java.awt.event.ComponentAdapter() {
+			public void componentResized(java.awt.event.ComponentEvent evt) {
+				pnlMainComponentResized(evt);
 			}
-
 		});
-		D.setHorizontalScrollBarPolicy(32);
-		D.setVerticalScrollBarPolicy(22);
-		B.setLayout(new GridBagLayout());
-		W.setLayout(new BorderLayout());
-		W.setMinimumSize(new Dimension(100, 100));
-		W.setPreferredSize(new Dimension(100, 100));
-		m.setLayout(new GridBagLayout());
-		m.setMinimumSize(new Dimension(100, 120));
-		m.setPreferredSize(new Dimension(100, 120));
-		J.setLayout(null);
-		J.setMinimumSize(new Dimension(5, 5));
-		J.setPreferredSize(new Dimension(5, 5));
-		J.setOpaque(false);
-		J.addMouseListener(new MouseAdapter() {
 
-			public void mousePressed(MouseEvent mouseevent) {
-				A.D(mouseevent);
+		scrollPane
+				.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		pnlInScroll.setLayout(new java.awt.GridBagLayout());
+
+		pnlPage.setLayout(new java.awt.BorderLayout());
+		pnlPage.setMinimumSize(new java.awt.Dimension(100, 100));
+		pnlPage.setPreferredSize(new java.awt.Dimension(100, 100));
+
+		jPanel4.setLayout(new java.awt.GridBagLayout());
+		jPanel4.setMinimumSize(new java.awt.Dimension(100, 120));
+		jPanel4.setPreferredSize(new java.awt.Dimension(100, 120));
+
+		pnlLinks.setLayout(null);
+		pnlLinks.setMinimumSize(new java.awt.Dimension(5, 5));
+		pnlLinks.setPreferredSize(new java.awt.Dimension(5, 5));
+		pnlLinks.setOpaque(false);
+		pnlLinks.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				pnlLinksMousePressed(evt);
 			}
 
-			public void mouseReleased(MouseEvent mouseevent) {
-				A.setListaSeleccionable(mouseevent);
+			public void mouseReleased(java.awt.event.MouseEvent evt) {
+				pnlLinksMouseReleased(evt);
 			}
-
 		});
-		J.addMouseMotionListener(new MouseMotionAdapter() {
-
-			public void mouseDragged(MouseEvent mouseevent) {
-				A.B(mouseevent);
+		pnlLinks.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+			public void mouseDragged(java.awt.event.MouseEvent evt) {
+				pnlLinksMouseDragged(evt);
 			}
-
 		});
-		GridBagConstraints gridbagconstraints = new GridBagConstraints();
-		gridbagconstraints.gridx = 0;
-		gridbagconstraints.gridy = 0;
-		gridbagconstraints.gridwidth = 2;
-		gridbagconstraints.gridheight = 2;
-		gridbagconstraints.fill = 1;
-		m.add(J, gridbagconstraints);
-		l.setBackground(Color.gray);
-		l.setMinimumSize(new Dimension(5, 5));
-		l.setPreferredSize(new Dimension(5, 5));
-		gridbagconstraints = new GridBagConstraints();
-		gridbagconstraints.gridx = 2;
-		gridbagconstraints.gridy = 1;
-		gridbagconstraints.fill = 3;
-		m.add(l, gridbagconstraints);
-		k.setMinimumSize(new Dimension(5, 5));
-		k.setPreferredSize(new Dimension(5, 5));
-		gridbagconstraints = new GridBagConstraints();
-		gridbagconstraints.gridx = 0;
-		gridbagconstraints.gridy = 2;
-		m.add(k, gridbagconstraints);
-		j.setBackground(Color.gray);
-		j.setMinimumSize(new Dimension(5, 5));
-		j.setPreferredSize(new Dimension(5, 5));
-		gridbagconstraints = new GridBagConstraints();
-		gridbagconstraints.gridx = 1;
-		gridbagconstraints.gridy = 2;
-		gridbagconstraints.fill = 2;
-		m.add(j, gridbagconstraints);
-		h.setBackground(Color.gray);
-		h.setMinimumSize(new Dimension(5, 5));
-		h.setPreferredSize(new Dimension(5, 5));
-		r.setText("jLabel1");
-		h.add(r);
-		gridbagconstraints = new GridBagConstraints();
-		gridbagconstraints.gridx = 2;
-		gridbagconstraints.gridy = 2;
-		m.add(h, gridbagconstraints);
-		f.setMinimumSize(new Dimension(5, 5));
-		f.setPreferredSize(new Dimension(5, 5));
-		gridbagconstraints = new GridBagConstraints();
-		gridbagconstraints.gridx = 2;
-		gridbagconstraints.gridy = 0;
-		m.add(f, gridbagconstraints);
-		K.setBackground(Color.white);
-		K.setBorder(new LineBorder(new Color(0, 0, 0)));
-		K.setOpaque(true);
-		gridbagconstraints = new GridBagConstraints();
-		gridbagconstraints.gridx = 0;
-		gridbagconstraints.gridy = 0;
-		gridbagconstraints.gridwidth = 2;
-		gridbagconstraints.gridheight = 2;
-		gridbagconstraints.fill = 1;
-		gridbagconstraints.weightx = 1.0D;
-		gridbagconstraints.weighty = 1.0D;
-		m.add(K, gridbagconstraints);
-		W.add(m, "Center");
-		gridbagconstraints = new GridBagConstraints();
-		gridbagconstraints.insets = new Insets(5, 5, 5, 5);
-		B.add(W, gridbagconstraints);
-		D.setViewportView(B);
-		X.add(D, "Center");
-		add(X, "Center");
-		p.setLayout(new FlowLayout(1, 0, 0));
-		A.setFont(new Font("Dialog", 1, 10));
-		A.setText("Page i of n");
-		p.add(A);
-		add(p, "South");
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.gridwidth = 2;
+		gridBagConstraints.gridheight = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		jPanel4.add(pnlLinks, gridBagConstraints);
+
+		jPanel5.setBackground(java.awt.Color.gray);
+		jPanel5.setMinimumSize(new java.awt.Dimension(5, 5));
+		jPanel5.setPreferredSize(new java.awt.Dimension(5, 5));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
+		jPanel4.add(jPanel5, gridBagConstraints);
+
+		jPanel6.setMinimumSize(new java.awt.Dimension(5, 5));
+		jPanel6.setPreferredSize(new java.awt.Dimension(5, 5));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		jPanel4.add(jPanel6, gridBagConstraints);
+
+		jPanel7.setBackground(java.awt.Color.gray);
+		jPanel7.setMinimumSize(new java.awt.Dimension(5, 5));
+		jPanel7.setPreferredSize(new java.awt.Dimension(5, 5));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+		jPanel4.add(jPanel7, gridBagConstraints);
+
+		jPanel8.setBackground(java.awt.Color.gray);
+		jPanel8.setMinimumSize(new java.awt.Dimension(5, 5));
+		jPanel8.setPreferredSize(new java.awt.Dimension(5, 5));
+		jLabel1.setText("jLabel1");
+		jPanel8.add(jLabel1);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 2;
+		jPanel4.add(jPanel8, gridBagConstraints);
+
+		jPanel9.setMinimumSize(new java.awt.Dimension(5, 5));
+		jPanel9.setPreferredSize(new java.awt.Dimension(5, 5));
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 0;
+		jPanel4.add(jPanel9, gridBagConstraints);
+
+		lblPage.setBackground(java.awt.Color.white);
+		lblPage.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0)));
+		lblPage.setOpaque(true);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.gridwidth = 2;
+		gridBagConstraints.gridheight = 2;
+		gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+		gridBagConstraints.weightx = 1.0;
+		gridBagConstraints.weighty = 1.0;
+		jPanel4.add(lblPage, gridBagConstraints);
+
+		pnlPage.add(jPanel4, java.awt.BorderLayout.CENTER);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+		pnlInScroll.add(pnlPage, gridBagConstraints);
+
+		scrollPane.setViewportView(pnlInScroll);
+		pnlMain.add(scrollPane, java.awt.BorderLayout.CENTER);
+		add(pnlMain, java.awt.BorderLayout.CENTER);
+
+		pnlStatus.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
+
+		lblStatus.setFont(new java.awt.Font("Dialog", 1, 10));
+		lblStatus.setText("Page i of n");
+		pnlStatus.add(lblStatus);
+		add(pnlStatus, java.awt.BorderLayout.SOUTH);
+		addKeyListener(keyNavigationListener);
 	}
 
-	void M(ActionEvent actionevent) {
+	// </editor-fold>//GEN-END:initComponents
+
+	void txtGoToActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtGoToActionPerformed
 		try {
-			int i1 = Integer.parseInt(I.getText());
-			if (i1 != C + 1 && i1 > 0 && i1 <= A5.getPages().size()) {
-				A(i1 - 1);
-				preparaColumnas();
+			int pageNumber = Integer.parseInt(txtGoTo.getText());
+			if (pageNumber != pageIndex + 1 && pageNumber > 0
+					&& pageNumber <= jasperPrint.getPages().size()) {
+				setPageIndex(pageNumber - 1);
+				refreshPage();
 			}
-		} catch (NumberFormatException numberformatexception) {
+		} catch (NumberFormatException e) {
 		}
-	}
+	}// GEN-LAST:event_txtGoToActionPerformed
 
-	void A(ItemEvent itemevent) {
-		z.setSelected(false);
-		AA.setSelected(false);
-		F.setSelected(false);
-	}
+	void cmbZoomItemStateChanged(java.awt.event.ItemEvent evt) {// GEN-FIRST:event_cmbZoomItemStateChanged
+		// Add your handling code here:
+		btnActualSize.setSelected(false);
+		btnFitPage.setSelected(false);
+		btnFitWidth.setSelected(false);
+	}// GEN-LAST:event_cmbZoomItemStateChanged
 
-	void A(ComponentEvent componentevent) {
-		if (AA.isSelected()) {
-			H();
-			AA.setSelected(true);
-		} else if (F.isSelected()) {
-			A(((float) B.getVisibleRect().getWidth() - 20F)
-					/ (float) A5.getPageWidth());
-			F.setSelected(true);
+	void pnlMainComponentResized(java.awt.event.ComponentEvent evt) {// GEN-FIRST:event_pnlMainComponentResized
+		// Add your handling code here:
+		if (btnFitPage.isSelected()) {
+			fitPage();
+			btnFitPage.setSelected(true);
+		} else if (btnFitWidth.isSelected()) {
+			setRealZoomRatio(((float) pnlInScroll.getVisibleRect().getWidth() - 20f)
+					/ jasperPrint.getPageWidth());
+			btnFitWidth.setSelected(true);
 		}
-	}
 
-	void A(ActionEvent actionevent) {
-		if (z.isSelected()) {
-			AA.setSelected(false);
-			F.setSelected(false);
-			V.setSelectedIndex(-1);
-			setZoomRatio(1.0F);
-			z.setSelected(true);
+	}// GEN-LAST:event_pnlMainComponentResized
+
+	void btnActualSizeActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnActualSizeActionPerformed
+		// Add your handling code here:
+		if (btnActualSize.isSelected()) {
+			btnFitPage.setSelected(false);
+			btnFitWidth.setSelected(false);
+			cmbZoom.setSelectedIndex(-1);
+			setZoomRatio(1);
+			btnActualSize.setSelected(true);
 		}
-	}
+	}// GEN-LAST:event_btnActualSizeActionPerformed
 
-	void J(ActionEvent actionevent) {
-		if (F.isSelected()) {
-			z.setSelected(false);
-			AA.setSelected(false);
-			V.setSelectedIndex(-1);
-			A(((float) B.getVisibleRect().getWidth() - 20F)
-					/ (float) A5.getPageWidth());
-			F.setSelected(true);
+	void btnFitWidthActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnFitWidthActionPerformed
+		// Add your handling code here:
+		if (btnFitWidth.isSelected()) {
+			btnActualSize.setSelected(false);
+			btnFitPage.setSelected(false);
+			cmbZoom.setSelectedIndex(-1);
+			setRealZoomRatio(((float) pnlInScroll.getVisibleRect().getWidth() - 20f)
+					/ jasperPrint.getPageWidth());
+			btnFitWidth.setSelected(true);
 		}
-	}
+	}// GEN-LAST:event_btnFitWidthActionPerformed
 
-	void F(ActionEvent actionevent) {
-		if (AA.isSelected()) {
-			z.setSelected(false);
-			F.setSelected(false);
-			V.setSelectedIndex(-1);
-			H();
-			AA.setSelected(true);
+	void btnFitPageActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnFitPageActionPerformed
+		// Add your handling code here:
+		if (btnFitPage.isSelected()) {
+			btnActualSize.setSelected(false);
+			btnFitWidth.setSelected(false);
+			cmbZoom.setSelectedIndex(-1);
+			fitPage();
+			btnFitPage.setSelected(true);
 		}
-	}
+	}// GEN-LAST:event_btnFitPageActionPerformed
 
-	void N(ActionEvent actionevent) {
-		JFileChooser jfilechooser = new JFileChooser();
-		for (int i1 = 0; i1 < i.size(); i1++)
-			jfilechooser.addChoosableFileFilter((JRSaveContributor) i.get(i1));
+	void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSaveActionPerformed
+		// Add your handling code here:
 
-		if (i.size() > 0)
-			jfilechooser.setFileFilter((JRSaveContributor) i.get(0));
-		int j1 = jfilechooser.showSaveDialog(this);
-		if (j1 == 0) {
-			FileFilter filefilter = jfilechooser.getFileFilter();
-			File file = jfilechooser.getSelectedFile();
-			Object obj = null;
-			if (filefilter instanceof JRSaveContributor) {
-				obj = (JRSaveContributor) filefilter;
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setLocale(this.getLocale());
+		fileChooser.updateUI();
+		for (int i = 0; i < saveContributors.size(); i++) {
+			fileChooser.addChoosableFileFilter((JRSaveContributor) saveContributors.get(i));
+		}
+
+		if (saveContributors.contains(lastSaveContributor)) {
+			fileChooser.setFileFilter(lastSaveContributor);
+		} else if (saveContributors.size() > 0) {
+			fileChooser.setFileFilter((JRSaveContributor) saveContributors.get(0));
+		}
+
+		if (lastFolder != null) {
+			fileChooser.setCurrentDirectory(lastFolder);
+		}
+
+		int retValue = fileChooser.showSaveDialog(this);
+		if (retValue == JFileChooser.APPROVE_OPTION) {
+			FileFilter fileFilter = fileChooser.getFileFilter();
+			File file = fileChooser.getSelectedFile();
+
+			lastFolder = file.getParentFile();
+
+			JRSaveContributor contributor = null;
+
+			if (fileFilter instanceof JRSaveContributor) {
+				contributor = (JRSaveContributor) fileFilter;
 			} else {
-				int k1 = 0;
-				do {
-					if (obj != null || k1 >= i.size())
-						break;
-					obj = (JRSaveContributor) i.get(k1++);
-					if (!((JRSaveContributor) (obj)).accept(file))
-						obj = null;
-				} while (true);
-				if (obj == null)
-					obj = new JRPrintSaveContributor();
+				int i = 0;
+				while (contributor == null && i < saveContributors.size()) {
+					contributor = (JRSaveContributor) saveContributors.get(i++);
+					if (!contributor.accept(file)) {
+						contributor = null;
+					}
+				}
+
+				if (contributor == null) {
+					contributor = new JRPrintSaveContributor();
+				}
 			}
+
+			lastSaveContributor = contributor;
+
 			try {
-				((JRSaveContributor) (obj)).save(A5, file);
-			} catch (JRException jrexception) {
-				jrexception.printStackTrace();
-				JOptionPane.showMessageDialog(this, buscaPorLetra("error.saving"));
+				contributor.save(jasperPrint, file);
+			} catch (JRException e) {
+				if (log.isEnabledFor(Priority.ERROR)) {
+					log.error("Save error.", e);
+				}
+				JOptionPane.showMessageDialog(this, getBundleString("error.saving"));
 			}
 		}
-	}
+	}// GEN-LAST:event_btnSaveActionPerformed
 
-	void B(MouseEvent mouseevent) {
-		Container container = B.getParent();
+	void pnlLinksMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_pnlLinksMouseDragged
+		// Add your handling code here:
+
+		Container container = pnlInScroll.getParent();
 		if (container instanceof JViewport) {
-			JViewport jviewport = (JViewport) container;
-			Point point = jviewport.getViewPosition();
-			int i1 = point.x - (mouseevent.getX() - d);
-			int j1 = point.y - (mouseevent.getY() - c);
-			int k1 = B.getWidth() - jviewport.getWidth();
-			int l1 = B.getHeight() - jviewport.getHeight();
-			if (i1 < 0)
-				i1 = 0;
-			if (i1 > k1)
-				i1 = k1;
-			if (j1 < 0)
-				j1 = 0;
-			if (j1 > l1)
-				j1 = l1;
-			jviewport.setViewPosition(new Point(i1, j1));
+			JViewport viewport = (JViewport) container;
+			Point point = viewport.getViewPosition();
+			int newX = point.x - (evt.getX() - downX);
+			int newY = point.y - (evt.getY() - downY);
+
+			int maxX = pnlInScroll.getWidth() - viewport.getWidth();
+			int maxY = pnlInScroll.getHeight() - viewport.getHeight();
+
+			if (newX < 0) {
+				newX = 0;
+			}
+			if (newX > maxX) {
+				newX = maxX;
+			}
+			if (newY < 0) {
+				newY = 0;
+			}
+			if (newY > maxY) {
+				newY = maxY;
+			}
+
+			viewport.setViewPosition(new Point(newX, newY));
 		}
-	}
+	}// GEN-LAST:event_pnlLinksMouseDragged
 
-	void A(MouseEvent mouseevent) {
-		J.setCursor(new Cursor(0));
-	}
+	void pnlLinksMouseReleased(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_pnlLinksMouseReleased
+		// Add your handling code here:
+		pnlLinks.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+	}// GEN-LAST:event_pnlLinksMouseReleased
 
-	void D(MouseEvent mouseevent) {
-		J.setCursor(new Cursor(13));
-		d = mouseevent.getX();
-		c = mouseevent.getY();
-	}
+	void pnlLinksMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_pnlLinksMousePressed
+		// Add your handling code here:
+		pnlLinks.setCursor(new Cursor(Cursor.MOVE_CURSOR));
 
-	void E(ActionEvent actionevent) {
+		downX = evt.getX();
+		downY = evt.getY();
+	}// GEN-LAST:event_pnlLinksMousePressed
+
+	void btnPrintActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnPrintActionPerformed
+	{// GEN-HEADEREND:event_btnPrintActionPerformed
+		// Add your handling code here:
+
 		Thread thread = new Thread(new Runnable() {
-
 			public void run() {
 				try {
-					JasperPrintManager.printReport(A.A5, true);
-				} catch (Exception exception) {
-					exception.printStackTrace();
-					JOptionPane.showMessageDialog(A, Configuracion. A.setListaSeleccionable("error.printing"));
+
+					btnPrint.setEnabled(false);
+					JRViewerKalos.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+					JasperPrintManager.printReport(jasperPrint, true);
+				} catch (Exception ex) {
+					if (log.isEnabledFor(Priority.ERROR)) {
+						log.error("Print error.", ex);
+					}
+					JOptionPane.showMessageDialog(JRViewerKalos.this,
+							getBundleString("error.printing"));
+				} finally {
+					JRViewerKalos.this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					btnPrint.setEnabled(true);
 				}
 			}
-
 		});
+
 		thread.start();
-	}
 
-	void D(ActionEvent actionevent) {
-		setListaSeleccionable(A5.getPages().size() - 1);
-		preparaColumnas();
-	}
+	}// GEN-LAST:event_btnPrintActionPerformed
 
-	void L(ActionEvent actionevent) {
-		A(C + 1);
-		preparaColumnas();
-	}
+	void btnLastActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnLastActionPerformed
+	{// GEN-HEADEREND:event_btnLastActionPerformed
+		// Add your handling code here:
+		setPageIndex(jasperPrint.getPages().size() - 1);
+		refreshPage();
+	}// GEN-LAST:event_btnLastActionPerformed
 
-	void K(ActionEvent actionevent) {
-		A(C - 1);
-		preparaColumnas();
-	}
+	void btnNextActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnNextActionPerformed
+	{// GEN-HEADEREND:event_btnNextActionPerformed
+		// Add your handling code here:
+		setPageIndex(pageIndex + 1);
+		refreshPage();
+	}// GEN-LAST:event_btnNextActionPerformed
 
-	void G(ActionEvent actionevent) {
-		A(0);
-		preparaColumnas();
-	}
+	void btnPreviousActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnPreviousActionPerformed
+	{// GEN-HEADEREND:event_btnPreviousActionPerformed
+		// Add your handling code here:
+		setPageIndex(pageIndex - 1);
+		refreshPage();
+	}// GEN-LAST:event_btnPreviousActionPerformed
 
-	void H(ActionEvent actionevent) {
-		if (C0 == 1) {
+	void btnFirstActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnFirstActionPerformed
+	{// GEN-HEADEREND:event_btnFirstActionPerformed
+		// Add your handling code here:
+		setPageIndex(0);
+		refreshPage();
+	}// GEN-LAST:event_btnFirstActionPerformed
+
+	void btnReloadActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnReloadActionPerformed
+	{// GEN-HEADEREND:event_btnReloadActionPerformed
+		// Add your handling code here:
+		if (type == TYPE_FILE_NAME) {
 			try {
-				A(A2, S);
-			} catch (JRException jrexception) {
-				jrexception.printStackTrace();
-				A5 = null;
-				A(0);
-				preparaColumnas();
-				JOptionPane.showMessageDialog(this, buscaPorLetra("error.loading"));
+				loadReport(reportFileName, isXML);
+			} catch (JRException e) {
+				if (log.isEnabledFor(Priority.ERROR)) {
+					log.error("Reload error.", e);
+				}
+				jasperPrint = null;
+				setPageIndex(0);
+				refreshPage();
+
+				JOptionPane.showMessageDialog(this, getBundleString("error.loading"));
 			}
-			A4 = 0.0F;
-			U = 0.0F;
-			setZoomRatio(1.0F);
+
+			forceRefresh();
 		}
+	}// GEN-LAST:event_btnReloadActionPerformed
+
+	protected void forceRefresh() {
+		zoom = 0;// force pageRefresh()
+		realZoom = 0f;
+		setZoomRatio(1);
 	}
 
-	void C(ActionEvent actionevent) {
-		z.setSelected(false);
-		AA.setSelected(false);
-		F.setSelected(false);
-		int i1 = (int) (100F * C());
-		int j1 = Arrays.binarySearch(Z, i1);
-		if (j1 < 0)
-			setZoomRatio((float) Z[-j1 - 1] / 100F);
-		else if (j1 < V.getModel().getSize() - 1)
-			setZoomRatio((float) Z[j1 + 1] / 100F);
+	void btnZoomInActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnZoomInActionPerformed
+	{// GEN-HEADEREND:event_btnZoomInActionPerformed
+		// Add your handling code here:
+		btnActualSize.setSelected(false);
+		btnFitPage.setSelected(false);
+		btnFitWidth.setSelected(false);
+
+		int newZoomInt = (int) (100 * getZoomRatio());
+		int index = Arrays.binarySearch(zooms, newZoomInt);
+		if (index < 0) {
+			setZoomRatio(zooms[-index - 1] / 100f);
+		} else if (index < cmbZoom.getModel().getSize() - 1) {
+			setZoomRatio(zooms[index + 1] / 100f);
+		}
+	}// GEN-LAST:event_btnZoomInActionPerformed
+
+	void btnZoomOutActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_btnZoomOutActionPerformed
+	{// GEN-HEADEREND:event_btnZoomOutActionPerformed
+		// Add your handling code here:
+		btnActualSize.setSelected(false);
+		btnFitPage.setSelected(false);
+		btnFitWidth.setSelected(false);
+
+		int newZoomInt = (int) (100 * getZoomRatio());
+		int index = Arrays.binarySearch(zooms, newZoomInt);
+		if (index > 0) {
+			setZoomRatio(zooms[index - 1] / 100f);
+		} else if (index < -1) {
+			setZoomRatio(zooms[-index - 2] / 100f);
+		}
+	}// GEN-LAST:event_btnZoomOutActionPerformed
+
+	void cmbZoomActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_cmbZoomActionPerformed
+	{// GEN-HEADEREND:event_cmbZoomActionPerformed
+		// Add your handling code here:
+		float newZoom = getZoomRatio();
+
+		if (newZoom < MIN_ZOOM) {
+			newZoom = MIN_ZOOM;
+		}
+
+		if (newZoom > MAX_ZOOM) {
+			newZoom = MAX_ZOOM;
+		}
+
+		setZoomRatio(newZoom);
+	}// GEN-LAST:event_cmbZoomActionPerformed
+
+	/**
+	*/
+	void hyperlinkClicked(MouseEvent evt) {
+		JPanel link = (JPanel) evt.getSource();
+		JRPrintHyperlink element = (JRPrintHyperlink) linksMap.get(link);
+		hyperlinkClicked(element);
 	}
 
-	void B(ActionEvent actionevent) {
-		z.setSelected(false);
-		AA.setSelected(false);
-		F.setSelected(false);
-		int i1 = (int) (100F * C());
-		int j1 = Arrays.binarySearch(Z, i1);
-		if (j1 > 0)
-			setZoomRatio((float) Z[j1 - 1] / 100F);
-		else if (j1 < -1)
-			setZoomRatio((float) Z[-j1 - 2] / 100F);
-	}
-
-	void I(ActionEvent actionevent) {
-		float f1 = C();
-		if (f1 < n)
-			f1 = n;
-		if (f1 > w)
-			f1 = w;
-		setZoomRatio(f1);
-	}
-
-	void C(MouseEvent mouseevent) {
-		JPanel jpanel = (JPanel) mouseevent.getSource();
-		JRPrintHyperlink jrprinthyperlink = (JRPrintHyperlink) o.get(jpanel);
-		C(jrprinthyperlink);
-	}
-
-	protected void C(JRPrintHyperlink jrprinthyperlink) {
+	protected void hyperlinkClicked(JRPrintHyperlink hyperlink) {
 		try {
-			Object obj = null;
-			for (int i1 = 0; i1 < H.size(); i1++) {
-				JRHyperlinkListener jrhyperlinklistener = (JRHyperlinkListener) H
-						.get(i1);
-				jrhyperlinklistener.gotoHyperlink(jrprinthyperlink);
+			JRHyperlinkListener listener = null;
+			for (int i = 0; i < hyperlinkListeners.size(); i++) {
+				listener = (JRHyperlinkListener) hyperlinkListeners.get(i);
+				listener.gotoHyperlink(hyperlink);
+			}
+		} catch (JRException e) {
+			if (log.isEnabledFor(Priority.ERROR)) {
+				log.error("Hyperlink click error.", e);
+			}
+			JOptionPane.showMessageDialog(this, getBundleString("error.hyperlink"));
+		}
+	}
+
+	/**
+	*/
+	public int getPageIndex() {
+		return pageIndex;
+	}
+
+	/**
+	*/
+	private void setPageIndex(int index) {
+		if (jasperPrint != null && jasperPrint.getPages() != null
+				&& jasperPrint.getPages().size() > 0) {
+			if (index >= 0 && index < jasperPrint.getPages().size()) {
+				pageIndex = index;
+				pageError = false;
+				btnFirst.setEnabled((pageIndex > 0));
+				btnPrevious.setEnabled((pageIndex > 0));
+				btnNext.setEnabled((pageIndex < jasperPrint.getPages().size() - 1));
+				btnLast.setEnabled((pageIndex < jasperPrint.getPages().size() - 1));
+				txtGoTo.setEnabled(btnFirst.isEnabled() || btnLast.isEnabled());
+				txtGoTo.setText("" + (pageIndex + 1));
+				lblStatus.setText(MessageFormat.format(
+						getBundleString("page"),
+						new Object[] { Integer.valueOf(pageIndex + 1),
+								Integer.valueOf(jasperPrint.getPages().size()) }));
+			}
+		} else {
+			btnFirst.setEnabled(false);
+			btnPrevious.setEnabled(false);
+			btnNext.setEnabled(false);
+			btnLast.setEnabled(false);
+			txtGoTo.setEnabled(false);
+			txtGoTo.setText("");
+			lblStatus.setText("");
+		}
+	}
+
+	/**
+	*/
+	protected void loadReport(String fileName, boolean isXmlReport) throws JRException {
+		if (isXmlReport) {
+			jasperPrint = JRPrintXmlLoader.load(fileName);
+		} else {
+			jasperPrint = (JasperPrint) JRLoader.loadObject(fileName);
+		}
+
+		type = TYPE_FILE_NAME;
+		this.isXML = isXmlReport;
+		reportFileName = fileName;
+		btnReload.setEnabled(true);
+		setPageIndex(0);
+	}
+
+	/**
+	*/
+	protected void loadReport(InputStream is, boolean isXmlReport) throws JRException {
+		if (isXmlReport) {
+			jasperPrint = JRPrintXmlLoader.load(is);
+		} else {
+			jasperPrint = (JasperPrint) JRLoader.loadObject(is);
+		}
+
+		type = TYPE_INPUT_STREAM;
+		this.isXML = isXmlReport;
+		btnReload.setEnabled(false);
+		setPageIndex(0);
+	}
+
+	/**
+	*/
+	protected void loadReport(JasperPrint jrPrint) {
+		jasperPrint = jrPrint;
+		type = TYPE_OBJECT;
+		isXML = false;
+		btnReload.setEnabled(false);
+		setPageIndex(0);
+	}
+
+	/**
+	*/
+	protected void refreshPage() {
+		if (jasperPrint == null || jasperPrint.getPages() == null
+				|| jasperPrint.getPages().size() == 0) {
+			pnlPage.setVisible(false);
+			btnSave.setEnabled(false);
+			btnPrint.setEnabled(false);
+			btnActualSize.setEnabled(false);
+			btnFitPage.setEnabled(false);
+			btnFitWidth.setEnabled(false);
+			btnZoomIn.setEnabled(false);
+			btnZoomOut.setEnabled(false);
+			cmbZoom.setEnabled(false);
+
+			if (jasperPrint != null) {
+				JOptionPane.showMessageDialog(this, getBundleString("no.pages"));
 			}
 
-		} catch (JRException jrexception) {
-			jrexception.printStackTrace();
-			JOptionPane.showMessageDialog(this, buscaPorLetra("error.hyperlink"));
-		}
-	}
-
-	private void A(int i1) {
-		C = i1;
-		if (A5 != null && A5.getPages() != null && A5.getPages().size() > 0) {
-			t.setEnabled(C > 0);
-			BA.setEnabled(C > 0);
-			B5.setEnabled(C < A5.getPages().size() - 1);
-			N.setEnabled(C < A5.getPages().size() - 1);
-			I.setEnabled(t.isEnabled() || N.isEnabled());
-			I.setText((new StringBuilder()).append("").append(C + 1).toString());
-			A.setText(MessageFormat.format(buscaPorLetra("page"), new Object[] {
-					new Integer(C + 1), new Integer(A5.getPages().size()) }));
-		} else {
-			t.setEnabled(false);
-			BA.setEnabled(false);
-			B5.setEnabled(false);
-			N.setEnabled(false);
-			I.setEnabled(false);
-			I.setText("");
-			A.setText("");
-		}
-	}
-
-	protected void A(String s1, boolean flag) throws JRException {
-		if (flag)
-			A5 = JRPrintXmlLoader.load(s1);
-		else
-			A5 = (JasperPrint) JRLoader.loadObject(s1);
-		C0 = 1;
-		S = flag;
-		A2 = s1;
-		a.setEnabled(true);
-		A(0);
-	}
-
-	protected void A(InputStream inputstream, boolean flag) throws JRException {
-		if (flag)
-			A5 = JRPrintXmlLoader.load(inputstream);
-		else
-			A5 = (JasperPrint) JRLoader.loadObject(inputstream);
-		C0 = 2;
-		S = flag;
-		a.setEnabled(false);
-		A(0);
-	}
-
-	protected void A(JasperPrint jasperprint) {
-		A5 = jasperprint;
-		C0 = 3;
-		S = false;
-		a.setEnabled(false);
-		A(0);
-	}
-
-	protected void F() {
-		if (A5 == null || A5.getPages() == null || A5.getPages().size() == 0) {
-			W.setVisible(false);
-			O.setEnabled(false);
-			Q.setEnabled(false);
-			z.setEnabled(false);
-			AA.setEnabled(false);
-			F.setEnabled(false);
-			G.setEnabled(false);
-			s.setEnabled(false);
-			V.setEnabled(false);
-			if (A5 != null)
-				JOptionPane.showMessageDialog(this, buscaPorLetra("no.pages"));
 			return;
 		}
-		W.setVisible(true);
-		O.setEnabled(true);
-		Q.setEnabled(true);
-		z.setEnabled(true);
-		AA.setEnabled(true);
-		F.setEnabled(true);
-		G.setEnabled(A4 < w);
-		s.setEnabled(A4 > n);
-		V.setEnabled(true);
-		Dimension dimension = new Dimension(
-				(int) ((float) A5.getPageWidth() * U) + 8,
-				(int) ((float) A5.getPageHeight() * U) + 8);
-		W.setMaximumSize(dimension);
-		W.setMinimumSize(dimension);
-		W.setPreferredSize(dimension);
-		long l1 = JRProperties
-				.getLongProperty("net.sf.jasperreports.viewer.render.buffer.max.size");
-		boolean flag;
-		if (l1 <= 0L) {
-			flag = false;
+
+		pnlPage.setVisible(true);
+		btnSave.setEnabled(true);
+		btnPrint.setEnabled(true);
+		btnActualSize.setEnabled(true);
+		btnFitPage.setEnabled(true);
+		btnFitWidth.setEnabled(true);
+		btnZoomIn.setEnabled(zoom < MAX_ZOOM);
+		btnZoomOut.setEnabled(zoom > MIN_ZOOM);
+		cmbZoom.setEnabled(true);
+
+		Dimension dim = new Dimension((int) (jasperPrint.getPageWidth() * realZoom) + 8, // 2
+																							// from
+																							// border,
+																							// 5
+																							// from
+																							// shadow
+																							// and
+																							// 1
+																							// extra
+																							// pixel
+																							// for
+																							// image
+				(int) (jasperPrint.getPageHeight() * realZoom) + 8);
+		pnlPage.setMaximumSize(dim);
+		pnlPage.setMinimumSize(dim);
+		pnlPage.setPreferredSize(dim);
+
+		long maxImageSize = JRProperties.getLongProperty(VIEWER_RENDER_BUFFER_MAX_SIZE);
+		boolean renderImage;
+		if (maxImageSize <= 0) {
+			renderImage = false;
 		} else {
-			long l2 = JRPrinterAWT.getImageSize(A5, U);
-			flag = l2 <= l1;
+			long imageSize = JRPrinterAWT.getImageSize(jasperPrint, realZoom);
+			renderImage = imageSize <= maxImageSize;
 		}
-		K.setRenderImage(flag);
-		if (flag) {
-			Object obj = null;
-			ImageIcon imageicon = null;
+
+		lblPage.setRenderImage(renderImage);
+
+		if (renderImage) {
+			setPageImage();
+		}
+
+		pnlLinks.removeAll();
+		linksMap = new HashMap();
+
+		createHyperlinks();
+
+		if (!renderImage) {
+			lblPage.setIcon(null);
+
+			pnlMain.validate();
+			pnlMain.repaint();
+		}
+	}
+
+	protected void setPageImage() {
+		Image image;
+		if (pageError) {
+			image = getPageErrorImage();
+		} else {
 			try {
-				Image image = JasperPrintManager.printPageToImage(A5, C, U);
-				imageicon = new ImageIcon(image);
-			} catch (Exception exception) {
-				exception.printStackTrace();
-				JOptionPane.showMessageDialog(
-						this,
-						ResourceBundle.getBundle(
-								"net/sf/jasperreports/view/viewer").getString(
-								"error.displaying"));
+				image = JasperPrintManager.printPageToImage(jasperPrint, pageIndex, realZoom);
+			} catch (Exception e) {
+				if (log.isEnabledFor(Priority.ERROR)) {
+					log.error("Print page to image error.", e);
+				}
+				pageError = true;
+
+				image = getPageErrorImage();
+				JOptionPane.showMessageDialog(this,
+						java.util.ResourceBundle.getBundle("net/sf/jasperreports/view/viewer")
+								.getString("error.displaying"));
 			}
-			K.setIcon(imageicon);
 		}
-		J.removeAll();
-		o = new HashMap();
-		getListaSeleccionable();
-		if (!flag) {
-			K.setIcon(null);
-			X.validate();
-			X.repaint();
-		}
+		ImageIcon imageIcon = new ImageIcon(image);
+		lblPage.setIcon(imageIcon);
 	}
 
-	protected void D() {
-		java.util.List list = A5.getPages();
-		JRPrintPage jrprintpage = (JRPrintPage) list.get(C);
-		java.util.List list1 = jrprintpage.getElements();
-		if (list1 != null && list1.size() > 0) {
-			Iterator iterator = list1.iterator();
-			do {
-				if (!iterator.hasNext())
-					break;
-				JRPrintElement jrprintelement = (JRPrintElement) iterator
-						.next();
-				JRImageMapRenderer jrimagemaprenderer = null;
-				if (jrprintelement instanceof JRPrintImage) {
-					net.sf.jasperreports.engine.JRRenderable jrrenderable = ((JRPrintImage) jrprintelement)
-							.getRenderer();
-					if (jrrenderable instanceof JRImageMapRenderer)
-						jrimagemaprenderer = (JRImageMapRenderer) jrrenderable;
-				}
-				boolean flag = jrimagemaprenderer != null;
-				JRPrintHyperlink jrprinthyperlink = null;
-				if (!flag && (jrprintelement instanceof JRPrintHyperlink))
-					jrprinthyperlink = (JRPrintHyperlink) jrprintelement;
-				boolean flag1 = jrprinthyperlink != null
-						&& jrprinthyperlink.getHyperlinkType() != 1;
-				if (flag1 || flag) {
-					Object obj;
-					if (flag1) {
-						obj = new JPanel();
-						((JPanel) (obj)).addMouseListener(g);
-					} else {
-						Rectangle rectangle = new Rectangle(0, 0,
-								jrprintelement.getWidth(),
-								jrprintelement.getHeight());
-						obj = new _B(rectangle, jrimagemaprenderer);
+	protected Image getPageErrorImage() {
+		Image image = new BufferedImage((int) (jasperPrint.getPageWidth() * realZoom) + 1,
+				(int) (jasperPrint.getPageHeight() * realZoom) + 1, BufferedImage.TYPE_INT_RGB);
+
+		Graphics2D grx = (Graphics2D) image.getGraphics();
+		AffineTransform transform = new AffineTransform();
+		transform.scale(realZoom, realZoom);
+		grx.transform(transform);
+
+		drawPageError(grx);
+
+		return image;
+	}
+
+	protected void createHyperlinks() {
+		java.util.List pages = jasperPrint.getPages();
+		JRPrintPage page = (JRPrintPage) pages.get(pageIndex);
+		createHyperlinks(page.getElements(), 0, 0);
+	}
+
+	protected void createHyperlinks(List elements, int offsetX, int offsetY) {
+		if (elements != null && elements.size() > 0) {
+			for (Iterator it = elements.iterator(); it.hasNext();) {
+				JRPrintElement element = (JRPrintElement) it.next();
+
+				JRImageMapRenderer imageMap = null;
+				if (element instanceof JRPrintImage) {
+					JRRenderable renderer = ((JRPrintImage) element).getRenderer();
+					if (renderer instanceof JRImageMapRenderer) {
+						imageMap = (JRImageMapRenderer) renderer;
 					}
-					if (flag1)
-						((JPanel) (obj)).setCursor(new Cursor(12));
-					((JPanel) (obj)).setLocation(
-							(int) ((float) jrprintelement.getX() * U),
-							(int) ((float) jrprintelement.getY() * U));
-					((JPanel) (obj)).setSize(
-							(int) ((float) jrprintelement.getWidth() * U),
-							(int) ((float) jrprintelement.getHeight() * U));
-					((JPanel) (obj)).setOpaque(false);
-					String s1;
-					if (flag1)
-						s1 = B(jrprinthyperlink);
-					else
-						s1 = "";
-					((JPanel) (obj)).setToolTipText(s1);
-					J.add(((Component) (obj)));
-					o.put(obj, jrprintelement);
 				}
-			} while (true);
+				boolean hasImageMap = imageMap != null;
+
+				JRPrintHyperlink hyperlink = null;
+				if (element instanceof JRPrintHyperlink) {
+					hyperlink = (JRPrintHyperlink) element;
+				}
+				boolean hasHyperlink = !hasImageMap && hyperlink != null
+						&& hyperlink.getHyperlinkType() != 1;
+				boolean hasTooltip = hyperlink != null && hyperlink.getHyperlinkTooltip() != null;
+
+				if (hasHyperlink || hasImageMap || hasTooltip) {
+					JPanel link;
+					if (hasImageMap) {
+						Rectangle renderingArea = new Rectangle(0, 0, element.getWidth(),
+								element.getHeight());
+						link = new ImageMapPanel(renderingArea, imageMap);
+					} else // hasImageMap
+					{
+						link = new JPanel();
+						if (hasHyperlink) {
+							link.addMouseListener(mouseListener);
+						}
+					}
+
+					if (hasHyperlink) {
+						link.setCursor(new Cursor(Cursor.HAND_CURSOR));
+					}
+
+					link.setLocation((int) ((element.getX() + offsetX) * realZoom),
+							(int) ((element.getY() + offsetY) * realZoom));
+					link.setSize((int) (element.getWidth() * realZoom),
+							(int) (element.getHeight() * realZoom));
+					link.setOpaque(false);
+
+					String toolTip = getHyperlinkTooltip(hyperlink);
+					if (toolTip == null && hasImageMap) {
+						toolTip = "";// not null to register the panel as having
+										// a tool tip
+					}
+					link.setToolTipText(toolTip);
+
+					pnlLinks.add(link);
+					linksMap.put(link, element);
+				}
+
+				if (element instanceof JRPrintFrame) {
+					JRPrintFrame frame = (JRPrintFrame) element;
+					int frameOffsetX = offsetX + frame.getX() + frame.getLeftPadding();
+					int frameOffsetY = offsetY + frame.getY() + frame.getTopPadding();
+					createHyperlinks(frame.getElements(), frameOffsetX, frameOffsetY);
+				}
+			}
 		}
 	}
 
-	protected String B(JRPrintHyperlink jrprinthyperlink) {
-		String s1 = jrprinthyperlink.getHyperlinkTooltip();
-		if (s1 == null)
-			s1 = setListaSeleccionable(jrprinthyperlink);
-		return s1;
+	protected class ImageMapPanel extends JPanel implements MouseListener, MouseMotionListener {
+		private static final long serialVersionUID = JRConstants.SERIAL_VERSION_UID;
+
+		protected final List imageAreaHyperlinks;
+
+		public ImageMapPanel(Rectangle renderingArea, JRImageMapRenderer imageMap) {
+			try {
+				imageAreaHyperlinks = imageMap.getImageAreaHyperlinks(renderingArea);// FIXMECHART
+			} catch (JRException e) {
+				throw new JRRuntimeException(e);
+			}
+
+			addMouseListener(this);
+			addMouseMotionListener(this);
+		}
+
+		public String getToolTipText(MouseEvent event) {
+			String tooltip = null;
+			JRPrintImageAreaHyperlink imageMapArea = getImageMapArea(event);
+			if (imageMapArea != null) {
+				tooltip = getHyperlinkTooltip(imageMapArea.getHyperlink());
+			}
+
+			if (tooltip == null) {
+				tooltip = super.getToolTipText(event);
+			}
+
+			return tooltip;
+		}
+
+		public void mouseDragged(MouseEvent e) {
+			pnlLinksMouseDragged(e);
+		}
+
+		public void mouseMoved(MouseEvent e) {
+			JRPrintImageAreaHyperlink imageArea = getImageMapArea(e);
+			if (imageArea != null && imageArea.getHyperlink().getHyperlinkType() != 1) { // 1
+																							// es
+																							// "NONE"
+				e.getComponent().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			} else {
+				e.getComponent().setCursor(Cursor.getDefaultCursor());
+			}
+		}
+
+		protected JRPrintImageAreaHyperlink getImageMapArea(MouseEvent e) {
+			return getImageMapArea((int) (e.getX() / realZoom), (int) (e.getY() / realZoom));
+		}
+
+		protected JRPrintImageAreaHyperlink getImageMapArea(int x, int y) {
+			JRPrintImageAreaHyperlink image = null;
+			if (imageAreaHyperlinks != null) {
+				for (ListIterator it = imageAreaHyperlinks.listIterator(imageAreaHyperlinks.size()); image == null
+						&& it.hasPrevious();) {
+					JRPrintImageAreaHyperlink area = (JRPrintImageAreaHyperlink) it.previous();
+					if (area.getArea().containsPoint(x, y)) {
+						image = area;
+					}
+				}
+			}
+			return image;
+		}
+
+		public void mouseClicked(MouseEvent e) {
+			JRPrintImageAreaHyperlink imageMapArea = getImageMapArea(e);
+			if (imageMapArea != null) {
+				hyperlinkClicked(imageMapArea.getHyperlink());
+			}
+		}
+
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		public void mouseExited(MouseEvent e) {
+		}
+
+		public void mousePressed(MouseEvent e) {
+			e.getComponent().setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+			pnlLinksMousePressed(e);
+		}
+
+		public void mouseReleased(MouseEvent e) {
+			e.getComponent().setCursor(Cursor.getDefaultCursor());
+			pnlLinksMouseReleased(e);
+		}
 	}
 
-	protected String A(JRPrintHyperlink jrprinthyperlink) {
-		String s1 = null;
-		switch (jrprinthyperlink.getHyperlinkType()) {
-		default:
-			break;
-
-		case 2: // '\002'
-			s1 = jrprinthyperlink.getHyperlinkReference();
-			break;
-
-		case 3: // '\003'
-			if (jrprinthyperlink.getHyperlinkAnchor() != null)
-				s1 = (new StringBuilder()).append("#")
-						.append(jrprinthyperlink.getHyperlinkAnchor())
-						.toString();
-			break;
-
-		case 4: // '\004'
-			if (jrprinthyperlink.getHyperlinkPage() != null)
-				s1 = (new StringBuilder()).append("#page ")
-						.append(jrprinthyperlink.getHyperlinkPage()).toString();
-			break;
-
-		case 5: // '\005'
-			s1 = "";
-			if (jrprinthyperlink.getHyperlinkReference() != null)
-				s1 = (new StringBuilder()).append(s1)
-						.append(jrprinthyperlink.getHyperlinkReference())
-						.toString();
-			if (jrprinthyperlink.getHyperlinkAnchor() != null)
-				s1 = (new StringBuilder()).append(s1).append("#")
-						.append(jrprinthyperlink.getHyperlinkAnchor())
-						.toString();
-			break;
-
-		case 6: // '\006'
-			s1 = "";
-			if (jrprinthyperlink.getHyperlinkReference() != null)
-				s1 = (new StringBuilder()).append(s1)
-						.append(jrprinthyperlink.getHyperlinkReference())
-						.toString();
-			if (jrprinthyperlink.getHyperlinkPage() != null)
-				s1 = (new StringBuilder()).append(s1).append("#page ")
-						.append(jrprinthyperlink.getHyperlinkPage()).toString();
-			break;
+	protected String getHyperlinkTooltip(JRPrintHyperlink hyperlink) {
+		String toolTip;
+		toolTip = hyperlink.getHyperlinkTooltip();
+		if (toolTip == null) {
+			toolTip = getFallbackTooltip(hyperlink);
 		}
-		return s1;
+		return toolTip;
 	}
 
-	private void A(Container container) {
-		Component acomponent[] = container.getComponents();
-		if (acomponent != null) {
-			for (int i1 = 0; i1 < acomponent.length; i1++)
-				if (acomponent[i1] instanceof Container)
-					A((Container) acomponent[i1]);
-
+	protected String getFallbackTooltip(JRPrintHyperlink hyperlink) {
+		String toolTip = null;
+		switch (hyperlink.getHyperlinkType()) {
+		case 2: // reference
+		{
+			toolTip = hyperlink.getHyperlinkReference();
+			break;
 		}
-		acomponent = null;
+		case 3: // local anchor
+		{
+			if (hyperlink.getHyperlinkAnchor() != null) {
+				toolTip = "#" + hyperlink.getHyperlinkAnchor();
+			}
+			break;
+		}
+		case 4: // local page
+		{
+			if (hyperlink.getHyperlinkPage() != null) {
+				toolTip = "#page " + hyperlink.getHyperlinkPage();
+			}
+			break;
+		}
+		case 5: // remote anchor
+		{
+			toolTip = "";
+			if (hyperlink.getHyperlinkReference() != null) {
+				toolTip = toolTip + hyperlink.getHyperlinkReference();
+			}
+			if (hyperlink.getHyperlinkAnchor() != null) {
+				toolTip = toolTip + "#" + hyperlink.getHyperlinkAnchor();
+			}
+			break;
+		}
+		case 6: // remote page
+		{
+			toolTip = "";
+			if (hyperlink.getHyperlinkReference() != null) {
+				toolTip = toolTip + hyperlink.getHyperlinkReference();
+			}
+			if (hyperlink.getHyperlinkPage() != null) {
+				toolTip = toolTip + "#page " + hyperlink.getHyperlinkPage();
+			}
+			break;
+		}
+		default: {
+			break;
+		}
+		}
+		return toolTip;
+	}
+
+	/**
+	*/
+	private void emptyContainer(Container container) {
+		Component[] components = container.getComponents();
+
+		if (components != null) {
+			for (int i = 0; i < components.length; i++) {
+				if (components[i] instanceof Container) {
+					emptyContainer((Container) components[i]);
+				}
+			}
+		}
+
+		components = null;
 		container.removeAll();
 		container = null;
 	}
 
-	private float C() {
-		float f1 = A4;
+	/**
+	*/
+	private float getZoomRatio() {
+		float newZoom = zoom;
+
 		try {
-			f1 = q.parse(String.valueOf(V.getEditor().getItem())).floatValue() / 100F;
-		} catch (ParseException parseexception) {
+			newZoom = zoomDecimalFormat.parse(String.valueOf(cmbZoom.getEditor().getItem()))
+					.floatValue() / 100f;
+		} catch (ParseException e) {
 		}
-		return f1;
+
+		return newZoom;
 	}
 
-	public void setZoomRatio(float f1) {
-		if (f1 > 0.0F) {
-			V.getEditor().setItem(
-					(new StringBuilder()).append(q.format(f1 * 100F))
-							.append("%").toString());
-			if (A4 != f1) {
-				A4 = f1;
-				U = (A4 * (float) b) / 72F;
-				preparaColumnas();
+	/**
+	*/
+	public void setZoomRatio(float newZoom) {
+		if (newZoom > 0) {
+			cmbZoom.getEditor().setItem(zoomDecimalFormat.format(newZoom * 100) + "%");
+
+			if (zoom != newZoom) {
+				zoom = newZoom;
+				realZoom = zoom * screenResolution / REPORT_RESOLUTION;
+
+				refreshPage();
 			}
 		}
 	}
 
-	private void A(float f1) {
-		if (f1 > 0.0F && U != f1) {
-			A4 = (f1 * 72F) / (float) b;
-			U = f1;
-			V.getEditor().setItem(
-					(new StringBuilder()).append(q.format(A4 * 100F))
-							.append("%").toString());
-			preparaColumnas();
+	/**
+	*/
+	private void setRealZoomRatio(float newZoom) {
+		if (newZoom > 0 && realZoom != newZoom) {
+			zoom = newZoom * REPORT_RESOLUTION / screenResolution;
+			realZoom = newZoom;
+
+			cmbZoom.getEditor().setItem(zoomDecimalFormat.format(zoom * 100) + "%");
+
+			refreshPage();
 		}
 	}
 
+	/**
+	 *
+	 */
 	public void setFitWidthZoomRatio() {
-		A(((float) B.getVisibleRect().getWidth() - 20F)
-				/ (float) A5.getPageWidth());
+		setRealZoomRatio(((float) pnlInScroll.getVisibleRect().getWidth() - 20f)
+				/ jasperPrint.getPageWidth());
+
 	}
 
 	public void setFitPageZoomRatio() {
-		A(((float) B.getVisibleRect().getHeight() - 20F)
-				/ (float) A5.getPageHeight());
+		setRealZoomRatio(((float) pnlInScroll.getVisibleRect().getHeight() - 20f)
+				/ jasperPrint.getPageHeight());
 	}
 
-	protected void A(Graphics2D graphics2d) {
+	/**
+	 * 
+	 */
+	protected JRGraphics2DExporter getGraphics2DExporter() throws JRException {
+		return new JRGraphics2DExporter();
+	}
+
+	/**
+	 * 
+	 */
+	protected void paintPage(Graphics2D grx) {
+		if (pageError) {
+			paintPageError(grx);
+			return;
+		}
+
 		try {
-			if (A3 == null)
-				A3 = new JRGraphics2DExporter();
-			else
-				A3.reset();
-			A3.setParameter(JRExporterParameter.JASPER_PRINT, A5);
-			A3.setParameter(JRGraphics2DExporterParameter.GRAPHICS_2D,
-					graphics2d);
-			A3.setParameter(JRExporterParameter.PAGE_INDEX, new Integer(C));
-			A3.setParameter(JRGraphics2DExporterParameter.ZOOM_RATIO,
-					new Float(U));
-			A3.setParameter(JRExporterParameter.OFFSET_X, new Integer(1));
-			A3.setParameter(JRExporterParameter.OFFSET_Y, new Integer(1));
-			A3.exportReport();
-		} catch (Exception exception) {
-			exception.printStackTrace();
-			JOptionPane.showMessageDialog(this, buscaPorLetra("error.displaying"));
+			if (exporter == null) {
+				exporter = getGraphics2DExporter();
+			} else {
+				exporter.reset();
+			}
+
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRGraphics2DExporterParameter.GRAPHICS_2D, grx.create());
+			exporter.setParameter(JRExporterParameter.PAGE_INDEX, Integer.valueOf(pageIndex));
+			exporter.setParameter(JRGraphics2DExporterParameter.ZOOM_RATIO, new Float(realZoom));
+			exporter.setParameter(JRExporterParameter.OFFSET_X, Integer.valueOf(1)); // lblPage
+																						// border
+			exporter.setParameter(JRExporterParameter.OFFSET_Y, Integer.valueOf(1));
+			exporter.exportReport();
+		} catch (Exception e) {
+			if (log.isEnabledFor(Priority.ERROR)) {
+				log.error("Page paint error.", e);
+			}
+			pageError = true;
+
+			paintPageError(grx);
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					JOptionPane.showMessageDialog(JRViewerKalos.this,
+							getBundleString("error.displaying"));
+				}
+			});
+		}
+
+	}
+
+	protected void paintPageError(Graphics2D grx) {
+		AffineTransform origTransform = grx.getTransform();
+
+		AffineTransform transform = new AffineTransform();
+		transform.translate(1, 1);
+		transform.scale(realZoom, realZoom);
+		grx.transform(transform);
+
+		try {
+			drawPageError(grx);
+		} finally {
+			grx.setTransform(origTransform);
 		}
 	}
 
-	private void H() {
-		float f1 = ((float) B.getVisibleRect().getHeight() - 20F)
-				/ (float) A5.getPageHeight();
-		float f2 = ((float) B.getVisibleRect().getWidth() - 20F)
-				/ (float) A5.getPageWidth();
-		A(f1 >= f2 ? f2 : f1);
+	protected void drawPageError(Graphics grx) {
+		grx.setColor(Color.white);
+		grx.fillRect(0, 0, jasperPrint.getPageWidth() + 1, jasperPrint.getPageHeight() + 1);
 	}
 
-	public static final String M = "net.sf.jasperreports.viewer.render.buffer.max.size";
-	private static final int e = 1;
-	private static final int E = 2;
-	private static final int v = 3;
-	public static final int L = 72;
-	protected float n;
-	protected float w;
-	protected int Z[] = { 50, 75, 100, 125, 150, 175, 200, 250, 400, 800 };
-	protected int Y;
-	private int C0;
-	private boolean S;
-	private String A2;
-	JasperPrint A5;
-	private int C;
-	private float A4;
-	private JRGraphics2DExporter A3;
-	private int b;
-	protected float U;
-	private DecimalFormat q;
-	private ResourceBundle _;
-	private int d;
-	private int c;
-	private java.util.List H;
-	private Map o;
-	private MouseListener g = new MouseAdapter() {
-
-		public void mouseClicked(MouseEvent mouseevent) {
-			A.C(mouseevent);
+	protected void keyNavigate(KeyEvent evt) {
+		boolean refresh = true;
+		switch (evt.getKeyCode()) {
+		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_PAGE_DOWN:
+			dnNavigate(evt);
+			break;
+		case KeyEvent.VK_UP:
+		case KeyEvent.VK_PAGE_UP:
+			upNavigate(evt);
+			break;
+		case KeyEvent.VK_HOME:
+			homeEndNavigate(0);
+			break;
+		case KeyEvent.VK_END:
+			homeEndNavigate(jasperPrint.getPages().size() - 1);
+			break;
+		default:
+			refresh = false;
 		}
 
-	};
-	private java.util.List i;
-	protected JToggleButton z;
-	protected JButton t;
-	protected JToggleButton AA;
-	protected JToggleButton F;
-	protected JButton N;
-	protected JButton B5;
-	protected JButton BA;
-	protected JButton Q;
-	protected JButton a;
-	protected JButton O;
-	protected JButton G;
-	protected JButton s;
-	protected JComboBox V;
-	private JLabel r;
-	private JPanel m;
-	private JPanel l;
-	private JPanel k;
-	private JPanel j;
-	private JPanel h;
-	private JPanel f;
-	private _A K;
-	protected JLabel A;
-	private JPanel B;
-	private JPanel J;
-	private JPanel X;
-	private JPanel W;
-	protected JPanel T;
-	protected JPanel R;
-	protected JPanel P;
-	protected JPanel p;
-	private JScrollPane D;
-	protected JPanel u;
-	protected JTextField I;
+		if (refresh) {
+			refreshPage();
+		}
+	}
+
+	private void dnNavigate(KeyEvent evt) {
+		int bottomPosition = scrollPane.getVerticalScrollBar().getValue();
+		scrollPane.dispatchEvent(evt);
+		if ((scrollPane.getViewport().getHeight() > pnlPage.getHeight() || scrollPane
+				.getVerticalScrollBar().getValue() == bottomPosition)
+				&& pageIndex < jasperPrint.getPages().size() - 1) {
+			setPageIndex(pageIndex + 1);
+			if (scrollPane.isEnabled()) {
+				scrollPane.getVerticalScrollBar().setValue(0);
+			}
+		}
+	}
+
+	private void upNavigate(KeyEvent evt) {
+		if ((scrollPane.getViewport().getHeight() > pnlPage.getHeight() || scrollPane
+				.getVerticalScrollBar().getValue() == 0) && pageIndex > 0) {
+			setPageIndex(pageIndex - 1);
+			if (scrollPane.isEnabled()) {
+				scrollPane.getVerticalScrollBar().setValue(
+						scrollPane.getVerticalScrollBar().getMaximum());
+			}
+		} else {
+			scrollPane.dispatchEvent(evt);
+		}
+	}
+
+	private void homeEndNavigate(int pageNumber) {
+		setPageIndex(pageNumber);
+		if (scrollPane.isEnabled()) {
+			scrollPane.getVerticalScrollBar().setValue(0);
+		}
+	}
+
+	/**
+	 *
+	*/
+	private void fitPage() {
+		float heightRatio = ((float) pnlInScroll.getVisibleRect().getHeight() - 20f)
+				/ jasperPrint.getPageHeight();
+		float widthRatio = ((float) pnlInScroll.getVisibleRect().getWidth() - 20f)
+				/ jasperPrint.getPageWidth();
+		setRealZoomRatio(heightRatio < widthRatio ? heightRatio : widthRatio);
+	}
+
+	/**
+	*/
+	class PageRenderer extends JLabel {
+		private static final long serialVersionUID = JRConstants.SERIAL_VERSION_UID;
+
+		private boolean renderImage;
+		JRViewerKalos viewer = null;
+
+		public PageRenderer(JRViewerKalos viewer) {
+			this.viewer = viewer;
+		}
+
+		public void paintComponent(Graphics g) {
+			if (isRenderImage()) {
+				super.paintComponent(g);
+			} else {
+				viewer.paintPage((Graphics2D) g.create());
+			}
+		}
+
+		public boolean isRenderImage() {
+			return renderImage;
+		}
+
+		public void setRenderImage(boolean renderImage) {
+			this.renderImage = renderImage;
+		}
+	}
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	protected javax.swing.JToggleButton btnActualSize;
+	protected javax.swing.JButton btnFirst;
+	protected javax.swing.JToggleButton btnFitPage;
+	protected javax.swing.JToggleButton btnFitWidth;
+	protected javax.swing.JButton btnLast;
+	protected javax.swing.JButton btnNext;
+	protected javax.swing.JButton btnPrevious;
+	protected javax.swing.JButton btnPrint;
+	protected javax.swing.JButton btnReload;
+	protected javax.swing.JButton btnSave;
+	protected javax.swing.JButton btnZoomIn;
+	protected javax.swing.JButton btnZoomOut;
+	protected javax.swing.JComboBox cmbZoom;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JPanel jPanel4;
+	private javax.swing.JPanel jPanel5;
+	private javax.swing.JPanel jPanel6;
+	private javax.swing.JPanel jPanel7;
+	private javax.swing.JPanel jPanel8;
+	private javax.swing.JPanel jPanel9;
+	private PageRenderer lblPage;
+	protected javax.swing.JLabel lblStatus;
+	private javax.swing.JPanel pnlInScroll;
+	private javax.swing.JPanel pnlLinks;
+	private javax.swing.JPanel pnlMain;
+	private javax.swing.JPanel pnlPage;
+	protected javax.swing.JPanel pnlSep01;
+	protected javax.swing.JPanel pnlSep02;
+	protected javax.swing.JPanel pnlSep03;
+	protected javax.swing.JPanel pnlStatus;
+	private javax.swing.JScrollPane scrollPane;
+	protected javax.swing.JPanel tlbToolBar;
+	protected javax.swing.JTextField txtGoTo;
+	// End of variables declaration//GEN-END:variables
+
 }
