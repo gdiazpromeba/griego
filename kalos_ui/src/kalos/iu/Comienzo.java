@@ -12,27 +12,36 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import kalos.C.A;
-import kalos.C.F;
-import kalos.D.A.C;
-import kalos.D.A.D;
-import kalos.D.A.E;
-import kalos.D.A.H;
-import kalos.D.A.L;
-import kalos.D.A.N;
-import kalos.D.A.O;
-import kalos.D.A.P;
-import kalos.D.A.R;
-import kalos.D.A.S;
-import kalos.E.E.KA;
-import kalos.E.E.M;
-import kalos.E.E.U;
-import kalos.H.C.I;
+
+import kalos.analisismorfologico.negocio.AMAdjetivos;
+import kalos.analisismorfologico.negocio.AMAdverbios;
+import kalos.analisismorfologico.negocio.AMConjunciones;
+import kalos.analisismorfologico.negocio.AMInterjecciones;
+import kalos.analisismorfologico.negocio.AMNominal;
+import kalos.analisismorfologico.negocio.AMParticipios;
+import kalos.analisismorfologico.negocio.AMParticulas;
+import kalos.analisismorfologico.negocio.AMPreposiciones;
+import kalos.analisismorfologico.negocio.AMSustantivos;
+import kalos.analisismorfologico.negocio.AMUtil;
+import kalos.analisismorfologico.negocio.AMVerbal;
+import kalos.analisismorfologico.negocio.ExtractorPrefijos;
+import kalos.datos.gerentes.GerenteSeguridad;
+import kalos.datos.gerentes.GerenteVerbalizadorParticipios;
+import kalos.datos.gerentes.GerenteVerbos;
+import kalos.datos.gerentes.GerenteVerbosCompuestos;
+import kalos.flexion.declinacion.Participios;
+import kalos.iu.analisismorfologico.PanelAM;
+import kalos.iu.diccionario.PanelDiccionario;
+import kalos.iu.flexion.PanelFlexion;
+import kalos.iu.registro.VentanaRegistro;
+import kalos.recursos.Configuracion;
+import kalos.recursos.Recursos;
+import kalos.visual.GerenteDeApariencias;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -45,434 +54,410 @@ import org.springframework.core.io.FileSystemResource;
 // Referenced classes of package kalos.iu:
 //            A, B, C, E
 
-public class Comienzo
-{
-    static class _A
-        implements ActionListener
-    {
+public class Comienzo {
+	static class ListenerComenzar implements ActionListener {
 
-        public void actionPerformed(ActionEvent actionevent)
-        {
-            JFrame jframe = new JFrame();
-            kalos.iu.C c = (kalos.iu.C)Comienzo.J().getBean("menues");
-            c.inicializa(jframe);
-            jframe.setTitle((new StringBuilder()).append("KAL\323S ").append(kalos.C.A.getVersionNumero()).toString());
-            jframe.setLayout(new BorderLayout());
-            kalos.iu.Comienzo.I = new JPanel();
-            kalos.iu.Comienzo.I.setLayout(new BorderLayout());
-            JTabbedPane jtabbedpane = new JTabbedPane();
-            kalos.iu.Comienzo.I.add(kalos.iu.Comienzo.P(), "South");
-            kalos.iu.Comienzo.I.add(jtabbedpane, "Center");
-            jtabbedpane.add(kalos.C.F.getCadena("diccionario"), kalos.iu.Comienzo.D());
-            jtabbedpane.add(kalos.C.F.getCadena("analisis_morfologico"), kalos.iu.Comienzo.M());
-            jtabbedpane.add(kalos.C.F.getCadena("flexion"), kalos.iu.Comienzo.L());
-            jframe.add(kalos.iu.Comienzo.I);
-            jframe.setSize(777, 550);
-            jframe.setLocationRelativeTo(null);
-            jframe.setVisible(true);
-            Comienzo.Q().dispose();
-            jframe.addWindowListener(new WindowAdapter() {
+		public void actionPerformed(ActionEvent actionevent) {
+			JFrame jframe = new JFrame();
+			Menues c = (Menues) Comienzo.getApplicationContext().getBean("menues");
+			c.inicializa(jframe);
+			jframe.setTitle((new StringBuilder()).append("KALÓS ")
+					.append(Configuracion.getVersionNumero()).toString());
+			jframe.setLayout(new BorderLayout());
+			kalos.iu.Comienzo.I = new JPanel();
+			kalos.iu.Comienzo.I.setLayout(new BorderLayout());
+			JTabbedPane jtabbedpane = new JTabbedPane();
+			kalos.iu.Comienzo.I.add(kalos.iu.Comienzo.getPanelProgreso(), "South");
+			kalos.iu.Comienzo.I.add(jtabbedpane, "Center");
+			jtabbedpane.add(Recursos.getCadena("diccionario"),
+					kalos.iu.Comienzo.getPanelDiccionario());
+			jtabbedpane.add(Recursos.getCadena("analisis_morfologico"),
+					kalos.iu.Comienzo.getPanelAM());
+			jtabbedpane.add(Recursos.getCadena("flexion"), kalos.iu.Comienzo.getPanelFlexion());
+			jframe.add(kalos.iu.Comienzo.I);
+			jframe.setSize(777, 550);
+			jframe.setLocationRelativeTo(null);
+			jframe.setVisible(true);
+			Comienzo.getFrame().dispose();
+			jframe.addWindowListener(new WindowAdapter() {
 
-                public void windowClosing(WindowEvent windowevent)
-                {
-                    System.exit(0);
-                }
+				public void windowClosing(WindowEvent windowevent) {
+					System.exit(0);
+				}
 
-                final _A A;
+			});
 
-                
-                {
-                    A = _A.this;
-                    super();
-                }
-            }
-);
-        }
+		}
 
-        _A()
-        {
-        }
-    }
+	}
 
+	public static void main(String args[]) {
+		DOMConfigurator.configure("log4j.xml");
+		Recursos.cambiaLocale(Configuracion.getUltimoIdioma());
+		GerenteDeApariencias.poneLYFPorDefecto();
+		logger.info("********************** INICIANDO *********************************");
+		logger.info((new StringBuilder()).append("user.dir=")
+				.append(System.getProperty("user.dir")).toString());
+		logger.info((new StringBuilder()).append("user.home=")
+				.append(System.getProperty("user.home")).toString());
+		logger.info((new StringBuilder()).append("user.name=")
+				.append(System.getProperty("user.name")).toString());
+		logger.info((new StringBuilder()).append("os.name=").append(System.getProperty("os.name"))
+				.toString());
+		logger.info((new StringBuilder()).append("os.version=")
+				.append(System.getProperty("os.version")).toString());
+		logger.info((new StringBuilder()).append("font=").append(Configuracion.getFont())
+				.toString());
+		logger.info((new StringBuilder()).append("versi\363n de Kal\363s=")
+				.append(Configuracion.getVersionNumero()).toString());
+		caratula = new Caratula();
+		idiomaEtiquetas();
+		idiomaContenidos();
+		manejaTeclado();
+		C();
+		frame = new JFrame();
+		frame.setUndecorated(true);
+		frame.setContentPane(caratula);
+		frame.setSize(533, 400);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		cargaBeans();
+		caratula.botComenzar.addActionListener(new ListenerComenzar());
+	}
 
-    public Comienzo()
-    {
-    }
+	private static void cargaBeans() {
+		caratula.botComenzar.setEnabled(false);
+		caratula.cmbTeclados.setEnabled(false);
+		caratula.comboIdiomaEtiquetas.setEnabled(false);
+		caratula.comboItiomaContenidos.setEnabled(false);
+		new Thread() {
 
-    public static void main(String args[])
-    {
-        DOMConfigurator.configure("log4j.xml");
-        kalos.C.F.cambiaLocale(kalos.C.A.getUltimoIdioma());
-        kalos.A.A.poneLYFPorDefecto();
-        H.info("********************** INICIANDO *********************************");
-        H.info((new StringBuilder()).append("user.dir=").append(System.getProperty("user.dir")).toString());
-        H.info((new StringBuilder()).append("user.home=").append(System.getProperty("user.home")).toString());
-        H.info((new StringBuilder()).append("user.name=").append(System.getProperty("user.name")).toString());
-        H.info((new StringBuilder()).append("os.name=").append(System.getProperty("os.name")).toString());
-        H.info((new StringBuilder()).append("os.version=").append(System.getProperty("os.version")).toString());
-        H.info((new StringBuilder()).append("font=").append(kalos.C.A.getFont()).toString());
-        H.info((new StringBuilder()).append("versi\363n de Kal\363s=").append(kalos.C.A.getVersionNumero()).toString());
-        E = new kalos.iu.A();
-        S();
-        R();
-        H();
-        C();
-        C = new JFrame();
-        C.setUndecorated(true);
-        C.setContentPane(E);
-        C.setSize(533, 400);
-        C.setLocationRelativeTo(null);
-        C.setVisible(true);
-        O();
-        E.fuenteDatosCacheable.addActionListener(new _A());
-    }
+			public void run() {
+				caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_contexto"));
+				if (Configuracion.isDebug())
+					applicationContext = Comienzo.creaContexto();
+				else
+					applicationContext = Comienzo.creaContextoClasspath();
 
-    private static void O()
-    {
-        E.beans.setEnabled(false);
-        E.fuenteDatosCacheable.setEnabled(false);
-        (new Thread() {
+				caratula.setMensajeProgreso(Recursos
+						.getCadena("progreso.creando_controles_visuales"));
+				panelDiccionario = (PanelDiccionario) applicationContext
+						.getBean("panelResultadosDiccionario");
+				panelAM = (PanelAM) applicationContext.getBean("panelResultadosAM");
+				// panelAM.setApplicationContext(applicationContext);
+				panelProgreso = (PanelProgreso) applicationContext.getBean("panelProgreso");
+				panelFlexion = (PanelFlexion) applicationContext.getBean("panelTablaFlexion");
+				ventanaRegistro =(VentanaRegistro) applicationContext.getBean("ventanaRegistro");
+				// panelFlexion.setApplicationContext(applicationContext);
+				new Thread() {
 
-            public void run()
-            {
-                kalos.iu.Comienzo.F().setMensajeProgreso(kalos.C.F.getCadena("progreso.creando_contexto"));
-                if(kalos.C.A.isDebug())
-                    kalos.iu.Comienzo.setListaSeleccionable(Comienzo.creaContexto());
-                else
-                    kalos.iu.Comienzo.setListaSeleccionable(Comienzo.creaContextoClasspath());
-                kalos.iu.Comienzo.F().setMensajeProgreso(kalos.C.F.getCadena("progreso.creando_controles_visuales"));
-                kalos.iu.Comienzo.setListaSeleccionable((kalos.iu.D.A)Comienzo.J().getBean("panelResultadosDiccionario"));
-                kalos.iu.Comienzo.setListaSeleccionable((kalos.iu.C.A)Comienzo.J().getBean("panelResultadosAM"));
-                kalos.iu.Comienzo.M().setApplicationContext(Comienzo.J());
-                kalos.iu.Comienzo.setListaSeleccionable((B)Comienzo.J().getBean("panelProgreso"));
-                kalos.iu.Comienzo.setListaSeleccionable((kalos.iu.F.A)Comienzo.J().getBean("panelTablaFlexion"));
-                kalos.iu.Comienzo.L().setApplicationContext(Comienzo.J());
-                (new Thread() {
+					public void run() {
+						AMParticipios d = (AMParticipios) Comienzo.getApplicationContext().getBean(
+								"amParticipios");
+						d.setParticipios((Participios) Comienzo.getApplicationContext().getBean(
+								"participios"));
+						d.setAmUtil((AMUtil) Comienzo.getApplicationContext().getBean("amUtil"));
+						d.setAmNominal((AMNominal) Comienzo.getApplicationContext().getBean(
+								"amNominal"));
+						d.setAmVerbal((AMVerbal) Comienzo.getApplicationContext().getBean(
+								"amVerbal"));
+						d.setExtractorPrefijos((ExtractorPrefijos) Comienzo.getApplicationContext()
+								.getBean("extractorPrefijos"));
+						d.setGerenteVerbos((GerenteVerbos) Comienzo.getApplicationContext()
+								.getBean("gerenteVerbos"));
+						d.setGerenteVerbosCompuestos((GerenteVerbosCompuestos) Comienzo
+								.getApplicationContext().getBean("gerenteVerbosCompuestos"));
+						d.setGerenteVerbalizadorParticipios((GerenteVerbalizadorParticipios) Comienzo
+								.getApplicationContext().getBean("gerenteVerbalizadorParticipios"));
+						AMSustantivos f = (AMSustantivos) Comienzo.getApplicationContext().getBean(
+								"amSustantivos");
+						f.setApplicationContext(Comienzo.getApplicationContext());
+						AMAdjetivos l = (AMAdjetivos) Comienzo.getApplicationContext().getBean(
+								"amAdjetivos");
+						l.setApplicationContext(Comienzo.getApplicationContext());
+						AMParticulas s = (AMParticulas) Comienzo.getApplicationContext().getBean(
+								"amParticulas");
+						s.setApplicationContext(Comienzo.getApplicationContext());
+						AMConjunciones h = (AMConjunciones) Comienzo.getApplicationContext()
+								.getBean("amConjunciones");
+						h.setApplicationContext(Comienzo.getApplicationContext());
+						AMPreposiciones e = (AMPreposiciones) Comienzo.getApplicationContext()
+								.getBean("amPreposiciones");
+						e.setApplicationContext(Comienzo.getApplicationContext());
+						AMAdverbios o = (AMAdverbios) Comienzo.getApplicationContext().getBean(
+								"amAdverbios");
+						o.setApplicationContext(Comienzo.getApplicationContext());
+						AMInterjecciones a = (AMInterjecciones) Comienzo.getApplicationContext()
+								.getBean("amInterjecciones");
+						a.setApplicationContext(Comienzo.getApplicationContext());
+					}
 
-                    public void run()
-                    {
-                        D d = (D)Comienzo.J().getBean("amParticipios");
-                        d.setParticipios((I)Comienzo.J().getBean("participios"));
-                        d.setAmUtil((C)Comienzo.J().getBean("amUtil"));
-                        d.setAmNominal((R)Comienzo.J().getBean("amNominal"));
-                        d.setAmVerbal((P)Comienzo.J().getBean("amVerbal"));
-                        d.setExtractorPrefijos((N)Comienzo.J().getBean("extractorPrefijos"));
-                        d.setGerenteVerbos((kalos.E.E.P)Comienzo.J().getBean("gerenteVerbos"));
-                        d.setGerenteVerbosCompuestos((U)Comienzo.J().getBean("gerenteVerbosCompuestos"));
-                        d.setGerenteVerbalizadorParticipios((M)Comienzo.J().getBean("gerenteVerbalizadorParticipios"));
-                        kalos.D.A.F f = (kalos.D.A.F)Comienzo.J().getBean("amSustantivos");
-                        f.setApplicationContext(Comienzo.J());
-                        L l = (L)Comienzo.J().getBean("amAdjetivos");
-                        l.setApplicationContext(Comienzo.J());
-                        S s = (S)Comienzo.J().getBean("amParticulas");
-                        s.setApplicationContext(Comienzo.J());
-                        H h = (H)Comienzo.J().getBean("amConjunciones");
-                        h.setApplicationContext(Comienzo.J());
-                        E e = (E)Comienzo.J().getBean("amPreposiciones");
-                        e.setApplicationContext(Comienzo.J());
-                        O o = (O)Comienzo.J().getBean("amAdverbios");
-                        o.setApplicationContext(Comienzo.J());
-                        kalos.D.A.A a = (kalos.D.A.A)Comienzo.J().getBean("amInterjecciones");
-                        a.setApplicationContext(Comienzo.J());
-                    }
+				}.start();
+				caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_control_eventos"));
+				new Controlador(panelDiccionario, kalos.iu.Comienzo.getPanelFlexion());
+				caratula.botComenzar.setEnabled(true);
+				caratula.cmbTeclados.setEnabled(true);
+				caratula.comboIdiomaEtiquetas.setEnabled(true);
+				caratula.comboItiomaContenidos.setEnabled(true);
+				caratula.setMensajeProgreso("");
+				Comienzo.T();
+			}
 
-                    final _cls1 A;
+		}.start();
+		caratula.repaint();
+	}
 
-                    
-                    {
-                        A = _cls1.this;
-                        super();
-                    }
-                }
-).start();
-                kalos.iu.Comienzo.F().setMensajeProgreso(kalos.C.F.getCadena("progreso.creando_control_eventos"));
-                new kalos.iu.E(kalos.iu.Comienzo.D(), kalos.iu.Comienzo.L());
-                kalos.iu.Comienzo.F().fuenteDatosCacheable.setEnabled(true);
-                kalos.iu.Comienzo.F().beans.setEnabled(true);
-                kalos.iu.Comienzo.F().botAceptar.setEnabled(true);
-                kalos.iu.Comienzo.F().setMensajeProgreso("");
-                Comienzo.T();
-            }
+	private static void I() {
+		GerenteSeguridad ka = (GerenteSeguridad) applicationContext.getBean("gerenteSeguridad");
+		Configuracion.setNombre(ka.getNombre());
+	}
 
-        }
-).start();
-        E.repaint();
-    }
+	private static void idiomaEtiquetas() {
+		if (Configuracion.getUltimoIdioma().equals("en"))
+			caratula.comboIdiomaEtiquetas.setSelectedIndex(0);
+		else if (Configuracion.getUltimoIdioma().equals("es"))
+			caratula.comboIdiomaEtiquetas.setSelectedIndex(1);
+		else if (Configuracion.getUltimoIdioma().equals("fr"))
+			caratula.comboIdiomaEtiquetas.setSelectedIndex(2);
+		else if (Configuracion.getUltimoIdioma().equals("pr"))
+			caratula.comboIdiomaEtiquetas.setSelectedIndex(3);
+	}
 
-    private static void I()
-    {
-        KA ka = (KA)D.getBean("gerenteSeguridad");
-        kalos.C.A.setNombre(ka.getNombre());
-    }
+	private static void idiomaContenidos() {
+		if (Configuracion.getIdiomaSignificados().equals("en"))
+			caratula.comboItiomaContenidos.setSelectedIndex(0);
+		else if (Configuracion.getIdiomaSignificados().equals("es"))
+			caratula.comboItiomaContenidos.setSelectedIndex(1);
+		else if (Configuracion.getIdiomaSignificados().equals("fr"))
+			caratula.comboItiomaContenidos.setSelectedIndex(2);
+	}
 
-    private static void S()
-    {
-        if(kalos.C.A.getUltimoIdioma().equals("en"))
-            E.beans.setSelectedIndex(0);
-        else
-        if(kalos.C.A.getUltimoIdioma().equals("es"))
-            E.beans.setSelectedIndex(1);
-        else
-        if(kalos.C.A.getUltimoIdioma().equals("fr"))
-            E.beans.setSelectedIndex(2);
-        else
-        if(kalos.C.A.getUltimoIdioma().equals("pr"))
-            E.beans.setSelectedIndex(3);
-    }
+	private static void manejaTeclado() {
+		caratula.cmbTeclados.setSelectedItem(Configuracion.getUltimoTeclado());
+	}
 
-    private static void R()
-    {
-        if(kalos.C.A.getIdiomaSignificados().equals("en"))
-            E.botAceptar.setSelectedIndex(0);
-        else
-        if(kalos.C.A.getIdiomaSignificados().equals("es"))
-            E.botAceptar.setSelectedIndex(1);
-        else
-        if(kalos.C.A.getIdiomaSignificados().equals("fr"))
-            E.botAceptar.setSelectedIndex(2);
-    }
+	private static void B() {
+		Configuracion.setUltimoTeclado((String) caratula.cmbTeclados.getSelectedItem());
+		Configuracion.reescribeIni();
+	}
 
-    private static void H()
-    {
-        E.textPane.setSelectedItem(kalos.C.A.getUltimoTeclado());
-    }
+	private static void C() {
+		caratula.comboIdiomaEtiquetas.addItemListener(new ItemListener() {
 
-    private static void B()
-    {
-        kalos.C.A.setUltimoTeclado((String)E.textPane.getSelectedItem());
-        kalos.C.A.reescribeIni();
-    }
+			public void itemStateChanged(ItemEvent itemevent) {
+				if (itemevent.getStateChange() != 1) {
+					return;
+				} else {
+					reescribeIdiomaEtiquetas();
+					;
+					return;
+				}
+			}
 
-    private static void C()
-    {
-        E.beans.addItemListener(new ItemListener() {
+		});
+		caratula.comboItiomaContenidos.addItemListener(new ItemListener() {
 
-            public void itemStateChanged(ItemEvent itemevent)
-            {
-                if(itemevent.getStateChange() != 1)
-                {
-                    return;
-                } else
-                {
-                    kalos.iu.Comienzo.E();
-                    return;
-                }
-            }
+			public void itemStateChanged(ItemEvent itemevent) {
+				if (itemevent.getStateChange() != 1) {
+					return;
+				} else {
+					reescribeIdiomaSignificados();
+					return;
+				}
+			}
 
-        }
-);
-        E.botAceptar.addItemListener(new ItemListener() {
+		});
+		caratula.cmbTeclados.addItemListener(new ItemListener() {
 
-            public void itemStateChanged(ItemEvent itemevent)
-            {
-                if(itemevent.getStateChange() != 1)
-                {
-                    return;
-                } else
-                {
-                    Comienzo.G();
-                    return;
-                }
-            }
+			public void itemStateChanged(ItemEvent itemevent) {
+				if (itemevent.getStateChange() != 1) {
+					return;
+				} else {
+					kalos.iu.Comienzo.manejaTeclado();
+					return;
+				}
+			}
 
-        }
-);
-        E.textPane.addItemListener(new ItemListener() {
+		});
+	}
 
-            public void itemStateChanged(ItemEvent itemevent)
-            {
-                if(itemevent.getStateChange() != 1)
-                {
-                    return;
-                } else
-                {
-                    kalos.iu.Comienzo.A();
-                    return;
-                }
-            }
+	private static void reescribeIdiomaEtiquetas() {
+		switch (caratula.comboIdiomaEtiquetas.getSelectedIndex()) {
+		case 0: // '\0'
+			Configuracion.setUltimoIdioma("en");
+			Configuracion.reescribeIni();
+			break;
 
-        }
-);
-    }
+		case 1: // '\001'
+			Configuracion.setUltimoIdioma("es");
+			Configuracion.reescribeIni();
+			break;
 
-    private static void K()
-    {
-        switch(E.beans.getSelectedIndex())
-        {
-        case 0: // '\0'
-            kalos.C.A.setUltimoIdioma("en");
-            kalos.C.A.reescribeIni();
-            break;
+		case 2: // '\002'
+			Configuracion.setUltimoIdioma("fr");
+			Configuracion.reescribeIni();
+			break;
 
-        case 1: // '\001'
-            kalos.C.A.setUltimoIdioma("es");
-            kalos.C.A.reescribeIni();
-            break;
+		case 3: // '\003'
+			Configuracion.setUltimoIdioma("pr");
+			Configuracion.reescribeIni();
+			break;
+		}
+		Recursos.cambiaLocale(Configuracion.getUltimoIdioma());
+		caratula.botComenzar.setText(Recursos.getCadena("comenzar"));
+		caratula.repaint();
+		caratula.revalidate();
+		cargaBeans();
+	}
 
-        case 2: // '\002'
-            kalos.C.A.setUltimoIdioma("fr");
-            kalos.C.A.reescribeIni();
-            break;
+	private static void reescribeIdiomaSignificados() {
+		switch (caratula.comboItiomaContenidos.getSelectedIndex()) {
+		case 0: // '\0'
+			Configuracion.setIdiomaSignificados("en");
+			Configuracion.reescribeIni();
+			break;
 
-        case 3: // '\003'
-            kalos.C.A.setUltimoIdioma("pr");
-            kalos.C.A.reescribeIni();
-            break;
-        }
-        kalos.C.F.cambiaLocale(kalos.C.A.getUltimoIdioma());
-        E.fuenteDatosCacheable.setText(kalos.C.F.getCadena("comenzar"));
-        E.fuenteDatosCacheable.repaint();
-        E.fuenteDatosCacheable.revalidate();
-        O();
-    }
+		case 1: // '\001'
+			Configuracion.setIdiomaSignificados("es");
+			Configuracion.reescribeIni();
+			break;
 
-    private static void N()
-    {
-        switch(E.botAceptar.getSelectedIndex())
-        {
-        case 0: // '\0'
-            kalos.C.A.setIdiomaSignificados("en");
-            kalos.C.A.reescribeIni();
-            break;
+		case 2: // '\002'
+			Configuracion.setIdiomaSignificados("fr");
+			Configuracion.reescribeIni();
+			break;
+		}
+		cargaBeans();
+	}
 
-        case 1: // '\001'
-            kalos.C.A.setIdiomaSignificados("es");
-            kalos.C.A.reescribeIni();
-            break;
+	public static ApplicationContext creaContextoClasspath() {
+		DefaultListableBeanFactory defaultlistablebeanfactory = new DefaultListableBeanFactory();
+		XmlBeanDefinitionReader xmlbeandefinitionreader = new XmlBeanDefinitionReader(
+				defaultlistablebeanfactory);
+		ClassPathResource classpathresource = new ClassPathResource("daos.xml");
+		xmlbeandefinitionreader.loadBeanDefinitions(classpathresource);
+		classpathresource = new ClassPathResource("flexion.xml");
+		xmlbeandefinitionreader.loadBeanDefinitions(classpathresource);
+		classpathresource = new ClassPathResource("gerentes-datos.xml");
+		xmlbeandefinitionreader.loadBeanDefinitions(classpathresource);
+		classpathresource = new ClassPathResource("analisisMorfologico.xml");
+		xmlbeandefinitionreader.loadBeanDefinitions(classpathresource);
+		classpathresource = new ClassPathResource("iu.xml");
+		xmlbeandefinitionreader.loadBeanDefinitions(classpathresource);
+		GenericApplicationContext genericapplicationcontext = new GenericApplicationContext(
+				defaultlistablebeanfactory);
+		return genericapplicationcontext;
+	}
 
-        case 2: // '\002'
-            kalos.C.A.setIdiomaSignificados("fr");
-            kalos.C.A.reescribeIni();
-            break;
-        }
-        O();
-    }
+	public static ApplicationContext creaContexto() {
+		logger.info((new StringBuilder())
+				.append("creando nuevo contexto, con la configuraci\363n de significado =")
+				.append(Configuracion.getIdiomaSignificados()).toString());
+		DefaultListableBeanFactory defaultlistablebeanfactory = new DefaultListableBeanFactory();
+		XmlBeanDefinitionReader xmlbeandefinitionreader = new XmlBeanDefinitionReader(
+				defaultlistablebeanfactory);
+		FileSystemResource filesystemresource = new FileSystemResource((new StringBuilder())
+				.append(System.getProperty("user.dir")).append(File.separator).append("daos.xml")
+				.toString());
+		xmlbeandefinitionreader.loadBeanDefinitions(filesystemresource);
+		filesystemresource = new FileSystemResource((new StringBuilder())
+				.append(System.getProperty("user.dir")).append(File.separator)
+				.append("gerentes-datos.xml").toString());
+		xmlbeandefinitionreader.loadBeanDefinitions(filesystemresource);
+		filesystemresource = new FileSystemResource((new StringBuilder())
+				.append(System.getProperty("user.dir")).append(File.separator)
+				.append("analisisMorfologico.xml").toString());
+		xmlbeandefinitionreader.loadBeanDefinitions(filesystemresource);
+		filesystemresource = new FileSystemResource((new StringBuilder())
+				.append(System.getProperty("user.dir")).append(File.separator)
+				.append("flexion.xml").toString());
+		xmlbeandefinitionreader.loadBeanDefinitions(filesystemresource);
+		filesystemresource = new FileSystemResource((new StringBuilder())
+				.append(System.getProperty("user.dir")).append(File.separator).append("iu.xml")
+				.toString());
+		xmlbeandefinitionreader.loadBeanDefinitions(filesystemresource);
+		GenericApplicationContext genericapplicationcontext = new GenericApplicationContext(
+				defaultlistablebeanfactory);
+		return genericapplicationcontext;
+	}
 
-    public static ApplicationContext creaContextoClasspath()
-    {
-        DefaultListableBeanFactory defaultlistablebeanfactory = new DefaultListableBeanFactory();
-        XmlBeanDefinitionReader xmlbeandefinitionreader = new XmlBeanDefinitionReader(defaultlistablebeanfactory);
-        ClassPathResource classpathresource = new ClassPathResource("daos.xml");
-        xmlbeandefinitionreader.loadBeanDefinitions(classpathresource);
-        classpathresource = new ClassPathResource("flexion.xml");
-        xmlbeandefinitionreader.loadBeanDefinitions(classpathresource);
-        classpathresource = new ClassPathResource("gerentes-datos.xml");
-        xmlbeandefinitionreader.loadBeanDefinitions(classpathresource);
-        classpathresource = new ClassPathResource("analisisMorfologico.xml");
-        xmlbeandefinitionreader.loadBeanDefinitions(classpathresource);
-        classpathresource = new ClassPathResource("iu.xml");
-        xmlbeandefinitionreader.loadBeanDefinitions(classpathresource);
-        GenericApplicationContext genericapplicationcontext = new GenericApplicationContext(defaultlistablebeanfactory);
-        return genericapplicationcontext;
-    }
+	static Caratula getCaratula() {
+		return caratula;
+	}
 
-    public static ApplicationContext creaContexto()
-    {
-        H.info((new StringBuilder()).append("creando nuevo contexto, con la configuraci\363n de significado =").append(kalos.C.A.getIdiomaSignificados()).toString());
-        DefaultListableBeanFactory defaultlistablebeanfactory = new DefaultListableBeanFactory();
-        XmlBeanDefinitionReader xmlbeandefinitionreader = new XmlBeanDefinitionReader(defaultlistablebeanfactory);
-        FileSystemResource filesystemresource = new FileSystemResource((new StringBuilder()).append(System.getProperty("user.dir")).append(File.separator).append("daos.xml").toString());
-        xmlbeandefinitionreader.loadBeanDefinitions(filesystemresource);
-        filesystemresource = new FileSystemResource((new StringBuilder()).append(System.getProperty("user.dir")).append(File.separator).append("gerentes-datos.xml").toString());
-        xmlbeandefinitionreader.loadBeanDefinitions(filesystemresource);
-        filesystemresource = new FileSystemResource((new StringBuilder()).append(System.getProperty("user.dir")).append(File.separator).append("analisisMorfologico.xml").toString());
-        xmlbeandefinitionreader.loadBeanDefinitions(filesystemresource);
-        filesystemresource = new FileSystemResource((new StringBuilder()).append(System.getProperty("user.dir")).append(File.separator).append("flexion.xml").toString());
-        xmlbeandefinitionreader.loadBeanDefinitions(filesystemresource);
-        filesystemresource = new FileSystemResource((new StringBuilder()).append(System.getProperty("user.dir")).append(File.separator).append("iu.xml").toString());
-        xmlbeandefinitionreader.loadBeanDefinitions(filesystemresource);
-        GenericApplicationContext genericapplicationcontext = new GenericApplicationContext(defaultlistablebeanfactory);
-        return genericapplicationcontext;
-    }
+	static void setApplicationContext(ApplicationContext applicationcontext) {
+		Comienzo.applicationContext = applicationcontext;
+	}
 
-    static kalos.iu.A F()
-    {
-        return E;
-    }
+	static void setPanelDiccionario(PanelDiccionario a) {
+		Comienzo.panelDiccionario = a;
+	}
 
-    static ApplicationContext A(ApplicationContext applicationcontext)
-    {
-        return D = applicationcontext;
-    }
+	static ApplicationContext getApplicationContext() {
+		return Comienzo.applicationContext;
+	}
 
-    static kalos.iu.D.A A(kalos.iu.D.A a)
-    {
-        return B = a;
-    }
+	static void setPanelAM(PanelAM a) {
+		Comienzo.panelAM = a;
+	}
 
-    static ApplicationContext J()
-    {
-        return D;
-    }
+	static PanelAM getPanelAM() {
+		return panelAM;
+	}
 
-    static kalos.iu.C.A A(kalos.iu.C.A a)
-    {
-        return G = a;
-    }
+	static void setPanelProgreso(PanelProgreso b) {
+		Comienzo.panelProgreso = b;
+	}
 
-    static kalos.iu.C.A M()
-    {
-        return G;
-    }
+	static void setPanelFlexion(PanelFlexion a) {
+		panelFlexion = a;
+	}
 
-    static B A(B b)
-    {
-        return F = b;
-    }
+	static PanelFlexion getPanelFlexion() {
+		return panelFlexion;
+	}
 
-    static kalos.iu.F.A A(kalos.iu.F.A a)
-    {
-        return A = a;
-    }
+	static PanelDiccionario getPanelDiccionario() {
+		return panelDiccionario;
+	}
 
-    static kalos.iu.F.A L()
-    {
-        return A;
-    }
+	static void T() {
+		I();
+	}
 
-    static kalos.iu.D.A D()
-    {
-        return B;
-    }
+	static PanelProgreso getPanelProgreso() {
+		return Comienzo.panelProgreso;
+	}
 
-    static void T()
-    {
-        I();
-    }
+	static JFrame getFrame() {
+		return Comienzo.frame;
+	}
+	
+	static VentanaRegistro getVentanaRegistro(){
+		return Comienzo.ventanaRegistro;
+	}
 
-    static B P()
-    {
-        return F;
-    }
+	static void E() {
+		reescribeIdiomaEtiquetas();
+	}
 
-    static JFrame Q()
-    {
-        return C;
-    }
+	static void G() {
+		reescribeIdiomaSignificados();
+	}
 
-    static void E()
-    {
-        K();
-    }
+	static void A() {
+		B();
+	}
 
-    static void G()
-    {
-        N();
-    }
-
-    static void A()
-    {
-        B();
-    }
-
-    private static Logger H = Logger.getLogger(kalos/iu/Comienzo.getName());
-    private static kalos.iu.D.A B;
-    private static kalos.iu.C.A G;
-    private static B F;
-    private static kalos.iu.F.A A;
-    private static kalos.iu.A E;
-    private static JFrame C;
-    private static ApplicationContext D;
-    public static JPanel I;
+	private static Logger logger = Logger.getLogger(Comienzo.class);
+	private static PanelDiccionario panelDiccionario;
+	private static PanelAM panelAM;
+	private static PanelProgreso panelProgreso;
+	private static PanelFlexion panelFlexion;
+	private static Caratula caratula;
+	private static JFrame frame;
+	private static ApplicationContext applicationContext;
+	private static VentanaRegistro ventanaRegistro;
+	public static JPanel I;
 
 }

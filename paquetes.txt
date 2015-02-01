@@ -20,7 +20,6 @@ kalos
 	L SubtipoConjuncion
     m AcentoConcuerda
 	M Reportes
-	N EntradaDiccionario
 	O Espiritu
 	p Modo
 	P FuerteDebil
@@ -194,6 +193,7 @@ kalos
     J TestVerboBean
     I ValorCombo
 	U IrrSustantivoBean
+    N EntradaDiccionario
   F fonts
     F CaracterGriegoFactory
     A CarPos
@@ -261,6 +261,7 @@ kalos
           C BotonDetalle
           D BotonCopia
 		C ventanas
+		  A BrowserLauncher
 		  C AceptarCancelar
 		  D DialogErrores
 
@@ -352,6 +353,7 @@ kalos
      B PanelProgreso
      C Menues
      D EleccionTipografia
+	 E Controlador
      
      A registro
        A VentanaRegistro
@@ -374,6 +376,7 @@ kalos
 	 E tareas
         A TareaHabilitaComponentes
 		B TareaDiccionario
+		C TareaDibujoTablemodel
 		E TareaCuadro
 		F TareaOcultaProgreso
 		G TareaLeyenda

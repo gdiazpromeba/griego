@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Iterator;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,14 +24,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import kalos.recursos.Configuracion;
+import kalos.recursos.Recursos;
+
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-
-import kalos.C.B;
-import kalos.C.F;
-import kalos.recursos.Configuracion;
-import kalos.recursos.Recursos;
 
 // Referenced classes of package kalos.iu:
 //            D
@@ -102,15 +101,15 @@ public class Caratula extends JPanel {
 		botSelTipog.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent actionevent) {
-				A.setListaSeleccionable(A);
+				muestraEleccionTipografia();
 			}
 
 		});
 		if (Configuracion.getFont() == null)
-			A();
+			muestraEleccionTipografia();
 	}
 
-	private void A() {
+	private void muestraEleccionTipografia() {
 		EleccionTipografia elecTip = new EleccionTipografia();
 		elecTip.setModal(true);
 		elecTip.setTitle(Recursos.getCadena("tipografias"));
@@ -177,9 +176,7 @@ public class Caratula extends JPanel {
 		super.paint(g);
 	}
 
-	static void A(A a) {
-		a.A();
-	}
+
 
 	public JComboBox comboIdiomaEtiquetas;
 	public JComboBox comboItiomaContenidos;
