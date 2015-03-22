@@ -95,7 +95,7 @@ import org.apache.commons.lang.StringUtils;
 
 public class OpPalabras {
 
-//	protected static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(OpPalabras.class.getName());
+	protected static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(OpPalabras.class.getName());
 
 	public static String aumenta(String palabra, Aumento tipo) {
 		if (tipo.equals(Aumento.Ninguno))
@@ -1483,7 +1483,7 @@ public class OpPalabras {
 	 * @param palabra
 	 *            el array de contracciones
 	 * 
-	 * @return tiene la forma, por ejemplo, {"temaComido", "M", "YAI"}, {..., ..., ... },
+	 * @return tiene la forma, por ejemplo, {"B", "M", "YAI"}, {..., ..., ... },
 	 *         etc
 	 * 
 	 */
@@ -1735,19 +1735,19 @@ public class OpPalabras {
 
 	{ "D", "K", "K" }, { "Q", "K", "K" }, { "T", "K", "K" },
 
-	{ "temaComido", "M", "MM" }, { "P", "M", "MM" }, { "F", "M", "MM" },
+	{ "B", "M", "MM" }, { "P", "M", "MM" }, { "F", "M", "MM" },
 
-	{ "temaComido", "SQ", "FQ" }, { "P", "SQ", "FQ" }, { "F", "SQ", "FQ" },
+	{ "B", "SQ", "FQ" }, { "P", "SQ", "FQ" }, { "F", "SQ", "FQ" },
 
-	{ "temaComido", "S", "Y" }, { "P", "S", "Y" }, { "F", "S", "Y" },
+	{ "B", "S", "Y" }, { "P", "S", "Y" }, { "F", "S", "Y" },
 
-	{ "temaComido", "J", "Y" }, { "P", "J", "Y" }, { "F", "J", "Y" },
+	{ "B", "J", "Y" }, { "P", "J", "Y" }, { "F", "J", "Y" },
 
-	{ "temaComido", "T", "PT" }, { "P", "T", "PT" }, { "F", "T", "PT" },
+	{ "B", "T", "PT" }, { "P", "T", "PT" }, { "F", "T", "PT" },
 
-	{ "temaComido", "Q", "FQ" }, { "P", "Q", "FQ" }, { "F", "Q", "FQ" },
+	{ "B", "Q", "FQ" }, { "P", "Q", "FQ" }, { "F", "Q", "FQ" },
 
-	{ "temaComido", "K", "F" }, { "P", "K", "F" }, { "F", "K", "F" },
+	{ "B", "K", "F" }, { "P", "K", "F" }, { "F", "K", "F" },
 
 	// sigma-theta pierde la sigma después de lambda, rho o nu
 			{ "L", "SQ", "LQ" }, { "R", "SQ", "RQ" }, { "N", "SQ", "NQ" },

@@ -4,7 +4,7 @@
 
 package kalos.visual.controles.selectores.tabulares.encparticula;
 
-import kalos.datos.gerentes.GerenteEncParticulas;
+import kalos.datos.gerentes.GerenteEncParticulasImpl;
 import kalos.visual.controles.FabricaControles;
 import kalos.visual.controles.selectores.tabulares.SelectorActivoBeansTabular;
 
@@ -13,7 +13,7 @@ import kalos.visual.controles.selectores.tabulares.SelectorActivoBeansTabular;
 
 public class SelectorEncParticula extends SelectorActivoBeansTabular {
 
-    public SelectorEncParticula(GerenteEncParticulas k, FabricaControles a, int i, boolean flag, boolean flag1,
+    public SelectorEncParticula(GerenteEncParticulasImpl k, FabricaControles a, int i, boolean flag, boolean flag1,
 	    boolean flag2) {
 	super(k, flag, flag1, flag2, true, "forma");
 	M = k;
@@ -23,5 +23,5 @@ public class SelectorEncParticula extends SelectorActivoBeansTabular {
 	return new DialogSelectorEncParticula(M);
     }
 
-    private GerenteEncParticulas M;
+    private GerenteEncParticulasImpl M;
 }

@@ -1,0 +1,1191 @@
+2015-03-21 15:15:28,643 INFO  [kalos.operaciones.OpPalabras] palabra =OI
+2015-03-21 15:15:34,833 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:15:35,335 INFO  [kalos.operaciones.OpPalabras] palabra =OIE
+2015-03-21 15:15:35,742 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:36,134 INFO  [kalos.operaciones.OpPalabras] palabra =EIN
+2015-03-21 15:15:36,529 INFO  [kalos.operaciones.OpPalabras] palabra =A_N
+2015-03-21 15:15:36,920 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:37,343 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:15:37,784 INFO  [kalos.operaciones.OpPalabras] palabra =A|
+2015-03-21 15:15:39,302 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:39,668 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:15:39,980 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:15:40,264 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:40,555 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:15:40,859 INFO  [kalos.operaciones.OpPalabras] palabra =A|
+2015-03-21 15:15:41,158 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:41,470 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:15:41,783 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:15:42,128 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:42,488 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:15:43,785 INFO  [kalos.operaciones.OpPalabras] palabra =W|
+2015-03-21 15:15:44,365 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:48,308 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:15:48,783 INFO  [kalos.operaciones.OpPalabras] palabra =W|
+2015-03-21 15:15:49,175 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:49,894 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:15:50,349 INFO  [kalos.operaciones.OpPalabras] palabra =W|
+2015-03-21 15:15:50,771 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:51,224 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:15:51,648 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:15:52,023 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:52,539 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:15:52,999 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:15:53,406 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:53,796 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:15:54,205 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:15:54,690 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:55,112 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:15:55,472 INFO  [kalos.operaciones.OpPalabras] palabra =AI
+2015-03-21 15:15:55,847 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:56,222 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:56,625 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:15:57,037 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:15:57,503 INFO  [kalos.operaciones.OpPalabras] palabra =U
+2015-03-21 15:15:57,882 INFO  [kalos.operaciones.OpPalabras] palabra =AU
+2015-03-21 15:15:58,305 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:15:58,680 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:15:59,057 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:15:59,434 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:15:59,794 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:00,130 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:00,483 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:00,858 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:01,250 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:01,563 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:01,938 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:16:02,330 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:16:02,690 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:07,769 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:16:08,240 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:16:08,790 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:10,231 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:16:10,608 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:10,951 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:11,280 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:11,634 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:12,071 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:12,496 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:16:13,196 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:16:13,666 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:14,162 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:34,662 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:35,104 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:35,432 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:35,746 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:16:36,035 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:36,301 INFO  [kalos.operaciones.OpPalabras] palabra =U
+2015-03-21 15:16:36,615 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:16:36,897 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:16:37,156 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:37,437 INFO  [kalos.operaciones.OpPalabras] palabra =IE
+2015-03-21 15:16:37,720 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:37,954 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:16:38,267 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:38,552 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:38,784 INFO  [kalos.operaciones.OpPalabras] palabra =EIN
+2015-03-21 15:16:39,081 INFO  [kalos.operaciones.OpPalabras] palabra =OUN
+2015-03-21 15:16:39,348 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:39,630 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:39,926 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:40,208 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:40,500 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:40,756 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:16:41,006 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:41,272 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:16:41,571 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:46,785 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:47,390 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:16:47,798 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:48,123 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:48,342 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:48,592 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:48,811 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:49,029 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:16:49,232 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:16:49,436 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:49,649 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:49,818 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:16:50,022 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:50,198 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:50,370 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:50,542 INFO  [kalos.operaciones.OpPalabras] palabra =U
+2015-03-21 15:16:50,987 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:51,346 INFO  [kalos.operaciones.OpPalabras] palabra =UE
+2015-03-21 15:16:51,565 INFO  [kalos.operaciones.OpPalabras] palabra =U
+2015-03-21 15:16:51,769 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:16:51,988 INFO  [kalos.operaciones.OpPalabras] palabra =UI
+2015-03-21 15:16:52,197 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:56,605 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,617 INFO  [kalos.operaciones.OpPalabras] palabra =WE
+2015-03-21 15:16:56,617 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,617 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EH
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EH|
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EW
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EOU
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EOI
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EO
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EIN
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =AN
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =A|
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =W|
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:56,618 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =EIN
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =OUN
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:16:56,633 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =GM
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =GM
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =GM
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =J
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =J
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =J
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =KT
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =KT
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =KT
+2015-03-21 15:16:56,649 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =SM
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:16:56,665 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =SM
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =SM
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =ST
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =ST
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =ST
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,680 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:16:56,696 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,696 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,696 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:16:56,696 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,696 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:16:56,696 INFO  [kalos.operaciones.OpPalabras] palabra =temaComido
+2015-03-21 15:21:05,609 INFO  [kalos.operaciones.OpPalabras] palabra =OI
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =OIE
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =EIN
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A_N
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A|
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A|
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =W|
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =W|
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,696 INFO  [kalos.operaciones.OpPalabras] palabra =W|
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =AI
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =U
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =AU
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:21:05,711 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =U
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =IE
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =EIN
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =OUN
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,727 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =U
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =UE
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =U
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =UI
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =WE
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:21:05,742 INFO  [kalos.operaciones.OpPalabras] palabra =EH
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =EH|
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =EW
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =EOU
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =EOI
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =EO
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =EIN
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =AN
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =A|
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =W|
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:21:05,758 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =EIN
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =OUN
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =GM
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =GM
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =GM
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =J
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =J
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =J
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =KT
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =KT
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,774 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =KT
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =SM
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =SM
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =SM
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:21:05,789 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =ST
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =ST
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =ST
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:21:05,805 INFO  [kalos.operaciones.OpPalabras] palabra =temaComido
+2015-03-21 15:25:08,487 INFO  [kalos.operaciones.OpPalabras] palabra =OI
+2015-03-21 15:25:12,870 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,872 INFO  [kalos.operaciones.OpPalabras] palabra =OIE
+2015-03-21 15:25:12,872 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =EIN
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =A_N
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =A|
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =A|
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:25:12,873 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =W|
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =W|
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =W|
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =AI
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,889 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =U
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =AU
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,905 INFO  [kalos.operaciones.OpPalabras] palabra =U
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =IE
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =EIN
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =OUN
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:25:12,920 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =U
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =UE
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =U
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =UI
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =WE
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =EH
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =EH|
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =EW
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =EOU
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =EOI
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =EO
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =EIN
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =AN
+2015-03-21 15:25:12,936 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =A|
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =A_
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =W|
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =A
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =OU
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =I
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =EIN
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =OUN
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =E
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =H
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =EI
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =H|
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,951 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =OI_
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =EU
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =O
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =W
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =GM
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =GM
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =GM
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =J
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =J
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =J
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =X
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =KT
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =KT
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =KT
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:25:12,967 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =CQ
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =G
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =C
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =SM
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =SM
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =M
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =SM
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:25:12,983 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =S
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =ST
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =ST
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =ST
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =SQ
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =D
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =Q
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =T
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =K
+2015-03-21 15:25:12,998 INFO  [kalos.operaciones.OpPalabras] palabra =temaComido
+2015-03-21 16:24:28,968 ERROR [kalos.operaciones.OpBeans] la propiedad temaPropuesto no existe en el bean kalos.beans.TermRegVerbo@1f
+las propiedades del bean son:
+[tiempo]=Perfecto; [modo]=Imperativo; [particularidad]=null; [juego]=0; [silaba]=ninguna; [idVerbo]=null; [acento]=Ninguno; [pats]=false; [formaOriginal]=δεδήλωσο; [id]=null; [formaADestransformar]=δεδήλωσο; [compuesto]=false; [partic]=null; [formaOriginalCompuesta]=δεδήλωσο; [terminacion]=σο; [contraccion]=null; [vozJuego]=null; [voz]=Media; [tipoDesinencia]=-1; [fuerte]=Fuerte; [tiempoJuego]=null; [idVerboCompuesto]=null; [aumento]=null; [tiempoOAspecto]=null; [tema]=null; [class]=class kalos.beans.TermRegVerbo; [formaDestransformada]=δεδήλωσο; [preposiciones]=[]; [tipoVerboExtendido]=-1; [propagacion]=null; [reduplicacion]=false; [verboId]=null; [subPart]=0; [regEx]=(.*)[^K]SO; [persona]=_2ps; 
+java.lang.IllegalArgumentException: Method Name cannot be null
+	at org.apache.commons.beanutils.MethodUtils$MethodDescriptor.<init>(MethodUtils.java:809)
+	at org.apache.commons.beanutils.MethodUtils.getAccessibleMethod(MethodUtils.java:378)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:327)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:286)
+	at kalos.operaciones.OpBeans.getPropiedadObject(OpBeans.java:61)
+	at kalos.analisismorfologico.negocio.AMVerbal.incorporaTemaPropuestoIrregulares(AMVerbal.java:626)
+	at kalos.analisismorfologico.negocio.AMVerbos.buscaCanonica(AMVerbos.java:101)
+	at kalos.analisismorfologico.test.AMVerbosTest.testGenerico(AMVerbosTest.java:70)
+	at kalos.analisismorfologico.test.AMVerbosTest.testTabla(AMVerbosTest.java:53)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:228)
+	at junit.framework.TestSuite.run(TestSuite.java:223)
+	at org.junit.internal.runners.OldTestClassRunner.run(OldTestClassRunner.java:35)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2015-03-21 16:24:28,981 ERROR [kalos.operaciones.OpBeans] la propiedad temaPropuesto no existe en el bean kalos.beans.TermRegVerbo@1f
+las propiedades del bean son:
+[tiempo]=Perfecto; [modo]=Imperativo; [particularidad]=null; [juego]=0; [silaba]=ninguna; [idVerbo]=null; [acento]=Ninguno; [pats]=false; [formaOriginal]=δεδήλωσο; [id]=null; [formaADestransformar]=δεδήλωσο; [compuesto]=false; [partic]=null; [formaOriginalCompuesta]=δεδήλωσο; [terminacion]=σο; [contraccion]=null; [vozJuego]=null; [voz]=Media; [tipoDesinencia]=-1; [fuerte]=Fuerte; [tiempoJuego]=null; [idVerboCompuesto]=null; [aumento]=null; [tiempoOAspecto]=null; [tema]=null; [class]=class kalos.beans.TermRegVerbo; [formaDestransformada]=δήλωσο; [preposiciones]=[]; [tipoVerboExtendido]=-1; [propagacion]=null; [reduplicacion]=false; [verboId]=null; [subPart]=0; [regEx]=(.*)[^K]SO; [persona]=_2ps; 
+java.lang.IllegalArgumentException: Method Name cannot be null
+	at org.apache.commons.beanutils.MethodUtils$MethodDescriptor.<init>(MethodUtils.java:809)
+	at org.apache.commons.beanutils.MethodUtils.getAccessibleMethod(MethodUtils.java:378)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:327)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:286)
+	at kalos.operaciones.OpBeans.getPropiedadObject(OpBeans.java:61)
+	at kalos.analisismorfologico.negocio.AMUtil.vocalUnitivaTemas(AMUtil.java:90)
+	at kalos.analisismorfologico.negocio.AMUtil.vocalUnitivaTemas(AMUtil.java:179)
+	at kalos.analisismorfologico.negocio.AMUtil.paso3_5(AMUtil.java:80)
+	at kalos.analisismorfologico.negocio.AMVerbos.buscaCanonica(AMVerbos.java:104)
+	at kalos.analisismorfologico.test.AMVerbosTest.testGenerico(AMVerbosTest.java:70)
+	at kalos.analisismorfologico.test.AMVerbosTest.testTabla(AMVerbosTest.java:53)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:228)
+	at junit.framework.TestSuite.run(TestSuite.java:223)
+	at org.junit.internal.runners.OldTestClassRunner.run(OldTestClassRunner.java:35)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2015-03-21 16:33:42,264 ERROR [kalos.operaciones.OpBeans] la propiedad temaPropuesto no existe en el bean kalos.beans.TermRegVerbo@1f
+las propiedades del bean son:
+[tiempo]=Perfecto; [modo]=Imperativo; [particularidad]=null; [juego]=0; [silaba]=ninguna; [idVerbo]=null; [acento]=Ninguno; [pats]=false; [formaOriginal]=δεδήλωσο; [id]=null; [formaADestransformar]=δεδήλωσο; [compuesto]=false; [partic]=null; [formaOriginalCompuesta]=δεδήλωσο; [terminacion]=σο; [contraccion]=null; [vozJuego]=null; [voz]=Media; [tipoDesinencia]=-1; [fuerte]=Fuerte; [tiempoJuego]=null; [idVerboCompuesto]=null; [aumento]=null; [tiempoOAspecto]=null; [tema]=null; [class]=class kalos.beans.TermRegVerbo; [formaDestransformada]=δεδήλωσο; [preposiciones]=[]; [tipoVerboExtendido]=-1; [propagacion]=null; [reduplicacion]=false; [verboId]=null; [subPart]=0; [regEx]=(.*)[^K]SO; [persona]=_2ps; 
+java.lang.IllegalArgumentException: Method Name cannot be null
+	at org.apache.commons.beanutils.MethodUtils$MethodDescriptor.<init>(MethodUtils.java:809)
+	at org.apache.commons.beanutils.MethodUtils.getAccessibleMethod(MethodUtils.java:378)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:327)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:286)
+	at kalos.operaciones.OpBeans.getPropiedadObject(OpBeans.java:61)
+	at kalos.analisismorfologico.negocio.AMVerbal.incorporaTemaPropuestoIrregulares(AMVerbal.java:626)
+	at kalos.analisismorfologico.negocio.AMVerbos.buscaCanonica(AMVerbos.java:101)
+	at kalos.analisismorfologico.test.AMVerbosTest.testGenerico(AMVerbosTest.java:70)
+	at kalos.analisismorfologico.test.AMVerbosTest.testTabla(AMVerbosTest.java:53)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:228)
+	at junit.framework.TestSuite.run(TestSuite.java:223)
+	at org.junit.internal.runners.OldTestClassRunner.run(OldTestClassRunner.java:35)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2015-03-21 16:33:42,274 ERROR [kalos.operaciones.OpBeans] la propiedad temaPropuesto no existe en el bean kalos.beans.TermRegVerbo@1f
+las propiedades del bean son:
+[tiempo]=Perfecto; [modo]=Imperativo; [particularidad]=null; [juego]=0; [silaba]=ninguna; [idVerbo]=null; [acento]=Ninguno; [pats]=false; [formaOriginal]=δεδήλωσο; [id]=null; [formaADestransformar]=δεδήλωσο; [compuesto]=false; [partic]=null; [formaOriginalCompuesta]=δεδήλωσο; [terminacion]=σο; [contraccion]=null; [vozJuego]=null; [voz]=Media; [tipoDesinencia]=-1; [fuerte]=Fuerte; [tiempoJuego]=null; [idVerboCompuesto]=null; [aumento]=null; [tiempoOAspecto]=null; [tema]=null; [class]=class kalos.beans.TermRegVerbo; [formaDestransformada]=δήλωσο; [preposiciones]=[]; [tipoVerboExtendido]=-1; [propagacion]=null; [reduplicacion]=false; [verboId]=null; [subPart]=0; [regEx]=(.*)[^K]SO; [persona]=_2ps; 
+java.lang.IllegalArgumentException: Method Name cannot be null
+	at org.apache.commons.beanutils.MethodUtils$MethodDescriptor.<init>(MethodUtils.java:809)
+	at org.apache.commons.beanutils.MethodUtils.getAccessibleMethod(MethodUtils.java:378)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:327)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:286)
+	at kalos.operaciones.OpBeans.getPropiedadObject(OpBeans.java:61)
+	at kalos.analisismorfologico.negocio.AMUtil.vocalUnitivaTemas(AMUtil.java:90)
+	at kalos.analisismorfologico.negocio.AMUtil.vocalUnitivaTemas(AMUtil.java:179)
+	at kalos.analisismorfologico.negocio.AMUtil.paso3_5(AMUtil.java:80)
+	at kalos.analisismorfologico.negocio.AMVerbos.buscaCanonica(AMVerbos.java:104)
+	at kalos.analisismorfologico.test.AMVerbosTest.testGenerico(AMVerbosTest.java:70)
+	at kalos.analisismorfologico.test.AMVerbosTest.testTabla(AMVerbosTest.java:53)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:228)
+	at junit.framework.TestSuite.run(TestSuite.java:223)
+	at org.junit.internal.runners.OldTestClassRunner.run(OldTestClassRunner.java:35)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2015-03-21 16:37:21,491 ERROR [kalos.operaciones.OpBeans] la propiedad temaPropuesto no existe en el bean kalos.beans.TermRegVerbo@1f
+las propiedades del bean son:
+[tiempo]=Perfecto; [modo]=Imperativo; [particularidad]=null; [juego]=0; [silaba]=ninguna; [idVerbo]=null; [acento]=Ninguno; [pats]=false; [formaOriginal]=δεδήλωσο; [id]=null; [formaADestransformar]=δεδήλωσο; [compuesto]=false; [partic]=null; [formaOriginalCompuesta]=δεδήλωσο; [terminacion]=σο; [contraccion]=null; [vozJuego]=null; [voz]=Media; [tipoDesinencia]=-1; [fuerte]=Fuerte; [tiempoJuego]=null; [idVerboCompuesto]=null; [aumento]=null; [tiempoOAspecto]=null; [tema]=null; [class]=class kalos.beans.TermRegVerbo; [formaDestransformada]=δήλωσο; [preposiciones]=[]; [tipoVerboExtendido]=-1; [propagacion]=null; [reduplicacion]=false; [verboId]=null; [subPart]=0; [regEx]=(.*)[^K]SO; [persona]=_2ps; 
+java.lang.IllegalArgumentException: Method Name cannot be null
+	at org.apache.commons.beanutils.MethodUtils$MethodDescriptor.<init>(MethodUtils.java:809)
+	at org.apache.commons.beanutils.MethodUtils.getAccessibleMethod(MethodUtils.java:378)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:327)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:286)
+	at kalos.operaciones.OpBeans.getPropiedadObject(OpBeans.java:61)
+	at kalos.analisismorfologico.negocio.AMUtil.vocalUnitivaTemas(AMUtil.java:90)
+	at kalos.analisismorfologico.negocio.AMUtil.vocalUnitivaTemas(AMUtil.java:179)
+	at kalos.analisismorfologico.negocio.AMUtil.paso3_5(AMUtil.java:80)
+	at kalos.analisismorfologico.negocio.AMVerbos.buscaCanonica(AMVerbos.java:104)
+	at kalos.analisismorfologico.test.AMVerbosTest.testGenerico(AMVerbosTest.java:70)
+	at kalos.analisismorfologico.test.AMVerbosTest.testTabla(AMVerbosTest.java:53)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:228)
+	at junit.framework.TestSuite.run(TestSuite.java:223)
+	at org.junit.internal.runners.OldTestClassRunner.run(OldTestClassRunner.java:35)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+2015-03-21 16:39:32,843 ERROR [kalos.operaciones.OpBeans] la propiedad temaPropuesto no existe en el bean kalos.beans.TermRegVerbo@1f
+las propiedades del bean son:
+[tiempo]=Perfecto; [modo]=Imperativo; [particularidad]=null; [juego]=0; [silaba]=ninguna; [idVerbo]=null; [acento]=Ninguno; [pats]=false; [formaOriginal]=δεδήλωσο; [id]=null; [formaADestransformar]=δεδήλωσο; [compuesto]=false; [partic]=null; [formaOriginalCompuesta]=δεδήλωσο; [terminacion]=σο; [contraccion]=null; [vozJuego]=null; [voz]=Media; [tipoDesinencia]=-1; [fuerte]=Fuerte; [tiempoJuego]=null; [idVerboCompuesto]=null; [aumento]=null; [tiempoOAspecto]=null; [tema]=null; [class]=class kalos.beans.TermRegVerbo; [formaDestransformada]=δεδήλωσο; [preposiciones]=[]; [tipoVerboExtendido]=-1; [propagacion]=null; [reduplicacion]=false; [verboId]=null; [subPart]=0; [regEx]=(.*)[^K]SO; [persona]=_2ps; 
+java.lang.IllegalArgumentException: Method Name cannot be null
+	at org.apache.commons.beanutils.MethodUtils$MethodDescriptor.<init>(MethodUtils.java:809)
+	at org.apache.commons.beanutils.MethodUtils.getAccessibleMethod(MethodUtils.java:378)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:327)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:286)
+	at kalos.operaciones.OpBeans.getPropiedadObject(OpBeans.java:61)
+	at kalos.analisismorfologico.negocio.AMVerbal.incorporaTemaPropuestoIrregulares(AMVerbal.java:626)
+	at kalos.analisismorfologico.negocio.AMVerbos.buscaCanonica(AMVerbos.java:101)
+	at kalos.analisismorfologico.test.AMVerbosTest.testGenerico(AMVerbosTest.java:70)
+	at kalos.analisismorfologico.test.AMVerbosTest.testTabla(AMVerbosTest.java:53)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at junit.framework.TestCase.runTest(TestCase.java:164)
+	at junit.framework.TestCase.runBare(TestCase.java:130)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:120)
+	at junit.framework.TestSuite.runTest(TestSuite.java:228)
+	at junit.framework.TestSuite.run(TestSuite.java:223)
+	at org.junit.internal.runners.OldTestClassRunner.run(OldTestClassRunner.java:35)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)

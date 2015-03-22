@@ -39,6 +39,7 @@ import kalos.enumeraciones.Modo;
 import kalos.enumeraciones.Particularidad;
 import kalos.enumeraciones.Persona;
 import kalos.enumeraciones.Propagacion;
+import kalos.enumeraciones.Silaba;
 import kalos.enumeraciones.Tiempo;
 import kalos.enumeraciones.TiempoOAspecto;
 import kalos.enumeraciones.TipoPalabra;
@@ -247,12 +248,12 @@ public class AMVerbal {
     public boolean silabaAcentoAceptables(String formaOriginal, TermRegVerbal beanDesinencia,
 	    Map<Object[], TemaConPreps[]> cacheExtraccionPrefijos, AACacheable cacheAA) {
 	AnalisisAcento aaOrig = cacheAA.getAnalisisAcento(formaOriginal);
-	Integer silaba = (Integer) OpBeans.getPropiedadObject(beanDesinencia, "silaba");
+	Silaba silaba = (Silaba) OpBeans.getPropiedadObject(beanDesinencia, "silaba");
 	Acento acento = (Acento) OpBeans.getPropiedadObject(beanDesinencia, "acento");
 
 	if (silaba == null)
 	    return true;
-	if (silaba == 0
+	if (silaba.equals(Silaba.ninguna)
 		&& acento.equals(Acento.Ninguno)
 		&& (aaOrig.actuales.silaba != aaOrig.sugeridos.silaba || aaOrig.actuales.tipoAcento != aaOrig.actuales.tipoAcento)) {
 	    // intento extraerle extractorPrefijos para excusar que no coincida
@@ -274,13 +275,13 @@ public class AMVerbal {
 	    }
 
 	    return false;
-	} else if (silaba.intValue() != 0 && !acento.equals(Acento.Ninguno)
-		&& (aaOrig.actuales.silaba != silaba.intValue() || !aaOrig.actuales.tipoAcento.equals(acento))) {
+	} else if (silaba != Silaba.ninguna && !acento.equals(Acento.Ninguno)
+		&& (aaOrig.actuales.silaba != Silaba.getInt(silaba) || !aaOrig.actuales.tipoAcento.equals(acento))) {
 	    return false;
-	} else if (silaba.intValue() != 0 && aaOrig.actuales.silaba != silaba) {
+	} else if (silaba != Silaba.ninguna && Silaba.getEnum(aaOrig.actuales.silaba) != silaba) {
 	    return false;
 	} else if (beanDesinencia.getTipoDesinencia() == TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO
-		&& silaba == aaOrig.actuales.silaba) {
+		&& silaba == Silaba.getEnum(aaOrig.actuales.silaba)) {
 	    // cuando la TERM_REG fue generada for las desinencias
 	    // "vocálicas no contractas", la
 	    // sílaba puede ser forzada, pero si lo es, el acento debe ser

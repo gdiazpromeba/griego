@@ -91,7 +91,7 @@ public class AMVerbos implements AnalizadorMorfologico{
 		
 		//utilizar la función "conservasolo"  para dejar una determinada rama del árbol solamente
 		paso1(setEntradas, setPaso1, cacheExtraccionPrefijos, cacheAA, debug);             //obtención de juegos voz-modo-tiempo-persona posibles según terminación
-//		amUtil.conservaSolo(setPaso1, new String[]{"tiempo", "persona", "voz"}, new Object[]{Tiempo.Pluscuamperfecto, Persona._3ps, Voz.Media});
+//		amUtil.conservaSolo(setPaso1, new String[]{"tiempo", "persona", "voz"}, new Object[]{Tiempo.Futuro, Persona._1ps, Voz.Pasiva});
 		amVerbal.extiendeTipos(setPaso1, setPaso2, debug);   //expansión de los "nodos" de paso 1, según  pertenezcan a ciertas terminaciones
 //		amUtil.conservaSolo(setPaso2, new String[]{"tiempo", "tipoDesinencia"}, new Object[]{Tiempo.Pluscuamperfecto, 10 });
 		amVerbal.averiguaPreposiciones(setPaso2, setPaso2_5, ExtractorPrefijos.TODOS_LOS_NODOS,cacheExtraccionPrefijos, debug); //averiguación de preposiciones

@@ -18,6 +18,7 @@ import kalos.enumeraciones.Silaba;
 import kalos.enumeraciones.Tiempo;
 import kalos.enumeraciones.TiempoOAspecto;
 import kalos.enumeraciones.Voz;
+import kalos.operaciones.OpBeans;
 
 //Referenced classes of package kalos.K:
 //         L
@@ -25,27 +26,27 @@ import kalos.enumeraciones.Voz;
 public class TermRegVerbo implements TermRegVerbal {
 
     public Aumento getAumento() {
-	return J;
+	return aumento;
     }
 
     public void setAumento(Aumento s) {
-	J = s;
+	aumento = s;
     }
 
     public Contraccion getContraccion() {
-	return N;
+	return contraccion;
     }
 
     public void setContraccion(Contraccion c) {
-	N = c;
+	contraccion = c;
     }
 
     public FuerteDebil getFuerte() {
-	return A;
+	return fuerte;
     }
 
     public void setFuerte(FuerteDebil p) {
-	A = p;
+	fuerte = p;
     }
 
     public String getId() {
@@ -57,115 +58,154 @@ public class TermRegVerbo implements TermRegVerbal {
     }
 
     public int getJuego() {
-	return I;
+	return juego;
     }
 
     public void setJuego(int i) {
-	I = i;
+	juego = i;
     }
 
     public Modo getModo() {
-	return F;
+	return modo;
     }
 
     public void setModo(Modo p) {
-	F = p;
+	modo = p;
     }
 
     public Particularidad getPartic() {
-	return G;
+	return partic;
     }
 
     public void setPartic(Particularidad x) {
-	G = x;
+	partic = x;
     }
 
     public Propagacion getPropagacion() {
-	return Q;
+	return propagacion;
     }
 
     public void setPropagacion(Propagacion d) {
-	Q = d;
+	propagacion = d;
     }
 
     public boolean isReduplicacion() {
-	return R;
+	return reduplicacion;
     }
 
     public void setReduplicacion(boolean flag) {
-	R = flag;
+	reduplicacion = flag;
     }
 
     public int getSubPart() {
-	return E;
+	return subPart;
     }
 
     public void setSubPart(int i) {
-	E = i;
+	subPart = i;
     }
 
     public String getTema() {
-	return C;
+	return tema;
     }
 
     public void setTema(String s) {
-	C = s;
+	tema = s;
     }
 
     public Tiempo getTiempo() {
-	return B;
+	return tiempo;
     }
 
     public void setTiempo(Tiempo j) {
-	B = j;
+	tiempo = j;
     }
 
     public Tiempo getTiempoJuego() {
-	return P;
+	return tiempoJuego;
     }
 
     public void setTiempoJuego(Tiempo j) {
-	P = j;
+	tiempoJuego = j;
     }
 
     public String getVerboId() {
-	return D;
+	return verboId;
     }
 
     public void setVerboId(String s) {
-	D = s;
+	verboId = s;
     }
 
     public Voz getVoz() {
-	return L;
+	return voz;
     }
 
     public void setVoz(Voz z) {
-	L = z;
+	voz = z;
     }
 
     public Voz getVozJuego() {
-	return K;
+	return vozJuego;
     }
 
     public void setVozJuego(Voz z) {
-	K = z;
+	vozJuego = z;
     }
 
     public boolean isCompuesto() {
-	return O;
+	return compuesto;
     }
 
     public void setCompuesto(boolean flag) {
-	O = flag;
+	compuesto = flag;
     }
 
+    
+    
+    
+    @Override
     public int hashCode() {
-	int i = 1;
-	i = 31 * i + (id != null ? id.hashCode() : 0);
-	return i;
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((acento == null) ? 0 : acento.hashCode());
+	result = prime * result + ((aumento == null) ? 0 : aumento.hashCode());
+	result = prime * result + (compuesto ? 1231 : 1237);
+	result = prime * result + ((contraccion == null) ? 0 : contraccion.hashCode());
+	result = prime * result + ((formaADestransformar == null) ? 0 : formaADestransformar.hashCode());
+	result = prime * result + ((formaDestransformada == null) ? 0 : formaDestransformada.hashCode());
+	result = prime * result + ((formaOriginal == null) ? 0 : formaOriginal.hashCode());
+	result = prime * result + ((formaOriginalCompuesta == null) ? 0 : formaOriginalCompuesta.hashCode());
+	result = prime * result + ((fuerte == null) ? 0 : fuerte.hashCode());
+	result = prime * result + ((id == null) ? 0 : id.hashCode());
+	result = prime * result + ((idVerbo == null) ? 0 : idVerbo.hashCode());
+	result = prime * result + ((idVerboCompuesto == null) ? 0 : idVerboCompuesto.hashCode());
+	result = prime * result + juego;
+	result = prime * result + ((modo == null) ? 0 : modo.hashCode());
+	result = prime * result + ((partic == null) ? 0 : partic.hashCode());
+	result = prime * result + ((particularidad == null) ? 0 : particularidad.hashCode());
+	result = prime * result + (pats ? 1231 : 1237);
+	result = prime * result + ((persona == null) ? 0 : persona.hashCode());
+	result = prime * result + ((preposiciones == null) ? 0 : preposiciones.hashCode());
+	result = prime * result + ((propagacion == null) ? 0 : propagacion.hashCode());
+	result = prime * result + (reduplicacion ? 1231 : 1237);
+	result = prime * result + ((regEx == null) ? 0 : regEx.hashCode());
+	result = prime * result + ((silaba == null) ? 0 : silaba.hashCode());
+	result = prime * result + subPart;
+	result = prime * result + ((tema == null) ? 0 : tema.hashCode());
+	result = prime * result + ((temaPropuesto == null) ? 0 : temaPropuesto.hashCode());
+	result = prime * result + ((terminacion == null) ? 0 : terminacion.hashCode());
+	result = prime * result + ((tiempo == null) ? 0 : tiempo.hashCode());
+	result = prime * result + ((tiempoJuego == null) ? 0 : tiempoJuego.hashCode());
+	result = prime * result + tipoDesinencia;
+	result = prime * result + tipoVerboExtendido;
+	result = prime * result + ((verboId == null) ? 0 : verboId.hashCode());
+	result = prime * result + ((voz == null) ? 0 : voz.hashCode());
+	result = prime * result + ((vozJuego == null) ? 0 : vozJuego.hashCode());
+	return result;
     }
 
+    @Override
     public boolean equals(Object obj) {
 	if (this == obj)
 	    return true;
@@ -173,55 +213,169 @@ public class TermRegVerbo implements TermRegVerbal {
 	    return false;
 	if (getClass() != obj.getClass())
 	    return false;
-	TermRegVerbo s = (TermRegVerbo) obj;
-	if (id == null) {
-	    if (s.id != null)
+	TermRegVerbo other = (TermRegVerbo) obj;
+	if (acento != other.acento)
+	    return false;
+	if (aumento != other.aumento)
+	    return false;
+	if (compuesto != other.compuesto)
+	    return false;
+	if (contraccion != other.contraccion)
+	    return false;
+	if (formaADestransformar == null) {
+	    if (other.formaADestransformar != null)
 		return false;
-	} else if (!id.equals(s.id))
+	} else if (!formaADestransformar.equals(other.formaADestransformar))
+	    return false;
+	if (formaDestransformada == null) {
+	    if (other.formaDestransformada != null)
+		return false;
+	} else if (!formaDestransformada.equals(other.formaDestransformada))
+	    return false;
+	if (formaOriginal == null) {
+	    if (other.formaOriginal != null)
+		return false;
+	} else if (!formaOriginal.equals(other.formaOriginal))
+	    return false;
+	if (formaOriginalCompuesta == null) {
+	    if (other.formaOriginalCompuesta != null)
+		return false;
+	} else if (!formaOriginalCompuesta.equals(other.formaOriginalCompuesta))
+	    return false;
+	if (fuerte != other.fuerte)
+	    return false;
+	if (id == null) {
+	    if (other.id != null)
+		return false;
+	} else if (!id.equals(other.id))
+	    return false;
+	if (idVerbo == null) {
+	    if (other.idVerbo != null)
+		return false;
+	} else if (!idVerbo.equals(other.idVerbo))
+	    return false;
+	if (idVerboCompuesto == null) {
+	    if (other.idVerboCompuesto != null)
+		return false;
+	} else if (!idVerboCompuesto.equals(other.idVerboCompuesto))
+	    return false;
+	if (juego != other.juego)
+	    return false;
+	if (modo != other.modo)
+	    return false;
+	if (partic != other.partic)
+	    return false;
+	if (particularidad != other.particularidad)
+	    return false;
+	if (pats != other.pats)
+	    return false;
+	if (persona != other.persona)
+	    return false;
+	if (preposiciones == null) {
+	    if (other.preposiciones != null)
+		return false;
+	} else if (!preposiciones.equals(other.preposiciones))
+	    return false;
+	if (propagacion != other.propagacion)
+	    return false;
+	if (reduplicacion != other.reduplicacion)
+	    return false;
+	if (regEx == null) {
+	    if (other.regEx != null)
+		return false;
+	} else if (!regEx.equals(other.regEx))
+	    return false;
+	if (silaba != other.silaba)
+	    return false;
+	if (subPart != other.subPart)
+	    return false;
+	if (tema == null) {
+	    if (other.tema != null)
+		return false;
+	} else if (!tema.equals(other.tema))
+	    return false;
+	if (temaPropuesto == null) {
+	    if (other.temaPropuesto != null)
+		return false;
+	} else if (!temaPropuesto.equals(other.temaPropuesto))
+	    return false;
+	if (terminacion == null) {
+	    if (other.terminacion != null)
+		return false;
+	} else if (!terminacion.equals(other.terminacion))
+	    return false;
+	if (tiempo != other.tiempo)
+	    return false;
+	if (tiempoJuego != other.tiempoJuego)
+	    return false;
+	if (tipoDesinencia != other.tipoDesinencia)
+	    return false;
+	if (tipoVerboExtendido != other.tipoVerboExtendido)
+	    return false;
+	if (verboId == null) {
+	    if (other.verboId != null)
+		return false;
+	} else if (!verboId.equals(other.verboId))
+	    return false;
+	if (voz != other.voz)
+	    return false;
+	if (vozJuego != other.vozJuego)
 	    return false;
 	return true;
     }
+    
+    
 
     public boolean isPats() {
-	return H;
+	return pats;
     }
 
     public void setPats(boolean flag) {
-	H = flag;
+	pats = flag;
     }
 
     private String id;
-    private String D;
-    private String C;
-    private Particularidad G;
-    private int E;
-    private Modo F;
-    private Tiempo B;
-    private Voz L;
-    private FuerteDebil A;
-    private Contraccion N;
-    private Aumento J;
-    private boolean R;
-    private int I;
-    private Tiempo P;
-    private Voz K;
-    private Propagacion Q;
-    private boolean H;
-    private boolean O;
+    private String verboId;
+    private String tema;
+    private Particularidad partic;
+    private int subPart;
+    private Modo modo;
+    private Tiempo tiempo;
+    private Voz voz;
+    private FuerteDebil fuerte;
+    private Contraccion contraccion;
+    private Aumento aumento;
+    private boolean reduplicacion;
+    private int juego;
+    private Tiempo tiempoJuego;
+    private Voz vozJuego;
+    private Propagacion propagacion;
+    private boolean pats;
+    private boolean compuesto;
     private int tipoDesinencia;
     private String formaDestransformada;
     private int tipoVerboExtendido;
     private String terminacion;
     private String formaADestransformar;
     private List<String> preposiciones;
-    private TiempoOAspecto tiempoOAspecto;
     private String formaOriginalCompuesta;
     private String formaOriginal;
     private String idVerbo;
     private Particularidad particularidad;
     private String idVerboCompuesto;
     private Persona persona;
+    private String temaPropuesto;
     
+
+    
+    public String getTemaPropuesto() {
+        return temaPropuesto;
+    }
+
+    public void setTemaPropuesto(String temaPropuesto) {
+        this.temaPropuesto = temaPropuesto;
+    }
+
     public Persona getPersona() {
         return persona;
     }
@@ -300,12 +454,9 @@ public class TermRegVerbo implements TermRegVerbal {
     }
 
     public TiempoOAspecto getTiempoOAspecto() {
-        return tiempoOAspecto;
+	return tiempo;
     }
 
-    public void setTiempoOAspecto(TiempoOAspecto tiempoOAspecto) {
-        this.tiempoOAspecto = tiempoOAspecto;
-    }
 
     public List<String> getPreposiciones() {
         return preposiciones;
@@ -356,14 +507,10 @@ public class TermRegVerbo implements TermRegVerbal {
     }
 
     @Override
-    public TermRegVerbal clona() {
-	try {
-	    return (TermRegVerbal)this.clone();
-	} catch (CloneNotSupportedException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	    return null;
-	}
+    public TermRegVerbo clona() {
+	
+	TermRegVerbo copia =(TermRegVerbo) OpBeans.clona(this);
+	return copia;
     }
 
     

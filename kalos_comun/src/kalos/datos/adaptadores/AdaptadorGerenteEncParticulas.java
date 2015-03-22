@@ -5,7 +5,7 @@ import java.util.List;
 
 import kalos.beans.EncParticulaBean;
 import kalos.bibliotecadatos.FuenteDatosCacheable;
-import kalos.datos.gerentes.GerenteEncParticulas;
+import kalos.datos.gerentes.GerenteEncParticulasImpl;
 
 import org.apache.log4j.Logger;
 
@@ -13,11 +13,11 @@ public class AdaptadorGerenteEncParticulas implements FuenteDatosCacheable{
 
 	private List<String> ids;
 //	private List<?> beans;
-	private GerenteEncParticulas gerenteEncParticulas;
+	private GerenteEncParticulasImpl gerenteEncParticulas;
 	
 	Logger logger = Logger.getLogger(this.getClass().getName());
 	
-	public AdaptadorGerenteEncParticulas(GerenteEncParticulas gerente){
+	public AdaptadorGerenteEncParticulas(GerenteEncParticulasImpl gerente){
 		this.gerenteEncParticulas=gerente;
 		
 	}

@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import kalos.datos.adaptadores.AdaptadorGerenteEncParticulas;
 import kalos.datos.adaptadores.AdaptadorGerenteSustantivos;
-import kalos.datos.gerentes.GerenteEncParticulas;
+import kalos.datos.gerentes.GerenteEncParticulasImpl;
 import kalos.datos.gerentes.GerenteSustantivos;
 import kalos.enumeraciones.LugarSubcadena;
 import kalos.operaciones.ExcepcionCaracterNoEncontradoEnPalabra;
@@ -53,14 +53,14 @@ import com.jgoodies.forms.layout.FormLayout;
 public class DialogSelectorEncParticula extends DialogSelectorTabular {
 
     BotonBuscar butBuscarTodos = new BotonBuscar();
-    private GerenteEncParticulas gerenteEncParticulas;
+    private GerenteEncParticulasImpl gerenteEncParticulas;
 
     /**
      * @param conPreposicionales
      *            se refiere a si el resultado s'olo devuelve verbos que tengan
      *            formas preposicionales, o todos lo verbos
      */
-    public DialogSelectorEncParticula(GerenteEncParticulas gerenteEncParticulas) {
+    public DialogSelectorEncParticula(GerenteEncParticulasImpl gerenteEncParticulas) {
 	super(new String[] { "forma", "tipoPalabra" }, new int[] { 30, 90 }, new String[] { FRGenericos.TEXTO_LATINO,
 		FRGenericos.ENUMERACION }, new String[] { "forma", "tipo_de_palabra" });
 

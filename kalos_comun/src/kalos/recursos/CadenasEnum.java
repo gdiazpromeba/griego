@@ -66,18 +66,18 @@ public class CadenasEnum {
 	} else if (enumeracion instanceof Silaba) {
 	    Silaba silaba = (Silaba) enumeracion;
 	    switch (silaba) {
-	    case _0:
+	    case ninguna:
 		return "0";
-	    case _1:
+	    case penultima:
+		return "-2";
+	    case antepenultima:
+		return "-3";
+	    case ultima:
+		return "-1";
+	    case primera:
 		return "1";
-	    case _2:
+	    case segunda:
 		return "2";
-	    case _3:
-		return "3";
-	    case _4:
-		return "4";
-	    case _5:
-		return "5";
 	    }
 	    throw new RuntimeException("sílaba no encontrado");
 	} else if (enumeracion instanceof Caso) {

@@ -3,3 +3,5 @@ kalos_comun/data/*
 kalos_comun/bin/*
 kalos_comun/target/*
 kalos_comun/data.zip
+**/.settings/**
+**/.classpath
