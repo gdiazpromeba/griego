@@ -76,7 +76,7 @@ public class AMUtil {
 	
 //	Logger logger=Logger.getLogger(this.getClass().getName());
 
-	public void paso3_5(Set<ObjYDest> setSiguiente, List<ObjYDest> aBuscarPorTema) {
+	public void vocalUnitivaTemas(Set<ObjYDest> setSiguiente, List<ObjYDest> aBuscarPorTema) {
 		vocalUnitivaTemas(setSiguiente);
 		vocalUnitivaTemas(aBuscarPorTema);
 	}

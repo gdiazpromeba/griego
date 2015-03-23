@@ -15,19 +15,19 @@ import kalos.enumeraciones.OrigenTema;
 public class TermRegSustantivo implements TermRegNominal {
 
 	public boolean isAceptaDieresis() {
-		return B;
+		return aceptaDieresis;
 	}
 
 	public void setAceptaDieresis(boolean flag) {
-		B = flag;
+		aceptaDieresis = flag;
 	}
 
 	public String getRegexDieresis() {
-		return N;
+		return regexDieresis;
 	}
 
 	public void setRegexDieresis(String s) {
-		N = s;
+		regexDieresis = s;
 	}
 
 	public int hashCode() {
@@ -45,215 +45,215 @@ public class TermRegSustantivo implements TermRegNominal {
 
 	protected int cadena() {
 		StringBuffer stringbuffer = new StringBuffer();
-		stringbuffer.append(R);
+		stringbuffer.append(tipoSustantivo);
 		stringbuffer.append("|");
-		stringbuffer.append(F);
+		stringbuffer.append(caso);
 		stringbuffer.append("|");
-		stringbuffer.append(I);
+		stringbuffer.append(numero);
 		stringbuffer.append("|");
-		stringbuffer.append(E);
+		stringbuffer.append(origenTema);
 		stringbuffer.append("|");
-		stringbuffer.append(D);
+		stringbuffer.append(subindice);
 		stringbuffer.append("|");
-		stringbuffer.append(C);
+		stringbuffer.append(terminacion);
 		stringbuffer.append("|");
-		stringbuffer.append(P);
+		stringbuffer.append(exContraccion);
 		stringbuffer.append("|");
-		stringbuffer.append(T);
+		stringbuffer.append(formaOriginal);
 		stringbuffer.append("|");
-		stringbuffer.append(S);
+		stringbuffer.append(acento);
 		stringbuffer.append("|");
-		stringbuffer.append(U);
+		stringbuffer.append(silaba);
 		stringbuffer.append("|");
-		stringbuffer.append(H);
+		stringbuffer.append(tiposHoja);
 		stringbuffer.append("|");
-		stringbuffer.append(L);
+		stringbuffer.append(nominativoPropuesto);
 		stringbuffer.append("|");
-		stringbuffer.append(A);
+		stringbuffer.append(genitivoPropuesto);
 		return stringbuffer.toString().hashCode();
 	}
 
 	public Acento getAcento() {
-		return S;
+		return acento;
 	}
 
 	public void setAcento(Acento e) {
-		S = e;
+		acento = e;
 		hashCodePropio = null;
 	}
 
 	public int getAcentoConcuerda() {
-		return G;
+		return acentoConcuerda;
 	}
 
 	public void setAcentoConcuerda(int i) {
-		G = i;
+		acentoConcuerda = i;
 		hashCodePropio = null;
 	}
 
 	public Caso getCaso() {
-		return F;
+		return caso;
 	}
 
 	public void setCaso(Caso a) {
-		F = a;
+		caso = a;
 		hashCodePropio = null;
 	}
 
 	public boolean isExContraccion() {
-		return P;
+		return exContraccion;
 	}
 
 	public void setExContraccion(boolean flag) {
-		P = flag;
+		exContraccion = flag;
 		hashCodePropio = null;
 	}
 
 	public int getIdTipoSustantivo() {
-		return O;
+		return idTipoSustantivo;
 	}
 
 	public void setIdTipoSustantivo(int i) {
-		O = i;
+		idTipoSustantivo = i;
 		hashCodePropio = null;
 	}
 
 	public Numero getNumero() {
-		return I;
+		return numero;
 	}
 
 	public void setNumero(Numero n) {
-		I = n;
+		numero = n;
 		hashCodePropio = null;
 	}
 
 	public int getPosicionConcuerda() {
-		return Q;
+		return posicionConcuerda;
 	}
 
 	public void setPosicionConcuerda(int i) {
-		Q = i;
+		posicionConcuerda = i;
 		hashCodePropio = null;
 	}
 
 	public String getRegExDesinencia() {
-		return J;
+		return regexDesinencia;
 	}
 
 	public void setRegExDesinencia(String s) {
-		J = s;
+		regexDesinencia = s;
 		hashCodePropio = null;
 	}
 
 	public int getSilaba() {
-		return U;
+		return silaba;
 	}
 
 	public void setSilaba(int i) {
-		U = i;
+		silaba = i;
 		hashCodePropio = null;
 	}
 
 	public int getSubindice() {
-		return D;
+		return subindice;
 	}
 
 	public void setSubindice(int i) {
-		D = i;
+		subindice = i;
 		hashCodePropio = null;
 	}
 
 	public String getTerminacion() {
-		return C;
+		return terminacion;
 	}
 
 	public void setTerminacion(String s) {
-		C = s;
+		terminacion = s;
 		hashCodePropio = null;
 	}
 
 	public String getTiposHoja() {
-		return H;
+		return tiposHoja;
 	}
 
 	public void setTiposHoja(String s) {
-		H = s;
+		tiposHoja = s;
 		hashCodePropio = null;
 	}
 
 	public int getTipoSustantivo() {
-		return R;
+		return tipoSustantivo;
 	}
 
 	public void setTipoSustantivo(int i) {
-		R = i;
+		tipoSustantivo = i;
 		hashCodePropio = null;
 	}
 
 	public String getFormaOriginal() {
-		return T;
+		return formaOriginal;
 	}
 
 	public void setFormaOriginal(String s) {
-		T = s;
+		formaOriginal = s;
 		hashCodePropio = null;
 	}
 
 	public TermRegNominal getTerminacionPendienteRevision() {
-		return K;
+		return terminacionPendienteRevision;
 	}
 
 	public void setTerminacionPendienteRevision(TermRegNominal t) {
-		K = t;
+		terminacionPendienteRevision = t;
 		hashCodePropio = null;
 	}
 
 	public String getGenitivoPropuesto() {
-		return A;
+		return genitivoPropuesto;
 	}
 
 	public void setGenitivoPropuesto(String s) {
-		A = s;
+		genitivoPropuesto = s;
 		hashCodePropio = null;
 	}
 
 	public String getNominativoPropuesto() {
-		return L;
+		return nominativoPropuesto;
 	}
 
 	public void setNominativoPropuesto(String s) {
-		L = s;
+		nominativoPropuesto = s;
 		hashCodePropio = null;
 	}
 
 	public OrigenTema getOrigenTema() {
-		return E;
+		return origenTema;
 	}
 
 	public void setOrigenTema(OrigenTema g) {
-		E = g;
+		origenTema = g;
 		hashCodePropio = null;
 	}
 
-	private int R;
-	private int O;
-	private Caso F;
-	private Numero I;
-	private OrigenTema E;
-	private int D;
-	private String C;
-	private String H;
-	private boolean P;
-	private int G;
-	private int Q;
-	private Acento S;
-	private String J;
-	private int U;
-	private boolean B;
-	private String N;
-	private String T;
-	private TermRegNominal K;
-	private String L;
-	private String A;
+	private int tipoSustantivo;
+	private int idTipoSustantivo;
+	private Caso caso;
+	private Numero numero;
+	private OrigenTema origenTema;
+	private int subindice;
+	private String terminacion;
+	private String tiposHoja;
+	private boolean exContraccion;
+	private int acentoConcuerda;
+	private int posicionConcuerda;
+	private Acento acento;
+	private String regexDesinencia;
+	private int silaba;
+	private boolean aceptaDieresis;
+	private String regexDieresis;
+	private String formaOriginal;
+	private TermRegNominal terminacionPendienteRevision;
+	private String nominativoPropuesto;
+	private String genitivoPropuesto;
 	protected Integer hashCodePropio;
 }

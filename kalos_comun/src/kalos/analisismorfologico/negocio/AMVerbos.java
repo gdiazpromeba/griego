@@ -91,7 +91,7 @@ public class AMVerbos implements AnalizadorMorfologico{
 		
 		//utilizar la función "conservasolo"  para dejar una determinada rama del árbol solamente
 		paso1(setEntradas, setPaso1, cacheExtraccionPrefijos, cacheAA, debug);             //obtención de juegos voz-modo-tiempo-persona posibles según terminación
-//		amUtil.conservaSolo(setPaso1, new String[]{"tiempo", "persona", "voz"}, new Object[]{Tiempo.Futuro, Persona._1ps, Voz.Pasiva});
+//		amUtil.conservaSolo(setPaso1, new String[]{"tiempo", "persona", "voz", "tipoDesinencia"}, new Object[]{Tiempo.Aoristo, Persona._1ps, Voz.Pasiva, -1});
 		amVerbal.extiendeTipos(setPaso1, setPaso2, debug);   //expansión de los "nodos" de paso 1, según  pertenezcan a ciertas terminaciones
 //		amUtil.conservaSolo(setPaso2, new String[]{"tiempo", "tipoDesinencia"}, new Object[]{Tiempo.Pluscuamperfecto, 10 });
 		amVerbal.averiguaPreposiciones(setPaso2, setPaso2_5, ExtractorPrefijos.TODOS_LOS_NODOS,cacheExtraccionPrefijos, debug); //averiguación de preposiciones
@@ -101,7 +101,7 @@ public class AMVerbos implements AnalizadorMorfologico{
 		amVerbal.incorporaTemaPropuestoIrregulares(temIrr, debug);
 		
 //		amUtil.conservaSolo(setPaso3, new String[]{"FORMA_ORIGINAL"}, new Object[]{OpPalabras.strBetaACompleto("E)/PEISQE")});
-		amUtil.paso3_5(setPaso3, temIrr);  //preparación de temas para la búsqueda temprana
+		amUtil.vocalUnitivaTemas(setPaso3, temIrr);  //preparación de temas para la búsqueda temprana
 		amVerbal.aplicaEncuentraTemasTemprano(setPaso3, resultadosIrr, temIrr, debug);  //búsqueda temprana de temas
 		amVerbal.envoltorioRestauraFormas(setPaso3, setPaso4, cacheAA, debug);   //unión de temas y desinencias de canónica
 		amUtil.agrupaTemasEnSet(setPaso4, mapTemasPropuestos, debug);  //conversión del resultado en un set con el tema propuesto como clave

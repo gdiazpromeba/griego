@@ -59,16 +59,7 @@ public class AnalisisAcento {
 	System.out.println((new StringBuilder()).append("  lícito estricto=").append(actuales.licitoEstricto).toString());
     }
 
-    private int averiguaSilabaB1() {
-	int i = 0;
-	for (int j = 0; j < silabas.length; j++) {
-	    Object aobj[] = OpPalabras.contieneAcento(silabas[j].getCadena());
-	    if (!aobj[0].equals(Acento.Ninguno))
-		i++;
-	}
 
-	return i;
-    }
 
     public static AnalisisAcento getAnalisisAcento(String s) {
 	AnalisisAcento d = new AnalisisAcento();
@@ -79,7 +70,6 @@ public class AnalisisAcento {
 	d.actuales.tipoAcento = (Acento) aobj[0];
 	d.actuales.indiceLetraAcentuada = ((Integer) aobj[1]).intValue();
 	d.analizaSilabas();
-	d.actuales.silabaB1 = d.averiguaSilabaB1();
 	d.actuales.esTipoAcentonaturalDadaPosicion = d.esNaturalDadaPosicion();
 	d.sugiere();
 	d.averiguaLicitoEstricto();
@@ -119,6 +109,7 @@ public class AnalisisAcento {
 	    if (!e.equals(Acento.Ninguno)) {
 		actuales.silaba = i - silabas.length;
 		actuales.silabaB1 = cantidadDeSilabas + actuales.silaba + 1;
+		break;
 	    }
 	}
 
@@ -154,23 +145,26 @@ public class AnalisisAcento {
     }
 
     private boolean esNaturalDadaPosicion() {
+	if (actuales.tipoAcento==Acento.Ninguno){
+	    return false;
+	}
 	int i = actuales.silabaB1 - 1;
 	Acento e = actuales.tipoAcento;
 	if (e == Acento.Grave)
 	    return i == silabas.length;
-	int j = 0;
-	for (int k = i + 1; k < silabas.length; k++) {
+	int acumCantidad = 0;
+	for (int k = silabas.length-1; k> i; k--) {
 	    Silaba o = silabas[k];
 	    if (o.esLarga())
-		j += 2;
+		acumCantidad += 2;
 	    else
-		j++;
+		acumCantidad++;
 	}
 
 	if (e == Acento.Circunflejo)
-	    return j < 2;
+	    return acumCantidad < 2;
 	if (e == Acento.Agudo)
-	    return j >= 2 || !silabas[i].esLarga();
+	    return acumCantidad >= 2 || !silabas[i].esLarga();
 	else
 	    return true;
     }

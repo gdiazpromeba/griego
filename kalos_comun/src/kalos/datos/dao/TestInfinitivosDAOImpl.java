@@ -34,7 +34,7 @@ public class TestInfinitivosDAOImpl extends JdbcDaoSupport implements TestInfini
 		sb.append("  VERBOS VER       \n");
 		sb.append("    INNER JOIN TEST_INFINITIVOS TEI                 \n");
 		sb.append("      ON VER.VERBO_ID=TEI.VERBO_ID       \n");
-
+		//sb.append("WHERE TEI.ACTIVA=1       \n");
 		SELECCION_TODOS_SQL = sb.toString();
 	}
 

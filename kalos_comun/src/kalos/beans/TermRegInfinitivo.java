@@ -6,11 +6,11 @@ package kalos.beans;
 
 import java.util.List;
 
-
 import kalos.enumeraciones.Acento;
 import kalos.enumeraciones.Contraccion;
 import kalos.enumeraciones.FuerteDebil;
 import kalos.enumeraciones.Particularidad;
+import kalos.enumeraciones.Silaba;
 import kalos.enumeraciones.TiempoOAspecto;
 import kalos.enumeraciones.Voz;
 import kalos.operaciones.OpBeans;
@@ -23,9 +23,9 @@ public class TermRegInfinitivo implements TermRegVerbal {
 
 
 	public int hashCode() {
-		if (CF == null)
-			CF = Integer.valueOf(cadena());
-		return CF.intValue();
+		if (hashCode == null)
+			hashCode = Integer.valueOf(cadena());
+		return hashCode.intValue();
 	}
 
 	public boolean equals(Object obj) {
@@ -37,188 +37,189 @@ public class TermRegInfinitivo implements TermRegVerbal {
 
 	private int cadena() {
 		StringBuffer stringbuffer = new StringBuffer();
-		stringbuffer.append(CA);
+		stringbuffer.append(voz);
 		stringbuffer.append("|");
-		stringbuffer.append(D2);
+		stringbuffer.append(aspecto);
 		stringbuffer.append("|");
-		stringbuffer.append(C6);
+		stringbuffer.append(fuerte);
 		stringbuffer.append("|");
-		stringbuffer.append(C2);
+		stringbuffer.append(tipoDesinencia);
 		stringbuffer.append("|");
-		stringbuffer.append(C5);
+		stringbuffer.append(terminacion);
 		stringbuffer.append("|");
-		stringbuffer.append(C9);
+		stringbuffer.append(regEx);
 		stringbuffer.append("|");
-		stringbuffer.append(D6);
+		stringbuffer.append(silaba);
 		stringbuffer.append("|");
-		stringbuffer.append(D3);
+		stringbuffer.append(acento);
 		stringbuffer.append("|");
-		stringbuffer.append(CB);
+		stringbuffer.append(contraccionGeneradora);
 		stringbuffer.append("|");
-		stringbuffer.append(D5);
+		stringbuffer.append(formaOriginal);
 		stringbuffer.append("|");
-		stringbuffer.append(D0);
+		stringbuffer.append(tipoVerboExtendido);
 		stringbuffer.append("|");
-		stringbuffer.append(C4);
+		stringbuffer.append(formaOriginalCompuesta);
 		stringbuffer.append("|");
-		stringbuffer.append(D4);
+		stringbuffer.append(preposiciones);
 		stringbuffer.append("|");
-		stringbuffer.append(CD);
+		stringbuffer.append(formaADestransformar);
 		stringbuffer.append("|");
-		stringbuffer.append(C3);
+		stringbuffer.append(temaPropuesto);
 		stringbuffer.append("|");
-		stringbuffer.append(C7);
+		stringbuffer.append(idVerbo);
 		stringbuffer.append("|");
-		stringbuffer.append(C8);
+		stringbuffer.append(particularidad);
 		return stringbuffer.toString().hashCode();
 	}
 
 	public String getTemaPropuesto() {
-		return C3;
+		return temaPropuesto;
 	}
 
 	public void setTemaPropuesto(String s) {
-		C3 = s;
-		CF = null;
+		temaPropuesto = s;
+		hashCode = null;
 	}
 
 	public String getFormaDestransformada() {
-		return D1;
+		return formaDestransformada;
 	}
 
 	public void setFormaDestransformada(String s) {
-		D1 = s;
-		CF = null;
+		formaDestransformada = s;
+		hashCode = null;
 	}
 
 	public Acento getAcento() {
-		return D3;
+		return acento;
 	}
 
 	public void setAcento(Acento e) {
-		D3 = e;
-		CF = null;
+		acento = e;
+		hashCode = null;
 	}
 
 	public FuerteDebil getFuerte() {
-		return C6;
+		return fuerte;
 	}
 
 	public void setFuerte(FuerteDebil p) {
-		C6 = p;
-		CF = null;
+		fuerte = p;
+		hashCode = null;
 	}
 
 	public String getRegEx() {
-		return C9;
+		return regEx;
 	}
 
 	public void setRegEx(String s) {
-		C9 = s;
-		CF = null;
+		regEx = s;
+		hashCode = null;
 	}
 
-	public int getSilaba() {
-		return D6;
+	public Silaba getSilaba() {
+		return silaba;
 	}
 
-	public void setSilaba(int i) {
-		D6 = i;
-		CF = null;
+	public void setSilaba(Silaba i) {
+		silaba = i;
+		hashCode = null;
 	}
 
 	public int getTipoDesinencia() {
-		return C2;
+		return tipoDesinencia;
 	}
 
 	public void setTipoDesinencia(int i) {
-		C2 = i;
-		CF = null;
+		tipoDesinencia = i;
+		hashCode = null;
 	}
 
 	public Voz getVoz() {
-		return CA;
+		return voz;
 	}
 
 	public void setVoz(Voz z) {
-		CA = z;
-		CF = null;
+		voz = z;
+		hashCode = null;
 	}
 
 	public String getTerminacion() {
-		return C5;
+		return terminacion;
 	}
 
 	public void setTerminacion(String s) {
-		C5 = s;
-		CF = null;
+		terminacion = s;
+		hashCode = null;
 	}
 
 	public String getFormaOriginal() {
-		return D5;
+		return formaOriginal;
 	}
 
 	public void setFormaOriginal(String s) {
-		D5 = s;
-		CF = null;
+		formaOriginal = s;
+		hashCode = null;
 	}
 
 	public int getTipoVerboExtendido() {
-		return D0;
+		return tipoVerboExtendido;
 	}
 
 	public void setTipoVerboExtendido(int i) {
-		D0 = i;
-		CF = null;
+		tipoVerboExtendido = i;
+		hashCode = null;
 	}
 
 	public String getFormaOriginalCompuesta() {
-		return C4;
+		return formaOriginalCompuesta;
 	}
 
 	public void setFormaOriginalCompuesta(String s) {
-		C4 = s;
-		CF = null;
+		formaOriginalCompuesta = s;
+		hashCode = null;
 	}
 
 	public List getPreposiciones() {
-		return D4;
+		return preposiciones;
 	}
 
 	public void setPreposiciones(List list) {
-		D4 = list;
-		CF = null;
+		preposiciones = list;
+		hashCode = null;
 	}
 
 	public String getFormaADestransformar() {
-		return CD;
+		return formaADestransformar;
 	}
 
 	public void setFormaADestransformar(String s) {
-		CD = s;
-		CF = null;
+		formaADestransformar = s;
+		hashCode = null;
 	}
 
 	public String getIdVerbo() {
-		return C7;
+		return idVerbo;
 	}
 
 	public void setIdVerbo(String s) {
-		C7 = s;
-		CF = null;
+		idVerbo = s;
+		hashCode = null;
 	}
 
 	public Particularidad getParticularidad() {
-		return C8;
+		return particularidad;
 	}
 
 	public void setParticularidad(Particularidad x) {
-		C8 = x;
-		CF = null;
+		particularidad = x;
+		hashCode = null;
 	}
-
+	
+	
 	public TiempoOAspecto getAspecto() {
-		return D2;
+		return aspecto;
 	}
 
 	public TiempoOAspecto getTiempoOAspecto() {
@@ -226,58 +227,58 @@ public class TermRegInfinitivo implements TermRegVerbal {
 	}
 
 	public void setAspecto(TiempoOAspecto k) {
-		D2 = k;
-		CF = null;
+		aspecto = k;
+		hashCode = null;
 	}
 
 	public Contraccion getContraccionGeneradora() {
-		return CB;
+		return contraccionGeneradora;
 	}
 
 	public void setContraccionGeneradora(Contraccion c) {
-		CB = c;
-		CF = null;
+		contraccionGeneradora = c;
+		hashCode = null;
 	}
 
 	public boolean isCompuesto() {
-		return CE;
+		return compuesto;
 	}
 
 	public void setCompuesto(boolean flag) {
-		CE = flag;
+		compuesto = flag;
 	}
 
 	public String getIdVerboCompuesto() {
-		return CC;
+		return idVerboCompuesto;
 	}
 
 	public void setIdVerboCompuesto(String s) {
-		CC = s;
+		idVerboCompuesto = s;
 	}
 
 	public TermRegInfinitivo clona() {
 		return (TermRegInfinitivo) OpBeans.clona(this);
 	}
 
-	private Voz CA;
-	private TiempoOAspecto D2;
-	private FuerteDebil C6;
-	private int C2;
-	private String C5;
-	private String C9;
-	private int D6;
-	private Acento D3;
-	private Contraccion CB;
-	private String D5;
-	private int D0;
-	private String C4;
-	private List D4;
-	private String CD;
-	private String D1;
-	private String C3;
-	private String C7;
-	private Particularidad C8;
-	private boolean CE;
-	private String CC;
-	Integer CF;
+	private Voz voz;
+	private TiempoOAspecto aspecto;
+	private FuerteDebil fuerte;
+	private int tipoDesinencia;
+	private String terminacion;
+	private String regEx;
+	private Silaba silaba;
+	private Acento acento;
+	private Contraccion contraccionGeneradora;
+	private String formaOriginal;
+	private int tipoVerboExtendido;
+	private String formaOriginalCompuesta;
+	private List preposiciones;
+	private String formaADestransformar;
+	private String formaDestransformada;
+	private String temaPropuesto;
+	private String idVerbo;
+	private Particularidad particularidad;
+	private boolean compuesto;
+	private String idVerboCompuesto;
+	Integer hashCode;
 }

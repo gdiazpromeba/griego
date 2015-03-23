@@ -69,14 +69,16 @@ public class AMSustantivos implements AnalizadorMorfologico, ApplicationContextA
     public long buscaCanonica(String[] formas, Set<ResultadoUniversal> paramHashSet, AACacheable paramB,
 	    boolean paramBoolean1, boolean paramBoolean2) {
 	paso1();
-	Set<TermRegSustantivo> setTrs1 = new HashSet<TermRegSustantivo>();
+
+	Set<TermRegSustantivo> setPpal = new HashSet<TermRegSustantivo>();
 	Set<TermRegSustantivo> setTrs2 = new HashSet<TermRegSustantivo>();
 	long l1 = System.currentTimeMillis();
-	Set<String> localHashSet3 = new HashSet<String>(Arrays.asList(formas));
-	this.amNominal.paso1(localHashSet3, setTrs1, paramB, paramBoolean2);
-	this.amNominal.corrigePluralizados(setTrs1);
-	revisaNomGen(setTrs1, paramHashSet, paramBoolean2);
-	this.amNominal.reconstruyeTemas(setTrs1, setTrs2, paramB, paramBoolean2);
+	Set<String> entradas = new HashSet<String>(Arrays.asList(formas));
+	this.amNominal.paso1(entradas, setPpal, paramB, paramBoolean2);
+//        amUtil.conservaSolo(setPpal, new String[]{"caso", "numero", "tipoSustantivo"}, new Object[]{Caso.Acusativo, Numero.Singular, 12});
+	this.amNominal.corrigePluralizados(setPpal);
+	revisaNomGen(setPpal, paramHashSet, paramBoolean2);
+	this.amNominal.reconstruyeTemas(setPpal, setTrs2, paramB, paramBoolean2);
 	paso2(setTrs2, paramHashSet, paramBoolean2);
 	paso3(formas, paramHashSet, paramBoolean2);
 	paso4(formas, paramHashSet, paramBoolean2);
@@ -123,7 +125,7 @@ public class AMSustantivos implements AnalizadorMorfologico, ApplicationContextA
 	}
     }
 
-    private boolean A(TermRegSustantivo param_) {
+    private boolean contieneTipo(TermRegSustantivo param_) {
 	String str = param_.getTiposHoja();
 	String[] arrayOfString = str.split("\\-");
 	boolean bool = false;
@@ -179,9 +181,15 @@ public class AMSustantivos implements AnalizadorMorfologico, ApplicationContextA
 	}
     }
 
-    public void revisaNomGen(Collection<TermRegSustantivo> terminaciones, Set<ResultadoUniversal> paramSet,
-	    boolean paramBoolean) {
-	StringBuffer localStringBuffer = new StringBuffer();
+    /**
+     * revisa los que ya son nominativo o genitivo singular
+     * @param terminaciones
+     * @param setSalida
+     * @param debug
+     */
+    public void revisaNomGen(Collection<TermRegSustantivo> terminaciones, Set<ResultadoUniversal> setSalida,
+	    boolean debug) {
+	StringBuffer debugSb = new StringBuffer();
 	Set<TermRegSustantivo> localHashSet = new HashSet<TermRegSustantivo>();
 	Map<String, List<SustantivoBean>> localHashMap1 = new HashMap<String, List<SustantivoBean>>();
 	Map<String, List<SustantivoBean>> localHashMap2 = new HashMap<String, List<SustantivoBean>>();
@@ -189,20 +197,20 @@ public class AMSustantivos implements AnalizadorMorfologico, ApplicationContextA
 	while (localIterator1.hasNext()) {
 	    TermRegSustantivo termRegSust = localIterator1.next();
 	    termRegSust = (TermRegSustantivo) OpBeans.clona(termRegSust);
-	    if (!A(termRegSust)) {
-		if (paramBoolean) {
-		    localStringBuffer.append("descartando por no ser sustantivo:  " + termRegSust.toString() + " \n");
+	    if (!contieneTipo(termRegSust)) {
+		if (debug) {
+		    debugSb.append("descartando por no ser sustantivo:  " + termRegSust.toString() + " \n");
 		}
 	    } else {
 		Caso caso = termRegSust.getCaso();
 		Numero numero = termRegSust.getNumero();
 		String formaOriginal = termRegSust.getFormaOriginal();
-		int i = (caso == Caso.Genitivo) || (caso == Caso.Nominativo) ? 1 : 0;
-		int j = numero == Numero.Singular ? 1 : 0;
-		if ((i != 0) && (j != 0)) {
+		boolean esNomOrGen = (caso == Caso.Genitivo) || (caso == Caso.Nominativo);
+		boolean esSingular = numero == Numero.Singular;
+		if (esNomOrGen && esSingular) {
 		    String str2 = OpPalabras.strCompletoABeta(formaOriginal);
-		    if (paramBoolean) {
-			localStringBuffer.append("buscando en revisaNomGen caso=" + caso + " parametro  " + str2
+		    if (debug) {
+			debugSb.append("buscando en revisaNomGen caso=" + caso + " parametro  " + str2
 				+ " \n");
 		    }
 		    List<SustantivoBean> localList;
@@ -225,32 +233,32 @@ public class AMSustantivos implements AnalizadorMorfologico, ApplicationContextA
 			String str3 = termRegSust.getTiposHoja();
 			String str4 = "-" + locali.getTipoNominal() + "-";
 			if (str3.indexOf(str4) == -1) {
-			    if (paramBoolean) {
-				localStringBuffer.append("  rechazando:  " + locali.getNominativo() + " - ");
-				localStringBuffer.append(locali.getGenitivo() + " tipo " + locali.getTipoNominal());
-				localStringBuffer.append("  porque su tipo ");
-				localStringBuffer.append(" no está contenido en la lista de posibles tipos hoja="
+			    if (debug) {
+				debugSb.append("  rechazando:  " + locali.getNominativo() + " - ");
+				debugSb.append(locali.getGenitivo() + " tipo " + locali.getTipoNominal());
+				debugSb.append("  porque su tipo ");
+				debugSb.append(" no está contenido en la lista de posibles tipos hoja="
 					+ str3 + "  \n");
 			    }
 			} else {
-			    if (paramBoolean) {
-				localStringBuffer.append("  va a resultados:  " + termRegSust.toString() + " \n");
+			    if (debug) {
+				debugSb.append("  va a resultados:  " + termRegSust.toString() + " \n");
 			    }
 			    ResultadoUniversal localj1 = new ResultadoUniversal(TipoPalabra.Sustantivo, locali.getId(),
 				    null, locali.getPartic(), null, null, formaOriginal, null, null, null, null, caso,
 				    locali.getGenero(), numero, null, null, OpPalabras.strBetaACompleto(locali
 					    .getNominativo()), null, null);
-			    paramSet.add(localj1);
+			    setSalida.add(localj1);
 			    if (caso == Caso.Nominativo) {
 				if (termRegSust.getTiposHoja().matches(cadenaTiposHoja)) {
 				    ResultadoUniversal localj2 = (ResultadoUniversal) OpBeans.clona(localj1);
 				    localj2.setCaso(Caso.Vocativo);
-				    paramSet.add(localj2);
+				    setSalida.add(localj2);
 				    ResultadoUniversal localj3 = (ResultadoUniversal) OpBeans.clona(localj1);
 				    localj3.setCaso(Caso.Acusativo);
-				    paramSet.add(localj3);
-				    if (paramBoolean) {
-					localStringBuffer.append("expandido a Vocativo y Acusativo por ser neutro \n");
+				    setSalida.add(localj3);
+				    if (debug) {
+					debugSb.append("expandido a Vocativo y Acusativo por ser neutro \n");
 				    }
 				} else {
 				    int k = locali.getTipoNominal();
@@ -263,9 +271,9 @@ public class AMSustantivos implements AnalizadorMorfologico, ApplicationContextA
 					if (m == 0) {
 					    ResultadoUniversal resVoc = (ResultadoUniversal) OpBeans.clona(localj1);
 					    resVoc.setCaso(Caso.Vocativo);
-					    paramSet.add(resVoc);
-					    if (paramBoolean) {
-						localStringBuffer.append("expandido a Vocativo por tener Nom=Voc \n");
+					    setSalida.add(resVoc);
+					    if (debug) {
+						debugSb.append("expandido a Vocativo por tener Nom=Voc \n");
 					    }
 					}
 				    }
@@ -278,11 +286,11 @@ public class AMSustantivos implements AnalizadorMorfologico, ApplicationContextA
 	    }
 	}
 	terminaciones.removeAll(localHashSet);
-	if (paramBoolean) {
+	if (debug) {
 	    System.out.println("revisaNomGen **************");
-	    System.out.println(localStringBuffer.toString());
+	    System.out.println(debugSb.toString());
 	    System.out.println("resultados ");
-	    this.amUtil.debugSet(paramSet, new String[0]);
+	    this.amUtil.debugSet(setSalida, new String[0]);
 	}
     }
 

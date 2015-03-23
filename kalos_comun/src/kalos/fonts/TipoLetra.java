@@ -19,19 +19,27 @@ public class TipoLetra
 {
 
 
+    /**
+     * obtiene el tipo de letra básico
+     * 1 - vocal
+     * 2 - consonant3
+     * 3 - signo especial
+     * @param c
+     * @return
+     */
     public static int getTipoLetraBasico(char c)
     {
         char c1 = OpLetras.desespirituarLetra(OpLetras.desacentuarLetra(c));
         switch(c1)
         {
-        case 917: 
-        case 919: 
+        case 917: //Épsilon mayúscula
+        case 919: //Eta mayúscula
         case 927: 
         case 937: 
         case 949: 
         case 951: 
         case 959: 
-        case 969: 
+        case 969: // ω
         case 8115: 
         case 8124: 
         case 8131: 
@@ -84,7 +92,7 @@ public class TipoLetra
         case 957: 
         case 958: 
         case 960: 
-        case 961: 
+        case 961: // ρ
         case 962: 
         case 963: 
         case 964: 
@@ -108,9 +116,16 @@ public class TipoLetra
         case 8125: 
             return 3;
         }
-        throw new ExcepcionLetra(c1, (new StringBuilder()).append("Error tratando de encontrar el tipo de letra b\341sico para ").append(c1).append(" hex=").append(Integer.toHexString(c1)).toString());
+        throw new ExcepcionLetra(c1, (new StringBuilder()).append("Error tratando de encontrar el tipo de letra básico para ").append(c1).append(" hex=").append(Integer.toHexString(c1)).toString());
     }
 
+    /**
+     * averigua si la vocal es larga o corta
+     * 1- corta
+     * 2- larga
+     * @param c
+     * @return
+     */
     public static int getTipoVocal(char c)
     {
         char c1 = OpLetras.desespirituarLetra(OpLetras.desacentuarLetra(c));

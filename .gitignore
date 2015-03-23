@@ -5,3 +5,5 @@ kalos_comun/target/*
 kalos_comun/data.zip
 **/.settings/**
 **/.classpath
+kalos_comun/kalos.log
+

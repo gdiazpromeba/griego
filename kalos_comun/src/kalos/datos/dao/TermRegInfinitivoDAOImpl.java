@@ -28,6 +28,7 @@ import kalos.enumeraciones.Acento;
 import kalos.enumeraciones.Aspecto;
 import kalos.enumeraciones.Contraccion;
 import kalos.enumeraciones.FuerteDebil;
+import kalos.enumeraciones.Silaba;
 import kalos.enumeraciones.Voz;
 
 import org.springframework.jdbc.core.SqlParameter;
@@ -101,7 +102,7 @@ public class TermRegInfinitivoDAOImpl extends JdbcDaoSupport implements TermRegI
 			bean.setTipoDesinencia(rs.getInt("TIPO_DESINENCIA"));
 			bean.setTerminacion(rs.getString("TERMINACION"));
 			bean.setRegEx(rs.getString("REGEX_TERM"));
-			bean.setSilaba(rs.getInt("SILABA"));
+			bean.setSilaba(Silaba.getEnum(rs.getInt("SILABA")));
 			bean.setAcento(Acento.getEnum(rs.getInt("ACENTO")));
 			bean.setContraccionGeneradora(Contraccion.getEnum(rs.getInt("CONTRACCION_GENERADORA")));
 			return bean;
