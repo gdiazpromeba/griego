@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 
 import kalos.recursos.CadenasEnum;
@@ -53,6 +55,40 @@ public enum TipoPalabra {
 
     public static String getString(TipoPalabra tp) {
 	return CadenasEnum.getCadena(tp);
+    }
+    
+    public  String getStringCorta(){
+	switch(this){
+	case Adjetivo:
+	    return "ADJ";
+	case Adverbio:
+	    return "ADV";
+	case Articulo:
+	    return "ART";
+	case Conjuncion:
+	    return "CONJ";
+	case Interjeccion:
+	    return "INTERJ";
+	case PronombrePersonal:
+	    return "PPE";
+	case PronombreReflexivo:
+	    return "PREF";
+	case PronombreRelativo:
+	    return "PREL";
+	case Preposicion:
+	    return "PREP";
+	case PronombreInterrogativo:
+	    return "PRINT";
+	case PronombreIndefinido:
+	    return "PRONINDEF";
+	case Sustantivo:
+	    return "SUS";
+	case Verbo:
+	    return "VER";
+	default:
+	  throw new RuntimeException("no se encuentra cadena para la enumeración " + this);
+		    
+	}
     }
     
     /**

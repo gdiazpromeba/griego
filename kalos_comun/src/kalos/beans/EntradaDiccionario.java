@@ -18,6 +18,9 @@ public class EntradaDiccionario implements ISignificados{
 	private String referenteId;
 	private String normal;
 	private String normalBeta;
+	private String sinLargasBeta;
+	private String neutralizadaBeta;
+	private String unicode;
 	private TipoPalabra tipoPalabra;
 	private String letra;
 	private int codigo;
@@ -114,6 +117,24 @@ public class EntradaDiccionario implements ISignificados{
 	 */
 	public void setNormalBeta(String normalBeta) {
 		this.normalBeta = normalBeta;
+	}
+	public String getSinLargasBeta() {
+	    return sinLargasBeta;
+	}
+	public void setSinLargasBeta(String sinLargasBeta) {
+	    this.sinLargasBeta = sinLargasBeta;
+	}
+	public String getNeutralizadaBeta() {
+	    return neutralizadaBeta;
+	}
+	public void setNeutralizadaBeta(String neutralizadaBeta) {
+	    this.neutralizadaBeta = neutralizadaBeta;
+	}
+	public String getUnicode() {
+	    return unicode;
+	}
+	public void setUnicode(String unicode) {
+	    this.unicode = unicode;
 	}
 	
 	

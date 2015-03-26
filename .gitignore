@@ -6,4 +6,7 @@ kalos_comun/data.zip
 **/.settings/**
 **/.classpath
 kalos_comun/kalos.log
+kalos_utilidades/*
+.metadata
+.recommenders
 

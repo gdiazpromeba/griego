@@ -56,5 +56,7 @@ public interface GerenteDiccionario {
 	
 	List<EntradaDiccionario> getRegistros(List<String> ids);
 	
+	void inserta(EntradaDiccionario ea);
+	
 	
 }

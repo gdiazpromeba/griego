@@ -56,6 +56,8 @@ public interface DiccionarioDAO {
 	 */
 	void modificaCodigoIndividual(int nuevoCodigo, String idReferente);
 	
+	void inserta(EntradaDiccionario end);
+	
 	
 
 }

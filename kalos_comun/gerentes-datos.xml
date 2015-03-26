@@ -100,12 +100,8 @@
 	</bean>
     
 	
-	<bean id="gerenteDiccionario" parent="transaccionAbstracta">
-		<property name="target">
-			<bean class="kalos.datos.gerentes.GerenteDiccionarioImpl">
-				<property name="diccionarioDAO" ref="diccionarioDAO" />
-			</bean>
-		</property>
+	<bean id="gerenteDiccionario" class="kalos.datos.gerentes.GerenteDiccionarioImpl">
+	  <property name="diccionarioDAO" ref="diccionarioDAO" />
 	</bean>		
 
 	<bean id="gerenteIrrAdjetivosEnteros" class="kalos.datos.gerentes.GerenteIrrAdjetivosEnterosImpl">
