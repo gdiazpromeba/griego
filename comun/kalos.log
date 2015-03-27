@@ -1,0 +1,26 @@
+2015-03-27 02:27:07,207 ERROR [com.kalos.operaciones.OpBeans] la propiedad genero no existe en el bean com.kalos.beans.TermRegSustantivo@4583844c
+las propiedades del bean son:
+[subindice]=0; [acentoConcuerda]=3; [origenTema]=NominativoSingular; [silaba]=0; [exContraccion]=false; [class]=class com.kalos.beans.TermRegSustantivo; [acento]=Ninguno; [idTipoSustantivo]=0; [formaOriginal]= λ㏅σ㽱ντο㎹ν; [tipoSustantivo]=95; [genitivoPropuesto]=null; [regExDesinencia]=null; [numero]=Singular; [terminacionPendienteRevision]=com.kalos.beans.TermRegSustantivo@4583844c; [caso]=Nominativo; [posicionConcuerda]=3; [aceptaDieresis]=false; [nominativoPropuesto]=null; [terminacion]=N; [tiposHoja]=-29-30-; [regexDieresis]=null; 
+java.lang.IllegalArgumentException: Method Name cannot be null
+	at org.apache.commons.beanutils.MethodUtils$MethodDescriptor.<init>(MethodUtils.java:809)
+	at org.apache.commons.beanutils.MethodUtils.getAccessibleMethod(MethodUtils.java:378)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:327)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:286)
+	at com.kalos.operaciones.OpBeans.getPropiedadObject(OpBeans.java:61)
+	at com.kalos.analisismorfologico.negocio.AMUtil.conservaSolo(AMUtil.java:473)
+	at com.kalos.analisismorfologico.negocio.AMParticipios.buscaCanonica(AMParticipios.java:169)
+	at com.kalos.analisismorfologico.ChequeosSimples.testAMParticipios(ChequeosSimples.java:136)
+	at com.kalos.analisismorfologico.ChequeosSimples.main(ChequeosSimples.java:182)
+2015-03-27 02:27:48,538 ERROR [com.kalos.operaciones.OpBeans] la propiedad genero no existe en el bean com.kalos.beans.TermRegSustantivo@4583844c
+las propiedades del bean son:
+[subindice]=0; [acentoConcuerda]=3; [origenTema]=NominativoSingular; [silaba]=0; [exContraccion]=false; [class]=class com.kalos.beans.TermRegSustantivo; [acento]=Ninguno; [idTipoSustantivo]=0; [formaOriginal]= λ㏅σ㽱ντο㎹ν; [tipoSustantivo]=95; [genitivoPropuesto]=null; [regExDesinencia]=null; [numero]=Singular; [terminacionPendienteRevision]=com.kalos.beans.TermRegSustantivo@4583844c; [caso]=Nominativo; [posicionConcuerda]=3; [aceptaDieresis]=false; [nominativoPropuesto]=null; [terminacion]=N; [tiposHoja]=-29-30-; [regexDieresis]=null; 
+java.lang.IllegalArgumentException: Method Name cannot be null
+	at org.apache.commons.beanutils.MethodUtils$MethodDescriptor.<init>(MethodUtils.java:809)
+	at org.apache.commons.beanutils.MethodUtils.getAccessibleMethod(MethodUtils.java:378)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:327)
+	at org.apache.commons.beanutils.MethodUtils.invokeExactMethod(MethodUtils.java:286)
+	at com.kalos.operaciones.OpBeans.getPropiedadObject(OpBeans.java:61)
+	at com.kalos.analisismorfologico.negocio.AMUtil.conservaSolo(AMUtil.java:473)
+	at com.kalos.analisismorfologico.negocio.AMParticipios.buscaCanonica(AMParticipios.java:169)
+	at com.kalos.analisismorfologico.ChequeosSimples.testAMParticipios(ChequeosSimples.java:136)
+	at com.kalos.analisismorfologico.ChequeosSimples.main(ChequeosSimples.java:182)
