@@ -10,3 +10,4 @@ kalos_utilidades/*
 .metadata
 .recommenders
 comun/target/*
+comun/target/*.*
