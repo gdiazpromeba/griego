@@ -40,12 +40,7 @@ public class TiposAdjetivoTest extends BaseAMTest {
                     String femComp = bean.getFemenino() != null ? OpPalabras.strBetaACompleto(bean.getFemenino()) : null;
                     String neuComp = bean.getNeutro() != null ? OpPalabras.strBetaACompleto(bean.getNeutro()) : null;
                     String mascFemComp = bean.getMascFem() != null ? OpPalabras.strBetaACompleto(bean.getMascFem()) : null;
-                    int tipoSugerido = declinaAdjetivos.sugiereTipoAdjetivoEntero(
-                            mascComp,
-                            femComp,
-                            neuComp,
-                            mascFemComp
-                            );
+                    int tipoSugerido = declinaAdjetivos.sugiereTipoAdjetivoEntero( mascComp,femComp, neuComp, mascFemComp);
 
                     boolean losTiposSonIguales = tipoSugerido == tipoBD;
                     if (!losTiposSonIguales) {

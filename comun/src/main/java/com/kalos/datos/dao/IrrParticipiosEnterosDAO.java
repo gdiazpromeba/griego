@@ -7,8 +7,11 @@ import com.kalos.beans.IrrParticipioEntero;
 public interface IrrParticipiosEnterosDAO {
 
 	List<IrrParticipioEntero> seleccionaPorVerbo(String verboId);
+
 	List<IrrParticipioEntero> seleccionaPorNominativo(String nominativo);
+
 	List<IrrParticipioEntero> seleccionaPorGenitivo(String genitivo);
-	
+
+	void inserta(IrrParticipioEntero bean);
 
 }

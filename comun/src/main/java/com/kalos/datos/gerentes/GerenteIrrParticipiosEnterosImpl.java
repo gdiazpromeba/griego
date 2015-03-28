@@ -58,6 +58,10 @@ public class GerenteIrrParticipiosEnterosImpl implements GerenteIrrParticipiosEn
 		// TODO Auto-generated method stub
 
 	}
+	
+	public void inserta(IrrParticipioEntero bean) {
+		irrParticipiosEnterosDAO.inserta(bean);
+	}
 
     public IrrParticipiosEnterosDAO getIrrParticipiosEnterosDAO() {
         return irrParticipiosEnterosDAO;

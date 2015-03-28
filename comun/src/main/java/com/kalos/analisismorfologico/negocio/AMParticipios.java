@@ -166,8 +166,8 @@ public class AMParticipios implements AnalizadorMorfologico {
         }
 
         amNominal.paso1(setEntradas, setPaso1, cacheAA, debug); //obtención de juegos caso-tiempo-tipos nominales posibles - según la  terminación
-        //amUtil.conservaSolo(setPaso1, new String[] { "terminacion", "caso" }, new Object[] { "N", Caso.Nominativo });
-        //		amUtil.conservaSolo(setPaso1, new String[]{ "caso", "numero", "tipoSustantivo"}, new Object[]{ Caso.Nominativo,  Numero.Singular, 46});
+        //amUtil.conservaSolo(setPaso1, new String[] { "numero", "caso" }, new Object[] { Numero.Singular, Caso.Nominativo });
+        //amUtil.conservaSolo(setPaso1, new String[]{ "caso", "numero", "tipoSustantivo"}, new Object[]{ Caso.Nominativo,  Numero.Singular, 46});
 
         filtraTiposPosibles(setPaso1, debug); //quita los tipos de sustantivo que no son de participio
 

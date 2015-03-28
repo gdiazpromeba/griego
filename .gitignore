@@ -9,5 +9,5 @@ kalos_comun/kalos.log
 kalos_utilidades/*
 .metadata
 .recommenders
-comun/target/*
-comun/target/*.*
+comun/target/**
+kalos_abms/.project
