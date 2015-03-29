@@ -559,35 +559,35 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 
      
 		
-		System.out.println(" infectivo de líquidos ");
-		stm=con.createStatement();
-		rs=stm.executeQuery("SELECT * FROM DESIN_INFINITIVOS WHERE JUEGO=1 AND ASPECTO IN (1) ");
-		tema=OpPalabras.strBetaACompleto("PAKALE");
-		while (rs.next()){
-			int voz=rs.getInt("VOZ");
-			int aspecto=rs.getInt("ASPECTO");
-			String desinencia=OpPalabras.strBetaACompleto(rs.getString("DESINENCIA"));
-			int silaba=rs.getInt("SILABA");
-			Acento acento=Acento.getEnum(rs.getInt("ACENTO"));
-			
-			String sumada=OpPalabras.contraeVocal(tema, desinencia, Contraccion.vocalica, silaba, acento)[2];
-			String terminacion=sumada.substring(5);
-			AnalisisAcento aaContracta=AnalisisAcento.getAnalisisAcento(sumada);
-			terminacion=OpPalabras.strCompletoABeta(OpPalabras.facilita(terminacion));
-			
-			ins.setInt(1, voz);
-			ins.setInt(2, aspecto);
-			ins.setInt(3, 0);  //fuerte
-			ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
-			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.vocalica));
-			ins.setString(7, "(.*)[LRNM]" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(sumada.substring(5))));
-			ins.setInt(8, aaContracta.actuales.silaba); 
-			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
-			ins.executeUpdate();
-		}
-		stm.close();
-		con.commit();
+//		System.out.println(" infectivo de líquidos ");
+//		stm=con.createStatement();
+//		rs=stm.executeQuery("SELECT * FROM DESIN_INFINITIVOS WHERE JUEGO=1 AND ASPECTO IN (1) ");
+//		tema=OpPalabras.strBetaACompleto("PAKALE");
+//		while (rs.next()){
+//			int voz=rs.getInt("VOZ");
+//			int aspecto=rs.getInt("ASPECTO");
+//			String desinencia=OpPalabras.strBetaACompleto(rs.getString("DESINENCIA"));
+//			int silaba=rs.getInt("SILABA");
+//			Acento acento=Acento.getEnum(rs.getInt("ACENTO"));
+//			
+//			String sumada=OpPalabras.contraeVocal(tema, desinencia, Contraccion.vocalica, silaba, acento)[2];
+//			String terminacion=sumada.substring(5);
+//			AnalisisAcento aaContracta=AnalisisAcento.getAnalisisAcento(sumada);
+//			terminacion=OpPalabras.strCompletoABeta(OpPalabras.facilita(terminacion));
+//			
+//			ins.setInt(1, voz);
+//			ins.setInt(2, aspecto);
+//			ins.setInt(3, 0);  //fuerte
+//			ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
+//			ins.setString(5, terminacion);
+//			ins.setInt(6, Contraccion.getInt(Contraccion.vocalica));
+//			ins.setString(7, "(.*)[LRNM]" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(sumada.substring(5))));
+//			ins.setInt(8, aaContracta.actuales.silaba); 
+//			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
+//			ins.executeUpdate();
+//		}
+//		stm.close();
+//		con.commit();
 		
 		
 		
@@ -721,7 +721,8 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 		
 		System.out.println(" perfectivo de líquidos  (activa y media) ");
         
-        	ins.setInt(1, Voz.getInt(Voz.Activa));
+        	//activa
+		    ins.setInt(1, Voz.getInt(Voz.Activa));
         	ins.setInt(2, Aspecto.getInt(Aspecto.Perfectivo));
         	ins.setInt(3, 0); // fuerte
         	ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
@@ -746,38 +747,6 @@ public class GeneraTermRegInfinitivo implements CompLetras{
         	stm.close();
         	con.commit();
 		
-		
-		
-		
-		stm=con.createStatement();
-		rs=stm.executeQuery("SELECT * FROM DESIN_INFINITIVOS WHERE JUEGO=1 AND ASPECTO IN (5) AND FUERTE=0");
-		tema=OpPalabras.strBetaACompleto("PAKAR");
-		while (rs.next()){
-			int voz=rs.getInt("VOZ");
-			int aspecto=rs.getInt("ASPECTO");
-			String desinencia=OpPalabras.strBetaACompleto(rs.getString("DESINENCIA"));
-			int silaba=rs.getInt("SILABA");
-			Acento acento=Acento.getEnum(rs.getInt("ACENTO"));
-			
-			String contracta=OpPalabras.contraeGenerica(tema, desinencia, Contraccion.sumaAcentuada, silaba, acento);
-			String terminacion=contracta.substring(5);
-			AnalisisAcento aaContracta=AnalisisAcento.getAnalisisAcento(contracta);
-			terminacion=OpPalabras.strCompletoABeta(OpPalabras.facilita(terminacion));
-			
-			ins.setInt(1, voz);
-			ins.setInt(2, aspecto);
-			ins.setInt(3, 0);  //fuerte
-			ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
-			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.sumaAcentuada));
-			ins.setString(7, "(.*)[LRN]QAI" );
-			ins.setInt(8, aaContracta.actuales.silaba); 
-			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
-			ins.executeUpdate();
-		}
-		stm.close();
-		con.commit();
-
 		
         	System.out.println(" perfectivo segundo sin kappa, sin contracción  (activa y media) ");
         	stm = con.createStatement();
