@@ -10,8 +10,9 @@ public enum Numero {
 		case Plural:
 			return 2;
 		case Dual:
+		    return 3;
 		default:
-			return 0;
+		    throw new RuntimeException("no hay número para " + valor);
 		}
 	}
 	
@@ -24,7 +25,7 @@ public enum Numero {
 		  case 3:
 			  return Dual;
 		  default:
-			  throw new RuntimeException("no hay número para " + valor);
+			  throw new RuntimeException("no hay enum para " + valor);
 		}
 	}	
 	

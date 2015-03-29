@@ -3,20 +3,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.kalos</groupId>
-	<artifactId>comun</artifactId>
+	<artifactId>mantenimiento</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	
+
 	<parent>
 		<groupId>com.kalos</groupId>
 		<artifactId>parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
-	</parent>	
+	</parent>
 
-	<name>comun</name>
+	<name>mantenimiento</name>
 	<url>http://maven.apache.org</url>
-	
-	
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,7 +25,11 @@
 
 	<dependencies>
 
-
+		<dependency>
+			<groupId>com.kalos</groupId>
+			<artifactId>comun</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 
 
 	</dependencies>

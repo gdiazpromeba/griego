@@ -92,11 +92,10 @@ public class DesinSustDAOImpl extends JdbcDaoSupport implements DesinSustDAO {
 	}
     }
 
-    class SeleccionConContraccion extends SeleccionAbstracta {
+    class SeleccionConContraccion extends com.kalos.datos.dao.comunes.SeleccionIds {
 
 	public SeleccionConContraccion(DataSource datasource) {
-	    super(datasource, SEL_CON_CONTRACCION_SQL);
-	    declareParameter(new SqlParameter(1));
+	    super(datasource, SEL_CON_CONTRACCION_SQL, "DESIN_SUST_ID" );
 	}
     }
 
