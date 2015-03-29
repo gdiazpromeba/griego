@@ -38,7 +38,7 @@ import org.springframework.core.io.FileSystemResource;
  * @version 1.0
  */
 
-public class AMAdjetivosTest extends TestCase implements CompLetras {
+public class AMAdjetivosTest extends BaseAMTest {
 
 	private static Logger logger = Logger.getLogger(AMAdjetivosTest.class.getName());
 
@@ -46,9 +46,7 @@ public class AMAdjetivosTest extends TestCase implements CompLetras {
 
 	private AMAdjetivos amAdjetivos;
 
-	public AMAdjetivosTest(String metodo) {
-		super(metodo);
-	}
+
 
 
 	private static long tiempoAcumulado = 0;
@@ -108,22 +106,7 @@ public class AMAdjetivosTest extends TestCase implements CompLetras {
 		return encontroCodigo;
 	}
 
-	public static ApplicationContext creaContexto() {
-		ApplicationContext contexto;
-		DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
-		XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
-		ClassPathResource res = new ClassPathResource( "daos.xml");
-		reader.loadBeanDefinitions(res);
-		res = new ClassPathResource( "gerentes-datos.xml");
-		reader.loadBeanDefinitions(res);
-		res = new ClassPathResource( "flexion.xml");
-		reader.loadBeanDefinitions(res);
-		res = new ClassPathResource( "analisisMorfologico.xml");
-		reader.loadBeanDefinitions(res);
 
-		contexto = new GenericApplicationContext(factory);
-		return contexto;
-	}
 
 	/* (non-Javadoc)
 	 * @see junit.framework.TestCase#setUp()

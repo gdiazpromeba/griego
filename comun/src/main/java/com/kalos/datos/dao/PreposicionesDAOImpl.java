@@ -10,14 +10,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.sql.DataSource;
+
+import com.kalos.beans.ParticulaBean;
 import com.kalos.beans.PreposicionBean;
 import com.kalos.beans.Significado;
+import com.kalos.datos.dao.ParticulasDAOImpl.SeleccionAbstracta;
+import com.kalos.datos.dao.ParticulasDAOImpl.SeleccionPorIds;
 import com.kalos.datos.dao.comunes.Borrado;
 import com.kalos.datos.dao.comunes.SeleccionIds;
 import com.kalos.enumeraciones.Idioma;
 import com.kalos.enumeraciones.Particularidad;
 import com.kalos.recursos.Configuracion;
+
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.object.MappingSqlQuery;
@@ -187,7 +193,7 @@ public class PreposicionesDAOImpl extends JdbcDaoSupport implements Preposicione
 	stringbuffer.append("      ON PREP.PREPOSICION_ID=SIG.REFERENTE_ID       \n");
 	stringbuffer.append("WHERE  \n");
 	stringbuffer.append("  PREP.PREPOSICION_ID IN (?)    \n");
-	stringbuffer.append("  (SIG.IDIOMA IS NULL OR SIG.IDIOMA='").append(Configuracion.getIdiomaSignificados())
+	stringbuffer.append("  AND (SIG.IDIOMA IS NULL OR SIG.IDIOMA='").append(Configuracion.getIdiomaSignificados())
 		.append("')    \n");
 	stringbuffer.append("ORDER BY  \n");
 	stringbuffer.append("  PREP.ORDEN   \n");
@@ -273,29 +279,40 @@ public class PreposicionesDAOImpl extends JdbcDaoSupport implements Preposicione
 	return seleccionTodasConSig.execute(new Object[0]);
     }
 
-    public List<PreposicionBean> getRegistros(List<String> list) {
-	ArrayList arraylist = new ArrayList();
-	int i = list.size();
-	int j = 0;
-	char c1 = '\u03E8';
-	for (; i > 0; i -= c1) {
-	    List list1 = list.subList(j, Math.min(j + c1, list.size()));
-	    StringBuffer stringbuffer = new StringBuffer(500);
-	    String s1;
-	    for (Iterator iterator = list1.iterator(); iterator.hasNext(); stringbuffer.append((new StringBuilder())
-		    .append("'").append(s1).append("',").toString()))
-		s1 = (String) iterator.next();
+    
 
-	    stringbuffer.deleteCharAt(stringbuffer.length() - 1);
-	    String s = SEL_POR_IDS_CON_SIG.replaceFirst("\\?", stringbuffer.toString());
-	    _I _li = new _I(getDataSource(), s);
-	    List list2 = _li.execute();
-	    arraylist.addAll(list2);
-	    j += c1;
-	}
+    public List<PreposicionBean> getRegistros(List<String> ids) {
+        List<PreposicionBean> resultado = new ArrayList<PreposicionBean>();
+        int restantes = ids.size();
+        int comienzo = 0;
+        int segmento = 1000;
+        while (restantes > 0) {
+            List<String> subIds = ids.subList(comienzo, Math.min(comienzo + segmento, ids.size()));
+            StringBuffer idsSeparadosComa = new StringBuffer(500);
+            for (String id : subIds) {
+                idsSeparadosComa.append("'" + id + "',");
+            }
+            idsSeparadosComa.deleteCharAt(idsSeparadosComa.length() - 1);
+            String sql = SEL_POR_IDS_CON_SIG.replaceFirst("\\?", idsSeparadosComa.toString());
 
-	return arraylist;
-    }
+            SeleccionPorIds seleccionPorIds = new SeleccionPorIds(getDataSource(), sql);
+
+            List<PreposicionBean> entradasDic = seleccionPorIds.execute();
+            resultado.addAll(entradasDic);
+            comienzo += segmento;
+            restantes -= segmento;
+        }
+        return resultado;
+    }    
+    
+
+    // selección de registros a mostrar de la tabla "PARTICULAS", dados los
+    // IDs
+    class SeleccionPorIds extends SeleccionAbstractaConSig {
+        public SeleccionPorIds(DataSource dataSource, String sql) {
+            super(dataSource, sql);
+        }
+    }   
 
     public void inserta(PreposicionBean c1) {
 	String s = com.kalos.datos.util.DBUtil.getHashableId();

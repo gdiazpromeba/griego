@@ -501,7 +501,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
     @SuppressWarnings("unchecked")
     public List<String> seleccionaIdsPorTipo(TipoPalabra tipoPalabra){
     	return seleccionIdsPorTipo.execute(new Object[]{
-    			TipoPalabra.getString(tipoPalabra)
+    			tipoPalabra.getStringCorta()
     			});
     }
 	
