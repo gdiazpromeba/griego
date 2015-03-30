@@ -3,8 +3,13 @@
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
+     <bean id="simpleBean" class="kalos.iu.analisismorfologico.SimpleBean"/>
 
-	<bean id="fabricaControles" class="kalos.A.B.A">
+	<bean id="panelResultadosAM" class="kalos.iu.analisismorfologico.PanelAM" >
+	</bean>
+
+
+	<bean id="fabricaControles" class="kalos.visual.controles.FabricaControles">
 		<property name="combosDAO" ref="combosDAO" />
 		<property name="gerenteTiposAdjetivo" ref="gerenteTiposAdjetivo" />
 		<property name="gerenteTiposSustantivo" ref="gerenteTiposSustantivo" />
@@ -12,51 +17,29 @@
 	</bean>
 	
 	
-	<bean id="panelProgreso" class="kalos.iu.B"/>
+	<bean id="panelProgreso" class="kalos.iu.PanelProgreso"/>
 
-    <bean id="panelResultadosDiccionario" class="kalos.iu.D.A">
+    <bean id="panelResultadosDiccionario" class="kalos.iu.diccionario.PanelDiccionario">
 	    <constructor-arg ref="gerenteDiccionario"/>
 	    <property name="panelProgreso" ref="panelProgreso" />
 	</bean>
 
-	<bean id="utilidadJasper" class="kalos.iu.B.B">
+	<bean id="utilidadJasper" class="kalos.iu.jasper.UtilidadJasper">
 	  <property name="utilidadesTM"  ref="utilidadesTM" />
 	</bean>
 
-    <bean id="ventanaMolesta" class="kalos.iu.A.B">
+    <bean id="ventanaMolesta" class="kalos.iu.registro.VentanaMolesta">
       <constructor-arg ref="gerenteSeguridad"/>
     </bean>
     
-    <bean id="ventanaRegistro" class="kalos.iu.A.A">
+    <bean id="ventanaRegistro" class="kalos.iu.registro.VentanaRegistro">
       <constructor-arg ref="gerenteSeguridad"/>
     </bean>    
 
-	<bean id="panelTablaFlexion" class="kalos.iu.F.A">
-	<!--
-	  <property name="panelProgreso" ref="panelProgreso" />
-	  <property name="creadorTableModelsGrilla"  ref="creadorTableModelsGrilla" />
-	  <property name="creadorTableModelsReporte" ref="creadorTableModelsReporte" />
-	  <property name="parametrosReporte" ref="parametrosReporte" />
-	  <property name="utilidadJasper" ref="utilidadJasper" />
-	  -->
+	<bean id="panelTablaFlexion" class="kalos.iu.flexion.PanelFlexion">
 	</bean>
 
-	<bean id="panelResultadosAM" class="kalos.iu.C.A" >
-	  <!-- 
-	    <property name="panelProgreso" ref="panelProgreso" /> 
-		<property name="amAdjetivos" ref="amAdjetivos" />
-		<property name="amConjunciones" ref="amConjunciones" />
-		<property name="amInfinitivos" ref="amInfinitivos" />
-		<property name="amInterjecciones" ref="amInterjecciones" />
-		<property name="amParticipios" ref="amParticipios" />
-		<property name="amSustantivos" ref="amSustantivos" />
-		<property name="amUtil" ref="amUtil" /> 
-		<property name="amVerbos" ref="amVerbos" />
-		<property name="gerenteSignificados" ref="gerenteSignificados" /> 
-	    <property name="utilidadesTM"  ref="utilidadesTM" /> 
-	    <property name="ventanaMolesta"  ref="ventanaMolesta" />
-	  --> 
-	</bean>
+
 	
 	<bean id="parametrosReporte" class="kalos.iu.flexion.ParametrosReporte">
 	  <property name="gerenteVerbos" ref="gerenteVerbos"/>
@@ -64,9 +47,9 @@
 	  <property name="gerenteAdjetivos" ref="gerenteAdjetivos"/>
 	</bean>
 	
-	<bean id="menues" class="kalos.iu.C">
+	<bean id="menues" class="kalos.iu.Menues">
 	  <constructor-arg ref="ventanaRegistro"/>
 	</bean>
-    
+  
 	
 </beans>

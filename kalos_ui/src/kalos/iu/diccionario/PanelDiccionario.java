@@ -67,7 +67,11 @@ import foxtrot.Worker;
 
 public class PanelDiccionario extends JPanel implements TipografiaCambiable {
 
-	public PanelDiccionario(GerenteDiccionario m1) {
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    public PanelDiccionario(GerenteDiccionario m1) {
 		logger = Logger.getLogger(getClass().getName());
 		cmbLugaresSubcadena = new ComboEnumeracion(LugarSubcadena.values());
 		tabla = new JTable();

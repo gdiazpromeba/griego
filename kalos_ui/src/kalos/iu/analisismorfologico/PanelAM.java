@@ -84,6 +84,11 @@ import foxtrot.Worker;
 
 public class PanelAM extends JPanel implements ApplicationContextAware, TipografiaCambiable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     private TextoAlternable textoEntrada = new TextoAlternable(false);

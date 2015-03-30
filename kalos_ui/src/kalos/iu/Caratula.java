@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -36,12 +37,18 @@ import org.dom4j.io.SAXReader;
 
 public class Caratula extends JPanel {
 
-	public void setMensajeProgreso(String s) {
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    public void setMensajeProgreso(String s) {
 		C = s;
 		repaint();
 	}
 
-	public Caratula() {
+	@SuppressWarnings("rawtypes")
+    public Caratula() {
+	    setBackground(Color.red);
 		comboIdiomaEtiquetas = new JComboBox();
 		comboItiomaContenidos = new JComboBox();
 		cmbTeclados = new JComboBox();
@@ -53,32 +60,21 @@ public class Caratula extends JPanel {
 		imagen = imageicon.getImage();
 		setLayout(new BorderLayout());
 		setBackground(Color.white);
-		((DefaultComboBoxModel) comboIdiomaEtiquetas.getModel())
-				.addElement(Recursos.getCadena("ingles"));
-		((DefaultComboBoxModel) comboIdiomaEtiquetas.getModel())
-				.addElement(Recursos.getCadena("castellano"));
-		((DefaultComboBoxModel) comboIdiomaEtiquetas.getModel())
-				.addElement(Recursos.getCadena("frances"));
-		((DefaultComboBoxModel) comboIdiomaEtiquetas.getModel())
-				.addElement(Recursos.getCadena("portugues"));
-		((DefaultComboBoxModel) comboItiomaContenidos.getModel())
-				.addElement(Recursos.getCadena("ingles"));
-		((DefaultComboBoxModel) comboItiomaContenidos.getModel())
-				.addElement(Recursos.getCadena("castellano"));
-		((DefaultComboBoxModel) comboItiomaContenidos.getModel())
-				.addElement(Recursos.getCadena("frances"));
+		((DefaultComboBoxModel) comboIdiomaEtiquetas.getModel()).addElement(Recursos.getCadena("ingles"));
+		((DefaultComboBoxModel) comboIdiomaEtiquetas.getModel()).addElement(Recursos.getCadena("castellano"));
+		((DefaultComboBoxModel) comboIdiomaEtiquetas.getModel()).addElement(Recursos.getCadena("frances"));
+		((DefaultComboBoxModel) comboIdiomaEtiquetas.getModel()).addElement(Recursos.getCadena("portugues"));
+		((DefaultComboBoxModel) comboItiomaContenidos.getModel()).addElement(Recursos.getCadena("ingles"));
+		((DefaultComboBoxModel) comboItiomaContenidos.getModel()).addElement(Recursos.getCadena("castellano"));
+		((DefaultComboBoxModel) comboItiomaContenidos.getModel()).addElement(Recursos.getCadena("frances"));
 		try {
-			File file = new File((new StringBuilder())
-					.append(System.getProperty("user.dir"))
-					.append(File.separator).append("keyboards.xml").toString());
+			File file = new File("keyboards.xml");
 			Document document = (new SAXReader()).read(file);
 			Element element = document.getRootElement();
-			java.util.List list = element.elements("keyboard");
-			Element element1;
-			for (Iterator iterator = list.iterator(); iterator.hasNext(); ((DefaultComboBoxModel) cmbTeclados
-					.getModel()).addElement(element1.attributeValue("name")))
-				element1 = (Element) iterator.next();
-
+			List<Element> elements = element.elements("keyboard");
+			for (Element elem : elements) {
+			    ((DefaultComboBoxModel) cmbTeclados.getModel()).addElement(elem.attributeValue("name"))  ; 
+            }
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
@@ -124,6 +120,7 @@ public class Caratula extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
+	    System.out.println("en caratula paintComponent");
 		super.paintComponent(g);
 		Graphics2D graphics2d = (Graphics2D) g;
 		RenderingHints renderinghints = new RenderingHints(
@@ -131,7 +128,7 @@ public class Caratula extends JPanel {
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics2d.setRenderingHints(renderinghints);
 		g.setColor(Color.white);
-		drawBackground(g);
+//		drawBackground(g);
 		g.setFont(new Font("Dialog", 0, 20));
 		g.drawString(
 				(new StringBuilder()).append("KAL\323S ")
@@ -158,22 +155,35 @@ public class Caratula extends JPanel {
 		g.drawString(C, 200, 230);
 	}
 
-	public void drawBackground(Graphics g) {
-		int i = getWidth();
-		int j = getHeight();
-		int k = imagen.getWidth(this);
-		int l = imagen.getHeight(this);
-		for (int i1 = 0; i1 < i; i1 += k) {
-			for (int j1 = 0; j1 < j; j1 += l)
-				g.drawImage(imagen, i1, j1, this);
+//	public void drawBackground(Graphics g) {
+//	    System.out.println("en caratula paintComponent");
+//		int i = getWidth();
+//		int j = getHeight();
+//		int k = imagen.getWidth(this);
+//		int l = imagen.getHeight(this);
+//		for (int i1 = 0; i1 < i; i1 += k) {
+//			for (int j1 = 0; j1 < j; j1 += l)
+//				g.drawImage(imagen, i1, j1, this);
+//
+//		}
+//
+//	}
 
-		}
-
+//	public void paint(Graphics g) {
+//		drawBackground(g);
+//		super.paint(g);
+//	}
+	
+	public void habilitacionBotonComenzar(boolean habilitacion){
+	    this.botComenzar.setEnabled(habilitacion);
 	}
-
-	public void paint(Graphics g) {
-		drawBackground(g);
-		super.paint(g);
+	
+	public void setTextoBotonComenzar(String text){
+	    this.botComenzar.setText(text);
+	}
+	
+	public void addListenerToBotonComenzar(ActionListener listenComenzar){
+	    this.botComenzar.addActionListener(listenComenzar);
 	}
 
 
@@ -181,7 +191,7 @@ public class Caratula extends JPanel {
 	public JComboBox comboIdiomaEtiquetas;
 	public JComboBox comboItiomaContenidos;
 	public JComboBox cmbTeclados;
-	public JButton botComenzar;
+	private JButton botComenzar;
 	public JButton botSelTipog;
 	Image imagen;
 	private String C;

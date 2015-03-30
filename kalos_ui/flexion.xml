@@ -4,11 +4,11 @@
 <beans>
 
 
-	<bean id="cacheFlexionParticipio" class="kalos.H.C.K" />
-	<bean id="cacheFlexionVerbos" class="kalos.H.B.C" />
-	<bean id="cacheFlexionInfinitivos" class="kalos.H.B.B" />
+	<bean id="cacheFlexionParticipio" class="kalos.flexion.declinacion.CacheFlexionParticipio" />
+	<bean id="cacheFlexionVerbos" class="kalos.flexion.conjugacion.CacheFlexionVerbos" />
+	<bean id="cacheFlexionInfinitivos" class="kalos.flexion.conjugacion.CacheFlexionInfinitivos" />
 
-	<bean id="creadorTableModelsBasicos" class="kalos.H.O">
+	<bean id="creadorTableModelsBasicos" class="kalos.flexion.CreadorTableModelsBasicos">
 		<property name="utilidadesTM" ref="utilidadesTM" />
 		<property name="proveedorDMNominal" ref="proveedorDMNominal" />
 		<property name="proveedorDMVerbal" ref="proveedorDMVerbal" />
@@ -18,12 +18,12 @@
 		<property name="proveedorDMInterjecciones" ref="proveedorDMInterjecciones" />
 	</bean>
 
-	<bean id="creadorTableModelsReporte" class="kalos.H.F">
+	<bean id="creadorTableModelsReporte" class="kalos.flexion.CreadorTableModelsReporte">
 		<property name="creadorTableModelsBasicos" ref="creadorTableModelsBasicos" />
 		<property name="utilidadesTM" ref="utilidadesTM" />
 	</bean>
 
-	<bean id="creadorTableModelsGrilla" class="kalos.H.J">
+	<bean id="creadorTableModelsGrilla" class="kalos.flexion.CreadorTableModelsGrilla">
 		<property name="creadorTableModelsBasicos" ref="creadorTableModelsBasicos" />
 		<property name="utilidadesTM" ref="utilidadesTM" />
 		<property name="utilidadReportes" ref="utilidadReportes" />
@@ -32,14 +32,14 @@
 
 
 
-	<bean id="declina" class="kalos.H.C.E">
+	<bean id="declina" class="kalos.flexion.declinacion.Declina">
 		<property name="manejaDesinenciasSustantivo" ref="manejaDesinenciasSustantivo" />
 		<property name="gerenteTiposSustantivo" ref="gerenteTiposSustantivo" />
 		<property name="gerenteSustantivos" ref="gerenteSustantivos" />
 		<property name="gerenteIrrSustantivos" ref="gerenteIrrSustantivos" />
 	</bean>
 
-	<bean id="declinaAdjetivos" class="kalos.H.C.A">
+	<bean id="declinaAdjetivos" class="kalos.flexion.declinacion.DeclinaAdjetivos">
 		<property name="declina" ref="declina" />
 		<property name="gerenteTiposAdjetivo" ref="gerenteTiposAdjetivo" />
 		<property name="gerenteTiposSustantivo" ref="gerenteTiposSustantivo" />
@@ -48,7 +48,7 @@
 		<property name="gerenteIrrAdjetivosIndividuales" ref="gerenteIrrAdjetivosIndividuales" />
 	</bean>
 
-	<bean id="infinitivos" class="kalos.H.B.D">
+	<bean id="infinitivos" class="kalos.flexion.conjugacion.Infinitivos">
 		<property name="verbos" ref="verbos" />
 		<property name="gerenteVerbos" ref="gerenteVerbos" />
 		<property name="gerenteIrrVerbos" ref="gerenteIrrVerbos" />
@@ -60,22 +60,22 @@
 	</bean>
 
 
-	<bean id="manejaDesinenciasSustantivo" class="kalos.H.C.L">
+	<bean id="manejaDesinenciasSustantivo" class="kalos.flexion.declinacion.ManejaDesinenciasSustantivo">
 		<property name="gerenteTiposSustantivo" ref="gerenteTiposSustantivo" />
 		<property name="gerenteDesinSust" ref="gerenteDesinSust" />
 	</bean>
 
-	<bean id="manejaDesinenciasVerbo" class="kalos.H.B.A.F">
+	<bean id="manejaDesinenciasVerbo" class="kalos.flexion.conjugacion.negocio.ManejaDesinenciasVerbo">
 		<constructor-arg value="false" />
 		<constructor-arg ref="gerenteDesinVerbos" />
 	</bean>
 
-	<bean id="manejaDesinenciasInfinitivo" class="kalos.H.B.A.E">
+	<bean id="manejaDesinenciasInfinitivo" class="kalos.flexion.conjugacion.negocio.ManejaDesinenciasInfinitivo">
 		<constructor-arg value="false" />
 		<constructor-arg ref="gerenteDesinInfinitivos" />
 	</bean>
 
-	<bean id="participios" class="kalos.H.C.I" lazy-init="true">
+	<bean id="participios" class="kalos.flexion.declinacion.Participios" lazy-init="true">
 		<property name="declina" ref="declina" />
 		<property name="gerenteVerbos" ref="gerenteVerbos" />
 		<property name="preposiciones" ref="preposiciones" />		
@@ -90,9 +90,9 @@
 
 
 
-	<bean id="preposiciones" class="kalos.H.B" />
+	<bean id="preposiciones" class="kalos.flexion.Preposiciones" />
 
-	<bean id="proveedorDMNominal" class="kalos.H.M">
+	<bean id="proveedorDMNominal" class="kalos.flexion.ProveedorDMNominal">
 		<property name="participios" ref="participios" />
 		<property name="gerenteVerbos" ref="gerenteVerbos" />
 		<property name="declina" ref="declina" />
@@ -100,24 +100,24 @@
 		<property name="utilidadesTM" ref="utilidadesTM" />
 	</bean>
 	
-    <bean id="proveedorDMConjunciones" class="kalos.H.H">
+    <bean id="proveedorDMConjunciones" class="kalos.flexion.ProveedorDMConjunciones">
 		<property name="gerenteConjunciones" ref="gerenteConjunciones" />
 	</bean>
 
-	<bean id="proveedorDMParticulas" class="kalos.H.L">
+	<bean id="proveedorDMParticulas" class="kalos.flexion.ProveedorDMParticulas">
 		<property name="gerenteParticulas" ref="gerenteParticulas" />
 	</bean>
 	
-	<bean id="proveedorDMPreposiciones" class="kalos.H.I">
+	<bean id="proveedorDMPreposiciones" class="kalos.flexion.ProveedorDMPreposiciones">
 		<property name="gerentePreposiciones" ref="gerentePreposiciones" />
 	</bean>	
 	
-	<bean id="proveedorDMInterjecciones" class="kalos.H.E">
+	<bean id="proveedorDMInterjecciones" class="kalos.flexion.ProveedorDMInterjecciones">
 		<property name="gerenteInterjecciones" ref="gerenteInterjecciones" />
 	</bean>	
 		
 
-	<bean id="proveedorDMVerbal" class="kalos.H.D">
+	<bean id="proveedorDMVerbal" class="kalos.flexion.ProveedorDMVerbal">
 		<property name="gerenteIrrVerbos" ref="gerenteIrrVerbos" />
 		<property name="gerenteVerbos" ref="gerenteVerbos" />
 		<property name="verbos" ref="verbos" />
@@ -128,12 +128,12 @@
 	</bean>
 
 
-	<bean id="utilidadReportes" class="kalos.H.K"/>
-	<bean id="utilidadesTM" class="kalos.H.C" />
+	<bean id="utilidadReportes" class="kalos.flexion.UtilidadReportes"/>
+	<bean id="utilidadesTM" class="kalos.flexion.UtilidadesTM" />
 
 
 
-	<bean id="verbos" class="kalos.H.B.A">
+	<bean id="verbos" class="kalos.flexion.conjugacion.Verbos">
 		<property name="manejaDesinenciasVerbo" ref="manejaDesinenciasVerbo" />
 		<property name="gerenteTiposVerbo" ref="gerenteTiposVerbo" />
 		<property name="gerenteIrrVerbos" ref="gerenteIrrVerbos" />

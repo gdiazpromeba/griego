@@ -3,14 +3,14 @@
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-	<bean id="extractorPrefijos" class="kalos.D.A.N" lazy-init="true">
+	<bean id="extractorPrefijos" class="kalos.analisismorfologico.negocio.ExtractorPrefijos" lazy-init="true">
 		<property name="gerenteSubstractorPrefijos" ref="gerenteSubstractorPrefijos" />
 	</bean>
 
-	<bean id="amUtil" class="kalos.D.A.C" lazy-init="true"/>
+	<bean id="amUtil" class="kalos.analisismorfologico.negocio.AMUtil" lazy-init="true"/>
 
 
-	<bean id="amVerbal" class="kalos.D.A.P" lazy-init="true">
+	<bean id="amVerbal" class="kalos.analisismorfologico.negocio.AMVerbal" lazy-init="true">
 		<property name="amUtil" ref="amUtil" />
 		<property name="gerenteVerbos" ref="gerenteVerbos" />
 		<property name="gerenteVerbosCompuestos" ref="gerenteVerbosCompuestos" />
@@ -20,7 +20,7 @@
 		<property name="gerenteIrrInfinitivos" ref="gerenteIrrInfinitivos" />
 	</bean>
 
-	<bean id="amVerbos" class="kalos.D.A.I" lazy-init="true">
+	<bean id="amVerbos" class="kalos.analisismorfologico.negocio.AMVerbos" lazy-init="true">
 		<property name="amUtil" ref="amUtil" />
 		<property name="amVerbal" ref="amVerbal" />
 		<property name="gerenteVerbos" ref="gerenteVerbos" />
@@ -31,7 +31,7 @@
 	</bean>
 
 
-	<bean id="amInfinitivos" class="kalos.D.A.J" lazy-init="true">
+	<bean id="amInfinitivos" class="kalos.analisismorfologico.negocio.AMInfinitivos" lazy-init="true">
 		<property name="amUtil" ref="amUtil" />
 		<property name="amVerbal" ref="amVerbal" />
 		<property name="extractorPrefijos" ref="extractorPrefijos" />
@@ -42,18 +42,18 @@
 	
 
 	
-	<bean id="amNominal" class="kalos.D.A.R" lazy-init="true">
+	<bean id="amNominal" class="kalos.analisismorfologico.negocio.AMNominal" lazy-init="true">
 		<property name="amUtil" ref="amUtil" />
 		<property name="gerenteTermRegSustantivo" ref="gerenteTermRegSustantivo" />
 		<constructor-arg ref="gerenteTiposSustantivo"/>
 		<constructor-arg ref="gerenteDesinSust"/>
 	</bean>
 
-	<bean id="amParticipios" class="kalos.D.A.D" lazy-init="true">
-		<!--
-		<property name="amNominal" ref="amNominal" />
+	<bean id="amParticipios" class="kalos.analisismorfologico.negocio.AMParticipios" lazy-init="true">
+		<!-- 
 		<property name="amUtil" ref="amUtil" />
 		<property name="amVerbal" ref="amVerbal" />
+		<property name="amNominal" ref="amNominal" />
 		<property name="participios" ref="participios" />
 		<property name="extractorPrefijos" ref="extractorPrefijos" />
 		<property name="gerenteVerbos" ref="gerenteVerbos" />
@@ -66,7 +66,7 @@
         <property name="gerenteTransParticipios" ref="gerenteTransParticipios" />
 	</bean>	
 	
-	<bean id="amSustantivos" class="kalos.D.A.F" lazy-init="true">
+	<bean id="amSustantivos" class="kalos.analisismorfologico.negocio.AMSustantivos" lazy-init="true">
 		<!-- 
 		<property name="amUtil" ref="amUtil" />
 		<property name="amNominal" ref="amNominal" />
@@ -75,7 +75,7 @@
 		-->
 	</bean>
 	
-	<bean id="amAdjetivos" class="kalos.D.A.L">
+	<bean id="amAdjetivos" class="kalos.analisismorfologico.negocio.AMAdjetivos">
 	    <!-- 
 		<property name="amUtil" ref="amUtil" />
 		<property name="amNominal" ref="amNominal" />
@@ -85,15 +85,13 @@
 		-->
 	</bean>
 	
-	<bean id="amAdverbios" class="kalos.D.A.O"/>	
+	<bean id="amAdverbios" class="kalos.analisismorfologico.negocio.AMAdverbios"/>	
 	
-	<bean id="amInterjecciones" class="kalos.D.A.A"/>
+	<bean id="amParticulas" class="kalos.analisismorfologico.negocio.AMParticulas"/>
 	
-	<bean id="amParticulas" class="kalos.D.A.S"/>
+	<bean id="amConjunciones" class="kalos.analisismorfologico.negocio.AMConjunciones"/>
 	
-	<bean id="amConjunciones" class="kalos.D.A.H"/>
-	
-	<bean id="amPreposiciones" class="kalos.D.A.E"/>
+	<bean id="amPreposiciones" class="kalos.analisismorfologico.negocio.AMPreposiciones"/>
 
 
 </beans>

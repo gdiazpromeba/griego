@@ -99,10 +99,10 @@ public class EleccionTipografia extends JDialog {
 	
 	private void textoGriego(){
 		StringBuffer sb=new StringBuffer();
-		sb.append("\tColumn VI\n");
+		sb.append("From Euripides' Cyclops\n");
 		sb.append("\n");
-		sb.append("Silenus:\t" + OpPalabras.strBetaAUnicode("KAI\\ PW=J etiqueta)KOU/SW MHDENO\\J FWNH\\N KLU/WN") + ";\n");
-		sb.append("Chorus:\t" + OpPalabras.strBetaAUnicode("E)MOI\\ PIQOU=") + ".\n");
+		sb.append("Cyclops:\t" + OpPalabras.strBetaAUnicode("A)PWLO/MHN")).append("\n");
+		sb.append("Chorus:\t" + OpPalabras.strBetaAUnicode("AI)SCRO/J GH GAI/NH|")).append(".\n");
 		
 		texto.setText(sb.toString());
 		texto.setFont(Configuracion.getFont());
