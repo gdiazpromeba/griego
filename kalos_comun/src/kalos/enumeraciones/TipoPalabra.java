@@ -48,6 +48,10 @@ public enum TipoPalabra {
 	    return Sustantivo;
 	case "VER":
 	    return Verbo;
+	case "PART":
+	    return Participio;	   
+	case "INFIN":
+	    return Infinitivo;	    
 	default:
 	    throw new RuntimeException("la cadena " + tp + " no corresponde a ningún tipo de palabra");
 	}
@@ -85,6 +89,10 @@ public enum TipoPalabra {
 	    return "SUS";
 	case Verbo:
 	    return "VER";
+	case Participio:
+	    return "PART";
+	case Infinitivo:
+	    return "INFIN";	    
 	default:
 	  throw new RuntimeException("no se encuentra cadena para la enumeración " + this);
 		    

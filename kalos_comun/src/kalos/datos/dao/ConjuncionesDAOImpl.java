@@ -96,6 +96,7 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
 
 	public SelectPorForma(DataSource datasource, String sql) {
 	    super(datasource, sql);
+	    declareParameter(new SqlParameter(Types.VARCHAR));
 	}
     }
 
@@ -172,188 +173,188 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
 	}
     }
 
-    private void C() {
-	StringBuffer stringbuffer = new StringBuffer(200);
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("SELECT   \n");
-	stringbuffer.append("  CONJ.CONJUNCION_ID   \n");
-	stringbuffer.append("FROM        \n");
-	stringbuffer.append("  CONJUNCIONES CONJ       \n");
-	stringbuffer.append("    INNER JOIN SIGNIFICADOS SIG                 \n");
-	stringbuffer.append("      ON CONJ.CONJUNCION_ID=SIG.REFERENTE_ID       \n");
-	stringbuffer.append("WHERE  \n");
-	stringbuffer.append("  CONJ.FORMA LIKE ?    \n");
-	stringbuffer.append((new StringBuilder()).append("  AND SIG.IDIOMA='")
+    private void puebla() {
+	StringBuffer sql = new StringBuffer(200);
+	sql = new StringBuffer(200);
+	sql.append("SELECT   \n");
+	sql.append("  CONJ.CONJUNCION_ID   \n");
+	sql.append("FROM        \n");
+	sql.append("  CONJUNCIONES CONJ       \n");
+	sql.append("    INNER JOIN SIGNIFICADOS SIG                 \n");
+	sql.append("      ON CONJ.CONJUNCION_ID=SIG.REFERENTE_ID       \n");
+	sql.append("WHERE  \n");
+	sql.append("  CONJ.FORMA LIKE ?    \n");
+	sql.append((new StringBuilder()).append("  AND SIG.IDIOMA='")
 		.append(kalos.recursos.Configuracion.getIdiomaSignificados()).append("'    \n").toString());
-	stringbuffer.append("ORDER BY  \n");
-	stringbuffer.append("  CONJ.CODIGO   \n");
-	SELECT_POR_FORMA_CON_SIG_SQL = stringbuffer.toString();
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("SELECT   \n");
-	stringbuffer.append("  CONJ.CONJUNCION_ID,   \n");
-	stringbuffer.append("  CONJ.CODIGO,   \n");
-	stringbuffer.append("  CONJ.FORMA,   \n");
-	stringbuffer.append("  CONJ.PARTIC,   \n");
-	stringbuffer.append("  CONJ.TIPO,   \n");
-	stringbuffer.append("  CONJ.SUBTIPO,   \n");
-	stringbuffer.append("  CONJ.PARTE,   \n");
-	stringbuffer.append("  SIG.SIGNIFICADO_ID,   \n");
-	stringbuffer.append("  SIG.VALOR   \n");
-	stringbuffer.append("FROM        \n");
-	stringbuffer.append("  CONJUNCIONES CONJ       \n");
-	stringbuffer.append("    INNER JOIN SIGNIFICADOS SIG                 \n");
-	stringbuffer.append("      ON CONJ.CONJUNCION_ID=SIG.REFERENTE_ID       \n");
-	stringbuffer.append("WHERE  \n");
-	stringbuffer.append((new StringBuilder()).append("  SIG.IDIOMA='")
+	sql.append("ORDER BY  \n");
+	sql.append("  CONJ.CODIGO   \n");
+	SELECT_POR_FORMA_CON_SIG_SQL = sql.toString();
+	sql = new StringBuffer(200);
+	sql.append("SELECT   \n");
+	sql.append("  CONJ.CONJUNCION_ID,   \n");
+	sql.append("  CONJ.CODIGO,   \n");
+	sql.append("  CONJ.FORMA,   \n");
+	sql.append("  CONJ.PARTIC,   \n");
+	sql.append("  CONJ.TIPO,   \n");
+	sql.append("  CONJ.SUBTIPO,   \n");
+	sql.append("  CONJ.PARTE,   \n");
+	sql.append("  SIG.SIGNIFICADO_ID,   \n");
+	sql.append("  SIG.VALOR   \n");
+	sql.append("FROM        \n");
+	sql.append("  CONJUNCIONES CONJ       \n");
+	sql.append("    INNER JOIN SIGNIFICADOS SIG                 \n");
+	sql.append("      ON CONJ.CONJUNCION_ID=SIG.REFERENTE_ID       \n");
+	sql.append("WHERE  \n");
+	sql.append((new StringBuilder()).append("  SIG.IDIOMA='")
 		.append(kalos.recursos.Configuracion.getIdiomaSignificados()).append("'    \n").toString());
-	stringbuffer.append("ORDER BY  \n");
-	stringbuffer.append("  CONJ.CODIGO   \n");
-	SELECT_TODAS_CON_SIGNIFICADO_SQL = stringbuffer.toString();
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("SELECT   \n");
-	stringbuffer.append("  CONJ.CONJUNCION_ID   \n");
-	stringbuffer.append("FROM        \n");
-	stringbuffer.append("  CONJUNCIONES CONJ       \n");
-	stringbuffer.append("WHERE  \n");
-	stringbuffer.append("  CONJ.SUBTIPO=?    \n");
-	stringbuffer.append("ORDER BY  \n");
-	stringbuffer.append("  CONJ.CODIGO   \n");
-	SELECT_IDS_POR_SUBTIPO_SQL = stringbuffer.toString();
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("SELECT   \n");
-	stringbuffer.append("  CONJ.CONJUNCION_ID,   \n");
-	stringbuffer.append("  CONJ.CODIGO,   \n");
-	stringbuffer.append("  CONJ.FORMA,   \n");
-	stringbuffer.append("  CONJ.TIPO,   \n");
-	stringbuffer.append("  CONJ.SUBTIPO,   \n");
-	stringbuffer.append("  CONJ.PARTE,   \n");
-	stringbuffer.append("  CONJ.PARTIC   \n");
-	stringbuffer.append("FROM        \n");
-	stringbuffer.append("  CONJUNCIONES CONJ \n");
-	stringbuffer.append("WHERE  \n");
-	stringbuffer.append("  CONJ.FORMA=?    \n");
-	SELECT_POR_FORMA_SQL = stringbuffer.toString();
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("SELECT   \n");
-	stringbuffer.append("  CONJ.CONJUNCION_ID,   \n");
-	stringbuffer.append("  CONJ.CODIGO,   \n");
-	stringbuffer.append("  CONJ.FORMA,   \n");
-	stringbuffer.append("  CONJ.TIPO,   \n");
-	stringbuffer.append("  CONJ.SUBTIPO,   \n");
-	stringbuffer.append("  CONJ.PARTE,   \n");
-	stringbuffer.append("  CONJ.PARTIC,   \n");
-	stringbuffer.append("  SIG.SIGNIFICADO_ID,   \n");
-	stringbuffer.append("  SIG.VALOR   \n");
-	stringbuffer.append("FROM        \n");
-	stringbuffer.append("  CONJUNCIONES CONJ       \n");
-	stringbuffer.append("    LEFT JOIN SIGNIFICADOS SIG                 \n");
-	stringbuffer.append("      ON CONJ.CONJUNCION_ID=SIG.REFERENTE_ID       \n");
-	stringbuffer.append("WHERE  \n");
-	stringbuffer.append("  CONJ.CONJUNCION_ID IN (?)    \n");
-	stringbuffer.append((new StringBuilder()).append("  AND (SIG.IDIOMA IS NULL OR SIG.IDIOMA='")
+	sql.append("ORDER BY  \n");
+	sql.append("  CONJ.CODIGO   \n");
+	SELECT_TODAS_CON_SIGNIFICADO_SQL = sql.toString();
+	sql = new StringBuffer(200);
+	sql.append("SELECT   \n");
+	sql.append("  CONJ.CONJUNCION_ID   \n");
+	sql.append("FROM        \n");
+	sql.append("  CONJUNCIONES CONJ       \n");
+	sql.append("WHERE  \n");
+	sql.append("  CONJ.SUBTIPO=?    \n");
+	sql.append("ORDER BY  \n");
+	sql.append("  CONJ.CODIGO   \n");
+	SELECT_IDS_POR_SUBTIPO_SQL = sql.toString();
+	sql = new StringBuffer(200);
+	sql.append("SELECT   \n");
+	sql.append("  CONJ.CONJUNCION_ID,   \n");
+	sql.append("  CONJ.CODIGO,   \n");
+	sql.append("  CONJ.FORMA,   \n");
+	sql.append("  CONJ.TIPO,   \n");
+	sql.append("  CONJ.SUBTIPO,   \n");
+	sql.append("  CONJ.PARTE,   \n");
+	sql.append("  CONJ.PARTIC   \n");
+	sql.append("FROM        \n");
+	sql.append("  CONJUNCIONES CONJ \n");
+	sql.append("WHERE  \n");
+	sql.append("  CONJ.FORMA=?    \n");
+	SELECT_POR_FORMA_SQL = sql.toString();
+	sql = new StringBuffer(200);
+	sql.append("SELECT   \n");
+	sql.append("  CONJ.CONJUNCION_ID,   \n");
+	sql.append("  CONJ.CODIGO,   \n");
+	sql.append("  CONJ.FORMA,   \n");
+	sql.append("  CONJ.TIPO,   \n");
+	sql.append("  CONJ.SUBTIPO,   \n");
+	sql.append("  CONJ.PARTE,   \n");
+	sql.append("  CONJ.PARTIC,   \n");
+	sql.append("  SIG.SIGNIFICADO_ID,   \n");
+	sql.append("  SIG.VALOR   \n");
+	sql.append("FROM        \n");
+	sql.append("  CONJUNCIONES CONJ       \n");
+	sql.append("    LEFT JOIN SIGNIFICADOS SIG                 \n");
+	sql.append("      ON CONJ.CONJUNCION_ID=SIG.REFERENTE_ID       \n");
+	sql.append("WHERE  \n");
+	sql.append("  CONJ.CONJUNCION_ID IN (?)    \n");
+	sql.append((new StringBuilder()).append("  AND (SIG.IDIOMA IS NULL OR SIG.IDIOMA='")
 		.append(kalos.recursos.Configuracion.getIdiomaSignificados()).append("')    \n").toString());
-	stringbuffer.append("ORDER BY  \n");
-	stringbuffer.append("  CONJ.CODIGO   \n");
-	SELECT_POR_VARIOS_IDS_CON_SIG_SQL = stringbuffer.toString();
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("SELECT   \n");
-	stringbuffer.append("  CONJ.CONJUNCION_ID,   \n");
-	stringbuffer.append("  CONJ.CODIGO,   \n");
-	stringbuffer.append("  CONJ.FORMA,   \n");
-	stringbuffer.append("  CONJ.TIPO,   \n");
-	stringbuffer.append("  CONJ.SUBTIPO,   \n");
-	stringbuffer.append("  CONJ.PARTE,   \n");
-	stringbuffer.append("  CONJ.PARTIC   \n");
-	stringbuffer.append("FROM        \n");
-	stringbuffer.append("  CONJUNCIONES CONJ       \n");
-	stringbuffer.append("WHERE  \n");
-	stringbuffer.append("  CONJ.CONJUNCION_ID IN (?)    \n");
-	SELECT_POR_VARIOS_IDS_SQL = stringbuffer.toString();
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("SELECT   \n");
-	stringbuffer.append("  CONJ.CONJUNCION_ID,   \n");
-	stringbuffer.append("  CONJ.CODIGO,   \n");
-	stringbuffer.append("  CONJ.FORMA,   \n");
-	stringbuffer.append("  CONJ.TIPO,   \n");
-	stringbuffer.append("  CONJ.SUBTIPO,   \n");
-	stringbuffer.append("  CONJ.PARTE,   \n");
-	stringbuffer.append("  CONJ.PARTIC,   \n");
-	stringbuffer.append("FROM        \n");
-	stringbuffer.append("  CONJUNCIONES CONJ       \n");
-	stringbuffer.append("WHERE  \n");
-	stringbuffer.append("  CONJ.CONJUNCION_ID=?    \n");
-	SELECT_POR_ID_SQL = stringbuffer.toString();
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("SELECT   \n");
-	stringbuffer.append("  CONJ.CONJUNCION_ID,   \n");
-	stringbuffer.append("  CONJ.CODIGO,   \n");
-	stringbuffer.append("  CONJ.FORMA,   \n");
-	stringbuffer.append("  CONJ.TIPO,   \n");
-	stringbuffer.append("  CONJ.SUBTIPO,   \n");
-	stringbuffer.append("  CONJ.PARTE,   \n");
-	stringbuffer.append("  CONJ.PARTIC,   \n");
-	stringbuffer.append("  SIG.SIGNIFICADO_ID,   \n");
-	stringbuffer.append("  SIG.VALOR   \n");
-	stringbuffer.append("FROM        \n");
-	stringbuffer.append("  CONJUNCIONES CONJ       \n");
-	stringbuffer.append("    LEFT JOIN SIGNIFICADOS SIG                 \n");
-	stringbuffer.append("      ON CONJ.CONJUNCION_ID=SIG.REFERENTE_ID       \n");
-	stringbuffer.append("WHERE  \n");
-	stringbuffer.append("  CONJ.CONJUNCION_ID=?    \n");
-	stringbuffer.append((new StringBuilder()).append("  AND (SIG.IDIOMA IS NULL OR SIG.IDIOMA='")
+	sql.append("ORDER BY  \n");
+	sql.append("  CONJ.CODIGO   \n");
+	SELECT_POR_VARIOS_IDS_CON_SIG_SQL = sql.toString();
+	sql = new StringBuffer(200);
+	sql.append("SELECT   \n");
+	sql.append("  CONJ.CONJUNCION_ID,   \n");
+	sql.append("  CONJ.CODIGO,   \n");
+	sql.append("  CONJ.FORMA,   \n");
+	sql.append("  CONJ.TIPO,   \n");
+	sql.append("  CONJ.SUBTIPO,   \n");
+	sql.append("  CONJ.PARTE,   \n");
+	sql.append("  CONJ.PARTIC   \n");
+	sql.append("FROM        \n");
+	sql.append("  CONJUNCIONES CONJ       \n");
+	sql.append("WHERE  \n");
+	sql.append("  CONJ.CONJUNCION_ID IN (?)    \n");
+	SELECT_POR_VARIOS_IDS_SQL = sql.toString();
+	sql = new StringBuffer(200);
+	sql.append("SELECT   \n");
+	sql.append("  CONJ.CONJUNCION_ID,   \n");
+	sql.append("  CONJ.CODIGO,   \n");
+	sql.append("  CONJ.FORMA,   \n");
+	sql.append("  CONJ.TIPO,   \n");
+	sql.append("  CONJ.SUBTIPO,   \n");
+	sql.append("  CONJ.PARTE,   \n");
+	sql.append("  CONJ.PARTIC,   \n");
+	sql.append("FROM        \n");
+	sql.append("  CONJUNCIONES CONJ       \n");
+	sql.append("WHERE  \n");
+	sql.append("  CONJ.CONJUNCION_ID=?    \n");
+	SELECT_POR_ID_SQL = sql.toString();
+	sql = new StringBuffer(200);
+	sql.append("SELECT   \n");
+	sql.append("  CONJ.CONJUNCION_ID,   \n");
+	sql.append("  CONJ.CODIGO,   \n");
+	sql.append("  CONJ.FORMA,   \n");
+	sql.append("  CONJ.TIPO,   \n");
+	sql.append("  CONJ.SUBTIPO,   \n");
+	sql.append("  CONJ.PARTE,   \n");
+	sql.append("  CONJ.PARTIC,   \n");
+	sql.append("  SIG.SIGNIFICADO_ID,   \n");
+	sql.append("  SIG.VALOR   \n");
+	sql.append("FROM        \n");
+	sql.append("  CONJUNCIONES CONJ       \n");
+	sql.append("    LEFT JOIN SIGNIFICADOS SIG                 \n");
+	sql.append("      ON CONJ.CONJUNCION_ID=SIG.REFERENTE_ID       \n");
+	sql.append("WHERE  \n");
+	sql.append("  CONJ.CONJUNCION_ID=?    \n");
+	sql.append((new StringBuilder()).append("  AND (SIG.IDIOMA IS NULL OR SIG.IDIOMA='")
 		.append(kalos.recursos.Configuracion.getIdiomaSignificados()).append("')    \n").toString());
-	SELECT_POR_ID_CON_SIG_SQL = stringbuffer.toString();
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("SELECT   \n");
-	stringbuffer.append("  CONJUNCION_ID,   \n");
-	stringbuffer.append("  CODIGO,   \n");
-	stringbuffer.append("  FORMA,   \n");
-	stringbuffer.append("  TIPO,   \n");
-	stringbuffer.append("  SUBTIPO,   \n");
-	stringbuffer.append("  PARTE,   \n");
-	stringbuffer.append("  PARTIC   \n");
-	stringbuffer.append("FROM   \n");
-	stringbuffer.append("  CONJUNCIONES   \n");
-	stringbuffer.append("WHERE   \n");
-	stringbuffer.append("  FORMA not like '%/%'  \n");
-	stringbuffer.append("  AND FORMA NOT LIKE  '%\\\\%'  \n");
-	stringbuffer.append("  AND FORMA NOT LIKE '%=%'  \n");
-	SELECT_SIN_ACENTO_SQL = stringbuffer.toString();
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("INSERT INTO CONJUNCIONES (  \n");
-	stringbuffer.append("  CONJUNCION_ID,   \n");
-	stringbuffer.append("  CODIGO,   \n");
-	stringbuffer.append("  FORMA,   \n");
-	stringbuffer.append("  TIPO,   \n");
-	stringbuffer.append("  SUBTIPO,   \n");
-	stringbuffer.append("  PARTE,   \n");
-	stringbuffer.append("  PARTIC   \n");
-	stringbuffer.append(") VALUES (     \n");
-	stringbuffer.append("  ?,?,?,?,?,?,?   \n");
-	stringbuffer.append(" )   \n");
-	INSERT_SQL = stringbuffer.toString();
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("UPDATE CONJUNCIONES SET  \n");
-	stringbuffer.append("  CODIGO=?,   \n");
-	stringbuffer.append("  FORMA=?,   \n");
-	stringbuffer.append("  TIPO=?,   \n");
-	stringbuffer.append("  SUBTIPO=?,   \n");
-	stringbuffer.append("  PARTE=?,   \n");
-	stringbuffer.append("  PARTIC=?   \n");
-	stringbuffer.append("WHERE     \n");
-	stringbuffer.append("  CONJUNCION_ID=?   \n");
-	UPDATE_SQL = stringbuffer.toString();
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("UPDATE CONJUNCIONES SET  \n");
-	stringbuffer.append("  CODIGO=?   \n");
-	stringbuffer.append("WHERE     \n");
-	stringbuffer.append("  CONJUNCION_ID=?   \n");
-	UPDATE_CODIGO_SQL = stringbuffer.toString();
-	stringbuffer = new StringBuffer(200);
-	stringbuffer.append("DELETE FROM CONJUNCIONES  \n");
-	stringbuffer.append("WHERE     \n");
-	stringbuffer.append("  CONJUNCION_ID=?   \n");
-	DELETE_SQL = stringbuffer.toString();
+	SELECT_POR_ID_CON_SIG_SQL = sql.toString();
+	sql = new StringBuffer(200);
+	sql.append("SELECT   \n");
+	sql.append("  CONJUNCION_ID,   \n");
+	sql.append("  CODIGO,   \n");
+	sql.append("  FORMA,   \n");
+	sql.append("  TIPO,   \n");
+	sql.append("  SUBTIPO,   \n");
+	sql.append("  PARTE,   \n");
+	sql.append("  PARTIC   \n");
+	sql.append("FROM   \n");
+	sql.append("  CONJUNCIONES   \n");
+	sql.append("WHERE   \n");
+	sql.append("  FORMA not like '%/%'  \n");
+	sql.append("  AND FORMA NOT LIKE  '%\\\\%'  \n");
+	sql.append("  AND FORMA NOT LIKE '%=%'  \n");
+	SELECT_SIN_ACENTO_SQL = sql.toString();
+	sql = new StringBuffer(200);
+	sql.append("INSERT INTO CONJUNCIONES (  \n");
+	sql.append("  CONJUNCION_ID,   \n");
+	sql.append("  CODIGO,   \n");
+	sql.append("  FORMA,   \n");
+	sql.append("  TIPO,   \n");
+	sql.append("  SUBTIPO,   \n");
+	sql.append("  PARTE,   \n");
+	sql.append("  PARTIC   \n");
+	sql.append(") VALUES (     \n");
+	sql.append("  ?,?,?,?,?,?,?   \n");
+	sql.append(" )   \n");
+	INSERT_SQL = sql.toString();
+	sql = new StringBuffer(200);
+	sql.append("UPDATE CONJUNCIONES SET  \n");
+	sql.append("  CODIGO=?,   \n");
+	sql.append("  FORMA=?,   \n");
+	sql.append("  TIPO=?,   \n");
+	sql.append("  SUBTIPO=?,   \n");
+	sql.append("  PARTE=?,   \n");
+	sql.append("  PARTIC=?   \n");
+	sql.append("WHERE     \n");
+	sql.append("  CONJUNCION_ID=?   \n");
+	UPDATE_SQL = sql.toString();
+	sql = new StringBuffer(200);
+	sql.append("UPDATE CONJUNCIONES SET  \n");
+	sql.append("  CODIGO=?   \n");
+	sql.append("WHERE     \n");
+	sql.append("  CONJUNCION_ID=?   \n");
+	UPDATE_CODIGO_SQL = sql.toString();
+	sql = new StringBuffer(200);
+	sql.append("DELETE FROM CONJUNCIONES  \n");
+	sql.append("WHERE     \n");
+	sql.append("  CONJUNCION_ID=?   \n");
+	DELETE_SQL = sql.toString();
     }
 
     public List seleccionaTodos() {
@@ -405,28 +406,29 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
     }    
     
 
-    public List seleccionaPorForma(String s, LugarSubcadena h1) {
-	String s1="";
-	switch (h1) {
-	case Principio: // '\001'
-	    s1 = (new StringBuilder()).append("'").append(s).append("%'").toString();
+    public List seleccionaPorForma(String forma, LugarSubcadena lugarSubcadena) {
+	StringBuffer expresionLike=new StringBuffer();
+	switch (lugarSubcadena) {
+	case Principio: 
+	    expresionLike.append("'").append(forma).append("%'");
 	    break;
-	case Medio: // '\002'
-	    s1 = (new StringBuilder()).append("'%").append(s).append("%'").toString();
+	case Medio: 
+	    expresionLike.append("'%").append(forma).append("%'");
 	    break;
-	case Fin: // '\003'
-	    s1 = (new StringBuilder()).append("'%").append(s).append("'").toString();
+	case Fin: 
+	    expresionLike.append("'%").append(forma).append("'");
 	    break;
-	case Exacto: // '\004'
-	    s1 = (new StringBuilder()).append("'").append(s).append("'").toString();
+	case Exacto: 
+	    expresionLike.append("'").append(forma).append("'");
 	    break;
 	}
-	String s2 = SELECT_POR_FORMA_CON_SIG_SQL.replaceFirst("\\?", s1);
-	SelectPorForma sel = new SelectPorForma(getDataSource(), s2);
+	String sql = SELECT_POR_FORMA_CON_SIG_SQL.replaceFirst("\\?", expresionLike.toString());
+	SelectPorForma sel = new SelectPorForma(getDataSource(), sql);
 	List list = sel.execute();
 	return list;
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public List seleccionaPorSubtipo(SubtipoConjuncion stc) {
 	List list = selIdsPorSubtipo.execute(new Object[] { SubtipoConjuncion.getCadena(stc) });
 	return list;
@@ -476,11 +478,13 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
 
     public void initDao() throws Exception {
 	super.initDao();
+	puebla();
 	selPorIdConSig = new SeleccionPorIdConSignificado(getDataSource(), SELECT_POR_ID_CON_SIG_SQL);
 	selPorId = new SeleccionPorIds(getDataSource(), SELECT_POR_ID_SQL);
 	selSinAcento = new SelectSinAcento(getDataSource());
 	selTodasConSignificado = new SelectTodasConSignificado(getDataSource());
 	selIdsPorSubtipo = new SelectIdsPorSubtipo(getDataSource());
+	selPorForma = new SelectPorForma(getDataSource(), SELECT_POR_FORMA_SQL);
 	insert = new Insert(getDataSource());
 	borrado = new Borrado(getDataSource(), DELETE_SQL);
 	update = new Update(getDataSource());

@@ -326,7 +326,7 @@ public class DiccionarioDAOImpl extends JdbcDaoSupport implements DiccionarioDAO
     private String tiposAString(List<TipoPalabra> tipos) {
 	StringBuffer sb = new StringBuffer(200);
 	for (TipoPalabra tipo : tipos) {
-	    sb.append("'" + TipoPalabra.getString(tipo) + "',");
+	    sb.append("'" + tipo.getStringCorta() + "',");
 	}
 	if (sb.length() > 0) {
 	    sb.delete(sb.length() - 1, sb.length()); // la coma

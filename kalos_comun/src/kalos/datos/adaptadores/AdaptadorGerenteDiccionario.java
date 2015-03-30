@@ -10,7 +10,7 @@ import kalos.enumeraciones.LugarSubcadena;
 import kalos.enumeraciones.TipoPalabra;
 
 public class AdaptadorGerenteDiccionario implements FuenteDatosCacheable {
-    private List<String> e;
+    private List<String> ids;
     private List<EntradaDiccionario> entradasDiccionario;
     private GerenteDiccionario gerenteDiccionario;
 
@@ -20,22 +20,22 @@ public class AdaptadorGerenteDiccionario implements FuenteDatosCacheable {
 
     public void agregaSeleccionPorTipos(List<TipoPalabra> paramList) {
 	List<String> localList = this.gerenteDiccionario.seleccionaPorTipos(paramList);
-	if (this.e == null) {
-	    this.e = new ArrayList<String>();
+	if (this.ids == null) {
+	    this.ids = new ArrayList<String>();
 	}
-	this.e.addAll(localList);
+	this.ids.addAll(localList);
     }
 
     public void seleccionaPorNeutralizada(String paramString, LugarSubcadena paramh, List<TipoPalabra> paramList) {
-	this.e = this.gerenteDiccionario.seleccionaPorNeutralizada(paramString, paramh, paramList);
+	this.ids = this.gerenteDiccionario.seleccionaPorNeutralizada(paramString, paramh, paramList);
     }
 
     public void seleccionaPorNormal(String paramString, LugarSubcadena paramh, List<TipoPalabra> paramList) {
-	this.e = this.gerenteDiccionario.seleccionaPorNormal(paramString, paramh, paramList);
+	this.ids = this.gerenteDiccionario.seleccionaPorNormal(paramString, paramh, paramList);
     }
 
     public void seleccionaPorSinLargas(String paramString, LugarSubcadena paramh, List<TipoPalabra> paramList) {
-	this.e = this.gerenteDiccionario.seleccionaPorSinLargas(paramString, paramh, paramList);
+	this.ids = this.gerenteDiccionario.seleccionaPorSinLargas(paramString, paramh, paramList);
     }
 
     public List<EntradaDiccionario> getBeans(List<String> paramList) {
@@ -44,10 +44,10 @@ public class AdaptadorGerenteDiccionario implements FuenteDatosCacheable {
     }
 
     public int getLongitudTotal() {
-	return this.e.size();
+	return this.ids.size();
     }
 
     public List<String> getTodosLosId() {
-	return this.e;
+	return this.ids;
     }
 }

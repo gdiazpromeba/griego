@@ -91,7 +91,7 @@ public class InterjeccionesDAOImpl extends JdbcDaoSupport implements Interjeccio
  	stringbuffer.append("  SIG.SIGNIFICADO_ID,   \n");
  	stringbuffer.append("  SIG.VALOR   \n");
  	stringbuffer.append("FROM        \n");
- 	stringbuffer.append("    INTERJECCION ITJ       \n");
+ 	stringbuffer.append("    INTERJECCIONES ITJ       \n");
  	stringbuffer.append("    LEFT JOIN SIGNIFICADOS SIG                 \n");
  	stringbuffer.append("      ON ITJ.INTERJECCION_ID=SIG.REFERENTE_ID       \n");
  	stringbuffer.append("WHERE  \n");
@@ -112,7 +112,7 @@ public class InterjeccionesDAOImpl extends JdbcDaoSupport implements Interjeccio
  	stringbuffer.append("  SIG.SIGNIFICADO_ID,   \n");
  	stringbuffer.append("  SIG.VALOR   \n");
  	stringbuffer.append("FROM        \n");
- 	stringbuffer.append("    INTERJECCION ITJ       \n");
+ 	stringbuffer.append("    INTERJECCIONES ITJ       \n");
  	stringbuffer.append("    LEFT JOIN SIGNIFICADOS SIG                 \n");
  	stringbuffer.append("      ON ITJ.INTERJECCION_ID=SIG.REFERENTE_ID       \n");
  	stringbuffer.append("WHERE  \n");
@@ -132,7 +132,7 @@ public class InterjeccionesDAOImpl extends JdbcDaoSupport implements Interjeccio
  	stringbuffer.append("  SIG.SIGNIFICADO_ID,   \n");
  	stringbuffer.append("  SIG.VALOR   \n");
  	stringbuffer.append("FROM        \n");
- 	stringbuffer.append("    INTERJECCION ITJ       \n");
+ 	stringbuffer.append("    INTERJECCIONES ITJ       \n");
  	stringbuffer.append("    LEFT JOIN SIGNIFICADOS SIG                 \n");
  	stringbuffer.append("      ON ITJ.INTERJECCION_ID=SIG.REFERENTE_ID       \n");
  	stringbuffer.append("WHERE  \n");
@@ -146,7 +146,7 @@ public class InterjeccionesDAOImpl extends JdbcDaoSupport implements Interjeccio
  	stringbuffer.append("SELECT   \n");
  	stringbuffer.append("  ITJ.INTERJECCION_ID   \n");
  	stringbuffer.append("FROM        \n");
- 	stringbuffer.append("    INTERJECCION ITJ       \n");
+ 	stringbuffer.append("    INTERJECCIONES ITJ       \n");
  	stringbuffer.append("WHERE  \n");
  	stringbuffer.append("  ITJ.LETRA=?    \n");
  	stringbuffer.append("ORDER BY \n");
@@ -157,7 +157,7 @@ public class InterjeccionesDAOImpl extends JdbcDaoSupport implements Interjeccio
  	stringbuffer.append("SELECT   \n");
  	stringbuffer.append("  ITJ.INTERJECCION_ID   \n");
  	stringbuffer.append("FROM        \n");
- 	stringbuffer.append("    INTERJECCION ITJ       \n");
+ 	stringbuffer.append("    INTERJECCIONES ITJ       \n");
  	stringbuffer.append("WHERE  \n");
  	stringbuffer.append("  ITJ.INTERJECCION=?    \n");
  	stringbuffer.append("ORDER BY \n");

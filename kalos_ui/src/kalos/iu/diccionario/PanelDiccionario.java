@@ -193,22 +193,22 @@ public class PanelDiccionario extends JPanel implements TipografiaCambiable {
 		return arraylist;
 	}
 
-	public void proceder(String s, Ignorancia e1) throws Exception {
-		String s1 = OpPalabras.strCompletoABeta(s);
-		LugarSubcadena h1 = (LugarSubcadena) cmbLugaresSubcadena.getEnumeracionSeleccionada();
+	public void proceder(String palabraCompleta, Ignorancia ignorancia) throws Exception {
+		String palabraBeta = OpPalabras.strCompletoABeta(palabraCompleta);
+		LugarSubcadena lugarSubcadena = (LugarSubcadena) cmbLugaresSubcadena.getEnumeracionSeleccionada();
 		Worker.post(new TareaLeyenda(panProgreso, "buscando"));
-		List<TipoPalabra> list = enumSeleccionadaATipoPalabra(tiposPalabra.getSeleccionadas());
-		DictionaryPM b = (DictionaryPM) Worker.post(new TareaDiccionario(adGerenteDir, s1, e1, h1, list));
-		if (b == null)
+		List<TipoPalabra> tiposPalabraSel = enumSeleccionadaATipoPalabra(tiposPalabra.getSeleccionadas());
+		DictionaryPM pagModDiccionario = (DictionaryPM) Worker.post(new TareaDiccionario(adGerenteDir, palabraBeta, ignorancia, lugarSubcadena, tiposPalabraSel));
+		if (pagModDiccionario == null)
 			Worker.post(new TareaLeyenda(panProgreso, "ninguna_forma_encontrada"));
 		else
-			Worker.post(new TareaLeyenda(panProgreso, "formas_encontradas", new String[] { Integer.toString(b
+			Worker.post(new TareaLeyenda(panProgreso, "formas_encontradas", new String[] { Integer.toString(pagModDiccionario
 					.getRowCount()) }));
 		Worker.post(new TareaOcultaProgreso(panProgreso));
 		Worker.post(new TareaHabilitaComponentes(new Component[] { botBuscar, cmbIgnorancias }));
-		if (b.getRowCount() > 0) {
+		if (pagModDiccionario.getRowCount() > 0) {
 			tabla.setColumnModel(colModelConResultados);
-			tabla.setModel(b);
+			tabla.setModel(pagModDiccionario);
 			tabla.scrollRectToVisible(tabla.getCellRect(0, 0, false));
 			tabla.getSelectionModel().setSelectionInterval(0, 0);
 		} else {
