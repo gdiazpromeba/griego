@@ -146,7 +146,6 @@ public class Comienzo {
 
                 caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_controles_visuales"));
                 
-                SimpleBean sib =  (SimpleBean) applicationContext.getBean("simpleBean");
                 
                 panelAM = (PanelAM) applicationContext.getBean("panelResultadosAM");
                 panelDiccionario = (PanelDiccionario) applicationContext.getBean("panelResultadosDiccionario");               

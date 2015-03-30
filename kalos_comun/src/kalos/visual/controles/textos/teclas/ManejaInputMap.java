@@ -21,13 +21,13 @@ import org.apache.commons.collections.MultiMap;
 import org.dom4j.io.SAXReader;
 
 /**
- * Maneja las combinaciones de taclas a las que se les presta atenci�n en los
+ * Maneja las combinaciones de taclas a las que se les presta atención en los
  * textos de entrada griega. Los arrays arrTeclado, arrTecladoSinMarcas, etc,
- * agrupan dichas combinaciones de teclas seg�n el modo de entrada de texto
- * porel cual el control est� configurado (algunos, como copiarPegar, se aplican
- * a todos). Lo que se hace una vez que se tecle� est� determinado por una
+ * agrupan dichas combinaciones de teclas según el modo de entrada de texto
+ * porel cual el control está configurado (algunos, como copiarPegar, se aplican
+ * a todos). Lo que se hace una vez que se tecleó está determinado por una
  * "TextAction", que se vincula en el contructor al "keystroke" definido por la
- * combinaci�n de teclas. La informaci�n de dicha vinculaci�n se guarda en un
+ * combinación de teclas. La información de dicha vinculación se guarda en un
  * "inputmap".
  */
 public class ManejaInputMap implements uLetras {
@@ -35,7 +35,7 @@ public class ManejaInputMap implements uLetras {
     static MultiMap mapeos = new MultiHashMap();
     static {
 	try {
-	    File archivoTeclado = new File(System.getProperty("user.dir") + File.separator + "keyboards.xml");
+	    File archivoTeclado = new File("keyboards.xml");
 	    org.dom4j.Document doc = new SAXReader().read(archivoTeclado);
 	    org.dom4j.Element raiz = doc.getRootElement();
 	    List teclados = raiz.elements("keyboard");
@@ -114,14 +114,14 @@ public class ManejaInputMap implements uLetras {
     static Object[][] arrAtras = {
 
 	    // universales
-	    { KeyEvent.VK_SLASH, 0, EfectoTecleado.AcentoAgudo },
-	    { KeyEvent.VK_DIVIDE, 0, EfectoTecleado.AcentoAgudo },
-	    { KeyEvent.VK_LEFT_PARENTHESIS, 0, EfectoTecleado.EspirituAspero },
-	    { KeyEvent.VK_RIGHT_PARENTHESIS, 0, EfectoTecleado.EspirituSuave },
-	    { KeyEvent.VK_EQUALS, 0, EfectoTecleado.AcentoCircunflejo },
-	    { KeyEvent.VK_BACK_SLASH, 0, EfectoTecleado.AcentoGrave },
-	    { KeyEvent.VK_SEPARATOR, 0, EfectoTecleado.IotaSuscripta },
-	    { KeyEvent.VK_PLUS, 0, EfectoTecleado.Dieresis }, { KeyEvent.VK_UNDERSCORE, 0, EfectoTecleado.SignoLarga },
+	    { KeyEvent.VK_SLASH, false, EfectoTecleado.AcentoAgudo },
+	    { KeyEvent.VK_DIVIDE, false, EfectoTecleado.AcentoAgudo },
+	    { KeyEvent.VK_LEFT_PARENTHESIS, false, EfectoTecleado.EspirituAspero },
+	    { KeyEvent.VK_RIGHT_PARENTHESIS, false, EfectoTecleado.EspirituSuave },
+	    { KeyEvent.VK_EQUALS, false, EfectoTecleado.AcentoCircunflejo },
+	    { KeyEvent.VK_BACK_SLASH, false, EfectoTecleado.AcentoGrave },
+	    { KeyEvent.VK_SEPARATOR, false, EfectoTecleado.IotaSuscripta },
+	    { KeyEvent.VK_PLUS, false, EfectoTecleado.Dieresis }, { KeyEvent.VK_UNDERSCORE, false, EfectoTecleado.SignoLarga },
 
     };
 
@@ -139,8 +139,8 @@ public class ManejaInputMap implements uLetras {
 
     /**
      * @param sinMarcas
-     *            determina cu�l array voy a usar para la maniobra de
-     *            "atr�s y acento"
+     *            determina cuál array voy a usar para la maniobra de
+     *            "atrás y acento"
      */
     public static void asociaTeclas(JTextField txt) {
 
@@ -160,7 +160,7 @@ public class ManejaInputMap implements uLetras {
 	// acciones 'atr�s y acento'
 	for (int i = 0; i < arrAtras.length; i++) {
 	    TAAtrasYAcento aa = new TAAtrasYAcento(txt, (EfectoTecleado)arrAtras[i][2]);
-	    KeyStroke ks = KeyStroke.getKeyStroke((char)arrAtras[i][0], (boolean)arrAtras[i][1]);
+	    KeyStroke ks = KeyStroke.getKeyStroke((int)arrAtras[i][0], 0,  (boolean)arrAtras[i][1]);
 	    txt.getInputMap().put(ks, aa);
 	}
 	for (Iterator it = mapeos.entrySet().iterator(); it.hasNext();) {

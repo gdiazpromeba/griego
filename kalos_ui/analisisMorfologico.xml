@@ -92,6 +92,8 @@
 	<bean id="amConjunciones" class="kalos.analisismorfologico.negocio.AMConjunciones"/>
 	
 	<bean id="amPreposiciones" class="kalos.analisismorfologico.negocio.AMPreposiciones"/>
+	
+    <bean id="amInterjecciones" class="kalos.analisismorfologico.negocio.AMInterjecciones"/>	
 
 
 </beans>

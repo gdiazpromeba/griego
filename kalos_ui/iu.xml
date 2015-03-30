@@ -3,7 +3,6 @@
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-     <bean id="simpleBean" class="kalos.iu.analisismorfologico.SimpleBean"/>
 
 	<bean id="panelResultadosAM" class="kalos.iu.analisismorfologico.PanelAM" >
 	</bean>
@@ -47,9 +46,8 @@
 	  <property name="gerenteAdjetivos" ref="gerenteAdjetivos"/>
 	</bean>
 	
-	<bean id="menues" class="kalos.iu.Menues">
-	  <constructor-arg ref="ventanaRegistro"/>
-	</bean>
+	<bean id="menues" class="kalos.iu.Menues"/>
+
   
 	
 </beans>
