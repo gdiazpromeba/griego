@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="extractorPrefijos" class="com.kalos.analisismorfologico.negocio.ExtractorPrefijos" lazy-init="true">
+		<property name="gerenteSubstractorPrefijos" ref="gerenteSubstractorPrefijos" />
+	</bean>
+
+	<bean id="amUtil" class="com.kalos.analisismorfologico.negocio.AMUtil" lazy-init="true"/>
+
+
+	<bean id="amVerbal" class="com.kalos.analisismorfologico.negocio.AMVerbal" lazy-init="true">
+		<property name="amUtil" ref="amUtil" />
+		<property name="gerenteVerbos" ref="gerenteVerbos" />
+		<property name="gerenteVerbosCompuestos" ref="gerenteVerbosCompuestos" />
+		<property name="gerenteIrrVerbos" ref="gerenteIrrVerbos" />
+		<property name="extractorPrefijos" ref="extractorPrefijos" />
+		<property name="gerenteIrrVerbosIndividuales" ref="gerenteIrrVerbosIndividuales" />
+		<property name="gerenteIrrInfinitivos" ref="gerenteIrrInfinitivos" />
+	</bean>
+
+	<bean id="amVerbos" class="com.kalos.analisismorfologico.negocio.AMVerbos" lazy-init="true">
+		<property name="amUtil" ref="amUtil" />
+		<property name="amVerbal" ref="amVerbal" />
+		<property name="gerenteVerbos" ref="gerenteVerbos" />
+		<property name="verbos" ref="verbos" />
+		<property name="gerenteTermRegVerbo" ref="gerenteTermRegVerbo" />
+		<property name="extractorPrefijos" ref="extractorPrefijos" />
+		<property name="gerenteIrrVerbosIndividuales" ref="gerenteIrrVerbosIndividuales" />
+	</bean>
+
+
+	<bean id="amInfinitivos" class="com.kalos.analisismorfologico.negocio.AMInfinitivos" lazy-init="true">
+		<property name="amUtil" ref="amUtil" />
+		<property name="amVerbal" ref="amVerbal" />
+		<property name="extractorPrefijos" ref="extractorPrefijos" />
+		<property name="gerenteTermRegInfinitivo" ref="gerenteTermRegInfinitivo" />
+		<property name="gerenteVerbos" ref="gerenteVerbos" />
+		<property name="gerenteIrrInfinitivos" ref="gerenteIrrInfinitivos" />
+	</bean>
+	
+
+	
+	<bean id="amNominal" class="com.kalos.analisismorfologico.negocio.AMNominal" lazy-init="true">
+		<property name="amUtil" ref="amUtil" />
+		<property name="gerenteTermRegSustantivo" ref="gerenteTermRegSustantivo" />
+		<constructor-arg ref="gerenteTiposSustantivo"/>
+		<constructor-arg ref="gerenteDesinSust"/>
+	</bean>
+
+	<bean id="amParticipios" class="com.kalos.analisismorfologico.negocio.AMParticipios" lazy-init="true">
+		<!-- 
+		<property name="amUtil" ref="amUtil" />
+		<property name="amVerbal" ref="amVerbal" />
+		<property name="amNominal" ref="amNominal" />
+		<property name="participios" ref="participios" />
+		<property name="extractorPrefijos" ref="extractorPrefijos" />
+		<property name="gerenteVerbos" ref="gerenteVerbos" />
+        <property name="gerenteVerbalizadorParticipios" ref="gerenteVerbalizadorParticipios" />
+        <property name="gerenteVerbosCompuestos" ref="gerenteVerbosCompuestos" />        
+        -->
+		<property name="gerenteIrrParticipiosEnteros" ref="gerenteIrrParticipiosEnteros" />
+		<property name="gerenteIrrParticipiosSimples" ref="gerenteIrrParticipiosSimples" />
+        <property name="gerenteCubosTipoPart" ref="gerenteCubosTipoPart" />
+        <property name="gerenteTransParticipios" ref="gerenteTransParticipios" />
+	</bean>	
+	
+	<bean id="amSustantivos" class="com.kalos.analisismorfologico.negocio.AMSustantivos" lazy-init="true">
+		<!-- 
+		<property name="amUtil" ref="amUtil" />
+		<property name="amNominal" ref="amNominal" />
+		<property name="gerenteIrrSustantivos" ref="gerenteIrrSustantivos" />
+		<property name="gerenteSustantivos" ref="gerenteSustantivos" />
+		-->
+	</bean>
+	
+	<bean id="amAdjetivos" class="com.kalos.analisismorfologico.negocio.AMAdjetivos">
+	    <!-- 
+		<property name="amUtil" ref="amUtil" />
+		<property name="amNominal" ref="amNominal" />
+		<property name="gerenteAdjetivosComoNominales" ref="gerenteAdjetivosComoNominales" />
+		<property name="gerenteIrrAdjetivosIndividuales" ref="gerenteIrrAdjetivosIndividuales" />
+		<property name="gerenteAdjetivos" ref="gerenteAdjetivos" />		
+		-->
+	</bean>
+	
+	<bean id="amAdverbios" class="com.kalos.analisismorfologico.negocio.AMAdverbios"/>	
+	
+	<bean id="amParticulas" class="com.kalos.analisismorfologico.negocio.AMParticulas"/>
+	
+	<bean id="amConjunciones" class="com.kalos.analisismorfologico.negocio.AMConjunciones"/>
+	
+	<bean id="amPreposiciones" class="com.kalos.analisismorfologico.negocio.AMPreposiciones"/>
+	
+    <bean id="amInterjecciones" class="com.kalos.analisismorfologico.negocio.AMInterjecciones"/>	
+
+
+</beans>

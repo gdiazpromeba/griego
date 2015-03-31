@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+	<bean id="panelResultadosAM" class="com.kalos.iu.analisismorfologico.PanelAM" >
+	</bean>
+
+
+	<bean id="fabricaControles" class="com.kalos.visual.controles.FabricaControles">
+		<property name="combosDAO" ref="combosDAO" />
+		<property name="gerenteTiposAdjetivo" ref="gerenteTiposAdjetivo" />
+		<property name="gerenteTiposSustantivo" ref="gerenteTiposSustantivo" />
+		<property name="gerenteTiposVerbo" ref="gerenteTiposVerbo" />
+	</bean>
+	
+	
+	<bean id="panelProgreso" class="com.kalos.iu.PanelProgreso"/>
+
+    <bean id="panelResultadosDiccionario" class="com.kalos.iu.diccionario.PanelDiccionario">
+	    <constructor-arg ref="gerenteDiccionario"/>
+	    <property name="panelProgreso" ref="panelProgreso" />
+	</bean>
+
+	<bean id="utilidadJasper" class="com.kalos.iu.jasper.UtilidadJasper">
+	  <property name="utilidadesTM"  ref="utilidadesTM" />
+	</bean>
+
+    <bean id="ventanaMolesta" class="com.kalos.iu.registro.VentanaMolesta">
+      <constructor-arg ref="gerenteSeguridad"/>
+    </bean>
+    
+    <bean id="ventanaRegistro" class="com.kalos.iu.registro.VentanaRegistro">
+      <constructor-arg ref="gerenteSeguridad"/>
+    </bean>    
+
+	<bean id="panelTablaFlexion" class="com.kalos.iu.flexion.PanelFlexion">
+	</bean>
+
+
+	
+	<bean id="parametrosReporte" class="com.kalos.iu.flexion.ParametrosReporte">
+	  <property name="gerenteVerbos" ref="gerenteVerbos"/>
+	  <property name="gerenteSustantivos" ref="gerenteSustantivos"/>
+	  <property name="gerenteAdjetivos" ref="gerenteAdjetivos"/>
+	</bean>
+	
+	<bean id="menues" class="com.kalos.iu.Menues"/>
+
+  
+	
+</beans>
