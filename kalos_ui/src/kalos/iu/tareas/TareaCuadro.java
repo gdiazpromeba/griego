@@ -1,7 +1,9 @@
 package kalos.iu.tareas;
 
+import java.awt.Color;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -70,9 +72,6 @@ public class TareaCuadro extends Task {
 		Map<String, String> parametros = parametrosReporte.parametros(id, tipoReporte);
 		JRViewerKalos visor = utilidadJasper.visorJasper(tipoReporte, parametros, tmJasper);
 		panelJasper.add(visor);
-		panelJasper.repaint();
-		panelJasper.revalidate();
-		panelTabla.repaint();
 		panelTabla.revalidate();
 		return null;
 	}
