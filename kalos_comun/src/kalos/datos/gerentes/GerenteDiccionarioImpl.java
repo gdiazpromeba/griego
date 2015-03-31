@@ -30,8 +30,7 @@ public class GerenteDiccionarioImpl   implements GerenteDiccionario {
 
     @Override
     public List<String> seleccionaPorNeutralizada(String subcadena, LugarSubcadena lugar, List<TipoPalabra> tipos) {
-	// TODO Auto-generated method stub
-	return null;
+	return diccionarioDAO.seleccionaPorNeutralizada(subcadena, lugar, tipos);
     }
 
     @Override
