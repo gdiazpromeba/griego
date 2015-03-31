@@ -420,7 +420,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 	private SeleccionPorTipo seleccionPorTipo;
 	
 	public List<ParticulaBean> seleccionaParticulasDadoTipoSinSignificado(TipoPalabra tipo) {
-		return seleccionPorTipo.execute(new Object[] {TipoPalabra.getString(tipo)});
+		return seleccionPorTipo.execute(new Object[] {tipo.getStringCorta()});
 	}
 	
 	private SeleccionIndividual seleccionIndividual;
