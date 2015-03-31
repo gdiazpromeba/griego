@@ -22,7 +22,7 @@ public class CargaRecursos {
     public ImageIcon getImagen(String dirArchivo) {
         try {
             ClassLoader loader = this.getClass().getClassLoader();
-            URL urlRecurso = loader.getResource("kalos/recursos/img/" + dirArchivo);
+            URL urlRecurso = loader.getResource("img/" + dirArchivo);
             ImageIcon ii = new ImageIcon(urlRecurso);
             return ii;
         } catch (Exception ex) {
@@ -31,17 +31,13 @@ public class CargaRecursos {
         }
     }
 
-    public URL getResourceURL(String dirRelativo) {
+    public static URL getResourceURL(String pathRelativo) {
         try {
-            if (Configuracion.isDebug()) {
-                URL url = new URL("file:C:/kalos_eclipse/lib/" + dirRelativo);
-                return url;
-            } else {
-                java.net.URL url = new URL(dirRelativo);
-                return url;
-            }
+            ClassLoader loader = CargaRecursos.class.getClassLoader();
+            URL urlRecurso = loader.getResource(pathRelativo);  
+            return urlRecurso;
         } catch (Exception ee) {
-            System.out.println("Error en getResourceURL directorio=" + dirRelativo + " debug" + Configuracion.isDebug());
+            System.out.println("Error en getResourceURL directorio=" + pathRelativo + " debug" + Configuracion.isDebug());
             ee.printStackTrace();
             System.exit(-1);
             return null;

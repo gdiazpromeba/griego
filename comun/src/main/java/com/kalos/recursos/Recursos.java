@@ -99,7 +99,8 @@ public class Recursos {
     }
 
     public static void cambiaLocale(String localeName) {
-        Configuracion.isDebug();
+        //Configuracion.isDebug();
+        locale=new Locale(localeName);
         recursos = ResourceBundle.getBundle("Mensajes", locale);
     }
 
