@@ -7,17 +7,20 @@ package com.kalos.visual.controles.botones;
 import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import com.kalos.recursos.Recursos;
+
+import com.kalos.recursos.CargaRecursos;
 
 public class BotonBuscar extends JButton {
 
     public BotonBuscar() {
-	super(Recursos.cargador.getImagen("buscar16.gif"));
-	setPreferredSize(new Dimension(22, 22));
-	setMaximumSize(new Dimension(22, 22));
-	this.boton=this;
-	manejaEventos();
+	  super(new ImageIcon(CargaRecursos.getResourceURL("img/buscar16.gif")));
+	  setPreferredSize(new Dimension(22, 22));
+	  setMaximumSize(new Dimension(22, 22));
+	  this.boton=this;
+	  manejaEventos();
     }
     //para el adapter
     private BotonBuscar boton;

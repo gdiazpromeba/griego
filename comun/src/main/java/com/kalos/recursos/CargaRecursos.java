@@ -19,17 +19,7 @@ public class CargaRecursos {
 
     Logger logger = Logger.getLogger(this.getClass().getName());
 
-    public ImageIcon getImagen(String dirArchivo) {
-        try {
-            ClassLoader loader = this.getClass().getClassLoader();
-            URL urlRecurso = loader.getResource("img/" + dirArchivo);
-            ImageIcon ii = new ImageIcon(urlRecurso);
-            return ii;
-        } catch (Exception ex) {
-            logger.error("error loading image " + ex);
-            return null;
-        }
-    }
+
 
     public static URL getResourceURL(String pathRelativo) {
         try {

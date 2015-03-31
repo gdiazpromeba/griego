@@ -8,27 +8,28 @@ import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import com.kalos.recursos.Recursos;
+import com.kalos.recursos.CargaRecursos;
 
 public class BotonDetalle extends JButton {
 
     public BotonDetalle() {
-	super(Recursos.cargador.getImagen("detalle16.gif"));
-	setPreferredSize(new Dimension(22, 22));
-	setMaximumSize(new Dimension(22, 22));
-	boton = this;
-	manejaEventos();
+	  super(new ImageIcon(CargaRecursos.getResourceURL("img/detalle16.gif")));
+	  setPreferredSize(new Dimension(22, 22));
+	  setMaximumSize(new Dimension(22, 22));
+	  boton = this;
+	  manejaEventos();
     }
 
     BotonDetalle boton;
 
     private void manejaEventos() {
-	addComponentListener(new ComponentAdapter() {
+	  addComponentListener(new ComponentAdapter() {
 	    public void componentResized(ComponentEvent componentevent) {
 		boton.setSize(new Dimension(22, 22));
 	    }
-	});
+	  });
     }
 }

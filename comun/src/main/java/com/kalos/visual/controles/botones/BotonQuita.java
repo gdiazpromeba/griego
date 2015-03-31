@@ -6,15 +6,16 @@ package com.kalos.visual.controles.botones;
 
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import com.kalos.recursos.Recursos;
+import com.kalos.recursos.CargaRecursos;
 
 public class BotonQuita extends JButton {
 
     public BotonQuita() {
-	super(Recursos.cargador.getImagen("quita16.gif"));
-	setPreferredSize(new Dimension(22, 22));
-	setMaximumSize(new Dimension(22, 22));
+	  super(new ImageIcon(CargaRecursos.getResourceURL("img/quita16.gif")));
+	  setPreferredSize(new Dimension(22, 22));
+	  setMaximumSize(new Dimension(22, 22));
     }
 }

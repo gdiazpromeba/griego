@@ -9,10 +9,12 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
+import com.kalos.recursos.CargaRecursos;
 import com.kalos.recursos.Recursos;
 
 public class TextoNulable extends JPanel {
@@ -29,7 +31,7 @@ public class TextoNulable extends JPanel {
 
     public TextoNulable(int i) {
 	habilitado = false;
-	boton = new JToggleButton(Recursos.cargador.getImagen("quita16.gif"));
+	boton = new JToggleButton(new ImageIcon(CargaRecursos.getResourceURL("img/quita16.gif")));
 	texto = new JTextField(i);
 	boton.setPreferredSize(new Dimension(22, 22));
 	boton.setMaximumSize(new Dimension(22, 22));

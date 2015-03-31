@@ -8,11 +8,7 @@ import com.kalos.enumeraciones.TipoPalabra;
 
 public interface GerenteDiccionario {
 
-	/**
-	 * ordena alfabéticamente todas las entradas de diccionario de una letra en particular 
-	 * @param letra
-	 */
-	public abstract void ordena(String letra);
+
 	
 	
 

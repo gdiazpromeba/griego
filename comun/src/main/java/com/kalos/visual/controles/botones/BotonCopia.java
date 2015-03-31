@@ -2,9 +2,10 @@ package com.kalos.visual.controles.botones;
 
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import com.kalos.recursos.Recursos;
+import com.kalos.recursos.CargaRecursos;
 
 /**
  * <p>Title: Kalos</p>
@@ -17,7 +18,7 @@ import com.kalos.recursos.Recursos;
 
 public class BotonCopia extends JButton {
   public BotonCopia() {
-    super(Recursos.cargador.getImagen("Copy16.gif"));
+    super(new ImageIcon(CargaRecursos.getResourceURL("img/Copy16.gif")));
     setPreferredSize(new Dimension(22, 22));
     setMaximumSize(new Dimension(22, 22));
   }

@@ -65,18 +65,15 @@ public class Comienzo {
             JFrame jframe = new JFrame();
             Menues c = (Menues) Comienzo.getApplicationContext().getBean("menues");
             c.inicializa(jframe);
-            jframe.setTitle((new StringBuilder()).append("KALÓS ")
-                    .append(Configuracion.getVersionNumero()).toString());
+            jframe.setTitle("KALÓS " + Configuracion.getVersionNumero());
             jframe.setLayout(new BorderLayout());
             Comienzo.panel = new JPanel();
             Comienzo.panel.setLayout(new BorderLayout());
             JTabbedPane jtabbedpane = new JTabbedPane();
             Comienzo.panel.add(Comienzo.getPanelProgreso(), "South");
             Comienzo.panel.add(jtabbedpane, "Center");
-            jtabbedpane.add(Recursos.getCadena("diccionario"),
-                    Comienzo.getPanelDiccionario());
-            jtabbedpane.add(Recursos.getCadena("analisis_morfologico"),
-                    Comienzo.getPanelAM());
+            jtabbedpane.add(Recursos.getCadena("diccionario"), Comienzo.getPanelDiccionario());
+            jtabbedpane.add(Recursos.getCadena("analisis_morfologico"), Comienzo.getPanelAM());
             jtabbedpane.add(Recursos.getCadena("flexion"), Comienzo.getPanelFlexion());
             jframe.add(Comienzo.panel);
             jframe.setSize(777, 550);
@@ -144,29 +141,29 @@ public class Comienzo {
                 new Thread() {
 
                     public void run() {
-                        AMParticipios d = (AMParticipios) Comienzo.getApplicationContext().getBean("amParticipios");
-                        d.setParticipios((Participios) Comienzo.getApplicationContext().getBean("participios"));
-                        d.setAmUtil((AMUtil) Comienzo.getApplicationContext().getBean("amUtil"));
-                        d.setAmNominal((AMNominal) Comienzo.getApplicationContext().getBean("amNominal"));
-                        d.setAmVerbal((AMVerbal) Comienzo.getApplicationContext().getBean("amVerbal"));
-                        d.setExtractorPrefijos((ExtractorPrefijos) Comienzo.getApplicationContext().getBean("extractorPrefijos"));
-                        d.setGerenteVerbos((GerenteVerbos) Comienzo.getApplicationContext().getBean("gerenteVerbos"));
-                        d.setGerenteVerbosCompuestos((GerenteVerbosCompuestos) Comienzo.getApplicationContext().getBean("gerenteVerbosCompuestos"));
-                        d.setGerenteVerbalizadorParticipios((GerenteVerbalizadorParticipios) Comienzo.getApplicationContext().getBean("gerenteVerbalizadorParticipios"));
-                        AMSustantivos f = (AMSustantivos) Comienzo.getApplicationContext().getBean("amSustantivos");
-                        f.setApplicationContext(Comienzo.getApplicationContext());
-                        AMAdjetivos l = (AMAdjetivos) Comienzo.getApplicationContext().getBean("amAdjetivos");
-                        l.setApplicationContext(Comienzo.getApplicationContext());
-                        AMParticulas s = (AMParticulas) Comienzo.getApplicationContext().getBean("amParticulas");
-                        s.setApplicationContext(Comienzo.getApplicationContext());
-                        AMConjunciones h = (AMConjunciones) Comienzo.getApplicationContext().getBean("amConjunciones");
-                        h.setApplicationContext(Comienzo.getApplicationContext());
-                        AMPreposiciones e = (AMPreposiciones) Comienzo.getApplicationContext().getBean("amPreposiciones");
-                        e.setApplicationContext(Comienzo.getApplicationContext());
-                        AMAdverbios o = (AMAdverbios) Comienzo.getApplicationContext().getBean("amAdverbios");
-                        o.setApplicationContext(Comienzo.getApplicationContext());
-                        AMInterjecciones a = (AMInterjecciones) Comienzo.getApplicationContext().getBean("amInterjecciones");
-                        a.setApplicationContext(Comienzo.getApplicationContext());
+                        AMParticipios amParticipios = (AMParticipios) Comienzo.getApplicationContext().getBean("amParticipios");
+                        amParticipios.setParticipios((Participios) Comienzo.getApplicationContext().getBean("participios"));
+                        amParticipios.setAmUtil((AMUtil) Comienzo.getApplicationContext().getBean("amUtil"));
+                        amParticipios.setAmNominal((AMNominal) Comienzo.getApplicationContext().getBean("amNominal"));
+                        amParticipios.setAmVerbal((AMVerbal) Comienzo.getApplicationContext().getBean("amVerbal"));
+                        amParticipios.setExtractorPrefijos((ExtractorPrefijos) Comienzo.getApplicationContext().getBean("extractorPrefijos"));
+                        amParticipios.setGerenteVerbos((GerenteVerbos) Comienzo.getApplicationContext().getBean("gerenteVerbos"));
+                        amParticipios.setGerenteVerbosCompuestos((GerenteVerbosCompuestos) Comienzo.getApplicationContext().getBean("gerenteVerbosCompuestos"));
+                        amParticipios.setGerenteVerbalizadorParticipios((GerenteVerbalizadorParticipios) Comienzo.getApplicationContext().getBean("gerenteVerbalizadorParticipios"));
+                        AMSustantivos amSustantivos = (AMSustantivos) Comienzo.getApplicationContext().getBean("amSustantivos");
+                        amSustantivos.setApplicationContext(Comienzo.getApplicationContext());
+                        AMAdjetivos amAdjetivos = (AMAdjetivos) Comienzo.getApplicationContext().getBean("amAdjetivos");
+                        amAdjetivos.setApplicationContext(Comienzo.getApplicationContext());
+                        AMParticulas amParticulas = (AMParticulas) Comienzo.getApplicationContext().getBean("amParticulas");
+                        amParticulas.setApplicationContext(Comienzo.getApplicationContext());
+                        AMConjunciones amConjunciones = (AMConjunciones) Comienzo.getApplicationContext().getBean("amConjunciones");
+                        amConjunciones.setApplicationContext(Comienzo.getApplicationContext());
+                        AMPreposiciones amPreposiciones = (AMPreposiciones) Comienzo.getApplicationContext().getBean("amPreposiciones");
+                        amPreposiciones.setApplicationContext(Comienzo.getApplicationContext());
+                        AMAdverbios amAdverbios = (AMAdverbios) Comienzo.getApplicationContext().getBean("amAdverbios");
+                        amAdverbios.setApplicationContext(Comienzo.getApplicationContext());
+                        AMInterjecciones amInterjecciones = (AMInterjecciones) Comienzo.getApplicationContext().getBean("amInterjecciones");
+                        amInterjecciones.setApplicationContext(Comienzo.getApplicationContext());
                     }
 
                 }.start();
@@ -226,7 +223,6 @@ public class Comienzo {
                     return;
                 } else {
                     reescribeIdiomaEtiquetas();
-                    ;
                     return;
                 }
             }

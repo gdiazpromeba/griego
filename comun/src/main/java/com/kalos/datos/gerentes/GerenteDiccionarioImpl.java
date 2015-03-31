@@ -12,11 +12,6 @@ public class GerenteDiccionarioImpl implements GerenteDiccionario {
 
     private DiccionarioDAO diccionarioDAO;
 
-    @Override
-    public void ordena(String letra) {
-        // TODO Auto-generated method stub
-
-    }
 
     @Override
     public void modificaCodigoIndividual(int nuevoCodigo, String idReferente) {

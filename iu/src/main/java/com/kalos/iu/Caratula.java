@@ -43,11 +43,11 @@ public class Caratula extends JPanel {
      */
     private static final long serialVersionUID = 1L;
     public void setMensajeProgreso(String s) {
-		C = s;
+		mensajeProgreso = s;
 		repaint();
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
     public Caratula() {
 	    setBackground(Color.red);
 		comboIdiomaEtiquetas = new JComboBox();
@@ -55,8 +55,8 @@ public class Caratula extends JPanel {
 		cmbTeclados = new JComboBox();
 		botComenzar = new JButton();
 		botSelTipog = new JButton();
-		C = "";
-		ImageIcon imageicon = Recursos.cargador.getImagen("columnas_mediana.jpg");
+		mensajeProgreso = "";
+		ImageIcon imageicon = new ImageIcon(CargaRecursos.getResourceURL("img/columnas_mediana.jpg"));
 		imagen = imageicon.getImage();
 		setLayout(new BorderLayout());
 		setBackground(Color.white);
@@ -110,14 +110,11 @@ public class Caratula extends JPanel {
 		elecTip.setModal(true);
 		elecTip.setTitle(Recursos.getCadena("tipografias"));
 		elecTip.pack();
-		elecTip.setLocationRelativeTo((JFrame) SwingUtilities
-				.getWindowAncestor(botSelTipog));
+		elecTip.setLocationRelativeTo((JFrame) SwingUtilities.getWindowAncestor(botSelTipog));
 		elecTip.setVisible(true);
 	}
 
-	public void setValorAlfa(int i) {
-		A = i;
-	}
+
 
 	public void paintComponent(Graphics g) {
 	    System.out.println("en caratula paintComponent");
@@ -128,12 +125,9 @@ public class Caratula extends JPanel {
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics2d.setRenderingHints(renderinghints);
 		g.setColor(Color.white);
-//		drawBackground(g);
+		drawBackground(g);
 		g.setFont(new Font("Dialog", 0, 20));
-		g.drawString(
-				(new StringBuilder()).append("KAL\323S ")
-						.append(Configuracion.getVersionNumero()).toString(),
-				400, 40);
+		g.drawString("KALÓS " + Configuracion.getVersionNumero(), 400, 40);
 		g.setFont(new Font("Dialog", 2, 11));
 		g.drawString("beautiful Greek software", 378, 55);
 		g.setFont(new Font("Dialog", 0, 9));
@@ -142,7 +136,7 @@ public class Caratula extends JPanel {
 		else
 			g.drawString(
 					(new StringBuilder())
-							.append(Recursos.getCadena("due\361o_registrado"))
+							.append(Recursos.getCadena("dueño_registrado"))
 							.append(" : ").append(Configuracion.getNombre())
 							.toString(), 280, 380);
 		g.drawString("1995-2011 Kallistos Corporation", 280, 390);
@@ -152,27 +146,24 @@ public class Caratula extends JPanel {
 		g.drawString(Recursos.getCadena("teclado"), 313, 342);
 		g.drawString(Recursos.getCadena("tipografias"), 313, 367);
 		g.setFont(new Font("Dialog", 1, 9));
-		g.drawString(C, 200, 230);
+		g.drawString(mensajeProgreso, 200, 230);
 	}
 
-//	public void drawBackground(Graphics g) {
-//	    System.out.println("en caratula paintComponent");
-//		int i = getWidth();
-//		int j = getHeight();
-//		int k = imagen.getWidth(this);
-//		int l = imagen.getHeight(this);
-//		for (int i1 = 0; i1 < i; i1 += k) {
-//			for (int j1 = 0; j1 < j; j1 += l)
-//				g.drawImage(imagen, i1, j1, this);
-//
-//		}
-//
-//	}
+	public void drawBackground(Graphics g) {
+	    System.out.println("en caratula drawBackground");
+		int i = getWidth();
+		int j = getHeight();
+		int k = imagen.getWidth(this);
+		int l = imagen.getHeight(this);
+		for (int i1 = 0; i1 < i; i1 += k) {
+			for (int j1 = 0; j1 < j; j1 += l)
+				g.drawImage(imagen, i1, j1, this);
 
-//	public void paint(Graphics g) {
-//		drawBackground(g);
-//		super.paint(g);
-//	}
+		}
+
+	}
+
+
 	
 	public void habilitacionBotonComenzar(boolean habilitacion){
 	    this.botComenzar.setEnabled(habilitacion);
@@ -194,6 +185,6 @@ public class Caratula extends JPanel {
 	private JButton botComenzar;
 	public JButton botSelTipog;
 	Image imagen;
-	private String C;
-	int A;
+	private String mensajeProgreso;
+	//int A;
 }
