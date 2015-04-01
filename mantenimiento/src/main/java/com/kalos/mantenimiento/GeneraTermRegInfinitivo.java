@@ -786,7 +786,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 
     
     public static ApplicationContext creaContexto() {
-        ApplicationContext contexto;
+        GenericApplicationContext contexto;
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
         ClassPathResource res = new ClassPathResource("daos.xml");
@@ -797,6 +797,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
         reader.loadBeanDefinitions(res);
 
         contexto = new GenericApplicationContext(factory);
+        contexto.refresh();
         return contexto;
     }   
   

@@ -45,6 +45,8 @@ public class TiposAdjetivoTest extends BaseAMTest {
                     boolean losTiposSonIguales = tipoSugerido == tipoBD;
                     if (!losTiposSonIguales) {
                         System.out.println("letra=" + bean.getLetra() + " codigo=" + bean.getCodigo() + " ****** tipo en BD=" + tipoBD + " sugeridos=" + tipoSugerido);
+                        bean.setTipoAdjetivo(tipoSugerido);
+                        gerenteAdjetivos.actualiza(bean);
                     }
                     assertTrue(losTiposSonIguales);
                 }

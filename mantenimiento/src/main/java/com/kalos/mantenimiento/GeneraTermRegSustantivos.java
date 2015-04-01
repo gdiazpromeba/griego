@@ -311,7 +311,7 @@ public class GeneraTermRegSustantivos {
 
 
     public static ApplicationContext creaContexto() {
-        ApplicationContext contexto;
+        GenericApplicationContext contexto;
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
         ClassPathResource res = new ClassPathResource("daos.xml");
@@ -322,6 +322,7 @@ public class GeneraTermRegSustantivos {
         reader.loadBeanDefinitions(res);
 
         contexto = new GenericApplicationContext(factory);
+        contexto.refresh();
         return contexto;
     }   
 
