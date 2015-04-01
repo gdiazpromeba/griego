@@ -56,8 +56,13 @@ public class Caratula extends JPanel {
 		botComenzar = new JButton();
 		botSelTipog = new JButton();
 		mensajeProgreso = "";
-		ImageIcon imageicon = new ImageIcon(CargaRecursos.getResourceURL("img/columnas_mediana.jpg"));
-		imagen = imageicon.getImage();
+		ImageIcon imageicon;
+		if (Configuracion.isDebug()){
+		  imageicon = new ImageIcon(CargaRecursos.getResourceURL("img/1pixel.png"));
+		}else{
+		  imageicon = new ImageIcon(CargaRecursos.getResourceURL("img/columnas_mediana2.jpg"));
+		}
+        imagen = imageicon.getImage();
 		setLayout(new BorderLayout());
 		setBackground(Color.white);
 		((DefaultComboBoxModel) comboIdiomaEtiquetas.getModel()).addElement(Recursos.getCadena("ingles"));
@@ -68,7 +73,6 @@ public class Caratula extends JPanel {
 		((DefaultComboBoxModel) comboItiomaContenidos.getModel()).addElement(Recursos.getCadena("castellano"));
 		((DefaultComboBoxModel) comboItiomaContenidos.getModel()).addElement(Recursos.getCadena("frances"));
 		try {
-			;
 			Document document = (new SAXReader()).read(CargaRecursos.getResourceURL("keyboards.xml"));
 			Element element = document.getRootElement();
 			List<Element> elements = element.elements("keyboard");
@@ -84,12 +88,12 @@ public class Caratula extends JPanel {
 		add(cmbTeclados);
 		add(botComenzar);
 		add(botSelTipog);
-		comboIdiomaEtiquetas.setBounds(380, 275, 140, 20);
-		comboItiomaContenidos.setBounds(380, 300, 140, 20);
-		cmbTeclados.setBounds(380, 325, 140, 20);
-		botSelTipog.setBounds(380, 350, 30, 20);
+		comboIdiomaEtiquetas.setBounds(397, 275, 140, 20);
+		comboItiomaContenidos.setBounds(397, 300, 140, 20);
+		cmbTeclados.setBounds(397, 325, 140, 20);
+		botSelTipog.setBounds(397, 350, 30, 20);
 		botSelTipog.setText("...");
-		botComenzar.setBounds(430, 375, 90, 20);
+		botComenzar.setBounds(490, 450, 90, 20);
 		botComenzar.setText(Recursos.getCadena("comenzar"));
 		botComenzar.setEnabled(false);
 		comboIdiomaEtiquetas.setEnabled(false);
@@ -117,7 +121,6 @@ public class Caratula extends JPanel {
 
 
 	public void paintComponent(Graphics g) {
-	    System.out.println("en caratula paintComponent");
 		super.paintComponent(g);
 		Graphics2D graphics2d = (Graphics2D) g;
 		RenderingHints renderinghints = new RenderingHints(
@@ -132,25 +135,24 @@ public class Caratula extends JPanel {
 		g.drawString("beautiful Greek software", 378, 55);
 		g.setFont(new Font("Dialog", 0, 9));
 		if (Configuracion.getNombre() == null)
-			g.drawString(Recursos.getCadena("usuario_no_registrado"), 280, 380);
+			g.drawString(Recursos.getCadena("usuario_no_registrado"), 397, 382);
 		else
 			g.drawString(
 					(new StringBuilder())
 							.append(Recursos.getCadena("dueño_registrado"))
 							.append(" : ").append(Configuracion.getNombre())
-							.toString(), 280, 380);
-		g.drawString("1995-2011 Kallistos Corporation", 280, 390);
+							.toString(), 397, 385);
+		g.drawString("1995-2011 Kallistos Corporation", 397, 395);
 		g.setFont(new Font("Dialog", 0, 10));
-		g.drawString(Recursos.getCadena("etiquetas"), 313, 287);
-		g.drawString(Recursos.getCadena("significados"), 313, 312);
-		g.drawString(Recursos.getCadena("teclado"), 313, 342);
-		g.drawString(Recursos.getCadena("tipografias"), 313, 367);
+		g.drawString(Recursos.getCadena("etiquetas"), 330, 287);
+		g.drawString(Recursos.getCadena("significados"), 330, 312);
+		g.drawString(Recursos.getCadena("teclado"), 330, 342);
+		g.drawString(Recursos.getCadena("tipografias"), 330, 367);
 		g.setFont(new Font("Dialog", 1, 9));
 		g.drawString(mensajeProgreso, 200, 230);
 	}
 
 	public void drawBackground(Graphics g) {
-	    System.out.println("en caratula drawBackground");
 		int i = getWidth();
 		int j = getHeight();
 		int k = imagen.getWidth(this);

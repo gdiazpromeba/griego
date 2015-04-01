@@ -76,7 +76,7 @@ public class Comienzo {
             jtabbedpane.add(Recursos.getCadena("analisis_morfologico"), Comienzo.getPanelAM());
             jtabbedpane.add(Recursos.getCadena("flexion"), Comienzo.getPanelFlexion());
             jframe.add(Comienzo.panel);
-            jframe.setSize(777, 550);
+            jframe.setSize(1084, 670);
             jframe.setLocationRelativeTo(null);
             jframe.setVisible(true);
             Comienzo.getFrame().dispose();
@@ -110,11 +110,11 @@ public class Comienzo {
         frame = new JFrame();
         frame.setUndecorated(true);
         frame.add(caratula);
-        frame.setSize(533, 400);
+        frame.setSize(640, 480);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         cargaBeans();
-        caratula.repaint();
+        //caratula.repaint();
         caratula.addListenerToBotonComenzar(new ListenerComenzar());
     }
 
@@ -178,7 +178,7 @@ public class Comienzo {
             }
 
         }.start();
-        caratula.repaint();
+//        caratula.repaint();
     }
 
     private static void obtieneNombre() {
@@ -278,8 +278,8 @@ public class Comienzo {
         }
         Recursos.cambiaLocale(Configuracion.getUltimoIdioma());
         caratula.setTextoBotonComenzar(Recursos.getCadena("comenzar"));
-        caratula.repaint();
-        caratula.revalidate();
+//        caratula.repaint();
+//        caratula.revalidate();
         cargaBeans();
     }
 

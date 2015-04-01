@@ -77,28 +77,31 @@ public class GeneraDiccionario {
         Statement stm = con.createStatement();
         stm.executeUpdate("DELETE FROM DICCIONARIO ");
         con.commit();       
+        con.setAutoCommit(false);
 
         for (char carLetra : Beta.arrBeta) {
             String letra = String.valueOf(carLetra);
-
-
-
             construyeSustantivos(letra);
             construyeAdverbios(letra);
             construyeAdjetivos(letra);
             construyeVerbos(letra);
             construyeInterjeciones(letra);
+            con.commit();
         }
 
         construyeParticulas();
         construyePreposiciones();
         construyeConjunciones();
+        con.commit();
         
+        int codigo = 10;
         for (char carLetra : Beta.arrBeta) {
           String letra = String.valueOf(carLetra);       
           System.out.println("ordenando " + letra);
-          ordenaLetra(letra);
+          codigo = ordenaLetra(letra, codigo);
+          codigo += 10;
         }
+        con.commit();
 
     }
 
@@ -232,7 +235,10 @@ public class GeneraDiccionario {
                 String formaBeta = bean.getVerbo();
                 poneFormasEnBeanDiccionario(formaBeta, ent);
                 ent.setReferenteId(bean.getId());
-                System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
+                if (codigo % 1000 ==0){
+                  System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
+                  con.commit();
+                }
                 ent.setTipoPalabra(TipoPalabra.Verbo);
                 gerenteDiccionario.inserta(ent);
             }
@@ -261,7 +267,10 @@ public class GeneraDiccionario {
                 String formaBeta = bean.getInterjeccion();
                 poneFormasEnBeanDiccionario(formaBeta, ent);
                 ent.setReferenteId(bean.getId());
-                System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
+                if (codigo % 1000 ==0){
+                    System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
+                    con.commit();
+                }                
                 ent.setTipoPalabra(TipoPalabra.Interjeccion);
                 gerenteDiccionario.inserta(ent);
             }
@@ -287,6 +296,7 @@ public class GeneraDiccionario {
                 List<ParticulaBean> beans = gerente.getBeans(list);
 
                 for (ParticulaBean bean : beans) {
+                    if (!bean.isMuestraEnDiccionario()) continue;
                     EntradaDiccionario ent = new EntradaDiccionario();
                     codigo += 10;
                     ent.setCodigo(codigo);
@@ -294,7 +304,10 @@ public class GeneraDiccionario {
                     String formaBeta = bean.getForma();
                     poneFormasEnBeanDiccionario(formaBeta, ent);
                     ent.setReferenteId(bean.getId());
-                    System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
+                    if (codigo % 1000 ==0){
+                        System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
+                        con.commit();
+                    }
                     ent.setTipoPalabra(bean.getParticulaTipo());
                     gerenteDiccionario.inserta(ent);
                 }
@@ -326,7 +339,10 @@ public class GeneraDiccionario {
                 String formaBeta = bean.getFormaDiccionario();
                 poneFormasEnBeanDiccionario(formaBeta, ent);
                 ent.setReferenteId(bean.getId());
-                System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
+                if (codigo % 1000 ==0){
+                    System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
+                    con.commit();
+                }
                 ent.setTipoPalabra(TipoPalabra.Preposicion);
                 gerenteDiccionario.inserta(ent);
             }
@@ -351,7 +367,10 @@ public class GeneraDiccionario {
             String formaBeta = bean.getForma();
             poneFormasEnBeanDiccionario(formaBeta, ent);
             ent.setReferenteId(bean.getId());
-            System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
+            if (codigo % 1000 ==0){
+                System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
+                con.commit();
+            }
             ent.setTipoPalabra(TipoPalabra.Conjuncion);
             gerenteDiccionario.inserta(ent);
         }
@@ -362,21 +381,26 @@ public class GeneraDiccionario {
      * ordena 1 letra (para todas las formas, todos los tipos de palabra) del diccionario
      * @param letra
      */
-    public static void ordenaLetra(String letra) {
+    public static int ordenaLetra(String letra, int codigoInicial) throws Exception {
         List<String> ids = gerenteDiccionario.seleccionaPorLetra(letra);
         List<EntradaDiccionario> beans = gerenteDiccionario.getRegistros(ids);
         String[] propiedades = { "normalBeta" };
         OpBeans.pasaDeBetaACompleto(beans, propiedades);
         Collections.sort(beans, new ComparadorBeansGriegos(propiedades));
         OpBeans.pasaDeCompletoABeta(beans, propiedades);
-        int codigo = 10;
+        int codigo = codigoInicial;
         Iterator<EntradaDiccionario> localIterator = beans.iterator();
         while (localIterator.hasNext()) {
             EntradaDiccionario ent = localIterator.next();
             String id = ent.getId();
             gerenteDiccionario.modificaCodigoIndividual(codigo, id);
             codigo += 10;
+            if (codigo % 1000 ==0){
+                System.out.println("ordenando, código=" + codigo);
+                con.commit();
+            }            
         }
+        return codigo;
     }   
 
 }

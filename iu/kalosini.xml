@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <kalos>
+  <claserecursos valor="kalos.recursos.abm,kalos.recursos.basico"/>
   <debug>true</debug>
   <version>NUMERO_DE_VERSION</version>
-  <ultimo_idioma valor="en"/>
+  <ultimo_idioma valor="pr"/>
   <idioma_significados valor="en"/>
   <ultimo_teclado>US-International</ultimo_teclado>
   <font name="Tahoma" size="12" sizeDiccionario="12" sizeAM="13" sizeFlexion="12">

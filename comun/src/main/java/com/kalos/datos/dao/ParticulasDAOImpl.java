@@ -83,7 +83,8 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 		sb.append("  SUBINDICE,   \n");
 		sb.append("  GENERO,   \n");
 		sb.append("  NUMERO,   \n");
-		sb.append("  FORMA   \n");
+		sb.append("  FORMA,   \n");
+		sb.append("  MUESTRA_EN_DICCIONARIO   \n");
 		sb.append("FROM   \n");
 		sb.append("  PARTICULAS   \n");
 		sb.append("WHERE   \n");
@@ -105,7 +106,8 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 		sb.append("  SUBINDICE,   \n");
 		sb.append("  GENERO,   \n");
 		sb.append("  NUMERO,   \n");
-		sb.append("  FORMA   \n");
+		sb.append("  FORMA,   \n");
+		sb.append("  MUESTRA_EN_DICCIONARIO   \n");
 		sb.append("FROM   \n");
 		sb.append("  PARTICULAS   \n");
 		sb.append("WHERE   \n");
@@ -126,6 +128,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 		sb.append("  PART.GENERO,   \n");
 		sb.append("  PART.NUMERO,   \n");
 		sb.append("  PART.FORMA,   \n");
+		sb.append("  PART.MUESTRA_EN_DICCIONARIO,   \n");
         sb.append("  SIG.SIGNIFICADO_ID,   \n");
         sb.append("  SIG.VALOR   \n");
         sb.append("FROM        \n");
@@ -272,9 +275,10 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
         sb.append("  SUBINDICE,   \n");
         sb.append("  GENERO,   \n");
         sb.append("  NUMERO,   \n");
-        sb.append("  FORMA   \n");
+        sb.append("  FORMA,   \n");
+        sb.append("  MUESTRA_EN_DICCIONARIO   \n");
         sb.append(") VALUES (     \n");
-        sb.append("  ?,?,?,?,?,?,?,?,?,?   \n");
+        sb.append("  ?,?,?,?,?,?,?,?,?,?,?   \n");
         sb.append(" )   \n");
 
         INSERCION_SQL = sb.toString();
@@ -289,7 +293,8 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
         sb.append("  SUBINDICE=?,   \n");
         sb.append("  GENERO=?,   \n");
         sb.append("  NUMERO=?,   \n");
-        sb.append("  FORMA=?   \n");
+        sb.append("  FORMA=?,   \n");
+        sb.append("  MUESTRA_EN_DICCIONARIO=?   \n");
         sb.append("WHERE     \n");
         sb.append("  PARTICULA_ID=?   \n");
 
@@ -336,6 +341,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 			  bean.setNumero((Numero)Numero.getEnum(numero));
 			}
 			bean.setForma(rs.getString("FORMA"));
+		    bean.setMuestraEnDiccionario(rs.getInt("MUESTRA_EN_DICCIONARIO")==1);
 			return bean;
 		}
 	}	
@@ -368,6 +374,8 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 			  bean.setNumero((Numero)Numero.getEnum(numero));
 			}
 			bean.setForma(rs.getString("FORMA"));
+			bean.setMuestraEnDiccionario(rs.getInt("MUESTRA_EN_DICCIONARIO")==1);
+			
             // un significado
             Significado sig = new Significado();
             sig.setIdioma(Configuracion.getIdiomaSignificados());
@@ -520,6 +528,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
             declareParameter(new SqlParameter(Types.CHAR)); // genero
             declareParameter(new SqlParameter(Types.INTEGER)); // numero
             declareParameter(new SqlParameter(Types.VARCHAR)); // forma
+            declareParameter(new SqlParameter(Types.INTEGER)); // muestra en diccionario
         }
     }
 
@@ -537,7 +546,8 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
         		ea.getSubindice(),
         		ea.getGenero()!=null?Genero.getLetra(ea.getGenero()):null,
         		ea.getNumero()!=null?Numero.getInt(ea.getNumero()):null,
-        	    ea.getForma()
+        	    ea.getForma(),
+        	    ea.isMuestraEnDiccionario()?1:0
         });
         ea.setParticulaId(pk);
     }	
@@ -555,6 +565,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
             declareParameter(new SqlParameter(Types.CHAR)); // genero
             declareParameter(new SqlParameter(Types.INTEGER)); // numero
             declareParameter(new SqlParameter(Types.VARCHAR)); // forma
+            declareParameter(new SqlParameter(Types.INTEGER)); // muestra en diccionario
             // where
             declareParameter(new SqlParameter(Types.CHAR)); // id
         }
@@ -575,6 +586,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
         		ea.getGenero()!=null?Genero.getLetra(ea.getGenero()):null,
         		ea.getNumero()!=null?Numero.getInt(ea.getNumero()):null,
         	    ea.getForma(),
+        	    ea.isMuestraEnDiccionario(),
         	    //where
         	    ea.getId()
         });
