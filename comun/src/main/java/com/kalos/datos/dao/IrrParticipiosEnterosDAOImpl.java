@@ -67,6 +67,9 @@ public class IrrParticipiosEnterosDAOImpl extends JdbcDaoSupport implements
         INSERCION_SQL = sql.toString();
         
         sql = new StringBuffer();
+        sql.append("SELECT \n");
+        sql.append("  IRR_PARTICIPIO_ENTERO_ID, \n");
+        sql.append("  IPE.VERBO_ID, \n");
         sql.append("  IPE.PARTIC, IPE.SUBPART,   \n");
         sql.append("  IPE.VOZ, IPE.ASPECTO, IPE.FUERTE, IPE.GENERO,   \n");
         sql.append("  IPE.NOMINATIVO, IPE.GENITIVO,   \n");

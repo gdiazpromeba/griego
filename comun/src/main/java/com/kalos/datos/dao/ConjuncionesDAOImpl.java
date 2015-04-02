@@ -89,6 +89,7 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
 
         public SelectPorForma(DataSource datasource, String sql) {
             super(datasource, sql);
+            declareParameter(new SqlParameter(Types.VARCHAR));
         }
     }
 
@@ -467,6 +468,7 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
         selSinAcento = new SelectSinAcento(getDataSource());
         selTodasConSignificado = new SelectTodasConSignificado(getDataSource());
         selIdsPorSubtipo = new SelectIdsPorSubtipo(getDataSource());
+        selPorForma = new SelectPorForma(getDataSource(), SELECT_POR_FORMA_SQL);
         insert = new Insert(getDataSource());
         borrado = new Borrado(getDataSource(), DELETE_SQL);
         update = new Update(getDataSource());
