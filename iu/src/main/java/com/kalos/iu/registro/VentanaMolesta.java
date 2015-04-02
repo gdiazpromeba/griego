@@ -33,6 +33,11 @@ import com.jgoodies.forms.layout.FormLayout;
 // Referenced classes of package kalos.iu.A:
 //            C
 
+/**
+ * ventana que aparece después de haber invocado el análisis morfológico una determinada cantidad de veces
+ * @author gdiaz
+ *
+ */
 public class VentanaMolesta extends JPanel {
 
 	public VentanaMolesta(GerenteSeguridad ka) {

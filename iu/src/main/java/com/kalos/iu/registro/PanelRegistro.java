@@ -16,7 +16,11 @@ import com.kalos.visual.controles.menues.FabricaMenues;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-
+/**
+ * panel para registratse. Es utilizado (distintas instancias) tanto por la VentanaMolesta como por la VentanaRegistro
+ * @author gdiaz
+ *
+ */
 @SuppressWarnings("serial")
 public class PanelRegistro extends JPanel {
 	 public JTextField nombre = new JTextField(4);
@@ -37,7 +41,6 @@ public class PanelRegistro extends JPanel {
 
      
      public PanelRegistro(){
-    	 logger.info("instanciando panelregistro=" + this.hashCode() );
     	 disposicion();
      }
      
