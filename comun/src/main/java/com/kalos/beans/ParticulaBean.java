@@ -22,7 +22,6 @@ public class ParticulaBean  implements ISignificados{
 	private Genero genero;
 	private Numero numero;
 	private String forma;
-	private boolean muestraEnDiccionario;
 	private Map<Idioma, Significado> significados=new HashMap<Idioma, Significado>();
 	private String particulaEncabezadoId;
 	
@@ -164,13 +163,5 @@ public class ParticulaBean  implements ISignificados{
 	public void setParticulaEncabezadoId(String particulaEncabezadoId) {
 		this.particulaEncabezadoId = particulaEncabezadoId;
 	}
-    
-    public boolean isMuestraEnDiccionario() {
-        return muestraEnDiccionario;
-    }
-    
-    public void setMuestraEnDiccionario(boolean muestraEnDiccionario) {
-        this.muestraEnDiccionario = muestraEnDiccionario;
-    }
 
 }

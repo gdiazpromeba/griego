@@ -21,6 +21,7 @@ import org.springframework.core.io.ClassPathResource;
 import com.kalos.beans.AdjetivoBean;
 import com.kalos.beans.AdverbioBean;
 import com.kalos.beans.ConjuncionBean;
+import com.kalos.beans.EncParticulaBean;
 import com.kalos.beans.EntradaDiccionario;
 import com.kalos.beans.InterjeccionBean;
 import com.kalos.beans.ParticulaBean;
@@ -31,6 +32,7 @@ import com.kalos.datos.gerentes.GerenteAdjetivos;
 import com.kalos.datos.gerentes.GerenteAdverbios;
 import com.kalos.datos.gerentes.GerenteConjunciones;
 import com.kalos.datos.gerentes.GerenteDiccionario;
+import com.kalos.datos.gerentes.GerenteEncParticulas;
 import com.kalos.datos.gerentes.GerenteInterjecciones;
 import com.kalos.datos.gerentes.GerenteParticulas;
 import com.kalos.datos.gerentes.GerentePreposiciones;
@@ -73,33 +75,33 @@ public class GeneraDiccionario {
 
         creaContexto();
         gerenteDiccionario = (GerenteDiccionario) contexto.getBean("gerenteDiccionario");
-        
-        Statement stm = con.createStatement();
-        stm.executeUpdate("DELETE FROM DICCIONARIO ");
-        con.commit();       
+
+//        Statement stm = con.createStatement();
+//        stm.executeUpdate("DELETE FROM DICCIONARIO ");
+//        con.commit();
         con.setAutoCommit(false);
 
-        for (char carLetra : Beta.arrBeta) {
-            String letra = String.valueOf(carLetra);
-            construyeSustantivos(letra);
-            construyeAdverbios(letra);
-            construyeAdjetivos(letra);
-            construyeVerbos(letra);
-            construyeInterjeciones(letra);
-            con.commit();
-        }
+//        for (char carLetra : Beta.arrBeta) {
+//            String letra = String.valueOf(carLetra);
+//            construyeSustantivos(letra);
+//            construyeAdverbios(letra);
+//            construyeAdjetivos(letra);
+//            construyeVerbos(letra);
+//            construyeInterjeciones(letra);
+//            con.commit();
+//        }
 
         construyeParticulas();
-        construyePreposiciones();
-        construyeConjunciones();
+//        construyePreposiciones();
+//        construyeConjunciones();
         con.commit();
-        
+
         int codigo = 10;
         for (char carLetra : Beta.arrBeta) {
-          String letra = String.valueOf(carLetra);       
-          System.out.println("ordenando " + letra);
-          codigo = ordenaLetra(letra, codigo);
-          codigo += 10;
+            String letra = String.valueOf(carLetra);
+            System.out.println("ordenando " + letra);
+            codigo = ordenaLetra(letra, codigo);
+            codigo += 10;
         }
         con.commit();
 
@@ -235,9 +237,9 @@ public class GeneraDiccionario {
                 String formaBeta = bean.getVerbo();
                 poneFormasEnBeanDiccionario(formaBeta, ent);
                 ent.setReferenteId(bean.getId());
-                if (codigo % 1000 ==0){
-                  System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
-                  con.commit();
+                if (codigo % 1000 == 0) {
+                    System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
+                    con.commit();
                 }
                 ent.setTipoPalabra(TipoPalabra.Verbo);
                 gerenteDiccionario.inserta(ent);
@@ -267,10 +269,10 @@ public class GeneraDiccionario {
                 String formaBeta = bean.getInterjeccion();
                 poneFormasEnBeanDiccionario(formaBeta, ent);
                 ent.setReferenteId(bean.getId());
-                if (codigo % 1000 ==0){
+                if (codigo % 1000 == 0) {
                     System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
                     con.commit();
-                }                
+                }
                 ent.setTipoPalabra(TipoPalabra.Interjeccion);
                 gerenteDiccionario.inserta(ent);
             }
@@ -279,42 +281,35 @@ public class GeneraDiccionario {
 
     }
 
+    /**
+     * lo que construye son los "encabezados" de partícula. Es decir, para los pronombres personales por ejemplo,
+     * solamente EGW/
+     * @throws SQLException
+     */
     private static void construyeParticulas() throws SQLException {
 
-        GerenteParticulas gerente = (GerenteParticulas) contexto.getBean("gerenteParticulas");
-        TipoPalabra[] tips = new TipoPalabra[] { TipoPalabra.Articulo, TipoPalabra.PronombrePersonal, TipoPalabra.PronombreReflexivo, TipoPalabra.PronombreRelativo, TipoPalabra.PronombreInterrogativo, TipoPalabra.PronombreIndefinido };
+        GerenteEncParticulas gerente = (GerenteEncParticulas) contexto.getBean("gerenteEncParticulas");
 
         int codigo = 10;
-        for (TipoPalabra tipoPalabra : tips) {
-            List<String> ids = gerente.seleccionaIdsPorTipo(tipoPalabra);
-            System.out.println("tipo palabra = " + tipoPalabra);
 
-            List<List<String>> segmentos = Listas.segmentos(ids, 10);
+        List<EncParticulaBean> beans = gerente.getTodos();
 
-            for (List<String> list : segmentos) {
-
-                List<ParticulaBean> beans = gerente.getBeans(list);
-
-                for (ParticulaBean bean : beans) {
-                    if (!bean.isMuestraEnDiccionario()) continue;
-                    EntradaDiccionario ent = new EntradaDiccionario();
-                    codigo += 10;
-                    ent.setCodigo(codigo);
-                    ent.setLetra(bean.getForma().substring(0, 1));
-                    String formaBeta = bean.getForma();
-                    poneFormasEnBeanDiccionario(formaBeta, ent);
-                    ent.setReferenteId(bean.getId());
-                    if (codigo % 1000 ==0){
-                        System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
-                        con.commit();
-                    }
-                    ent.setTipoPalabra(bean.getParticulaTipo());
-                    gerenteDiccionario.inserta(ent);
-                }
-
+        for (EncParticulaBean bean : beans) {
+            EntradaDiccionario ent = new EntradaDiccionario();
+            codigo += 10;
+            ent.setCodigo(codigo);
+            ent.setLetra(bean.getForma().substring(0, 1));
+            String formaBeta = bean.getForma();
+            poneFormasEnBeanDiccionario(formaBeta, ent);
+            ent.setReferenteId(bean.getId());
+            if (codigo % 1000 == 0) {
+                System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
+                con.commit();
             }
-
+            ent.setTipoPalabra(bean.getTipoPalabra());
+            gerenteDiccionario.inserta(ent);
         }
+
     }
 
     private static void construyePreposiciones() throws SQLException {
@@ -339,7 +334,7 @@ public class GeneraDiccionario {
                 String formaBeta = bean.getFormaDiccionario();
                 poneFormasEnBeanDiccionario(formaBeta, ent);
                 ent.setReferenteId(bean.getId());
-                if (codigo % 1000 ==0){
+                if (codigo % 1000 == 0) {
                     System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
                     con.commit();
                 }
@@ -367,7 +362,7 @@ public class GeneraDiccionario {
             String formaBeta = bean.getForma();
             poneFormasEnBeanDiccionario(formaBeta, ent);
             ent.setReferenteId(bean.getId());
-            if (codigo % 1000 ==0){
+            if (codigo % 1000 == 0) {
                 System.out.println("RF=" + bean.getId() + " forma=" + ent.getUnicode());
                 con.commit();
             }
@@ -376,7 +371,7 @@ public class GeneraDiccionario {
         }
 
     }
-    
+
     /**
      * ordena 1 letra (para todas las formas, todos los tipos de palabra) del diccionario
      * @param letra
@@ -395,12 +390,12 @@ public class GeneraDiccionario {
             String id = ent.getId();
             gerenteDiccionario.modificaCodigoIndividual(codigo, id);
             codigo += 10;
-            if (codigo % 1000 ==0){
+            if (codigo % 1000 == 0) {
                 System.out.println("ordenando, código=" + codigo);
                 con.commit();
-            }            
+            }
         }
         return codigo;
-    }   
+    }
 
 }
