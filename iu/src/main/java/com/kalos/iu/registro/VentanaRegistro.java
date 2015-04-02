@@ -22,9 +22,11 @@ import com.kalos.recursos.Recursos;
 
 import org.apache.log4j.Logger;
 
-// Referenced classes of package kalos.iu.A:
-//            C
-
+/**
+ * Similar a la VentanaMolesta, pero aparece específicamente cuando se la llama por menú
+ * @author gdiaz
+ *
+ */
 public class VentanaRegistro extends JDialog {
 
 	public VentanaRegistro(GerenteSeguridad gerSeg) {

@@ -10,6 +10,12 @@
 	<name>parent</name>
 	<url>http://maven.apache.org</url>
 
+        <modules>
+          <module>comun</module>
+          <module>iu</module>
+          <module>mantenimiento</module>
+        </modules>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
