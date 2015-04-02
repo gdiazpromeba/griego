@@ -210,7 +210,7 @@ public class Comienzo {
         caratula.cmbTeclados.setSelectedItem(Configuracion.getUltimoTeclado());
     }
 
-    private static void B() {
+    private static void reescribeIdiomaTeclados() {
         Configuracion.setUltimoTeclado((String) caratula.cmbTeclados.getSelectedItem());
         Configuracion.reescribeIni();
     }
@@ -246,7 +246,7 @@ public class Comienzo {
                 if (itemevent.getStateChange() != 1) {
                     return;
                 } else {
-                    Comienzo.manejaTeclado();
+                    reescribeIdiomaTeclados();
                     return;
                 }
             }
@@ -375,17 +375,17 @@ public class Comienzo {
         return Comienzo.ventanaRegistro;
     }
 
-    static void E() {
-        reescribeIdiomaEtiquetas();
-    }
+//    static void E() {
+//        reescribeIdiomaEtiquetas();
+//    }
 
-    static void G() {
-        reescribeIdiomaSignificados();
-    }
+//    static void G() {
+//        reescribeIdiomaSignificados();
+//    }
 
-    static void A() {
-        B();
-    }
+//    static void A() {
+//        B();
+//    }
 
     private static Logger logger = Logger.getLogger(Comienzo.class);
     private static PanelDiccionario panelDiccionario;
