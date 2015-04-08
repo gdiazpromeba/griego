@@ -16,4 +16,6 @@ kalos_abms/.project
 bibliotecas/**
 iu/target/**
 comun/*.log
+datos/data/**
+setup/work
 

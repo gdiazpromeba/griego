@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+
+	<bean id="kalosDataSource" class="com.kalos.datos.modulos.FuenteDeDatosKalos" destroy-method="close">
+		<property name="driverClassName" value="com.mckoi.JDBCDriver" />
+		<property name="url" value="jdbc:mckoi://localhost/" />
+		<property name="username" value="gonzalo" />
+		<property name="password" value="ymcsngm" />
+	</bean>
+	
+
+
+	<bean id="testAdjetivosDAO" class="com.kalos.datos.dao.TestAdjetivosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="testInfinitivosDAO" class="com.kalos.datos.dao.TestInfinitivosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="testParticipiosDAO" class="com.kalos.datos.dao.TestParticipiosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+	<bean id="testSustantivosDAO" class="com.kalos.datos.dao.TestSustantivosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+
+	<bean id="testVerbosDAO" class="com.kalos.datos.dao.TestVerbosDAOImpl">
+		<property name="dataSource" ref="kalosDataSource" />
+	</bean>
+
+
+
+
+</beans>

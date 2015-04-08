@@ -23,6 +23,7 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
+import com.kalos.datos.util.DBUtil;
 import com.kalos.enumeraciones.Acento;
 import com.kalos.enumeraciones.CompLetras;
 import com.kalos.enumeraciones.Contraccion;
@@ -985,12 +986,12 @@ public class GeneraTermRegVerbos implements CompLetras{
         GenericApplicationContext contexto;
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
-        ClassPathResource res = new ClassPathResource("daos.xml");
-        reader.loadBeanDefinitions(res);
-        res = new ClassPathResource("gerentes-datos.xml");
-        reader.loadBeanDefinitions(res);
-        res = new ClassPathResource("flexion.xml");
-        reader.loadBeanDefinitions(res);
+        FileSystemResource fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("daos-comun.xml").getFile());
+        reader.loadBeanDefinitions(fileResource);
+        fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("gerentes-comun.xml").getFile());
+        reader.loadBeanDefinitions(fileResource);       
+        fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("flexion.xml").getFile());
+        reader.loadBeanDefinitions(fileResource); 
 
         contexto = new GenericApplicationContext(factory);
         contexto.refresh();

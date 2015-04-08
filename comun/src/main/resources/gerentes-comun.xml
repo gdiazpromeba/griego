@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+
+	<!-- managers -->
+	<bean id="gerenteSignificados" class="com.kalos.datos.gerentes.GerenteSignificadosImpl">
+		<property name="significadoDAO" ref="significadoDAO" />
+	</bean>
+
+	<bean id="gerenteAdjetivos" class="com.kalos.datos.gerentes.GerenteAdjetivosImpl">
+
+		<property name="adjetivoDAO" ref="adjetivoDAO" />
+		<property name="irrAdjetivosEnterosDAO" ref="irrAdjetivosEnterosDAO" />
+		<property name="irrAdjetivosIndividualesDAO" ref="irrAdjetivosIndividualesDAO" />
+		<property name="gerenteSignificados" ref="gerenteSignificados" />
+		<property name="gerenteAdjetivosComoNominales" ref="gerenteAdjetivosComoNominales" />
+		<property name="gerenteIrrAdjetivosEnteros" ref="gerenteIrrAdjetivosEnteros" />
+
+	</bean>
+
+	<bean id="gerenteAdverbios" class="com.kalos.datos.gerentes.GerenteAdverbiosImpl">
+
+		<property name="adverbiosDAO" ref="adverbiosDAO" />
+		<property name="gerenteSignificados" ref="gerenteSignificados" />
+
+	</bean>
+
+	<bean id="gerenteInterjecciones" class="com.kalos.datos.gerentes.GerenteInterjeccionesImpl">
+
+		<property name="interjeccionesDAO" ref="interjeccionesDAO" />
+		<property name="gerenteSignificados" ref="gerenteSignificados" />
+
+	</bean>
+
+
+	<bean id="gerenteAdjetivosComoNominales"
+		class="com.kalos.datos.gerentes.GerenteAdjetivosComoNominalesImpl">
+
+		<property name="adjetivosComoNominalesDAO" ref="adjetivosComoNominalesDAO" />
+
+	</bean>
+
+
+	<bean id="gerenteCombosValores" class="com.kalos.datos.gerentes.GerenteCombosValoresImpl">
+		<property name="combosDAO" ref="combosDAO" />
+	</bean>
+
+	<bean id="gerenteConjunciones" class="com.kalos.datos.gerentes.GerenteConjuncionesImpl">
+		<property name="conjuncionesDAO" ref="conjuncionesDAO" />
+		<property name="gerenteSignificados" ref="gerenteSignificados" />
+	</bean>
+
+	<bean id="gerenteCubosTipoPart" class="com.kalos.datos.gerentes.GerenteCubosTipoPartImpl"
+		lazy-init="true">
+		<property name="cubosTipoPartDAO" ref="cubosTipoPartDAO" />
+	</bean>
+
+
+	<bean id="gerenteDesinSust" class="com.kalos.datos.gerentes.GerenteDesinSustImpl">
+		<property name="desinSustDAO" ref="desinSustDAO" />
+	</bean>
+
+	<bean id="gerenteDesinInfinitivos" class="com.kalos.datos.gerentes.GerenteDesinInfinitivosImpl">
+		<property name="desinInfinitivosDAO" ref="desinInfinitivosDAO" />
+	</bean>
+
+	<bean id="gerenteDesinVerbos" class="com.kalos.datos.gerentes.GerenteDesinVerbosImpl">
+		<property name="desinVerbosDAO" ref="desinVerbosDAO" />
+	</bean>
+
+	<bean id="gerenteEncParticulas" class="com.kalos.datos.gerentes.GerenteEncParticulasImpl">
+		<property name="encParticulasDAO" ref="encParticulasDAO" />
+	</bean>
+
+
+	<bean id="gerenteDiccionario" class="com.kalos.datos.gerentes.GerenteDiccionarioImpl">
+		<property name="diccionarioDAO" ref="diccionarioDAO" />
+	</bean>
+
+	<bean id="gerenteIrrAdjetivosEnteros" class="com.kalos.datos.gerentes.GerenteIrrAdjetivosEnterosImpl">
+		<property name="irrAdjetivosEnterosDAO" ref="irrAdjetivosEnterosDAO" />
+	</bean>
+
+	<bean id="gerenteIrrAdjetivosIndividuales"
+		class="com.kalos.datos.gerentes.GerenteIrrAdjetivosIndividualesImpl">
+		<property name="irrAdjetivosIndividualesDAO" ref="irrAdjetivosIndividualesDAO" />
+	</bean>
+
+	<bean id="gerenteIrrInfinitivos" class="com.kalos.datos.gerentes.GerenteIrrInfinitivosImpl">
+		<property name="irrInfinitivosDAO" ref="irrInfinitivosDAO" />
+	</bean>
+
+	<bean id="gerenteIrrParticipiosEnteros"
+		class="com.kalos.datos.gerentes.GerenteIrrParticipiosEnterosImpl"
+		lazy-init="true">
+		<property name="irrParticipiosEnterosDAO" ref="irrParticipiosEnterosDAO" />
+	</bean>
+
+
+	<bean id="gerenteIrrParticipiosSimples"
+		class="com.kalos.datos.gerentes.GerenteIrrParticipiosSimplesImpl"
+		lazy-init="true">
+		<property name="irrParticipiosSimplesDAO" ref="irrParticipiosSimplesDAO" />
+	</bean>
+
+
+	<bean id="gerenteIrrSustantivos" class="com.kalos.datos.gerentes.GerenteIrrSustantivosImpl">
+		<property name="irrSustantivosDAO" ref="irrSustantivosDAO" />
+	</bean>
+
+	<bean id="gerenteIrrVerbos" class="com.kalos.datos.gerentes.GerenteIrrVerbosImpl">
+		<property name="irrVerbosDAO" ref="irrVerbosDAO" />
+	</bean>
+
+	<bean id="gerenteIrrVerbosIndividuales"
+		class="com.kalos.datos.gerentes.GerenteIrrVerbosIndividualesImpl">
+		<property name="irrVerbosIndividualesDAO" ref="irrVerbosIndividualesDAO" />
+	</bean>
+
+	<bean id="gerenteTiposAdjetivo" class="com.kalos.datos.gerentes.GerenteTiposAdjetivoImpl">
+		<property name="tiposAdjetivoDAO" ref="tiposAdjetivoDAO" />
+	</bean>
+
+	<bean id="gerenteParticulas" class="com.kalos.datos.gerentes.GerenteParticulasImpl">
+		<property name="particulasDAO" ref="particulasDAO" />
+		<property name="gerenteSignificados" ref="gerenteSignificados" />
+	</bean>
+
+	<bean id="gerentePreposiciones" class="com.kalos.datos.gerentes.GerentePreposicionesImpl">
+		<property name="preposicionesDAO" ref="preposicionesDAO" />
+		<property name="gerenteSignificados" ref="gerenteSignificados" />
+	</bean>
+
+	<bean id="gerentePreposicionesEnVerbos"
+		class="com.kalos.datos.gerentes.GerentePreposicionesEnVerbosImpl">
+		<property name="preposicionesEnVerbosDAO" ref="preposicionesEnVerbosDAO" />
+	</bean>
+
+	<bean id="gerenteSeguridad" class="com.kalos.datos.gerentes.GerenteSeguridadImpl">
+		<property name="seguridadDAO" ref="seguridadDAO" />
+	</bean>
+
+	<bean id="gerenteSustantivos" class="com.kalos.datos.gerentes.GerenteSustantivosImpl">
+
+				<property name="sustantivosDAO" ref="sustantivosDAO" />
+				<property name="irrSustantivosDAO" ref="irrSustantivosDAO" />
+				<property name="diccionarioDAO" ref="diccionarioDAO" />
+				<property name="gerenteSignificados" ref="gerenteSignificados" />
+
+	</bean>
+
+
+
+	<bean id="gerenteSubstractorPrefijos" class="com.kalos.datos.gerentes.GerenteSubstractorPrefijosImpl">
+		<property name="substractorPrefijosDAO" ref="substractorPrefijosDAO" />
+	</bean>
+
+
+	<bean id="gerenteTemasTermRegNominal" class="com.kalos.datos.gerentes.GerenteTemasTermRegNominalImpl">
+		<property name="temasTermRegNominalDAO" ref="temasTermRegNominalDAO" />
+	</bean>
+
+
+	<bean id="gerenteTiposSustantivo" class="com.kalos.datos.gerentes.GerenteTiposSustantivoImpl">
+		<property name="tiposSustantivoDAO" ref="tiposSustantivoDAO" />
+	</bean>
+
+	<bean id="gerenteTiposVerbo" class="com.kalos.datos.gerentes.GerenteTiposVerboImpl">
+		<property name="tiposVerboDAO" ref="tiposVerboDAO" />
+	</bean>
+
+
+	<bean id="gerenteTermRegInfinitivo" class="com.kalos.datos.gerentes.GerenteTermRegInfinitivoImpl">
+		<property name="termRegInfinitivoDAO" ref="termRegInfinitivoDAO" />
+	</bean>
+
+	<bean id="gerenteTermRegSustantivo" class="com.kalos.datos.gerentes.GerenteTermRegSustantivoImpl">
+		<property name="termRegSustantivoDAO" ref="termRegSustantivoDAO" />
+	</bean>
+
+
+	<bean id="gerenteTermRegVerbo" class="com.kalos.datos.gerentes.GerenteTermRegVerboImpl">
+		<property name="termRegVerboDAO" ref="termRegVerboDAO" />
+	</bean>
+
+	<bean id="gerenteTransParticipios" class="com.kalos.datos.gerentes.GerenteTransParticipiosImpl"
+		lazy-init="true">
+		<property name="transParticipiosDAO" ref="transParticipiosDAO" />
+	</bean>
+
+
+	<bean id="gerenteVerbalizadorParticipios"
+		class="com.kalos.datos.gerentes.GerenteVerbalizadorParticipiosImpl"
+		lazy-init="true">
+		<property name="verbalizadorParticipiosDAO" ref="verbalizadorParticipiosDAO" />
+	</bean>
+
+
+	<bean id="gerenteVerbos" class="com.kalos.datos.gerentes.GerenteVerbosImpl" lazy-init="true">
+
+				<property name="verbosDAO" ref="verbosDAO" />
+				<property name="irrVerbosDAO" ref="irrVerbosDAO" />
+				<property name="irrVerbosIndividualesDAO" ref="irrVerbosIndividualesDAO" />
+				<property name="gerenteSignificados" ref="gerenteSignificados" />
+				<property name="gerentePreposicionesEnVerbos" ref="gerentePreposicionesEnVerbos" />
+				<property name="gerenteVerbosCompuestos" ref="gerenteVerbosCompuestos" />
+
+	</bean>
+
+	<bean id="gerenteVerbosCompuestos" class="com.kalos.datos.gerentes.GerenteVerbosCompuestosImpl"
+		lazy-init="true">
+		<property name="verbosCompuestosDAO" ref="verbosCompuestosDAO" />
+		<property name="preposicionesEnVerbosDAO" ref="preposicionesEnVerbosDAO" />
+	</bean>
+
+</beans>

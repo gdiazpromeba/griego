@@ -26,6 +26,7 @@ import com.kalos.datos.adaptadores.AdaptadorGerenteIrrAdjetivosEnteros;
 import com.kalos.datos.gerentes.GerenteAdjetivos;
 import com.kalos.datos.gerentes.GerenteAdjetivosComoNominales;
 import com.kalos.datos.gerentes.GerenteIrrAdjetivosEnteros;
+import com.kalos.datos.util.DBUtil;
 import com.kalos.enumeraciones.Beta;
 import com.kalos.enumeraciones.Genero;
 import com.kalos.flexion.declinacion.Declina;
@@ -332,12 +333,12 @@ public class GeneraAdjetivosComoNominales {
         GenericApplicationContext contexto;
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
-        ClassPathResource res = new ClassPathResource("daos.xml");
-        reader.loadBeanDefinitions(res);
-        res = new ClassPathResource("gerentes-datos.xml");
-        reader.loadBeanDefinitions(res);
-        res = new ClassPathResource("flexion.xml");
-        reader.loadBeanDefinitions(res);
+        FileSystemResource fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("daos-comun.xml").getFile());
+        reader.loadBeanDefinitions(fileResource);
+        fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("gerentes-comun.xml").getFile());
+        reader.loadBeanDefinitions(fileResource);       
+        fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("flexion.xml").getFile());
+        reader.loadBeanDefinitions(fileResource); 
 
         contexto = new GenericApplicationContext(factory);
         contexto.refresh();

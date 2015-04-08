@@ -35,6 +35,7 @@ import com.kalos.datos.gerentes.GerenteSeguridad;
 import com.kalos.datos.gerentes.GerenteVerbalizadorParticipios;
 import com.kalos.datos.gerentes.GerenteVerbos;
 import com.kalos.datos.gerentes.GerenteVerbosCompuestos;
+import com.kalos.datos.util.DBUtil;
 import com.kalos.flexion.declinacion.Participios;
 import com.kalos.iu.analisismorfologico.PanelAM;
 import com.kalos.iu.analisismorfologico.SimpleBean;
@@ -306,11 +307,16 @@ public class Comienzo {
     public static ApplicationContext creaContextoClasspath() {
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
-        ClassPathResource resource = new ClassPathResource("daos.xml");
+        FileSystemResource fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("daos-comun.xml").getFile());
+        reader.loadBeanDefinitions(fileResource);
+        fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("gerentes-comun.xml").getFile());
+        reader.loadBeanDefinitions(fileResource);       
+        fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("flexion.xml").getFile());
+        reader.loadBeanDefinitions(fileResource);         
+        
+        ClassPathResource resource = new ClassPathResource("flexion.xml");
         reader.loadBeanDefinitions(resource);
-        resource = new ClassPathResource("flexion.xml");
-        reader.loadBeanDefinitions(resource);
-        resource = new ClassPathResource("gerentes-datos.xml");
+        resource = new ClassPathResource("gerentes-comun.xml");
         reader.loadBeanDefinitions(resource);
         resource = new ClassPathResource("analisisMorfologico.xml");
         reader.loadBeanDefinitions(resource);

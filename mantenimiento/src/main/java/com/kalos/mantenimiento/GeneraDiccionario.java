@@ -17,6 +17,7 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 
 import com.kalos.beans.AdjetivoBean;
 import com.kalos.beans.AdverbioBean;
@@ -38,6 +39,7 @@ import com.kalos.datos.gerentes.GerenteParticulas;
 import com.kalos.datos.gerentes.GerentePreposiciones;
 import com.kalos.datos.gerentes.GerenteSustantivos;
 import com.kalos.datos.gerentes.GerenteVerbos;
+import com.kalos.datos.util.DBUtil;
 import com.kalos.enumeraciones.Beta;
 import com.kalos.enumeraciones.TipoPalabra;
 import com.kalos.operaciones.OpBeans;
@@ -58,10 +60,10 @@ public class GeneraDiccionario {
     public static ApplicationContext creaContexto() {
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
-        ClassPathResource res = new ClassPathResource("daos.xml");
-        reader.loadBeanDefinitions(res);
-        res = new ClassPathResource("gerentes-datos.xml");
-        reader.loadBeanDefinitions(res);
+        FileSystemResource fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("daos-comun.xml").getFile());
+        reader.loadBeanDefinitions(fileResource);
+        fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("gerentes-comun.xml").getFile());
+        reader.loadBeanDefinitions(fileResource);       
 
         contexto = new GenericApplicationContext(factory);
         return contexto;

@@ -30,9 +30,13 @@ public class BaseAMTest extends TestCase implements CompLetras {
         GenericApplicationContext contexto;
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
-        ClassPathResource res = new ClassPathResource("daos.xml");
+        ClassPathResource res = new ClassPathResource("daos-comun-test.xml");
         reader.loadBeanDefinitions(res);
-        res = new ClassPathResource("gerentes-datos.xml");
+        res = new ClassPathResource("daos-comun.xml");
+        reader.loadBeanDefinitions(res);        
+        res = new ClassPathResource("gerentes-comun.xml");
+        reader.loadBeanDefinitions(res);        
+        res = new ClassPathResource("gerentes-comun-test.xml");       
         reader.loadBeanDefinitions(res);
         res = new ClassPathResource("flexion.xml");
         reader.loadBeanDefinitions(res);

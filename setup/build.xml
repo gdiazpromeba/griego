@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- prepara un setup. Este build asume que común e iu han sido ejecutados, y que archivos jar compilados ya existen
+en los respectivos directorios "target" -->
+<project name="setup" basedir="." default="preparacion">
+
+	<property name="jar.comun" value="comun-1.0-SNAPSHOT.jar"/>
+	<property name="jar.iu" value="iu-1.0-SNAPSHOT.jar"/>
+
+	<target name="preparacion" description="Delete all generated files">
+		<delete dir="work"/>
+		<mkdir dir="work"/>
+		<mkdir dir="work/lib"/>
+		<copy file="../iu/target/${jar.iu}" toDir="work"/>
+		<copy file="../comun/target/${jar.comun}" toDir="work/lib"/>
+		<copy todir="work/lib">
+			<fileset dir="../iu/target/dependency"/>
+		</copy>
+	</target>
+
+	<target name="run">
+		<java jar="work/conmanifiesto/iu-1.0-SNAPSHOT.jar" fork="true">
+		</java>
+	</target>
+
+	<target name="runComun">
+		<java jar="work/conmanifiesto/lib/comun-1.0-SNAPSHOT.jar" fork="true">
+		</java>
+	</target>
+
+
+	<path id="libs.for.iu">
+		<fileset dir="work/lib/">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+
+	<path id="libs.for.comun">
+		<fileset dir="work/lib/">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<manifestclasspath property="lib.list.iu" jarfile="work/${iu.jar}">
+		<classpath refid="libs.for.iu" />
+	</manifestclasspath>
+
+	<manifestclasspath property="lib.list.comun" jarfile="work/lib/${comun.jar}">
+		<classpath refid="libs.for.comun" />
+	</manifestclasspath>
+
+	<target name="inyectaManifiestos" depends="preparaDirsParaManifiestos,inyectaManifiestoEnComun,inyectaManifiestoEnIu" >
+	  <delete dir="work/conmanifiesto"/>
+	  <mkdir dir="work/conmanifiesto"/>
+	  <copy file="work/tmp/comun/newjar/${jar.comun}" toDir="work/conmanifiesto"/>
+      <copy file="work/tmp/iu/newjar/${jar.iu}" toDir="work/conmanifiesto"/>
+	  <delete dir="work/tmp"/>
+	</target>
+	
+	
+	<target name="preparaDirsParaManifiestos">
+	  <delete dir="work/tmp"/>
+	  <mkdir dir="work/tmp/comun/"/>		
+	  <mkdir dir="work/tmp/comun/unjarred"/>
+	  <mkdir dir="work/tmp/comun/newjar"/>		
+      <mkdir dir="work/tmp/iu/"/>		
+	  <mkdir dir="work/tmp/iu/unjarred"/>
+	  <mkdir dir="work/tmp/iu/newjar"/>			
+	</target>
+	
+
+	<target name="inyectaManifiestoEnComun">
+		<echo>Inyectando el manifiesto en "común"</echo>
+		<unzip src="work/lib/${jar.comun}" dest="work/tmp/comun/unjarred"/>
+		<jar destfile="work/tmp/comun/newjar/${jar.comun}">
+			<fileset dir="work/tmp/comun/unjarred"/>
+			<manifest>
+				<attribute name="Class-Path" value="${lib.list.comun}" />
+				<attribute name="Created-By" value="${user.name}" />
+				<attribute name="Main-Class" value="com.kalos.App" />
+			</manifest>
+		</jar>
+	</target>
+
+
+
+	<target name="inyectaManifiestoEnIu">
+		<echo>Inyectando el manifiesto en "iu"</echo>
+		<unzip src="work/${jar.iu}" dest="work/tmp/iu/unjarred"/>
+		<jar destfile="work/tmp/iu/newjar/${jar.iu}">
+			<fileset dir="work/tmp/iu/unjarred"/>
+			<manifest>
+				<attribute name="Class-Path" value="${lib.list.iu}"/>
+				<attribute name="Created-By" value="${user.name}" />
+				<attribute name="Main-Class" value="com.kalos.iu.Comienzo" />
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="conBD">
+      <echo>Creando una versión con base de datos</echo>
+	  <delete dir="work/condb"/>
+	  <mkdir dir="work/tmp/condb/"/>
+	  <mkdir dir="work/tmp/condb/data"/>		
+	  <copy todir="work/condb/data">
+	    <fileset dir="../datos/data"/>
+	  </copy>		
+	  <copy file="../datos/db.conf" toDir="work/condb"/>
+	  <copy file="work/conmanifiesto/${jar.comun}" toDir="work/condb"/>		
+	  <copy file="work/conmanifiesto/${jar.iu}" toDir="work/condb"/>
+	  <copy todir="work/condb/lib">
+	    <fileset dir="work/lib"/>
+	  </copy>			
+	</target>
+
+</project>
