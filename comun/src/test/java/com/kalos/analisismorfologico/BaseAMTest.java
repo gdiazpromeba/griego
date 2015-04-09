@@ -32,14 +32,14 @@ public class BaseAMTest extends TestCase implements CompLetras {
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
         ClassPathResource res = new ClassPathResource("daos-comun-test.xml");
         reader.loadBeanDefinitions(res);
-        res = new ClassPathResource("daos-comun.xml");
-        reader.loadBeanDefinitions(res);        
-        res = new ClassPathResource("gerentes-comun.xml");
-        reader.loadBeanDefinitions(res);        
+//        res = new ClassPathResource("daos-comun.xml");
+//        reader.loadBeanDefinitions(res);        
+//        res = new ClassPathResource("gerentes-comun.xml");
+//        reader.loadBeanDefinitions(res);        
         res = new ClassPathResource("gerentes-comun-test.xml");       
         reader.loadBeanDefinitions(res);
-        res = new ClassPathResource("flexion.xml");
-        reader.loadBeanDefinitions(res);
+//        res = new ClassPathResource("flexion.xml");
+//        reader.loadBeanDefinitions(res);
         res = new ClassPathResource("analisisMorfologico.xml");
         reader.loadBeanDefinitions(res);
 
