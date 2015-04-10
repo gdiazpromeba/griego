@@ -21,6 +21,9 @@ import javax.sql.DataSource;
 import com.kalos.beans.AdjetivoComoNominalBean;
 import com.kalos.beans.AdjetivoBean;
 import com.kalos.beans.IrrAdjetivoEntero;
+import com.kalos.comun.config.DaoConfig;
+import com.kalos.comun.config.FlexionConfig;
+import com.kalos.comun.config.ServicesConfig;
 import com.kalos.datos.adaptadores.AdaptadorGerenteAdjetivos;
 import com.kalos.datos.adaptadores.AdaptadorGerenteIrrAdjetivosEnteros;
 import com.kalos.datos.gerentes.GerenteAdjetivos;
@@ -39,6 +42,7 @@ import org.apache.log4j.xml.DOMConfigurator;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.io.ClassPathResource;
@@ -330,19 +334,10 @@ public class GeneraAdjetivosComoNominales {
     }
 
     public static ApplicationContext creaContexto() {
-        GenericApplicationContext contexto;
-        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
-        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
-        FileSystemResource fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("daos-comun.xml").getFile());
-        reader.loadBeanDefinitions(fileResource);
-        fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("gerentes-comun.xml").getFile());
-        reader.loadBeanDefinitions(fileResource);       
-        fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("flexion.xml").getFile());
-        reader.loadBeanDefinitions(fileResource); 
-
-        contexto = new GenericApplicationContext(factory);
-        contexto.refresh();
-        return contexto;
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(DaoConfig.class, ServicesConfig.class, FlexionConfig.class);
+        context.refresh();
+        return context;
     }
 
 }

@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
@@ -30,6 +31,7 @@ import com.kalos.beans.ParticulaBean;
 import com.kalos.beans.PreposicionBean;
 import com.kalos.beans.SustantivoBean;
 import com.kalos.beans.VerboBean;
+import com.kalos.comun.config.DaoConfig;
 import com.kalos.datos.gerentes.GerenteAdjetivos;
 import com.kalos.datos.gerentes.GerenteAdverbios;
 import com.kalos.datos.gerentes.GerenteConjunciones;
@@ -58,12 +60,10 @@ public class CompactaTodo {
 
 
     public static ApplicationContext creaContexto() {
-        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
-        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
-        FileSystemResource fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("daos-comun.xml").getFile());
-        reader.loadBeanDefinitions(fileResource);        
-        contexto = new GenericApplicationContext(factory);
-        return contexto;
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(DaoConfig.class);
+        context.refresh();
+        return context;
     }
 
     public static void main(String[] args) throws Exception {
