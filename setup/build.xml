@@ -5,6 +5,7 @@ en los respectivos directorios "target" -->
 <project name="setup" basedir="." default="preparacion">
 
 	<property name="jar.comun" value="comun-1.0-SNAPSHOT.jar"/>
+	<property name="jar.comun.swing" value="comun-swing-1.0-SNAPSHOT.jar"/>
 	<property name="jar.iu" value="iu-1.0-SNAPSHOT.jar"/>
 
 	<target name="preparacion" description="Delete all generated files">
@@ -12,7 +13,8 @@ en los respectivos directorios "target" -->
 		<mkdir dir="work"/>
 		<mkdir dir="work/lib"/>
 		<copy file="../iu/target/${jar.iu}" toDir="work"/>
-		<copy file="../comun/target/${jar.comun}" toDir="work/lib"/>
+		<copy file="../comun/target/${jar.comun}" toDir="work"/>
+		<copy file="../comun-swing/target/${jar.comun.swing}" toDir="work"/>
 		<copy todir="work/lib">
 			<fileset dir="../iu/target/dependency"/>
 		</copy>
@@ -35,25 +37,35 @@ en los respectivos directorios "target" -->
 		</fileset>
 	</path>
 
-
 	<path id="libs.for.comun">
 		<fileset dir="work/lib/">
 			<include name="*.jar"/>
 		</fileset>
 	</path>
+	
+	<path id="libs.for.comun-swing">
+		<fileset dir="work/lib/">
+			<include name="*.jar"/>
+		</fileset>
+	</path>	
 
-	<manifestclasspath property="lib.list.iu" jarfile="work/${iu.jar}">
+	<manifestclasspath property="lib.list.iu" jarfile="work/${jar.iu}">
 		<classpath refid="libs.for.iu" />
 	</manifestclasspath>
 
-	<manifestclasspath property="lib.list.comun" jarfile="work/lib/${comun.jar}">
+	<manifestclasspath property="lib.list.comun" jarfile="work/lib/${jar.comun}">
 		<classpath refid="libs.for.comun" />
 	</manifestclasspath>
+	
+	<manifestclasspath property="lib.list.comun.swing" jarfile="work/lib/${jar.comun.swing}">
+		<classpath refid="libs.for.comun" />
+	</manifestclasspath>	
 
-	<target name="inyectaManifiestos" depends="preparaDirsParaManifiestos,inyectaManifiestoEnComun,inyectaManifiestoEnIu" >
+	<target name="inyectaManifiestos" depends="preparaDirsParaManifiestos,inyectaManifiestoEnComun, inyectaManifiestoEnComunSwing, inyectaManifiestoEnIu" >
 	  <delete dir="work/conmanifiesto"/>
 	  <mkdir dir="work/conmanifiesto"/>
 	  <copy file="work/tmp/comun/newjar/${jar.comun}" toDir="work/conmanifiesto"/>
+      <copy file="work/tmp/comun-swing/newjar/${jar.comun.swing}" toDir="work/conmanifiesto"/>
       <copy file="work/tmp/iu/newjar/${jar.iu}" toDir="work/conmanifiesto"/>
 	  <delete dir="work/tmp"/>
 	</target>
@@ -63,7 +75,11 @@ en los respectivos directorios "target" -->
 	  <delete dir="work/tmp"/>
 	  <mkdir dir="work/tmp/comun/"/>		
 	  <mkdir dir="work/tmp/comun/unjarred"/>
-	  <mkdir dir="work/tmp/comun/newjar"/>		
+	  <mkdir dir="work/tmp/comun/newjar"/>	
+	  <delete dir="work/tmp"/>
+	  <mkdir dir="work/tmp/comun-swing/"/>		
+	  <mkdir dir="work/tmp/comun-swing/unjarred"/>
+	  <mkdir dir="work/tmp/comun-swing/newjar"/>	  	
       <mkdir dir="work/tmp/iu/"/>		
 	  <mkdir dir="work/tmp/iu/unjarred"/>
 	  <mkdir dir="work/tmp/iu/newjar"/>			
@@ -72,16 +88,34 @@ en los respectivos directorios "target" -->
 
 	<target name="inyectaManifiestoEnComun">
 		<echo>Inyectando el manifiesto en "común"</echo>
-		<unzip src="work/lib/${jar.comun}" dest="work/tmp/comun/unjarred"/>
+		<unzip src="work/${jar.comun}" dest="work/tmp/comun/unjarred"/>
+	    <replace file="work/tmp/comun/unjarred/com/kalos/datos/modulos/">
+          <replacetoken>debug>true</replacetoken>
+          <replacevalue>debug>false</replacevalue>
+        </replace>		
+		jdbc:mckoi:local://./db.conf
+		
+		
 		<jar destfile="work/tmp/comun/newjar/${jar.comun}">
 			<fileset dir="work/tmp/comun/unjarred"/>
 			<manifest>
 				<attribute name="Class-Path" value="${lib.list.comun}" />
 				<attribute name="Created-By" value="${user.name}" />
-				<attribute name="Main-Class" value="com.kalos.App" />
 			</manifest>
 		</jar>
 	</target>
+	
+	<target name="inyectaManifiestoEnComunSwing">
+		<echo>Inyectando el manifiesto en "común"</echo>
+		<unzip src="work/${jar.comun.swing}" dest="work/tmp/comun-swing/unjarred"/>
+		<jar destfile="work/tmp/comun-swing/newjar/${jar.comun.swing}">
+			<fileset dir="work/tmp/comun-swing/unjarred"/>
+			<manifest>
+				<attribute name="Class-Path" value="${lib.list.comun.swing}" />
+				<attribute name="Created-By" value="${user.name}" />
+			</manifest>
+		</jar>
+	</target>	
 
 
 
@@ -107,11 +141,18 @@ en los respectivos directorios "target" -->
 	    <fileset dir="../datos/data"/>
 	  </copy>		
 	  <copy file="../datos/db.conf" toDir="work/condb"/>
-	  <copy file="work/conmanifiesto/${jar.comun}" toDir="work/condb"/>		
+	  <copy file="work/conmanifiesto/${jar.comun}" toDir="work/condb"/>	
+	  <copy file="work/conmanifiesto/${jar.comun.swing}" toDir="work/condb"/>	
 	  <copy file="work/conmanifiesto/${jar.iu}" toDir="work/condb"/>
 	  <copy todir="work/condb/lib">
 	    <fileset dir="work/lib"/>
-	  </copy>			
+	  </copy>
+	  <echo>Copiando el INI y pasándolo a no-debug</echo>	
+	  <copy file="../iu/kalosini.xml" toDir="work/condb"/>
+	  <replace file="work/condb/kalosini.xml">
+        <replacetoken>debug>true</replacetoken>
+        <replacevalue>debug>false</replacevalue>
+      </replace>	
 	</target>
 
 </project>

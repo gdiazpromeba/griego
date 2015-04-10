@@ -1,7 +1,10 @@
 package com.kalos.comun.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 
 import com.kalos.datos.dao.AdjetivoDAO;
 import com.kalos.datos.dao.AdjetivoDAOImpl;
@@ -81,16 +84,20 @@ import com.kalos.datos.dao.VerbosDAO;
 import com.kalos.datos.dao.VerbosDAOImpl;
 import com.kalos.datos.modulos.FuenteDeDatosKalos;
 
+@PropertySource("classpath:/connection.properties")
 @Configuration
 public class DaoConfig {
+    
+     @Autowired
+     private Environment env;
 
     @Bean 
 	public FuenteDeDatosKalos kalosDataSource() {
 		FuenteDeDatosKalos dataSource = new FuenteDeDatosKalos();
-		dataSource.setDriverClassName("com.mckoi.JDBCDriver");
-		dataSource.setUrl("jdbc:mckoi://localhost/");
-		dataSource.setUsername("gonzalo");
-		dataSource.setPassword("ymcsngm");
+		dataSource.setDriverClassName(env.getProperty("connection.driver"));
+		dataSource.setUrl(env.getProperty("connection.url"));
+		dataSource.setUsername(env.getProperty("connection.username"));
+		dataSource.setPassword(env.getProperty("connection.password"));
 		return dataSource;
 	}
 	
