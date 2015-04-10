@@ -9,6 +9,7 @@ import com.kalos.analisismorfologico.negocio.AMAdjetivos;
 import com.kalos.analisismorfologico.negocio.AMAdverbios;
 import com.kalos.analisismorfologico.negocio.AMConjunciones;
 import com.kalos.analisismorfologico.negocio.AMInfinitivos;
+import com.kalos.analisismorfologico.negocio.AMInterjecciones;
 import com.kalos.analisismorfologico.negocio.AMNominal;
 import com.kalos.analisismorfologico.negocio.AMParticipios;
 import com.kalos.analisismorfologico.negocio.AMParticulas;
@@ -204,6 +205,10 @@ public class AnalisisMorfologicoConfig {
         return new AMPreposiciones();
     }
     
-
+    @Bean
+    @Autowired   
+    public AMInterjecciones amInterjecciones(){
+        return new AMInterjecciones();
+    }
 
 }

@@ -5,19 +5,20 @@
 package com.kalos.iu;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.kalos.analisismorfologico.negocio.AMAdjetivos;
 import com.kalos.analisismorfologico.negocio.AMAdverbios;
@@ -35,25 +36,15 @@ import com.kalos.datos.gerentes.GerenteSeguridad;
 import com.kalos.datos.gerentes.GerenteVerbalizadorParticipios;
 import com.kalos.datos.gerentes.GerenteVerbos;
 import com.kalos.datos.gerentes.GerenteVerbosCompuestos;
-import com.kalos.datos.util.DBUtil;
 import com.kalos.flexion.declinacion.Participios;
 import com.kalos.iu.analisismorfologico.PanelAM;
-import com.kalos.iu.analisismorfologico.SimpleBean;
+import com.kalos.iu.config.IuConfig;
 import com.kalos.iu.diccionario.PanelDiccionario;
 import com.kalos.iu.flexion.PanelFlexion;
 import com.kalos.iu.registro.VentanaRegistro;
 import com.kalos.recursos.Configuracion;
 import com.kalos.recursos.Recursos;
 import com.kalos.visual.GerenteDeApariencias;
-
-import org.apache.log4j.Logger;
-import org.apache.log4j.xml.DOMConfigurator;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 
 // Referenced classes of package kalos.iu:
 //            A, B, C, E
@@ -305,26 +296,10 @@ public class Comienzo {
     }
 
     public static ApplicationContext creaContextoClasspath() {
-        DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
-        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
-        FileSystemResource fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("daos-comun.xml").getFile());
-        reader.loadBeanDefinitions(fileResource);
-        fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("gerentes-comun.xml").getFile());
-        reader.loadBeanDefinitions(fileResource);       
-        fileResource = new FileSystemResource( DBUtil.class.getClassLoader().getResource("flexion.xml").getFile());
-        reader.loadBeanDefinitions(fileResource);         
-        
-        ClassPathResource resource = new ClassPathResource("flexion.xml");
-        reader.loadBeanDefinitions(resource);
-        resource = new ClassPathResource("gerentes-comun.xml");
-        reader.loadBeanDefinitions(resource);
-        resource = new ClassPathResource("analisisMorfologico.xml");
-        reader.loadBeanDefinitions(resource);
-        resource = new ClassPathResource("iu.xml");
-        reader.loadBeanDefinitions(resource);
-        GenericApplicationContext genericapplicationcontext = new GenericApplicationContext(factory);
-        genericapplicationcontext.refresh();
-        return genericapplicationcontext;
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(IuConfig.class);
+        context.refresh();
+        return context;
     }
 
     static Caratula getCaratula() {
