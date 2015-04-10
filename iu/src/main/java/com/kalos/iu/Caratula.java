@@ -13,8 +13,6 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -25,13 +23,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import com.kalos.recursos.CargaRecursos;
-import com.kalos.recursos.Configuracion;
-import com.kalos.recursos.Recursos;
-
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
+import com.kalos.recursos.CargaRecursos;
+import com.kalos.recursos.Configuracion;
+import com.kalos.recursos.Recursos;
 
 // Referenced classes of package kalos.iu:
 //            D

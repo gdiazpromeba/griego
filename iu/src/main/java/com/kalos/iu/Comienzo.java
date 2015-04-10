@@ -106,7 +106,6 @@ public class Comienzo {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         cargaBeans();
-        //caratula.repaint();
         caratula.addListenerToBotonComenzar(new ListenerComenzar());
     }
 
@@ -130,35 +129,6 @@ public class Comienzo {
                 panelFlexion = (PanelFlexion) applicationContext.getBean("panelTablaFlexion");
                 ventanaRegistro = (VentanaRegistro) applicationContext.getBean("ventanaRegistro");
                 panelFlexion.setApplicationContext(applicationContext);
-                new Thread() {
-
-                    public void run() {
-                        AMParticipios amParticipios = (AMParticipios) Comienzo.getApplicationContext().getBean("amParticipios");
-                        amParticipios.setParticipios((Participios) Comienzo.getApplicationContext().getBean("participios"));
-                        amParticipios.setAmUtil((AMUtil) Comienzo.getApplicationContext().getBean("amUtil"));
-                        amParticipios.setAmNominal((AMNominal) Comienzo.getApplicationContext().getBean("amNominal"));
-                        amParticipios.setAmVerbal((AMVerbal) Comienzo.getApplicationContext().getBean("amVerbal"));
-                        amParticipios.setExtractorPrefijos((ExtractorPrefijos) Comienzo.getApplicationContext().getBean("extractorPrefijos"));
-                        amParticipios.setGerenteVerbos((GerenteVerbos) Comienzo.getApplicationContext().getBean("gerenteVerbos"));
-                        amParticipios.setGerenteVerbosCompuestos((GerenteVerbosCompuestos) Comienzo.getApplicationContext().getBean("gerenteVerbosCompuestos"));
-                        amParticipios.setGerenteVerbalizadorParticipios((GerenteVerbalizadorParticipios) Comienzo.getApplicationContext().getBean("gerenteVerbalizadorParticipios"));
-                        AMSustantivos amSustantivos = (AMSustantivos) Comienzo.getApplicationContext().getBean("amSustantivos");
-                        amSustantivos.setApplicationContext(Comienzo.getApplicationContext());
-                        AMAdjetivos amAdjetivos = (AMAdjetivos) Comienzo.getApplicationContext().getBean("amAdjetivos");
-                        amAdjetivos.setApplicationContext(Comienzo.getApplicationContext());
-                        AMParticulas amParticulas = (AMParticulas) Comienzo.getApplicationContext().getBean("amParticulas");
-                        amParticulas.setApplicationContext(Comienzo.getApplicationContext());
-                        AMConjunciones amConjunciones = (AMConjunciones) Comienzo.getApplicationContext().getBean("amConjunciones");
-                        amConjunciones.setApplicationContext(Comienzo.getApplicationContext());
-                        AMPreposiciones amPreposiciones = (AMPreposiciones) Comienzo.getApplicationContext().getBean("amPreposiciones");
-                        amPreposiciones.setApplicationContext(Comienzo.getApplicationContext());
-                        AMAdverbios amAdverbios = (AMAdverbios) Comienzo.getApplicationContext().getBean("amAdverbios");
-                        amAdverbios.setApplicationContext(Comienzo.getApplicationContext());
-                        AMInterjecciones amInterjecciones = (AMInterjecciones) Comienzo.getApplicationContext().getBean("amInterjecciones");
-                        amInterjecciones.setApplicationContext(Comienzo.getApplicationContext());
-                    }
-
-                }.start();
                 caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_control_eventos"));
                 new Controlador(panelDiccionario, Comienzo.getPanelFlexion());
                 caratula.habilitacionBotonComenzar(true);
@@ -356,17 +326,7 @@ public class Comienzo {
         return Comienzo.ventanaRegistro;
     }
 
-//    static void E() {
-//        reescribeIdiomaEtiquetas();
-//    }
 
-//    static void G() {
-//        reescribeIdiomaSignificados();
-//    }
-
-//    static void A() {
-//        B();
-//    }
 
     private static Logger logger = Logger.getLogger(Comienzo.class);
     private static PanelDiccionario panelDiccionario;

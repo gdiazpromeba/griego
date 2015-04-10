@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Lazy;
 
 import com.kalos.analisismorfologico.negocio.AMAdjetivos;
 import com.kalos.analisismorfologico.negocio.AMAdverbios;
@@ -45,6 +46,7 @@ import com.kalos.flexion.declinacion.Participios;
 
 @Configuration
 @Import(FlexionConfig.class)
+@Lazy
 public class AnalisisMorfologicoConfig {
     
     
@@ -57,7 +59,7 @@ public class AnalisisMorfologicoConfig {
     }
     
     @Bean
-    @Autowired    
+    @Autowired  
     public AMUtil amUtil(){
         return new AMUtil();
     }
@@ -132,7 +134,6 @@ public class AnalisisMorfologicoConfig {
            GerenteTransParticipios gerenteTransParticipios){
         
         AMParticipios service = new AMParticipios();
-        /*
         service.setAmUtil(amUtil);
         service.setAmVerbal(amVerbal);
         service.setAmNominal(amNominal);
@@ -141,7 +142,6 @@ public class AnalisisMorfologicoConfig {
         service.setGerenteVerbos(gerenteVerbos);
         service.setGerenteVerbalizadorParticipios(gerenteVerbalizadorParticipios);
         service.setGerenteVerbosCompuestos(gerenteVerbosCompuestos);
-        */
         service.setGerenteIrrParticipiosEnteros(gerenteIrrParticipiosEnteros);
         service.setGerenteIrrParticipiosSimples(gerenteIrrParticipiosSimples);
         service.setGerenteCubosTipoPart(gerenteCubosTipoPart);
@@ -154,12 +154,10 @@ public class AnalisisMorfologicoConfig {
     public AMSustantivos amSustantivos(AMUtil amUtil, AMNominal amNominal, GerenteIrrSustantivos gerenteIrrSustantivos, GerenteSustantivos gerenteSustantivos){
         
         AMSustantivos service = new AMSustantivos();
-        /*
         service.setAmUtil(amUtil);
         service.setAmNominal(amNominal);
         service.setGerenteIrrSustantivos(gerenteIrrSustantivos);
         service.setGerenteSustantivos(gerenteSustantivos);
-        */
         return service;
         
     }
@@ -170,13 +168,11 @@ public class AnalisisMorfologicoConfig {
             GerenteAdjetivos gerenteAdjetivos){
         
         AMAdjetivos service = new AMAdjetivos();
-        /*
         service.setAmUtil(amUtil);
         service.setAmNominal(amNominal);
         service.setGerenteAdjetivosComoNominales(gerenteAdjetivosComoNominales);
         service.setGerenteIrrAdjetivosIndividuales(gerenteIrrAdjetivosIndividuales);
         service.setGerenteAdjetivos(gerenteAdjetivos);
-        */
         return service;
     }
     

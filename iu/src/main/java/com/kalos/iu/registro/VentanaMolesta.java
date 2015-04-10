@@ -44,7 +44,6 @@ public class VentanaMolesta extends JPanel {
 		panelRegistro = new PanelRegistro();
 		txtArea = new JTextArea();
 		logger = Logger.getLogger(VentanaMolesta.class);
-		logger.info("instanciando VentanaMolesta");
 		gerenteSeguridad = ka;
 		B();
 		panelRegistro.butIngresarClave.addActionListener(new ActionListener() {

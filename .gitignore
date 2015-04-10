@@ -11,7 +11,7 @@ kalos_abms/.project
 **/*.log
 **/.project
 bibliotecas/**
-iu/target/**
+**/target/**
 comun/*.log
 datos/data/**
 setup/work
