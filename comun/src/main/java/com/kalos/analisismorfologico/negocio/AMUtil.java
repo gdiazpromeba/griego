@@ -44,6 +44,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import com.kalos.beans.ResultadoUniversal;
 import com.kalos.beans.TermRegVerbal;
+import com.kalos.beans.TieneTemaPropuesto;
 import com.kalos.enumeraciones.Aspecto;
 import com.kalos.enumeraciones.Aumento;
 import com.kalos.enumeraciones.Caso;
@@ -77,7 +78,8 @@ public class AMUtil {
     //	Logger logger=Logger.getLogger(this.getClass().getName());
 
     public void vocalUnitivaTemas(Set<ObjYDest> setSiguiente, List<ObjYDest> aBuscarPorTema) {
-        vocalUnitivaTemas(setSiguiente);
+        
+    	vocalUnitivaTemas(setSiguiente);
         vocalUnitivaTemas(aBuscarPorTema);
     }
 
@@ -86,11 +88,11 @@ public class AMUtil {
      * 
      * @param reg
      */
-    public void vocalUnitivaTemas(Object reg) {
-        String temaPropuesto = (String) OpBeans.getPropiedadObject(reg, "temaPropuesto");
+    public void vocalUnitivaTemas(TermRegVerbal reg) {
+        String temaPropuesto =  ((TieneTemaPropuesto)reg).getTemaPropuesto();
         StringBuffer tema = new StringBuffer(temaPropuesto);
-        int tipoVerboExt = OpBeans.getPropiedadInt(reg, "tipoVerboExtendido");
-        TiempoOAspecto toa = (TiempoOAspecto) OpBeans.getPropiedadObject(reg, new String[] { "tiempo", "aspecto" });
+        int tipoVerboExt = reg.getTipoVerboExtendido();
+        TiempoOAspecto toa = reg.getTiempoOAspecto();
         int tiempo = Tiempo.getInt(TransformadorTiempoAspecto.comoTiempo(toa));
         // los VC, tanto infectivos como no infectivos, comen la desinencia
         // completa con
@@ -99,13 +101,13 @@ public class AMUtil {
         if (TiposVerbo.esVocalicoContracto(tipoVerboExt)) {
             if (tipoVerboExt == TipoVerbo.VC_ALFA_NORMAL) {
                 tema.append(cAlfaCorta);
-                OpBeans.setPropiedad(reg, "vocalUnitivaRestaurada", "A");
+                //OpBeans.setPropiedad(reg, "vocalUnitivaRestaurada", "A");
             } else if (tipoVerboExt == TipoVerbo.VC_EPSILON_NORMAL) {
                 tema.append(cEpsilon);
-                OpBeans.setPropiedad(reg, "vocalUnitivaRestaurada", "E");
+                //OpBeans.setPropiedad(reg, "vocalUnitivaRestaurada", "E");
             } else if (tipoVerboExt == TipoVerbo.VC_OMICRON_NORMAL) {
                 tema.append(cOmicron);
-                OpBeans.setPropiedad(reg, "vocalUnitivaRestaurada", "O");
+                //OpBeans.setPropiedad(reg, "vocalUnitivaRestaurada", "O");
             }
             // indiqué con un campo adicional que restauró la desinencia;
             // así, al final cuando busque la
@@ -113,8 +115,9 @@ public class AMUtil {
             // que sean TI_MA/W directamente
             // (sin haber tenido la vocal unitiva restaurada)
         }
-        //
-        else if (TiposVerbo.esMudoNormal(tipoVerboExt) && tiempo > 2) {
+        
+        else 
+        	if (TiposVerbo.esMudoNormal(tipoVerboExt) && tiempo > 2) {
             switch (tipoVerboExt) {
             // consonánticos mudos no infectivos
                 case TipoVerbo.BETA_NORMAL:
@@ -159,7 +162,7 @@ public class AMUtil {
      */
     public void vocalUnitivaTemas(List<ObjYDest> lista) {
         for (ObjYDest red : lista) {
-            Object reg = red.getRegistro();
+            TermRegVerbal reg = red.getRegistro();
             vocalUnitivaTemas(reg);
         }
     }
@@ -172,7 +175,7 @@ public class AMUtil {
      */
     public void vocalUnitivaTemas(Set<ObjYDest> set) {
         for (ObjYDest red : set) {
-            Object reg = red.getRegistro();
+            TermRegVerbal reg = red.getRegistro();
             vocalUnitivaTemas(reg);
         }
     }
@@ -212,8 +215,7 @@ public class AMUtil {
             // int iLenTer=desinencia.length();
             List<DesTransformaciones> arrDesaumentado = new ArrayList<DesTransformaciones>();
             List<DesTransformaciones> arrDesresuplicado = new ArrayList<DesTransformaciones>();
-            TiempoOAspecto toa = (TiempoOAspecto) OpBeans.getPropiedadObject(regAux,
-                    new String[] { "tiempo", "aspecto" });
+            TiempoOAspecto toa =  regAux.getTiempoOAspecto();
             Modo modo = null;
             if (OpBeans.tienePropiedad(regAux, "modo")) {
                 modo = (Modo) OpBeans.getPropiedadObject(regAux, "modo");
@@ -587,15 +589,14 @@ public class AMUtil {
      * @param mapTemasPropuestos
      * @param debug
      */
-    public <T extends TermRegVerbal> void agrupaTemasEnSet(Set<T> setOriginal,
-            Map<TemaConPreps, HashSet<T>> mapTemasPropuestos, boolean debug) {
+    public <T extends TermRegVerbal> void agrupaTemasEnSet(Set<T> setOriginal, Map<TemaConPreps, HashSet<T>> mapTemasPropuestos, boolean debug) {
         // primero creamos un set con sólo los temasPropuestos, y al mismo
         // tiempo voy haciendo un map
         // que tiene como claves los temaspropuestos, y como valores listas de
         // canons
         mapTemasPropuestos.clear();
         for (T regAux : setOriginal) {
-            String temaProp = OpPalabras.strCompletoABeta((String) OpBeans.getPropiedadObject(regAux, "temaPropuesto"));
+            String temaProp =  OpPalabras.strCompletoABeta(((TieneTemaPropuesto)regAux).getTemaPropuesto());
             if (!mapTemasPropuestos.containsKey(temaProp)) {
                 HashSet<T> setAux = new HashSet<T>();
                 setAux.add(regAux);

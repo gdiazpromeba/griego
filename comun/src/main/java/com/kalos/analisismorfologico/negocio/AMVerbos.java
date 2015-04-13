@@ -91,7 +91,7 @@ public class AMVerbos implements AnalizadorMorfologico{
 		
 		//utilizar la función "conservasolo"  para dejar una determinada rama del árbol solamente
 		paso1(setEntradas, setPaso1, cacheExtraccionPrefijos, cacheAA, debug);             //obtención de juegos voz-modo-tiempo-persona posibles según terminación
-//		amUtil.conservaSolo(setPaso1, new String[]{"tiempo", "persona", "voz", "tipoDesinencia"}, new Object[]{Tiempo.Aoristo, Persona._1ps, Voz.Pasiva, -1});
+//		amUtil.conservaSolo(setPaso1, new String[]{"voz", "modo", "tipoDesinencia"}, new Object[]{Voz.Media, Modo.Imperativo, 11});
 		amVerbal.extiendeTipos(setPaso1, setPaso2, debug);   //expansión de los "nodos" de paso 1, según  pertenezcan a ciertas terminaciones
 //		amUtil.conservaSolo(setPaso2, new String[]{"tiempo", "tipoDesinencia"}, new Object[]{Tiempo.Pluscuamperfecto, 10 });
 		amVerbal.averiguaPreposiciones(setPaso2, setPaso2_5, ExtractorPrefijos.TODOS_LOS_NODOS,cacheExtraccionPrefijos, debug); //averiguación de preposiciones
@@ -350,8 +350,8 @@ public class AMVerbos implements AnalizadorMorfologico{
 				List<IrrVerboIndividual> dm=encuentraFormasIndividuales(entrada, cacheAA);
 
 				Map<String, VerboBean> mapBusquedas = new HashMap<String, VerboBean>();
-				for (Object bean : dm) {
-					String idVerbo = (String) OpBeans.getPropiedadObject(bean, "verboId");
+				for (IrrVerboIndividual bean : dm) {
+					String idVerbo =  bean.getVerboId();
 					// cacheo la letra-forma para búsquedas
 					VerboBean entradaVerbo = mapBusquedas.get(idVerbo);
 					if (entradaVerbo == null) {
@@ -361,16 +361,16 @@ public class AMVerbos implements AnalizadorMorfologico{
 					String formaAccidentada = entradas[i];
 					Particularidad particIrr = (Particularidad) OpBeans.getPropiedadObject(bean, "partic");
 					Particularidad particCanonica = entradaVerbo.getParticularidad();
-					Voz voz = (Voz) OpBeans.getPropiedadObject(bean, "voz");
+					Voz voz = bean.getVoz();
 					Aspecto aspecto = null;
 					Persona persona = null;
 					Tiempo tiempo = null;
 					Modo modo = null;
 					FuerteDebil fuerte = null;
-					modo = (Modo) OpBeans.getPropiedadObject(bean, "modo");
-					persona = (Persona) OpBeans.getPropiedadObject(bean, "persona");
-					tiempo = (Tiempo) OpBeans.getPropiedadObject(bean, "tiempo");
-					fuerte = (FuerteDebil) OpBeans.getPropiedadObject(bean, "fuerte");
+					modo = bean.getModo();
+					persona = bean.getPersona();;
+					tiempo = bean.getTiempo();
+					fuerte = bean.getFuerte();
 
 					ResultadoUniversal reu = new ResultadoUniversal(TipoPalabra.Verbo, idVerbo, null, particCanonica, particIrr, voz,
 							formaAccidentada, tiempo, aspecto, fuerte, persona, null, null, null, modo, null, null,

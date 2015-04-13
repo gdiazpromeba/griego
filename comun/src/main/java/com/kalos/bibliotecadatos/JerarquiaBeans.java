@@ -242,8 +242,8 @@ public class JerarquiaBeans<T extends TipoJerarquico> {
                 continue;
             }
             
-            String idPadreCandidato = OpBeans.getPropiedad(bean, propiedadPadre);
-            String idBean = OpBeans.getId(bean);
+            String idPadreCandidato = tij.getPadreId();
+            String idBean = tij.getId();
             if ((idPadreCandidato != null && idPadreCandidato.equals(idPadre))
                     || (idPadreCandidato == null && idPadre == null)) {
                 DefaultMutableTreeNode hijo = mapNodes.get(idBean);

@@ -109,24 +109,24 @@ public class AMInfinitivos implements AnalizadorMorfologico {
 		Map<String, VerboBean> localHashMap2 = new HashMap<String, VerboBean>();
 		Iterator<IrrInfinitivoBean> localIterator = localList.iterator();
 		while (localIterator.hasNext()) {
-		    IrrInfinitivoBean localy = localIterator.next();
-		    String str2 = (String) OpBeans.getPropiedadObject(localy, "verboId");
+		    IrrInfinitivoBean irrInfBean = localIterator.next();
+		    String str2 = irrInfBean.getVerboId();
 		    VerboBean localh = localHashMap2.get(str2);
 		    if (localh == null) {
 			localh = this.gerenteVerbos.seleccionaIndividualSinSignificado(str2);
 			localHashMap2.put(str2, localh);
 		    }
 		    String str3 = paramArrayOfString[i];
-		    Particularidad localX1 = (Particularidad) OpBeans.getPropiedadObject(localy, "partic");
+		    Particularidad localX1 = irrInfBean.getPartic();
 		    Particularidad localX2 = localh.getParticularidad();
-		    Voz localZ = (Voz) OpBeans.getPropiedadObject(localy, "voz");
+		    Voz localZ = irrInfBean.getVoz();
 		    Aspecto localk = null;
 		    Persona local_ = null;
 		    Tiempo localj = null;
 		    Modo localp = null;
 		    FuerteDebil localP = null;
-		    localk = (Aspecto) OpBeans.getPropiedadObject(localy, "aspecto");
-		    localP = (FuerteDebil) OpBeans.getPropiedadObject(localy, "fuerte");
+		    localk = irrInfBean.getAspecto();
+		    localP = irrInfBean.getFuerte();
 		    ResultadoUniversal localj1 = new ResultadoUniversal(TipoPalabra.Infinitivo, str2, null, localX2,
 			    localX1, localZ, str3, localj, localk, localP, local_, null, null, null, localp, null,
 			    null, tcps[k].preps, null);

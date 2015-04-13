@@ -18,7 +18,7 @@ import com.kalos.operaciones.OpBeans;
 // Referenced classes of package kalos.K:
 //            G
 
-public class TermRegInfinitivo implements TermRegVerbal {
+public class TermRegInfinitivo implements TermRegVerbal, TieneTemaPropuesto {
 
 
 
