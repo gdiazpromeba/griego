@@ -9,6 +9,7 @@ package com.kalos.visual.controles.ventanas;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
@@ -22,6 +23,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -31,7 +35,6 @@ import javax.swing.JOptionPane;
 
 import com.kalos.recursos.Configuracion;
 import com.kalos.recursos.Recursos;
-
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -107,8 +110,8 @@ public class DialogErrores extends JDialog {
   		sb.append("Also, feel free to add comments of your own to this message,  ");
   		sb.append("indicating how it happened, what you were trying to do, etc. ");
   		try{
-  	      BrowserLauncher.openURL(sb.toString());
-  		}catch(IOException ex){
+  		  Desktop.getDesktop().mail(new URI(sb.toString()));
+  		}catch(Exception ex){
   			ex.printStackTrace();
   		}
 
