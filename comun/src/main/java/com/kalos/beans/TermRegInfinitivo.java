@@ -7,6 +7,7 @@ package com.kalos.beans;
 import java.util.List;
 
 import com.kalos.enumeraciones.Acento;
+import com.kalos.enumeraciones.Aspecto;
 import com.kalos.enumeraciones.Contraccion;
 import com.kalos.enumeraciones.FuerteDebil;
 import com.kalos.enumeraciones.Particularidad;
@@ -18,7 +19,7 @@ import com.kalos.operaciones.OpBeans;
 // Referenced classes of package kalos.K:
 //            G
 
-public class TermRegInfinitivo implements TermRegVerbal, TieneTemaPropuesto {
+public class TermRegInfinitivo implements TermRegVerbal, TieneTemaPropuesto, Verboide {
 
 
 
@@ -218,15 +219,15 @@ public class TermRegInfinitivo implements TermRegVerbal, TieneTemaPropuesto {
 	}
 	
 	
-	public TiempoOAspecto getAspecto() {
+	public Aspecto getAspecto() {
 		return aspecto;
 	}
 
 	public TiempoOAspecto getTiempoOAspecto() {
-		return getAspecto();
+		return aspecto;
 	}
 
-	public void setAspecto(TiempoOAspecto k) {
+	public void setAspecto(Aspecto k) {
 		aspecto = k;
 		hashCode = null;
 	}
@@ -261,7 +262,7 @@ public class TermRegInfinitivo implements TermRegVerbal, TieneTemaPropuesto {
 	}
 
 	private Voz voz;
-	private TiempoOAspecto aspecto;
+	private Aspecto aspecto;
 	private FuerteDebil fuerte;
 	private int tipoDesinencia;
 	private String terminacion;

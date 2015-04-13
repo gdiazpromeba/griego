@@ -191,17 +191,6 @@ public class OpBeans {
 		return null;
 	}
 
-	public static Object getBeanConEsteCodigo(List list, int i) {
-		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
-			Object obj = iterator.next();
-			int j = getPropiedadInt(obj, "codigo");
-			if (j == i)
-				return obj;
-		}
-
-		return null;
-	}
-
 	public static String primerCampoNoVacio(Object obj, String as[]) {
 		String as1[] = as;
 		int i = as1.length;

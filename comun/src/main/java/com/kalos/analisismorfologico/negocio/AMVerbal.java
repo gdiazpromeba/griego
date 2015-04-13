@@ -24,8 +24,10 @@ import com.kalos.beans.TermRegInfinitivo;
 import com.kalos.beans.TermRegParticipio;
 import com.kalos.beans.TermRegVerbal;
 import com.kalos.beans.TermRegVerbo;
+import com.kalos.beans.TieneJuego;
 import com.kalos.beans.TieneTemaPropuesto;
 import com.kalos.beans.VerboBean;
+import com.kalos.beans.Verboide;
 import com.kalos.datos.gerentes.GerenteIrrInfinitivos;
 import com.kalos.datos.gerentes.GerenteIrrVerbos;
 import com.kalos.datos.gerentes.GerenteIrrVerbosIndividuales;
@@ -54,6 +56,7 @@ import com.kalos.operaciones.DesTransformaciones;
 import com.kalos.operaciones.OpBeans;
 import com.kalos.operaciones.OpPalabras;
 import com.kalos.operaciones.TiposVerbo;
+import com.sun.msv.writer.relaxng.RELAXNGWriter;
 
 //import org.apache.log4j.Logger;
 
@@ -338,7 +341,7 @@ public class AMVerbal {
 		// todo lo que pued obtener de aqué estoy seguro que no es vocálico
 		// contracto, así que
 		// las reglas de acentuación "estrictas" se aplican
-		boolean esInfinitivo = OpBeans.tienePropiedad(regW, "aspecto");
+		boolean esInfinitivo =  (regW instanceof Verboide);
 		if (!esInfinitivo && !esLicitoEstricto(formaOriginal))
 			return;
 
@@ -400,7 +403,7 @@ public class AMVerbal {
 			Set<T> setSiguiente, boolean debug) {
 		for (Iterator<T> it = setOriginal.iterator(); it.hasNext();) {
 			T trv = it.next();
-			OpBeans.pasaDeBetaACompleto(trv, new String[] { "terminacion" });
+			trv.setTerminacion(OpPalabras.strBetaACompleto(trv.getTerminacion()));
 			// TermRegVerbo trvNuevo = (TermRegVerbo) OpBeans.clona(trv);
 			String formaOriginal = trv.getFormaOriginal();
 			CarPos letraUnitiva = CarPos.getCarPos(formaOriginal,
@@ -1178,11 +1181,10 @@ public class AMVerbal {
 				"voz");
 		// si no hay modo reconstruido, es que estamos reconstruyendo e partir
 		// de un infinitivo o un participo
-		boolean hayModoReconstruido = OpBeans.tienePropiedad(reconstruido,
-				"modo");
 		Modo modo = null;
-		if (hayModoReconstruido)
-			modo = (Modo) OpBeans.getPropiedadObject(reconstruido, "modo");
+		boolean esTermRegVerbo = reconstruido instanceof TermRegVerbo;
+		if (esTermRegVerbo)
+			modo = ((TermRegVerbo )reconstruido).getModo();
 		Voz jvoz = irregularidad.getVozJuego();
 		Tiempo ntie = irregularidad.getTiempo();
 		boolean fuerte = irregularidad.getFuerte() == FuerteDebil.Fuerte;
@@ -1190,9 +1192,8 @@ public class AMVerbal {
 		Contraccion contraccion = irregularidad.getContraccion();
 		Propagacion propagacion = irregularidad.getPropagacion();
 		int tieneContComedora = 0;
-		if (OpBeans.tienePropiedad(reconstruido, "contraccionComedora")) {
-			tieneContComedora = (Integer) OpBeans.getPropiedadObject(
-					reconstruido, "contraccionComedora");
+		if (reconstruido instanceof TermRegParticipio){  
+			tieneContComedora =   ((TermRegParticipio)reconstruido).getContraccionComedora();
 		}
 		// tiempos: el reconstruido debe coincidir con el irregular, o el
 		// reconstruido ser infectivo de un irregular aoristo segundo
@@ -1230,11 +1231,11 @@ public class AMVerbal {
 		// modos: deben coincidir o el modo reconstruido no ser indicativo y la
 		// irregularidad indicativo propagante
 		boolean modoOK = false;
-		if (!hayModoReconstruido) // es un infinitivo
+		if (!esTermRegVerbo) // es un infinitivo
 			modoOK = true;
 		else if (modo == modoIrr)
 			modoOK = true;
-		else if (hayModoReconstruido && modoIrr.equals(Modo.Indicativo)
+		else if (esTermRegVerbo && modoIrr.equals(Modo.Indicativo)
 				&& !modo.equals(Modo.Indicativo) && propagacion.esDeModo())
 			modoOK = true;
 		else
@@ -1246,13 +1247,11 @@ public class AMVerbal {
 		// dicho juego indicado tiene que coincidir con el
 		// campo JUEGO del registro de IRR_VERBOS
 		boolean juegoOK = true;
-		boolean reconstruidoTieneJuego = OpBeans.tienePropiedad(reconstruido,
-				"juego");
+		boolean reconstruidoTieneJuego = (reconstruido instanceof TieneJuego);
 		if (reconstruidoTieneJuego) {
-			int juegoReconstruido = OpBeans.getPropiedadInt(reconstruido,
-					"juego");
+			int juegoReconstruido =  ((TieneJuego)reconstruido).getJuego();  
 			if (juegoReconstruido != 0) {
-				int juegoIrr = OpBeans.getPropiedadInt(irregularidad, "juego");
+				int juegoIrr = irregularidad.getJuego();
 				if (juegoReconstruido != juegoIrr) {
 					juegoOK = false;
 				}

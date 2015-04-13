@@ -23,7 +23,7 @@ import com.kalos.operaciones.OpBeans;
 //Referenced classes of package kalos.K:
 //         L
 
-public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto {
+public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto, TieneJuego {
 
 	public Aumento getAumento() {
 		return aumento;

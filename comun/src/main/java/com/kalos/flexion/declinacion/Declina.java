@@ -89,7 +89,8 @@ public class Declina  {
         // que tenga una combinación válida)
         SustantivoBean reg = gerenteSustantivos.seleccionaUno(sustantivoId);
 
-        OpBeans.pasaDeBetaACompleto(reg, new String[]{"nominativo", "genitivo"});
+        reg.setNominativo(OpPalabras.strBetaACompleto(reg.getNominativo()));
+        reg.setGenitivo(OpPalabras.strBetaACompleto(reg.getGenitivo()));
         int tipoSustantivo = reg.getTipoNominal();
         boolean pluralizado = reg.isPluralizado();
         boolean soloSingular = reg.isSoloSingular();

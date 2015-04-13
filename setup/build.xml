@@ -2,12 +2,20 @@
 
 <!-- prepara un setup. Este build asume que común e iu han sido ejecutados, y que archivos jar compilados ya existen
 en los respectivos directorios "target" -->
-<project name="setup" basedir="." default="preparacion">
+<project name="setup" basedir="." default="preparacion" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+	
+   <path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.3.jar" />
+   <typedef resource="org/apache/maven/artifact/ant/antlib.xml"  uri="antlib:org.apache.maven.artifact.ant" classpathref="maven-ant-tasks.classpath" />	
 
 	<property name="jar.comun" value="comun-1.0-SNAPSHOT.jar"/>
 	<property name="jar.comun.swing" value="comun-swing-1.0-SNAPSHOT.jar"/>
 	<property name="jar.iu" value="iu-1.0-SNAPSHOT.jar"/>
-
+	<property name="jar.kalos" value="kalos-4.16.jar"/>
+	<property name="jar.kalos.ofuscado" value="kalos-ofuscado-4.16.jar"/>
+	<property name="shrinklog" value="shrink.log"/>
+	<property environment="env"/>
+	
+	
 	<target name="preparacion" description="Delete all generated files">
 		<delete dir="work"/>
 		<mkdir dir="work"/>
@@ -19,15 +27,157 @@ en los respectivos directorios "target" -->
 			<fileset dir="../iu/target/dependency"/>
 		</copy>
 	</target>
+	
+	<target name="copiaDeps">
+	  <artifact:mvn pom="../iu/pom.xml" mavenHome="${env.MAVEN_HOME}" fork="true">
+	    <arg value="dependency:copy-dependencies"/>
+	  </artifact:mvn>
+	  <mkdir dir="work/lib"/>
+	  <copy todir="work/lib">
+	    <fileset dir="../iu/target/dependency"/>
+	  </copy>
+	  <delete file="work/lib/${jar.comun}"/>
+	  <delete file="work/lib/${jar.comun.swing}"/>
+    </target>
+	
+	<target name="copyDeps" description="Copia las dependencias de iu">
+	 <property environment="env" />
+	 <echo>${env.MAVEN_HOME}</echo>
+	 <exec dir="../iu" executable="cmd">
+	        <arg value="${env.MAVEN_HOME}\bin\mvn.bat"/>
+	        <arg line="dependency:copy-dependencies" />
+	  </exec>
+	</target>	
+	
+	<target name="compilacion" >
+		<echo>Compilando todo ... </echo>
+		<delete dir="work/comp"/>
+		<mkdir dir="work/comp"/>
+		<mkdir dir="work/comp/src"/>
+		<mkdir dir="work/comp/out"/>
+
+		
+		
+		<copy todir="work/comp/src">
+			<fileset dir="../comun/src/main/java"/>
+			<fileset dir="../comun-swing/src/main/java"/>
+			<fileset dir="../iu/src/main/java"/>
+		</copy>
+		
+		<javac srcdir="work/comp/src" destdir="work/comp/out" classpathref="libs.for.comun"/>
+		
+		
+
+	</target>	
 
 	<target name="run">
-		<java jar="work/conmanifiesto/iu-1.0-SNAPSHOT.jar" fork="true">
+		<java jar="work/condb/${jar.kalos}" dir="work/condb" fork="true">
 		</java>
 	</target>
-
-	<target name="runComun">
-		<java jar="work/conmanifiesto/lib/comun-1.0-SNAPSHOT.jar" fork="true">
+	
+	<target name="runOfuscado">
+		<java jar="work/condb/${jar.kalos.ofuscado}" dir="work/condb" fork="true">
 		</java>
+	</target>
+	
+
+	
+	<!-- ANT OBFUSCATE TASK --> 
+	<target name="obfuscate2" >
+	  <proguard
+	    allowaccessmodification="true"
+	    usemixedcaseclassnames="false"
+	    defaultpackage=""
+	    skipnonpubliclibraryclasses="false"
+	    printseeds="obfuscateseeds.txt"
+	    printusage="obfuscateusage.txt"
+	    printmapping="obfuscatemapping.txt">
+	 
+	    <!-- specify which jar files should be obfuscated -->
+	    <injar name="work/condb/${jar.kalos}"/>
+
+	    <!-- java libraries my java application depends on -->
+	    <libraryjar name="work/condb/lib/*.jar" />
+	 
+	    <!-- the output jar file that should be created with the obfuscated java class files -->
+	    <outjar name="work/condb/${jar.kalos.ofuscado}"/>
+	 
+	    <!-- don't obfuscate this method -->
+	    <keep name="com.kalos.iu.Comienzo">
+	      <method name="main"/>
+	    </keep>
+	 
+	  </proguard>
+	   
+	   
+	</target>	
+	
+	<target name="obfuscate" >
+
+	            <property name="obfuscate.absolute.dir" location="${out.absolute.dir}/proguard" />
+	            <property name="preobfuscate.jar.file"  value="${obfuscate.absolute.dir}/original.jar" />
+	            <property name="obfuscated.jar.file"    value="${obfuscate.absolute.dir}/obfuscated.jar" />
+
+	             <!-- input for dex will be proguard's output -->
+	            <property name="out.dex.input.absolute.dir" value="${obfuscated.jar.file}" />
+
+	            <!-- Add Proguard Tasks -->
+	            <property name="proguard.jar" location="${android.tools.dir}/proguard/lib/proguard.jar" />
+	            <taskdef name="proguard" classname="proguard.ant.ProGuardTask" classpath="lib/proguard.jar" />
+		
+			    <!-- don't obfuscate this method -->
+	
+
+
+
+	            <proguard>
+				    <keep name="com.kalos.iu.Comienzo">
+				      <method name="main"/>
+				    </keep>	
+	            	
+	            	
+	                @proguard.config
+	                -injars "work/condb/${jar.kalos}"
+	                -outjars "work/condb/${jar.kalos.ofuscado}"
+	                -libraryjars "work/condb/lib/"
+	                -dump ${obfuscate.absolute.dir}/dump.txt
+	                -printseeds ${obfuscate.absolute.dir}/seeds.txt
+	                -printusage ${obfuscate.absolute.dir}/usage.txt
+	                -printmapping ${obfuscate.absolute.dir}/mapping.txt
+	            </proguard>
+
+	</target>	
+	
+	<target name="granJar" >
+		<delete dir="work/comp/jar"/>
+		<mkdir dir="work/comp/jar"/>
+		
+		<!-- crea un directorio temporario para los recursos, algunos de los cuales tengo que editar -->
+		<delete dir="work/comp/rec"/>
+		<mkdir dir="work/comp/rec"/>
+		<copy todir="work/comp/rec">
+		  <fileset dir="../comun/src/main/resources">
+		    <!-- el log4j.xml que va a quedar es el de iu, no el de común -->
+		  	<exclude name="../comun/src/main/resources/log4j.xml"/>
+		  </fileset>
+		  <fileset dir="../iu/src/main/resources"/>
+		</copy>
+		<!-- edito el archivito de conexiones -->
+	    <replace file="work/comp/rec/connection.properties/">
+		  <!-- esta es la ubicación del archivo RESPECTO DEL PROCESO JAVA QUE LLAMA A IU, no respecto del jar común que lo contiene -->
+          <replacetoken>jdbc:mckoi://localhost/</replacetoken>
+          <replacevalue>jdbc:mckoi:local://./db.conf</replacevalue>
+        </replace>			
+		
+		<jar destfile="work/comp/jar/${jar.kalos}">
+			<fileset dir="work/comp/out"/>
+			<fileset dir="work/comp/rec"/>
+			<manifest>
+				<attribute name="Class-Path" value="${lib.list.iu}" />
+				<attribute name="Created-By" value="${user.name}" />
+				<attribute name="Main-Class" value="com.kalos.iu.Comienzo" />
+			</manifest>
+		</jar>		
 	</target>
 
 
@@ -61,7 +211,7 @@ en los respectivos directorios "target" -->
 		<classpath refid="libs.for.comun" />
 	</manifestclasspath>	
 
-	<target name="inyectaManifiestos" depends="preparaDirsParaManifiestos,inyectaManifiestoEnComun, inyectaManifiestoEnComunSwing, inyectaManifiestoEnIu" >
+	<target name="inyectaManifiestos" depends="preparaDirsParaManifiestos,preparaComun, preparaComunSwing, inyectaManifiestoEnIu" >
 	  <delete dir="work/conmanifiesto"/>
 	  <mkdir dir="work/conmanifiesto"/>
 	  <copy file="work/tmp/comun/newjar/${jar.comun}" toDir="work/conmanifiesto"/>
@@ -85,17 +235,54 @@ en los respectivos directorios "target" -->
 	  <mkdir dir="work/tmp/iu/newjar"/>			
 	</target>
 	
+	
+	<path id="libs.for.comun.yguard">
+		<fileset dir="work/condb/lib/">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	
+	
+    <target name="ofuscacion">
+      <echo>lib comun es=${lib.list.comun.yguard}</echo>
+      <taskdef name="yguard" classname="com.yworks.yguard.YGuardTask" classpath="lib/yguard-2.5.3/lib/yguard.jar"/>
+      <yguard>
+      	<inoutpair in="work/condb/${jar.kalos}" out="work/condb/${jar.kalos.ofuscado}"/>  
+        
+	    <externalclasses>
+	      <path refid="libs.for.comun.yguard" />
+	    </externalclasses>        
 
-	<target name="inyectaManifiestoEnComun">
+        <rename mainclass="com.kalos.iu.Comienzo" logfile="renamelog.xml">
+
+          <property name="error-checking" value="pedantic"/>
+
+          <keep>
+            <package>
+              <patternset>
+                <include name="com.kalos.**"/>
+              </patternset>
+            </package>
+
+          </keep>
+        </rename>
+
+      </yguard>
+
+    </target>
+
+
+
+
+	<target name="preparaComun">
 		<echo>Inyectando el manifiesto en "común"</echo>
 		<unzip src="work/${jar.comun}" dest="work/tmp/comun/unjarred"/>
-	    <replace file="work/tmp/comun/unjarred/com/kalos/datos/modulos/">
-          <replacetoken>debug>true</replacetoken>
-          <replacevalue>debug>false</replacevalue>
+	    <echo>reemplazando el archivo de configuración de BD</echo>
+	    <replace file="work/tmp/comun/unjarred/connection.properties/">
+		  <!-- esta es la ubicación del archivo RESPECTO DEL PROCESO JAVA QUE LLAMA A IU, no respecto del jar común que lo contiene -->
+          <replacetoken>jdbc:mckoi://localhost/</replacetoken>
+          <replacevalue>jdbc:mckoi:local://./db.conf</replacevalue>
         </replace>		
-		jdbc:mckoi:local://./db.conf
-		
-		
 		<jar destfile="work/tmp/comun/newjar/${jar.comun}">
 			<fileset dir="work/tmp/comun/unjarred"/>
 			<manifest>
@@ -105,7 +292,7 @@ en los respectivos directorios "target" -->
 		</jar>
 	</target>
 	
-	<target name="inyectaManifiestoEnComunSwing">
+	<target name="preparaComunSwing">
 		<echo>Inyectando el manifiesto en "común"</echo>
 		<unzip src="work/${jar.comun.swing}" dest="work/tmp/comun-swing/unjarred"/>
 		<jar destfile="work/tmp/comun-swing/newjar/${jar.comun.swing}">
@@ -132,7 +319,7 @@ en los respectivos directorios "target" -->
 		</jar>
 	</target>
 	
-	<target name="conBD">
+	<target name="conBDYReportes">
       <echo>Creando una versión con base de datos</echo>
 	  <delete dir="work/condb"/>
 	  <mkdir dir="work/tmp/condb/"/>
@@ -141,18 +328,22 @@ en los respectivos directorios "target" -->
 	    <fileset dir="../datos/data"/>
 	  </copy>		
 	  <copy file="../datos/db.conf" toDir="work/condb"/>
-	  <copy file="work/conmanifiesto/${jar.comun}" toDir="work/condb"/>	
-	  <copy file="work/conmanifiesto/${jar.comun.swing}" toDir="work/condb"/>	
-	  <copy file="work/conmanifiesto/${jar.iu}" toDir="work/condb"/>
+	  <copy file="work/comp/jar/${jar.kalos}" toDir="work/condb"/>	
 	  <copy todir="work/condb/lib">
 	    <fileset dir="work/lib"/>
 	  </copy>
-	  <echo>Copiando el INI y pasándolo a no-debug</echo>	
-	  <copy file="../iu/kalosini.xml" toDir="work/condb"/>
-	  <replace file="work/condb/kalosini.xml">
-        <replacetoken>debug>true</replacetoken>
-        <replacevalue>debug>false</replacevalue>
-      </replace>	
+	  <echo>Copiando el kalos.properties y editándolo</echo>	
+	  <copy file="../iu/kalos.properties" toDir="work/condb"/>
+	  <replace file="work/condb/kalos.properties">
+        <replacetoken>debug=true</replacetoken>
+        <replacevalue>debug=false</replacevalue>
+      </replace>
+	  <echo>Copiando los archivos de reportes</echo>
+	  <delete dir="work/condb/armado_reportes"/>
+	  <mkdir dir="work/condb/armado_reportes"/>
+	  <copy todir="work/condb/armado_reportes">
+	    <fileset dir="../iu/armado_reportes"/>
+	  </copy>		
 	</target>
 
 </project>

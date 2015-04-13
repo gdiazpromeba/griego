@@ -44,6 +44,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import com.kalos.beans.ResultadoUniversal;
 import com.kalos.beans.TermRegVerbal;
+import com.kalos.beans.TermRegVerbo;
 import com.kalos.beans.TieneTemaPropuesto;
 import com.kalos.enumeraciones.Aspecto;
 import com.kalos.enumeraciones.Aumento;
@@ -217,8 +218,8 @@ public class AMUtil {
             List<DesTransformaciones> arrDesresuplicado = new ArrayList<DesTransformaciones>();
             TiempoOAspecto toa =  regAux.getTiempoOAspecto();
             Modo modo = null;
-            if (OpBeans.tienePropiedad(regAux, "modo")) {
-                modo = (Modo) OpBeans.getPropiedadObject(regAux, "modo");
+            if (regAux instanceof TermRegVerbo){
+                modo = ((TermRegVerbo)regAux).getModo();
             }
 
             String formaADestransformar = regAux.getFormaADestransformar();

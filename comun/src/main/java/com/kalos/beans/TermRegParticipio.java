@@ -20,7 +20,7 @@ import com.kalos.operaciones.OpBeans;
 // Referenced classes of package kalos.K:
 //            G, T
 
-public class TermRegParticipio implements TermRegNominal, TermRegVerbal {
+public class TermRegParticipio implements TermRegNominal, TermRegVerbal, TieneJuego, Verboide {
 
     public int hashCode() {
         if (hash == null)
