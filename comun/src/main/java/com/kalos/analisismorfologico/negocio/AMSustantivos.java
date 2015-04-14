@@ -196,7 +196,7 @@ public class AMSustantivos implements AnalizadorMorfologico, ApplicationContextA
 	Iterator<TermRegSustantivo> localIterator1 = terminaciones.iterator();
 	while (localIterator1.hasNext()) {
 	    TermRegSustantivo termRegSust = localIterator1.next();
-	    termRegSust = (TermRegSustantivo) OpBeans.clona(termRegSust);
+	    termRegSust = termRegSust.clona(); 
 	    if (!contieneTipo(termRegSust)) {
 		if (debug) {
 		    debugSb.append("descartando por no ser sustantivo:  " + termRegSust.toString() + " \n");
@@ -251,10 +251,10 @@ public class AMSustantivos implements AnalizadorMorfologico, ApplicationContextA
 			    setSalida.add(localj1);
 			    if (caso == Caso.Nominativo) {
 				if (termRegSust.getTiposHoja().matches(cadenaTiposHoja)) {
-				    ResultadoUniversal localj2 = (ResultadoUniversal) OpBeans.clona(localj1);
+				    ResultadoUniversal localj2 = localj1.clona();
 				    localj2.setCaso(Caso.Vocativo);
 				    setSalida.add(localj2);
-				    ResultadoUniversal localj3 = (ResultadoUniversal) OpBeans.clona(localj1);
+				    ResultadoUniversal localj3 = localj1.clona(); 
 				    localj3.setCaso(Caso.Acusativo);
 				    setSalida.add(localj3);
 				    if (debug) {
@@ -269,7 +269,7 @@ public class AMSustantivos implements AnalizadorMorfologico, ApplicationContextA
 					    break;
 					}
 					if (m == 0) {
-					    ResultadoUniversal resVoc = (ResultadoUniversal) OpBeans.clona(localj1);
+					    ResultadoUniversal resVoc = localj1.clona(); 
 					    resVoc.setCaso(Caso.Vocativo);
 					    setSalida.add(resVoc);
 					    if (debug) {

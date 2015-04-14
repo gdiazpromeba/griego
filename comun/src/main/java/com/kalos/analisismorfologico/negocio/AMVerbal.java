@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import com.kalos.beans.IrrVerbo;
 import com.kalos.beans.ResultadoUniversal;
 import com.kalos.beans.TermRegInfinitivo;
@@ -77,7 +79,7 @@ public class AMVerbal {
 	private GerenteVerbos gerenteVerbos;
 	private GerenteIrrVerbos gerenteIrrVerbos;
 
-	// private Logger logger=Logger.getLogger(this.getClass().getName());
+	private Logger logger=Logger.getLogger(this.getClass().getName());
 
 	/**
 	 * @return Returns the gerenteVerbos.
@@ -115,9 +117,7 @@ public class AMVerbal {
 	 * @param serResultado
 	 * @param lstIrr
 	 */
-	public void comparaConTemasSemirreconstruidos(
-			Set<ResultadoUniversal> setResultado, List<TermRegVerbal> lstIrr,
-			boolean infinitivo, boolean debug) {
+	public void comparaConTemasSemirreconstruidos(Set<ResultadoUniversal> setResultado, List<TermRegVerbal> lstIrr, boolean infinitivo, boolean debug) {
 		Set<TermRegVerbal> setIrr = new HashSet<TermRegVerbal>(lstIrr);
 		Map<String, VerboBean> mapEntradasVerbo = new HashMap<String, VerboBean>();
 		for (Iterator<TermRegVerbal> it = setIrr.iterator(); it.hasNext();) {
@@ -159,10 +159,8 @@ public class AMVerbal {
 			setResultado.add(reu);
 		}
 		if (debug) {
-			System.out
-					.println("así queda el resultado después del paso 6 (agregar los temas que habíamos encontrado tempranamente) **********************");
-			amUtil.debugBeans(setResultado, new String[] { "formaAccidentada",
-					"formaCanonica", "temaPropuesto", "terminacion" });
+			System.out.println("así queda el resultado después del paso 6 (agregar los temas que habíamos encontrado tempranamente) **********************");
+			amUtil.debugBeans(setResultado, new String[] { "formaAccidentada", "formaCanonica", "temaPropuesto", "terminacion" });
 		}
 	}
 
@@ -178,10 +176,8 @@ public class AMVerbal {
 	 * nodos
 	 */
 
-	public <T extends TermRegVerbal> void buscaReconstruidaEnTablas(
-			Set<ResultadoUniversal> setResultado,
-			Map<TemaConPreps, HashSet<T>> mapTemasPropuestos, boolean pasivar,
-			boolean verboide, boolean debug) {
+	public <T extends TermRegVerbal> void buscaReconstruidaEnTablas( Set<ResultadoUniversal> setResultado,
+			Map<TemaConPreps, HashSet<T>> mapTemasPropuestos, boolean pasivar, boolean verboide, boolean debug) {
 		Set<TemaConPreps> keySet = mapTemasPropuestos.keySet();
 		StringBuffer sbDebug = new StringBuffer();
 		for (Iterator<TemaConPreps> it = keySet.iterator(); it.hasNext();) {
@@ -263,13 +259,11 @@ public class AMVerbal {
 	 * @param formaOriginal
 	 * @param regDesinencia
 	 */
-	public boolean silabaAcentoAceptables(String formaOriginal,
-			TermRegVerbal beanDesinencia,
-			Map<Object[], TemaConPreps[]> cacheExtraccionPrefijos,
-			AACacheable cacheAA) {
+	public boolean silabaAcentoAceptables(String formaOriginal, TermRegVerbal beanDesinencia,
+			Map<Object[], TemaConPreps[]> cacheExtraccionPrefijos, AACacheable cacheAA) {
 		AnalisisAcento aaOrig = cacheAA.getAnalisisAcento(formaOriginal);
-		Silaba silaba =  (Silaba) OpBeans.getPropiedadObject(beanDesinencia, "silaba");
-		Acento acento = (Acento) OpBeans.getPropiedadObject(beanDesinencia, "acento");
+		Silaba silaba =  beanDesinencia.getSilaba();
+		Acento acento =  beanDesinencia.getAcento();
 
 		if (silaba == null)
 			return true;
@@ -355,6 +349,7 @@ public class AMVerbal {
 		// le come todo, y no queda letra unitiva
 		if (letraUnitiva != null) {
 			T aAgregar = (T) regW.clona();
+			logger.info("desarrollaTipoW clonado.terminacion" + aAgregar.getTerminacion());
 			// para épsilon y iota se generan nodos sin importar el aspecto
 			if (letraUnitiva.getLetraBase() == cUpsilonCorta
 					|| letraUnitiva.getLetraBase() == cUpsilonDieresisCorta
@@ -399,17 +394,18 @@ public class AMVerbal {
 	 * TIPO_DESINENCIA, uno o más tipos de verbo extendido.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends TermRegVerbal> void extiendeTipos(Set<T> setOriginal,
-			Set<T> setSiguiente, boolean debug) {
+	public <T extends TermRegVerbal> void extiendeTipos(Set<T> setOriginal, Set<T> setSiguiente, boolean debug) {
 		for (Iterator<T> it = setOriginal.iterator(); it.hasNext();) {
 			T trv = it.next();
+			logger.info("trv.terminacion=" + trv.getTerminacion());
 			trv.setTerminacion(OpPalabras.strBetaACompleto(trv.getTerminacion()));
-			// TermRegVerbo trvNuevo = (TermRegVerbo) OpBeans.clona(trv);
+			// TermRegVerbo trvNuevo = (TermRegVerbo) trv.clona();
 			String formaOriginal = trv.getFormaOriginal();
 			CarPos letraUnitiva = CarPos.getCarPos(formaOriginal,
 					formaOriginal.length() - 1 - trv.getTerminacion().length());
 			T trvNuevo = null;
 
+			
 			int tipoDesinencia = trv.getTipoDesinencia();
 			TiempoOAspecto toa = trv.getTiempoOAspecto();
 			Tiempo tiempo = TransformadorTiempoAspecto.comoTiempo(toa);
@@ -418,7 +414,8 @@ public class AMVerbal {
 			// los tipos de desinencia establecidos)
 			// sigo de largo a la espera de la búsqueda por temas
 			if (tipoDesinencia < 0) {
-				trvNuevo = (T) OpBeans.clona(trv);
+				trvNuevo = (T) trv.clona();
+				logger.info("1 clonado.terminacion" + trvNuevo.getTerminacion());
 				trvNuevo.setTipoVerboExtendido(tipoDesinencia);
 				setSiguiente.add(trvNuevo);
 				continue;
@@ -428,7 +425,8 @@ public class AMVerbal {
 			// búsqueda de temas
 			FuerteDebil fuerte = trv.getFuerte();
 			if (tiempo == Tiempo.Aoristo && fuerte == FuerteDebil.Fuerte) {
-				trvNuevo = (T) OpBeans.clona(trv);
+				trvNuevo = (T) trv.clona();
+				logger.info("2 clonado.terminacion" + trvNuevo.getTerminacion());
 				trvNuevo.setTipoVerboExtendido(tipoDesinencia);
 				setSiguiente.add(trvNuevo);
 				continue;
@@ -436,11 +434,13 @@ public class AMVerbal {
 
 			// mi, numi
 			if (tipoDesinencia == TipoVerbo.NoHojas.MI_PROPIAMENTE) {
-				trvNuevo = (T) OpBeans.clona(trv);
+				trvNuevo = (T) trv.clona();
+				logger.info("3 clonado.terminacion" + trvNuevo.getTerminacion());
 				trvNuevo.setTipoVerboExtendido(TipoVerbo.MI_PROPIAMENTE_NORMAL);
 				setSiguiente.add(trvNuevo);
 			} else if (tipoDesinencia == TipoVerbo.NoHojas.NUMI) {
-				trvNuevo = (T) OpBeans.clona(trv);
+				trvNuevo = (T) trv.clona();
+				logger.info("4 clonado.terminacion" + trvNuevo.getTerminacion());
 				trvNuevo.setTipoVerboExtendido(TipoVerbo.NUMI_NORMAL);
 				setSiguiente.add(trvNuevo);
 			}
@@ -461,37 +461,41 @@ public class AMVerbal {
 			// representado en la lista de terminaciones_regulares)
 			// No agrego dental si es pasiva y la terminación no comienza con S,
 			// ya que es YEUSQ.., no YEUQ...
-			if (tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO
-					&& Tiempo.getInt(tiempo) > 2) {
+			if (tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO && Tiempo.getInt(tiempo) > 2) {
 				if (trv.getTerminacion().charAt(0) == CompLetras.cSigma
 						|| trv.getVoz() != Voz.Pasiva) {
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
+					logger.info("5 clonado.terminacion" + trvNuevo.getTerminacion());
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
+					logger.info("6 clonado.terminacion" + trvNuevo.getTerminacion());
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DELTA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
+					logger.info("7 clonado.terminacion" + trvNuevo.getTerminacion());
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.THETA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
+					logger.info("8 clonado.terminacion" + trvNuevo.getTerminacion());
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DOBLE_SIGMA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
+					logger.info("9 clonado.terminacion" + trvNuevo.getTerminacion());
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DOBLE_TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
+					logger.info("10 clonado.terminacion" + trvNuevo.getTerminacion());
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DZETA_NORMAL);
 					setSiguiente.add(trvNuevo);
 				}
 			}
 
 			// confectivo y prefectivo de líquidos
-			if (tiempo.compareTo(Tiempo.Futuro) >= 0
-					&& tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO) {
-				trvNuevo = (T) OpBeans.clona(trv);
-				trvNuevo.setTipoVerboExtendido(amUtil
-						.tiempoExtendidoLetra(letraUnitiva.getCaracter()));
+			if (tiempo.compareTo(Tiempo.Futuro) >= 0 && tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO) {
+				trvNuevo = (T) trv.clona();
+				logger.info("11 clonado.terminacion" + trvNuevo.getTerminacion());
+				trvNuevo.setTipoVerboExtendido(amUtil.tiempoExtendidoLetra(letraUnitiva.getCaracter()));
 				setSiguiente.add(trvNuevo);
 			}
 
@@ -501,45 +505,47 @@ public class AMVerbal {
 					&& (tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_GUTURALES
 							|| tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_LABIALES || tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_DENTALES)) {
 				if (tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_GUTURALES) {// guturales
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
+					logger.info("12 clonado.terminacion" + trvNuevo.getTerminacion());
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.GAMMA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
+					logger.info("13 clonado.terminacion" + trvNuevo.getTerminacion());
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.JI_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.KAPPA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DOBLE_SIGMA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DOBLE_TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
 				} else if (tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_LABIALES) {
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.PI_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.FI_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.BETA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.PI_TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
 				} else if (tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_DENTALES) {
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DELTA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.THETA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DZETA_NORMAL);
 					setSiguiente.add(trvNuevo);
 				}// infectivo de los consonánticos líquidos -- la terminación
@@ -548,12 +554,10 @@ public class AMVerbal {
 						&& tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO
 						&& letraUnitiva.esLiquida()
 						&& (tiempo == Tiempo.Presente | tiempo == Tiempo.Imperfecto)) {
-					trvNuevo = (T) OpBeans.clona(trv);
+					trvNuevo = (T) trv.clona();
 					trvNuevo.setTipoVerboExtendido(amUtil
 							.tiempoExtendidoLetra(letraUnitiva.getCaracter()));
-					trvNuevo.setTerminacion(new String(
-							new char[] { letraUnitiva.getCaracter() })
-							+ trv.getTerminacion());
+					trvNuevo.setTerminacion(new String(new char[] { letraUnitiva.getCaracter() })+ trv.getTerminacion());
 					if (formaOriginal.endsWith(trvNuevo.getTerminacion()))
 						setSiguiente.add(trvNuevo);
 				}
@@ -566,7 +570,8 @@ public class AMVerbal {
 			else if (tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_CONTRACTO_ALFA
 					|| tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_CONTRACTO_EPSILON
 					|| tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_CONTRACTO_OMICRON) {
-				trvNuevo = (T) OpBeans.clona(trv);
+				trvNuevo = (T) trv.clona();
+				logger.info("14 clonado.terminacion" + trvNuevo.getTerminacion());
 				switch (tipoDesinencia) {
 				case TipoVerbo.NoHojas.VOCALICO_CONTRACTO_ALFA:
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.VC_ALFA_NORMAL);
@@ -581,11 +586,10 @@ public class AMVerbal {
 				setSiguiente.add(trvNuevo);
 			}
 		}
+		logger.info("saliendo de extiende tipos, debug=" + debug);
 		if (debug) {
-			System.out
-					.println("el setsigiente después de 2 (expansión a tipo-verbo-extendido) **********************");
-			amUtil.debugSet(setSiguiente, new String[] { "FORMA_ORIGINAL",
-					"GEN_PROPUESTO", "NOM_PROPUESTO" });
+			System.out.println("el setsigiente después de 2 (expansión a tipo-verbo-extendido) **********************");
+			amUtil.debugSet(setSiguiente, new String[] { "FORMA_ORIGINAL","GEN_PROPUESTO", "NOM_PROPUESTO" });
 		}
 	}
 
@@ -938,7 +942,7 @@ public class AMVerbal {
 					lstResTemas, temaPropuesto, cacheAA);
 			for (int e = 0; e < lstResTemas.size(); e++) {
 				String formaRestaurada = lstResTemas.get(e);
-				T regNew = (T)OpBeans.clona(bean);
+				T regNew =  (T)bean.clona();
 				((TieneTemaPropuesto)regNew).setTemaPropuesto(formaRestaurada);
 				setSiguiente.add((T) regNew);
 			}
@@ -1124,7 +1128,7 @@ public class AMVerbal {
 					}
 					// fin del segmento comprobador
 					if (comparacionAceptable(regTemas, irrVerbo, sbDebug, debug)) {
-						T nuevoReconstruido = (T) OpBeans.clona(regTemas);
+						T nuevoReconstruido = (T) regTemas.clona(); 
 						if (!esVerboide){
 							((TermRegVerbo)nuevoReconstruido).setPersona(((TermRegVerbo)regTemas).getPersona());
 						}
@@ -1346,44 +1350,50 @@ public class AMVerbal {
 	 * @param setSiguiente
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends TermRegVerbal> void averiguaPreposiciones(
-			Collection<T> setOriginal, Set<T> setSiguiente,
-			int nivelPreposiciones,
-			Map<Object[], TemaConPreps[]> cacheExtraccionPrefijos, boolean debug) {
+	public <T extends TermRegVerbal> void averiguaPreposiciones(Collection<T> setOriginal, Set<T> setSiguiente,
+			int nivelPreposiciones, Map<Object[], TemaConPreps[]> cacheExtraccionPrefijos, boolean debug) {
+	    
+	    logger.info("entrando en averiguaPreposiciones");
 		// si el nivel de extractorPrefijos es 0, simplemente copio el set
 		if (nivelPreposiciones == ExtractorPrefijos.NADA) {
 			setSiguiente.addAll(setOriginal);
 			return;
 		}
-
+        logger.info("hito 1");
 		for (TermRegVerbal trv : setOriginal) {
 			String formaOriginal = trv.getFormaOriginal();
 
 			String terminacion = trv.getTerminacion();
-			TemaConPreps[] arrTcp = extractorPrefijos.averiguaPrefijos(
-					formaOriginal, terminacion.length(),
-					cacheExtraccionPrefijos);
-
+			logger.info("hito 1.1, ep=" + extractorPrefijos + " terminacion=" + terminacion);
+			TemaConPreps[] arrTcp = extractorPrefijos.averiguaPrefijos(formaOriginal, terminacion.length(), cacheExtraccionPrefijos);
+            logger.info("hito 1.2");
 			for (int i = 0; i < arrTcp.length; i++) {
-				T trvNuevo = (T) OpBeans.clona(trv);
+			    logger.info("hito 1.2.1");
+				T trvNuevo = (T) trv.clona();
+				logger.info("hito 1.2.2");
 				trvNuevo.setFormaOriginalCompuesta(formaOriginal);
+				logger.info("hito 1.2.3");
 
 				// les caía en la preposición sean incluidas
 				trvNuevo.setFormaOriginal(arrTcp[i].resto);
 				List<String> preposiciones = new ArrayList<String>();
+				logger.info("hito 1.2.4");
 				for (int e = 0; e < arrTcp[i].preps.size(); e++) {
+				    logger.info("hito 1.2.4.1");
 					preposiciones.add(arrTcp[i].preps.get(e));
+					logger.info("hito 1.2.4.2");
 				}
-
+                logger.info("hito 1.2.5");
 				trvNuevo.setPreposiciones(preposiciones);
+				logger.info("hito 1.2.6");
 				setSiguiente.add(trvNuevo);
+				logger.info("hito 1.2.7");
 			}
 		}
+		logger.info("saliendo de averiguaPreposiciones");
 		if (debug) {
-			System.out
-					.println("el set siguiente después de la extracción de extractorPrefijos  ***********************************");
-			amUtil.debugBeans(setSiguiente, new String[] { "formaOriginal",
-					"formaOriginalCompuesta", "terminacion" });
+			System.out.println("el set siguiente después de la extracción de extractorPrefijos  ***********************************");
+			amUtil.debugBeans(setSiguiente, new String[] { "formaOriginal","formaOriginalCompuesta", "terminacion" });
 		}
 	}
 

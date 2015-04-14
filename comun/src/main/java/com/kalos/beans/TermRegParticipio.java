@@ -4,7 +4,10 @@
 
 package com.kalos.beans;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import com.kalos.enumeraciones.Acento;
 import com.kalos.enumeraciones.Aspecto;
@@ -14,6 +17,7 @@ import com.kalos.enumeraciones.Genero;
 import com.kalos.enumeraciones.Numero;
 import com.kalos.enumeraciones.OrigenTema;
 import com.kalos.enumeraciones.Particularidad;
+import com.kalos.enumeraciones.Silaba;
 import com.kalos.enumeraciones.Voz;
 import com.kalos.operaciones.OpBeans;
 
@@ -21,6 +25,8 @@ import com.kalos.operaciones.OpBeans;
 //            G, T
 
 public class TermRegParticipio implements TermRegNominal, TermRegVerbal, TieneJuego, Verboide {
+    
+    private Logger logger=Logger.getLogger(this.getClass().getName());
 
     public int hashCode() {
         if (hash == null)
@@ -185,11 +191,11 @@ public class TermRegParticipio implements TermRegNominal, TermRegVerbal, TieneJu
         hash = null;
     }
 
-    public int getSilaba() {
+    public Silaba getSilaba() {
         return silaba;
     }
 
-    public void setSilaba(int i1) {
+    public void setSilaba(Silaba i1) {
         silaba = i1;
         hash = null;
     }
@@ -458,7 +464,51 @@ public class TermRegParticipio implements TermRegNominal, TermRegVerbal, TieneJu
     }
 
     public TermRegParticipio clona() {
-        return (TermRegParticipio) OpBeans.clona(this);
+        TermRegParticipio nuevo= new TermRegParticipio();
+        nuevo.setAcento(this.acento);
+        nuevo.setAcentoConcuerda(this.acentoConcuerda);
+        nuevo.setAspecto(this.aspecto);
+        nuevo.setCaso(this.caso);
+        nuevo.setCompuesto(this.compuesto);
+        nuevo.setContraccionComedora(this.contraccionComedora);
+        nuevo.setExContraccion(this.exContraccion);
+        nuevo.setFormaADestransformar(this.formaADestransformar);
+        nuevo.setFormaCanonica(this.formaCanonica);
+        nuevo.setFormaDestransformada(this.formaDestransformada);
+        nuevo.setFormaOriginal(this.formaOriginal);
+        nuevo.setFormaOriginalCompuesta(this.formaOriginalCompuesta);
+        nuevo.setFuerte(this.fuerte);
+        nuevo.setGenero(this.genero);
+        nuevo.setGenitivoPropuesto(this.genitivoPropuesto);
+        nuevo.setIdTipoSustantivo(this.idTipoSustantivo);
+        nuevo.setIdVerbo(this.idVerbo);
+        nuevo.setIdVerboCompuesto(this.idVerboCompuesto);
+        nuevo.setJuego(this.juego);
+        nuevo.setNominativoPropuesto(this.nominativoPropuesto);
+        nuevo.setNumero(this.numero);
+        nuevo.setOrigenTema(this.origenTema);
+        nuevo.setParticularidad(this.particularidad);
+        nuevo.setPosicionConcuerda(this.posicionConcuerda);
+        List<String> newPreps = new ArrayList<>();
+        for (String prep : this.getPreposiciones()) {
+            newPreps.add(prep);
+        }
+        nuevo.setPreposiciones(newPreps);
+        nuevo.setPudeAcento(this.puedeAcento);
+        nuevo.setRegExDesinencia(this.regexDesinencia);
+        nuevo.setSilaba(this.silaba);
+        nuevo.setSubindice(this.subindice);
+        nuevo.setTemaPropuesto(this.temaPropuesto);
+        nuevo.setTerminacion(this.terminacion);
+        nuevo.setTerminacionPendienteRevision(this.terminacionPendienteRevision);
+        nuevo.setTerminacionVerbalizada(this.terminacionVerbalizada);
+        nuevo.setTipoDesinencia(this.tipoDesinencia);
+        nuevo.setTiposHoja(this.tiposHoja);
+        nuevo.setTipoSustantivo(this.tipoSustantivo);
+        nuevo.setTipoVerbo(this.tipoVerbo);
+        nuevo.setTipoVerboExtendido(this.tipoVerboExtendido);
+        nuevo.setVoz(this.voz);
+        return nuevo;
     }
 
     private int tipoSustantivo;
@@ -472,7 +522,7 @@ public class TermRegParticipio implements TermRegNominal, TermRegVerbal, TieneJu
     private int posicionConcuerda;
     private Acento acento;
     private String regexDesinencia;
-    private int silaba;
+    private Silaba silaba;
     private String formaOriginal;
     private TermRegNominal terminacionPendienteRevision;
     private String nominativoPropuesto;

@@ -4,7 +4,10 @@
 
 package com.kalos.beans;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 
 import com.kalos.enumeraciones.Acento;
 import com.kalos.enumeraciones.Aumento;
@@ -18,12 +21,13 @@ import com.kalos.enumeraciones.Silaba;
 import com.kalos.enumeraciones.Tiempo;
 import com.kalos.enumeraciones.TiempoOAspecto;
 import com.kalos.enumeraciones.Voz;
-import com.kalos.operaciones.OpBeans;
 
 //Referenced classes of package kalos.K:
 //         L
 
 public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto, TieneJuego {
+    
+    private Logger logger=Logger.getLogger(this.getClass().getName());
 
 	public Aumento getAumento() {
 		return aumento;
@@ -73,13 +77,6 @@ public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto, TieneJue
 		modo = p;
 	}
 
-	public Particularidad getPartic() {
-		return partic;
-	}
-
-	public void setPartic(Particularidad x) {
-		partic = x;
-	}
 
 	public Propagacion getPropagacion() {
 		return propagacion;
@@ -129,13 +126,7 @@ public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto, TieneJue
 		tiempoJuego = j;
 	}
 
-	public String getVerboId() {
-		return verboId;
-	}
 
-	public void setVerboId(String s) {
-		verboId = s;
-	}
 
 	public Voz getVoz() {
 		return voz;
@@ -192,7 +183,6 @@ public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto, TieneJue
 				+ ((idVerboCompuesto == null) ? 0 : idVerboCompuesto.hashCode());
 		result = prime * result + juego;
 		result = prime * result + ((modo == null) ? 0 : modo.hashCode());
-		result = prime * result + ((partic == null) ? 0 : partic.hashCode());
 		result = prime * result
 				+ ((particularidad == null) ? 0 : particularidad.hashCode());
 		result = prime * result + (pats ? 1231 : 1237);
@@ -215,7 +205,6 @@ public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto, TieneJue
 				+ ((tiempoJuego == null) ? 0 : tiempoJuego.hashCode());
 		result = prime * result + tipoDesinencia;
 		result = prime * result + tipoVerboExtendido;
-		result = prime * result + ((verboId == null) ? 0 : verboId.hashCode());
 		result = prime * result + ((voz == null) ? 0 : voz.hashCode());
 		result = prime * result
 				+ ((vozJuego == null) ? 0 : vozJuego.hashCode());
@@ -280,8 +269,6 @@ public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto, TieneJue
 			return false;
 		if (modo != other.modo)
 			return false;
-		if (partic != other.partic)
-			return false;
 		if (particularidad != other.particularidad)
 			return false;
 		if (pats != other.pats)
@@ -329,11 +316,6 @@ public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto, TieneJue
 			return false;
 		if (tipoVerboExtendido != other.tipoVerboExtendido)
 			return false;
-		if (verboId == null) {
-			if (other.verboId != null)
-				return false;
-		} else if (!verboId.equals(other.verboId))
-			return false;
 		if (voz != other.voz)
 			return false;
 		if (vozJuego != other.vozJuego)
@@ -350,9 +332,7 @@ public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto, TieneJue
 	}
 
 	private String id;
-	private String verboId;
 	private String tema;
-	private Particularidad partic;
 	private int subPart;
 	private Modo modo;
 	private Tiempo tiempo;
@@ -519,9 +499,44 @@ public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto, TieneJue
 
 	@Override
 	public TermRegVerbo clona() {
-
-		TermRegVerbo copia = (TermRegVerbo) OpBeans.clona(this);
-		return copia;
+	    TermRegVerbo n = new TermRegVerbo();
+	    n.setAcento(this.acento);
+	    n.setAumento(this.aumento);
+	    n.setCompuesto(this.compuesto);
+	    n.setContraccion(this.contraccion);
+	    n.setFormaADestransformar(formaADestransformar);
+	    n.setFormaDestransformada(formaDestransformada);
+	    n.setFormaOriginal(formaOriginal);
+	    n.setFormaOriginalCompuesta(formaOriginalCompuesta);
+	    n.setFuerte(fuerte);
+	    n.setId(id);
+        n.setIdVerbo(idVerbo);
+        n.setIdVerboCompuesto(idVerboCompuesto);
+        n.setJuego(juego);
+        n.setModo(modo);
+        n.setParticularidad(particularidad);
+        n.setPats(pats);
+        n.setPersona(persona);
+        List<String> newPreps = new ArrayList<>();
+        for (String prep : this.getPreposiciones()) {
+            newPreps.add(prep);
+        }
+        n.setPreposiciones(newPreps);
+        n.setPropagacion(propagacion);
+        n.setReduplicacion(reduplicacion);
+        n.setRegEx(this.regEx);
+        n.setSilaba(silaba);
+        n.setSubPart(subPart);
+        n.setTema(tema);
+        n.setTemaPropuesto(temaPropuesto);
+        n.setTerminacion(terminacion);
+        n.setTiempo(tiempo);
+        n.setTiempoJuego(tiempoJuego);
+        n.setTipoDesinencia(tipoDesinencia);
+        n.setTipoVerboExtendido(tipoVerboExtendido);
+        n.setVoz(voz);
+        n.setVozJuego(vozJuego);
+        return n;
 	}
 
 }

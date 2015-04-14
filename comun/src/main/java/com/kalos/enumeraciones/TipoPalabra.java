@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
-
 import com.kalos.recursos.CadenasEnum;
 
 /**

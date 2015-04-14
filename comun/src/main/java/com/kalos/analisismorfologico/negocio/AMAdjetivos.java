@@ -34,6 +34,7 @@ import com.kalos.enumeraciones.Caso;
 import com.kalos.enumeraciones.Genero;
 import com.kalos.enumeraciones.Numero;
 import com.kalos.enumeraciones.Particularidad;
+import com.kalos.enumeraciones.Silaba;
 import com.kalos.enumeraciones.TipoPalabra;
 import com.kalos.flexion.declinacion.DeclinaAdjetivos;
 import com.kalos.flexion.declinacion.OcAdjetivo;
@@ -297,7 +298,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
             
             
             if (esPlural && ((esNomVoc && tipo==45))|| (esGenitivo && tipo==1) ){
-                TermRegAdjetivo copia=(TermRegAdjetivo)OpBeans.clona(nuevoTra);
+                TermRegAdjetivo copia= nuevoTra.clona();
                 nuevoTra.setTerminacionPendienteRevision(copia);
                 if (esNomVoc){
                 	nuevoTra.setTransformadoAMasculino(true);
@@ -316,7 +317,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
                 	nuevoTra.setTiposHoja("-101-100-75-119-118-106-107-49-110-111-");
                 	nuevoTra.setTipoSustantivo(2);
                 	nuevoTra.setPosicionConcuerda(1);
-                	nuevoTra.setSilaba(0);
+                	nuevoTra.setSilaba(Silaba.getEnum(0));
                 }
             }
         }

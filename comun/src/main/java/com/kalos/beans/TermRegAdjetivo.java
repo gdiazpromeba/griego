@@ -52,7 +52,31 @@ public class TermRegAdjetivo extends TermRegSustantivo {
     }
     
     
-
+    public TermRegAdjetivo clona(){
+        TermRegAdjetivo nuevo = new TermRegAdjetivo();
+        nuevo.setAcento(getAcento());
+        nuevo.setAcentoConcuerda(getAcentoConcuerda());
+        nuevo.setAceptaDieresis(isAceptaDieresis());
+        nuevo.setCaso(getCaso());
+        nuevo.setExContraccion(isExContraccion());
+        nuevo.setFormaOriginal(getFormaOriginal());
+        nuevo.setGenitivoPropuesto(getGenitivoPropuesto());
+        nuevo.setIdTipoSustantivo(getIdTipoSustantivo());
+        nuevo.setNominativoPropuesto(getNominativoPropuesto());
+        nuevo.setNumero(getNumero());
+        nuevo.setOrigenTema(getOrigenTema());
+        nuevo.setPosicionConcuerda(getPosicionConcuerda());
+        nuevo.setRegExDesinencia(getRegExDesinencia());
+        nuevo.setRegexDieresis(getRegexDieresis());
+        nuevo.setSilaba(getSilaba());
+        nuevo.setSubindice(getSubindice());
+        nuevo.setTerminacion(getTerminacion());
+        nuevo.setTerminacionPendienteRevision(getTerminacionPendienteRevision());
+        nuevo.setTiposHoja(getTiposHoja());
+        nuevo.setTipoSustantivo(getTipoSustantivo());
+        nuevo.setTransformadoAMasculino(transformadoAMasculino);
+        return nuevo;
+    }
     
     /* (non-Javadoc)
    * @see com.kalos.beans.TermRegNominal#equals(java.lang.Object)

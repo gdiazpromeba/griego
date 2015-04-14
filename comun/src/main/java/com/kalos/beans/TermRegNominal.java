@@ -4,6 +4,7 @@ import com.kalos.enumeraciones.Acento;
 import com.kalos.enumeraciones.Caso;
 import com.kalos.enumeraciones.Numero;
 import com.kalos.enumeraciones.OrigenTema;
+import com.kalos.enumeraciones.Silaba;
 
 public interface TermRegNominal {
 
@@ -100,12 +101,12 @@ public interface TermRegNominal {
 	/**
 	 * @return Returns the silaba.
 	 */
-	int getSilaba();
+	Silaba getSilaba();
 
 	/**
 	 * @param silaba The silaba to set.
 	 */
-	void setSilaba(int silaba);
+	void setSilaba(Silaba silaba);
 
 	/**
 	 * @return Returns the subindice.

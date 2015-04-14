@@ -62,7 +62,7 @@ public class ObjYDest {
 	
 	
 	public ObjYDest clona(){
-	    TermRegVerbal nuevo=(TermRegVerbal)OpBeans.clona(registro);
+	    TermRegVerbal nuevo=registro.clona(); 
 	    DesTransformaciones nueva=destransformacion.clona();
 	    ObjYDest nuevaRegDest=new ObjYDest(nuevo, nueva);
 	    return nuevaRegDest;

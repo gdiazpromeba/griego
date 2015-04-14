@@ -51,6 +51,12 @@ public enum Silaba  {
 			  throw new RuntimeException("no hay sílaba número " + silaba);
 		}
 	}
+	
+	public int getInt(){
+	    return Silaba.getInt(this);
+	}
+	
+	
       
 
       

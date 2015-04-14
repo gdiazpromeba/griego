@@ -17,10 +17,14 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.MethodUtils;
 import org.apache.log4j.Logger;
 
+import com.kalos.beans.TermRegVerbal;
+
 // Referenced classes of package kalos.G:
 //            I
 
 public class OpBeans {
+    
+    private static Logger logger=Logger.getLogger(OpBeans.class.getName());
 
 	public static String getId(Object obj) {
 		try {
@@ -49,17 +53,7 @@ public class OpBeans {
 		}
 	}
 
-	public static Object clona(Object obj) {
-		try {
-			// Object nueva =
-			// org.springframework.beans.BeanUtils.instantiateClass(obj.getClass());
-			// org.springframework.beans.BeanUtils.copyProperties(obj, nueva);
-			return BeanUtils.cloneBean(obj);
-			// return nueva;
-		} catch (Exception exception) {
-			throw new RuntimeException("error clonando bean");
-		}
-	}
+
 
 	public static Object getPropiedadObject(Object obj, String s) {
 		try {

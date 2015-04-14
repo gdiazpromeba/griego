@@ -8,6 +8,7 @@ import com.kalos.enumeraciones.Acento;
 import com.kalos.enumeraciones.Caso;
 import com.kalos.enumeraciones.Numero;
 import com.kalos.enumeraciones.OrigenTema;
+import com.kalos.enumeraciones.Silaba;
 
 // Referenced classes of package kalos.K:
 //            T
@@ -145,11 +146,11 @@ public class TermRegSustantivo implements TermRegNominal {
 		hashCodePropio = null;
 	}
 
-	public int getSilaba() {
+	public Silaba getSilaba() {
 		return silaba;
 	}
 
-	public void setSilaba(int i) {
+	public void setSilaba(Silaba i) {
 		silaba = i;
 		hashCodePropio = null;
 	}
@@ -248,7 +249,7 @@ public class TermRegSustantivo implements TermRegNominal {
 	private int posicionConcuerda;
 	private Acento acento;
 	private String regexDesinencia;
-	private int silaba;
+	private Silaba silaba;
 	private boolean aceptaDieresis;
 	private String regexDieresis;
 	private String formaOriginal;
@@ -256,4 +257,29 @@ public class TermRegSustantivo implements TermRegNominal {
 	private String nominativoPropuesto;
 	private String genitivoPropuesto;
 	protected Integer hashCodePropio;
+	
+	public TermRegSustantivo clona(){
+	    TermRegSustantivo nuevo = new TermRegSustantivo();
+	    nuevo.setAcento(this.acento);
+	    nuevo.setAcentoConcuerda(this.acentoConcuerda);
+	    nuevo.setAceptaDieresis(this.aceptaDieresis);
+	    nuevo.setCaso(this.caso);
+	    nuevo.setExContraccion(this.exContraccion);
+	    nuevo.setFormaOriginal(this.formaOriginal);
+	    nuevo.setGenitivoPropuesto(this.genitivoPropuesto);
+	    nuevo.setIdTipoSustantivo(this.idTipoSustantivo);
+	    nuevo.setNominativoPropuesto(this.nominativoPropuesto);
+	    nuevo.setNumero(this.numero);
+	    nuevo.setOrigenTema(this.origenTema);
+	    nuevo.setPosicionConcuerda(this.posicionConcuerda);
+	    nuevo.setRegExDesinencia(this.regexDesinencia);
+	    nuevo.setRegexDieresis(this.regexDieresis);
+	    nuevo.setSilaba(this.silaba);
+	    nuevo.setSubindice(this.subindice);
+	    nuevo.setTerminacion(this.terminacion);
+	    nuevo.setTerminacionPendienteRevision(this.terminacionPendienteRevision);
+	    nuevo.setTiposHoja(this.tiposHoja);
+	    nuevo.setTipoSustantivo(this.tipoSustantivo);
+	    return nuevo;
+	}
 }

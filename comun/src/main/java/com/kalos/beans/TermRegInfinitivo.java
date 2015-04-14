@@ -4,6 +4,7 @@
 
 package com.kalos.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.kalos.enumeraciones.Acento;
@@ -182,11 +183,11 @@ public class TermRegInfinitivo implements TermRegVerbal, TieneTemaPropuesto, Ver
 		hashCode = null;
 	}
 
-	public List getPreposiciones() {
+	public List<String> getPreposiciones() {
 		return preposiciones;
 	}
 
-	public void setPreposiciones(List list) {
+	public void setPreposiciones(List<String> list) {
 		preposiciones = list;
 		hashCode = null;
 	}
@@ -258,7 +259,33 @@ public class TermRegInfinitivo implements TermRegVerbal, TieneTemaPropuesto, Ver
 	}
 
 	public TermRegInfinitivo clona() {
-		return (TermRegInfinitivo) OpBeans.clona(this);
+	    TermRegInfinitivo n = new TermRegInfinitivo();
+	    n.setAcento(acento);
+	    n.setAspecto(aspecto);
+	    n.setCompuesto(compuesto);
+	    n.setContraccionGeneradora(contraccionGeneradora);
+	    n.setFormaADestransformar(formaADestransformar);
+	    n.setFormaDestransformada(formaDestransformada);
+	    n.setFormaOriginal(formaOriginal);
+	    n.setFormaOriginalCompuesta(formaOriginalCompuesta);
+	    n.setFuerte(fuerte);
+	    n.setIdVerbo(idVerbo);
+	    n.setIdVerboCompuesto(idVerboCompuesto);
+	    n.setParticularidad(particularidad);
+        List<String> newPreps = new ArrayList<>();
+        for (String prep : this.getPreposiciones()) {
+            newPreps.add(prep);
+        }
+        n.setPreposiciones(newPreps);
+        n.setRegEx(regEx);
+        n.setSilaba(silaba);
+        n.setTemaPropuesto(temaPropuesto);
+        n.setTerminacion(terminacion);
+        n.setTipoDesinencia(tipoDesinencia);
+        n.setTipoVerboExtendido(tipoVerboExtendido);
+        n.setVoz(voz);
+	    
+		return n;
 	}
 
 	private Voz voz;

@@ -75,48 +75,21 @@ en los respectivos directorios "target" -->
 		</java>
 	</target>
 	
-	<target name="runOfuscado">
+	<target name="runOfuscado" depends="compilacion, granJar, conBDYReportes, obfuscate" >
 		<java jar="work/condb/${jar.kalos.ofuscado}" dir="work/condb" fork="true">
 		</java>
 	</target>
 	
 
-	
-	<!-- ANT OBFUSCATE TASK --> 
-	<target name="obfuscate2" >
-	  <proguard
-	    allowaccessmodification="true"
-	    usemixedcaseclassnames="false"
-	    defaultpackage=""
-	    skipnonpubliclibraryclasses="false"
-	    printseeds="obfuscateseeds.txt"
-	    printusage="obfuscateusage.txt"
-	    printmapping="obfuscatemapping.txt">
-	 
-	    <!-- specify which jar files should be obfuscated -->
-	    <injar name="work/condb/${jar.kalos}"/>
 
-	    <!-- java libraries my java application depends on -->
-	    <libraryjar name="work/condb/lib/*.jar" />
-	 
-	    <!-- the output jar file that should be created with the obfuscated java class files -->
-	    <outjar name="work/condb/${jar.kalos.ofuscado}"/>
-	 
-	    <!-- don't obfuscate this method -->
-	    <keep name="com.kalos.iu.Comienzo">
-	      <method name="main"/>
-	    </keep>
-	 
-	  </proguard>
-	   
-	   
-	</target>	
 	
 	<target name="obfuscate" >
+		        <delete dir="work/tmp"/>
+		        <mkdir dir="work/tmp"/>
 
-	            <property name="obfuscate.absolute.dir" location="${out.absolute.dir}/proguard" />
-	            <property name="preobfuscate.jar.file"  value="${obfuscate.absolute.dir}/original.jar" />
-	            <property name="obfuscated.jar.file"    value="${obfuscate.absolute.dir}/obfuscated.jar" />
+	            <property name="obfuscate.absolute.dir" location="work/tmp" />
+	            <property name="preobfuscate.jar.file"  value="work/tmp/original.jar" />
+	            <property name="obfuscated.jar.file"    value="work/tmp/obfuscated.jar" />
 
 	             <!-- input for dex will be proguard's output -->
 	            <property name="out.dex.input.absolute.dir" value="${obfuscated.jar.file}" />
@@ -141,9 +114,9 @@ en los respectivos directorios "target" -->
 	                -outjars "work/condb/${jar.kalos.ofuscado}"
 	                -libraryjars "work/condb/lib/"
 	                -dump ${obfuscate.absolute.dir}/dump.txt
-	                -printseeds ${obfuscate.absolute.dir}/seeds.txt
-	                -printusage ${obfuscate.absolute.dir}/usage.txt
-	                -printmapping ${obfuscate.absolute.dir}/mapping.txt
+	                -printseeds work/tmp/seeds.txt
+	                -printusage work/tmp/usage.txt
+	                -printmapping work/tmp/mapping.txt
 	            </proguard>
 
 	</target>	

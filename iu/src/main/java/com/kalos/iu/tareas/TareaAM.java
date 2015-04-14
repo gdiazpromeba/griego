@@ -5,6 +5,8 @@ import java.util.HashSet;
 import com.kalos.analisismorfologico.negocio.AnalizadorMorfologico;
 import com.kalos.beans.ResultadoUniversal;
 import com.kalos.operaciones.AACacheable;
+import com.kalos.recursos.Configuracion;
+
 import foxtrot.Task;
 
 public class TareaAM extends Task {
@@ -22,7 +24,7 @@ public class TareaAM extends Task {
 
 	@Override
 	public Object run() throws Exception {
-		analizadorMorfologico.buscaCanonica(entradas, resultado, cacheAA, true, false);
+		analizadorMorfologico.buscaCanonica(entradas, resultado, cacheAA, true, Configuracion.isDebug());
 		return null;
 	}
 

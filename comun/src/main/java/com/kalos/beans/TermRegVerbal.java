@@ -2,8 +2,10 @@ package com.kalos.beans;
 
 import java.util.List;
 
+import com.kalos.enumeraciones.Acento;
 import com.kalos.enumeraciones.FuerteDebil;
 import com.kalos.enumeraciones.Particularidad;
+import com.kalos.enumeraciones.Silaba;
 import com.kalos.enumeraciones.TiempoOAspecto;
 import com.kalos.enumeraciones.Voz;
 
@@ -64,6 +66,14 @@ public interface TermRegVerbal {
 	void setIdVerboCompuesto(String valor);
 
 	String getIdVerboCompuesto();
+	
+    void setAcento(Acento val);
+    
+    Acento getAcento();	
 
 	TermRegVerbal clona();
+	
+	Silaba getSilaba();
+	
+	void setSilaba(Silaba val);
 }

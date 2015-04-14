@@ -469,7 +469,7 @@ public class AMParticipios implements AnalizadorMorfologico {
                 if (caso.equals(Caso.Nominativo)) {
                     //TODO: asumo que todos los nominativos reportados en IRR_PARTICIPIOS_ENTEROS tienen nom=voc, lo 
                     //cual no es consistente con representar un vocativo distinto (en -N) para el tipo 70
-                    ResultadoUniversal reuVoc = (ResultadoUniversal) OpBeans.clona(reu);
+                    ResultadoUniversal reuVoc = reu.clona();
                     reuVoc.setCaso(Caso.Vocativo);
                     resultados.add(reuVoc);
                 }
@@ -801,7 +801,7 @@ public class AMParticipios implements AnalizadorMorfologico {
                 int tamañoSubstraccion = OpPalabras.strBetaACompleto(tpb.getSubstraer()).length();
                 String agregar = tpb.getAgregar();
                 String agregarTema = tpb.getAgregarTema();
-                TermRegParticipio aAgregar = (TermRegParticipio) OpBeans.clona(reg);
+                TermRegParticipio aAgregar =  reg.clona();
                 aAgregar.setTipoVerboExtendido(tpb.getTipoVerbo());
 
                 //si "agregar" es lo que es <> nulo en la fila del TRANS_PARTICIPIO, el resultado intenta transformarse en canónica
@@ -919,7 +919,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 
                 int tamañoSubstraccion = OpPalabras.strBetaACompleto(regDm.getSubstraer()).length();
                 String agregarTema = regDm.getAgregarTema();
-                TermRegParticipio aAgregar = (TermRegParticipio) OpBeans.clona(reg);
+                TermRegParticipio aAgregar = reg.clona();
                 aAgregar.setTipoVerboExtendido(regDm.getTipoVerbo());
 
                 //si "agregarTema" es lo que es <> nulo en la fila del TRANS_PARTICIPIO, el resultado se suma a la lista de cosas 
@@ -1091,7 +1091,7 @@ public class AMParticipios implements AnalizadorMorfologico {
         Set<TermRegSustantivo> aBorrar = new HashSet<TermRegSustantivo>();
         nomGenDisponibles.clear();
         for (TermRegSustantivo reg : setOriginal) {
-            reg = (TermRegSustantivo) OpBeans.clona(reg);
+            reg = reg.clona() ;
 
             Caso caso = reg.getCaso();
             Numero numero = reg.getNumero();
@@ -1160,7 +1160,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 
             for (VerbalizadorBean regDm : dm) {
                 if (genitivo != null) {
-                    TermRegParticipio regAAgregar = (TermRegParticipio) OpBeans.clona(reg);
+                    TermRegParticipio regAAgregar = reg.clona();
                     regAAgregar.setVoz(regDm.getVoz());
                     regAAgregar.setAspecto(regDm.getAspecto());
                     regAAgregar.setFuerte(regDm.getFuerte());
@@ -1169,7 +1169,7 @@ public class AMParticipios implements AnalizadorMorfologico {
                     regAAgregar.setTerminacionVerbalizada(OpPalabras.strBetaACompleto(regDm.getTerminacionGenitivo()));
                     setSiguiente.add(regAAgregar);
                 } else if (nominativo != null) {
-                    TermRegParticipio regAAgregar = (TermRegParticipio) OpBeans.clona(reg);
+                    TermRegParticipio regAAgregar = reg.clona();
                     regAAgregar.setVoz(regDm.getVoz());
                     regAAgregar.setAspecto(regDm.getAspecto());
                     regAAgregar.setFuerte(regDm.getFuerte());
