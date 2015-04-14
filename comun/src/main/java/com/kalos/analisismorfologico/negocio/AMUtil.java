@@ -153,7 +153,7 @@ public class AMUtil {
                     break;
             }
         }
-        OpBeans.setPropiedad(reg, "temaPropuesto", tema.toString());
+        reg.setTemaPropuesto(tema.toString());
     }
 
     /**
@@ -610,8 +610,7 @@ public class AMUtil {
         }
         if (debug) {
             System.out.println("el set (original) después de agrupaTemasEnSet ***********************************");
-            debugSet(setOriginal, new String[] { "formaOriginalCompuesta", "formaADestransformar",
-                    "formaDestransformada" });
+            debugSet(setOriginal, new String[] { "formaOriginalCompuesta", "formaADestransformar","formaDestransformada" });
             debugMapTemas(mapTemasPropuestos);
         }
     }

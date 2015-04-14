@@ -9,10 +9,10 @@ comun/target/**
 mantenimiento/target/**
 kalos_abms/.project
 **/*.log
+**/*.log.*
 **/.project
 bibliotecas/**
 **/target/**
-comun/*.log
 datos/data/**
 setup/work
 

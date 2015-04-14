@@ -273,8 +273,10 @@ public class TermRegInfinitivo implements TermRegVerbal, TieneTemaPropuesto, Ver
 	    n.setIdVerboCompuesto(idVerboCompuesto);
 	    n.setParticularidad(particularidad);
         List<String> newPreps = new ArrayList<>();
-        for (String prep : this.getPreposiciones()) {
+        if (this.getPreposiciones()!=null){
+          for (String prep : this.getPreposiciones()) {
             newPreps.add(prep);
+          }
         }
         n.setPreposiciones(newPreps);
         n.setRegEx(regEx);

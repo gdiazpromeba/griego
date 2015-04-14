@@ -26,6 +26,10 @@ public interface TermRegVerbal {
 
 	String getTerminacion();
 
+	void setTemaPropuesto(String val);
+	
+	String getTemaPropuesto();
+	
 	void setTerminacion(String terminacion);
 
 	TiempoOAspecto getTiempoOAspecto();
@@ -42,6 +46,8 @@ public interface TermRegVerbal {
 	void setFormaADestransformar(String formaADestransformar);
 
 	void setFormaDestransformada(String formaDestransformada);
+	
+	String getFormaDestransformada();
 
 	void setPreposiciones(List<String> preposiciones);
 

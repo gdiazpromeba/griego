@@ -55,7 +55,7 @@ public class AMInfinitivos implements AnalizadorMorfologico {
 	List<ObjYDest> aBuscarPorTema = new ArrayList<ObjYDest>();
 	List<TermRegVerbal> localArrayList2 = new ArrayList<TermRegVerbal>();
 	paso1(setEntradas, setPaso1, cacheExtraccionPrefijos, cacheAA, debug);
-	//amUtil.conservaSolo(setPaso1, new String[]{"aspecto", "voz", "tipoDesinencia"}, new Object[]{Aspecto.Confectivo, Voz.Pasiva, 5});
+	//amUtil.conservaSolo(setPaso1, new String[]{"aspecto", "voz"}, new Object[]{Aspecto.Infectivo, Voz.Media});
 	this.amVerbal.extiendeTipos(setPaso1, termsRegInf, debug);
 	this.amVerbal.averiguaPreposiciones(termsRegInf, triDespuesPreps, 1, cacheExtraccionPrefijos, debug);
 	this.amUtil.incorporaADestransformar(triDespuesPreps, debug);
@@ -82,8 +82,7 @@ public class AMInfinitivos implements AnalizadorMorfologico {
 	if (debug) {
 	    GregorianCalendar localGregorianCalendar = new GregorianCalendar();
 	    localGregorianCalendar.setTimeInMillis(l3);
-	    System.out.println("tardó " + localGregorianCalendar.get(12) + " minutos " + localGregorianCalendar.get(13)
-		    + " segundos " + localGregorianCalendar.get(14) + " milisegundos");
+	    System.out.println("tardó " + localGregorianCalendar.get(12) + " minutos " + localGregorianCalendar.get(13) + " segundos " + localGregorianCalendar.get(14) + " milisegundos");
 	}
 	return l3;
     }

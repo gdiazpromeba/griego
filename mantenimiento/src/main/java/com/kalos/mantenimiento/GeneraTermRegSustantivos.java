@@ -39,6 +39,7 @@ import com.kalos.enumeraciones.AcentoConcuerda;
 import com.kalos.enumeraciones.Caso;
 import com.kalos.enumeraciones.Numero;
 import com.kalos.enumeraciones.PosicionConcuerda;
+import com.kalos.enumeraciones.Silaba;
 import com.kalos.operaciones.OpPalabras;
 
 import org.apache.log4j.Logger;
@@ -139,7 +140,7 @@ public class GeneraTermRegSustantivos {
 				String hc = hojasConcatenadas(ds.getTipoSustantivo());
 				trs.setTiposHoja(hc);
 				trs.setAcento(ds.getAcento());
-				trs.setSilaba(ds.getSilaba());
+				trs.setSilaba(Silaba.getEnum(ds.getSilaba()));
 				trs.setAcentoConcuerda(AcentoConcuerda.getInt(ds.getAcentoConcuerda()));
 				trs.setPosicionConcuerda(PosicionConcuerda.getInt(ds.getPosicionConcuerda()));
 				gerenteTermRegSustantivo.inserta(trs);

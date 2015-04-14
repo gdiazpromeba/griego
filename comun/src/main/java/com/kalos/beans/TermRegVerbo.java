@@ -27,7 +27,6 @@ import com.kalos.enumeraciones.Voz;
 
 public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto, TieneJuego {
     
-    private Logger logger=Logger.getLogger(this.getClass().getName());
 
 	public Aumento getAumento() {
 		return aumento;
@@ -518,8 +517,10 @@ public class TermRegVerbo implements TermRegVerbal, TieneTemaPropuesto, TieneJue
         n.setPats(pats);
         n.setPersona(persona);
         List<String> newPreps = new ArrayList<>();
-        for (String prep : this.getPreposiciones()) {
+        if (this.getPreposiciones()!=null){
+          for (String prep : this.getPreposiciones()) {
             newPreps.add(prep);
+          }
         }
         n.setPreposiciones(newPreps);
         n.setPropagacion(propagacion);

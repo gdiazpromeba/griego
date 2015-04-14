@@ -26,7 +26,6 @@ import com.kalos.operaciones.OpBeans;
 
 public class TermRegParticipio implements TermRegNominal, TermRegVerbal, TieneJuego, Verboide {
     
-    private Logger logger=Logger.getLogger(this.getClass().getName());
 
     public int hashCode() {
         if (hash == null)
@@ -490,8 +489,10 @@ public class TermRegParticipio implements TermRegNominal, TermRegVerbal, TieneJu
         nuevo.setParticularidad(this.particularidad);
         nuevo.setPosicionConcuerda(this.posicionConcuerda);
         List<String> newPreps = new ArrayList<>();
-        for (String prep : this.getPreposiciones()) {
+        if (this.getPreposiciones()!=null){
+          for (String prep : this.getPreposiciones()) {
             newPreps.add(prep);
+          }
         }
         nuevo.setPreposiciones(newPreps);
         nuevo.setPudeAcento(this.puedeAcento);

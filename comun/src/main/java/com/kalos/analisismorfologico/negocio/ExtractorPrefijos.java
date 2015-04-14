@@ -22,7 +22,6 @@ public class ExtractorPrefijos {
     public static final int TODOS_LOS_NODOS = 1;
     private GerenteSubstractorPrefijos gerenteSubstractorPrefijos;
     
-    private Logger logger=Logger.getLogger(this.getClass().getName());
 
     public GerenteSubstractorPrefijos getGerenteSubstractorPrefijos() {
         return this.gerenteSubstractorPrefijos;
@@ -33,9 +32,7 @@ public class ExtractorPrefijos {
     }
 
     public TemaConPreps[] averiguaPreposiciones(String paramString, int paramInt1, int paramInt2) {
-        logger.info("en averiguapPeposiciones, gerenteSubstractor=" + gerenteSubstractorPrefijos);
         ArbolPreposiciones arbol = creaArbol(new TemaConPreps(paramString), paramInt2);
-        logger.info("árbol creado=" + arbol);
         Object[] arrayOfObject;
         switch (paramInt1) {
             case 1:
@@ -53,18 +50,15 @@ public class ExtractorPrefijos {
             default:
                 return null;
         }
-        logger.info("saliendo de averiguaPreposiciones");
         return (TemaConPreps[]) Arrays.asList(arrayOfObject).toArray(new TemaConPreps[0]);
     }
 
     public TemaConPreps[] averiguaPrefijos(String paramString, int paramInt, Map<Object[], TemaConPreps[]> paramMap) {
-        logger.info("entrando en averiguaPrefijos");
         Object[] arrayOfObject = { paramString, Integer.valueOf(paramInt) };
         TemaConPreps[] arrayOfM = (TemaConPreps[]) paramMap.get(arrayOfObject);
         if (arrayOfM == null) {
             arrayOfM = averiguaPreposiciones(paramString, 1, paramInt);
         }
-        logger.info("saliendo de averiguaPrefijos");
         return arrayOfM;
     }
 
