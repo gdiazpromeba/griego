@@ -282,4 +282,67 @@ public class TermRegSustantivo implements TermRegNominal {
 	    nuevo.setTipoSustantivo(this.tipoSustantivo);
 	    return nuevo;
 	}
+	
+	/**
+	 * crea un bean TermRegParticipio, pasándole la información que puede
+	 * @return
+	 */
+	public TermRegParticipio aTermRegParticipio(){
+        TermRegParticipio nuevo = new TermRegParticipio();
+        nuevo.setAcento(this.acento);
+        nuevo.setAcentoConcuerda(this.acentoConcuerda);
+        
+        nuevo.setCaso(this.caso);
+        nuevo.setExContraccion(this.exContraccion);
+        
+        nuevo.setFormaOriginal(this.formaOriginal);
+        
+        nuevo.setGenitivoPropuesto(this.genitivoPropuesto);
+        nuevo.setIdTipoSustantivo(this.idTipoSustantivo);
+        
+        nuevo.setNominativoPropuesto(this.nominativoPropuesto);
+        nuevo.setNumero(this.numero);
+        
+        nuevo.setOrigenTema(this.origenTema);
+
+        nuevo.setPosicionConcuerda(this.posicionConcuerda);
+        
+        nuevo.setRegExDesinencia(this.regexDesinencia);
+
+        nuevo.setSilaba(this.silaba);
+        nuevo.setSubindice(this.subindice);
+        
+        nuevo.setTerminacion(this.terminacion);
+        nuevo.setTerminacionPendienteRevision(this.terminacionPendienteRevision);
+        
+        nuevo.setTiposHoja(this.tiposHoja);
+        nuevo.setTipoSustantivo(this.tipoSustantivo);
+        return nuevo;
+	    
+	}
+	
+    public TermRegAdjetivo aTermregAdjetivo(){
+        TermRegAdjetivo nuevo = new TermRegAdjetivo();
+        nuevo.setAcento(this.acento);
+        nuevo.setAcentoConcuerda(this.acentoConcuerda);
+        nuevo.setAceptaDieresis(this.aceptaDieresis);
+        nuevo.setCaso(this.caso);
+        nuevo.setExContraccion(this.exContraccion);
+        nuevo.setFormaOriginal(this.formaOriginal);
+        nuevo.setGenitivoPropuesto(this.genitivoPropuesto);
+        nuevo.setIdTipoSustantivo(this.idTipoSustantivo);
+        nuevo.setNominativoPropuesto(this.nominativoPropuesto);
+        nuevo.setNumero(this.numero);
+        nuevo.setOrigenTema(this.origenTema);
+        nuevo.setPosicionConcuerda(this.posicionConcuerda);
+        nuevo.setRegExDesinencia(this.regexDesinencia);
+        nuevo.setRegexDieresis(this.regexDieresis);
+        nuevo.setSilaba(this.silaba);
+        nuevo.setSubindice(this.subindice);
+        nuevo.setTerminacion(this.terminacion);
+        nuevo.setTerminacionPendienteRevision(this.terminacionPendienteRevision);
+        nuevo.setTiposHoja(this.tiposHoja);
+        nuevo.setTipoSustantivo(this.tipoSustantivo);
+        return nuevo;
+    }	
 }

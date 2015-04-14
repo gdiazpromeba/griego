@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.log4j.Logger;
 
 import com.kalos.beans.CubosTipoPartBean;
 import com.kalos.beans.IrrParticipioEntero;
@@ -164,50 +165,38 @@ public class AMParticipios implements AnalizadorMorfologico {
             setEntradas.add(entradas[i]);
             revisaIrrPartIndividuales(setResultado, entradas[i], debug);
         }
-
         amNominal.paso1(setEntradas, setPaso1, cacheAA, debug); //obtención de juegos caso-tiempo-tipos nominales posibles - según la  terminación
         //amUtil.conservaSolo(setPaso1, new String[] { "numero", "caso" }, new Object[] { Numero.Singular, Caso.Nominativo });
         //amUtil.conservaSolo(setPaso1, new String[]{ "caso", "numero", "tipoSustantivo"}, new Object[]{ Caso.Nominativo,  Numero.Singular, 46});
-
         filtraTiposPosibles(setPaso1, debug); //quita los tipos de sustantivo que no son de participio
-
+       
         revisaNomGen(setPaso1, nomGenDisponibles, debug); //revisa si las formas no son ya nominativos o genitivos
 
         amNominal.reconstruyeTemas(setPaso1, nomGenDisponibles, cacheAA, debug); //para transformar en nom o gen los que no lo son
 
         amNominal.validaContraTerminacionesPendientes(nomGenDisponibles, cacheAA, debug);
-
+ 
         nomGenDisponiblesParticipio = transformaNominalEnParticipio(nomGenDisponibles);
-
         //chequeo de IRR_PARTICIPIOS_ENTEROS
         revisaIrrParticipiosEnteros(nomGenDisponiblesParticipio, setResultado, debug);
-
         inyeccionCamposVerbales(nomGenDisponiblesParticipio, setPaso2, debug); //agrega los campos de carácter verbal (voz, aspecto, fuerte)
         //		amUtil.conservaSolo(setPaso2, new String[]{"aspecto"}, new Object[]{Aspecto.Perfectivo});
-
         filtraGeneroVozAspecto(setPaso2, debug);
-
         incorporaADestransformar(setPaso2, debug);
         amUtil.desTransformacionesTemas(setPaso2, setPaso3, aBuscarPorTema, debug); //des-reduplica los perfectivos
-
         List<ObjYDest> temasABuscar = new ArrayList<ObjYDest>(); //lista de registros conteniendo temas que se buscarán en IRR_VERBOS, más sus destransformaciones
         trataDescarteDestransformacion(aBuscarPorTema, temasABuscar, cacheAA, debug); //pasa los temas descartados por des-transformaciones por TRANS_PARTICIPIOS, y agrega el resultado a temasABuscar
         temaPropuestoACanonica(setPaso3, setConCanonicasPropuestas, temasABuscar, cacheAA, debug); //remplaza las terminaciones de nom. o gen. por las verbales
-
         List<TermRegParticipio> resultadosIrr = new ArrayList<TermRegParticipio>(); //lista que contendrá los registros con información agregada de PK de verbos por los temas  a buscar
         Map<String, List<IrrVerbo>> mapBusquedasHechas = new HashMap<String, List<IrrVerbo>>();
         amVerbal.encuentraTemasTemprano(temasABuscar, resultadosIrr, mapBusquedasHechas, debug);
-
         agregaResultadosIrr(setResultado, resultadosIrr, debug);
-
         comparaReconstruidosConTabla(setConCanonicasPropuestas, setResultado, false, debug); //busca dichas formas verbales en la tabla de verbos
         comparaReconstruidosConTabla(setConCanonicasPropuestas, setResultado, true, debug); //busca dichas formas verbales en la tabla de verbos
-
         amVerbal.pueblaCanonicasVerbos(setResultado);
         if (validaContraFlexion) {
             validaConFlexion(setResultado);
         }
-
         tiempoFinal = System.currentTimeMillis();
         lapsoEnMilis = tiempoFinal - tiempoInicial;
         if (debug) {
@@ -260,12 +249,7 @@ public class AMParticipios implements AnalizadorMorfologico {
         List<TermRegParticipio> listTrp = new ArrayList<TermRegParticipio>();
         for (TermRegSustantivo nominal : nodosNominal) {
             TermRegSustantivo trs = (TermRegSustantivo) nominal;
-            TermRegParticipio trp = new TermRegParticipio();
-            try {
-                BeanUtils.copyProperties(trp, trs);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            TermRegParticipio trp = trs.aTermRegParticipio();
             listTrp.add(trp);
         }
         return listTrp;
@@ -328,7 +312,6 @@ public class AMParticipios implements AnalizadorMorfologico {
             boolean casoGenSing = caso.equals(Caso.Genitivo) && numero.equals(Numero.Singular);
             boolean tieneNomPropuesto = regNomGen.getNominativoPropuesto() != null;
             boolean tieneGenPropuesto = regNomGen.getGenitivoPropuesto() != null;
-
             if (casoNomSing) {
                 nominativo = regNomGen.getFormaOriginal();
                 espirituNom = OpPalabras.getEspiritu(nominativo);
@@ -340,7 +323,6 @@ public class AMParticipios implements AnalizadorMorfologico {
             } else if (tieneGenPropuesto) {
                 genitivo = regNomGen.getGenitivoPropuesto();
             }
-
             List<IrrParticipioEntero> ipes = null;
             Espiritu espirituAConsiderar = null;
             if (nominativo != null) {
@@ -394,6 +376,7 @@ public class AMParticipios implements AnalizadorMorfologico {
                         }
                     }
                 } else {
+
                     //si el verbo es compuesto
                     String idCompuesto = gerenteVerbosCompuestos.seleccionaPorVerboSimpleYPreps(ipe.getVerboId(), ipe.getPreposiciones());
                     regDic = busquedasDic.get(idCompuesto);
@@ -441,12 +424,10 @@ public class AMParticipios implements AnalizadorMorfologico {
 
                 if (!hayUnCuboConGeneroCoincidente) {
                     if (debug) {
-                        sbDebug.append(" al registro siguiente: "
-                                + OpBeans.debugBean(regNomGen, new String[] { "TERMINACION", "FORMA_ORIGINAL" }));
+                        sbDebug.append(" al registro siguiente: "+ OpBeans.debugBean(regNomGen, new String[] { "TERMINACION", "FORMA_ORIGINAL" }));
                         sbDebug.append("   se le encontró el siguiente registro coincidente en forma en IRR_PARTICIPIOS_ENTEROS : "
                                 + OpBeans.debugBean(ipe, new String[] {}));
-                        sbDebug
-                                .append("   pero su género no coinicde con ninguna de las muestras que, para ese tipo de sustantivo, hay en CUBOS_TIPO_PART \n");
+                        sbDebug.append("   pero su género no coinicde con ninguna de las muestras que, para ese tipo de sustantivo, hay en CUBOS_TIPO_PART \n");
                     }
                     continue;
                 }
@@ -461,6 +442,7 @@ public class AMParticipios implements AnalizadorMorfologico {
                         idVerbo = idCompuesto;
                     }
                 }
+              
                 ResultadoUniversal reu = new ResultadoUniversal(TipoPalabra.Participio, idVerbo, null, particCanonica,
                         particIrr, voz, formaAccidentada, null, aspecto, fuerte, null, caso, generoIrr, numero, null,
                         null, formaCanonica, ipe.getPreposiciones(), idCompuesto);

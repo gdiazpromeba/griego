@@ -117,8 +117,8 @@ public class AMSustantivos implements AnalizadorMorfologico, ApplicationContextA
 	while (itRes2.hasNext()) {
 	    ResultadoUniversal res = itRes2.next();
 	    if (res.getFormaCanonica() == null) {
-		SustantivoBean locali = mapBeans.get(res.getId());
-		String nomOGen = OpBeans.primerCampoNoVacio(locali, new String[] { "nominativo", "genitivo" });
+		SustantivoBean subsBean = mapBeans.get(res.getId());
+		String nomOGen =  subsBean.primerCampoNoVacio(); 
 		nomOGen = OpPalabras.strBetaACompleto(nomOGen);
 		res.setFormaCanonica(nomOGen);
 	    }

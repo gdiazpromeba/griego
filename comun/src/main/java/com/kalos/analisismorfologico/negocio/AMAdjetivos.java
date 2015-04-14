@@ -44,6 +44,7 @@ import com.kalos.operaciones.OpBeans;
 import com.kalos.operaciones.OpPalabras;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 //import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -57,7 +58,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
     private GerenteIrrAdjetivosIndividuales gerenteIrrAdjetivosIndividuales;
     private DeclinaAdjetivos declinaAdjetivos;
     
-//    Logger logger=Logger.getLogger(this.getClass().getName());
+    Logger logger=Logger.getLogger(this.getClass().getName());
 
     /**
 	 * @param gerenteAdjetivos The gerenteAdjetivos to set.
@@ -90,25 +91,6 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
 	}
 	
 	
-	/**
-     * Punto de entrada de esta clase. La función tiene parámetros de entrada y
-     * de salida
-     * 
-     * @param entradas
-     *            las entradas
-     * @param setResultado
-     *            resultado final
-     * @param setPaso1
-     *            paso intermedio
-     * @param setPaso2
-     *            paso intermedio
-     * @param setPaso3
-     *            paso intermedio
-     * @param setPaso4
-     *            paso intermedio
-     * @param con
-     *            la conexion
-     */
 
     public long buscaCanonica(String[] entradas, Set<ResultadoUniversal> setResultado, AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
         cargaDependencias();
@@ -118,7 +100,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
 
         long tiempoInicial = System.currentTimeMillis();
         Set<String> setEntradas = new HashSet<String>(Arrays.asList(entradas));
-
+        logger.info("AMAdjetivos hito 1");
         //obtención de uegos voz-modo-tiempo-persona posibles según terminación
         amNominal.paso1(setEntradas, setPaso1, cacheAA, debug);
         amNominal.corrigePluralizados(setPaso1);
@@ -199,7 +181,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
     	for(Iterator<ResultadoUniversal> it=reus.iterator(); it.hasNext(); ){
     		ResultadoUniversal reu=it.next();
     		AdjetivoBean ea=mapaEntradas.get(reu.getId());
-    		String canonica=OpBeans.primerCampoNoVacio(ea, new String[]{"masculino", "mascFem", "femenino", "neutro"});
+    		String canonica= ea.primerCampoNoVacio();
     		canonica=OpPalabras.strBetaACompleto(canonica);
     		reu.setFormaCanonica(canonica);
     	}
@@ -284,13 +266,10 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
     private Set<TermRegAdjetivo> trataFemenino(Set<TermRegSustantivo> terminaciones, boolean debug) {
     	Set<TermRegAdjetivo> resultado = new HashSet<TermRegAdjetivo>();
         for (TermRegSustantivo trs : terminaciones) {
-            TermRegAdjetivo tra = new TermRegAdjetivo();
-            OpBeans.copiaPropiedades(tra, trs);
+            TermRegAdjetivo tra = trs.aTermregAdjetivo();
             resultado.add(tra);
             //ahora hace una copia que modifica y agrega el el caso de los femeninos con acento raro
-//            tra= (TermRegAdjetivo)OpBeans.clona(tra);
-            TermRegAdjetivo nuevoTra=new TermRegAdjetivo(); 
-            OpBeans.copiaPropiedades(nuevoTra, tra);
+            TermRegAdjetivo nuevoTra= trs.aTermregAdjetivo(); 
             boolean esPlural=nuevoTra.getNumero().equals(Numero.Plural);
             boolean esNomVoc=nuevoTra.getCaso().equals(Caso.Nominativo)  || nuevoTra.getCaso().equals(Caso.Vocativo) ;
             boolean esGenitivo=nuevoTra.getCaso().equals(Caso.Genitivo);

@@ -136,6 +136,15 @@ public class SustantivoBean implements ISignificados, NomGenTipo{
 	public Map<Idioma, Significado> getSignificados() {
 		return significados;
 	}
+	
+	public String primerCampoNoVacio(){
+	    if (this.nominativo!=null){
+	      return nominativo;  
+	    }else if (this.genitivo!=null){
+	        return this.genitivo;
+	    }
+	    return null;
+	}
 
 
 

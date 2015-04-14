@@ -59,7 +59,7 @@ public class AMVerbos implements AnalizadorMorfologico{
 	
 	
 
-	private Logger logger=Logger.getLogger(this.getClass().getName());
+	//private Logger logger=Logger.getLogger(this.getClass().getName());
 	
 
 	/**
@@ -179,7 +179,6 @@ public class AMVerbos implements AnalizadorMorfologico{
 			String entradaBetaDesacentuada=OpPalabras.strCompletoABeta(OpPalabras.desacentuar(entrada));
 			List<TermRegVerbo> terminaciones=gerenteTermRegVerbo.seleccionaPorTerminacion(entradaBetaDesacentuada);
 		    for (TermRegVerbo trv: terminaciones){
-		        logger.info(" en paso1 de AMVerbos, terminacion=" + trv.getTerminacion());
 				String regex=trv.getRegEx();
 				if (regex!=null && !entradaBeta.matches(regex)){
 					if (debug){
