@@ -28,23 +28,7 @@ public class GerenteAdverbiosImpl implements GerenteAdverbios{
 
 
 
-    public void ordena(String letra){
-        List<String> idsetra = adverbiosDAO.seleccionaPorLetra(letra);
-        List<AdverbioBean> todosLetra=adverbiosDAO.getRegistros(idsetra);
-        String[] camposaABeta=new String[]{"adverbio"};
-        OpBeans.pasaDeBetaACompleto(todosLetra, camposaABeta);
-        Collections.sort(todosLetra, new ComparadorBeansGriegos(camposaABeta));
-        OpBeans.pasaDeCompletoABeta(todosLetra, camposaABeta);
-        int contador = 10;
-        for (AdverbioBean bean : todosLetra) {
-            String id=bean.getId();
-            adverbiosDAO.modificaCodigoIndividual(contador, id);
-            contador += 10;
-        }    
-     }
-    
-
-	/**
+  	/**
 	 * @return Returns the gerenteSignificados.
 	 */
 	public GerenteSignificados getGerenteSignificados() {

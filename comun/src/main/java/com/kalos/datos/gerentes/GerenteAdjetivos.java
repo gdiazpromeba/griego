@@ -15,8 +15,6 @@ public interface GerenteAdjetivos {
 
     public abstract void modificaVarios(List<AdjetivoBean> list);
 
-    public abstract void ordena(String s);
-
     public abstract List<String> seleccionaPartics(String s);
 
     public abstract List<AdjetivoBean> seleccionaInvariables(String s);

@@ -58,7 +58,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
     private GerenteIrrAdjetivosIndividuales gerenteIrrAdjetivosIndividuales;
     private DeclinaAdjetivos declinaAdjetivos;
     
-    Logger logger=Logger.getLogger(this.getClass().getName());
+    //Logger logger=Logger.getLogger(this.getClass().getName());
 
     /**
 	 * @param gerenteAdjetivos The gerenteAdjetivos to set.
@@ -100,7 +100,6 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
 
         long tiempoInicial = System.currentTimeMillis();
         Set<String> setEntradas = new HashSet<String>(Arrays.asList(entradas));
-        logger.info("AMAdjetivos hito 1");
         //obtención de uegos voz-modo-tiempo-persona posibles según terminación
         amNominal.paso1(setEntradas, setPaso1, cacheAA, debug);
         amNominal.corrigePluralizados(setPaso1);
@@ -316,8 +315,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
      * @param setOriginal
      * @param setResultados
      */
-    private void buscaNomGenReconstruidos(Set<TermRegAdjetivo> setOriginal, Set<ResultadoUniversal> setResultados,
-            boolean debug) {
+    private void buscaNomGenReconstruidos(Set<TermRegAdjetivo> setOriginal, Set<ResultadoUniversal> setResultados, boolean debug) {
         StringBuffer sbDebug = new StringBuffer();
         Set<TermRegSustantivo> aBorrar = new HashSet<TermRegSustantivo>();
         Map<String, List<AdjetivoComoNominalBean>> llamadasNom = new HashMap<String, List<AdjetivoComoNominalBean>>();

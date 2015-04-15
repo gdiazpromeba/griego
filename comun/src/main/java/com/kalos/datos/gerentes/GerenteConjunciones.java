@@ -51,11 +51,6 @@ public interface GerenteConjunciones {
      */
     void modificaCodigoIndividual(String id, int codigo);
     
-    /**
-     * ordena todos los beans alfabéticamente
-     */
-    void ordena();
-    
     
     List<ConjuncionBean> getBeans(List<String> ids);
     

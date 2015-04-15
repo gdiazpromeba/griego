@@ -57,24 +57,6 @@ public class GerenteSustantivosImpl implements GerenteSustantivos {
 	return this.sustantivosDAO.seleccionaInvariables(paramString);
     }
 
-    public void ordena(String paramString) {
-	this.sustantivosDAO.modificaCodigosTodos(paramString);
-	List localList1 = this.sustantivosDAO.getPorLetra(paramString);
-	List localList2 = this.sustantivosDAO.getRegistros(localList1);
-	String[] arrayOfString = { "nominativo" };
-	OpBeans.pasaDeBetaACompleto(localList2, arrayOfString);
-	Collections.sort(localList2, new ComparadorBeansGriegos(arrayOfString));
-	OpBeans.pasaDeCompletoABeta(localList2, arrayOfString);
-	int i = 10;
-	Iterator localIterator = localList2.iterator();
-	while (localIterator.hasNext()) {
-	    SustantivoBean locali = (SustantivoBean) localIterator.next();
-	    String str = locali.getId();
-	    this.sustantivosDAO.modificaCodigoIndividual(i, str);
-	    i += 10;
-	}
-    }
-
     public List<SustantivoBean> getBeans(List<String> paramList) {
 	return this.sustantivosDAO.getRegistros(paramList);
     }

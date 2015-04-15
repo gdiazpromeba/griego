@@ -52,25 +52,7 @@ public class GerenteAdjetivosImpl implements GerenteAdjetivos
 
     }
 
-    /* (non-Javadoc)
-     * @see com.kalos.datos.gerentes.GerenteAdjetivos#ordena(java.lang.String)
-     */
-    public void ordena(String s) {
-	List<String> list = adjetivoDAO.seleccionaPorLetra(s);
-	List<AdjetivoBean> list1 = adjetivoDAO.getRegistros(list);
-	String as[] = { "masculino", "mascFem", "femenino", "neutro" };
-	OpBeans.pasaDeBetaACompleto(list1, as);
-	Collections.sort(list1, new ComparadorBeansGriegos(as));
-	OpBeans.pasaDeCompletoABeta(list1, as);
-	int j = 10;
-	for (Iterator<AdjetivoBean> iterator = list1.iterator(); iterator.hasNext();) {
-	    AdjetivoBean f1 = (AdjetivoBean) iterator.next();
-	    String s1 = f1.getId();
-	    adjetivoDAO.modificaCodigoIndividual(j, s1);
-	    j += 10;
-	}
 
-    }
 
     /* (non-Javadoc)
      * @see com.kalos.datos.gerentes.GerenteAdjetivos#seleccionaPartics(java.lang.String)

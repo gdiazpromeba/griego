@@ -361,7 +361,7 @@ public class AMVerbos implements AnalizadorMorfologico{
 						mapBusquedas.put(idVerbo, entradaVerbo);
 					}
 					String formaAccidentada = entradas[i];
-					Particularidad particIrr = (Particularidad) OpBeans.getPropiedadObject(bean, "partic");
+					Particularidad particIrr =  bean.getPartic();
 					Particularidad particCanonica = entradaVerbo.getParticularidad();
 					Voz voz = bean.getVoz();
 					Aspecto aspecto = null;

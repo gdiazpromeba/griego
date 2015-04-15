@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.kalos.beans.AdverbioBean;
 
-public interface GerenteAdverbios extends GerenteOrdenable{
+public interface GerenteAdverbios {
 	
 	/**
 	 * selecciona los ids de todas las entradas de adverbio correspondientes a esa letra

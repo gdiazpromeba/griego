@@ -29,26 +29,6 @@ public class GerenteInterjeccionesImpl implements GerenteInterjecciones {
 
 
 
-    /* (non-Javadoc)
-     * @see com.kalos.datos.gerentes.GerenteInterjecciones#ordena(java.lang.String)
-     */
-    @Override
-    public void ordena(String letra){
-        List<String> idsetra = interjeccionesDAO.seleccionaPorLetra(letra);
-        List<InterjeccionBean> todosLetra=interjeccionesDAO.getRegistros(idsetra);
-        String[] camposaABeta=new String[]{"interjeccion"};
-        OpBeans.pasaDeBetaACompleto(todosLetra, camposaABeta);
-        Collections.sort(todosLetra, new ComparadorBeansGriegos(camposaABeta));
-        OpBeans.pasaDeCompletoABeta(todosLetra, camposaABeta);
-        int contador = 10;
-        for (InterjeccionBean bean : todosLetra) {
-            String id=bean.getId();
-            interjeccionesDAO.modificaCodigoIndividual(contador, id);
-            contador += 10;
-        }    
-     }
-    
-
 	/* (non-Javadoc)
 	 * @see com.kalos.datos.gerentes.GerenteInterjecciones#getGerenteSignificados()
 	 */

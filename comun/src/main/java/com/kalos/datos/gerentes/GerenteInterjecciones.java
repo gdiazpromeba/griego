@@ -12,8 +12,6 @@ public interface GerenteInterjecciones {
      */
     public abstract void setInterjeccionesDAO(InterjeccionesDAO interjeccionesDAO);
 
-    public abstract void ordena(String letra);
-
     /**
      * @return Returns the gerenteSignificados.
      */

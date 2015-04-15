@@ -90,19 +90,7 @@ public class GerenteConjuncionesImpl implements GerenteConjunciones {
     }
 	
 
-    public void ordena(){
-        List<ConjuncionBean> beans = conjuncionesDAO.seleccionaTodos();
-        String[] camposaABeta=new String[]{"forma"};
-        OpBeans.pasaDeBetaACompleto(beans, camposaABeta);
-        Collections.sort(beans, new ComparadorBeansGriegos(camposaABeta));
-        OpBeans.pasaDeCompletoABeta(beans, camposaABeta);
-        int contador = 10;
-        for (ConjuncionBean bean : beans) {
-            String id=bean.getId();
-            conjuncionesDAO.modificaCodigoIndividual(id, contador);
-            contador += 10;
-        }    
-     }
+
 	
 	
 
