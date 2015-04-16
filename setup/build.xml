@@ -10,7 +10,9 @@ en los respectivos directorios "target" -->
 	<property name="jar.comun" value="comun-1.0-SNAPSHOT.jar"/>
 	<property name="jar.comun.swing" value="comun-swing-1.0-SNAPSHOT.jar"/>
 	<property name="jar.iu" value="iu-1.0-SNAPSHOT.jar"/>
-	<property name="jar.kalos" value="kalos-4.16.jar"/>
+	<property name="version" value="4.16"/>
+	<property name="nombre" value="kalos-${version}"/>
+	<property name="jar.kalos" value="${nombre}.jar"/>
 	<property name="jar.kalos.ofuscado" value="kalos-ofuscado-4.16.jar"/>
 	<property name="shrinklog" value="shrink.log"/>
 	<property environment="env"/>
@@ -318,5 +320,32 @@ en los respectivos directorios "target" -->
 	    <fileset dir="../iu/armado_reportes"/>
 	  </copy>		
 	</target>
+	
+	<taskdef name="jarbundler"  classname="net.sourceforge.jarbundler.JarBundler" classpath="lib/jarbundler-2.3.1.jar" />
+	
+	<target name="bundleMac2">
+      <delete dir="work/bundlemac"/>
+	  <mkdir dir="work/bundlemac/"/>
+	  <jarbundler dir="work/bundlemac" name="${nombre}" mainclass="com.kalos.iu.Comienzo"
+	  	 jvmversion="1.8.0_40">
+	  	<jarfileset dir="work/condb">
+	  	</jarfileset>
+	  </jarbundler>
+	</target>
+	
+    <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask"   classpath="lib/appbundler-1.0.jar" />
+
+    <target name="bundleMac">
+  	  <echo>Creando una versión Mac</echo>
+      <delete dir="work/bundlemac"/>
+  	  <mkdir dir="work/bundlemac/"/>    	
+        <bundleapp outputdirectory="work/bundlemac" name="${nombre}"
+            displayname="${nombre}"
+            identifier="components.${nombre}"
+            mainclassname="com.kalos.iu.Comienzo">
+        	<classpath file="work/condb/${jar.kalos.ofuscado}"/>
+            <librarypath dir="work/condb/lib" />
+        </bundleapp>
+    </target>	
 
 </project>
