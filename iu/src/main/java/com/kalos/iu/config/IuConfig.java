@@ -1,11 +1,13 @@
 package com.kalos.iu.config;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.kalos.comun.config.AnalisisMorfologicoConfig;
+import com.kalos.comun.config.DaoConfig;
 import com.kalos.comun.config.SwingConfig;
 import com.kalos.datos.dao.CombosDAO;
 import com.kalos.datos.gerentes.GerenteAdjetivos;
@@ -31,6 +33,7 @@ import com.kalos.visual.controles.FabricaControles;
 @Configuration
 @Import(SwingConfig.class)
 public class IuConfig {
+    
 	
 	@Bean
 	@Autowired

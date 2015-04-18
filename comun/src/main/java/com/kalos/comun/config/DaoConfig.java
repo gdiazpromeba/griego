@@ -1,5 +1,6 @@
 package com.kalos.comun.config;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -83,21 +84,36 @@ import com.kalos.datos.dao.VerbosCompuestosDAOImpl;
 import com.kalos.datos.dao.VerbosDAO;
 import com.kalos.datos.dao.VerbosDAOImpl;
 import com.kalos.datos.modulos.FuenteDeDatosKalos;
+import com.kalos.recursos.Configuracion;
+
 
 @PropertySource("classpath:/connection.properties")
 @Configuration
 public class DaoConfig {
+    
+    private static Logger logger = Logger.getLogger(DaoConfig.class);
     
      @Autowired
      private Environment env;
 
     @Bean 
 	public FuenteDeDatosKalos kalosDataSource() {
+        logger.info("daoconfig paso 1");
 		FuenteDeDatosKalos dataSource = new FuenteDeDatosKalos();
-		dataSource.setDriverClassName(env.getProperty("connection.driver"));
-		dataSource.setUrl(env.getProperty("connection.url"));
-		dataSource.setUsername(env.getProperty("connection.username"));
-		dataSource.setPassword(env.getProperty("connection.password"));
+        dataSource.setDriverClassName("com.mckoi.JDBCDriver");
+        logger.info("daoconfig paso 2");
+        dataSource.setUrl(Configuracion.getProperty("database_url"));
+        dataSource.setUsername("gonzalo");
+        dataSource.setPassword("ymcsngm");
+        dataSource.addConnectionProperty("database_path", Configuracion.getProperty("database_path"));
+        logger.info("daoconfig paso 3");
+        logger.info("java version" + Runtime.class.getPackage().getImplementationVersion());
+//        try {
+//            logger.info("el schema es= " + dataSource.getConnection().getSchema());
+//        } catch (Exception e) {
+//            logger.error("error al intentar abrir la BD", e);
+//        }
+       
 		return dataSource;
 	}
 	

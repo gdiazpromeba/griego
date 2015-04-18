@@ -1,0 +1,16 @@
+#Sat Apr 18 10:59:30 CDT 2015
+debug=true
+font_size_MA=13
+font_size_dictionary=12
+font_size=12
+font_name=Tahoma
+registered_to=
+show_makrons=true
+database_url=jdbc\:mckoi\:local\:///Applications/kalos-4.16.app/Contents/Java/db.conf
+language_meanings=en
+version=NUMERO_DE_VERSION
+last_keyboard=US-International
+last_language=en
+database_path=///Applications/kalos-4.16.app/Contents/Java/data
+max_forms_MA=100
+font_size_inflection=12

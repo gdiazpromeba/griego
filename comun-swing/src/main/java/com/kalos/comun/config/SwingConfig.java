@@ -1,5 +1,6 @@
 package com.kalos.comun.config;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,7 +57,7 @@ import com.kalos.flexion.declinacion.Participios;
 @Import(AnalisisMorfologicoConfig.class)
 public class SwingConfig {
     
-   
+    //private static Logger logger = Logger.getLogger(AnalisisMorfologicoConfig.class);
     
  
     @Bean

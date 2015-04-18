@@ -11,6 +11,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -36,6 +37,7 @@ import com.kalos.datos.gerentes.GerenteSeguridad;
 import com.kalos.datos.gerentes.GerenteVerbalizadorParticipios;
 import com.kalos.datos.gerentes.GerenteVerbos;
 import com.kalos.datos.gerentes.GerenteVerbosCompuestos;
+import com.kalos.datos.modulos.FuenteDeDatosKalos;
 import com.kalos.flexion.declinacion.Participios;
 import com.kalos.iu.analisismorfologico.PanelAM;
 import com.kalos.iu.config.IuConfig;
@@ -83,8 +85,11 @@ public class Comienzo {
         }
 
     }
-
+    
     public static void main(String args[]) {
+        logger.info("el dir de ejecución es " + new File(".").getAbsolutePath() );
+        logger.info("o bien" +  new File(Comienzo.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent().toString() );
+        //logger.info("el classloader=" + Comienzo.class.getClassLoader().getResource("db.conf").getPath());
         Recursos.cambiaLocale(Configuracion.getUltimoIdioma());
         GerenteDeApariencias.poneLYFPorDefecto();
         logger.info("********************** INICIANDO *********************************");
@@ -118,7 +123,9 @@ public class Comienzo {
 
             public void run() {
                 caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_contexto"));
+                logger.info("creando el applicationContext");
                 applicationContext = Comienzo.creaContextoClasspath();
+                logger.info("applicationContext creado");
                 caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_controles_visuales"));
                 
                 
@@ -269,6 +276,7 @@ public class Comienzo {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(IuConfig.class);
         context.refresh();
+        logger.info("refrescando el applicationContext");
         return context;
     }
 

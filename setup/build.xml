@@ -31,7 +31,7 @@ en los respectivos directorios "target" -->
 	</target>
 	
 	<target name="copiaDeps">
-	  <artifact:mvn pom="../iu/pom.xml" mavenHome="${env.MAVEN_HOME}" fork="true">
+	  <artifact:mvn pom="../iu/pom.xml" mavenHome="${env.M2_HOME}" fork="true">
 	    <arg value="dependency:copy-dependencies"/>
 	  </artifact:mvn>
 	  <mkdir dir="work/lib"/>
@@ -42,16 +42,7 @@ en los respectivos directorios "target" -->
 	  <delete file="work/lib/${jar.comun.swing}"/>
     </target>
 	
-	<target name="copyDeps" description="Copia las dependencias de iu">
-	 <property environment="env" />
-	 <echo>${env.MAVEN_HOME}</echo>
-	 <exec dir="../iu" executable="cmd">
-	        <arg value="${env.MAVEN_HOME}\bin\mvn.bat"/>
-	        <arg line="dependency:copy-dependencies" />
-	  </exec>
-	</target>	
-	
-	<target name="compilacion" >
+	<target name="compilacion" depends="copiaDeps">
 		<echo>Compilando todo ... </echo>
 		<delete dir="work/comp"/>
 		<mkdir dir="work/comp"/>
@@ -141,14 +132,14 @@ en los respectivos directorios "target" -->
 	    <replace file="work/comp/rec/connection.properties/">
 		  <!-- esta es la ubicación del archivo RESPECTO DEL PROCESO JAVA QUE LLAMA A IU, no respecto del jar común que lo contiene -->
           <replacetoken>jdbc:mckoi://localhost/</replacetoken>
-          <replacevalue>jdbc:mckoi:local://./db.conf</replacevalue>
-        </replace>			
+	      <replacevalue>jdbc:mckoi:local://../../Applications/kalos-4.16.app/Contents/Java/db.conf</replacevalue>
+	    </replace>			
 		
 		<jar destfile="work/comp/jar/${jar.kalos}">
 			<fileset dir="work/comp/out"/>
 			<fileset dir="work/comp/rec"/>
 			<manifest>
-				<attribute name="Class-Path" value="${lib.list.iu}" />
+				<attribute name="Class-Path" value="${lib.list.comun}" />
 				<attribute name="Created-By" value="${user.name}" />
 				<attribute name="Main-Class" value="com.kalos.iu.Comienzo" />
 			</manifest>
@@ -256,7 +247,10 @@ en los respectivos directorios "target" -->
 	    <replace file="work/tmp/comun/unjarred/connection.properties/">
 		  <!-- esta es la ubicación del archivo RESPECTO DEL PROCESO JAVA QUE LLAMA A IU, no respecto del jar común que lo contiene -->
           <replacetoken>jdbc:mckoi://localhost/</replacetoken>
-          <replacevalue>jdbc:mckoi:local://./db.conf</replacevalue>
+	    	<replacevalue>jdbc:mckoi:local://../Java/db.conf</replacevalue>
+	    	<!--
+            <replacevalue>jdbc:mckoi:local://./db.conf</replacevalue>
+            -->
         </replace>		
 		<jar destfile="work/tmp/comun/newjar/${jar.comun}">
 			<fileset dir="work/tmp/comun/unjarred"/>
@@ -323,29 +317,49 @@ en los respectivos directorios "target" -->
 	
 	<taskdef name="jarbundler"  classname="net.sourceforge.jarbundler.JarBundler" classpath="lib/jarbundler-2.3.1.jar" />
 	
-	<target name="bundleMac2">
-      <delete dir="work/bundlemac"/>
-	  <mkdir dir="work/bundlemac/"/>
-	  <jarbundler dir="work/bundlemac" name="${nombre}" mainclass="com.kalos.iu.Comienzo"
-	  	 jvmversion="1.8.0_40">
-	  	<jarfileset dir="work/condb">
-	  	</jarfileset>
-	  </jarbundler>
-	</target>
+	  <fileset id="libs.en.condb" dir="work/condb/lib">
+	    <include name="*.jar"/>
+	  </fileset>  
+
 	
     <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask"   classpath="lib/appbundler-1.0.jar" />
 
     <target name="bundleMac">
   	  <echo>Creando una versión Mac</echo>
       <delete dir="work/bundlemac"/>
-  	  <mkdir dir="work/bundlemac/"/>    	
-        <bundleapp outputdirectory="work/bundlemac" name="${nombre}"
+  	  <mkdir dir="work/bundlemac/"/>
+      <mkdir dir="work/bundlemac/temp"/>
+      <copy file="kalos.properties-mac" tofile="work/bundlemac/temp/kalos.properties"/> 
+      <bundleapp outputdirectory="work/bundlemac" name="${nombre}"
             displayname="${nombre}"
             identifier="components.${nombre}"
             mainclassname="com.kalos.iu.Comienzo">
+      	    <runtime dir="${env.JAVA_HOME}" />
         	<classpath file="work/condb/${jar.kalos.ofuscado}"/>
-            <librarypath dir="work/condb/lib" />
-        </bundleapp>
+      	    <classpath refid="libs.en.condb"/>
+      	    <classpath file="work/bundlemac/temp/kalos.properties"/>
+      </bundleapp>
+      <delete dir="work/bundlemac/temp"/> 
+      <!-- agregar el resto de los directorios y archivos a la sección "Java" -->
+      <mkdir dir="work/bundlemac/${nombre}.app/Contents/Java/data"/>	
+  	  <copy todir="work/bundlemac/${nombre}.app/Contents/Java/data">
+  	    <fileset dir="work/condb/data"/>
+  	  </copy>  
+     	
+  	  <mkdir dir="work/bundlemac/${nombre}.app/Contents/Java/armado_reportes"/>
+  	  <copy todir="work/bundlemac/${nombre}.app/Contents/Java/armado_reportes">
+  	    <fileset dir="work/condb/armado_reportes"/>
+  	  </copy>   
+      <copy file="work/condb/kalos.properties" toDir="work/bundlemac/${nombre}.app/Contents/Java"/>
+      <copy file="work/condb/db.conf" toDir="work/bundlemac/${nombre}.app/Contents/Java"/>  
+      <!-- agregar el ícono -->
+      <copy file="icono_kalos.icns" toDir="work/bundlemac/${nombre}.app/Contents/Resources"/> 
+  	  <replace file="work/bundlemac/${nombre}.app/Contents/Info.plist">
+          <replacetoken>GenericApp.icns</replacetoken>
+          <replacevalue>icono_kalos.icns</replacevalue>
+      </replace>  
+      	
+	
     </target>	
 
 </project>
