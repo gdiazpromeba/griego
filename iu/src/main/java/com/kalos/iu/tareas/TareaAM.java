@@ -24,7 +24,7 @@ public class TareaAM extends Task {
 
 	@Override
 	public Object run() throws Exception {
-		analizadorMorfologico.buscaCanonica(entradas, resultado, cacheAA, true, Configuracion.isDebug());
+		analizadorMorfologico.buscaCanonica(entradas, resultado, cacheAA, true, false);
 		return null;
 	}
 

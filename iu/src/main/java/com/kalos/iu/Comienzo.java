@@ -87,9 +87,8 @@ public class Comienzo {
     }
     
     public static void main(String args[]) {
-        logger.info("el dir de ejecución es " + new File(".").getAbsolutePath() );
-        logger.info("o bien" +  new File(Comienzo.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent().toString() );
-        //logger.info("el classloader=" + Comienzo.class.getClassLoader().getResource("db.conf").getPath());
+        logger.info("execution path is " + new File(".").getAbsolutePath() );
+        logger.info("jar path is " +  new File(Comienzo.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent().toString() );
         Recursos.cambiaLocale(Configuracion.getUltimoIdioma());
         GerenteDeApariencias.poneLYFPorDefecto();
         logger.info("********************** INICIANDO *********************************");
@@ -123,9 +122,8 @@ public class Comienzo {
 
             public void run() {
                 caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_contexto"));
-                logger.info("creando el applicationContext");
                 applicationContext = Comienzo.creaContextoClasspath();
-                logger.info("applicationContext creado");
+                logger.info("application context created");
                 caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_controles_visuales"));
                 
                 

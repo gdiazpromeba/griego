@@ -87,34 +87,26 @@ import com.kalos.datos.modulos.FuenteDeDatosKalos;
 import com.kalos.recursos.Configuracion;
 
 
-@PropertySource("classpath:/connection.properties")
 @Configuration
 public class DaoConfig {
     
-    private static Logger logger = Logger.getLogger(DaoConfig.class);
+    //private static Logger logger = Logger.getLogger(DaoConfig.class);
     
      @Autowired
      private Environment env;
 
     @Bean 
 	public FuenteDeDatosKalos kalosDataSource() {
-        logger.info("daoconfig paso 1");
 		FuenteDeDatosKalos dataSource = new FuenteDeDatosKalos();
         dataSource.setDriverClassName("com.mckoi.JDBCDriver");
-        logger.info("daoconfig paso 2");
         dataSource.setUrl(Configuracion.getProperty("database_url"));
         dataSource.setUsername("gonzalo");
         dataSource.setPassword("ymcsngm");
-        dataSource.addConnectionProperty("database_path", Configuracion.getProperty("database_path"));
-        logger.info("daoconfig paso 3");
-        logger.info("java version" + Runtime.class.getPackage().getImplementationVersion());
-//        try {
-//            logger.info("el schema es= " + dataSource.getConnection().getSchema());
-//        } catch (Exception e) {
-//            logger.error("error al intentar abrir la BD", e);
-//        }
-       
-		return dataSource;
+        String databasePath = Configuracion.getProperty("database_path");
+        if (databasePath !=null){
+          dataSource.addConnectionProperty("database_path", Configuracion.getProperty("database_path"));
+        }
+    	return dataSource;
 	}
 	
 	@Bean 

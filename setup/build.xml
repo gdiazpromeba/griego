@@ -64,7 +64,7 @@ en los respectivos directorios "target" -->
 	</target>	
 
 	<target name="run">
-		<java jar="work/condb/${jar.kalos}" dir="work/condb" fork="true">
+		<java jar="work/condb/${jar.kalos.ofuscado}" dir="work/condb" fork="true">
 		</java>
 	</target>
 	
@@ -128,18 +128,11 @@ en los respectivos directorios "target" -->
 		  </fileset>
 		  <fileset dir="../iu/src/main/resources"/>
 		</copy>
-		<!-- edito el archivito de conexiones -->
-	    <replace file="work/comp/rec/connection.properties/">
-		  <!-- esta es la ubicación del archivo RESPECTO DEL PROCESO JAVA QUE LLAMA A IU, no respecto del jar común que lo contiene -->
-          <replacetoken>jdbc:mckoi://localhost/</replacetoken>
-	      <replacevalue>jdbc:mckoi:local://../../Applications/kalos-4.16.app/Contents/Java/db.conf</replacevalue>
-	    </replace>			
-		
 		<jar destfile="work/comp/jar/${jar.kalos}">
 			<fileset dir="work/comp/out"/>
 			<fileset dir="work/comp/rec"/>
 			<manifest>
-				<attribute name="Class-Path" value="${lib.list.comun}" />
+				<attribute name="Class-Path" value="${lib.list.iu}" />
 				<attribute name="Created-By" value="${user.name}" />
 				<attribute name="Main-Class" value="com.kalos.iu.Comienzo" />
 			</manifest>
@@ -302,17 +295,18 @@ en los respectivos directorios "target" -->
 	    <fileset dir="work/lib"/>
 	  </copy>
 	  <echo>Copiando el kalos.properties y editándolo</echo>	
-	  <copy file="../iu/kalos.properties" toDir="work/condb"/>
+      <copy file="kalos.properties-win" tofile="work/condb/kalos.properties"/> 		
 	  <replace file="work/condb/kalos.properties">
-        <replacetoken>debug=true</replacetoken>
-        <replacevalue>debug=false</replacevalue>
+	  	<replacefilter token="debug=true" value="debug=false"/>
+	  	<replacefilter token="NUMERO_DE_VERSION" value="${version}"/>
       </replace>
 	  <echo>Copiando los archivos de reportes</echo>
 	  <delete dir="work/condb/armado_reportes"/>
 	  <mkdir dir="work/condb/armado_reportes"/>
 	  <copy todir="work/condb/armado_reportes">
 	    <fileset dir="../iu/armado_reportes"/>
-	  </copy>		
+	  </copy>	
+	 
 	</target>
 	
 	<taskdef name="jarbundler"  classname="net.sourceforge.jarbundler.JarBundler" classpath="lib/jarbundler-2.3.1.jar" />
@@ -330,13 +324,17 @@ en los respectivos directorios "target" -->
   	  <mkdir dir="work/bundlemac/"/>
       <mkdir dir="work/bundlemac/temp"/>
       <copy file="kalos.properties-mac" tofile="work/bundlemac/temp/kalos.properties"/> 
+  	  <replace file="work/bundlemac/temp/kalos.properties">
+  	  	<replacefilter token="debug=true" value="debug=false"/>
+  	  	<replacefilter token="NUMERO_DE_VERSION" value="${version}"/>
+      </replace>   	
       <bundleapp outputdirectory="work/bundlemac" name="${nombre}"
             displayname="${nombre}"
             identifier="components.${nombre}"
             mainclassname="com.kalos.iu.Comienzo">
       	    <runtime dir="${env.JAVA_HOME}" />
         	<classpath file="work/condb/${jar.kalos.ofuscado}"/>
-      	    <classpath refid="libs.en.condb"/>
+      	    <!-- <classpath refid="libs.en.condb"/> -->
       	    <classpath file="work/bundlemac/temp/kalos.properties"/>
       </bundleapp>
       <delete dir="work/bundlemac/temp"/> 
@@ -345,7 +343,10 @@ en los respectivos directorios "target" -->
   	  <copy todir="work/bundlemac/${nombre}.app/Contents/Java/data">
   	    <fileset dir="work/condb/data"/>
   	  </copy>  
-     	
+      <mkdir dir="work/bundlemac/${nombre}.app/Contents/Java/lib"/>    	
+      <copy todir="work/bundlemac/${nombre}.app/Contents/Java/lib">
+    	    <fileset dir="work/condb/lib"/>
+      </copy>      	
   	  <mkdir dir="work/bundlemac/${nombre}.app/Contents/Java/armado_reportes"/>
   	  <copy todir="work/bundlemac/${nombre}.app/Contents/Java/armado_reportes">
   	    <fileset dir="work/condb/armado_reportes"/>

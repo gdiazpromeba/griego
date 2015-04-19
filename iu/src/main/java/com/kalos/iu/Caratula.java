@@ -131,7 +131,7 @@ public class Caratula extends JPanel {
 		g.drawString("KALÓS " + Configuracion.getVersionNumero(), 400, 40);
 		g.setFont(new Font("Dialog", 2, 11));
 		g.drawString("beautiful Greek software", 378, 55);
-		g.setFont(new Font("Dialog", 0, 9));
+		g.setFont(new Font("Dialog", 0, 12));
 		if (Configuracion.getNombre() == null)
 			g.drawString(Recursos.getCadena("usuario_no_registrado"), 397, 382);
 		else
@@ -140,8 +140,8 @@ public class Caratula extends JPanel {
 							.append(Recursos.getCadena("dueño_registrado"))
 							.append(" : ").append(Configuracion.getNombre())
 							.toString(), 397, 385);
-		g.drawString("1995-2011 Kallistos Corporation", 397, 395);
-		g.setFont(new Font("Dialog", 0, 10));
+		g.drawString("1995-2015 Kallistos Corporation", 397, 400);
+		g.setFont(new Font("Dialog", 0, 12));
 		g.drawString(Recursos.getCadena("etiquetas"), 330, 287);
 		g.drawString(Recursos.getCadena("significados"), 330, 312);
 		g.drawString(Recursos.getCadena("teclado"), 330, 342);
