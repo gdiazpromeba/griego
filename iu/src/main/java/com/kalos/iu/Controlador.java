@@ -24,7 +24,8 @@ import com.kalos.visual.controles.combos.ComboEnumeracion;
 import com.kalos.visual.modelos.DictionaryPM;
 
 public class Controlador {
-	private class _D implements ActionListener {
+	
+    private class EleccionTipoReporteIndependiente implements ActionListener {
 
 		public void actionPerformed(ActionEvent actionevent) {
 			ComboEnumeracion d = panelFlexion.getPanelEleccionTipoReporte().getMasTipos();
@@ -37,7 +38,7 @@ public class Controlador {
 
 	}
 
-	private class _C implements ActionListener {
+	private class EleccionTipoReporteDependiente implements ActionListener {
 
 		public void actionPerformed(ActionEvent actionevent) {
 			ComboEnumeracion d = panelFlexion.getPanelEleccionTipoReporte().getTiposReporte();
@@ -59,7 +60,7 @@ public class Controlador {
 
 	}
 
-	private class _B implements ListSelectionListener {
+	private class SeleccionEntradaDiccionario implements ListSelectionListener {
 
 		public void valueChanged(ListSelectionEvent listselectionevent) {
 			if (listselectionevent.getValueIsAdjusting())
@@ -72,13 +73,14 @@ public class Controlador {
 				DictionaryPM b = (DictionaryPM)jtable.getModel();
 				entradaDiccionario = b.getFila(i);
 				panelDiccionario.setUltimaEntradaDiccionario(entradaDiccionario);
+				panelPrincipal.setEntradaDiccionario(entradaDiccionario);
 				return;
 			}
 		}
 
 	}
 
-	private class _A extends ComponentAdapter {
+	private class AparicionPanelFlexion extends ComponentAdapter {
 
 		public void componentShown(ComponentEvent componentevent) {
 			panelFlexion.activar(entradaDiccionario);
@@ -90,14 +92,15 @@ public class Controlador {
 
 	}
 
-	public Controlador(PanelDiccionario a, PanelFlexion a1) {
-		panelDiccionario = a;
-		panelFlexion = a1;
-		JTable jtable = a.getTabla();
-		jtable.getSelectionModel().addListSelectionListener(new _B());
-		a1.addComponentListener(new _A());
-		a1.getPanelEleccionTipoReporte().getCrear().addActionListener(new _C());
-		a1.getPanelEleccionTipoReporte().getCrearMas().addActionListener(new _D());
+	public Controlador(PanelDiccionario panelDiccionario, PanelFlexion panelFlexion, PanelPrincipal panelPrincipal) {
+		this.panelDiccionario = panelDiccionario;
+		this.panelFlexion = panelFlexion;
+		this.panelPrincipal = panelPrincipal;
+		JTable jtable = panelDiccionario.getTabla();
+		jtable.getSelectionModel().addListSelectionListener(new SeleccionEntradaDiccionario());
+		this.panelFlexion.addComponentListener(new AparicionPanelFlexion());
+		this.panelFlexion.getPanelEleccionTipoReporte().getCrear().addActionListener(new EleccionTipoReporteDependiente());
+		this.panelFlexion.getPanelEleccionTipoReporte().getCrearMas().addActionListener(new EleccionTipoReporteIndependiente());
 	}
 
 	public void navegaTablaResultado(KeyEvent keyevent) {
@@ -110,6 +113,7 @@ public class Controlador {
 
 
 	private PanelDiccionario panelDiccionario;
-	PanelFlexion panelFlexion;
+	private PanelFlexion panelFlexion;
 	private EntradaDiccionario entradaDiccionario;
+	private PanelPrincipal panelPrincipal;
 }

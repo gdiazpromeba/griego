@@ -2,6 +2,7 @@ package com.kalos.datos.gerentes;
 
 import java.util.List;
 
+import com.kalos.beans.EncParticulaBean;
 import com.kalos.beans.ParticulaBean;
 import com.kalos.enumeraciones.TipoPalabra;
 
@@ -13,6 +14,7 @@ public interface GerenteParticulas {
 	List<ParticulaBean> seleccionaParticulasDadoTipoSinSignificado(TipoPalabra tipo, boolean duales);
 	
 	List<ParticulaBean> seleccionaParticulasDadaFormaSinSignificado(String forma);
+	
 	
 	List<ParticulaBean> seleccionaParticulasNoAcentuablesSinSignificado();
 	
@@ -31,5 +33,7 @@ public interface GerenteParticulas {
 	List<String> seleccionaIdsPorEncabezado(String idEncabezado);
 	
 	List<ParticulaBean> getBeans(List<String> ids);
+	
+	
 	
 }

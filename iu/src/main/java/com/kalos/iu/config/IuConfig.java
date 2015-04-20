@@ -1,13 +1,11 @@
 package com.kalos.iu.config;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Lazy;
 
-import com.kalos.comun.config.AnalisisMorfologicoConfig;
-import com.kalos.comun.config.DaoConfig;
 import com.kalos.comun.config.SwingConfig;
 import com.kalos.datos.dao.CombosDAO;
 import com.kalos.datos.gerentes.GerenteAdjetivos;
@@ -20,6 +18,7 @@ import com.kalos.datos.gerentes.GerenteTiposVerbo;
 import com.kalos.datos.gerentes.GerenteVerbos;
 import com.kalos.flexion.UtilidadesTM;
 import com.kalos.iu.Menues;
+import com.kalos.iu.PanelPrincipal;
 import com.kalos.iu.PanelProgreso;
 import com.kalos.iu.analisismorfologico.PanelAM;
 import com.kalos.iu.diccionario.PanelDiccionario;
@@ -30,6 +29,7 @@ import com.kalos.iu.registro.VentanaMolesta;
 import com.kalos.iu.registro.VentanaRegistro;
 import com.kalos.visual.controles.FabricaControles;
 
+@Lazy
 @Configuration
 @Import(SwingConfig.class)
 public class IuConfig {
@@ -40,6 +40,15 @@ public class IuConfig {
 	public PanelAM panelResultadosAM() throws Exception{
 		return new PanelAM();
 	}
+	
+	
+	@Bean
+	@Autowired
+	public PanelPrincipal panelPrincipal(PanelDiccionario panelDiccionario, PanelAM panelAM, PanelFlexion panelFlexion, PanelProgreso panelProgreso, GerenteDiccionario gerenteDiccionario ){
+	    PanelPrincipal bean = new PanelPrincipal(panelDiccionario, panelAM, panelFlexion, panelProgreso, gerenteDiccionario);
+	    return bean;
+	}
+	
 	
 	@Bean
 	@Autowired

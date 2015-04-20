@@ -1,9 +1,15 @@
 
 package com.kalos.datos.gerentes;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import sun.util.logging.resources.logging;
+
 import com.kalos.beans.EntradaDiccionario;
+import com.kalos.beans.ResultadoUniversal;
 import com.kalos.datos.dao.DiccionarioDAO;
 import com.kalos.enumeraciones.LugarSubcadena;
 import com.kalos.enumeraciones.TipoPalabra;
@@ -58,6 +64,42 @@ public class GerenteDiccionarioImpl implements GerenteDiccionario {
 
     public void setDiccionarioDAO(DiccionarioDAO diccionarioDAO) {
         this.diccionarioDAO = diccionarioDAO;
+    }
+    
+    Logger log = Logger.getLogger(this.getClass().getName());
+    
+    public EntradaDiccionario getEntradaDiccionario(ResultadoUniversal reu){
+        String referenteId = null;
+        switch(reu.getTipoPalabra()){
+            case Adjetivo:
+            case Adverbio:
+            case Sustantivo:
+            case Infinitivo:
+            case Participio:
+            case Preposicion:
+                referenteId = reu.getId();
+                break;
+            case Verbo:
+                referenteId = reu.getIdSimpleOCompuesto();
+                break;
+            case Articulo:
+            case Conjuncion:
+            case PronombreIndefinido:
+            case PronombreInterrogativo:
+            case PronombrePersonal:
+            case PronombreReflexivo:
+            case PronombreRelativo:
+            case Interjeccion:
+                  referenteId =  reu.getIdEncabezado();
+                  break;
+            default:
+                new RuntimeException("word type not contemplated in GerenteDiccionario.getEntradaDiccionario(ResultadoUniversal)");
+            
+        }
+        List<String> ids= new ArrayList<>();
+        log.info("el referente id deducido es =" + referenteId);
+        ids.add(referenteId);
+        return  getRegistros( ids).get(0);
     }
 
 }

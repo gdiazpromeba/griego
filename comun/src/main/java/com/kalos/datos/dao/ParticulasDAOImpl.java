@@ -41,6 +41,7 @@ import com.kalos.enumeraciones.Persona;
 import com.kalos.enumeraciones.TipoPalabra;
 import com.kalos.recursos.Configuracion;
 
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.object.MappingSqlQuery;
@@ -57,7 +58,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 	private static String SELECCION_POR_TIPO_SQL;
 	private static String SELECCION_POR_ENCABEZADO_SQL;
 	private static String SELECCION_INDIVIDUAL_SQL;
-	private static String SELECCION_POR_FORMA_SQL;
+	private static String SELECCION_POR_FORMA_SQL;	
 	private static String SELECCION_NO_ACENTUABLES_SQL;
 	private static String SELECCION_TODOS_IDS_SQL;
 	private static String SELECCION_IDS_POR_TIPO_SQL;
@@ -74,20 +75,22 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 
 		sb = new StringBuffer(200);
 		sb.append("SELECT   \n");
-		sb.append("  PARTICULA_ID,   \n");
-		sb.append("  PARTICULA_ENCABEZADO_ID,   \n");
-		sb.append("  TIPO_PALABRA,   \n");
-		sb.append("  PARTICULARIDAD,   \n");
-		sb.append("  CASO,   \n");
-		sb.append("  PERSONA,   \n");
-		sb.append("  SUBINDICE,   \n");
-		sb.append("  GENERO,   \n");
-		sb.append("  NUMERO,   \n");
-		sb.append("  FORMA   \n");
+		sb.append("  PART.PARTICULA_ID,   \n");
+		sb.append("  PART.PARTICULA_ENCABEZADO_ID,   \n");
+		sb.append("  PART.TIPO_PALABRA,   \n");
+		sb.append("  PART.PARTICULARIDAD,   \n");
+		sb.append("  PART.CASO,   \n");
+		sb.append("  PART.PERSONA,   \n");
+		sb.append("  PART.SUBINDICE,   \n");
+		sb.append("  PART.GENERO,   \n");
+		sb.append("  PART.NUMERO,   \n");
+		sb.append("  PART.FORMA,   \n");
+		sb.append("  ENC.FORMA AS ENC_FORMA   \n");
 		sb.append("FROM   \n");
-		sb.append("  PARTICULAS   \n");
+		sb.append("  PARTICULAS PART  \n");
+		sb.append("  INNER JOIN PARTICULA_ENCABEZADOS ENC on PART.PARTICULA_ENCABEZADO_ID=ENC.PARTICULA_ENCABEZADO_ID  \n");
 		sb.append("WHERE   \n");
-		sb.append("  TIPO_PALABRA=?   \n");
+		sb.append("  PART.TIPO_PALABRA=?   \n");
 		
 
 		SELECCION_POR_TIPO_SQL = sb.toString();
@@ -96,20 +99,22 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 
 		sb = new StringBuffer(200);
 		sb.append("SELECT   \n");
-		sb.append("  PARTICULA_ID,   \n");
-		sb.append("  PARTICULA_ENCABEZADO_ID,   \n");
-		sb.append("  TIPO_PALABRA,   \n");
-		sb.append("  PARTICULARIDAD,   \n");
-		sb.append("  CASO,   \n");
-		sb.append("  PERSONA,   \n");
-		sb.append("  SUBINDICE,   \n");
-		sb.append("  GENERO,   \n");
-		sb.append("  NUMERO,   \n");
-		sb.append("  FORMA   \n");
+		sb.append("  PART.PARTICULA_ID,   \n");
+		sb.append("  PART.PARTICULA_ENCABEZADO_ID,   \n");
+		sb.append("  PART.TIPO_PALABRA,   \n");
+		sb.append("  PART.PARTICULARIDAD,   \n");
+		sb.append("  PART.CASO,   \n");
+		sb.append("  PART.PERSONA,   \n");
+		sb.append("  PART.SUBINDICE,   \n");
+		sb.append("  PART.GENERO,   \n");
+		sb.append("  PART.NUMERO,   \n");
+		sb.append("  PART.FORMA,   \n");
+		sb.append("  ENC.FORMA AS ENC_FORMA   \n");
 		sb.append("FROM   \n");
-		sb.append("  PARTICULAS   \n");
+		sb.append("  PARTICULAS PART   \n");
+		sb.append("  INNER JOIN PARTICULA_ENCABEZADOS ENC on PART.PARTICULA_ENCABEZADO_ID=ENC.PARTICULA_ENCABEZADO_ID  \n");
 		sb.append("WHERE   \n");
-		sb.append("  PARTICULA_ENCABEZADO_ID=?   \n");
+		sb.append("  PART.PARTICULA_ENCABEZADO_ID=?   \n");
 		
 
 		SELECCION_POR_ENCABEZADO_SQL = sb.toString();		
@@ -126,10 +131,12 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 		sb.append("  PART.GENERO,   \n");
 		sb.append("  PART.NUMERO,   \n");
 		sb.append("  PART.FORMA,   \n");
+		sb.append("  ENC.FORMA AS ENC_FORMA,   \n");
         sb.append("  SIG.SIGNIFICADO_ID,   \n");
         sb.append("  SIG.VALOR   \n");
         sb.append("FROM        \n");
         sb.append("  PARTICULAS PART       \n");
+        sb.append("  INNER JOIN PARTICULA_ENCABEZADOS ENC on PART.PARTICULA_ENCABEZADO_ID=ENC.PARTICULA_ENCABEZADO_ID  \n");
         sb.append("    LEFT JOIN SIGNIFICADOS SIG                 \n");
         sb.append("      ON PART.PARTICULA_ID=SIG.REFERENTE_ID       \n");
         sb.append("WHERE  \n");
@@ -202,20 +209,22 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 		
 		sb = new StringBuffer(200);
 		sb.append("SELECT   \n");
-		sb.append("  PARTICULA_ID,   \n");
-		sb.append("  PARTICULA_ENCABEZADO_ID,   \n");
-		sb.append("  TIPO_PALABRA,   \n");
-		sb.append("  PARTICULARIDAD,   \n");
-		sb.append("  CASO,   \n");
-		sb.append("  PERSONA,   \n");
-		sb.append("  SUBINDICE,   \n");
-		sb.append("  GENERO,   \n");
-		sb.append("  NUMERO,   \n");
-		sb.append("  FORMA   \n");
+		sb.append("  PART.PARTICULA_ID,   \n");
+		sb.append("  PART.PARTICULA_ENCABEZADO_ID,   \n");
+		sb.append("  PART.TIPO_PALABRA,   \n");
+		sb.append("  PART.PARTICULARIDAD,   \n");
+		sb.append("  PART.CASO,   \n");
+		sb.append("  PART.PERSONA,   \n");
+		sb.append("  PART.SUBINDICE,   \n");
+		sb.append("  PART.GENERO,   \n");
+		sb.append("  PART.NUMERO,   \n");
+		sb.append("  PART.FORMA,   \n");
+		sb.append("  ENC.FORMA AS ENC_FORMA   \n");
 		sb.append("FROM   \n");
-		sb.append("  PARTICULAS   \n");
+		sb.append("  PARTICULAS PART  \n");
+		sb.append("  INNER JOIN PARTICULA_ENCABEZADOS ENC on PART.PARTICULA_ENCABEZADO_ID=ENC.PARTICULA_ENCABEZADO_ID  \n");
 		sb.append("WHERE   \n");
-		sb.append("  PARTICULA_ID=?   \n");
+		sb.append("  PART.PARTICULA_ID=?   \n");
 
 		SELECCION_INDIVIDUAL_SQL = sb.toString();
 		
@@ -230,15 +239,17 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 		sb.append("  PART.SUBINDICE,   \n");
 		sb.append("  PART.GENERO,   \n");
 		sb.append("  PART.NUMERO,   \n");
-		sb.append("  PART.FORMA   \n");
+		sb.append("  PART.FORMA,   \n");
+		sb.append("  ENC.FORMA AS ENC_FORMA   \n");
         sb.append("FROM        \n");
         sb.append("  PARTICULAS PART       \n");
+        sb.append("  INNER JOIN PARTICULA_ENCABEZADOS ENC on PART.PARTICULA_ENCABEZADO_ID=ENC.PARTICULA_ENCABEZADO_ID  \n");
 		sb.append("WHERE   \n");
-		sb.append("  FORMA=?   \n");
+		sb.append("  PART.FORMA=?   \n");
 
 		SELECCION_POR_FORMA_SQL = sb.toString();
 		
-
+  
 		sb = new StringBuffer(200);
 		sb.append("SELECT   \n");
 		sb.append("  PART.PARTICULA_ID,   \n");
@@ -250,13 +261,15 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 		sb.append("  PART.SUBINDICE,   \n");
 		sb.append("  PART.GENERO,   \n");
 		sb.append("  PART.NUMERO,   \n");
-		sb.append("  PART.FORMA   \n");
+		sb.append("  PART.FORMA,   \n");
+		sb.append("  ENC.FORMA AS ENC_FORMA   \n");
         sb.append("FROM        \n");
         sb.append("  PARTICULAS PART       \n");
+        sb.append("  INNER JOIN PARTICULA_ENCABEZADOS ENC on PART.PARTICULA_ENCABEZADO_ID=ENC.PARTICULA_ENCABEZADO_ID  \n");
 		sb.append("WHERE   \n");
-		sb.append("  FORMA not like '%/%'  \n"); 
-	    sb.append("  AND FORMA NOT LIKE  '%\\\\%'  \n"); 
-		sb.append("  AND FORMA NOT LIKE '%=%'  \n");
+		sb.append("  PART.FORMA not like '%/%'  \n"); 
+	    sb.append("  AND PART.FORMA NOT LIKE  '%\\\\%'  \n"); 
+		sb.append("  AND PART.FORMA NOT LIKE '%=%'  \n");
 
 
 		SELECCION_NO_ACENTUABLES_SQL = sb.toString();
@@ -322,6 +335,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 			bean.setParticulaTipo(TipoPalabra.getEnum(rs.getString("TIPO_PALABRA")));
 			bean.setParticularidad((Particularidad)Particularidad.getEnum(rs.getString("PARTICULARIDAD")));
 			bean.setCaso((Caso)Caso.getEnum(rs.getInt("CASO")));
+			bean.setFormaEncabezado(rs.getString("ENC_FORMA"));
 			int persona=rs.getInt("PERSONA");
 			if (!rs.wasNull()){
 				bean.setPersona(Persona.getEnum(persona));
@@ -354,6 +368,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 			bean.setParticulaTipo(TipoPalabra.getEnum(rs.getString("TIPO_PALABRA")));
 			bean.setParticularidad((Particularidad)Particularidad.getEnum(rs.getString("PARTICULARIDAD")));
 			bean.setCaso((Caso)Caso.getEnum(rs.getInt("CASO")));
+			bean.setFormaEncabezado(rs.getString("ENC_FORMA"));
 			int persona=rs.getInt("PERSONA");
 			if (!rs.wasNull()){
 				bean.setPersona(Persona.getEnum(persona));
@@ -410,6 +425,8 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 		}
 	}
 	
+
+	
 	class SeleccionNoAcentuables extends SeleccionAbstractaSinSignificado {
 		public SeleccionNoAcentuables(DataSource dataSource) {
 			super(dataSource, SELECCION_NO_ACENTUABLES_SQL);
@@ -440,6 +457,8 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 	public List<ParticulaBean> seleccionaParticulasDadaFormaSinSignificado(String forma) {
 		return seleccionPorForma.execute(new Object[] {forma});
 	}
+	
+
 	
 	private SeleccionNoAcentuables seleccionNoAcentuables;
 	

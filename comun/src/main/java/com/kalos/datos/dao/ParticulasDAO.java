@@ -21,6 +21,8 @@ public interface ParticulasDAO  {
 	
 	List<ParticulaBean> seleccionaParticulasDadaFormaSinSignificado(String forma);
 	
+
+	
 	List<ParticulaBean> seleccionaParticulasNoAcentuablesSinSignificado();
 	
 	void inserta(ParticulaBean bean);

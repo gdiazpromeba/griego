@@ -21,9 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.log4j.Logger;
-
 import com.kalos.beans.CubosTipoPartBean;
 import com.kalos.beans.IrrParticipioEntero;
 import com.kalos.beans.IrrParticipioSimpleBean;
@@ -61,7 +58,7 @@ import com.kalos.operaciones.DesTransformaciones;
 import com.kalos.operaciones.OpBeans;
 import com.kalos.operaciones.OpPalabras;
 
-//import org.apache.log4j.Logger;
+
 
 /**
  * Clase que realiza el análisis morfológico de los participios.
@@ -85,8 +82,6 @@ public class AMParticipios implements AnalizadorMorfologico {
     private List<CubosTipoPartBean> listaCubosTipoPart;
     private GerenteTransParticipios gerenteTransParticipios;
     private GerenteVerbalizadorParticipios gerenteVerbalizadorParticipios;
-
-    //private Logger logger=Logger.getLogger(this.getClass().getName());
 
     private Participios participios;
 

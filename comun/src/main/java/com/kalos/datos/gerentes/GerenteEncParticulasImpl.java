@@ -1,3 +1,4 @@
+
 package com.kalos.datos.gerentes;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import com.kalos.datos.dao.EncParticulasDAO;
 import org.springframework.beans.factory.InitializingBean;
 
 public class GerenteEncParticulasImpl implements InitializingBean, SeleccionadorUnoTodos, GerenteEncParticulas {
+
     private Map<String, EncParticulaBean> mapEncPart = new HashMap<String, EncParticulaBean>();
     private EncParticulasDAO encParticulasDAO;
 
@@ -20,20 +22,21 @@ public class GerenteEncParticulasImpl implements InitializingBean, Seleccionador
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-	List<EncParticulaBean> localList = this.encParticulasDAO.seleccionaEncParticulasTodos();
-	Iterator<EncParticulaBean> localIterator = localList.iterator();
-	while (localIterator.hasNext()) {
-	    EncParticulaBean localf = localIterator.next();
-	    this.mapEncPart.put(localf.getId(), localf);
-	}
+        List<EncParticulaBean> localList = this.encParticulasDAO.seleccionaEncParticulasTodos();
+        Iterator<EncParticulaBean> localIterator = localList.iterator();
+        while (localIterator.hasNext()) {
+            EncParticulaBean localf = localIterator.next();
+            this.mapEncPart.put(localf.getId(), localf);
+        }
     }
+
 
     /* (non-Javadoc)
      * @see com.kalos.datos.gerentes.GerenteEncParticulasImpl#getTodos()
      */
     @Override
     public List<EncParticulaBean> getTodos() {
-	return new ArrayList<EncParticulaBean>(this.mapEncPart.values());
+        return new ArrayList<EncParticulaBean>(this.mapEncPart.values());
     }
 
     /* (non-Javadoc)
@@ -41,7 +44,7 @@ public class GerenteEncParticulasImpl implements InitializingBean, Seleccionador
      */
     @Override
     public EncParticulaBean seleccionaUno(String paramString) {
-	return (EncParticulaBean) this.mapEncPart.get(paramString);
+        return (EncParticulaBean) this.mapEncPart.get(paramString);
     }
 
     /* (non-Javadoc)
@@ -49,6 +52,6 @@ public class GerenteEncParticulasImpl implements InitializingBean, Seleccionador
      */
     @Override
     public void setEncParticulasDAO(EncParticulasDAO paramQA) {
-	this.encParticulasDAO = paramQA;
+        this.encParticulasDAO = paramQA;
     }
 }

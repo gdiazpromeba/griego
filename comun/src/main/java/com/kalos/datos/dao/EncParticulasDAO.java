@@ -14,5 +14,6 @@ public interface EncParticulasDAO {
     public abstract void modifica(ParticulaBean paraml);
 
     public abstract void borra(String paramString);
+    
 
 }

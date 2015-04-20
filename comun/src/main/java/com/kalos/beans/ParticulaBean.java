@@ -24,6 +24,7 @@ public class ParticulaBean  implements ISignificados{
 	private String forma;
 	private Map<Idioma, Significado> significados=new HashMap<Idioma, Significado>();
 	private String particulaEncabezadoId;
+	private String formaEncabezado;
 	
 	/**
 	 * @return Returns the caso.
@@ -163,5 +164,13 @@ public class ParticulaBean  implements ISignificados{
 	public void setParticulaEncabezadoId(String particulaEncabezadoId) {
 		this.particulaEncabezadoId = particulaEncabezadoId;
 	}
+    
+    public String getFormaEncabezado() {
+        return formaEncabezado;
+    }
+    
+    public void setFormaEncabezado(String formaEncabezado) {
+        this.formaEncabezado = formaEncabezado;
+    }
 
 }

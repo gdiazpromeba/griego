@@ -14,31 +14,12 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.kalos.analisismorfologico.negocio.AMAdjetivos;
-import com.kalos.analisismorfologico.negocio.AMAdverbios;
-import com.kalos.analisismorfologico.negocio.AMConjunciones;
-import com.kalos.analisismorfologico.negocio.AMInterjecciones;
-import com.kalos.analisismorfologico.negocio.AMNominal;
-import com.kalos.analisismorfologico.negocio.AMParticipios;
-import com.kalos.analisismorfologico.negocio.AMParticulas;
-import com.kalos.analisismorfologico.negocio.AMPreposiciones;
-import com.kalos.analisismorfologico.negocio.AMSustantivos;
-import com.kalos.analisismorfologico.negocio.AMUtil;
-import com.kalos.analisismorfologico.negocio.AMVerbal;
-import com.kalos.analisismorfologico.negocio.ExtractorPrefijos;
 import com.kalos.datos.gerentes.GerenteSeguridad;
-import com.kalos.datos.gerentes.GerenteVerbalizadorParticipios;
-import com.kalos.datos.gerentes.GerenteVerbos;
-import com.kalos.datos.gerentes.GerenteVerbosCompuestos;
-import com.kalos.datos.modulos.FuenteDeDatosKalos;
-import com.kalos.flexion.declinacion.Participios;
 import com.kalos.iu.analisismorfologico.PanelAM;
 import com.kalos.iu.config.IuConfig;
 import com.kalos.iu.diccionario.PanelDiccionario;
@@ -61,15 +42,7 @@ public class Comienzo {
             c.inicializa(jframe);
             jframe.setTitle("KALÓS " + Configuracion.getVersionNumero());
             jframe.setLayout(new BorderLayout());
-            Comienzo.panel = new JPanel();
-            Comienzo.panel.setLayout(new BorderLayout());
-            JTabbedPane jtabbedpane = new JTabbedPane();
-            Comienzo.panel.add(Comienzo.getPanelProgreso(), "South");
-            Comienzo.panel.add(jtabbedpane, "Center");
-            jtabbedpane.add(Recursos.getCadena("diccionario"), Comienzo.getPanelDiccionario());
-            jtabbedpane.add(Recursos.getCadena("analisis_morfologico"), Comienzo.getPanelAM());
-            jtabbedpane.add(Recursos.getCadena("flexion"), Comienzo.getPanelFlexion());
-            jframe.add(Comienzo.panel);
+            jframe.add(Comienzo.panelPrincipal);
             jframe.setSize(1084, 670);
             jframe.setLocationRelativeTo(null);
             jframe.setVisible(true);
@@ -125,8 +98,6 @@ public class Comienzo {
                 applicationContext = Comienzo.creaContextoClasspath();
                 logger.info("application context created");
                 caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_controles_visuales"));
-                
-                
                 panelAM = (PanelAM) applicationContext.getBean("panelResultadosAM");
                 panelDiccionario = (PanelDiccionario) applicationContext.getBean("panelResultadosDiccionario");               
                 panelAM.setApplicationContext(applicationContext);
@@ -134,8 +105,10 @@ public class Comienzo {
                 panelFlexion = (PanelFlexion) applicationContext.getBean("panelTablaFlexion");
                 ventanaRegistro = (VentanaRegistro) applicationContext.getBean("ventanaRegistro");
                 panelFlexion.setApplicationContext(applicationContext);
+                panelPrincipal = (PanelPrincipal) applicationContext.getBean("panelPrincipal");
+                panelAM.setPanelPrincipal(panelPrincipal);
                 caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_control_eventos"));
-                new Controlador(panelDiccionario, Comienzo.getPanelFlexion());
+                new Controlador(panelDiccionario, Comienzo.getPanelFlexion(), Comienzo.panelPrincipal);
                 caratula.habilitacionBotonComenzar(true);
                 caratula.cmbTeclados.setEnabled(true);
                 caratula.comboIdiomaEtiquetas.setEnabled(true);
@@ -343,6 +316,6 @@ public class Comienzo {
     private static JFrame frame;
     private static ApplicationContext applicationContext;
     private static VentanaRegistro ventanaRegistro;
-    public static JPanel panel;
+    public static PanelPrincipal panelPrincipal;
 
 }

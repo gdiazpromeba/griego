@@ -2,7 +2,7 @@
 
 <!-- prepara un setup. Este build asume que común e iu han sido ejecutados, y que archivos jar compilados ya existen
 en los respectivos directorios "target" -->
-<project name="setup" basedir="." default="preparacion" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+<project name="setup" basedir="." default="run" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
 	
    <path id="maven-ant-tasks.classpath" path="lib/maven-ant-tasks-2.1.3.jar" />
    <typedef resource="org/apache/maven/artifact/ant/antlib.xml"  uri="antlib:org.apache.maven.artifact.ant" classpathref="maven-ant-tasks.classpath" />	
@@ -17,23 +17,11 @@ en los respectivos directorios "target" -->
 	<property name="shrinklog" value="shrink.log"/>
 	<property environment="env"/>
 	
-	
-	<target name="preparacion" description="Delete all generated files">
-		<delete dir="work"/>
-		<mkdir dir="work"/>
-		<mkdir dir="work/lib"/>
-		<copy file="../iu/target/${jar.iu}" toDir="work"/>
-		<copy file="../comun/target/${jar.comun}" toDir="work"/>
-		<copy file="../comun-swing/target/${jar.comun.swing}" toDir="work"/>
-		<copy todir="work/lib">
-			<fileset dir="../iu/target/dependency"/>
-		</copy>
-	</target>
-	
 	<target name="copiaDeps">
 	  <artifact:mvn pom="../iu/pom.xml" mavenHome="${env.M2_HOME}" fork="true">
 	    <arg value="dependency:copy-dependencies"/>
 	  </artifact:mvn>
+	  <delete dir="work/lib"/>
 	  <mkdir dir="work/lib"/>
 	  <copy todir="work/lib">
 	    <fileset dir="../iu/target/dependency"/>
@@ -68,7 +56,12 @@ en los respectivos directorios "target" -->
 		</java>
 	</target>
 	
-	<target name="runOfuscado" depends="compilacion, granJar, conBDYReportes, obfuscate" >
+	<target name="runBuild" depends="compilacion, granJar, conBDYReportes" >
+		<java jar="work/condb/${jar.kalos}" dir="work/condb" fork="true">
+		</java>
+	</target>
+	
+	<target name="runBuildOfuscado" depends="compilacion, granJar, conBDYReportes, obfuscate" >
 		<java jar="work/condb/${jar.kalos.ofuscado}" dir="work/condb" fork="true">
 		</java>
 	</target>
@@ -151,12 +144,6 @@ en los respectivos directorios "target" -->
 			<include name="*.jar"/>
 		</fileset>
 	</path>
-	
-	<path id="libs.for.comun-swing">
-		<fileset dir="work/lib/">
-			<include name="*.jar"/>
-		</fileset>
-	</path>	
 
 	<manifestclasspath property="lib.list.iu" jarfile="work/${jar.iu}">
 		<classpath refid="libs.for.iu" />
@@ -165,121 +152,7 @@ en los respectivos directorios "target" -->
 	<manifestclasspath property="lib.list.comun" jarfile="work/lib/${jar.comun}">
 		<classpath refid="libs.for.comun" />
 	</manifestclasspath>
-	
-	<manifestclasspath property="lib.list.comun.swing" jarfile="work/lib/${jar.comun.swing}">
-		<classpath refid="libs.for.comun" />
-	</manifestclasspath>	
 
-	<target name="inyectaManifiestos" depends="preparaDirsParaManifiestos,preparaComun, preparaComunSwing, inyectaManifiestoEnIu" >
-	  <delete dir="work/conmanifiesto"/>
-	  <mkdir dir="work/conmanifiesto"/>
-	  <copy file="work/tmp/comun/newjar/${jar.comun}" toDir="work/conmanifiesto"/>
-      <copy file="work/tmp/comun-swing/newjar/${jar.comun.swing}" toDir="work/conmanifiesto"/>
-      <copy file="work/tmp/iu/newjar/${jar.iu}" toDir="work/conmanifiesto"/>
-	  <delete dir="work/tmp"/>
-	</target>
-	
-	
-	<target name="preparaDirsParaManifiestos">
-	  <delete dir="work/tmp"/>
-	  <mkdir dir="work/tmp/comun/"/>		
-	  <mkdir dir="work/tmp/comun/unjarred"/>
-	  <mkdir dir="work/tmp/comun/newjar"/>	
-	  <delete dir="work/tmp"/>
-	  <mkdir dir="work/tmp/comun-swing/"/>		
-	  <mkdir dir="work/tmp/comun-swing/unjarred"/>
-	  <mkdir dir="work/tmp/comun-swing/newjar"/>	  	
-      <mkdir dir="work/tmp/iu/"/>		
-	  <mkdir dir="work/tmp/iu/unjarred"/>
-	  <mkdir dir="work/tmp/iu/newjar"/>			
-	</target>
-	
-	
-	<path id="libs.for.comun.yguard">
-		<fileset dir="work/condb/lib/">
-			<include name="*.jar"/>
-		</fileset>
-	</path>
-	
-	
-    <target name="ofuscacion">
-      <echo>lib comun es=${lib.list.comun.yguard}</echo>
-      <taskdef name="yguard" classname="com.yworks.yguard.YGuardTask" classpath="lib/yguard-2.5.3/lib/yguard.jar"/>
-      <yguard>
-      	<inoutpair in="work/condb/${jar.kalos}" out="work/condb/${jar.kalos.ofuscado}"/>  
-        
-	    <externalclasses>
-	      <path refid="libs.for.comun.yguard" />
-	    </externalclasses>        
-
-        <rename mainclass="com.kalos.iu.Comienzo" logfile="renamelog.xml">
-
-          <property name="error-checking" value="pedantic"/>
-
-          <keep>
-            <package>
-              <patternset>
-                <include name="com.kalos.**"/>
-              </patternset>
-            </package>
-
-          </keep>
-        </rename>
-
-      </yguard>
-
-    </target>
-
-
-
-
-	<target name="preparaComun">
-		<echo>Inyectando el manifiesto en "común"</echo>
-		<unzip src="work/${jar.comun}" dest="work/tmp/comun/unjarred"/>
-	    <echo>reemplazando el archivo de configuración de BD</echo>
-	    <replace file="work/tmp/comun/unjarred/connection.properties/">
-		  <!-- esta es la ubicación del archivo RESPECTO DEL PROCESO JAVA QUE LLAMA A IU, no respecto del jar común que lo contiene -->
-          <replacetoken>jdbc:mckoi://localhost/</replacetoken>
-	    	<replacevalue>jdbc:mckoi:local://../Java/db.conf</replacevalue>
-	    	<!--
-            <replacevalue>jdbc:mckoi:local://./db.conf</replacevalue>
-            -->
-        </replace>		
-		<jar destfile="work/tmp/comun/newjar/${jar.comun}">
-			<fileset dir="work/tmp/comun/unjarred"/>
-			<manifest>
-				<attribute name="Class-Path" value="${lib.list.comun}" />
-				<attribute name="Created-By" value="${user.name}" />
-			</manifest>
-		</jar>
-	</target>
-	
-	<target name="preparaComunSwing">
-		<echo>Inyectando el manifiesto en "común"</echo>
-		<unzip src="work/${jar.comun.swing}" dest="work/tmp/comun-swing/unjarred"/>
-		<jar destfile="work/tmp/comun-swing/newjar/${jar.comun.swing}">
-			<fileset dir="work/tmp/comun-swing/unjarred"/>
-			<manifest>
-				<attribute name="Class-Path" value="${lib.list.comun.swing}" />
-				<attribute name="Created-By" value="${user.name}" />
-			</manifest>
-		</jar>
-	</target>	
-
-
-
-	<target name="inyectaManifiestoEnIu">
-		<echo>Inyectando el manifiesto en "iu"</echo>
-		<unzip src="work/${jar.iu}" dest="work/tmp/iu/unjarred"/>
-		<jar destfile="work/tmp/iu/newjar/${jar.iu}">
-			<fileset dir="work/tmp/iu/unjarred"/>
-			<manifest>
-				<attribute name="Class-Path" value="${lib.list.iu}"/>
-				<attribute name="Created-By" value="${user.name}" />
-				<attribute name="Main-Class" value="com.kalos.iu.Comienzo" />
-			</manifest>
-		</jar>
-	</target>
 	
 	<target name="conBDYReportes">
       <echo>Creando una versión con base de datos</echo>

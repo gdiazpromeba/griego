@@ -1,3 +1,4 @@
+
 package com.kalos.iu.analisismorfologico;
 
 import java.awt.BorderLayout;
@@ -48,6 +49,7 @@ import com.kalos.enumeraciones.Acento;
 import com.kalos.enumeraciones.Ignorancia;
 import com.kalos.enumeraciones.TipoPalabra;
 import com.kalos.flexion.UtilidadesTM;
+import com.kalos.iu.PanelPrincipal;
 import com.kalos.iu.PanelProgreso;
 import com.kalos.iu.registro.VentanaMolesta;
 import com.kalos.iu.tareas.TareaAM;
@@ -115,8 +117,11 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
     private JTabbedPane tab = new JTabbedPane();
     private DetallelAM detalle = new DetallelAM();
     private List<ResultadoUniversal> resultados;
+    private PanelPrincipal panelPrincipal;
 
     private FiltroEnumeraciones tipoPalabra = new FiltroEnumeraciones(TipoPalabra.values());
+    
+    Logger log=Logger.getLogger(this.getClass().getName());
 
     public PanelAM() throws Exception {
         buscar.setText(Recursos.getCadena("cargando"));
@@ -127,12 +132,14 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
         tab.add(Recursos.getCadena("detalles"), detalle);
         tabla.getSelectionModel().addListSelectionListener(new EscuchaSeleccionTabla());
         ignorar.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent ev) {
                 tabla.setColumnModel(new DefaultTableColumnModel());
                 tabla.repaint();
             }
         });
         textoEntrada.getJTextField().addFocusListener(new FocusAdapter() {
+
             public void focusLost(FocusEvent ev) {
                 String cadenaCompleta = textoEntrada.getCadenaCompleta();
                 if (cadenaCompleta == null)
@@ -141,8 +148,23 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
                 textoEntrada.setCadenaCompleta(cadenaCompleta);
             }
         });
+        tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+
+                if (tabla.getSelectionModel().getValueIsAdjusting()) return;
+                if (tabla.getSelectedRow() > 0) {
+                    PanelAM panelAM = panelPrincipal.getPanelAM();
+                    ResultadoUniversal reu = panelAM.getResultadoAt(tabla.getSelectedRow());
+                    panelPrincipal.setResultadoUniversal(reu);
+                }
+
+            }
+        });
 
         buscar.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent ev) {
                 String cadenaCompleta = textoEntrada.getCadenaCompleta();
                 if (StringUtils.isEmpty(cadenaCompleta)) {
@@ -157,8 +179,8 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
                     proceder();
                 } catch (Exception e) {
                     logger.error("error al invocar proceder ", e);
-                    JFrame fra=(JFrame) SwingUtilities.getRoot(buscar);
-                    
+                    JFrame fra = (JFrame) SwingUtilities.getRoot(buscar);
+
                     DialogErrores dle = new DialogErrores(fra, Recursos.getCadena("error"), Recursos.getCadena("error_en_am"), true, e);
                     dle.setLocationRelativeTo(null);
                     dle.setVisible(true);
@@ -168,6 +190,7 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
         });
         deslizador.setValor(Configuracion.getTamañoAM());
         deslizador.addPropertyChangeListener(new PropertyChangeListener() {
+
             public void propertyChange(PropertyChangeEvent evt) {
                 Deslizador deslizador = (Deslizador) evt.getSource();
                 cambiaTamañoFont(deslizador.getValor());
@@ -177,6 +200,7 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
         // esta carga hay que ponerla en un evento, porque no puede ocurrir
         // hasta que el panel reciba el contexto
         this.addComponentListener(new ComponentAdapter() {
+
             public void componentShown(ComponentEvent ev) {
                 new CargaAnalizadores().start();
             }
@@ -185,11 +209,16 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
         repaint();
     }
 
+    public void setPanelPrincipal(PanelPrincipal panelPrincipal) {
+        this.panelPrincipal = panelPrincipal;
+    }
+
     /**
      * cosas que dejo para cuando el control es mostrado
      * 
      */
     private class CargaAnalizadores extends Thread {
+
         public void run() {
             panelProgreso = (PanelProgreso) contexto.getBean("panelProgreso");
             ventanaMolesta = (VentanaMolesta) contexto.getBean("ventanaMolesta");
@@ -221,8 +250,8 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
 
         PanelBuilder builder = new PanelBuilder(layout);
 
-//         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
-//         new FormDebugPanel());
+        //         DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+        //         new FormDebugPanel());
 
         builder.setDefaultDialogBorder();
 
@@ -265,33 +294,32 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
                 String[] entradasQuePuedenNoTenerAcento = null;
                 resultados = new ArrayList<ResultadoUniversal>();
                 switch (tipoIgnorancia) {
-                case Nada:
-                    entradas = new String[]{cadenaCompleta };
-                    entradasQuePuedenNoTenerAcento=entradas;
-                    break;
-                case SignosLargaCorta:
-                    // String ccAcortada =
-                    // OpPalabras.strAbreviaCompleta(cadenaCompleta);
-                    ;
-                    entradas = OpPalabras.explotaCompletaLargaBreve(cadenaCompleta);
-                    entradasQuePuedenNoTenerAcento=entradas;
-                    break;
-                case TodosLosDiacriticos:
-                    try {
-                        String ccNeutralizada = OpPalabras.neutraliza(cadenaCompleta);
-                        entradas = OpPalabras.explotaCompleta(ccNeutralizada);
-                        entradasQuePuedenNoTenerAcento=OpPalabras.explotaCompleta(ccNeutralizada, true);
-                    } catch (ExcepcionCaracterNoEncontrado ex) {
-                        logger.error("excepción en AM ", ex);
-                    }
-                    break;
+                    case Nada:
+                        entradas = new String[] { cadenaCompleta };
+                        entradasQuePuedenNoTenerAcento = entradas;
+                        break;
+                    case SignosLargaCorta:
+                        // String ccAcortada =
+                        // OpPalabras.strAbreviaCompleta(cadenaCompleta);
+                        ;
+                        entradas = OpPalabras.explotaCompletaLargaBreve(cadenaCompleta);
+                        entradasQuePuedenNoTenerAcento = entradas;
+                        break;
+                    case TodosLosDiacriticos:
+                        try {
+                            String ccNeutralizada = OpPalabras.neutraliza(cadenaCompleta);
+                            entradas = OpPalabras.explotaCompleta(ccNeutralizada);
+                            entradasQuePuedenNoTenerAcento = OpPalabras.explotaCompleta(ccNeutralizada, true);
+                        } catch (ExcepcionCaracterNoEncontrado ex) {
+                            logger.error("excepción en AM ", ex);
+                        }
+                        break;
                 }
 
                 int maximoFormas = Configuracion.getMaximoFormasAM();
                 logger.info("la forma fue explotada en " + entradas.length + " formas");
                 if (entradas.length > maximoFormas) {
 
-                	
                     logger.info("son demasiadas formas y el AM se suspende");
                     String mensaje = Recursos.getCadena("am.maximo_numero_formas_superado");
                     mensaje = mensaje.replace("{1}", Integer.toString(maximoFormas));
@@ -325,78 +353,77 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_verbos"));
                     Worker.post(new TareaAM(amVerbos, entradas, resVerbos, cacheAA));
                 }
-                
+
                 if (tiposAAnalizar.contains(TipoPalabra.Sustantivo)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_sustantivos"));
                     Worker.post(new TareaAM(amSustantivos, entradas, resSustantivos, cacheAA));
                 }
-             
+
                 if (tiposAAnalizar.contains(TipoPalabra.Infinitivo)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_infinitivos"));
                     Worker.post(new TareaAM(amInfinitivos, entradas, resInfinitivos, cacheAA));
                 }
-                
+
                 if (tiposAAnalizar.contains(TipoPalabra.Participio)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_participios"));
                     Worker.post(new TareaAM(amParticipios, entradas, resParticipios, cacheAA));
                 }
-                
+
                 if (tiposAAnalizar.contains(TipoPalabra.Adjetivo)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_adjetivos"));
                     Worker.post(new TareaAM(amAdjetivos, entradas, resAdjetivos, cacheAA));
                 }
-                
+
                 if (tiposAAnalizar.contains(TipoPalabra.Adverbio)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_adverbios"));
                     Worker.post(new TareaAM(amAdverbios, entradas, resAdjetivos, cacheAA));
                 }
-                
+
                 if (tiposAAnalizar.contains(TipoPalabra.Interjeccion)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_interjecciones"));
                     Worker.post(new TareaAM(amInterjecciones, entradas, resAdjetivos, cacheAA));
                 }
-                
+
                 if (tiposAAnalizar.contains(TipoPalabra.Conjuncion)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_conjunciones"));
                     Worker.post(new TareaAM(amConjunciones, entradasQuePuedenNoTenerAcento, resConjunciones, cacheAA));
                 }
-                
+
                 if (tiposAAnalizar.contains(TipoPalabra.Preposicion)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_preposiciones"));
                     Worker.post(new TareaAM(amPreposiciones, entradasQuePuedenNoTenerAcento, resConjunciones, cacheAA));
                 }
-                
-                
-                boolean hayParticulas=tiposAAnalizar.contains(TipoPalabra.Articulo) 
-                || tiposAAnalizar.contains(TipoPalabra.PronombrePersonal)
-                || tiposAAnalizar.contains(TipoPalabra.PronombreReflexivo)
-                || tiposAAnalizar.contains(TipoPalabra.PronombreRelativo)
-                || tiposAAnalizar.contains(TipoPalabra.PronombreInterrogativo)
-                || tiposAAnalizar.contains(TipoPalabra.PronombreIndefinido);
-                
+
+                boolean hayParticulas = tiposAAnalizar.contains(TipoPalabra.Articulo)
+                        || tiposAAnalizar.contains(TipoPalabra.PronombrePersonal)
+                        || tiposAAnalizar.contains(TipoPalabra.PronombreReflexivo)
+                        || tiposAAnalizar.contains(TipoPalabra.PronombreRelativo)
+                        || tiposAAnalizar.contains(TipoPalabra.PronombreInterrogativo)
+                        || tiposAAnalizar.contains(TipoPalabra.PronombreIndefinido);
+
                 if (hayParticulas) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_otros"));
                     Worker.post(new TareaAM(amParticulas, entradasQuePuedenNoTenerAcento, resParticulas, cacheAA));
                 }
-                
+
                 resultados.addAll(resVerbos);
                 resultados.addAll(resSustantivos);
                 resultados.addAll(resInfinitivos);
                 resultados.addAll(resParticipios);
-                resultados.addAll(resAdjetivos);                
+                resultados.addAll(resAdjetivos);
                 resultados.addAll(resAdverbios);
                 resultados.addAll(resInterjecciones);
                 resultados.addAll(resConjunciones);
                 resultados.addAll(resPreposiciones);
                 resultados.addAll(resParticulas);
-                
+
                 Collections.sort(resultados, new ComparadorResultados<ResultadoUniversal>());
 
                 gerenteSignificados.pueblaSignificadosResultados(resultados);
                 dtm = cargaResultadosEnModelo(resultados, ignorando);
             }
             TareaDibujoTablemodel tdt = new TareaDibujoTablemodel(dtm, tabla, ignorando);
-            Worker.post(new TareaHabilitaComponentes(new Component[]{buscar, ignorar }));
+            Worker.post(new TareaHabilitaComponentes(new Component[] { buscar, ignorar }));
             Worker.post(new TareaOcultaProgreso(panelProgreso));
             Worker.post(tdt);
             Worker.post(new TareaRedibujaTodo());
@@ -407,7 +434,7 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
             panelProgreso.etiqueta.setVisible(false);
             buscar.setEnabled(true);
             ignorar.setEnabled(true);
-            JFrame fra=(JFrame) SwingUtilities.getRoot(this);
+            JFrame fra = (JFrame) SwingUtilities.getRoot(this);
             DialogErrores dle = new DialogErrores(fra, Recursos.getCadena("error"), Recursos.getCadena("error_en_am"), true, e);
             dle.setLocationRelativeTo(null);
             dle.setVisible(true);
@@ -423,6 +450,7 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
      * @version $Revision: 1.0 $
      */
     private class EscuchaSeleccionTabla implements ListSelectionListener {
+
         public void valueChanged(ListSelectionEvent ev) {
             if (ev.getValueIsAdjusting())
                 return;
@@ -450,9 +478,8 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
         return nuevoArray;
     }
 
-
-
     private class TareaRedibujaTodo extends Task {
+
         public Object run() {
             JFrame fra = (JFrame) SwingUtilities.getWindowAncestor(panelProgreso);
             if (Configuracion.getNombre() == null) {
@@ -476,9 +503,9 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
             dtm.addRow(fila);
         }
         if (ignorando) {
-            utilidadesTM.reemplazaNombresColumna(dtm, new String[]{"forma_flexionada", "accidentes", "significado" });
+            utilidadesTM.reemplazaNombresColumna(dtm, new String[] { "forma_flexionada", "accidentes", "significado" });
         } else {
-            utilidadesTM.reemplazaNombresColumna(dtm, new String[]{"accidentes", "significado" });
+            utilidadesTM.reemplazaNombresColumna(dtm, new String[] { "accidentes", "significado" });
         }
         return dtm;
     }
@@ -594,48 +621,48 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
         List<String> advertencias = new ArrayList<String>();
         AnalisisAcento aa = AnalisisAcento.getAnalisisAcento(cadenaCompleta);
         switch (ignorancia) {
-        case Nada:
-            if (aa.actuales.tipoAcento.equals(Acento.Ninguno)) {
-                if (!buscaParticulas()) {
-                    errores.add(Recursos.getCadena("validacion.ignora_nada.forma_no_tiene_acentos"));
+            case Nada:
+                if (aa.actuales.tipoAcento.equals(Acento.Ninguno)) {
+                    if (!buscaParticulas()) {
+                        errores.add(Recursos.getCadena("validacion.ignora_nada.forma_no_tiene_acentos"));
+                    }
                 }
-            }
-            if (OpPalabras.empiezaConVocal(cadenaCompleta) && !OpPalabras.tieneEspiritu(cadenaCompleta)) {
-                errores.add(Recursos.getCadena("validacion.ignora_nada.forma_no_tiene_espiritus"));
-            }
-            break;
-        case SignosLargaCorta:
-            if (aa.actuales.tipoAcento.equals(Acento.Ninguno)) {
-                if (!buscaParticulas()) {
-                    errores.add(Recursos.getCadena("validacion.ignora_larga_corta.forma_no_tiene_acentos"));
+                if (OpPalabras.empiezaConVocal(cadenaCompleta) && !OpPalabras.tieneEspiritu(cadenaCompleta)) {
+                    errores.add(Recursos.getCadena("validacion.ignora_nada.forma_no_tiene_espiritus"));
                 }
-            }
-            if (OpPalabras.empiezaConVocal(cadenaCompleta) && !OpPalabras.tieneEspiritu(cadenaCompleta)) {
-                errores.add(Recursos.getCadena("validacion.ignora_larga_corta.forma_no_tiene_espiritus"));
-            }
-            if (OpPalabras.tieneInformacionLargaCorta(cadenaCompleta)) {
-                advertencias.add(Recursos.getCadena("validacion.ignora_larga_corta.larga_ignorada"));
-            }
-            break;
-        case TodosLosDiacriticos:
-            if (OpPalabras.tieneInformacionLargaCorta(cadenaCompleta)) {
-                advertencias.add(Recursos.getCadena("validacion.ignora_todo.larga_ignorada"));
-            }
-            if (!aa.actuales.tipoAcento.equals(Acento.Ninguno)) {
-                if (!buscaParticulas()) {
-                    advertencias.add(Recursos.getCadena("validacion.ignora_todo.acento_ignorado"));
+                break;
+            case SignosLargaCorta:
+                if (aa.actuales.tipoAcento.equals(Acento.Ninguno)) {
+                    if (!buscaParticulas()) {
+                        errores.add(Recursos.getCadena("validacion.ignora_larga_corta.forma_no_tiene_acentos"));
+                    }
                 }
-            }
-            if (OpPalabras.tieneEspiritu(cadenaCompleta)) {
-                advertencias.add(Recursos.getCadena("validacion.ignora_todo.espiritu_ignorado"));
-            }
-            if (OpPalabras.tieneDieresis(cadenaCompleta)) {
-                advertencias.add(Recursos.getCadena("validacion.ignora_todo.dieresis_ignorado"));
-            }
-            if (OpPalabras.tieneSubscripta(cadenaCompleta)) {
-                advertencias.add(Recursos.getCadena("validacion.ignora_todo.subscripta_ignorada"));
-            }
-            break;
+                if (OpPalabras.empiezaConVocal(cadenaCompleta) && !OpPalabras.tieneEspiritu(cadenaCompleta)) {
+                    errores.add(Recursos.getCadena("validacion.ignora_larga_corta.forma_no_tiene_espiritus"));
+                }
+                if (OpPalabras.tieneInformacionLargaCorta(cadenaCompleta)) {
+                    advertencias.add(Recursos.getCadena("validacion.ignora_larga_corta.larga_ignorada"));
+                }
+                break;
+            case TodosLosDiacriticos:
+                if (OpPalabras.tieneInformacionLargaCorta(cadenaCompleta)) {
+                    advertencias.add(Recursos.getCadena("validacion.ignora_todo.larga_ignorada"));
+                }
+                if (!aa.actuales.tipoAcento.equals(Acento.Ninguno)) {
+                    if (!buscaParticulas()) {
+                        advertencias.add(Recursos.getCadena("validacion.ignora_todo.acento_ignorado"));
+                    }
+                }
+                if (OpPalabras.tieneEspiritu(cadenaCompleta)) {
+                    advertencias.add(Recursos.getCadena("validacion.ignora_todo.espiritu_ignorado"));
+                }
+                if (OpPalabras.tieneDieresis(cadenaCompleta)) {
+                    advertencias.add(Recursos.getCadena("validacion.ignora_todo.dieresis_ignorado"));
+                }
+                if (OpPalabras.tieneSubscripta(cadenaCompleta)) {
+                    advertencias.add(Recursos.getCadena("validacion.ignora_todo.subscripta_ignorada"));
+                }
+                break;
         }
         if (errores.size() > 0) {
             StringBuffer mensaje = new StringBuffer();
@@ -661,6 +688,10 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
      */
     public JButton getBuscar() {
         return buscar;
+    }
+    
+    public ResultadoUniversal getResultadoAt(int row) {
+        return resultados.get(row);
     }
 
     /*

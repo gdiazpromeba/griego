@@ -1,12 +1,20 @@
 package com.kalos.iu.tareas;
 
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import com.kalos.beans.ResultadoUniversal;
+import com.kalos.iu.PanelPrincipal;
+import com.kalos.iu.analisismorfologico.PanelAM;
 import com.kalos.recursos.Recursos;
+
 import foxtrot.Task;
 
 public class TareaDibujoTablemodel extends Task {
@@ -15,6 +23,7 @@ public class TareaDibujoTablemodel extends Task {
 	private JTable tabla;
 	private boolean ignorando;
 	private TableColumnModel columnModelVacio;
+	//private PanelPrincipal panelPrincipal;
 	
 	public TareaDibujoTablemodel(DefaultTableModel dtm, JTable tabla, boolean ignorando) {
 		this.dtm = dtm;
@@ -26,7 +35,10 @@ public class TareaDibujoTablemodel extends Task {
 		this.columnModelVacio.getColumn(0).setHeaderValue(Recursos.getCadena("ninguna_forma_encontrada"));
 	}
 	
+	org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(this.getClass().getName());
+	
 	public Object run(){
+	    tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		if (dtm != null && dtm.getRowCount() > 0) {
 			TableColumnModel columnModelNormal=creaColumnmodelNormal(ignorando);
 			tabla.setColumnModel(columnModelNormal);
@@ -41,6 +53,8 @@ public class TareaDibujoTablemodel extends Task {
 		}
 		return null;
 	}
+	
+
 
 	/**
 	 * Crea el columnmodel normal.

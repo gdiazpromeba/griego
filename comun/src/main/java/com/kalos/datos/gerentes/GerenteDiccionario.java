@@ -3,6 +3,7 @@ package com.kalos.datos.gerentes;
 import java.util.List;
 
 import com.kalos.beans.EntradaDiccionario;
+import com.kalos.beans.ResultadoUniversal;
 import com.kalos.enumeraciones.LugarSubcadena;
 import com.kalos.enumeraciones.TipoPalabra;
 
@@ -53,6 +54,8 @@ public interface GerenteDiccionario {
 	List<EntradaDiccionario> getRegistros(List<String> ids);
 	
 	void inserta(EntradaDiccionario ea);
+	
+	public EntradaDiccionario getEntradaDiccionario(ResultadoUniversal reu);
 	
 	
 }

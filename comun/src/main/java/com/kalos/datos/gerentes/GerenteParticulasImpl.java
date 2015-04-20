@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import com.kalos.beans.EncParticulaBean;
 import com.kalos.beans.ParticulaBean;
 import com.kalos.datos.dao.ParticulasDAO;
 import com.kalos.enumeraciones.Persona;
@@ -20,6 +21,8 @@ public class GerenteParticulasImpl implements GerenteParticulas {
 	public List<String> seleccionaIdsPorEncabezado(String idEncabezado) {
 		return particulasDAO.seleccionaIdsPorEncabezado(idEncabezado);
 	}
+
+	
 
 
 	/* (non-Javadoc)
@@ -76,12 +79,13 @@ public class GerenteParticulasImpl implements GerenteParticulas {
 	public ParticulaBean getParticulaSinSignificado(String id){
 	    return particulasDAO.seleccionaIndividual(id);
 	}
-	
 
 	
 	public List<ParticulaBean> seleccionaParticulasDadaFormaSinSignificado(String forma){
 		return particulasDAO.seleccionaParticulasDadaFormaSinSignificado(forma);
 	}
+	
+
 
 
 	/**

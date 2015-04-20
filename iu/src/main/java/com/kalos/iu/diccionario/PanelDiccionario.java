@@ -202,8 +202,7 @@ public class PanelDiccionario extends JPanel implements TipografiaCambiable {
 		if (pagModDiccionario == null)
 			Worker.post(new TareaLeyenda(panProgreso, "ninguna_forma_encontrada"));
 		else
-			Worker.post(new TareaLeyenda(panProgreso, "formas_encontradas", new String[] { Integer.toString(pagModDiccionario
-					.getRowCount()) }));
+			Worker.post(new TareaLeyenda(panProgreso, "formas_encontradas", new String[] { Integer.toString(pagModDiccionario.getRowCount()) }));
 		Worker.post(new TareaOcultaProgreso(panProgreso));
 		Worker.post(new TareaHabilitaComponentes(new Component[] { botBuscar, cmbIgnorancias }));
 		if (pagModDiccionario.getRowCount() > 0) {
@@ -235,22 +234,22 @@ public class PanelDiccionario extends JPanel implements TipografiaCambiable {
 		return cmbLugaresSubcadena;
 	}
 
-	public void procesaCadena(Ignorancia e1, boolean flag) throws Exception {
+	public void procesaCadena(Ignorancia ingorancia, boolean flag) throws Exception {
 		D();
-		String s = textoAlternable.getCadenaCompleta();
+		String cadena = textoAlternable.getCadenaCompleta();
 
-		switch (e1) {
+		switch (ingorancia) {
 		case TodosLosDiacriticos: // '\001'
-			s = OpPalabras.neutraliza(s);
+			cadena = OpPalabras.neutraliza(cadena);
 			break;
 
 		case SignosLargaCorta: // '\002'
-			s = OpPalabras.strAbreviaCompleta(s);
+			cadena = OpPalabras.strAbreviaCompleta(cadena);
 			break;
 		}
-		if (s == null)
-			s = "";
-		proceder(s, e1);
+		if (cadena == null)
+			cadena = "";
+		proceder(cadena, ingorancia);
 	}
 
 	public void navegaTablaResultado(KeyEvent keyevent) {
