@@ -154,7 +154,7 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
             public void valueChanged(ListSelectionEvent e) {
 
                 if (tabla.getSelectionModel().getValueIsAdjusting()) return;
-                if (tabla.getSelectedRow() > 0) {
+                if (tabla.getSelectedRow() > -1) {
                     PanelAM panelAM = panelPrincipal.getPanelAM();
                     ResultadoUniversal reu = panelAM.getResultadoAt(tabla.getSelectedRow());
                     panelPrincipal.setResultadoUniversal(reu);

@@ -66,7 +66,6 @@ public class GerenteDiccionarioImpl implements GerenteDiccionario {
         this.diccionarioDAO = diccionarioDAO;
     }
     
-    Logger log = Logger.getLogger(this.getClass().getName());
     
     public EntradaDiccionario getEntradaDiccionario(ResultadoUniversal reu){
         String referenteId = null;
@@ -97,7 +96,6 @@ public class GerenteDiccionarioImpl implements GerenteDiccionario {
             
         }
         List<String> ids= new ArrayList<>();
-        log.info("el referente id deducido es =" + referenteId);
         ids.add(referenteId);
         return  getRegistros( ids).get(0);
     }
