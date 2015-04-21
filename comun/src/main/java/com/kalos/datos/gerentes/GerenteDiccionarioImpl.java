@@ -4,10 +4,6 @@ package com.kalos.datos.gerentes;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
-import sun.util.logging.resources.logging;
-
 import com.kalos.beans.EntradaDiccionario;
 import com.kalos.beans.ResultadoUniversal;
 import com.kalos.datos.dao.DiccionarioDAO;

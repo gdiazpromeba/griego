@@ -106,7 +106,11 @@ public class Comienzo {
                 ventanaRegistro = (VentanaRegistro) applicationContext.getBean("ventanaRegistro");
                 panelFlexion.setApplicationContext(applicationContext);
                 panelPrincipal = (PanelPrincipal) applicationContext.getBean("panelPrincipal");
+                //referencia al panel principal (manual, para evitar configuración circular)
+                panelDiccionario.setPanelPrincipal(panelPrincipal);
                 panelAM.setPanelPrincipal(panelPrincipal);
+                panelFlexion.setPanelPrincipal(panelPrincipal);
+                
                 caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_control_eventos"));
                 new Controlador(panelDiccionario, Comienzo.getPanelFlexion(), Comienzo.panelPrincipal);
                 caratula.habilitacionBotonComenzar(true);

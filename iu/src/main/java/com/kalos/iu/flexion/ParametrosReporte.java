@@ -129,8 +129,7 @@ public class ParametrosReporte {
 		if (flag)
 			hashmap.put("P_TITULO", Recursos.getCadena("reportes.pronombres_personales_por_caso"));
 		else
-			hashmap.put("P_TITULO",
-					Recursos.getCadena("reportes.pronombres_personales_por_caso_sin_dual"));
+			hashmap.put("P_TITULO",Recursos.getCadena("reportes.pronombres_personales_por_caso_sin_dual"));
 		hashmap.put("P_NOMINATIVO", Recursos.getCadena("nominativo"));
 		hashmap.put("P_ACUSATIVO", Recursos.getCadena("acusativo"));
 		hashmap.put("P_GENITIVO", Recursos.getCadena("genitivo"));

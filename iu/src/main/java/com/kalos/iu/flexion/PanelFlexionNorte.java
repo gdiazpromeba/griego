@@ -24,14 +24,16 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 public class PanelFlexionNorte extends JPanel {
+    
+    Logger log = Logger.getLogger(getClass().getName());
 
 	public JButton getCrear() {
 		return botCrear;
 	}
 
 	public void habilitarBotones() {
-		B = false;
-		botCrear.setEnabled(!B && H);
+		inhabilitado = false;
+		botCrear.setEnabled(!inhabilitado && poblo);
 		botCrear.setText(Recursos.getCadena("crear"));
 		botCrearMas.setText(Recursos.getCadena("crear"));
 		botCrearMas.setEnabled(true);
@@ -57,19 +59,15 @@ public class PanelFlexionNorte extends JPanel {
 		botCrear = new JButton(Recursos.getCadena("cargando"));
 		botCrearMas = new JButton(Recursos.getCadena("cargando"));
 		deslizador = new Deslizador();
-		etiqueta = new JLabel();
-		B = true;
-		H = false;
-		F = Logger.getLogger(getClass().getName());
-		etiqueta.setFont(Configuracion.getFont());
+		inhabilitado = true;
+		poblo = false;
+
+
 		disposicion();
 		botCrear.setEnabled(false);
 		botCrearMas.setEnabled(false);
 	}
 
-	public void setFormaCanonica(String s) {
-		etiqueta.setText(s);
-	}
 
 	public void disposicion() {
 		FormLayout formlayout = new FormLayout(
@@ -78,8 +76,6 @@ public class PanelFlexionNorte extends JPanel {
 		PanelBuilder panelbuilder = new PanelBuilder(formlayout);
 		panelbuilder.setDefaultDialogBorder();
 		CellConstraints cellconstraints = new CellConstraints();
-		panelbuilder.addLabel(Recursos.getCadena("forma_canonica"), cellconstraints.xy(1, 1));
-		panelbuilder.add(etiqueta, cellconstraints.xy(3, 1));
 		panelbuilder.addLabel(Recursos.getCadena("elija_tipo_de_reporte"), cellconstraints.xy(1, 3));
 		panelbuilder.add(cmbChartTypes, cellconstraints.xy(3, 3));
 		panelbuilder.add(botCrear, cellconstraints.xy(5, 3));
@@ -92,15 +88,15 @@ public class PanelFlexionNorte extends JPanel {
 		add(panelbuilder.getPanel());
 	}
 
-	public void pueblaSegunEntrada(EntradaDiccionario n) {
+	public void pueblaSegunEntrada(EntradaDiccionario entradaDic) {
 		cmbChartTypes.removeAllItems();
-		if (n == null) {
+		if (entradaDic == null) {
 			cmbChartTypes.addItem(Reportes.NINGUN_TIPO_DISPONIBLE);
-			H = false;
+			poblo = false;
 		} else {
-			H = true;
-
-			switch (n.getTipoPalabra()) {
+			poblo = true;
+            log.info("el tipo de palabra es " + entradaDic.getTipoPalabra());
+			switch (entradaDic.getTipoPalabra()) {
 			case Adjetivo: // '\001'
 				cmbChartTypes.addItem(Reportes.ADJETIVOS_POR_GENERO);
 				cmbChartTypes.addItem(Reportes.ADJETIVOS_POR_NUMERO);
@@ -171,7 +167,9 @@ public class PanelFlexionNorte extends JPanel {
 				break;
 			}
 		}
-		botCrear.setEnabled(!B && H);
+		log.info("ahora el chart types mide =" + cmbChartTypes.getModel().getSize());
+		botCrear.setEnabled(!inhabilitado && poblo);
+		repaint();
 	}
 
 	public JButton getCrearMas() {
@@ -187,8 +185,7 @@ public class PanelFlexionNorte extends JPanel {
 	private JButton botCrear;
 	private JButton botCrearMas;
 	Deslizador deslizador;
-	private JLabel etiqueta;
-	private boolean B;
-	private boolean H;
-	Logger F;
+	private boolean inhabilitado;
+	private boolean poblo;
+
 }

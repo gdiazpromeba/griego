@@ -9,6 +9,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.apache.log4j.Logger;
 
@@ -32,16 +34,18 @@ public class PanelPrincipal extends JPanel {
     private PanelAM panelAM;
     private GerenteDiccionario gerenteDiccionario;
     
+    Logger log= Logger.getLogger(this.getClass().getName());    
+    
     public PanelPrincipal(PanelDiccionario panelDiccionario, PanelAM panelAM, PanelFlexion panelFlexion, PanelProgreso panelProgreso, GerenteDiccionario gerenteDiccionario){
         this.panelAM = panelAM;
         this.gerenteDiccionario = gerenteDiccionario;
         setLayout(new BorderLayout());
-        JTabbedPane jtabbedpane = new JTabbedPane();
+        JTabbedPane solapas = new JTabbedPane();
         add(Comienzo.getPanelProgreso(), "South");
-        add(jtabbedpane, "Center");
-        jtabbedpane.add(Recursos.getCadena("diccionario"), Comienzo.getPanelDiccionario());
-        jtabbedpane.add(Recursos.getCadena("analisis_morfologico"), Comienzo.getPanelAM());
-        jtabbedpane.add(Recursos.getCadena("flexion"), Comienzo.getPanelFlexion());
+        add(solapas, "Center");
+        solapas.add(Recursos.getCadena("diccionario"), Comienzo.getPanelDiccionario());
+        solapas.add(Recursos.getCadena("analisis_morfologico"), Comienzo.getPanelAM());
+        solapas.add(Recursos.getCadena("flexion"), Comienzo.getPanelFlexion());
         FormLayout formlayout = new FormLayout("400dlu:grow(0.9),  right:100dlu:none, 3dlu, left:100dlu:grow(0.9)", "fill:25dlu");
         PanelBuilder panelbuilder = new PanelBuilder(formlayout);
         CellConstraints cellconstraints = new CellConstraints();
@@ -50,13 +54,22 @@ public class PanelPrincipal extends JPanel {
         add(panelbuilder.getPanel(), BorderLayout.NORTH);     
         add(panelProgreso, BorderLayout.SOUTH);
         
-        etiquetaForma.setBorder(BorderFactory.createLineBorder(Color.red));
-        
+        //notificación a los paneles individuales, de que su solapa fue seleccionada
+        solapas.getModel().addChangeListener(new ChangeListener() {
+            
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int tabIndex = solapas.getSelectedIndex();
+                EscuchaSolapa panelES = (EscuchaSolapa) solapas.getSelectedComponent();
+                log.info("el componente de la solapa es iíndice=" + tabIndex + " clase=" + panelES);
+                panelES.miSolapaSeleccionada();
+                
+            }
+        });
     }
     
     private EntradaDiccionario entradaDiccionario;
-    
-    Logger log= Logger.getLogger(this.getClass().getName());
+
     
     public void setEntradaDiccionario(EntradaDiccionario entradaDiccionario){
         this.entradaDiccionario = entradaDiccionario;
@@ -68,6 +81,10 @@ public class PanelPrincipal extends JPanel {
         EntradaDiccionario end = gerenteDiccionario.getEntradaDiccionario(reu);
         this.entradaDiccionario = end;
         etiquetaForma.setText(this.entradaDiccionario.getNormal());
+    }
+    
+    public EntradaDiccionario getEntradaDiccionario(){
+        return this.entradaDiccionario;
     }
     
     public PanelAM getPanelAM(){

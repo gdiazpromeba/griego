@@ -29,12 +29,20 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.jgoodies.forms.builder.PanelBuilder;
+import com.jgoodies.forms.layout.CellConstraints;
+import com.jgoodies.forms.layout.FormLayout;
 import com.kalos.beans.EntradaDiccionario;
 import com.kalos.datos.adaptadores.AdaptadorGerenteDiccionario;
 import com.kalos.datos.gerentes.GerenteDiccionario;
 import com.kalos.enumeraciones.Ignorancia;
 import com.kalos.enumeraciones.LugarSubcadena;
 import com.kalos.enumeraciones.TipoPalabra;
+import com.kalos.iu.EscuchaSolapa;
+import com.kalos.iu.PanelPrincipal;
 import com.kalos.iu.PanelProgreso;
 import com.kalos.iu.tareas.TareaDiccionario;
 import com.kalos.iu.tareas.TareaHabilitaComponentes;
@@ -54,25 +62,22 @@ import com.kalos.visual.controles.ventanas.DialogErrores;
 import com.kalos.visual.modelos.DictionaryPM;
 import com.kalos.visual.modelos.PagingModel;
 
-import org.apache.log4j.Logger;
-
-import com.jgoodies.forms.builder.PanelBuilder;
-import com.jgoodies.forms.layout.CellConstraints;
-import com.jgoodies.forms.layout.FormLayout;
-
 import foxtrot.Worker;
 
 // Referenced classes of package kalos.iu.D:
 //            B
 
-public class PanelDiccionario extends JPanel implements TipografiaCambiable {
+public class PanelDiccionario extends JPanel implements TipografiaCambiable, EscuchaSolapa {
 
+    Logger log = Logger.getLogger(getClass().getName());
+    
+
+    
 	/**
      * 
      */
     private static final long serialVersionUID = 1L;
     public PanelDiccionario(GerenteDiccionario m1) {
-		logger = Logger.getLogger(getClass().getName());
 		cmbLugaresSubcadena = new ComboEnumeracion(LugarSubcadena.values());
 		tabla = new JTable();
 		panel = new JPanel();
@@ -112,7 +117,7 @@ public class PanelDiccionario extends JPanel implements TipografiaCambiable {
 				try {
 					procesaCadena((Ignorancia) cmbIgnorancias.getEnumeracionSeleccionada(), false);
 				} catch (Exception exception) {
-					logger.error(
+					log.error(
 							"error al invocar procesaCadena en PanelDiccionario (desde el buscar tradicional) ",
 							exception);
 					JFrame jframe = (JFrame) SwingUtilities.windowForComponent(botBuscar);
@@ -261,8 +266,20 @@ public class PanelDiccionario extends JPanel implements TipografiaCambiable {
 	public void setPanelProgreso(PanelProgreso b) {
 		panProgreso = b;
 	}
+	
+	public void miSolapaSeleccionada(){
+	    if (tabla.getSelectedRow()>0){
+	        DictionaryPM  model = (DictionaryPM)tabla.getModel();
+	        EntradaDiccionario endic = model.getFila(tabla.getSelectedRow());
+	        panelPrincipal.setEntradaDiccionario(endic);
+	    }
+	}
+	
+	   public void setPanelPrincipal(PanelPrincipal panelPrincipal){
+	        this.panelPrincipal = panelPrincipal;
+	    }	
 
-	private Logger logger;
+
 	private ComboEnumeracion cmbLugaresSubcadena;
 	private JTable tabla;
 	private TableColumnModel colModelConResultados;
@@ -277,4 +294,5 @@ public class PanelDiccionario extends JPanel implements TipografiaCambiable {
 	private JTabbedPane tab;
 	private DetalleDiccionario detalle;
 	private AdaptadorGerenteDiccionario adGerenteDir;
+	private PanelPrincipal panelPrincipal;
 }

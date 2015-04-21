@@ -80,17 +80,16 @@ public class Controlador {
 
 	}
 
-	private class AparicionPanelFlexion extends ComponentAdapter {
-
-		public void componentShown(ComponentEvent componentevent) {
-			panelFlexion.activar(entradaDiccionario);
-			if (entradaDiccionario != null)
-				panelFlexion.setFormaCanonica(entradaDiccionario.getNormal());
-			else
-				panelFlexion.setFormaCanonica(Recursos.getCadena("ninguna"));
-		}
-
-	}
+//	private class AparicionPanelFlexion extends ComponentAdapter {
+//
+//		public void componentShown(ComponentEvent componentevent) {
+//			if (entradaDiccionario != null)
+//				panelFlexion.setFormaCanonica(entradaDiccionario.getNormal());
+//			else
+//				panelFlexion.setFormaCanonica(Recursos.getCadena("ninguna"));
+//		}
+//
+//	}
 
 	public Controlador(PanelDiccionario panelDiccionario, PanelFlexion panelFlexion, PanelPrincipal panelPrincipal) {
 		this.panelDiccionario = panelDiccionario;
@@ -98,7 +97,7 @@ public class Controlador {
 		this.panelPrincipal = panelPrincipal;
 		JTable jtable = panelDiccionario.getTabla();
 		jtable.getSelectionModel().addListSelectionListener(new SeleccionEntradaDiccionario());
-		this.panelFlexion.addComponentListener(new AparicionPanelFlexion());
+//		this.panelFlexion.addComponentListener(new AparicionPanelFlexion());
 		this.panelFlexion.getPanelEleccionTipoReporte().getCrear().addActionListener(new EleccionTipoReporteDependiente());
 		this.panelFlexion.getPanelEleccionTipoReporte().getCrearMas().addActionListener(new EleccionTipoReporteIndependiente());
 	}

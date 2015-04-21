@@ -43,12 +43,14 @@ import com.kalos.analisismorfologico.negocio.AMPreposiciones;
 import com.kalos.analisismorfologico.negocio.AMSustantivos;
 import com.kalos.analisismorfologico.negocio.AMUtil;
 import com.kalos.analisismorfologico.negocio.AMVerbos;
+import com.kalos.beans.EntradaDiccionario;
 import com.kalos.beans.ResultadoUniversal;
 import com.kalos.datos.gerentes.GerenteSignificados;
 import com.kalos.enumeraciones.Acento;
 import com.kalos.enumeraciones.Ignorancia;
 import com.kalos.enumeraciones.TipoPalabra;
 import com.kalos.flexion.UtilidadesTM;
+import com.kalos.iu.EscuchaSolapa;
 import com.kalos.iu.PanelPrincipal;
 import com.kalos.iu.PanelProgreso;
 import com.kalos.iu.registro.VentanaMolesta;
@@ -70,10 +72,12 @@ import com.kalos.visual.controles.textos.alternable.TextoAlternable;
 import com.kalos.visual.controles.util.TipografiaCambiable;
 import com.kalos.visual.controles.util.UtilTipografias;
 import com.kalos.visual.controles.ventanas.DialogErrores;
+import com.kalos.visual.modelos.DictionaryPM;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
@@ -84,7 +88,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import foxtrot.Task;
 import foxtrot.Worker;
 
-public class PanelAM extends JPanel implements ApplicationContextAware, TipografiaCambiable {
+public class PanelAM extends JPanel implements ApplicationContextAware, TipografiaCambiable, EscuchaSolapa {
 
     /**
      * 
@@ -118,7 +122,7 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
     private DetallelAM detalle = new DetallelAM();
     private List<ResultadoUniversal> resultados;
     private PanelPrincipal panelPrincipal;
-
+ 
     private FiltroEnumeraciones tipoPalabra = new FiltroEnumeraciones(TipoPalabra.values());
     
     Logger log=Logger.getLogger(this.getClass().getName());
@@ -197,20 +201,15 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
             }
         });
 
-        // esta carga hay que ponerla en un evento, porque no puede ocurrir
-        // hasta que el panel reciba el contexto
-        this.addComponentListener(new ComponentAdapter() {
 
+        this.addComponentListener(new ComponentAdapter() {
             public void componentShown(ComponentEvent ev) {
                 new CargaAnalizadores().start();
             }
         });
+        
         disposicion();
         repaint();
-    }
-
-    public void setPanelPrincipal(PanelPrincipal panelPrincipal) {
-        this.panelPrincipal = panelPrincipal;
     }
 
     /**
@@ -703,6 +702,14 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
         this.contexto = arg0;
 
     }
+    
+    public void miSolapaSeleccionada(){
+        if (tabla.getSelectedRow() > -1) {
+            PanelAM panelAM = panelPrincipal.getPanelAM();
+            ResultadoUniversal reu = panelAM.getResultadoAt(tabla.getSelectedRow());
+            panelPrincipal.setResultadoUniversal(reu);
+        }
+    }   
 
     /**
      * @param amConjunciones
@@ -714,6 +721,10 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
 
     public void setPanelProgreso(PanelProgreso panelProgreso) {
         this.panelProgreso = panelProgreso;
+    }
+    
+    public void setPanelPrincipal(PanelPrincipal panelPrincipal){
+        this.panelPrincipal = panelPrincipal;
     }
 
 }
