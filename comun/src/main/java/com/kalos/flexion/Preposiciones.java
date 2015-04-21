@@ -14,118 +14,118 @@ import com.kalos.operaciones.OpPalabras;
 import org.apache.log4j.Logger;
 
 public class Preposiciones {
-    private String F = OpPalabras.strBetaACompleto("PERI");
-    private String I = OpPalabras.strBetaACompleto("PRO");
-    private String E = OpPalabras.strBetaACompleto("PROJ");
-    private String K = OpPalabras.strBetaACompleto("PROS");
-    private String B = OpPalabras.strBetaACompleto("N");
-    private String C = OpPalabras.strBetaACompleto("E)K");
-    private String G = OpPalabras.strBetaACompleto("SUN");
-    private String D = OpPalabras.strBetaACompleto("J");
-    private String A = OpPalabras.strBetaACompleto("S");
-    private String H = OpPalabras.strBetaACompleto("I");
-    Logger J = Logger.getLogger(getClass().getName());
+	private String peri = OpPalabras.strBetaACompleto("PERI");
+	private String pro = OpPalabras.strBetaACompleto("PRO");
+	private String proj = OpPalabras.strBetaACompleto("PROJ");
+	private String pros = OpPalabras.strBetaACompleto("PROS");
+	private String n = OpPalabras.strBetaACompleto("N");
+	private String ek = OpPalabras.strBetaACompleto("E)K");
+	private String sun = OpPalabras.strBetaACompleto("SUN");
+	private String j = OpPalabras.strBetaACompleto("J");
+	private String s = OpPalabras.strBetaACompleto("S");
+	private String i = OpPalabras.strBetaACompleto("I");
+	Logger log = Logger.getLogger(getClass().getName());
 
-    public String une(String paramString1, String paramString2, boolean paramBoolean) {
-	Espiritu localO = OpPalabras.getEspiritu(paramString1);
-	paramString1 = OpPalabras.desespirituar(paramString1);
-	if ((paramString2.equals(this.F)) || (paramString2.equals(this.I))) {
-	    paramString1 = B(paramString2, paramString1);
-	    paramString1 = A(paramString2, paramString1);
-	    return A(paramString1, paramString2, paramBoolean);
-	}
-	if (paramString2.equals(this.E)) {
-	    paramString2 = this.K;
-	}
-	CaracterGriego localC1 = CaracterGriegoFactory.produceCaracterGriego(paramString1.charAt(0));
-	CaracterGriego localC2 = CaracterGriegoFactory
-		.produceCaracterGriego(paramString2.charAt(paramString2.length() - 1));
-	if (localC2.esVocal()) {
-	    if (localC1.esVocal()) {
-		paramString2 = OpPalabras.comeFinal(paramString2, 1);
-		localC2 = CaracterGriegoFactory.produceCaracterGriego(paramString2.charAt(paramString2.length() - 1));
-	    }
-	    if (localO == Espiritu.Aspero) {
-		if (localC2.getCaracter() == 'τ') {
-		    paramString2 = paramString2.replace('τ', 'θ');
-		} else if (localC2.getCaracter() == 'π') {
-		    paramString2 = paramString2.replace('π', 'φ');
+	public String une(String palabra, String prep, boolean acentuar) {
+		Espiritu espiritu = OpPalabras.getEspiritu(palabra);
+		palabra = OpPalabras.desespirituar(palabra);
+		if ((prep.equals(this.peri)) || (prep.equals(this.pro))) {
+			palabra = uneConDieresis(prep, palabra);
+			palabra = uneConRho(prep, palabra);
+			return uneAcentuando(palabra, prep, acentuar);
 		}
-	    }
-	    paramString1 = A(paramString2, paramString1);
-	    paramString1 = B(paramString2, paramString1);
-	    return A(paramString1, paramString2, paramBoolean);
-	}
-	if (paramString2.endsWith(this.B)) {
-	    ArticulacionConsonante localV = TipoLetra.getArticulacionConsonante(localC1.getCaracter());
-	    if (!localV.equals(ArticulacionConsonante.NoEsConsonante)) {
-		if (localV.equals(ArticulacionConsonante.Labial)) {
-		    paramString2 = paramString2.replace('ν', 'μ');
-		} else if (localV.equals(ArticulacionConsonante.Gutural)) {
-		    paramString2 = paramString2.replace('ν', 'γ');
+		if (prep.equals(this.proj)) {
+			prep = this.pros;
 		}
-	    }
+		CaracterGriego primerCar = CaracterGriegoFactory.produceCaracterGriego(palabra.charAt(0));
+		CaracterGriego ultimoCar = CaracterGriegoFactory.produceCaracterGriego(prep.charAt(prep.length() - 1));
+		if (ultimoCar.esVocal()) {
+			if (primerCar.esVocal()) {
+				prep = OpPalabras.comeFinal(prep, 1);
+				ultimoCar = CaracterGriegoFactory.produceCaracterGriego(prep.charAt(prep.length() - 1));
+			}
+			if (espiritu == Espiritu.Aspero) {
+				if (ultimoCar.getCaracter() == 'τ') {
+					prep = prep.replace('τ', 'θ');
+				} else if (ultimoCar.getCaracter() == 'π') {
+					prep = prep.replace('π', 'φ');
+				}
+			}
+			palabra = uneConRho(prep, palabra);
+			palabra = uneConDieresis(prep, palabra);
+			return uneAcentuando(palabra, prep, acentuar);
+		}
+		if (prep.endsWith(this.n)) {
+			ArticulacionConsonante localV = TipoLetra.getArticulacionConsonante(primerCar.getCaracter());
+			if (!localV.equals(ArticulacionConsonante.NoEsConsonante)) {
+				if (localV.equals(ArticulacionConsonante.Labial)) {
+					prep = prep.replace('ν', 'μ');
+				} else if (localV.equals(ArticulacionConsonante.Gutural)) {
+					prep = prep.replace('ν', 'γ');
+				}
+			}
+		}
+		if ((prep.equals(this.ek)) && (primerCar.esVocal())) {
+			prep = prep.replace('κ', 'ξ');
+		}
+		if (prep.equals(this.sun)) {
+			int i = primerCar.getCaracter();
+			if ((i == 950) || (i == 963)) {
+				prep = OpPalabras.comeFinal(prep, 1);
+			}
+		}
+		if (prep.endsWith(this.j)) {
+			prep = OpPalabras.comeFinal(prep, 1).concat(this.s);
+		}
+		return uneAcentuando(palabra, prep, acentuar);
 	}
-	if ((paramString2.equals(this.C)) && (localC1.esVocal())) {
-	    paramString2 = paramString2.replace('κ', 'ξ');
-	}
-	if (paramString2.equals(this.G)) {
-	    int i = localC1.getCaracter();
-	    if ((i == 950) || (i == 963)) {
-		paramString2 = OpPalabras.comeFinal(paramString2, 1);
-	    }
-	}
-	if (paramString2.endsWith(this.D)) {
-	    paramString2 = OpPalabras.comeFinal(paramString2, 1).concat(this.A);
-	}
-	return A(paramString1, paramString2, paramBoolean);
-    }
 
-    private String B(String paramString1, String paramString2) {
-	if (paramString1.endsWith(this.H)) {
-	    CarPos localA = CarPos.getCarPos(paramString2, 0);
-	    char c = localA.getCaracter();
-	    c = OpLetrasUnicode.dieresisLetra(c);
-	    StringBuffer localStringBuffer = new StringBuffer(paramString2);
-	    localStringBuffer.setCharAt(0, c);
-	    paramString2 = localStringBuffer.toString();
+	private String uneConDieresis(String prep, String palabra) {
+		if (prep.endsWith(this.i)) {
+			CarPos primerCar = CarPos.getCarPos(palabra, 0);
+			char c = primerCar.getCaracter();
+			c = OpLetrasUnicode.dieresisLetra(c);
+			StringBuffer sb = new StringBuffer(palabra);
+			sb.setCharAt(0, c);
+			palabra = sb.toString();
+		}
+		return palabra;
 	}
-	return paramString2;
-    }
 
-    private String A(String paramString1, String paramString2) {
-	CarPos localA1 = CarPos.getCarPos(paramString1, paramString1.length() - 1);
-	CarPos localA2 = CarPos.getCarPos(paramString2, 0);
-	if ((localA1.esVocal()) && (localA2.getCaracter() == 'ρ')) {
-	    paramString2 = new String(new char[] { 'ρ' }).concat(paramString2);
+	private String uneConRho(String prep, String palabra) {
+		CarPos ultimoCar = CarPos.getCarPos(prep, prep.length() - 1);
+		CarPos primerCar = CarPos.getCarPos(palabra, 0);
+		if ((ultimoCar.esVocal()) && (primerCar.getCaracter() == 'ρ')) {
+			palabra = new String(new char[] { 'ρ' }).concat(palabra);
+		}
+		return palabra;
 	}
-	return paramString2;
-    }
 
-    private String A(String paramString1, String paramString2, boolean paramBoolean) {
-	if (!paramBoolean) {
-	    StringBuffer localStringBuffer = new StringBuffer();
-	    localStringBuffer.append(paramString2);
-	    localStringBuffer.append(paramString1);
-	    return localStringBuffer.toString();
+	private String uneAcentuando(String palabra, String prep, boolean acentuar) {
+		if (!acentuar) {
+			StringBuffer sb = new StringBuffer();
+			sb.append(prep);
+			sb.append(palabra);
+			return sb.toString();
+		}
+		StringBuffer sb = new StringBuffer();
+		sb.append(OpPalabras.desacentuar(prep));
+		sb.append(OpPalabras.desacentuar(palabra));
+		return OpPalabras.acentua(sb.toString());
 	}
-	StringBuffer localStringBuffer = new StringBuffer();
-	localStringBuffer.append(OpPalabras.desacentuar(paramString2));
-	localStringBuffer.append(OpPalabras.desacentuar(paramString1));
-	return OpPalabras.acentua(localStringBuffer.toString());
-    }
 
-    public String une(String paramString, List<String> paramList, boolean paramBoolean) {
-	if (paramList == null) {
-	    return paramString;
+	public String une(String paramString, List<String> paramList,
+			boolean paramBoolean) {
+		if (paramList == null) {
+			return paramString;
+		}
+		String str1 = paramString;
+		for (int i = paramList.size() - 1; i >= 0; i--) {
+			String str2 = (String) paramList.get(i);
+			boolean bool = i == paramList.size() - 1;
+			bool = (bool) && (paramBoolean);
+			str1 = une(str1, str2, bool);
+		}
+		return str1;
 	}
-	String str1 = paramString;
-	for (int i = paramList.size() - 1; i >= 0; i--) {
-	    String str2 = (String) paramList.get(i);
-	    boolean bool = i == paramList.size() - 1;
-	    bool = (bool) && (paramBoolean);
-	    str1 = une(str1, str2, bool);
-	}
-	return str1;
-    }
 }

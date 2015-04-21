@@ -45,7 +45,7 @@ en los respectivos directorios "target" -->
 			<fileset dir="../iu/src/main/java"/>
 		</copy>
 		
-		<javac srcdir="work/comp/src" destdir="work/comp/out" classpathref="libs.for.comun"/>
+		<javac encoding="UTF-8" debug="true" srcdir="work/comp/src" destdir="work/comp/out" classpathref="libs.for.comun"/>
 		
 		
 
