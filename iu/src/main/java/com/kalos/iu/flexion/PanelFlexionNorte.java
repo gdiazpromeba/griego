@@ -95,7 +95,6 @@ public class PanelFlexionNorte extends JPanel {
 			poblo = false;
 		} else {
 			poblo = true;
-            log.info("el tipo de palabra es " + entradaDic.getTipoPalabra());
 			switch (entradaDic.getTipoPalabra()) {
 			case Adjetivo: // '\001'
 				cmbChartTypes.addItem(Reportes.ADJETIVOS_POR_GENERO);
@@ -167,7 +166,6 @@ public class PanelFlexionNorte extends JPanel {
 				break;
 			}
 		}
-		log.info("ahora el chart types mide =" + cmbChartTypes.getModel().getSize());
 		botCrear.setEnabled(!inhabilitado && poblo);
 		repaint();
 	}

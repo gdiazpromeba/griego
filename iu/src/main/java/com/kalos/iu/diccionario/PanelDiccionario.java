@@ -24,6 +24,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -98,38 +100,60 @@ public class PanelDiccionario extends JPanel implements TipografiaCambiable, Esc
 		tab.add(Recursos.getCadena("detalles"), detalle);
 		panel.setLayout(new BorderLayout());
 		panel.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-		fontSize.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent propertychangeevent) {
-				Deslizador des = (Deslizador) propertychangeevent.getSource();
-				cambiaTamañoFont(des.getValor());
-			}
-		});
-		botBuscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent actionevent) {
-				if (tiposPalabra.getSeleccionadas().size() == 0) {
-					JOptionPane.showMessageDialog(
-							SwingUtilities.getWindowAncestor((JButton) actionevent.getSource()),
-							Recursos.getCadena("seleccione_al_menos_un_tipo_de_palabra"));
-					return;
-				}
-				botBuscar.setEnabled(false);
-				cmbIgnorancias.setEnabled(false);
-				try {
-					procesaCadena((Ignorancia) cmbIgnorancias.getEnumeracionSeleccionada(), false);
-				} catch (Exception exception) {
-					log.error(
-							"error al invocar procesaCadena en PanelDiccionario (desde el buscar tradicional) ",
-							exception);
-					JFrame jframe = (JFrame) SwingUtilities.windowForComponent(botBuscar);
-					DialogErrores d1 = new DialogErrores(jframe, Recursos.getCadena("error"),
-							Recursos.getCadena("error_de_diccionario"), true, exception);
-					d1.setLocationRelativeTo(null);
-					d1.setVisible(true);
-				}
-			}
 
-		});
+		eventos();
 	}
+    
+    private void eventos(){
+        fontSize.addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent propertychangeevent) {
+                Deslizador des = (Deslizador) propertychangeevent.getSource();
+                cambiaTamañoFont(des.getValor());
+            }
+        });
+        botBuscar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionevent) {
+                if (tiposPalabra.getSeleccionadas().size() == 0) {
+                    JOptionPane.showMessageDialog(
+                            SwingUtilities.getWindowAncestor((JButton) actionevent.getSource()),
+                            Recursos.getCadena("seleccione_al_menos_un_tipo_de_palabra"));
+                    return;
+                }
+                botBuscar.setEnabled(false);
+                cmbIgnorancias.setEnabled(false);
+                try {
+                    procesaCadena((Ignorancia) cmbIgnorancias.getEnumeracionSeleccionada(), false);
+                } catch (Exception exception) {
+                    log.error(
+                            "error al invocar procesaCadena en PanelDiccionario (desde el buscar tradicional) ",
+                            exception);
+                    JFrame jframe = (JFrame) SwingUtilities.windowForComponent(botBuscar);
+                    DialogErrores d1 = new DialogErrores(jframe, Recursos.getCadena("error"),
+                            Recursos.getCadena("error_de_diccionario"), true, exception);
+                    d1.setLocationRelativeTo(null);
+                    d1.setVisible(true);
+                }
+            }
+
+        });
+
+        tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent listselectionevent) {
+                if (listselectionevent.getValueIsAdjusting())
+                    return;
+                int i = tabla.getSelectedRow();
+                if (i == -1) {
+                    return;
+                } else {
+                    DictionaryPM b = (DictionaryPM)tabla.getModel();
+                    panelPrincipal.setEntradaDiccionario( b.getFila(i));
+                    detalle.setEntradaDiccionario(b.getFila(i));
+                    return;
+                }
+            }
+        });        
+    }
 
 	private void D() {
 		LugarSubcadena h1 = (LugarSubcadena) cmbLugaresSubcadena.getEnumeracionSeleccionada();

@@ -388,8 +388,6 @@ public class CreadorTableModelsGrilla {
     }    
     
     
-    
-    
     private DefaultTableModel getArticulosPorGenero(){
         DefaultTableModel tm=creadorTableModelsBasicos.getParticulasPorTipo(TipoPalabra.Articulo);
         if (tm==null || tm.getRowCount()==0){
@@ -422,14 +420,6 @@ public class CreadorTableModelsGrilla {
         return tm;
     }
     
-    
-    
-    
-    
-
-    
-    
-    
     /**
      * crea y devuelve el tableModel necesario para el reporte completo de verbos
      * en forma tabular.
@@ -445,8 +435,6 @@ public class CreadorTableModelsGrilla {
         
     	utilidadesTM.columnasAInterfaz(tm, new String[]{"INDICATIVO", "SUBJUNTIVO", "OPTATIVO", "IMPERATIVO"});
     	
-    	
-    	
     	utilidadesTM.transformaEnICeldasReporte(tm, new String[]{"PARTIC", "VOZ", "TIEMPO", "PERSONA", 
     	        "INDICATIVO", "SUBJUNTIVO", "OPTATIVO", "IMPERATIVO"});
     	
@@ -458,8 +446,6 @@ public class CreadorTableModelsGrilla {
         //agrupa por voz
         utilidadesTM.agrupaPorColumna(tm, 0, 2, utilidadReportes.getColorSubtitulo2());
         utilidadesTM.borraColumna(tm, "VOZ");
-        
-        
         
         //agrupo por tiempo
         utilidadesTM.agrupaPorColumna(tm, 0, 1, utilidadReportes.getColorSubtitulo3());
@@ -482,17 +468,10 @@ public class CreadorTableModelsGrilla {
     	utilidadesTM.columnasAInterfaz(tm, new String[]{"ACTIVA", "MEDIA", "PASIVA"});
     	
     	utilidadesTM.transformaEnICeldasReporte(tm, new String[]{"PARTIC", "MODO", "TIEMPO", "PERSONA", "ACTIVA", "MEDIA", "PASIVA"});
-    	
-    	
-    	
-
-        
         
         //agrupa por particularidad
         utilidadesTM.agrupaPorColumna(tm, 0, 2, utilidadReportes.getColorSubtitulo1());
         utilidadesTM.borraColumna(tm, "PARTIC");
-        
-        
         
         //agrupa por voz
         utilidadesTM.agrupaPorColumna(tm, 2, 1, utilidadReportes.getColorSubtitulo2());

@@ -112,7 +112,6 @@ public class Comienzo {
                 panelFlexion.setPanelPrincipal(panelPrincipal);
                 
                 caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_control_eventos"));
-                new Controlador(panelDiccionario, Comienzo.getPanelFlexion(), Comienzo.panelPrincipal);
                 caratula.habilitacionBotonComenzar(true);
                 caratula.cmbTeclados.setEnabled(true);
                 caratula.comboIdiomaEtiquetas.setEnabled(true);
