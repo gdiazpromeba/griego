@@ -1355,7 +1355,7 @@ public class Participios {
      * @param op
      */
     private void transformaNGEnDetallado(OcParticipio op) {
-        for (int iVoz = Voz.getInt(Voz.Activa); iVoz <= Voz.getInt(Voz.Pasiva); iVoz++) {
+        for (int iVoz = Voz.Activa.valorEntero(); iVoz <= Voz.Pasiva.valorEntero(); iVoz++) {
             Voz voz = Voz.getEnum(iVoz);
             for (Aspecto aspecto : Aspecto.values()) {
                 for (FuerteDebil fuerte : FuerteDebil.values()) {
@@ -1431,7 +1431,7 @@ public class Participios {
         for (Particularidad partic : interseccion) {
             OcParticipio completa = (OcParticipio) mapOcCompletas.get(partic);
             OcParticipio aislada = (OcParticipio) mapOcAisladas.get(partic);
-            for (int iVoz = Voz.getInt(Voz.Activa); iVoz <= Voz.getInt(Voz.Pasiva); iVoz++) {
+            for (int iVoz = Voz.Activa.valorEntero(); iVoz <= Voz.Pasiva.valorEntero(); iVoz++) {
                 Voz voz = Voz.getEnum(iVoz);
                 for (Aspecto aspecto : Aspecto.values()) {
                     for (FuerteDebil fuerte : FuerteDebil.values()) {

@@ -326,7 +326,7 @@ public class IrrAdjetivosEnterosDAOImpl extends JdbcDaoSupport implements IrrAdj
 		insercion.update(new Object[] { 
 				pk, 						
 				iae.getAdjetivoId(),        
-				Genero.getLetra(iae.getGenero()),
+				iae.getGenero().valorEntero(),
 				GradoComparacion.getLetra(iae.getGrado()),
 				Particularidad.getString(iae.getParticularidad()),
 				iae.getSubindice(),
@@ -366,7 +366,7 @@ public class IrrAdjetivosEnterosDAOImpl extends JdbcDaoSupport implements IrrAdj
 	public void modifica(IrrAdjetivoEntero bean) {
 		modificacion.update(new Object[] { 
 				bean.getAdjetivoId(),
-				Genero.getLetra(bean.getGenero()),
+				bean.getGenero().valorEntero(),
 				GradoComparacion.getLetra(bean.getGrado()),
 				Particularidad.getString(bean.getParticularidad()),
 				bean.getSubindice(),

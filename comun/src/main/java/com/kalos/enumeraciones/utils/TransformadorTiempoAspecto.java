@@ -11,7 +11,7 @@ public class TransformadorTiempoAspecto {
 			return (Tiempo)toa;
 		}else{
 			Aspecto aspecto=(Aspecto)toa;
-			int valor=Aspecto.getInt(aspecto);
+			int valor=aspecto.valorEntero();
 			Tiempo tiempo=Tiempo.getEnum(valor);
 			return tiempo;
 		}

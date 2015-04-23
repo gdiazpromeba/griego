@@ -453,7 +453,7 @@ public class AMVerbal {
 			// representado en la lista de terminaciones_regulares)
 			// No agrego dental si es pasiva y la terminación no comienza con S,
 			// ya que es YEUSQ.., no YEUQ...
-			if (tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO && Tiempo.getInt(tiempo) > 2) {
+			if (tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO && tiempo.valorEntero() > 2) {
 				if (trv.getTerminacion().charAt(0) == CompLetras.cSigma
 						|| trv.getVoz() != Voz.Pasiva) {
 					trvNuevo = (T) trv.clona();
@@ -1180,14 +1180,14 @@ public class AMVerbal {
 
 		int valorToa;
 		if (toaReconstruido instanceof Tiempo) {
-			valorToa = Tiempo.getInt((Tiempo) toaReconstruido);
+			valorToa = ((Tiempo) toaReconstruido).valorEntero();
 		} else {
-			valorToa = Aspecto.getInt((Aspecto) toaReconstruido);
+			valorToa = ((Aspecto) toaReconstruido).valorEntero();
 		}
 
-		if (valorToa == Tiempo.getInt(ntie) && fuerte == fuerteReconstruido) {
+		if (valorToa == ntie.valorEntero() && fuerte == fuerteReconstruido) {
 			tiemposOK = true;
-		} else if (valorToa == Tiempo.getInt(Tiempo.Imperfecto)
+		} else if (valorToa == Tiempo.Imperfecto.valorEntero()
 				&& irregularidad.getTiempo().equals(Tiempo.Presente)
 				&& irregularidad.isPats()) {
 			tiemposOK = true;

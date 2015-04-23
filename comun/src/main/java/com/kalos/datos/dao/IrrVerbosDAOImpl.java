@@ -535,10 +535,10 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 		String pk = com.kalos.datos.util.DBUtil.getHashableId();
 
 		insercion.update(new Object[] { bean.getTema(),  Particularidad.getString(bean.getPartic()),
-				bean.getSubPart(), Modo.getInt(bean.getModo()), Tiempo.getInt(bean.getTiempo()),
-				Voz.getInt(bean.getVoz()), FuerteDebil.getInt(bean.getFuerte()), 
+				bean.getSubPart(), bean.getModo().valorEntero(), bean.getTiempo().valorEntero(),
+				bean.getVoz().valorEntero(), FuerteDebil.getInt(bean.getFuerte()), 
 				Contraccion.getInt(bean.getContraccion()), Aumento.getInt(bean.getAumento()), bean.isReduplicacion(),
-				bean.getJuego(), Tiempo.getInt(bean.getTiempoJuego()), Voz.getInt(bean.getVozJuego()),
+				bean.getJuego(), bean.getTiempoJuego().valorEntero(), bean.getVozJuego().valorEntero(),
 				Propagacion.getInt(bean.getPropagacion()), bean.isPats()?1:0, 
 				bean.getVerboId(), pk });
 		bean.setId(pk);
@@ -576,10 +576,10 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 	 */
 	public void modifica(IrrVerbo bean) {
 		modificacion.update(new Object[] { bean.getTema(),  Particularidad.getString(bean.getPartic()),
-				bean.getSubPart(), Modo.getInt(bean.getModo()), Tiempo.getInt(bean.getTiempo()),
-				Voz.getInt(bean.getVoz()), FuerteDebil.getInt(bean.getFuerte()), 
+				bean.getSubPart(), bean.getModo().valorEntero(), bean.getTiempo().valorEntero(),
+				bean.getVoz().valorEntero(), FuerteDebil.getInt(bean.getFuerte()), 
 				Contraccion.getInt(bean.getContraccion()), Aumento.getInt(bean.getAumento()), bean.isReduplicacion(),
-				bean.getJuego(), Tiempo.getInt(bean.getTiempoJuego()), Voz.getInt(bean.getVozJuego()),
+				bean.getJuego(), bean.getTiempoJuego().valorEntero(), bean.getVozJuego().valorEntero(),
 				Propagacion.getInt(bean.getPropagacion()), bean.isPats()?1:0, 
 				bean.getVerboId(),
 				//where

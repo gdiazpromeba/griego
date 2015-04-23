@@ -672,7 +672,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			
 			ins.setInt(1, voz);
 			ins.setInt(2, modo);
-			ins.setInt(3, Tiempo.getInt(Tiempo.Futuro));
+			ins.setInt(3, Tiempo.Futuro.valorEntero());
 			ins.setInt(4, 0);  //fuerte
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
@@ -708,7 +708,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			
 			ins.setInt(1, voz);
 			ins.setInt(2, modo);
-			ins.setInt(3, Tiempo.getInt(Tiempo.Aoristo));
+			ins.setInt(3, Tiempo.Aoristo.valorEntero());
 			ins.setInt(4, 0);  //fuerte
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);

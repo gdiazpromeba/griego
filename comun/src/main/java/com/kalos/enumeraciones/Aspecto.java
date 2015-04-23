@@ -1,5 +1,7 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 
 
 
@@ -13,40 +15,33 @@ package com.kalos.enumeraciones;
  */
 
 public enum Aspecto implements TiempoOAspecto {
-	Infectivo, Futuro, Confectivo, Perfectivo;
+	Infectivo(1, "infectivo"), Futuro(3, "futuro"), Confectivo(4, "confectivo"), Perfectivo(5, "perfectivo");
 	
-	public static int getInt(Aspecto aspecto){
-		switch(aspecto){
-		case Infectivo:
-			return 1;
-		case Futuro:
-			return 3;
-		case Confectivo:
-			return 4;
-		case Perfectivo:
-			return 5;
-		default:
-			throw new RuntimeException("aspecto no encontrado " + aspecto);
-		}
-	}
+    private int valorEntero;
+    private String etiquetaRecursos;
+    
+    Aspecto (int valorEntero, String etiquetaRecursos){
+        this.valorEntero = valorEntero;
+        this.etiquetaRecursos = etiquetaRecursos;
+    }
+    
+    public String getCadenaRecursos(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }
+    
+    public int valorEntero(){
+        return this.valorEntero;
+    }	
+    
+    
+    public static Aspecto getEnum(int valorEntero){
+        for (Aspecto enu : values()) {
+            if (enu.valorEntero==valorEntero){
+                return enu;
+            }
+        }
+        throw new RuntimeException("no hay enum de aspecto para el número " + valorEntero);
+    }    
 	
-	
-	public static Aspecto getEnum(int valor){
-		switch(valor){
-		case 1:
-			return Aspecto.Infectivo;
-		case 3:
-			return Aspecto.Futuro;
-		case 4:
-			return Aspecto.Confectivo;
-		case 5:
-			return Aspecto.Perfectivo;
-		default:
-			throw new RuntimeException("no hay aspecto para el número " + valor);
-		
-		}
-	}
-
-  
   
 }

@@ -405,9 +405,9 @@ public class IrrAdjetivosIndividualesDAOImpl extends JdbcDaoSupport implements I
     @Override
     public void inserta(IrrAdjetivoIndividual iae) {
 	String pk = com.kalos.datos.util.DBUtil.getHashableId();
-	insercion.update(new Object[] { pk, iae.getAdjetivoId(), Genero.getLetra(iae.getGenero()),
-		Particularidad.getString(iae.getParticularidad()), Numero.getInt(iae.getNumero()),
-		Caso.getInt(iae.getCaso()), GradoComparacion.getLetra(iae.getGrado()), iae.getSubindice(),
+	insercion.update(new Object[] { pk, iae.getAdjetivoId(), iae.getGenero().valorEntero(),
+		Particularidad.getString(iae.getParticularidad()), iae.getNumero().valorEntero(),
+		iae.getCaso().valorEntero(), GradoComparacion.getLetra(iae.getGrado()), iae.getSubindice(),
 		iae.getForma() });
 	iae.setId(pk);
     }
@@ -451,9 +451,9 @@ public class IrrAdjetivosIndividualesDAOImpl extends JdbcDaoSupport implements I
      */
     @Override
     public void modifica(IrrAdjetivoIndividual bean) {
-	modificacion.update(new Object[] { bean.getAdjetivoId(), Genero.getLetra(bean.getGenero()),
-		Particularidad.getString(bean.getParticularidad()), Numero.getInt(bean.getNumero()),
-		Caso.getInt(bean.getCaso()), GradoComparacion.getLetra(bean.getGrado()), bean.getSubindice(),
+	modificacion.update(new Object[] { bean.getAdjetivoId(), bean.getGenero().valorLetra(),
+		Particularidad.getString(bean.getParticularidad()), bean.getNumero().valorEntero(),
+		bean.getCaso().valorEntero(), GradoComparacion.getLetra(bean.getGrado()), bean.getSubindice(),
 		bean.getForma(),
 		// where
 		bean.getId() });

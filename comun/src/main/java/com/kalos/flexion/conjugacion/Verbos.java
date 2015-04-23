@@ -696,7 +696,7 @@ public class Verbos {
     private void A(Ocurrencia paramC, Object[][] paramArrayOfObject, String paramString1, String paramString2,
             int paramInt, Voz paramZ1, Voz paramZ2, boolean paramBoolean1, Contraccion paramc, Tiempo paramj,
             boolean paramBoolean2, List<String> paramList) {
-        for (int i = Voz.getInt(paramZ1); i <= Voz.getInt(paramZ2); i++) {
+        for (int i = paramZ1.valorEntero(); i <= paramZ2.valorEntero(); i++) {
             Voz localZ1 = Voz.getEnum(i);
             if ((!paramBoolean1) || (!localZ1.equals(Voz.Media))) {
                 Voz localZ2;

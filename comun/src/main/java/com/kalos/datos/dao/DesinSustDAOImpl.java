@@ -383,7 +383,7 @@ public class DesinSustDAOImpl extends JdbcDaoSupport implements DesinSustDAO {
 	String s = com.kalos.datos.util.DBUtil.getHashableId();
 	insert.update(new Object[] { s, Integer.valueOf(bean.getSubindice()), bean.getDesinencia(),
 		Integer.valueOf(bean.getSilaba()), Integer.valueOf(Acento.getInt(bean.getAcento())),
-		Integer.valueOf(Caso.getInt(bean.getCaso())), Integer.valueOf(Numero.getInt(bean.getNumero())),
+		bean.getCaso().valorEntero(), bean.getNumero().valorEntero(),
 		Integer.valueOf(Contraccion.getInt(bean.getContraccion())), OrigenTema.getCadena(bean.getOrigenTema()),
 		Integer.valueOf(bean.getTipoSustantivo()), bean.getTipoSustantivoId(), bean.getAcentoConcuerda(),
 		bean.getPosicionConcuerda(), bean.getRegexDesinencia(), bean.getOrden(),
@@ -394,7 +394,7 @@ public class DesinSustDAOImpl extends JdbcDaoSupport implements DesinSustDAO {
     public void modifica(DesinSust bean) {
 	update.update(new Object[] { Integer.valueOf(bean.getSubindice()), bean.getDesinencia(),
 		Integer.valueOf(bean.getSilaba()), Integer.valueOf(Acento.getInt(bean.getAcento())),
-		Integer.valueOf(Caso.getInt(bean.getCaso())), Integer.valueOf(Numero.getInt(bean.getNumero())),
+		bean.getCaso().valorEntero(), bean.getNumero().valorEntero(),
 		Integer.valueOf(Contraccion.getInt(bean.getContraccion())), OrigenTema.getCadena(bean.getOrigenTema()),
 		Integer.valueOf(bean.getTipoSustantivo()), bean.getTipoSustantivoId(), bean.getAcentoConcuerda(),
 		bean.getPosicionConcuerda(), bean.getRegexDesinencia(), bean.getOrden(),

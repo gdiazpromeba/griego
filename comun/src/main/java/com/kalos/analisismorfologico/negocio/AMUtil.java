@@ -94,7 +94,7 @@ public class AMUtil {
         StringBuffer tema = new StringBuffer(temaPropuesto);
         int tipoVerboExt = reg.getTipoVerboExtendido();
         TiempoOAspecto toa = reg.getTiempoOAspecto();
-        int tiempo = Tiempo.getInt(TransformadorTiempoAspecto.comoTiempo(toa));
+        int tiempo = TransformadorTiempoAspecto.comoTiempo(toa).valorEntero();
         // los VC, tanto infectivos como no infectivos, comen la desinencia
         // completa con
         // vocal unitiva y todo para formar el tema, así que necesitan que

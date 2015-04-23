@@ -613,7 +613,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			terminacion=OpPalabras.strCompletoABeta(OpPalabras.facilita(terminacion));
 			
 			ins.setInt(1, voz);
-			ins.setInt(2, Aspecto.getInt(Aspecto.Futuro));
+			ins.setInt(2, Aspecto.Futuro.valorEntero());
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
 			ins.setString(5, terminacion);
@@ -645,7 +645,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			terminacion=OpPalabras.strCompletoABeta(OpPalabras.facilita(terminacion));
 			
 			ins.setInt(1, voz);
-			ins.setInt(2, Aspecto.getInt(Aspecto.Confectivo));
+			ins.setInt(2, Aspecto.Confectivo.valorEntero());
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
 			ins.setString(5, terminacion);
@@ -727,8 +727,8 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 		System.out.println(" perfectivo de líquidos  (activa y media) ");
         
         	//activa
-		    ins.setInt(1, Voz.getInt(Voz.Activa));
-        	ins.setInt(2, Aspecto.getInt(Aspecto.Perfectivo));
+		    ins.setInt(1, Voz.Activa.valorEntero());
+        	ins.setInt(2, Aspecto.Perfectivo.valorEntero());
         	ins.setInt(3, 0); // fuerte
         	ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
         	ins.setString(5, "ENAI");
@@ -738,8 +738,8 @@ public class GeneraTermRegInfinitivo implements CompLetras{
         	ins.setInt(9, 0);
         	ins.executeUpdate();
         
-        	ins.setInt(1, Voz.getInt(Voz.Media));
-        	ins.setInt(2, Aspecto.getInt(Aspecto.Perfectivo));
+        	ins.setInt(1, Voz.Media.valorEntero());
+        	ins.setInt(2, Aspecto.Perfectivo.valorEntero());
         	ins.setInt(3, 0); // fuerte
         	ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
         	ins.setString(5, "QAI");
@@ -758,8 +758,8 @@ public class GeneraTermRegInfinitivo implements CompLetras{
         	rs = stm.executeQuery("SELECT *  FROM  DESIN_INFINITIVOS WHERE JUEGO=1 AND ASPECTO IN (5) and FUERTE=1 ");
         	tema = OpPalabras.strBetaACompleto("PAKAR");
         
-        	ins.setInt(1, Voz.getInt(Voz.Media));
-        	ins.setInt(2, Aspecto.getInt(Aspecto.Perfectivo));
+        	ins.setInt(1, Voz.Media.valorEntero());
+        	ins.setInt(2, Aspecto.Perfectivo.valorEntero());
         	ins.setInt(3, 1); // fuerte
         	ins.setInt(4, -1);
         	ins.setString(5, "QAI");

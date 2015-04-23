@@ -1,5 +1,7 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 
 /**
  * Title:
@@ -11,30 +13,31 @@ package com.kalos.enumeraciones;
  */
 
 public enum Voz {
-	Activa, Media, Pasiva;
+	Activa(1, "voz_activa"), Media(2, "voz_media"), Pasiva(3, "voz_pasiva");
 	
-	public static Voz getEnum(int voz){
-		switch(voz){
-		case(1):
-			return Activa;
-		case(2):
-			return Media;
-		case(3):
-			return Pasiva;
-		default:
-			throw new RuntimeException("no hay Voz para el número "+ voz);
-		}
-	}
-	
-
-	public static int getInt(Voz voz){
-		switch(voz){
-		case Activa:
-			return 1;
-		case Media:
-			return 2;
-		default:
-			return 3;
-		}
-	}
+    private int valorEntero;
+    private String etiquetaRecursos;
+    
+    Voz (int valorEntero, String etiquetaRecursos){
+        this.valorEntero = valorEntero;
+        this.etiquetaRecursos = etiquetaRecursos;
+    }
+    
+    public String getCadenaRecursos(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }
+    
+    public int valorEntero(){
+        return this.valorEntero;
+    }   
+    
+    
+    public static Voz getEnum(int valorEntero){
+        for (Voz enu : values()) {
+            if (enu.valorEntero==valorEntero){
+                return enu;
+            }
+        }
+        throw new RuntimeException("no hay enum de voz para el número " + valorEntero);
+    } 
 }

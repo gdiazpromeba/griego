@@ -24,7 +24,7 @@ public class CoordenadasOc {
     }
 
     public CoordenadasOc(Voz voz, Modo modo, Tiempo tiempo, FuerteDebil fuerte, Persona persona){
-        this.hashCode= Voz.getInt(voz) + 10 * Modo.getInt(modo) + 100 * Tiempo.getInt(tiempo) 
+        this.hashCode= voz.valorEntero() + 10 * modo.valorEntero() + 100 * tiempo.valorEntero() 
         + 1000 * FuerteDebil.getInt(fuerte) + 10000 * Persona.getInt(persona);
 	}
 	

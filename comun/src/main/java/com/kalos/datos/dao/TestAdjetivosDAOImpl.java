@@ -73,15 +73,15 @@ public class TestAdjetivosDAOImpl extends JdbcDaoSupport implements TestAdjetivo
     public void inserta(TestAdjetivosBean bean) {
 	String pk = com.kalos.datos.util.DBUtil.getHashableId();
 	this.insercion.update(new Object[] { bean.getId(), bean.getIdAdjetivo(), bean.getFormaDeclinada(),
-		Integer.valueOf(Caso.getInt(bean.getCaso())), Integer.valueOf(Numero.getInt(bean.getNumero())),
-		Integer.valueOf(Genero.getInt(bean.getGenero())) });
+		bean.getCaso().valorEntero(), bean.getNumero().valorEntero(),
+		bean.getGenero().valorEntero() });
 	bean.setId(pk);
     }
 
     public void modifica(TestAdjetivosBean bean) {
 	this.modificacion.update(new Object[] { bean.getIdAdjetivo(), bean.getFormaDeclinada(),
-		Integer.valueOf(Caso.getInt(bean.getCaso())), Integer.valueOf(Numero.getInt(bean.getNumero())),
-		Integer.valueOf(Genero.getInt(bean.getGenero())), bean.getId() });
+		bean.getCaso().valorEntero(), bean.getNumero().valorEntero(),
+		bean.getGenero().valorEntero(), bean.getId() });
     }
 
     public void borra(String paramString) {

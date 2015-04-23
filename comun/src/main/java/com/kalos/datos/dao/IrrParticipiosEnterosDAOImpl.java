@@ -135,14 +135,14 @@ public class IrrParticipiosEnterosDAOImpl extends JdbcDaoSupport implements
         String id = DBUtil.getHashableId();
         insercion.update(new Object[] {
                 id,
-                Voz.getInt(bean.getVoz()),
-                Aspecto.getInt(bean.getAspecto()),
+                bean.getVoz().valorEntero(),
+                bean.getAspecto().valorEntero(),
                 FuerteDebil.getInt(bean.getFuerte()),
                 Particularidad.getString(bean.getPartic()),
                 bean.getSubPart(),
                 bean.getNominativo(),
                 bean.getGenitivo(),
-                Genero.getLetra(bean.getGenero()),
+                bean.getGenero().valorLetra(),
                 bean.getTipoSustantivo(),
                 0,
                 bean.getVerboId()

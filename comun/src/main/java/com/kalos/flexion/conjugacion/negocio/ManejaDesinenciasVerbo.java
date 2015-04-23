@@ -20,9 +20,9 @@ public class ManejaDesinenciasVerbo {
 
     public Desinencia[] getDesinencias(int paramInt, Voz voz, Modo modo, Tiempo tiempo, FuerteDebil fuerte,
 	    Persona persona) {
-	int i = Voz.getInt(voz);
-	int j = Modo.getInt(modo);
-	int k = Tiempo.getInt(tiempo);
+	int i = voz.valorEntero();
+	int j = modo.valorEntero();
+	int k = tiempo.valorEntero();
 	int m = FuerteDebil.getInt(fuerte);
 	int n = Persona.getInt(persona);
 	List<Desinencia> localList = this.desinencias[paramInt][i][j][k][m][n];
@@ -45,9 +45,9 @@ public class ManejaDesinenciasVerbo {
 
     private void puebla(int juego, Voz voz, Modo modo, Tiempo tiempo, FuerteDebil fuerte, Persona persona, String paramString, int paramInt2,
 	    Acento acento) {
-	int i = Voz.getInt(voz);
-	int j = Modo.getInt(modo);
-	int k = Tiempo.getInt(tiempo);
+	int i = voz.valorEntero();
+	int j = modo.valorEntero();
+	int k = tiempo.valorEntero();
 	int m = FuerteDebil.getInt(fuerte);
 	int n = Persona.getInt(persona);
 	try {

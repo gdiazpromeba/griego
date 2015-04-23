@@ -1,5 +1,7 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 
 /**
  * Title:
@@ -11,46 +13,37 @@ package com.kalos.enumeraciones;
  */
 
 public enum Tiempo implements TiempoOAspecto {
-	Presente, Imperfecto, Futuro, Aoristo, Perfecto, Pluscuamperfecto; 
+	Presente(1, "presente"), Imperfecto(2, "imperfecto"), Futuro(3, "futuro"), 
+	Aoristo(4, "aoristo"), Perfecto(5, "perfecto"), Pluscuamperfecto(6, "pluscuamperfecto"); 
 	
-	public static Tiempo getEnum(int tiempo){
-		switch(tiempo){
-		case(1):
-			return Presente;
-		case(2):
-			return Imperfecto;
-		case(3):
-			return Futuro;
-		case(4):
-			 return Aoristo;
-		case(5):
-			return Perfecto;
-		case(6):
-			 return Pluscuamperfecto;
-		default:
-			throw new RuntimeException("no hay theEnum de tiempo para el número " + tiempo);
-		}
+	
+	private int valorEntero;
+	private String etiquetaRecursos;
+	
+	Tiempo (int valorEntero, String etiquetaRecursos){
+	    this.valorEntero = valorEntero;
+	    this.etiquetaRecursos = etiquetaRecursos;
+	}
+	
+	public String getCadenaRecursos(){
+	    return Recursos.getCadena(this.etiquetaRecursos);
+	}
+	
+	public int valorEntero(){
+	    return this.valorEntero;
+	}
+	
+	
+	public static Tiempo getEnum(int valorEntero){
+	    for (Tiempo tiempo : values()) {
+            if (tiempo.valorEntero==valorEntero){
+                return tiempo;
+            }
+        }
+        throw new RuntimeException("no hay theEnum de tiempo para el número " + valorEntero);
 	}
 	
 
-	public static int getInt(Tiempo tiempo){
-		switch(tiempo){
-		  case Presente:
-			  return 1;
-		  case Imperfecto:
-			  return 2;
-		  case Futuro:
-			  return 3;
-		  case Aoristo:
-			  return 4;
-		  case Perfecto:
-			  return 5;
-		  case Pluscuamperfecto:
-			  return 6;
-		  default:
-			  throw new RuntimeException("no hay tiempo número " + tiempo);
-		}
-	}
       
 
       

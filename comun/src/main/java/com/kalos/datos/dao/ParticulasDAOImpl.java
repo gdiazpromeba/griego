@@ -551,11 +551,11 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
         		ea.getParticulaEncabezadoId(),
         		TipoPalabra.getString(ea.getParticulaTipo()),
         		Particularidad.getString(ea.getParticularidad()),
-        		ea.getCaso()!=null?Caso.getInt(ea.getCaso()): null,
+        		ea.getCaso()!=null?ea.getCaso().valorEntero(): null,
         		ea.getPersona()!=null?Persona.getInt(ea.getPersona()):null,
         		ea.getSubindice(),
-        		ea.getGenero()!=null?Genero.getLetra(ea.getGenero()):null,
-        		ea.getNumero()!=null?Numero.getInt(ea.getNumero()):null,
+        		ea.getGenero()!=null?ea.getGenero().valorLetra():null,
+        		ea.getNumero()!=null?ea.getNumero().valorEntero():null,
         	    ea.getForma()
         });
         ea.setParticulaId(pk);
@@ -588,11 +588,11 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
         		ea.getParticulaEncabezadoId(),
         		TipoPalabra.getString(ea.getParticulaTipo()), 
         		Particularidad.getString(ea.getParticularidad()),
-        		ea.getCaso()!=null?Caso.getInt(ea.getCaso()): null,
+        		ea.getCaso()!=null?ea.getCaso().valorEntero(): null,
         		ea.getPersona()!=null?Persona.getInt(ea.getPersona()):null,
         		ea.getSubindice(),
-        		ea.getGenero()!=null?Genero.getLetra(ea.getGenero()):null,
-        		ea.getNumero()!=null?Numero.getInt(ea.getNumero()):null,
+        		ea.getGenero()!=null?ea.getGenero().valorLetra():null,
+        		ea.getNumero()!=null?ea.getNumero().valorEntero():null,
         	    ea.getForma(),
         	    //where
         	    ea.getId()

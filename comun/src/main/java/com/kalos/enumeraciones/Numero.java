@@ -1,32 +1,34 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 public enum Numero {
-	Singular, Plural, Dual;
+	Singular(1, "singular"), Plural(2, "plural"), Dual(3, "dual");
 	
-	public static int getInt(Numero valor){
-		switch(valor){
-		case Singular:
-			return 1;
-		case Plural:
-			return 2;
-		case Dual:
-		    return 3;
-		default:
-		    throw new RuntimeException("no hay número para " + valor);
-		}
-	}
-	
-	public static Numero getEnum(int valor){
-		switch(valor){
-		  case 1:
-			  return Singular;
-		  case 2:
-			  return Plural;
-		  case 3:
-			  return Dual;
-		  default:
-			  throw new RuntimeException("no hay enum para " + valor);
-		}
-	}	
+    private int valorEntero;
+    private String etiquetaRecursos;
+    
+    Numero (int valorEntero, String etiquetaRecursos){
+        this.valorEntero = valorEntero;
+        this.etiquetaRecursos = etiquetaRecursos;
+    }
+    
+    public String getCadenaRecursos(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }
+    
+    public int valorEntero(){
+        return this.valorEntero;
+    }   
+    
+    
+    public static Numero getEnum(int valorEntero){
+        for (Numero enu : values()) {
+            if (enu.valorEntero==valorEntero){
+                return enu;
+            }
+        }
+        throw new RuntimeException("no hay enum de Numero para el número " + valorEntero);
+    }	
 	
 }

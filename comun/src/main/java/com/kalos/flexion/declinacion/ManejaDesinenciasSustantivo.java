@@ -37,8 +37,8 @@ public class ManejaDesinenciasSustantivo {
     }
 
     public DesinenciaSustantivo[] getDesinencia(int i, Numero n1, Caso a1) {
-	int j = Numero.getInt(n1);
-	int k = Caso.getInt(a1);
+	int j = n1.valorEntero();
+	int k = a1.valorEntero();
 	List<DesinenciaSustantivo> list = desinencias[i][j][k];
 	if (list != null) {
 	    return (DesinenciaSustantivo[]) desinencias[i][j][k].toArray(new DesinenciaSustantivo[0]);
@@ -98,8 +98,8 @@ public class ManejaDesinenciasSustantivo {
 	    Iterator<DesinSust> iterator1 = arraylist.iterator();
 	    while (iterator1.hasNext()) {
 		DesinSust a2 = iterator1.next();
-		int k = Caso.getInt(a2.getCaso());
-		int l = Numero.getInt(a2.getNumero());
+		int k = a2.getCaso().valorEntero();
+		int l = a2.getNumero().valorEntero();
 		List<DesinenciaSustantivo> lstDes = desinencias[i][l][k];
 		if (lstDes == null) {
 		    lstDes = new ArrayList<DesinenciaSustantivo>();

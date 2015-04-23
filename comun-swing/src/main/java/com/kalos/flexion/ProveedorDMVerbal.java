@@ -160,7 +160,7 @@ public class ProveedorDMVerbal {
 	    if (sinDual)
 	        ultimaPersona=Persona._3pp;
 
-	        for (int iVoz=Voz.getInt(Voz.Activa); iVoz<=Voz.getInt(Voz.Pasiva); iVoz++){
+	        for (int iVoz=Voz.Activa.valorEntero(); iVoz<=Voz.Pasiva.valorEntero(); iVoz++){
 	        	Voz voz=Voz.getEnum(iVoz);
 	            for (int iPersona=Persona.getInt(Persona._1ps); iPersona<=Persona.getInt(ultimaPersona); iPersona++){
 	            	Persona persona=Persona.getEnum(iPersona);
@@ -265,7 +265,7 @@ public class ProveedorDMVerbal {
 	    		infinitivos.conjuga(oc, beanVerbo,  partic);
 	    		cacheFlexionInfinitivos.setOcurrencia(beanVerbo.getId(), partic, oc);
 	    	}
-			for (int iVoz=Voz.getInt(Voz.Activa); iVoz<=Voz.getInt(Voz.Pasiva); iVoz++){
+			for (int iVoz=Voz.Activa.valorEntero(); iVoz<=Voz.Pasiva.valorEntero(); iVoz++){
 				Voz voz=Voz.getEnum(iVoz);
 				for (Aspecto aspecto: Aspecto.values()){
 					for (FuerteDebil fuerte: FuerteDebil.values()){

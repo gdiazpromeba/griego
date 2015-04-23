@@ -22,16 +22,16 @@ public class OcNominal {
   
 
   public List<String> getFormas(Caso caso, Numero numero){
-	  int iCaso=Caso.getInt(caso);
-      return forma[iCaso][Numero.getInt(numero)];
+	  int iCaso=caso.valorEntero();
+      return forma[iCaso][numero.valorEntero()];
   }
   public String getPrimeraForma(Caso caso, Numero numero){
-	  int iCaso=Caso.getInt(caso);
-      return (String)forma[iCaso][Numero.getInt(numero)].get(0);
+	  int iCaso=caso.valorEntero();
+      return (String)forma[iCaso][numero.valorEntero()].get(0);
   }
   public String getFormaIndividual(Caso caso, Numero numero, int subindice){
-    int iNum=Numero.getInt(numero);
-    int iCaso=Caso.getInt(caso);
+    int iNum=numero.valorEntero();
+    int iCaso=caso.valorEntero();
 	if (forma[iCaso][iNum]!=null)
       if (subindice<forma[iCaso][iNum].size())
         return (String)forma[iCaso][iNum].get(subindice);
@@ -41,8 +41,8 @@ public class OcNominal {
       return null;
   }
   public void setFormaIndividual(Caso caso, Numero numero, String cadena){
-	  int iNum=Numero.getInt(numero);  
-	  int iCaso=Caso.getInt(caso);
+	  int iNum=numero.valorEntero();  
+	  int iCaso=caso.valorEntero();
 	  if (forma[iCaso][iNum]==null)
               forma[iCaso][iNum]=new ArrayList<String>();
         forma[iCaso][iNum].add(cadena);
@@ -56,8 +56,8 @@ public class OcNominal {
    * @param subindice
    */
   public void setFormaIndividual(Caso caso, Numero numero, String cadena, int subindice){
-      int iCaso=Caso.getInt(caso);
-	  int iNum=Numero.getInt(numero);
+      int iCaso=caso.valorEntero();
+	  int iNum=numero.valorEntero();
 	  if (forma[iCaso][iNum]==null)
          forma[iCaso][iNum]=new ArrayList<String>();
       if (forma[iCaso][iNum].size()<=subindice)
@@ -75,13 +75,13 @@ public class OcNominal {
   }
   public int cantidadDeFormasDelCaso(Caso caso){
     int alturaSingular=0,alturaPlural=0,alturaDual=0;
-    int iCaso=Caso.getInt(caso);
-    if (forma[iCaso][Numero.getInt(Numero.Singular)]!=null)
-    	alturaSingular= forma[iCaso][Numero.getInt(Numero.Singular)].size();
-    if (forma[iCaso][Numero.getInt(Numero.Plural)]!=null)
-    	alturaPlural= forma[iCaso][Numero.getInt(Numero.Plural)].size();
-    if (forma[iCaso][Numero.getInt(Numero.Dual)]!=null)
-    	alturaDual= forma[iCaso][Numero.getInt(Numero.Dual)].size();
+    int iCaso=caso.valorEntero();
+    if (forma[iCaso][Numero.Singular.valorEntero()]!=null)
+    	alturaSingular= forma[iCaso][Numero.Singular.valorEntero()].size();
+    if (forma[iCaso][Numero.Plural.valorEntero()]!=null)
+    	alturaPlural= forma[iCaso][Numero.Plural.valorEntero()].size();
+    if (forma[iCaso][Numero.Dual.valorEntero()]!=null)
+    	alturaDual= forma[iCaso][Numero.Dual.valorEntero()].size();
     return Math.max(Math.max(alturaSingular,alturaPlural),alturaDual);
   }
 
