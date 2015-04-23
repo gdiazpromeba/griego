@@ -58,8 +58,16 @@ en los respectivos directorios "target" -->
 	
 	<target name="runBuild" depends="compilacion, granJar, conBDYReportes" >
 		<java jar="work/condb/${jar.kalos}" dir="work/condb" fork="true">
+			  <jvmarg value="-Xdebug" />
 		</java>
 	</target>
+	
+	<target name="runBuildDebug" depends="compilacion, granJar, conBDYReportes" >
+		<java jar="work/condb/${jar.kalos}" dir="work/condb" fork="true">
+			  <jvmarg value="-Xdebug" />
+			  <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5432" />
+		</java>
+	</target>	
 	
 	<target name="runBuildOfuscado" depends="compilacion, granJar, conBDYReportes, obfuscate" >
 		<java jar="work/condb/${jar.kalos.ofuscado}" dir="work/condb" fork="true">

@@ -54,7 +54,7 @@ public class ProveedorDMVerbal {
 	 * @param conta
 	 * @return
 	 */
-	DefaultTableModel modeloInfinitivos(String idVerbo){
+	DefaultTableModel tmInfinitivos(String idVerbo){
 		VerboBean veb=gerenteVerbos.seleccionaUno(idVerbo);
 		DefaultTableModel tmInf=(DefaultTableModel) modeloInfinitivosBasico(veb);
 		return tmInf;
@@ -108,11 +108,6 @@ public class ProveedorDMVerbal {
 	 */
 	DefaultTableModel modeloVerbosPorModos(String idVerbo, boolean sinDual){
 		DefaultTableModel tm=(DefaultTableModel) modeloVerbosBasico(idVerbo, sinDual);
-		
-
-		
-		
-		
 		utilidadesTM.horizontaliza(tm, 
 		      new String[]{"PARTIC", "ORDEN_PARTIC", "VOZ", "TIEMPO", "FUERTE", "PERSONA", "SUBPART"},
 		      new String[]{"ORDEN_PARTIC", "VOZ", "TIEMPO", "FUERTE", "PERSONA", "SUBPART"},
@@ -121,7 +116,6 @@ public class ProveedorDMVerbal {
 					"FORMA",
 					new String[]{"INDICATIVO", "SUBJUNTIVO", "OPTATIVO", "IMPERATIVO"}			                                                                                           
 		);
-
 		
 
 		
@@ -198,7 +192,7 @@ public class ProveedorDMVerbal {
 	DefaultTableModel modeloVerbosBasico(String idVerbo, boolean sinDual){
 	    
 	    VerboBean beanVerbo=gerenteVerbos.seleccionaIndividualSinSignificado(idVerbo);
-		DefaultTableModel tm=new DefaultTableModel(new String[]{"PARTIC",  "SUBPART", "VOZ", "TIEMPO", "FUERTE", "PERSONA", "MODO", "FORMA"}, 0);
+		DefaultTableModel tm=new DefaultTableModel(new String[]{"PARTIC", "ORDEN_PARTIC", "SUBPART", "VOZ", "TIEMPO", "FUERTE", "PERSONA", "MODO", "FORMA"}, 0);
 	    List<Particularidad> particsOrden=gerenteVerbos.seleccionaPartics(idVerbo);
 	    particsOrden=new ArrayList<Particularidad>(particsOrden);
 	    
@@ -225,7 +219,7 @@ public class ProveedorDMVerbal {
 	                            for (int formas=0; formas<cantidad; formas++){
 	                                String forma  = oc.getFormaIndividual(voz, modo,  tiempo,   fuerte, persona, formas);
 	                                if (forma==null) continue;
-	                                tm.addRow(new Object[]{partic, formas, voz, tiempo, fuerte, persona, modo,  
+	                                tm.addRow(new Object[]{partic, partic.getOrden(), formas, voz, tiempo, fuerte, persona, modo,  
 	                                new ClaveFlexion(idVerbo, forma, voz, modo, tiempo, fuerte, persona, partic, formas, null, null, null, null)});
 	                            }
 	                        }

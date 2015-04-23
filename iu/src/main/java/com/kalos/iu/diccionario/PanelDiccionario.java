@@ -183,10 +183,6 @@ public class PanelDiccionario extends JPanel implements TipografiaCambiable, Esc
 		add(panelbuilder.getPanel());
 	}
 
-	public void setUltimaEntradaDiccionario(EntradaDiccionario n1) {
-		detalle.setEntradaDiccionario(n1);
-	}
-
 	private List<TipoPalabra> enumSeleccionadaATipoPalabra(List<EnumSeleccionada> list) {
 		List<TipoPalabra> arraylist = new ArrayList<TipoPalabra>();
 		TipoPalabra l1;

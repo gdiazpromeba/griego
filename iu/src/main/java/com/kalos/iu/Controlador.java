@@ -47,13 +47,13 @@ public class Controlador {
 				return;
 			if (m.equals(Reportes.NINGUN_TIPO_DISPONIBLE))
 				return;
-			if (entradaDiccionario == null) {
+			if (panelPrincipal.getEntradaDiccionario() == null) {
 				return;
 			} else {
 				d.setEnabled(false);
 				JButton jbutton = (JButton) actionevent.getSource();
 				jbutton.setEnabled(false);
-				panelFlexion.creaTableModel(entradaDiccionario.getId(), m);
+				panelFlexion.creaTableModel(panelPrincipal.getEntradaDiccionario().getId(), m);
 				return;
 			}
 		}
@@ -71,9 +71,7 @@ public class Controlador {
 				return;
 			} else {
 				DictionaryPM b = (DictionaryPM)jtable.getModel();
-				entradaDiccionario = b.getFila(i);
-				panelDiccionario.setUltimaEntradaDiccionario(entradaDiccionario);
-				panelPrincipal.setEntradaDiccionario(entradaDiccionario);
+				panelPrincipal.setEntradaDiccionario( b.getFila(i));
 				return;
 			}
 		}
@@ -113,6 +111,5 @@ public class Controlador {
 
 	private PanelDiccionario panelDiccionario;
 	private PanelFlexion panelFlexion;
-	private EntradaDiccionario entradaDiccionario;
 	private PanelPrincipal panelPrincipal;
 }

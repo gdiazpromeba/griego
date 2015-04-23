@@ -34,7 +34,7 @@ public class PanelPrincipal extends JPanel {
     private PanelAM panelAM;
     private GerenteDiccionario gerenteDiccionario;
     
-    Logger log= Logger.getLogger(this.getClass().getName());    
+    //Logger log= Logger.getLogger(this.getClass().getName());    
     
     public PanelPrincipal(PanelDiccionario panelDiccionario, PanelAM panelAM, PanelFlexion panelFlexion, PanelProgreso panelProgreso, GerenteDiccionario gerenteDiccionario){
         this.panelAM = panelAM;
@@ -61,7 +61,6 @@ public class PanelPrincipal extends JPanel {
             public void stateChanged(ChangeEvent e) {
                 int tabIndex = solapas.getSelectedIndex();
                 EscuchaSolapa panelES = (EscuchaSolapa) solapas.getSelectedComponent();
-                log.info("el componente de la solapa es iíndice=" + tabIndex + " clase=" + panelES);
                 panelES.miSolapaSeleccionada();
                 
             }
