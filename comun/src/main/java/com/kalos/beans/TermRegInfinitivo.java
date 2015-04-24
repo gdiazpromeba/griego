@@ -39,11 +39,11 @@ public class TermRegInfinitivo implements TermRegVerbal, TieneTemaPropuesto, Ver
 
 	private int cadena() {
 		StringBuffer stringbuffer = new StringBuffer();
-		stringbuffer.append(voz);
+		stringbuffer.append(voz.name());
 		stringbuffer.append("|");
-		stringbuffer.append(aspecto);
+		stringbuffer.append(aspecto.name());
 		stringbuffer.append("|");
-		stringbuffer.append(fuerte);
+		stringbuffer.append(fuerte.name());
 		stringbuffer.append("|");
 		stringbuffer.append(tipoDesinencia);
 		stringbuffer.append("|");
@@ -51,9 +51,9 @@ public class TermRegInfinitivo implements TermRegVerbal, TieneTemaPropuesto, Ver
 		stringbuffer.append("|");
 		stringbuffer.append(regEx);
 		stringbuffer.append("|");
-		stringbuffer.append(silaba);
+		stringbuffer.append(silaba.name());
 		stringbuffer.append("|");
-		stringbuffer.append(acento);
+		stringbuffer.append(acento.name());
 		stringbuffer.append("|");
 		stringbuffer.append(contraccionGeneradora);
 		stringbuffer.append("|");
@@ -71,7 +71,7 @@ public class TermRegInfinitivo implements TermRegVerbal, TieneTemaPropuesto, Ver
 		stringbuffer.append("|");
 		stringbuffer.append(idVerbo);
 		stringbuffer.append("|");
-		stringbuffer.append(particularidad);
+		stringbuffer.append(particularidad!=null?particularidad.name():null);
 		return stringbuffer.toString().hashCode();
 	}
 

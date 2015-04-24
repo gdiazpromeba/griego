@@ -10,7 +10,6 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.UIManager;
 
-import com.kalos.recursos.CadenasEnum;
 import com.kalos.recursos.Recursos;
 
 public class RendererComboEnumeraciones extends DefaultListCellRenderer {
@@ -21,7 +20,7 @@ public class RendererComboEnumeraciones extends DefaultListCellRenderer {
 	if (obj == null)
 	    s = Recursos.getCadena("nulo");
 	else
-	    s = CadenasEnum.getCadena(enu);
+	    s = enu.toString();
 	setText(s);
 	if (flag) {
 	    setBackground(UIManager.getColor("List.selectionBackground"));

@@ -24,7 +24,7 @@ public enum Persona {
         this.etiquetaRecursos = etiquetaRecursos;
     }
     
-    public String getCadenaRecursos(){
+    public String toString(){
         return Recursos.getCadena(this.etiquetaRecursos);
     }	
     

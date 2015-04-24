@@ -25,7 +25,7 @@ public enum Tiempo implements TiempoOAspecto {
 	    this.etiquetaRecursos = etiquetaRecursos;
 	}
 	
-	public String getCadenaRecursos(){
+	public String toString(){
 	    return Recursos.getCadena(this.etiquetaRecursos);
 	}
 	
@@ -40,7 +40,7 @@ public enum Tiempo implements TiempoOAspecto {
                 return tiempo;
             }
         }
-        throw new RuntimeException("no hay theEnum de tiempo para el número " + valorEntero);
+        throw new RuntimeException("no hay theEnum de Tiempo para el número " + valorEntero);
 	}
 	
 

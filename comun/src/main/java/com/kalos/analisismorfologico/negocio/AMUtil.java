@@ -65,7 +65,6 @@ import com.kalos.operaciones.DesTransformaciones;
 import com.kalos.operaciones.OpBeans;
 import com.kalos.operaciones.OpPalabras;
 import com.kalos.operaciones.TiposVerbo;
-import com.kalos.recursos.CadenasEnum;
 import com.kalos.recursos.Recursos;
 
 /**
@@ -731,59 +730,59 @@ public class AMUtil {
             case Sustantivo: {
                 frase.append(Recursos.getCadena("sustantivo").toLowerCase() + " ");
                 frase.append(OpPalabras.strCompletoAUnicode(resUniversal.getFormaCanonica()) + ", ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getCaso()).toLowerCase());
+                frase.append(resUniversal.getCaso().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getGenero()).toLowerCase());
+                frase.append(resUniversal.getGenero().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getNumero()).toLowerCase());
+                frase.append(resUniversal.getNumero().toString().toLowerCase());
                 frase.append(" ");
                 break;
             }
             case Participio: {
                 frase.append(Recursos.getCadena("participio_del_verbo") + " ");
                 frase.append(OpPalabras.strCompletoAUnicode(resUniversal.getFormaCanonica()) + ", ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getCaso()).toLowerCase());
+                frase.append(resUniversal.getCaso().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getGenero()).toLowerCase());
+                frase.append(resUniversal.getGenero().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getNumero()).toLowerCase());
+                frase.append(resUniversal.getNumero().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getAspecto()).toLowerCase());
+                frase.append(resUniversal.getAspecto().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getVoz()).toLowerCase());
+                frase.append(resUniversal.getVoz().toString().toLowerCase());
                 frase.append(" ");
                 break;
             }
             case Infinitivo: {
                 frase.append(Recursos.getCadena("infinitivo_del_verbo") + " ");
                 frase.append(OpPalabras.strCompletoAUnicode(resUniversal.getFormaCanonica()) + ", ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getAspecto()).toLowerCase());
+                frase.append(resUniversal.getAspecto().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getVoz()).toLowerCase());
+                frase.append(resUniversal.getVoz().toString().toLowerCase());
                 frase.append(" ");
                 break;
             }
             case Verbo: {
                 frase.append(Recursos.getCadena("verbo").toLowerCase() + " ");
                 frase.append(OpPalabras.strCompletoAUnicode(resUniversal.getFormaCanonica()) + ", ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getTiempo()).toLowerCase());
+                frase.append(resUniversal.getTiempo().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getModo()).toLowerCase());
+                frase.append(resUniversal.getModo().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getVoz()).toLowerCase());
+                frase.append(resUniversal.getVoz().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getPersona()).toLowerCase());
+                frase.append(resUniversal.getPersona().toString().toLowerCase());
                 frase.append(" ");
                 break;
             }
             case Adjetivo: {
                 frase.append(Recursos.getCadena("adjetivo").toLowerCase() + " ");
                 frase.append(OpPalabras.strCompletoAUnicode(resUniversal.getFormaCanonica()) + ", ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getCaso()).toLowerCase());
+                frase.append(resUniversal.getCaso().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getGenero()).toLowerCase());
+                frase.append(resUniversal.getGenero().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getNumero()).toLowerCase());
+                frase.append(resUniversal.getNumero().toString().toLowerCase());
                 if (!resUniversal.getGrado().equals(GradoComparacion.Positivo)) {
                     frase.append(" ");
                     if (resUniversal.getGrado().equals(GradoComparacion.Comparativo)) {
@@ -797,62 +796,62 @@ public class AMUtil {
             case Articulo: {
                 frase.append(Recursos.getCadena("articulo").toLowerCase() + " ");
                 frase.append(OpPalabras.strCompletoAUnicode(resUniversal.getFormaCanonica()) + ", ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getCaso()).toLowerCase());
+                frase.append(resUniversal.getCaso().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getGenero()).toLowerCase());
+                frase.append(resUniversal.getGenero().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getNumero()).toLowerCase());
+                frase.append(resUniversal.getNumero().toString().toLowerCase());
                 break;
             }
 
             case PronombrePersonal: {
                 frase.append(Recursos.getCadena("pronombre_personal").toLowerCase() + " ");
                 frase.append(OpPalabras.strCompletoAUnicode(resUniversal.getFormaCanonica()) + ", ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getCaso()).toLowerCase());
+                frase.append(resUniversal.getCaso().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getPersona()).toLowerCase());
+                frase.append(resUniversal.getPersona().toString().toLowerCase());
                 break;
             }
 
             case PronombreRelativo: {
                 frase.append(Recursos.getCadena("pronombre_relativo").toLowerCase() + " ");
                 frase.append(OpPalabras.strCompletoAUnicode(resUniversal.getFormaCanonica()) + ", ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getCaso()).toLowerCase());
+                frase.append(resUniversal.getCaso().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getGenero()).toLowerCase());
+                frase.append(resUniversal.getGenero().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getNumero()).toLowerCase());
+                frase.append(resUniversal.getNumero().toString().toLowerCase());
                 break;
             }
 
             case PronombreInterrogativo: {
                 frase.append(Recursos.getCadena("pronombre_interrogativo").toLowerCase() + " ");
                 frase.append(OpPalabras.strCompletoAUnicode(resUniversal.getFormaCanonica()) + ", ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getCaso()).toLowerCase());
+                frase.append(resUniversal.getCaso().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getGenero()).toLowerCase());
+                frase.append(resUniversal.getGenero().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getNumero()).toLowerCase());
+                frase.append(resUniversal.getNumero().toString().toLowerCase());
                 break;
             }
 
             case PronombreReflexivo: {
                 frase.append(Recursos.getCadena("pronombre_reflexivo").toLowerCase() + " ");
                 frase.append(OpPalabras.strCompletoAUnicode(resUniversal.getFormaCanonica()) + ", ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getCaso()).toLowerCase());
+                frase.append(resUniversal.getCaso().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getPersona()).toLowerCase());
+                frase.append(resUniversal.getPersona().toString().toLowerCase());
                 break;
             }
 
             case PronombreIndefinido: {
                 frase.append(Recursos.getCadena("pronombre_indefinido").toLowerCase() + " ");
                 frase.append(OpPalabras.strCompletoAUnicode(resUniversal.getFormaCanonica()) + ", ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getCaso()).toLowerCase());
+                frase.append(resUniversal.getCaso().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getGenero()).toLowerCase());
+                frase.append(resUniversal.getGenero().toString().toLowerCase());
                 frase.append(" ");
-                frase.append(CadenasEnum.getCadena(resUniversal.getNumero()).toLowerCase());
+                frase.append(resUniversal.getNumero().toString().toLowerCase());
                 break;
             }
 
@@ -860,7 +859,7 @@ public class AMUtil {
             case Adverbio:
             case Preposicion:
             case Interjeccion:
-                frase.append(CadenasEnum.getCadena(resUniversal.getTipoPalabra()).toLowerCase());
+                frase.append(resUniversal.getTipoPalabra().toString().toLowerCase());
                 frase.append(", ");
                 frase.append(Recursos.getCadena("invariable"));
                 break;
@@ -871,7 +870,7 @@ public class AMUtil {
             partic = resUniversal.getParticCanonica();
         }
         if (partic != null && !partic.equals(Particularidad.Regular)) {
-            frase.append(" " + CadenasEnum.getCadena(partic));
+            frase.append(" " + partic.toString() );
         }
         return frase.toString();
     }

@@ -312,14 +312,14 @@ public class AdverbiosDAOImpl extends JdbcDaoSupport implements AdverbiosDAO {
 	String s = com.kalos.datos.util.DBUtil.getHashableId();
 	insercion.update(new Object[] { s, m1.getLetra(), Integer.valueOf(m1.getCodigo()), m1.getAdverbio(),
 		m1.getPartic().abreviatura(), m1.getGrado().abreviatura(),
-		TipoAdverbio.getCadena(m1.getTipo()) });
+		m1.getTipo().abreviatura() });
 	m1.setId(s);
     }
 
     public void modifica(AdverbioBean m1) {
 	modificacion.update(new Object[] { m1.getLetra(), Integer.valueOf(m1.getCodigo()), m1.getAdverbio(),
 		m1.getPartic().abreviatura(), m1.getGrado().abreviatura(),
-		TipoAdverbio.getCadena(m1.getTipo()), m1.getId() });
+		m1.getTipo().abreviatura(), m1.getId() });
     }
 
     public void borra(String s) {

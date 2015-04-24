@@ -4,7 +4,6 @@ import com.kalos.beans.EntradaDiccionario;
 import com.kalos.beans.Significado;
 import com.kalos.bibliotecadatos.FuenteDatosCacheable;
 import com.kalos.operaciones.OpSignificados;
-import com.kalos.recursos.CadenasEnum;
 
 public class DictionaryPM extends PagingModel<EntradaDiccionario> {
 
@@ -19,7 +18,7 @@ public class DictionaryPM extends PagingModel<EntradaDiccionario> {
 		 case 0:
 			 return ed.getNormal();
 		 case 1: 
-			 return CadenasEnum.getCadena(ed.getTipoPalabra());
+			 return ed.getTipoPalabra().toString();
 		 case 2:
 			 Significado significado=OpSignificados.getSignificadoIndividual(ed);
 			 return significado.getValor();

@@ -136,8 +136,8 @@ public class GeneraTermRegSustantivos {
 				trs.setTiposHoja(hc);
 				trs.setAcento(ds.getAcento());
 				trs.setSilaba(Silaba.getEnum(ds.getSilaba()));
-				trs.setAcentoConcuerda(AcentoConcuerda.getInt(ds.getAcentoConcuerda()));
-				trs.setPosicionConcuerda(PosicionConcuerda.getInt(ds.getPosicionConcuerda()));
+				trs.setAcentoConcuerda(ds.getAcentoConcuerda().valorEntero());
+				trs.setPosicionConcuerda(ds.getPosicionConcuerda().valorEntero());
 				gerenteTermRegSustantivo.inserta(trs);
 			}
 		}

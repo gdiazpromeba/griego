@@ -15,12 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import javax.swing.UIManager;
 
+import org.apache.log4j.xml.DOMConfigurator;
+
 import com.kalos.enumeraciones.TipoPalabra;
-import com.kalos.recursos.CadenasEnum;
 import com.kalos.recursos.Configuracion;
 import com.kalos.recursos.Recursos;
-
-import org.apache.log4j.xml.DOMConfigurator;
 
 /**
  * Lista que presenta un array de enumeraciones, y es capaz de devolver un array con qué fue seleccionado
@@ -86,7 +85,7 @@ public class FiltroEnumeraciones extends JPanel{
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 			EnumSeleccionada ens=(EnumSeleccionada)value;
 			JCheckBox chk=new JCheckBox();
-			chk.setText(CadenasEnum.getCadena(ens.getEnumeracion()));
+			chk.setText(ens.getEnumeracion().toString());
 			chk.setSelected(ens.isSeleccionado());
 			return chk;
 		}

@@ -23,7 +23,7 @@ public class ManejaDesinenciasVerbo {
 	int i = voz.valorEntero();
 	int j = modo.valorEntero();
 	int k = tiempo.valorEntero();
-	int m = FuerteDebil.getInt(fuerte);
+	int m = fuerte.valorEntero();
 	int n = persona.valorEntero();
 	List<Desinencia> localList = this.desinencias[paramInt][i][j][k][m][n];
 	if (localList == null) {
@@ -48,7 +48,7 @@ public class ManejaDesinenciasVerbo {
 	int i = voz.valorEntero();
 	int j = modo.valorEntero();
 	int k = tiempo.valorEntero();
-	int m = FuerteDebil.getInt(fuerte);
+	int m = fuerte.valorEntero();
 	int n = persona.valorEntero();
 	try {
 	    if (this.desinencias[juego][i][j][k][m][n] == null) {

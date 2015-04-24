@@ -24,7 +24,7 @@ public enum TiempoSegundos implements TiempoOAspecto{
         this.etiquetaRecursos = etiquetaRecursos;
     }
     
-    public String getCadenaRecursos(){
+    public String toString(){
         return Recursos.getCadena(this.etiquetaRecursos);
     }	
 	

@@ -48,11 +48,11 @@ public class TermRegSustantivo implements TermRegNominal {
 		StringBuffer stringbuffer = new StringBuffer();
 		stringbuffer.append(tipoSustantivo);
 		stringbuffer.append("|");
-		stringbuffer.append(caso);
+		stringbuffer.append(caso.name());
 		stringbuffer.append("|");
-		stringbuffer.append(numero);
+		stringbuffer.append(numero.name());
 		stringbuffer.append("|");
-		stringbuffer.append(origenTema);
+		stringbuffer.append(origenTema.name());
 		stringbuffer.append("|");
 		stringbuffer.append(subindice);
 		stringbuffer.append("|");
@@ -62,9 +62,9 @@ public class TermRegSustantivo implements TermRegNominal {
 		stringbuffer.append("|");
 		stringbuffer.append(formaOriginal);
 		stringbuffer.append("|");
-		stringbuffer.append(acento);
+		stringbuffer.append(acento.name());
 		stringbuffer.append("|");
-		stringbuffer.append(silaba);
+		stringbuffer.append(silaba.name());
 		stringbuffer.append("|");
 		stringbuffer.append(tiposHoja);
 		stringbuffer.append("|");

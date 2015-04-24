@@ -34,7 +34,7 @@ public class OcParticipio {
                                 int i9 = localA.valorEntero();
                                 int i10 = localZ.valorEntero();
                                 int i11 = localk.valorEntero();
-                                int i12 = FuerteDebil.getInt(localP);
+                                int i12 = localP.valorEntero();
                                 int i13 = localn.valorEntero();
                                 this.formas[i10][i11][i12][i9][i8][i13] = null;
                             }
@@ -51,7 +51,7 @@ public class OcParticipio {
         int j = paramA.valorEntero();
         int k = voz.valorEntero();
         int m = aspecto.valorEntero();
-        int n = FuerteDebil.getInt(fuerte);
+        int n = fuerte.valorEntero();
         int i1 = paramn.valorEntero();
         return this.formas[k][m][n][j][i][i1];
     }
@@ -62,7 +62,7 @@ public class OcParticipio {
         int j = paramA.valorEntero();
         int k = voz.valorEntero();
         int m = aspecto.valorEntero();
-        int n = FuerteDebil.getInt(fuerte);
+        int n = fuerte.valorEntero();
         int i1 = paramn.valorEntero();
         List<String> localList = this.formas[k][m][n][j][i][i1];
         if ((localList != null) && (paramInt < localList.size())) {
@@ -77,7 +77,7 @@ public class OcParticipio {
         int j = paramA.valorEntero();
         int k = voz.valorEntero();
         int m = aspecto.valorEntero();
-        int n = FuerteDebil.getInt(fuerte);
+        int n = fuerte.valorEntero();
         int i1 = paramn.valorEntero();
         return this.formas[k][m][n][j][i][i1];
     }
@@ -88,7 +88,7 @@ public class OcParticipio {
         int j = paramA.valorEntero();
         int k = voz.valorEntero();
         int m = aspecto.valorEntero();
-        int n = FuerteDebil.getInt(fuerte);
+        int n = fuerte.valorEntero();
         int i1 = paramn.valorEntero();
         if (this.formas[k][m][n][j][i][i1] == null) {
             this.formas[k][m][n][j][i][i1] = new ArrayList<String>();
@@ -101,7 +101,7 @@ public class OcParticipio {
         int i = paramA.valorEntero();
         int j = voz.valorEntero();
         int k = aspecto.valorEntero();
-        int m = FuerteDebil.getInt(fuerte);
+        int m = fuerte.valorEntero();
         int n = paramn.valorEntero();
         if (this.indices[j][k][m][i][n] == null) {
             this.indices[j][k][m][i][n] = new ArrayList<Integer>();
@@ -119,7 +119,7 @@ public class OcParticipio {
         int i = paramA.valorEntero();
         int j = voz.valorEntero();
         int k = aspecto.valorEntero();
-        int m = FuerteDebil.getInt(fuerte);
+        int m = fuerte.valorEntero();
         int n = paramn.valorEntero();
         List<Integer> localList = this.indices[j][k][m][i][n];
         if (localList == null) {
@@ -138,7 +138,7 @@ public class OcParticipio {
         int j = paramA.valorEntero();
         int k = voz.valorEntero();
         int m = aspecto.valorEntero();
-        int n = FuerteDebil.getInt(fuerte);
+        int n = fuerte.valorEntero();
         int i1 = paramn.valorEntero();
         try {
             if (this.formas[k][m][n][j][i][i1] == null) {
@@ -162,7 +162,7 @@ public class OcParticipio {
         int j = paramA.valorEntero();
         int k = voz.valorEntero();
         int m = aspecto.valorEntero();
-        int n = FuerteDebil.getInt(fuerte);
+        int n = fuerte.valorEntero();
         int i1 = paramn.valorEntero();
         List<String> localList = this.formas[k][m][n][j][i][i1];
         if (localList != null) {

@@ -536,8 +536,8 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 
 		insercion.update(new Object[] { bean.getTema(),  bean.getPartic().abreviatura(),
 				bean.getSubPart(), bean.getModo().valorEntero(), bean.getTiempo().valorEntero(),
-				bean.getVoz().valorEntero(), FuerteDebil.getInt(bean.getFuerte()), 
-				bean.getContraccion().valorEntero(), Aumento.getInt(bean.getAumento()), bean.isReduplicacion(),
+				bean.getVoz().valorEntero(), bean.getFuerte().valorEntero(), 
+				bean.getContraccion().valorEntero(), bean.getAumento().valorEntero(), bean.isReduplicacion(),
 				bean.getJuego(), bean.getTiempoJuego().valorEntero(), bean.getVozJuego().valorEntero(),
 				bean.getPropagacion().valorEntero(), bean.isPats()?1:0, 
 				bean.getVerboId(), pk });
@@ -577,8 +577,8 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 	public void modifica(IrrVerbo bean) {
 		modificacion.update(new Object[] { bean.getTema(),  bean.getPartic().abreviatura(),
 				bean.getSubPart(), bean.getModo().valorEntero(), bean.getTiempo().valorEntero(),
-				bean.getVoz().valorEntero(), FuerteDebil.getInt(bean.getFuerte()), 
-				bean.getContraccion().valorEntero(), Aumento.getInt(bean.getAumento()), bean.isReduplicacion(),
+				bean.getVoz().valorEntero(), bean.getFuerte().valorEntero(), 
+				bean.getContraccion().valorEntero(), bean.getAumento().valorEntero(), bean.isReduplicacion(),
 				bean.getJuego(), bean.getTiempoJuego().valorEntero(), bean.getVozJuego().valorEntero(),
 				bean.getPropagacion().valorEntero(), bean.isPats()?1:0, 
 				bean.getVerboId(),

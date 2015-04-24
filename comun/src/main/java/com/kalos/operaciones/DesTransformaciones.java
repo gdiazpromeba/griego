@@ -64,7 +64,7 @@ public class DesTransformaciones {
 		sb.append("|");
 		sb.append(desAumentada);
 		sb.append("|");
-		sb.append(aumento);
+		sb.append(aumento!=null?aumento.name():null);
 		sb.append("|");
 		sb.append(reduplicacion);
 		sb.append("|");

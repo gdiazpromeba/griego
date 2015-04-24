@@ -1,5 +1,7 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 
 
 /**
@@ -12,29 +14,37 @@ package com.kalos.enumeraciones;
  */
 
 public enum FuerteDebil {
-	Debil, Fuerte;
+	Debil(0, "debil"), Fuerte(1, "fuerte");
 	
-	public static FuerteDebil getEnum(int fuerteDebil){
-		switch(fuerteDebil){
-		case(0):
-			return Debil;
-		case(1):
-			return Fuerte;
-		default:
-			throw new RuntimeException("no hay carácter fuerte para numero "+ fuerteDebil);
-		}
-	}
+    private String etiquetaRecursos;
+    private int valorEntero;
+    
+    FuerteDebil (int valorEntero, String etiquetaRecursos){
+        this.etiquetaRecursos = etiquetaRecursos;
+        this.valorEntero = valorEntero;
+        
+    }
+    
+    public String toString(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }   
+    
+
+    
+    public int valorEntero(){
+        return this.valorEntero;
+    } 
+    
+    public static FuerteDebil getEnum(int valorEntero){
+        for (FuerteDebil tiempo : values()) {
+            if (tiempo.valorEntero==valorEntero){
+                return tiempo;
+            }
+        }
+        throw new RuntimeException("no hay theEnum de FuerteDebil para el número " + valorEntero);
+    }	
 	
-	public static int getInt(FuerteDebil fud){
-		switch(fud){
-		case Debil:
-			return 0;
-		case Fuerte:
-			return 1;
-		default:
-			throw new RuntimeException("no hay número para carácter fuerte "+ fud);
-		}
-	}
+
 	
 
 }

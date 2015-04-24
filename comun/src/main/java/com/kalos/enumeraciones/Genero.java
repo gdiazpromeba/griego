@@ -29,7 +29,7 @@ public enum Genero {
         this.letra = letra;
     }
     
-    public String getCadenaRecursos(){
+    public String toString(){
         return Recursos.getCadena(this.etiquetaRecursos);
     }
     

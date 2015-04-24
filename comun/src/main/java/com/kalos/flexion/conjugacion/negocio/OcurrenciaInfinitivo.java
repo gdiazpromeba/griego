@@ -28,7 +28,7 @@ public class OcurrenciaInfinitivo {
 
     public List<String> getFormas(Voz voz, Aspecto aspecto, FuerteDebil fuerte) {
         int iVoz = voz.valorEntero();
-        int iFuerte = FuerteDebil.getInt(fuerte);
+        int iFuerte = fuerte.valorEntero();
         int iAspecto = aspecto.valorEntero();
         try {
             return formas[iVoz][iAspecto][iFuerte];
@@ -45,7 +45,7 @@ public class OcurrenciaInfinitivo {
 
     public String getFormaIndividual(Voz voz, Aspecto aspecto, FuerteDebil fuerte, int subindice) {
         int iVoz = voz.valorEntero();
-        int iFuerte = FuerteDebil.getInt(fuerte);
+        int iFuerte = fuerte.valorEntero();
         int iAspecto = aspecto.valorEntero();
         return (String) formas[iVoz][iAspecto][iFuerte].get(subindice);
     }
@@ -53,7 +53,7 @@ public class OcurrenciaInfinitivo {
     /*
     public void addFormaIndividual(Voz voz, Aspecto aspecto, FuerteDebil fuerte, String cadena) {
     	int iVoz = Voz.getInt(voz);
-    	int iFuerte=FuerteDebil.getInt(fuerte);
+    	int iFuerte=fuerte.valorEntero();
     	int iAspecto=Aspecto.getInt(aspecto);
     	if (formas[iVoz][iAspecto][iFuerte] == null)
     		formas[iVoz][iAspecto][iFuerte] = new ArrayList();
@@ -71,7 +71,7 @@ public class OcurrenciaInfinitivo {
      */
     public void agregaFormaIndividual(Voz voz, Aspecto aspecto, FuerteDebil fuerte, String cadena, int subindice) {
         int iVoz = voz.valorEntero();
-        int iFuerte = FuerteDebil.getInt(fuerte);
+        int iFuerte = fuerte.valorEntero();
         int iAspecto = aspecto.valorEntero();
         if (formas[iVoz][iAspecto][iFuerte] == null) {
             formas[iVoz][iAspecto][iFuerte] = new ArrayList<String>();
@@ -85,14 +85,14 @@ public class OcurrenciaInfinitivo {
 
     public void setFormaIndividual(Voz voz, Aspecto aspecto, FuerteDebil fuerte, int subindice, String cadena) {
         int iVoz = voz.valorEntero();
-        int iFuerte = FuerteDebil.getInt(fuerte);
+        int iFuerte = fuerte.valorEntero();
         int iAspecto = aspecto.valorEntero();
         formas[iVoz][iAspecto][iFuerte].set(subindice, cadena);
     }
 
     public int getCantidadDeFormas(Voz voz, Aspecto aspecto, FuerteDebil fuerte) {
         int iVoz = voz.valorEntero();
-        int iFuerte = FuerteDebil.getInt(fuerte);
+        int iFuerte = fuerte.valorEntero();
         int iAspecto = aspecto.valorEntero();
         if (formas[iVoz][iAspecto][iFuerte] == null)
             return 0;

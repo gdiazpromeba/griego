@@ -15,45 +15,47 @@
  * 
  */
 package com.kalos.enumeraciones;
+
+import com.kalos.recursos.Recursos;
+
 /**
  * @author <a href="mailto:gonzalo.diaz@turner.com">Gonzalo Diaz</a>
  * @version $Revision: 1.0 $
  */
 public enum OrigenTema {
-    NominativoSingular, NominativoPlural, VocativoSingular, GenitivoSingular, DativoPlural;
+    NominativoSingular("NS", "origen_tema.nominativo_singular"), NominativoPlural("NP", "origen_tema.nominativo_plural"), 
+    VocativoSingular("VS", "origen_tema.vocativo_singular"), GenitivoSingular("GS", "origen_tema.genitivo_singular"), 
+    DativoPlural("DP", "origen_tema.dativo_plural");
     
+    private final String abreviatura; 
+    private final String etiquetaRecursos; 
     
-    public static String getCadena(OrigenTema origenTema){
-        switch(origenTema){
-          case NominativoSingular:
-            return "NS";
-          case NominativoPlural:
-              return "NP";
-          case VocativoSingular:
-              return "VS";
-          case GenitivoSingular:
-              return "GS";
-          case DativoPlural:
-              return "DP";
-          default:
-            return "error";
+    OrigenTema(String abreviatura, String etiquetaRecursos) {
+        this.abreviatura = abreviatura;
+        this.etiquetaRecursos = etiquetaRecursos;
+    }
+ 
+
+
+
+    public static OrigenTema getEnum(String s){
+        for (OrigenTema p : OrigenTema.values()) {
+            if (p.abreviatura.equals(s)) return p;
         }
-      }
+        throw new RuntimeException("OrigenTema not found for string " + s );
+    }
+   
+    public String toString(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }
     
-    public static OrigenTema getEnum(String origenTema){
-        if (origenTema.equals("NS"))
-          return NominativoSingular;
-        else if (origenTema.equals("NP"))
-          return NominativoPlural;
-        else if (origenTema.equals("VS"))
-            return VocativoSingular;
-        else if (origenTema.equals("GS"))
-            return GenitivoSingular;
-        else if (origenTema.equals("DP"))
-            return DativoPlural;
-        else 
-            throw new RuntimeException("no sé qué origen de tema es la cadena " + origenTema);
+    public String abreviatura(){
+        return this.abreviatura;
     }    
+    
+    
+
+    
     
 
 }

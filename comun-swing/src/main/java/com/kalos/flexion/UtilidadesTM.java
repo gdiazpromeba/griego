@@ -35,7 +35,6 @@ import com.kalos.enumeraciones.Genero;
 import com.kalos.enumeraciones.Tiempo;
 import com.kalos.enumeraciones.TiempoSegundos;
 import com.kalos.operaciones.OpPalabras;
-import com.kalos.recursos.CadenasEnum;
 import com.kalos.recursos.Configuracion;
 import com.kalos.recursos.Recursos;
 
@@ -104,7 +103,7 @@ public class UtilidadesTM {
     public String[] extraeEncabezadosGeneros(Genero[] paramArrayOfA) {
         String[] arrayOfString = new String[paramArrayOfA.length];
         for (int i = 0; i < paramArrayOfA.length; i++) {
-            String str = CadenasEnum.getCadena(paramArrayOfA[i]);
+            String str = paramArrayOfA[i].toString();
             arrayOfString[i] = str;
         }
         return arrayOfString;
@@ -437,7 +436,7 @@ public class UtilidadesTM {
             for (int j = 0; j < paramDefaultTableModel.getColumnCount(); j++) {
                 Object localObject = paramDefaultTableModel.getValueAt(i, j);
                 if ((localObject instanceof Enum)) {
-                    localObject = CadenasEnum.getCadena((Enum) localObject);
+                    localObject = ((Enum) localObject).toString();
                     paramDefaultTableModel.setValueAt(localObject, i, j);
                 }
             }
@@ -497,7 +496,7 @@ public class UtilidadesTM {
                     paramDefaultTableModel.setValueAt(new CeldaReporte(((Integer) localObject).toString(), Color.white), j,
                             paramInt);
                 } else if ((localObject instanceof Enum)) {
-                    paramDefaultTableModel.setValueAt(new CeldaReporte(CadenasEnum.getCadena((Enum) localObject), Color.white), j, paramInt);
+                    paramDefaultTableModel.setValueAt(new CeldaReporte(((Enum) localObject).toString(), Color.white), j, paramInt);
                 } else if ((localObject instanceof ClaveFlexion)) {
                     ClaveFlexion localA = (ClaveFlexion) paramDefaultTableModel.getValueAt(j, paramInt);
                     paramDefaultTableModel.setValueAt(new CeldaReporte(localA.getForma(), Color.white), j, paramInt);

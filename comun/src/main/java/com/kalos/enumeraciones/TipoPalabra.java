@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.kalos.recursos.CadenasEnum;
 import com.kalos.recursos.Recursos;
 
 /**
@@ -30,7 +29,7 @@ public enum TipoPalabra {
         this.abreviatura = abreviatura;
     }
     
-    public String getCadenaRecursos(){
+    public String toString(){
         return Recursos.getCadena(this.etiquetaRecursos);
     }
     
@@ -40,7 +39,7 @@ public enum TipoPalabra {
     
     public static TipoPalabra getEnum(String abreviatura){
         for (TipoPalabra enu : values()) {
-            if (enu.abreviatura==abreviatura){
+            if (enu.abreviatura.equals(abreviatura)){
                 return enu;
             }
         }

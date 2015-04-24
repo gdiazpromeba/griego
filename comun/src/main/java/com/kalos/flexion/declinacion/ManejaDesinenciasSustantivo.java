@@ -107,8 +107,8 @@ public class ManejaDesinenciasSustantivo {
 		}
 		lstDes.add(cargaIndividual(OpPalabras.strBetaACompleto(a2.getDesinencia()), a2.getAcento(),
 			a2.getSilaba(), a2.getContraccion(), a2.getOrigenTema(),
-			PosicionConcuerda.getInt(a2.getPosicionConcuerda()),
-			AcentoConcuerda.getInt(a2.getAcentoConcuerda())));
+			a2.getPosicionConcuerda().valorEntero(),
+			a2.getAcentoConcuerda().valorEntero()));
 	    }
 	}
 

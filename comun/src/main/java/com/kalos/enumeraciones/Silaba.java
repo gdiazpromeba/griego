@@ -11,7 +11,7 @@ package com.kalos.enumeraciones;
  */
 
 public enum Silaba  {
-	ultima(-1), penultima(-1), antepenultima(-3), ninguna(0), primera(1), segunda(2); 
+	ultima(-1), penultima(-2), antepenultima(-3), ninguna(0), primera(1), segunda(2); 
 	
     private int valorEntero;
 

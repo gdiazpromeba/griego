@@ -23,11 +23,11 @@ public class TermRegAdjetivo extends TermRegSustantivo {
   	  StringBuffer sb=new StringBuffer();
   	  sb.append(getTipoSustantivo());
   	  sb.append("|");
-  	  sb.append(getCaso());
+  	  sb.append(getCaso().name());
   	  sb.append("|");
-  	  sb.append(getNumero());
+  	  sb.append(getNumero().name());
   	  sb.append("|");
-  	  sb.append(getOrigenTema());
+  	  sb.append(getOrigenTema().name());
   	  sb.append("|");
   	  sb.append(getSubindice());
   	  sb.append("|");
@@ -37,9 +37,9 @@ public class TermRegAdjetivo extends TermRegSustantivo {
   	  sb.append("|");
   	  sb.append(isExContraccion());
   	  sb.append("|");
-  	  sb.append(getAcento());
+  	  sb.append(getAcento().name());
   	  sb.append("|");
-  	  sb.append(getSilaba());
+  	  sb.append(getSilaba().name());
   	  sb.append("|");
   	  sb.append(getTiposHoja());
   	  sb.append("|");

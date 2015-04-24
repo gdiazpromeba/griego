@@ -15,30 +15,44 @@
  * 
  */
 package com.kalos.enumeraciones;
+
+import com.kalos.recursos.Recursos;
+
 /**
  * @author <a href="mailto:gonzalo.diaz@turner.com">Gonzalo Diaz</a>
  * @version $Revision: 1.0 $
  */
 public enum TipoConjuncion {
-    Coordinante, Subordinante;
+    Coordinante("conjuncion.coordinante", "COORD"), Subordinante("conjuncion.subordinante", "SUBORD");
     
-    public static String getCadena(TipoConjuncion tipo) {
-        switch (tipo) {
-        case Coordinante:
-            return "COORD";
-        case Subordinante:
-            return "SUBORD";
-        default:
-            throw new RuntimeException("tipo de conjunción no encontrado");
-        }
+    private String etiquetaRecursos;
+    private String abreviatura;
+    
+    TipoConjuncion (String etiquetaRecursos, String abreviatura){
+        this.etiquetaRecursos = etiquetaRecursos;
+        this.abreviatura = abreviatura;
+        
     }
+    
+    public String toString(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }   
+    
+    public String abreviatura(){
+        return this.abreviatura;
+    }
+    
 
-    public static TipoConjuncion getEnum(String tipo) {
-        if (tipo.equals("COORD"))
-            return Coordinante;
-        else if (tipo.equals("SUBORD"))
-            return Subordinante;
-            throw new RuntimeException("el tipo de conjunción para la cadena " + tipo + " no existe ");
-    }
+    
+    public static TipoConjuncion getEnum(String abreviatura){
+        for (TipoConjuncion enu : values()) {
+            if (enu.abreviatura.equals(abreviatura)){
+                return enu;
+            }
+        }
+        throw new RuntimeException("no hay enum de TipoConjuncion para la abreviatura " + abreviatura);
+    }    
+    
+
    
 }

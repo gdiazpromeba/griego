@@ -1,34 +1,38 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 public enum Acento {
-	Agudo, Circunflejo, Grave, Ninguno;
+	Agudo(1, "agudo"), Circunflejo(3, "circunflejo"), Grave(2, "grave"), Ninguno(0, "ninguno");
 	
-	public static int getInt(Acento valor){
-		switch(valor){
-		case Agudo:
-			return 1;
-		case Grave:
-			return 2;
-		case Circunflejo:
-			return 3;
-		default:
-			return 0;
-		}
-	}
+    private int valorEntero;
+    private String etiquetaRecursos;
+    
+    Acento (int valorEntero, String etiquetaRecursos){
+        this.valorEntero = valorEntero;
+        this.etiquetaRecursos = etiquetaRecursos;
+    }
+    
+    public String toString(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }
+    
+    public int valorEntero(){
+        return this.valorEntero;
+    }
+    
+    
+    public static Acento getEnum(int valorEntero){
+        for (Acento tiempo : values()) {
+            if (tiempo.valorEntero==valorEntero){
+                return tiempo;
+            }
+        }
+        throw new RuntimeException("no hay theEnum de Acento para el número " + valorEntero);
+    }	
 	
-	public static Acento getEnum(int valor){
-		switch(valor){
-		  case 1:
-			  return Agudo;
-		  case 2:
-			  return Grave;
-		  case 3:
-			  return Circunflejo;
-		  case 0:
-			  return Ninguno;
-		  default:
-			  throw new RuntimeException("no hay Acento número " + valor);
-		}
-	}	
+
+	
+	
 	
 }

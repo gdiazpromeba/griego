@@ -18,7 +18,6 @@ import com.kalos.enumeraciones.Idioma;
 import com.kalos.enumeraciones.Reportes;
 import com.kalos.operaciones.OpBeans;
 import com.kalos.operaciones.OpPalabras;
-import com.kalos.recursos.CadenasEnum;
 import com.kalos.recursos.Configuracion;
 import com.kalos.recursos.Recursos;
 
@@ -330,7 +329,7 @@ public class ParametrosReporte {
 		hashmap.put("P_TITULO", OpPalabras.strBetaAUnicode(s1));
 		Significado q1 = (Significado) k.getSignificados().get(
 				Idioma.getEnum(Configuracion.getIdiomaSignificados()));
-		String s2 = CadenasEnum.getCadena(k.getGenero()).toLowerCase();
+		String s2 = k.getGenero().toString().toLowerCase();
 		hashmap.put("P_SUBTITULO", (new StringBuilder()).append("(").append(s2).append(") ")
 				.append(q1.getValor()).toString());
 		hashmap.put("P_SINGULAR", Recursos.getCadena("singular"));
@@ -346,7 +345,7 @@ public class ParametrosReporte {
 		hashmap.put("P_TITULO", OpPalabras.strBetaAUnicode(s1));
 		Significado q1 = (Significado) k.getSignificados().get(
 				Idioma.getEnum(Configuracion.getIdiomaSignificados()));
-		String s2 = CadenasEnum.getCadena(k.getGenero()).toLowerCase();
+		String s2 =  k.getGenero().toString().toLowerCase();
 		hashmap.put("P_SUBTITULO", (new StringBuilder()).append("(").append(s2).append(") ")
 				.append(q1.getValor()).toString());
 		hashmap.put("P_SINGULAR", Recursos.getCadena("singular"));

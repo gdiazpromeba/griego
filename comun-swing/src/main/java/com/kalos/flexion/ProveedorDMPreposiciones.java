@@ -16,7 +16,6 @@ import com.kalos.datos.gerentes.GerentePreposiciones;
 import com.kalos.enumeraciones.Caso;
 import com.kalos.enumeraciones.Idioma;
 import com.kalos.operaciones.OpPalabras;
-import com.kalos.recursos.CadenasEnum;
 import com.kalos.recursos.Configuracion;
 
 /**
@@ -49,17 +48,17 @@ public class ProveedorDMPreposiciones {
             String valorSignificado=sig.getValor();
             StringBuffer casos=new StringBuffer();
             if (bean.isAcusativo()){
-                casos.append(CadenasEnum.getCadena(Caso.Acusativo));
+                casos.append(Caso.Acusativo.toString());
             }
             if (bean.isGenitivo()){
                 if (casos.length()>0)
                     casos.append(", ");
-                casos.append(CadenasEnum.getCadena(Caso.Genitivo));
+                casos.append(Caso.Genitivo.toString());
             }
             if (bean.isDativo()){
                 if (casos.length()>0)
                     casos.append(", ");
-                casos.append(CadenasEnum.getCadena(Caso.Dativo));
+                casos.append(Caso.Dativo.toString());
             }
 
             tm.addRow(new Object[]{

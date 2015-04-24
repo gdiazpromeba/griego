@@ -156,12 +156,12 @@ public class TermRegInfinitivoDAOImpl extends JdbcDaoSupport implements TermRegI
 		insercion.update(new Object[]{
 				bean.getVoz().valorEntero(),
 				bean.getAspecto().valorEntero(),
-				FuerteDebil.getInt(bean.getFuerte()),
+				bean.getFuerte().valorEntero(),
 				bean.getTipoDesinencia(),
 				bean.getTerminacion(),
 				bean.getRegEx(),
 				bean.getSilaba(),
-				Acento.getInt(bean.getAcento()),
+				bean.getAcento().valorEntero(),
 				bean.getContraccionGeneradora().valorEntero()
 		});
 	}	

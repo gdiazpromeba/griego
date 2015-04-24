@@ -1,5 +1,7 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 
 /**
  * Title:        Kalos
@@ -11,33 +13,37 @@ package com.kalos.enumeraciones;
  */
 
 public enum Aumento {
-	Ninguno, Normal, enEi;
+	Ninguno(0, "ninguno"), Normal(-1, "normal"), enEi(2, "en_ei");
 	
-	public static int getInt(Aumento valor){
-		switch(valor){
-		  case Ninguno:
-			  return 0;
-		  case Normal:
-			  return -1;
-		  case enEi:
-			  return 2;
-		  default:
-			  throw new RuntimeException("aumento no encontrado");
-		}
-	}
+    private String etiquetaRecursos;
+    private int valorEntero;
+    
+    Aumento (int valorEntero, String etiquetaRecursos){
+        this.etiquetaRecursos = etiquetaRecursos;
+        this.valorEntero = valorEntero;
+        
+    }
+    
+    public String toString(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }   
+
+    
+    public int valorEntero(){
+        return this.valorEntero;
+    } 
+    
+    public static Aumento getEnum(int valorEntero){
+        for (Aumento enu : values()) {
+            if (enu.valorEntero == valorEntero){
+                return enu;
+            }
+        }
+        throw new RuntimeException("no hay enum de Aumento para el número " + valorEntero);
+    } 	
 	
-	public static Aumento getEnum(int valor){
-		switch(valor){
-		  case(-1):
-			  return Normal;
-		  case(0):
-			  return Ninguno;
-		  case(2):
-			  return enEi;
-		  default:
-			  throw new RuntimeException("no hay Aumento número " + valor);
-		}
-	}
+
+
 	
 
 

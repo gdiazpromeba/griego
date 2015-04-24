@@ -15,64 +15,42 @@
  * 
  */
 package com.kalos.enumeraciones;
+
+import com.kalos.recursos.Recursos;
+
 /**
  * @author <a href="mailto:gonzalo.diaz@turner.com">Gonzalo Diaz</a>
  * @version $Revision: 1.0 $
  */
 public enum TipoAdverbio {
-    Modo, Tiempo, Lugar, Cantidad, Medio, Frecuencia, Negacion, Causa,  Afirmacion, Otro;
+    Modo("adverbio.modo", "MOD"), Tiempo("adverbio.tiempo", "TIE"), Lugar("adverbio.lugar", "LUG"), Cantidad("adverbio.cantidad", "CNT"), Medio("adverbio.medio", "MED"), 
+    Frecuencia("adverbio.frecuencia", "FRC"), Negacion("adverbio.negacion", "NEG"), Causa("adverbio.causa", "CAU"),  Afirmacion("adverbio.afirmacion", "AFI"), Otro("adverbio.otro", "OTR");
     
+    private String etiquetaRecursos;
+    private String abreviatura;
     
-    public static TipoAdverbio getEnum(String cadena){
-        if (cadena.equals("TIE"))
-            return Tiempo;
-        else if (cadena.equals("LUG"))
-            return Lugar;
-        else if (cadena.equals("CNT"))
-            return Cantidad;
-        else if (cadena.equals("MED"))
-            return Medio;
-        else if (cadena.equals("FRC"))
-            return Frecuencia;
-        else if (cadena.equals("NEG"))
-            return Negacion;
-        else if (cadena.equals("CAU"))
-            return Causa;
-        else if (cadena.equals("MOD"))
-            return Modo;
-        else if (cadena.equals("AFI"))
-            return Afirmacion;
-        else if (cadena.equals("OTR"))
-            return Otro;
-        else 
-            throw new RuntimeException("tipo de adjetivo para la cadena=" + cadena);
+    TipoAdverbio (String etiquetaRecursos, String abreviatura){
+        this.etiquetaRecursos = etiquetaRecursos;
+        this.abreviatura = abreviatura;     
     }
     
-    public static String getCadena(TipoAdverbio tipo){
-        switch(tipo){
-        case Tiempo:
-            return "TIE";
-        case Lugar:
-            return "LUG";
-        case Cantidad:
-            return "CNT";
-        case Medio:
-            return "MED";
-        case Frecuencia:
-            return "FRC";
-        case Negacion:
-            return "NEG";
-        case Causa:
-            return "CAU";
-        case Modo:
-            return "MOD";
-        case Afirmacion:
-            return "AFI";
-        case Otro:
-            return "OTR";
-        default:
-            throw new RuntimeException("no hay cadena para la enumeración " + tipo);
+    public String toString(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }   
+    
+    public String abreviatura(){
+        return this.abreviatura;
+    }
+ 
+    
+    public static TipoAdverbio getEnum(String abreviatura){
+        for (TipoAdverbio enu : values()) {
+            if (enu.abreviatura.equals(abreviatura)){
+                return enu;
+            }
         }
-    }
+        throw new RuntimeException("no hay enum de GradoComparacion para la abreviatura " + abreviatura);
+    }     
+ 
     
 }

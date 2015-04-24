@@ -1,61 +1,40 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 public enum SubtipoConjuncion {
-    Copulativa, Adversativa, Disyuntiva, Comparativa, Declarativa, Causal, Temporal, Conclusiva, Final, Condicional, Concesiva;
+    Copulativa("conjuncion.copulativa", "COP"), Adversativa("conjuncion.adversativa", "ADV"), Disyuntiva("conjuncion.disyuntiva", "DIS"), 
+    Comparativa("conjuncion.comparativa", "COM"), Declarativa("conjuncion.declarativa", "DEC"), Causal("conjuncion.causal", "CAU"), 
+    Temporal("conjuncion.temporal", "TEM"), Conclusiva("conjuncion.conclusiva", "CNC"), Final("conjuncion.final", "FIN"), 
+    Condicional("conjuncion.supositiva", "CND"), Concesiva("conjuncion.concesiva", "CON");
+    
+    private String etiquetaRecursos;
+    private String abreviatura;
+    
+    SubtipoConjuncion (String etiquetaRecursos, String abreviatura){
+        this.etiquetaRecursos = etiquetaRecursos;
+        this.abreviatura = abreviatura;
+        
+    }
+    
+    public String toString(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }   
+    
+    public String abreviatura(){
+        return this.abreviatura;
+    }
+    
 
-    public static String getCadena(SubtipoConjuncion tipo) {
-        switch (tipo) {
-        case Copulativa:
-            return "COP";
-        case Adversativa:
-            return "ADV";
-        case Disyuntiva:
-            return "DIS";
-        case Comparativa:
-            return "COM";
-        case Declarativa:
-            return "DEC";
-        case Causal:
-            return "CAU";
-        case Temporal:
-            return "TEM";
-        case Conclusiva:
-            return "CNC";
-        case Final:
-            return "FIN";
-        case Condicional:
-            return "CND";
-        case Concesiva:
-            return "CON";
-        default:
-            throw new RuntimeException("tipo de conjunción");
+    
+    public static SubtipoConjuncion getEnum(String abreviatura){
+        for (SubtipoConjuncion enu : values()) {
+            if (enu.abreviatura.equals(abreviatura)){
+                return enu;
+            }
         }
-    }
+        throw new RuntimeException("no hay enum de SubipoConjuncion para la abreviatura " + abreviatura);
+    }      
 
-    public static SubtipoConjuncion getEnum(String tipo) {
-        if (tipo.equals("COP"))
-            return Copulativa;
-        else if (tipo.equals("ADV"))
-            return Adversativa;
-        else if (tipo.equals("DIS"))
-            return Disyuntiva;
-        else if (tipo.equals("COM"))
-            return Comparativa;
-        else if (tipo.equals("DEC"))
-            return Declarativa;
-        else if (tipo.equals("CAU"))
-            return Causal;
-        else if (tipo.equals("TEM"))
-            return Temporal;
-        else if (tipo.equals("CNC"))
-            return Conclusiva;
-        else if (tipo.equals("FIN"))
-            return Final;
-        else if (tipo.equals("CND"))
-            return Condicional;
-        else if (tipo.equals("CON"))
-            return Concesiva;
-        else
-            throw new RuntimeException("el tipo de conjunción para la cadena " + tipo + " no existe ");
-    }
+
 }

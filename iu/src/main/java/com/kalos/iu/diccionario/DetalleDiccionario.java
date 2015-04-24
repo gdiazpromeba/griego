@@ -7,18 +7,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import com.jgoodies.forms.builder.PanelBuilder;
+import com.jgoodies.forms.layout.CellConstraints;
+import com.jgoodies.forms.layout.FormLayout;
 import com.kalos.beans.EntradaDiccionario;
 import com.kalos.beans.Significado;
 import com.kalos.enumeraciones.Idioma;
-import com.kalos.recursos.CadenasEnum;
 import com.kalos.recursos.Configuracion;
 import com.kalos.recursos.Recursos;
 import com.kalos.visual.controles.util.TipografiaCambiable;
 import com.kalos.visual.controles.util.UtilTipografias;
-
-import com.jgoodies.forms.builder.PanelBuilder;
-import com.jgoodies.forms.layout.CellConstraints;
-import com.jgoodies.forms.layout.FormLayout;
 
 public class DetalleDiccionario extends JPanel implements TipografiaCambiable{
 
@@ -37,7 +35,7 @@ public class DetalleDiccionario extends JPanel implements TipografiaCambiable{
 
 	public void setEntradaDiccionario(EntradaDiccionario entrada){
 	    forma.setText(entrada.getNormal());
-	    tipoPalabra.setText(CadenasEnum.getCadena(entrada.getTipoPalabra()));
+	    tipoPalabra.setText(entrada.getTipoPalabra().toString());
 	    Significado sig=entrada.getSignificados().get(Idioma.getEnum(Configuracion.getIdiomaSignificados()));
 	    significado.setText(sig.getValor());
 	}
