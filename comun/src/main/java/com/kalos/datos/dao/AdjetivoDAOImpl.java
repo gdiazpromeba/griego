@@ -574,11 +574,11 @@ public class AdjetivoDAOImpl extends JdbcDaoSupport implements AdjetivoDAO {
 				ea.getNeutro(),
 				ea.getMascFem(),
 				ea.getGenitivo(),
-				Particularidad.getString(ea.getParticularidad()),
+				ea.getParticularidad().abreviatura(),
 				ea.getTipoAdjetivo(),
 				ea.getIdTipo(),
 				ea.isVerbal()?1:0,
-				GradoComparacion.getLetra(ea.getGrado()),
+				ea.getGrado().abreviatura(),
 		});
 		ea.setId(pk);
 	}
@@ -622,11 +622,11 @@ public class AdjetivoDAOImpl extends JdbcDaoSupport implements AdjetivoDAO {
 				ea.getNeutro(),
 				ea.getMascFem(),
 				ea.getGenitivo(),
-				Particularidad.getString(ea.getParticularidad()),
+				ea.getParticularidad().abreviatura(),
 				ea.getTipoAdjetivo(), 
 				ea.getIdTipo(),
 				ea.isVerbal()?1:0,
-				GradoComparacion.getLetra(ea.getGrado()),
+				ea.getGrado().abreviatura(),
 				//where
 				ea.getId() });
 	}

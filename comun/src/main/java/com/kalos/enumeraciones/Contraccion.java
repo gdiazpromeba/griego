@@ -1,5 +1,7 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 /**
  * Title:
  * Description:
@@ -10,49 +12,35 @@ package com.kalos.enumeraciones;
  */
 
 public enum Contraccion {
-	suma, sumaAcentuada, vocalica, consonantica, monosilabosEw, jonica, comePrimera;
+	suma(-1), sumaAcentuada(0), vocalica(1), consonantica(2), monosilabosEw(3), jonica(4), comePrimera(6);
+	
+    private int valorEntero;
 
-	public static Contraccion getEnum(int contraccion){
-		switch(contraccion){
-		case(-1):
-			return suma;
-		case(0):
-			return sumaAcentuada;
-		case(1):
-			return vocalica;
-		case(2):
-			return consonantica;
-		case(3):
-			return monosilabosEw;
-		case(4):
-			return jonica;
-		case(6):
-			return comePrimera;
-		default:
-			throw new RuntimeException("no hay contracción para el número "+ contraccion);
-		}
-	}
+    
+    Contraccion (int valorEntero){
+        this.valorEntero = valorEntero;
+    }
+    
+
+    
+    public int valorEntero(){
+        return this.valorEntero;
+    }   
+    
+   
+    
+    
+    public static Contraccion getEnum(int valorEntero){
+        for (Contraccion enu : values()) {
+            if (enu.valorEntero==valorEntero){
+                return enu;
+            }
+        }
+        throw new RuntimeException("no hay enum de contracción para el número " + valorEntero);
+    }	
+
+
 	
-	
-	public static int getInt(Contraccion contraccion){
-		switch(contraccion){
-		case suma:
-			return -1;
-		case sumaAcentuada:
-			return 0;
-		case vocalica:
-			return 1;
-		case consonantica:
-			return 2;
-		case monosilabosEw:
-			return 3;
-		case jonica:
-			return 4;
-		case comePrimera:
-			return 6;
-		default:
-			throw new RuntimeException("no hay número para la contracción "+ contraccion);
-		}
-	}	
+
 
 }

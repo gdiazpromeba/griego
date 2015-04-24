@@ -126,7 +126,7 @@ public class IrrInfinitivosDAOImpl extends JdbcDaoSupport implements IrrInfiniti
 		List<IrrInfinitivoBean> resultado=seleccionPorVerboPartic.execute(
 				new Object[]{
 						verboId, 
-						Particularidad.getString(partic)
+						partic.abreviatura()
 				});
 		return resultado;
 	}

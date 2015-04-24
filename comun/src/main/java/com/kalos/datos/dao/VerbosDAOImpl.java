@@ -486,14 +486,14 @@ public class VerbosDAOImpl extends JdbcDaoSupport implements VerbosDAO {
     public void inserta(VerboBean h1) {
 	String s = DBUtil.getHashableId();
 	insercion.update(new Object[] { s, h1.getLetra(), Integer.valueOf(h1.getCodigo()), h1.getVerbo(), h1.getSufijo(),
-		Particularidad.getString(h1.getParticularidad()), Integer.valueOf(h1.getTipoVerbo()), h1.getIdTipo(),
+		h1.getParticularidad().abreviatura(), Integer.valueOf(h1.getTipoVerbo()), h1.getIdTipo(),
 		Integer.valueOf(h1.isDibujado() ? 1 : 0), Integer.valueOf(h1.isCompuesto() ? 1 : 0) });
 	h1.setId(s);
     }
 
     public void modifica(VerboBean h1) {
 	borrado.update(new Object[] { h1.getLetra(), Integer.valueOf(h1.getCodigo()), h1.getVerbo(), h1.getSufijo(),
-		Particularidad.getString(h1.getParticularidad()), Integer.valueOf(h1.getTipoVerbo()), h1.getIdTipo(),
+		h1.getParticularidad().abreviatura(), Integer.valueOf(h1.getTipoVerbo()), h1.getIdTipo(),
 		Integer.valueOf(h1.isDibujado() ? 1 : 0), Integer.valueOf(h1.isCompuesto() ? 1 : 0), h1.getId() });
     }
 

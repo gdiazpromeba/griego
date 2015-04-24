@@ -409,7 +409,7 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 	public List<IrrVerbo> seleccionaPorVerboPartic(String verboId, Particularidad partic) {
 		List<IrrVerbo> resultado = seleccionPorVerboPartic.execute(new Object[] { 
 				verboId, 
-				Particularidad.getString(partic) 
+				partic.abreviatura()
 				});
 		return resultado;
 	}
@@ -451,7 +451,7 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 	 */
 	public List<String> seleccionaIdsPorVerboPartic(String verboId, Particularidad partic) {
 		List<String> ids=seleccionIdsPorVerboPartric.execute(new Object[] {
-				verboId, Particularidad.getString(partic)
+				verboId, partic.abreviatura()
 		});
 		return ids;
 	}
@@ -475,7 +475,7 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 		List<IrrVerbo> resultado = seleccionPorVerboParticParaInfinitivos.execute(
 				new Object[] {
 						verboId, 
-						Particularidad.getString(partic)
+						partic.abreviatura()
 				});
 		return resultado;
 	}
@@ -534,12 +534,12 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 	public void inserta(IrrVerbo bean) {
 		String pk = com.kalos.datos.util.DBUtil.getHashableId();
 
-		insercion.update(new Object[] { bean.getTema(),  Particularidad.getString(bean.getPartic()),
+		insercion.update(new Object[] { bean.getTema(),  bean.getPartic().abreviatura(),
 				bean.getSubPart(), bean.getModo().valorEntero(), bean.getTiempo().valorEntero(),
 				bean.getVoz().valorEntero(), FuerteDebil.getInt(bean.getFuerte()), 
-				Contraccion.getInt(bean.getContraccion()), Aumento.getInt(bean.getAumento()), bean.isReduplicacion(),
+				bean.getContraccion().valorEntero(), Aumento.getInt(bean.getAumento()), bean.isReduplicacion(),
 				bean.getJuego(), bean.getTiempoJuego().valorEntero(), bean.getVozJuego().valorEntero(),
-				Propagacion.getInt(bean.getPropagacion()), bean.isPats()?1:0, 
+				bean.getPropagacion().valorEntero(), bean.isPats()?1:0, 
 				bean.getVerboId(), pk });
 		bean.setId(pk);
 	}
@@ -575,12 +575,12 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 	 * @see kalos.dao.IrrVerbosDAO#modifica(kalos.beans.IrrVerbo)
 	 */
 	public void modifica(IrrVerbo bean) {
-		modificacion.update(new Object[] { bean.getTema(),  Particularidad.getString(bean.getPartic()),
+		modificacion.update(new Object[] { bean.getTema(),  bean.getPartic().abreviatura(),
 				bean.getSubPart(), bean.getModo().valorEntero(), bean.getTiempo().valorEntero(),
 				bean.getVoz().valorEntero(), FuerteDebil.getInt(bean.getFuerte()), 
-				Contraccion.getInt(bean.getContraccion()), Aumento.getInt(bean.getAumento()), bean.isReduplicacion(),
+				bean.getContraccion().valorEntero(), Aumento.getInt(bean.getAumento()), bean.isReduplicacion(),
 				bean.getJuego(), bean.getTiempoJuego().valorEntero(), bean.getVozJuego().valorEntero(),
-				Propagacion.getInt(bean.getPropagacion()), bean.isPats()?1:0, 
+				bean.getPropagacion().valorEntero(), bean.isPats()?1:0, 
 				bean.getVerboId(),
 				//where
 				bean.getId() });

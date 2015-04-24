@@ -162,7 +162,7 @@ public class ProveedorDMVerbal {
 
 	        for (int iVoz=Voz.Activa.valorEntero(); iVoz<=Voz.Pasiva.valorEntero(); iVoz++){
 	        	Voz voz=Voz.getEnum(iVoz);
-	            for (int iPersona=Persona.getInt(Persona._1ps); iPersona<=Persona.getInt(ultimaPersona); iPersona++){
+	            for (int iPersona=Persona._1ps.valorEntero(); iPersona<=ultimaPersona.valorEntero(); iPersona++){
 	            	Persona persona=Persona.getEnum(iPersona);
 	                for (int iModo=1; iModo<=4; iModo++){
 	                	Modo modo=Modo.getEnum(iModo);
@@ -210,7 +210,7 @@ public class ProveedorDMVerbal {
 	    		cacheFlexionVerbos.setOcurrencia(beanVerbo.getId(), partic, oc);
 	    	}
 	        for (Voz voz: Voz.values()){
-	            for (int iPersona=Persona.getInt(Persona._1ps); iPersona<=Persona.getInt(ultimaPersona); iPersona++){
+	            for (int iPersona=Persona._1ps.valorEntero(); iPersona<=ultimaPersona.valorEntero(); iPersona++){
 	            	Persona persona=Persona.getEnum(iPersona);
 	                for (Modo modo: Modo.values()){
 	                	for (Tiempo tiempo: Tiempo.values()){

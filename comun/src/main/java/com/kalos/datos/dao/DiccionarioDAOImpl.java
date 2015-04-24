@@ -208,7 +208,7 @@ public class DiccionarioDAOImpl extends JdbcDaoSupport implements DiccionarioDAO
                 bean.getReferenteId(),
                 bean.getLetra(),
                 bean.getCodigo(),
-                bean.getTipoPalabra().getStringCorta(),
+                bean.getTipoPalabra().getAbreviatura(),
                 bean.getNormalBeta(),
                 bean.getSinLargasBeta(),
                 bean.getNeutralizadaBeta(),
@@ -332,7 +332,7 @@ public class DiccionarioDAOImpl extends JdbcDaoSupport implements DiccionarioDAO
     private String tiposAString(List<TipoPalabra> tipos) {
         StringBuffer sb = new StringBuffer(200);
         for (TipoPalabra tipo : tipos) {
-            sb.append("'" + tipo.getStringCorta() + "',");
+            sb.append("'" + tipo.getAbreviatura() + "',");
         }
         if (sb.length() > 0) {
             sb.delete(sb.length() - 1, sb.length()); // la coma

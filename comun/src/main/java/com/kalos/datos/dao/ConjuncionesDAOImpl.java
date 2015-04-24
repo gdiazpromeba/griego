@@ -442,14 +442,14 @@ public class ConjuncionesDAOImpl extends JdbcDaoSupport implements ConjuncionesD
         String s = com.kalos.datos.util.DBUtil.getHashableId();
         insert.update(new Object[] { s, Integer.valueOf(e.getCodigo()), e.getForma(),
                 TipoConjuncion.getCadena(e.getTipo()), SubtipoConjuncion.getCadena(e.getSubtipo()),
-                Integer.valueOf(e.isParte() ? 1 : 0), Particularidad.getString(e.getPartic()) });
+                Integer.valueOf(e.isParte() ? 1 : 0),  e.getPartic().abreviatura() });
         e.setId(s);
     }
 
     public void modifica(com.kalos.beans.ConjuncionBean e) {
         update.update(new Object[] { Integer.valueOf(e.getCodigo()), e.getForma(),
                 TipoConjuncion.getCadena(e.getTipo()), SubtipoConjuncion.getCadena(e.getSubtipo()),
-                Integer.valueOf(e.isParte() ? 1 : 0), Particularidad.getString(e.getPartic()), e.getId() });
+                Integer.valueOf(e.isParte() ? 1 : 0), e.getPartic().abreviatura(), e.getId() });
     }
 
     public void modificaCodigoIndividual(String s, int i) {

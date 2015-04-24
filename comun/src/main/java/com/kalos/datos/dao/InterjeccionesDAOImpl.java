@@ -265,14 +265,14 @@ public class InterjeccionesDAOImpl extends JdbcDaoSupport implements Interjeccio
     public void inserta(InterjeccionBean bean) {
         String id = com.kalos.datos.util.DBUtil.getHashableId();
         insercion.update(new Object[] { id, bean.getLetra(), Integer.valueOf(bean.getCodigo()), bean.getInterjeccion(),
-                Particularidad.getString(bean.getPartic())
+               bean.getPartic().abreviatura()
         });
         bean.setId(id);
     }
 
     public void modifica(InterjeccionBean bean) {
         modificacion.update(new Object[] { bean.getLetra(), Integer.valueOf(bean.getCodigo()), bean.getInterjeccion(),
-                Particularidad.getString(bean.getPartic()), bean.getId()
+                bean.getPartic().abreviatura(), bean.getId()
         });
     }
 

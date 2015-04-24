@@ -138,7 +138,7 @@ public class IrrParticipiosEnterosDAOImpl extends JdbcDaoSupport implements
                 bean.getVoz().valorEntero(),
                 bean.getAspecto().valorEntero(),
                 FuerteDebil.getInt(bean.getFuerte()),
-                Particularidad.getString(bean.getPartic()),
+                bean.getPartic().abreviatura(),
                 bean.getSubPart(),
                 bean.getNominativo(),
                 bean.getGenitivo(),

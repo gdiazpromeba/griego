@@ -1,5 +1,7 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 
 /**
  * Title:
@@ -11,8 +13,18 @@ package com.kalos.enumeraciones;
  */
 
 public enum AspectosSegundos implements TiempoOAspecto{
-	Infectivo, Futuro, FuturoSegundo, Confectivo, ConfectivoSegundo, 
-	Perfectivo, PerfectivoSegundo; 
+	Infectivo("infectivo"), Futuro("futuro"), FuturoSegundo("futuro_segundo"), Confectivo("confectivo"), 
+	ConfectivoSegundo("confectivo_segundo"), Perfectivo("perfectivo"), PerfectivoSegundo("perfectivo_segundo"); 
+	
+    private String etiquetaRecursos;
+    
+    AspectosSegundos (String etiquetaRecursos){
+        this.etiquetaRecursos = etiquetaRecursos;
+    }
+    
+    public String getCadenaRecursos(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }	
 }
 
 

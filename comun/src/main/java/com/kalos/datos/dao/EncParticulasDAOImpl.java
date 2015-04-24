@@ -83,7 +83,7 @@ public class EncParticulasDAOImpl extends JdbcDaoSupport implements EncParticula
     @Override
     public void inserta(EncParticulaBean paramf) {
         String str = com.kalos.datos.util.DBUtil.getHashableId();
-        insercion.update(new Object[] { str, TipoPalabra.getString(paramf.getTipoPalabra()), paramf.getForma() });
+        insercion.update(new Object[] { str, paramf.getTipoPalabra().getAbreviatura(), paramf.getForma() });
         paramf.setId(str);
     }
 
@@ -92,7 +92,7 @@ public class EncParticulasDAOImpl extends JdbcDaoSupport implements EncParticula
      */
     @Override
     public void modifica(ParticulaBean paraml) {
-        modificacion.update(new Object[] { TipoPalabra.getString(paraml.getParticulaTipo()), paraml.getForma(), paraml.getId() });
+        modificacion.update(new Object[] { paraml.getParticulaTipo().getAbreviatura(), paraml.getForma(), paraml.getId() });
     }
 
     /* (non-Javadoc)

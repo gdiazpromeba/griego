@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.kalos.recursos.CadenasEnum;
+import com.kalos.recursos.Recursos;
 
 /**
  * Title: Description: Copyright: Copyright (c) 2001 Company:
@@ -14,99 +15,47 @@ import com.kalos.recursos.CadenasEnum;
  */
 
 public enum TipoPalabra {
-    Sustantivo, Adjetivo, Adverbio, Articulo, Verbo, Participio, Infinitivo, PronombrePersonal, PronombreRelativo, Conjuncion, Preposicion, PronombreReflexivo, PronombreIndefinido, Interjeccion, PronombreInterrogativo;
+    Sustantivo("sustantivo", "SUS"), Adjetivo("adjetivo", "ADJ"), Adverbio("adverbio", "ADV"), Articulo ("articulo", "ART") , 
+    Verbo("verbo", "VER"), Participio("participio", "PART"), Infinitivo("infinitivo", "INFIN"), PronombrePersonal("pronombre_personal", "PPE"),
+    PronombreRelativo("pronombre_relativo", "PREL"), Conjuncion ("conjuncion", "CONJ"), Preposicion("preposicion", "PREP"), 
+    PronombreReflexivo("pronombre_reflexivo", "PREF"), PronombreIndefinido("pronombre_indefinido", "PRONINDEF"), 
+    Interjeccion("interjeccion", "INTERJ"), PronombreInterrogativo("pronombre_interrogativo", "PRINT");
 
-    public static TipoPalabra getEnum(String tp) {
-	switch (tp) {
-	case "ADJ":
-	    return Adjetivo;
-	case "ADV":
-	    return Adverbio;
-	case "ART":
-	    return Articulo;
-	case "CONJ":
-	    return Conjuncion;
-	case "INTERJ":
-	    return Interjeccion;
-	case "PPE":
-	    return PronombrePersonal;
-	case "PREF":
-	    return PronombreReflexivo;
-	case "PREL":
-	    return PronombreRelativo;
-	case "PREP":
-	    return Preposicion;
-	case "PRINT":
-	    return PronombreInterrogativo;
-	case "PRONINDEF":
-	    return PronombreIndefinido;
-	case "SUS":
-	    return Sustantivo;
-	case "VER":
-	    return Verbo;
-	case "PART":
-	    return Participio;
-	case "INFIN":
-	    return Infinitivo;
-	default:
-	    throw new RuntimeException("la cadena " + tp + " no corresponde a ningún tipo de palabra");
-	}
-    }
+    private String etiquetaRecursos;
+    private String abreviatura;
+    
+    TipoPalabra (String etiquetaRecursos, String abreviatura){
 
-    public static String getString(TipoPalabra tp) {
-	return CadenasEnum.getCadena(tp);
+        this.etiquetaRecursos = etiquetaRecursos;
+        this.abreviatura = abreviatura;
     }
     
-    public  String getStringCorta(){
-	switch(this){
-	case Adjetivo:
-	    return "ADJ";
-	case Adverbio:
-	    return "ADV";
-	case Articulo:
-	    return "ART";
-	case Conjuncion:
-	    return "CONJ";
-	case Interjeccion:
-	    return "INTERJ";
-	case PronombrePersonal:
-	    return "PPE";
-	case PronombreReflexivo:
-	    return "PREF";
-	case PronombreRelativo:
-	    return "PREL";
-	case Preposicion:
-	    return "PREP";
-	case PronombreInterrogativo:
-	    return "PRINT";
-	case PronombreIndefinido:
-	    return "PRONINDEF";
-	case Sustantivo:
-	    return "SUS";
-	case Verbo:
-	    return "VER";
-	case Participio:
-	    return "PART";
-	case Infinitivo:
-	    return "INFIN";
-	default:
-	  throw new RuntimeException("no se encuentra cadena para la enumeración " + this);
-		    
-	}
+    public String getCadenaRecursos(){
+        return Recursos.getCadena(this.etiquetaRecursos);
     }
     
-    /**
-     * esto probablemente no está bien. No entiendo qué transformación de Enunms está ocurriendo acá
-     * @param lista
-     * @return
-     */
-    public static List<TipoPalabra> getTiposPalabra(List<Enum<?>> lista){
-	List<TipoPalabra> result=new ArrayList<TipoPalabra>();
-	for (Iterator<Enum<?>> iterator = lista.iterator(); iterator.hasNext();) {
-	    Enum<?> enum1 =  iterator.next();
-	    result.add((TipoPalabra)enum1);
-	}
-	return result;
-    }
+    public String getAbreviatura(){
+        return this.abreviatura;
+    }    
+    
+    public static TipoPalabra getEnum(String abreviatura){
+        for (TipoPalabra enu : values()) {
+            if (enu.abreviatura==abreviatura){
+                return enu;
+            }
+        }
+        throw new RuntimeException("no hay enum de TipoPalabra para la abreviatura " + abreviatura);
+    }    
+    
+    public static List<TipoPalabra> getTiposPalabra(List<Enum<?>> lista) {
+        List<TipoPalabra> result = new ArrayList<TipoPalabra>();
+        for (Iterator<Enum<?>> iterator = lista.iterator(); iterator.hasNext();) {
+            Enum<?> enum1 = iterator.next();
+            result.add((TipoPalabra) enum1);
+        }
+        return result;
+    } 
+    
+ 
 
 }

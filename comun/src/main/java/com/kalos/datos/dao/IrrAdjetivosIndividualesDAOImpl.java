@@ -406,8 +406,8 @@ public class IrrAdjetivosIndividualesDAOImpl extends JdbcDaoSupport implements I
     public void inserta(IrrAdjetivoIndividual iae) {
 	String pk = com.kalos.datos.util.DBUtil.getHashableId();
 	insercion.update(new Object[] { pk, iae.getAdjetivoId(), iae.getGenero().valorEntero(),
-		Particularidad.getString(iae.getParticularidad()), iae.getNumero().valorEntero(),
-		iae.getCaso().valorEntero(), GradoComparacion.getLetra(iae.getGrado()), iae.getSubindice(),
+		iae.getParticularidad().abreviatura(), iae.getNumero().valorEntero(),
+		iae.getCaso().valorEntero(), iae.getGrado().abreviatura(), iae.getSubindice(),
 		iae.getForma() });
 	iae.setId(pk);
     }
@@ -452,8 +452,8 @@ public class IrrAdjetivosIndividualesDAOImpl extends JdbcDaoSupport implements I
     @Override
     public void modifica(IrrAdjetivoIndividual bean) {
 	modificacion.update(new Object[] { bean.getAdjetivoId(), bean.getGenero().valorLetra(),
-		Particularidad.getString(bean.getParticularidad()), bean.getNumero().valorEntero(),
-		bean.getCaso().valorEntero(), GradoComparacion.getLetra(bean.getGrado()), bean.getSubindice(),
+		bean.getParticularidad().abreviatura(), bean.getNumero().valorEntero(),
+		bean.getCaso().valorEntero(), bean.getGrado().abreviatura(), bean.getSubindice(),
 		bean.getForma(),
 		// where
 		bean.getId() });

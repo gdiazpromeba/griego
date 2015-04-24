@@ -25,7 +25,7 @@ public class CoordenadasOc {
 
     public CoordenadasOc(Voz voz, Modo modo, Tiempo tiempo, FuerteDebil fuerte, Persona persona){
         this.hashCode= voz.valorEntero() + 10 * modo.valorEntero() + 100 * tiempo.valorEntero() 
-        + 1000 * FuerteDebil.getInt(fuerte) + 10000 * Persona.getInt(persona);
+        + 1000 * FuerteDebil.getInt(fuerte) + 10000 * persona.valorEntero();
 	}
 	
 	public boolean equals(Object obj){

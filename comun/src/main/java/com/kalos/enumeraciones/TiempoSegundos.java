@@ -1,5 +1,7 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 
 /**
  * Title:
@@ -11,8 +13,21 @@ package com.kalos.enumeraciones;
  */
 
 public enum TiempoSegundos implements TiempoOAspecto{
-	Presente, Imperfecto, Futuro, FuturoSegundo, Aoristo, AoristoSegundo, 
-	Perfecto, PerfectoSegundo, Pluscuamperfecto, PluscuamperfectoSegundo; 
+	Presente("presente"), Imperfecto("imperfecto"), Futuro("futuro"), FuturoSegundo("futuro_segundo"), 
+	Aoristo("aoristo"), AoristoSegundo("aoristo_segundo"),  Perfecto("perfecto"), PerfectoSegundo("perfecto_segundo"), 
+	Pluscuamperfecto("pluscuamperfecto"), PluscuamperfectoSegundo("pluscuamperfecto_segundo"); 
+	
+    
+    private String etiquetaRecursos;
+    
+    TiempoSegundos (String etiquetaRecursos){
+        this.etiquetaRecursos = etiquetaRecursos;
+    }
+    
+    public String getCadenaRecursos(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }	
+	
 }
 
 

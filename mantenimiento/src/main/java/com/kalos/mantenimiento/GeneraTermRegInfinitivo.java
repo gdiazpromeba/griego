@@ -136,7 +136,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, fuerte); 
 			ins.setInt(4, TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO);
 			ins.setString(5, desinenciaBeta);
-			ins.setInt(6, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(6, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, silaba);
 			ins.setInt(9, Acento.getInt(acento));
@@ -170,7 +170,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_EPSILON);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.vocalica));
+			ins.setInt(6, Contraccion.vocalica.valorEntero());
 			ins.setString(7, null); 
 			ins.setInt(8, aaContracta.actuales.silaba); 
 			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -203,7 +203,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_EPSILON);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.jonica));
+			ins.setInt(6, Contraccion.jonica.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, aaContracta.actuales.silaba); 
 			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -237,7 +237,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_EPSILON);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(6, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, aaContracta.actuales.silaba); 
 			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -272,7 +272,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_ALFA);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.vocalica));
+			ins.setInt(6, Contraccion.vocalica.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, aaContracta.actuales.silaba); 
 			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -304,7 +304,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_ALFA);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(6, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, aaContracta.actuales.silaba); 
 			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -341,7 +341,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_OMICRON);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.vocalica));
+			ins.setInt(6, Contraccion.vocalica.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, aaContracta.actuales.silaba); 
 			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -372,7 +372,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_OMICRON);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(6, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, aaContracta.actuales.silaba); 
 			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -411,7 +411,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_GUTURALES);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.consonantica));
+			ins.setInt(6, Contraccion.consonantica.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, silaba); 
 			ins.setInt(9, Acento.getInt(acento));
@@ -450,7 +450,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LABIALES);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.consonantica));
+			ins.setInt(6, Contraccion.consonantica.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, silaba); 
 			ins.setInt(9, Acento.getInt(acento));
@@ -485,7 +485,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_DENTALES);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.consonantica));
+			ins.setInt(6, Contraccion.consonantica.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, silaba); 
 			ins.setInt(9, Acento.getInt(acento));
@@ -519,7 +519,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, fuerte);  
 			ins.setInt(4, TipoVerbo.NoHojas.MI_PROPIAMENTE);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(6, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, -2); 
 			ins.setInt(9, Acento.getInt(Acento.Circunflejo));
@@ -553,7 +553,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, fuerte);  
 			ins.setInt(4, TipoVerbo.NoHojas.NUMI);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(6, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, aaContracta.actuales.silaba); 
 			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -585,7 +585,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 //			ins.setInt(3, 0);  //fuerte
 //			ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
 //			ins.setString(5, terminacion);
-//			ins.setInt(6, Contraccion.getInt(Contraccion.vocalica));
+//			ins.setInt(6, Contraccion.vocalica.valorEntero());
 //			ins.setString(7, "(.*)[LRNM]" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(sumada.substring(5))));
 //			ins.setInt(8, aaContracta.actuales.silaba); 
 //			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -617,7 +617,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.vocalica));
+			ins.setInt(6, Contraccion.vocalica.valorEntero());
 			ins.setString(7, "(.*)[(QI)LRN]" + OpPalabras.strCompletoABeta(OpPalabras.desacentuar(contracta.substring(5))));
 			ins.setInt(8, aaContracta.actuales.silaba); 
 			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -649,7 +649,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.comePrimera));
+			ins.setInt(6, Contraccion.comePrimera.valorEntero());
 			ins.setString(7, "(.*)[LRN]" + UtilidadesGeneracion.escapaBetasRegexp( OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(8, -2); 
 			ins.setInt(9, 0);
@@ -679,7 +679,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 1);  //fuerte
 			ins.setInt(4, -1);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(6, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(7, "(.*)[^Q]" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(8, aaContracta.actuales.silaba); 
 			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -712,7 +712,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 			ins.setInt(3, 0);  //fuerte
 			ins.setInt(4, -1);
 			ins.setString(5, terminacion);
-			ins.setInt(6, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(6, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(7, null);
 			ins.setInt(8, aaContracta.actuales.silaba); 
 			ins.setInt(9, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -732,7 +732,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
         	ins.setInt(3, 0); // fuerte
         	ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
         	ins.setString(5, "ENAI");
-        	ins.setInt(6, Contraccion.getInt(Contraccion.comePrimera));
+        	ins.setInt(6, Contraccion.comePrimera.valorEntero());
         	ins.setString(7, "(.*)[LRN]ENAI");
         	ins.setInt(8, -2);
         	ins.setInt(9, 0);
@@ -743,7 +743,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
         	ins.setInt(3, 0); // fuerte
         	ins.setInt(4, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
         	ins.setString(5, "QAI");
-        	ins.setInt(6, Contraccion.getInt(Contraccion.comePrimera));
+        	ins.setInt(6, Contraccion.comePrimera.valorEntero());
         	ins.setString(7, "(.*)[LRN]QAI");
         	ins.setInt(8, -2);
         	ins.setInt(9, 0);
@@ -763,7 +763,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
         	ins.setInt(3, 1); // fuerte
         	ins.setInt(4, -1);
         	ins.setString(5, "QAI");
-        	ins.setInt(6, Contraccion.getInt(Contraccion.comePrimera));
+        	ins.setInt(6, Contraccion.comePrimera.valorEntero());
         	ins.setString(7, "(.*)[^K]QAI");
         	ins.setInt(8, -2);
         	ins.setInt(9, 0);

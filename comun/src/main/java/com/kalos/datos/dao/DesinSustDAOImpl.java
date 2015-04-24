@@ -384,7 +384,7 @@ public class DesinSustDAOImpl extends JdbcDaoSupport implements DesinSustDAO {
 	insert.update(new Object[] { s, Integer.valueOf(bean.getSubindice()), bean.getDesinencia(),
 		Integer.valueOf(bean.getSilaba()), Integer.valueOf(Acento.getInt(bean.getAcento())),
 		bean.getCaso().valorEntero(), bean.getNumero().valorEntero(),
-		Integer.valueOf(Contraccion.getInt(bean.getContraccion())), OrigenTema.getCadena(bean.getOrigenTema()),
+		bean.getContraccion().valorEntero() , OrigenTema.getCadena(bean.getOrigenTema()),
 		Integer.valueOf(bean.getTipoSustantivo()), bean.getTipoSustantivoId(), bean.getAcentoConcuerda(),
 		bean.getPosicionConcuerda(), bean.getRegexDesinencia(), bean.getOrden(),
 		Integer.valueOf(bean.getOrdenPorDefecto()) });
@@ -395,7 +395,7 @@ public class DesinSustDAOImpl extends JdbcDaoSupport implements DesinSustDAO {
 	update.update(new Object[] { Integer.valueOf(bean.getSubindice()), bean.getDesinencia(),
 		Integer.valueOf(bean.getSilaba()), Integer.valueOf(Acento.getInt(bean.getAcento())),
 		bean.getCaso().valorEntero(), bean.getNumero().valorEntero(),
-		Integer.valueOf(Contraccion.getInt(bean.getContraccion())), OrigenTema.getCadena(bean.getOrigenTema()),
+		bean.getContraccion().valorEntero(), OrigenTema.getCadena(bean.getOrigenTema()),
 		Integer.valueOf(bean.getTipoSustantivo()), bean.getTipoSustantivoId(), bean.getAcentoConcuerda(),
 		bean.getPosicionConcuerda(), bean.getRegexDesinencia(), bean.getOrden(),
 		Integer.valueOf(bean.getOrdenPorDefecto()), bean.getId() });

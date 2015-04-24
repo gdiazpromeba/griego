@@ -437,7 +437,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 	private SeleccionPorTipo seleccionPorTipo;
 	
 	public List<ParticulaBean> seleccionaParticulasDadoTipoSinSignificado(TipoPalabra tipo) {
-		return seleccionPorTipo.execute(new Object[] {tipo.getStringCorta()});
+		return seleccionPorTipo.execute(new Object[] {tipo.getAbreviatura()});
 	}
 	
 	private SeleccionIndividual seleccionIndividual;
@@ -520,7 +520,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
     @SuppressWarnings("unchecked")
     public List<String> seleccionaIdsPorTipo(TipoPalabra tipoPalabra){
     	return seleccionIdsPorTipo.execute(new Object[]{
-    			tipoPalabra.getStringCorta()
+    			tipoPalabra.getAbreviatura()
     			});
     }
 	
@@ -549,10 +549,10 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
         insercion.update(new Object[]{
         		pk, 
         		ea.getParticulaEncabezadoId(),
-        		TipoPalabra.getString(ea.getParticulaTipo()),
-        		Particularidad.getString(ea.getParticularidad()),
+        		ea.getParticulaTipo().getAbreviatura(),
+        		ea.getParticularidad().abreviatura(),
         		ea.getCaso()!=null?ea.getCaso().valorEntero(): null,
-        		ea.getPersona()!=null?Persona.getInt(ea.getPersona()):null,
+        		ea.getPersona()!=null?ea.getPersona().valorEntero():null,
         		ea.getSubindice(),
         		ea.getGenero()!=null?ea.getGenero().valorLetra():null,
         		ea.getNumero()!=null?ea.getNumero().valorEntero():null,
@@ -586,10 +586,10 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
     public void modifica(ParticulaBean ea) {
         modificacion.update(new Object[]{
         		ea.getParticulaEncabezadoId(),
-        		TipoPalabra.getString(ea.getParticulaTipo()), 
-        		Particularidad.getString(ea.getParticularidad()),
+        		ea.getParticulaTipo().getAbreviatura(), 
+        		ea.getParticularidad().abreviatura(),
         		ea.getCaso()!=null?ea.getCaso().valorEntero(): null,
-        		ea.getPersona()!=null?Persona.getInt(ea.getPersona()):null,
+        		ea.getPersona()!=null?ea.getPersona().valorEntero():null,
         		ea.getSubindice(),
         		ea.getGenero()!=null?ea.getGenero().valorLetra():null,
         		ea.getNumero()!=null?ea.getNumero().valorEntero():null,

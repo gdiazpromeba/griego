@@ -162,7 +162,7 @@ public class TermRegInfinitivoDAOImpl extends JdbcDaoSupport implements TermRegI
 				bean.getRegEx(),
 				bean.getSilaba(),
 				Acento.getInt(bean.getAcento()),
-				Contraccion.getInt(bean.getContraccionGeneradora())
+				bean.getContraccionGeneradora().valorEntero()
 		});
 	}	
 	

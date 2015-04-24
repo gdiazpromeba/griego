@@ -145,7 +145,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO);
 			ins.setString(7, desinenciaBeta);
-			ins.setInt(8, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(8, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(9, "(.*)" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(sumada.substring(6))));
 			ins.setInt(10, silaba);
 			ins.setInt(11, Acento.getInt(acento));
@@ -183,7 +183,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_EPSILON);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.vocalica));
+			ins.setInt(8, Contraccion.vocalica.valorEntero());
 			ins.setString(9, "(.*)" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(contracta.substring(5)))); 
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -220,7 +220,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_EPSILON);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.jonica));
+			ins.setInt(8, Contraccion.jonica.valorEntero());
 			ins.setString(9, "(.*)" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -258,7 +258,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_EPSILON);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(8, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(9, "(.*)" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -297,7 +297,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_ALFA);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.vocalica));
+			ins.setInt(8, Contraccion.vocalica.valorEntero());
 			ins.setString(9, "(.*)" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -333,7 +333,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_ALFA);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(8, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(9, "(.*)" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -374,7 +374,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_OMICRON);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.vocalica));
+			ins.setInt(8, Contraccion.vocalica.valorEntero());
 			ins.setString(9, "(.*)" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -409,7 +409,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.VOCALICO_CONTRACTO_OMICRON);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(8, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(9, "(.*)" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -452,7 +452,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.CONSONANTICO_GUTURALES);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.consonantica));
+			ins.setInt(8, Contraccion.consonantica.valorEntero());
 			ins.setString(9, null);
 			ins.setInt(10, silaba); 
 			ins.setInt(11, Acento.getInt(acento));
@@ -495,7 +495,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.CONSONANTICO_LABIALES);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.consonantica));
+			ins.setInt(8, Contraccion.consonantica.valorEntero());
 			ins.setString(9, null);
 			ins.setInt(10, silaba); 
 			ins.setInt(11, Acento.getInt(acento));
@@ -534,7 +534,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.CONSONANTICO_DENTALES);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.consonantica));
+			ins.setInt(8, Contraccion.consonantica.valorEntero());
 			ins.setString(9, null);
 			ins.setInt(10, silaba); 
 			ins.setInt(11, Acento.getInt(acento));
@@ -572,7 +572,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.MI_PROPIAMENTE);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(8, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(9, null);
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -610,7 +610,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.NUMI);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(8, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(9, null);
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -646,7 +646,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.vocalica));
+			ins.setInt(8, Contraccion.vocalica.valorEntero());
 			ins.setString(9, "(.*)[LRNM]" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(sumada.substring(5))));
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -682,7 +682,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.vocalica));
+			ins.setInt(8, Contraccion.vocalica.valorEntero());
 			ins.setString(9, "(.*)[LRNM]" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -718,7 +718,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.comePrimera));
+			ins.setInt(8, Contraccion.comePrimera.valorEntero());
 			ins.setString(9, "(.*)[LRNM]" + UtilidadesGeneracion.escapaBetasRegexp( OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(10, 0); 
 			ins.setInt(11, 0);
@@ -752,7 +752,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, -1);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(8, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(9, "(.*)[^Q]" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -789,7 +789,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, -1);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(8, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(9, null);
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -826,7 +826,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(8, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(9, "(.*)[LRNM]" + UtilidadesGeneracion.escapaBetasRegexp(OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(10, aaContracta.actuales.silaba); 
 			ins.setInt(11, Acento.getInt(aaContracta.actuales.tipoAcento));
@@ -860,7 +860,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, -1);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.sumaAcentuada));
+			ins.setInt(8, Contraccion.sumaAcentuada.valorEntero());
 			ins.setString(9, "(.*)[^K]" + UtilidadesGeneracion.escapaBetasRegexp( OpPalabras.strCompletoABeta(contracta.substring(5))));
 			ins.setInt(10, silaba); 
 			ins.setInt(11, Acento.getInt(acento));
@@ -895,7 +895,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, -1);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.consonantica));
+			ins.setInt(8, Contraccion.consonantica.valorEntero());
 			ins.setString(9, null);
 			ins.setInt(10, silaba); 
 			ins.setInt(11, Acento.getInt(acento));
@@ -929,7 +929,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, -1);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.consonantica));
+			ins.setInt(8, Contraccion.consonantica.valorEntero());
 			ins.setString(9, null);
 			ins.setInt(10, silaba); 
 			ins.setInt(11, Acento.getInt(acento));
@@ -963,7 +963,7 @@ public class GeneraTermRegVerbos implements CompLetras{
 			ins.setInt(5, persona);
 			ins.setInt(6, -1);
 			ins.setString(7, terminacion);
-			ins.setInt(8, Contraccion.getInt(Contraccion.consonantica));
+			ins.setInt(8, Contraccion.consonantica.valorEntero());
 			ins.setString(9, null);
 			ins.setInt(10, silaba); 
 			ins.setInt(11, Acento.getInt(acento));

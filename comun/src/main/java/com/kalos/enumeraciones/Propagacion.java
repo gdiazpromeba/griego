@@ -1,5 +1,7 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 
 /**
  * Title:
@@ -11,38 +13,33 @@ package com.kalos.enumeraciones;
  */
 
 public enum Propagacion {
-	Ninguna, haciaModoYVoz, haciaLaVoz, haciaElModo; 
+	Ninguna(0, "propagacion.ninguna"), haciaModoYVoz(-1,"propagacion.hacia_modo_y_voz"), haciaLaVoz(2, "propagacion.hacia_la_voz"), 
+	haciaElModo(3, "propagacion.hacia_el_modo"); 
 	
-	public static Propagacion getEnum(int propagacion){
-		switch(propagacion){
-		case(-1):
-			return haciaModoYVoz;
-		case(2):
-			return haciaLaVoz;
-		case(0):
-			return Ninguna;
-        case(3):
-            return haciaElModo;
-		default:
-			throw new RuntimeException("no hay theEnum de propagación para el número " + propagacion);
-		}
-	}
-	
-
-	public static int getInt(Propagacion propagacion){
-		switch(propagacion){
-		  case haciaModoYVoz:
-			  return -1;
-		  case haciaLaVoz:
-			  return 2;
-		  case Ninguna:
-			  return 0;
-          case haciaElModo:
-              return 3;
-		  default:
-			  throw new RuntimeException("no hay propagación número " + propagacion);
-		}
-	}
+    private int valorEntero;
+    private String etiquetaRecursos;
+    
+    Propagacion (int valorEntero, String etiquetaRecursos){
+        this.valorEntero = valorEntero;
+        this.etiquetaRecursos = etiquetaRecursos;
+    }
+    
+    public String getCadenaRecursos(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }
+    
+    public int valorEntero(){
+        return this.valorEntero;
+    }   
+    
+    public static Propagacion getEnum(int valorEntero){
+        for (Propagacion enu : values()) {
+            if (enu.valorEntero==valorEntero){
+                return enu;
+            }
+        }
+        throw new RuntimeException("no hay enum de Silaba para el número " + valorEntero);
+    }
 	
 	public boolean esDeVoz(){
 		return this.equals(haciaModoYVoz) || this.equals(haciaLaVoz);

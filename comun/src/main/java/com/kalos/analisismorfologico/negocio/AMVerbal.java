@@ -291,8 +291,7 @@ public class AMVerbal {
 			return false;
 		} else if (silaba != Silaba.ninguna
 				&& !acento.equals(Acento.Ninguno)
-				&& (aaOrig.actuales.silaba != Silaba.getInt(silaba) || !aaOrig.actuales.tipoAcento
-						.equals(acento))) {
+				&& (aaOrig.actuales.silaba != silaba.valorEntero() || !aaOrig.actuales.tipoAcento.equals(acento))) {
 			return false;
 		} else if (silaba != Silaba.ninguna
 				&& Silaba.getEnum(aaOrig.actuales.silaba) != silaba) {

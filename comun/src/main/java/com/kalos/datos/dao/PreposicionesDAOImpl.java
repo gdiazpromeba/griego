@@ -317,7 +317,7 @@ public class PreposicionesDAOImpl extends JdbcDaoSupport implements Preposicione
     public void inserta(PreposicionBean c1) {
 	String s = com.kalos.datos.util.DBUtil.getHashableId();
 	insercion.update(new Object[] { s, Integer.valueOf(c1.getOrden()), c1.getPreposicion(),
-		c1.getFormaDiccionario(), Particularidad.getString(c1.getParticularidad()),
+		c1.getFormaDiccionario(), c1.getParticularidad().abreviatura() ,
 		Integer.valueOf(c1.isGenitivo() ? 1 : 0), Integer.valueOf(c1.isAcusativo() ? 1 : 0),
 		Integer.valueOf(c1.isDativo() ? 1 : 0) });
 	c1.setId(s);
@@ -325,7 +325,7 @@ public class PreposicionesDAOImpl extends JdbcDaoSupport implements Preposicione
 
     public void modifica(PreposicionBean c1) {
 	modificacion.update(new Object[] { Integer.valueOf(c1.getOrden()), c1.getPreposicion(),
-		c1.getFormaDiccionario(), Particularidad.getString(c1.getParticularidad()),
+		c1.getFormaDiccionario(), c1.getParticularidad().abreviatura(),
 		Integer.valueOf(c1.isGenitivo() ? 1 : 0), Integer.valueOf(c1.isAcusativo() ? 1 : 0),
 		Integer.valueOf(c1.isDativo() ? 1 : 0), c1.getId() });
     }

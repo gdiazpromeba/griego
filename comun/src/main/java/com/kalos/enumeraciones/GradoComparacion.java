@@ -1,42 +1,43 @@
 package com.kalos.enumeraciones;
 
+import com.kalos.recursos.Recursos;
+
 
 public enum GradoComparacion {
-	Positivo, Comparativo, Superlativo;
+	Positivo(1, "positivo", "P"), Comparativo(2, "comparativo", "C"), Superlativo(3, "superlativo", "S");
 	
-	public static String getLetra(GradoComparacion grado){
-		  switch(grado){
-			case Positivo:
-			  return "P";
-			case Comparativo:
-				return "C";
-			case Superlativo:
-				return "S";
-			default:
-			  return "error";
-		  }
-		}
+    private String etiquetaRecursos;
+    private String abreviatura;
+    private int valorEntero;
+    
+    GradoComparacion (int valorEntero, String etiquetaRecursos, String abreviatura){
+        this.etiquetaRecursos = etiquetaRecursos;
+        this.abreviatura = abreviatura;
+        this.valorEntero = valorEntero;
+        
+    }
+    
+    public String getCadenaRecursos(){
+        return Recursos.getCadena(this.etiquetaRecursos);
+    }	
+    
+    public String abreviatura(){
+        return this.abreviatura;
+    }
+    
+    public int valorEntero(){
+        return this.valorEntero;
+    } 
+	
+    public static GradoComparacion getEnum(String abreviatura){
+        for (GradoComparacion enu : values()) {
+            if (enu.abreviatura.equals(abreviatura)){
+                return enu;
+            }
+        }
+        throw new RuntimeException("no hay enum de GradoComparacion para la abreviatura " + abreviatura);
+    } 
 
-	public static int getInt(GradoComparacion grado){
-		  switch(grado){
-			case Positivo:
-			  return 1;
-			case Comparativo:
-				return 2;
-			default: //superlativo
-				return 3;
-		  }
-	}	
-	
-	public static GradoComparacion getEnum(String grado){
-		if (grado.equals("P"))
-		  return Positivo;
-		else if (grado.equals("C"))
-		  return Comparativo;
-		else if (grado.equals("S"))
-			return Superlativo;
-		else 
-			throw new RuntimeException("no sé qué grado es la letra " + grado);
-	}
+
 	
 }

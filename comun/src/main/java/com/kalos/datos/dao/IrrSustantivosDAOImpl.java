@@ -149,7 +149,7 @@ public class IrrSustantivosDAOImpl extends JdbcDaoSupport implements IrrSustanti
     }
 
     public List<IrrSustantivoBean> seleccionaPorIdyPartic(String paramString, Particularidad paramX) {
-        List localList = this.seleccionPorIdYPartic.execute(new Object[] { paramString, Particularidad.getString(paramX) });
+        List localList = this.seleccionPorIdYPartic.execute(new Object[] { paramString, paramX.abreviatura() });
         return localList;
     }
 
@@ -177,14 +177,14 @@ public class IrrSustantivosDAOImpl extends JdbcDaoSupport implements IrrSustanti
     public void inserta(IrrSustantivoBean paramU) {
         String str = com.kalos.datos.util.DBUtil.getHashableId();
         this.insercion.update(new Object[] { str, paramU.getSustantivoId(),
-                Particularidad.getString(paramU.getParticularidad()), paramU.getCaso().valorEntero(),
+                paramU.getParticularidad().abreviatura(), paramU.getCaso().valorEntero(),
                 paramU.getNumero().valorEntero(), Integer.valueOf(paramU.getSubindice()),
                 paramU.getForma() });
         paramU.setId(str);
     }
 
     public void actualiza(IrrSustantivoBean irrSust) {
-        this.modificacion.update(new Object[] { irrSust.getSustantivoId(), Particularidad.getString(irrSust.getParticularidad()),
+        this.modificacion.update(new Object[] { irrSust.getSustantivoId(), irrSust.getParticularidad().abreviatura(),
                 irrSust.getCaso().valorEntero(), irrSust.getNumero().valorEntero(),
                 Integer.valueOf(irrSust.getSubindice()), irrSust.getForma(), irrSust.getId() });
     }
