@@ -20,6 +20,27 @@
  		<?php include 'menu.php'; ?>
  	</div>
  	<div id="colTwo">
+ 	
+ 	 		<div class="box">
+	 			<h3>Version 4.16 released</h3>
+	 			<h4><strong>10.May.2015</strong></h4>
+	 			<p class="bottom">
+	 				<strong>Usability</strong>
+	 				<strong>Internal programming</strong>
+	 				<ul>
+	 				  <li>We made numerous internal changes, based on improved Java technology</li>
+	 				  <li>They result in a faster, smoother user experience</li>
+	 				  <li>You will also notice that the program displays charts faster, and finds more forms in the Greek morphological analysis more quickly</li>
+	 				</ul>	 				
+	 				
+	 				<ul>
+	 				  <li>A new section at the top is available, with the last selected form</li>
+	 				  <li>This form determines what kind of charts are shown in the chart section</li>
+	 				</ul>
+
+
+	 		    </p>
+ 	    </div> 	
 
  	 		<div class="box">
 	 			<h3>Version 4.15 released</h3>

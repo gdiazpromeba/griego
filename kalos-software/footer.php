@@ -1,5 +1,5 @@
 <div id="footer">
-	<p>Copyright (c) 2015 by Gonzalo Díaz. All rights reserved.</p>
+	<p>Copyright (c) 2015 by SIR MV Incorporated. All rights reserved.</p>
 </div>
 
 
