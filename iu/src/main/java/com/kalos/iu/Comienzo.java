@@ -121,12 +121,15 @@ public class Comienzo {
             }
 
         }.start();
-//        caratula.repaint();
+        caratula.repaint();  //este repaint es para que se redibuje el nombre de usuario
     }
 
     private static void obtieneNombre() {
         GerenteSeguridad gerenteSeguridad = (GerenteSeguridad) applicationContext.getBean("gerenteSeguridad");
-        Configuracion.setNombre(gerenteSeguridad.getNombre());
+        String nombre = gerenteSeguridad.getNombre();
+        if (nombre == null || nombre.trim().equals("") ){
+            Configuracion.setNombre(Recursos.getCadena("usuario_no_registrado"));
+        }
     }
 
     private static void idiomaEtiquetas() {

@@ -14,6 +14,7 @@ en los respectivos directorios "target" -->
 	<property name="nombre" value="kalos-${version}"/>
 	<property name="jar.kalos" value="${nombre}.jar"/>
 	<property name="jar.kalos.ofuscado" value="kalos-ofuscado-4.16.jar"/>
+	<property name="jar.iu.work" value="work/${jar.iu}"/>
 	<property name="shrinklog" value="shrink.log"/>
 	<property environment="env"/>
 	
@@ -31,6 +32,14 @@ en los respectivos directorios "target" -->
     </target>
 	
 	<target name="compilacion" depends="copiaDeps">
+		
+		<path id="libs.for.comun">
+			<fileset dir="work/lib/">
+				<include name="*.jar"/>
+			</fileset>
+		</path>
+		
+		
 		<echo>Compilando todo ... </echo>
 		<delete dir="work/comp"/>
 		<mkdir dir="work/comp"/>
@@ -62,10 +71,12 @@ en los respectivos directorios "target" -->
 		</java>
 	</target>	
 	
-	<target name="runBuildOfuscado" depends="compilacion, granJar, conBDYReportes, obfuscate" >
+	<target name="runOfuscado">
 		<java jar="work/condb/${jar.kalos.ofuscado}" dir="work/condb" fork="true">
 		</java>
 	</target>
+	
+	<target name="buildOfuscado" depends="compilacion, granJar, conBDYReportes, obfuscate" />
 	
 
 
@@ -109,9 +120,16 @@ en los respectivos directorios "target" -->
 	</target>	
 	
 	<target name="granJar" >
+		<manifestclasspath property="lib.list.iu" jarfile="${jar.iu.work}">
+			<classpath refid="libs.for.iu" />
+		</manifestclasspath>		
 		<delete dir="work/comp/jar"/>
 		<mkdir dir="work/comp/jar"/>
-		
+		  <echoproperties>
+		    <propertyset>
+		      <propertyref prefix="lib.list"/>
+		    </propertyset>
+		  </echoproperties>
 		<!-- crea un directorio temporario para los recursos, algunos de los cuales tengo que editar -->
 		<delete dir="work/comp/rec"/>
 		<mkdir dir="work/comp/rec"/>
@@ -140,19 +158,8 @@ en los respectivos directorios "target" -->
 		</fileset>
 	</path>
 
-	<path id="libs.for.comun">
-		<fileset dir="work/lib/">
-			<include name="*.jar"/>
-		</fileset>
-	</path>
 
-	<manifestclasspath property="lib.list.iu" jarfile="work/${jar.iu}">
-		<classpath refid="libs.for.iu" />
-	</manifestclasspath>
 
-	<manifestclasspath property="lib.list.comun" jarfile="work/lib/${jar.comun}">
-		<classpath refid="libs.for.comun" />
-	</manifestclasspath>
 
 	
 	<target name="conBDYReportes">

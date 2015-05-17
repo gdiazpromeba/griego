@@ -60,9 +60,9 @@ public class Recursos {
         String url = null;
         try {
             if (Configuracion.isDebug()) {
-                url = "file://c:/kalos/help/help.html";
+                url = "file://../help/help.html";
             } else {
-                url = "file://" + new File("").getCanonicalPath() + "/help.html";
+                url = "file://" + new File("").getCanonicalPath() + "/help/help.html";
                 url = url.replaceAll("\\\\", "/");
                 System.out.println();
             }

@@ -132,7 +132,7 @@ public class Caratula extends JPanel {
 		g.setFont(new Font("Dialog", 2, 11));
 		g.drawString("beautiful Greek software", 378, 55);
 		g.setFont(new Font("Dialog", 0, 12));
-		if (Configuracion.getNombre() == null)
+		if (Configuracion.getNombre() == null || Configuracion.getNombre().trim().equals(""))
 			g.drawString(Recursos.getCadena("usuario_no_registrado"), 397, 382);
 		else
 			g.drawString(

@@ -343,7 +343,7 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
 
                 AACacheable cacheAA = new AACacheable();
 
-                if (Configuracion.getNombre() == null) {
+                if (Configuracion.getNombre().equals(Recursos.getCadena("usuario_no_registrado"))) {
                     ventanaMolesta.muestraMolestia(this);
                 }
 
@@ -452,6 +452,8 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
 
         public void valueChanged(ListSelectionEvent ev) {
             if (ev.getValueIsAdjusting())
+                return;
+            if (resultados.size()==0)
                 return;
             int indice = tabla.getSelectedRow();
             if (indice == -1)

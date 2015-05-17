@@ -10,12 +10,12 @@
 	<name>parent</name>
 	<url>http://maven.apache.org</url>
 
-        <modules>
-          <module>comun</module>
-          <module>comun-swing</module>
-          <module>iu</module>
-          <module>mantenimiento</module>
-        </modules>
+	<modules>
+		<module>comun</module>
+		<module>comun-swing</module>
+		<module>iu</module>
+		<module>mantenimiento</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -56,7 +56,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-
 	</build>
 
 	<dependencies>
@@ -150,17 +149,17 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-	
-		
+
+
 		<dependency>
 			<groupId>foxtrot</groupId>
 			<artifactId>foxtrot-core</artifactId>
 			<version>4.0</version>
-		</dependency>	
-		
-		
-		
-		
+		</dependency>
+
+
+
+
 		<dependency>
 			<groupId>com.jgoodies</groupId>
 			<artifactId>jgoodies-common</artifactId>
@@ -177,13 +176,13 @@
 			<groupId>com.jgoodies</groupId>
 			<artifactId>looks</artifactId>
 			<version>2.2.2</version>
-		</dependency>		
+		</dependency>
 
 		<dependency>
 			<groupId>jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
 			<version>1.2.8</version>
-		</dependency>			
+		</dependency>
 
 	</dependencies>
 </project>
