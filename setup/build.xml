@@ -86,8 +86,6 @@ en los respectivos directorios "target" -->
 		        <mkdir dir="work/tmp"/>
 
 	            <property name="obfuscate.absolute.dir" location="work/tmp" />
-	            <property name="preobfuscate.jar.file"  value="work/tmp/original.jar" />
-	            <property name="obfuscated.jar.file"    value="work/tmp/obfuscated.jar" />
 
 	             <!-- input for dex will be proguard's output -->
 	            <property name="out.dex.input.absolute.dir" value="${obfuscated.jar.file}" />
@@ -240,8 +238,37 @@ en los respectivos directorios "target" -->
           <replacetoken>GenericApp.icns</replacetoken>
           <replacevalue>icono_kalos.icns</replacevalue>
       </replace>  
-      	
+   </target>
 	
-    </target>	
+    <target name="bundleWin">
+  	  <echo>Creando una versión Mac</echo>
+      <delete dir="work/bundlewin"/>
+  	  <mkdir dir="work/bundlewin/"/>
+      <copy file="kalos.properties-win" tofile="work/bundlewin/kalos.properties"/> 
+  	  <!-- archivo de propiedades -->
+      <replace file="work/bundlewin/kalos.properties">
+  	  	<replacefilter token="debug=true" value="debug=false"/>
+  	  	<replacefilter token="NUMERO_DE_VERSION" value="${version}"/>
+      </replace>   	 
+      <!-- agregar el resto de los directorios y archivos a la sección "Java" -->	
+      <mkdir dir="work/bundlewin/data" />
+      <mkdir dir="work/bundlewin/lib" />
+      <mkdir dir="work/bundlewin/armado_reportes" />
+  	  <copy todir="work/bundlewin/data">
+  	    <fileset dir="work/condb/data"/>
+  	  </copy>
+      <copy todir="work/bundlewin/lib">
+        <fileset dir="work/condb/lib"/>
+      </copy>    	
+      <copy todir="work/bundlewin/armado_reportes">
+        <fileset dir="work/condb/armado_reportes"/>
+      </copy>    	
+      <!-- archivo iss -->
+      <replace file="work/bundlewin/kalos.properties">
+        <replacefilter token="debug=true" value="debug=false"/>
+    	<replacefilter token="NUMERO_DE_VERSION" value="${version}"/>
+      </replace>     	
+      <copy file="kalos.exe" todir="work/bundlewin"/>
+   </target>	
 
 </project>

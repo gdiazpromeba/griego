@@ -55,6 +55,11 @@ Por eso, para Mac, al menos, prefiero poner una dirección absoluta. De lo contr
 * ejecutar una vez “bundleMac”. El resultado queda en el subdirectorio “bundleMac” bajo “work”
 
 ##Instrucciones para el setup en Windows
+* crear un directorio vacío “work” , y dentro de él, otro directorio vacío “lib”
+* ejecutar una vez “runBuild”. Debería andar. Pararlo
+* ejecutar una vez “runBuildOfuscado”. Debería andar. Pararlo.
+* ejecutar una vez “bundleWin”. El resultado queda en el subdirectorio “bundleWin” bajo “work”
+
 
 
 

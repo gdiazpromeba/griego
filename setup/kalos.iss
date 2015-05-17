@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 [Setup]
-AppName=Kalós
-AppVersion=4.16
+AppName=KalÃ³s
+AppVersion=NUMERO_DE_VERSION
 DefaultDirName={pf}\Kalos
 
 
