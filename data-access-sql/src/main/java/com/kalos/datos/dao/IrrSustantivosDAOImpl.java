@@ -8,17 +8,17 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import com.kalos.beans.IrrSustantivoBean;
-import com.kalos.datos.dao.comunes.Borrado;
-import com.kalos.enumeraciones.Caso;
-import com.kalos.enumeraciones.Numero;
-import com.kalos.enumeraciones.Particularidad;
-import com.kalos.utils.Listas;
-
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.object.MappingSqlQuery;
 import org.springframework.jdbc.object.SqlUpdate;
+
+import com.kalos.beans.IrrSustantivoBean;
+import com.kalos.datos.dao.comunes.Borrado;
+import com.kalos.datos.util.Listas;
+import com.kalos.enumeraciones.Caso;
+import com.kalos.enumeraciones.Numero;
+import com.kalos.enumeraciones.Particularidad;
 
 public class IrrSustantivosDAOImpl extends JdbcDaoSupport implements IrrSustantivosDAO {
 

@@ -19,7 +19,7 @@ import com.kalos.enumeraciones.OrigenTema;
 import com.kalos.enumeraciones.Particularidad;
 import com.kalos.enumeraciones.Silaba;
 import com.kalos.enumeraciones.Voz;
-import com.kalos.operaciones.OpBeans;
+
 
 // Referenced classes of package kalos.K:
 //            G, T

@@ -26,22 +26,21 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import com.kalos.beans.AdjetivoBean;
-import com.kalos.beans.Significado;
-import com.kalos.beans.SustantivoBean;
-import com.kalos.datos.dao.comunes.Borrado;
-import com.kalos.datos.dao.comunes.ModificaCodigoIndividual;
-import com.kalos.datos.dao.comunes.SeleccionIds;
-import com.kalos.enumeraciones.GradoComparacion;
-import com.kalos.enumeraciones.Idioma;
-import com.kalos.enumeraciones.Particularidad;
-import com.kalos.recursos.Configuracion;
-import com.kalos.utils.Listas;
-
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.object.MappingSqlQuery;
 import org.springframework.jdbc.object.SqlUpdate;
+
+import com.kalos.beans.AdjetivoBean;
+import com.kalos.beans.Significado;
+import com.kalos.datos.dao.comunes.Borrado;
+import com.kalos.datos.dao.comunes.ModificaCodigoIndividual;
+import com.kalos.datos.dao.comunes.SeleccionIds;
+import com.kalos.datos.util.Listas;
+import com.kalos.enumeraciones.GradoComparacion;
+import com.kalos.enumeraciones.Idioma;
+import com.kalos.enumeraciones.Particularidad;
+import com.kalos.recursos.Configuracion;
 
 /**
  * @author <a href="mailto:gonzalo.diaz@turner.com">Gonzalo Diaz</a>

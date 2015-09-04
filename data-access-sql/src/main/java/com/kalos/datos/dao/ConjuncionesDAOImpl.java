@@ -9,33 +9,27 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
-import com.kalos.beans.AdjetivoBean;
+import org.springframework.jdbc.core.SqlParameter;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.object.MappingSqlQuery;
+import org.springframework.jdbc.object.SqlUpdate;
+
 import com.kalos.beans.ConjuncionBean;
 import com.kalos.beans.Significado;
-import com.kalos.datos.dao.AdjetivoDAOImpl.SeleccionPorIds;
-import com.kalos.datos.dao.AdverbiosDAOImpl.SeleccionAbstracta;
-import com.kalos.datos.dao.AdverbiosDAOImpl.SeleccionPorIdConSignificado;
 import com.kalos.datos.dao.comunes.Borrado;
 import com.kalos.datos.dao.comunes.ModificaCodigoIndividual;
 import com.kalos.datos.dao.comunes.SeleccionIds;
+import com.kalos.datos.util.Listas;
 import com.kalos.enumeraciones.Idioma;
 import com.kalos.enumeraciones.LugarSubcadena;
 import com.kalos.enumeraciones.Particularidad;
 import com.kalos.enumeraciones.SubtipoConjuncion;
 import com.kalos.enumeraciones.TipoConjuncion;
 import com.kalos.recursos.Configuracion;
-import com.kalos.utils.Listas;
-
-import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.jdbc.object.MappingSqlQuery;
-import org.springframework.jdbc.object.SqlUpdate;
 
 // Referenced classes of package kalos.E.C:
 //            d

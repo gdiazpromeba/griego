@@ -13,22 +13,22 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.jdbc.core.SqlParameter;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.object.MappingSqlQuery;
+import org.springframework.jdbc.object.SqlUpdate;
+
 import com.kalos.beans.AdverbioBean;
 import com.kalos.beans.Significado;
 import com.kalos.datos.dao.comunes.Borrado;
 import com.kalos.datos.dao.comunes.ModificaCodigoIndividual;
 import com.kalos.datos.dao.comunes.SeleccionIds;
+import com.kalos.datos.util.Listas;
 import com.kalos.enumeraciones.GradoComparacion;
 import com.kalos.enumeraciones.Idioma;
 import com.kalos.enumeraciones.Particularidad;
 import com.kalos.enumeraciones.TipoAdverbio;
 import com.kalos.recursos.Configuracion;
-import com.kalos.utils.Listas;
-
-import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.jdbc.object.MappingSqlQuery;
-import org.springframework.jdbc.object.SqlUpdate;
 
 // Referenced classes of package kalos.E.C:
 //            YA
