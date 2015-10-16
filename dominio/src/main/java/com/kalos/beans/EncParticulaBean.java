@@ -1,11 +1,29 @@
 package com.kalos.beans;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.kalos.enumeraciones.Idioma;
 import com.kalos.enumeraciones.TipoPalabra;
 
-public class EncParticulaBean {
+public class EncParticulaBean implements ISignificados {
 	private String id;
 	private String forma;
 	private TipoPalabra tipoPalabra;
+    private Map significados;
+    
+    public EncParticulaBean() {
+        significados = new HashMap<>();
+    }
+    
+    public Map<Idioma, Significado> getSignificados() {
+        return significados;
+    }
+
+    public void setSignificados(Map<Idioma, Significado> map) {
+        significados = map;
+    }
+	
 	/**
 	 * @return the id
 	 */

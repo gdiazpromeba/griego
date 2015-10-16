@@ -255,33 +255,44 @@ public class UtilidadesTM {
         }
     }
 
-    public void dejaSelect(DefaultTableModel paramDefaultTableModel, String[] paramArrayOfString,
-            Object[] paramArrayOfObject) {
+    /**
+     * deja sólo las filas de un tableModel cuyas celdas en las columnas dadas, tienen los valores dados.
+     * @param tableModel
+     * @param nombresColumna
+     * @param valoresCelda
+     */
+    public void dejaSelect(DefaultTableModel tableModel, String[] nombresColumna, Object[] valoresCelda) {
         int i = 0;
-        int[] arrayOfInt = A(paramDefaultTableModel, paramArrayOfString);
-        while (i < paramDefaultTableModel.getRowCount()) {
+        int[] indicesColumnas = indicesColumnas(tableModel, nombresColumna);
+        while (i < tableModel.getRowCount()) {
             int j = 1;
-            for (int k = 0; k < arrayOfInt.length; k++) {
-                Object localObject = paramDefaultTableModel.getValueAt(i, arrayOfInt[k]);
-                if (!localObject.equals(paramArrayOfObject[k])) {
+            for (int k = 0; k < indicesColumnas.length; k++) {
+                Object valorCelda = tableModel.getValueAt(i, indicesColumnas[k]);
+                if (!valorCelda.equals(valoresCelda[k])) {
                     j = 0;
                     break;
                 }
             }
             if (j == 0) {
-                paramDefaultTableModel.removeRow(i);
+                tableModel.removeRow(i);
             } else {
                 i++;
             }
         }
     }
 
-    private int[] A(DefaultTableModel paramDefaultTableModel, String[] paramArrayOfString) {
-        int[] arrayOfInt = new int[paramArrayOfString.length];
-        for (int i = 0; i < paramArrayOfString.length; i++) {
-            arrayOfInt[i] = paramDefaultTableModel.findColumn(paramArrayOfString[i]);
+    /**
+     * dado un tableModel, encuentra los índices de los nombres de columna dados
+     * @param tableModel
+     * @param nombresColumna
+     * @return
+     */
+    private int[] indicesColumnas(DefaultTableModel tableModel, String[] nombresColumna) {
+        int[] indicesColumna = new int[nombresColumna.length];
+        for (int i = 0; i < nombresColumna.length; i++) {
+            indicesColumna[i] = tableModel.findColumn(nombresColumna[i]);
         }
-        return arrayOfInt;
+        return indicesColumna;
     }
 
     public void borraColumna(DefaultTableModel paramDefaultTableModel, int paramInt) {
