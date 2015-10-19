@@ -202,7 +202,7 @@ public class AMUtil <T extends TermRegVerbal>{
      *            irregularidades verbales
      * @param debug
      */
-    public <T extends TermRegVerbal> void desTransformacionesTemas(Collection<T> setOriginal, Set<ObjYDest<T>> setDestransformados, List<ObjYDest<T>> aBuscarPorTema, boolean debug) {
+    public void desTransformacionesTemas(Collection<T> setOriginal, Set<ObjYDest<T>> setDestransformados, List<ObjYDest<T>> aBuscarPorTema, boolean debug) {
         // la lstTemas acumula cuplas ObjYDest's con todos los resultados que
         // encuentro, o la forma
         // original si la des-transformación de turno no pudo producir nada
@@ -232,10 +232,10 @@ public class AMUtil <T extends TermRegVerbal>{
                     // condición de que el registro no
                     // tenga aumento ni reduplicación
 
-                    TermRegVerbal regNew = regAux.clona();
+                    T regNew = regAux.clona();
 
                     regNew.setFormaDestransformada(formaADestransformar);
-                    aBuscarPorTema.add(new ObjYDest(regNew, new DesTransformaciones(formaADestransformar, null, null, Aumento.Ninguno, false, false)));
+                    aBuscarPorTema.add(new ObjYDest<T>(regNew, new DesTransformaciones(formaADestransformar, null, null, Aumento.Ninguno, false, false)));
                     // des-transformaciones
                     if (modo == Modo.Indicativo) {
                         if (OpPalabras.esEspecificamenteDesAumentable(formaADestransformar)) {
@@ -247,9 +247,9 @@ public class AMUtil <T extends TermRegVerbal>{
                                     regNew = regAux.clona();
                                     regNew.setFormaDestransformada(itDesAum);
                                     if (dest.isRegular()) {
-                                        setDestransformados.add(new ObjYDest(regNew, dest));
+                                        setDestransformados.add(new ObjYDest<T>(regNew, dest));
                                     } else {
-                                        aBuscarPorTema.add(new ObjYDest(regNew.clona(), dest));
+                                        aBuscarPorTema.add(new ObjYDest<T>(regNew.clona(), dest));
                                     }
                                 }
                             } else {
@@ -261,9 +261,9 @@ public class AMUtil <T extends TermRegVerbal>{
                     } else {// no es indicativo
                         regNew = regAux.clona();
                         regNew.setFormaDestransformada(formaADestransformar);
-                        setDestransformados.add(new ObjYDest(regNew, new DesTransformaciones(formaADestransformar, null,
+                        setDestransformados.add(new ObjYDest<T>(regNew, new DesTransformaciones(formaADestransformar, null,
                                 null, Aumento.Ninguno, false, true)));
-                        aBuscarPorTema.add(new ObjYDest(regNew.clona(), new DesTransformaciones(
+                        aBuscarPorTema.add(new ObjYDest<T>(regNew.clona(), new DesTransformaciones(
                                 formaADestransformar, null, null, Aumento.Ninguno, false, true)));
                     }
                 }
@@ -272,9 +272,9 @@ public class AMUtil <T extends TermRegVerbal>{
                     // primero lo agrego como viene a la futura búsqueda de temas,
                     // pero a condición
                     // de que le registro no tenga aumentos ni reduplicaciones
-                    TermRegVerbal regNew = regAux.clona();
+                    T regNew = regAux.clona();
                     regNew.setFormaDestransformada(formaADestransformar);
-                    aBuscarPorTema.add(new ObjYDest(regNew.clona(), new DesTransformaciones(formaADestransformar,
+                    aBuscarPorTema.add(new ObjYDest<T>(regNew.clona(), new DesTransformaciones(formaADestransformar,
                             null, null, Aumento.Ninguno, false, false)));
 
                     // luego, aplico des-transformaciones
@@ -287,9 +287,9 @@ public class AMUtil <T extends TermRegVerbal>{
                                 regNew = regAux.clona(); 
                                 regNew.setFormaDestransformada(itDesRed);
                                 if (dest.isRegular()) {
-                                    setDestransformados.add(new ObjYDest(regNew, dest));
+                                    setDestransformados.add(new ObjYDest<T>(regNew, dest));
                                 } else {
-                                    aBuscarPorTema.add(new ObjYDest(regNew.clona(), dest));
+                                    aBuscarPorTema.add(new ObjYDest<T>(regNew.clona(), dest));
                                 }
                             }
                         } else {
@@ -300,7 +300,7 @@ public class AMUtil <T extends TermRegVerbal>{
                         // desTransformación vacía
                         regNew = regAux.clona();
                         regNew.setFormaDestransformada(formaADestransformar);
-                        aBuscarPorTema.add(new ObjYDest(regNew, new DesTransformaciones(formaADestransformar, null, null,
+                        aBuscarPorTema.add(new ObjYDest<T>(regNew, new DesTransformaciones(formaADestransformar, null, null,
                                 Aumento.Ninguno, false, true)));
                     }
                     break;
@@ -309,10 +309,9 @@ public class AMUtil <T extends TermRegVerbal>{
                     // los agrego como vienen a la futura búsqueda de temas, pero a
                     // condición de que no tengan aumento ni
                     // reduplicación
-                    TermRegVerbal regNew = regAux.clona();
-                    ;
+                    T regNew = regAux.clona();
                     regNew.setFormaDestransformada(formaADestransformar);
-                    aBuscarPorTema.add(new ObjYDest(regNew.clona(), new DesTransformaciones(formaADestransformar,
+                    aBuscarPorTema.add(new ObjYDest<T>(regNew.clona(), new DesTransformaciones(formaADestransformar,
                             null, null, Aumento.Ninguno, false, false)));
 
                     // des-transformaciones
@@ -340,30 +339,27 @@ public class AMUtil <T extends TermRegVerbal>{
                                                 if (dest2.isRegular()) {
                                                     dest2.setDesAumentada(dest.getDesAumentada());
                                                     dest2.setAumento(dest.getAumento());
-                                                    setDestransformados.add(new ObjYDest(regNew, dest));
+                                                    setDestransformados.add(new ObjYDest<T>(regNew, dest));
                                                 } else {
-                                                    aBuscarPorTema.add(new ObjYDest(regNew.clona(), dest2));
+                                                    aBuscarPorTema.add(new ObjYDest<T>(regNew.clona(), dest2));
                                                 }
                                             }
                                         } else {
-                                            throw new RuntimeException(
-                                                    "la palabra "
-                                                            + OpPalabras.strCompletoABeta(itDesAum)
+                                            throw new RuntimeException("la palabra "+ OpPalabras.strCompletoABeta(itDesAum)
                                                             + ", pese a serespecíficamente des-reduplicable, no presenta formas des-reduplicadas");
                                         }
                                     } else {// no esespecíficamente
                                         // des-reduplicable
                                         regNew = regAux.clona();
-                                        ;
                                         regNew.setFormaDestransformada(dest.getDesAumentada());
-                                        setDestransformados.add(new ObjYDest(regNew, dest));
-                                        aBuscarPorTema.add(new ObjYDest(regNew.clona(), dest));
+                                        setDestransformados.add(new ObjYDest<T>(regNew, dest));
+                                        aBuscarPorTema.add(new ObjYDest<T>(regNew.clona(), dest));
                                     }
 
                                 } else {
                                     regNew = regAux.clona();
                                     regNew.setFormaDestransformada(dest.getDesAumentada());
-                                    aBuscarPorTema.add(new ObjYDest(regNew.clona(), dest));
+                                    aBuscarPorTema.add(new ObjYDest<T>(regNew.clona(), dest));
                                 }
                             }
                         } else {
@@ -374,17 +370,17 @@ public class AMUtil <T extends TermRegVerbal>{
                         // vacía
                         regNew = regAux.clona();
                         regNew.setFormaDestransformada(formaADestransformar);
-                        aBuscarPorTema.add(new ObjYDest(regNew, new DesTransformaciones(formaADestransformar, null, null,
+                        aBuscarPorTema.add(new ObjYDest<T>(regNew, new DesTransformaciones(formaADestransformar, null, null,
                                 Aumento.Ninguno, false, false)));
                     }
                     break;
                 }
                 default: // simplemente agrego
-                    TermRegVerbal regNew = regAux.clona();
+                    T regNew = regAux.clona();
                     regNew.setFormaDestransformada(formaADestransformar);
-                    setDestransformados.add(new ObjYDest(regNew, new DesTransformaciones(formaADestransformar, null, null,
+                    setDestransformados.add(new ObjYDest<T>(regNew, new DesTransformaciones(formaADestransformar, null, null,
                             Aumento.Ninguno, false, true)));
-                    aBuscarPorTema.add(new ObjYDest(regNew.clona(), new DesTransformaciones(formaADestransformar,
+                    aBuscarPorTema.add(new ObjYDest<T>(regNew.clona(), new DesTransformaciones(formaADestransformar,
                             null, null, Aumento.Ninguno, false, true)));
             }
         }
@@ -539,13 +535,11 @@ public class AMUtil <T extends TermRegVerbal>{
     /**
      * Imprime el la información de una colección de nodos que contienen
      * regdests
-     * (no entiendo bien por qué tengo que redeclarar T aquí. Si no lo hago, no toma la List<ObjYDest<T>> y el Set<ObjYDest<T>>
-     * como parámetros válidos al llamar a este método)
      * 
      * @param nodes
      * @param columnasBeta
      */
-    public <T extends TermRegVerbal> void debugRegDes(Collection<ObjYDest<T>> nodes, String[] columnasBeta) {
+    public void debugRegDes(Collection<ObjYDest<T>> nodes, String[] columnasBeta) {
         Arrays.sort(columnasBeta);
         StringBuffer salida = new StringBuffer();
         for (ObjYDest<T> red : nodes) {
@@ -568,7 +562,7 @@ public class AMUtil <T extends TermRegVerbal>{
      * 
      * @param aDestransformar
      */
-    public <T extends TermRegVerbal> void incorporaADestransformar(Collection<T> aDestransformar, boolean debug) {
+    public void incorporaADestransformar(Collection<T> aDestransformar, boolean debug) {
         for (Iterator<T> it = aDestransformar.iterator(); it.hasNext();) {
             T trv = (T) it.next();
             trv.setFormaADestransformar(trv.getFormaOriginal());
@@ -590,7 +584,7 @@ public class AMUtil <T extends TermRegVerbal>{
      * @param mapTemasPropuestos
      * @param debug
      */
-    public <T extends TermRegVerbal> void agrupaTemasEnSet(Set<T> setOriginal, Map<TemaConPreps, HashSet<T>> mapTemasPropuestos, boolean debug) {
+    public void agrupaTemasEnSet(Set<T> setOriginal, Map<TemaConPreps, HashSet<T>> mapTemasPropuestos, boolean debug) {
         // primero creamos un set con sólo los temasPropuestos, y al mismo
         // tiempo voy haciendo un map
         // que tiene como claves los temaspropuestos, y como valores listas de
@@ -615,7 +609,7 @@ public class AMUtil <T extends TermRegVerbal>{
         }
     }
 
-    public <T extends TermRegVerbal> void debugMapTemas(Map<TemaConPreps, HashSet<T>> mapTemasPropuestos) {
+    public void debugMapTemas(Map<TemaConPreps, HashSet<T>> mapTemasPropuestos) {
         Set<TemaConPreps> keySet = mapTemasPropuestos.keySet();
         System.out.println("forma del map de temas propuestos luego de 4_5 ");
         for (Iterator<TemaConPreps> it = keySet.iterator(); it.hasNext();) {
