@@ -187,6 +187,8 @@ public interface TermRegNominal {
 	 * @param nominativoPropuesto The nominativoPropuesto to set.
 	 */
 	void setNominativoPropuesto(String nominativoPropuesto);
+	
+	<T extends TermRegNominal> T clona();
 
 
 }
