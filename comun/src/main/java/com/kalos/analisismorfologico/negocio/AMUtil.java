@@ -73,11 +73,11 @@ import com.kalos.recursos.Recursos;
  * To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Generation - Code and Comments
  */
-public class AMUtil {
+public class AMUtil <T extends TermRegVerbal>{
 
     //	Logger logger=Logger.getLogger(this.getClass().getName());
 
-    public void vocalUnitivaTemas(Set<ObjYDest> setSiguiente, List<ObjYDest> aBuscarPorTema) {
+    public void vocalUnitivaTemas(Set<ObjYDest<T>> setSiguiente, List<ObjYDest<T>> aBuscarPorTema) {
         
     	vocalUnitivaTemas(setSiguiente);
         vocalUnitivaTemas(aBuscarPorTema);
@@ -88,8 +88,8 @@ public class AMUtil {
      * 
      * @param reg
      */
-    public void vocalUnitivaTemas(TermRegVerbal reg) {
-        String temaPropuesto =  ((TieneTemaPropuesto)reg).getTemaPropuesto();
+    public void vocalUnitivaTemas(T reg) {
+        String temaPropuesto =  reg.getTemaPropuesto();
         StringBuffer tema = new StringBuffer(temaPropuesto);
         int tipoVerboExt = reg.getTipoVerboExtendido();
         TiempoOAspecto toa = reg.getTiempoOAspecto();
@@ -160,9 +160,9 @@ public class AMUtil {
      * 
      * @param lista
      */
-    public void vocalUnitivaTemas(List<ObjYDest> lista) {
-        for (ObjYDest red : lista) {
-            TermRegVerbal reg = red.getRegistro();
+    public void vocalUnitivaTemas(List<ObjYDest<T>> lista) {
+        for (ObjYDest<T> red : lista) {
+            T reg = red.getRegistro();
             vocalUnitivaTemas(reg);
         }
     }
@@ -173,9 +173,9 @@ public class AMUtil {
      * 
      * @param lista
      */
-    public void vocalUnitivaTemas(Set<ObjYDest> set) {
-        for (ObjYDest red : set) {
-            TermRegVerbal reg = red.getRegistro();
+    public void vocalUnitivaTemas(Set<ObjYDest<T>> set) {
+        for (ObjYDest<T> red : set) {
+            T reg = red.getRegistro();
             vocalUnitivaTemas(reg);
         }
     }
@@ -202,8 +202,7 @@ public class AMUtil {
      *            irregularidades verbales
      * @param debug
      */
-    public <T extends TermRegVerbal> void desTransformacionesTemas(Collection<T> setOriginal,
-            Set<ObjYDest> setDestransformados, List<ObjYDest> aBuscarPorTema, boolean debug) {
+    public <T extends TermRegVerbal> void desTransformacionesTemas(Collection<T> setOriginal, Set<ObjYDest<T>> setDestransformados, List<ObjYDest<T>> aBuscarPorTema, boolean debug) {
         // la lstTemas acumula cuplas ObjYDest's con todos los resultados que
         // encuentro, o la forma
         // original si la des-transformación de turno no pudo producir nada
@@ -236,8 +235,7 @@ public class AMUtil {
                     TermRegVerbal regNew = regAux.clona();
 
                     regNew.setFormaDestransformada(formaADestransformar);
-                    aBuscarPorTema.add(new ObjYDest(regNew, new DesTransformaciones(formaADestransformar, null, null,
-                            Aumento.Ninguno, false, false)));
+                    aBuscarPorTema.add(new ObjYDest(regNew, new DesTransformaciones(formaADestransformar, null, null, Aumento.Ninguno, false, false)));
                     // des-transformaciones
                     if (modo == Modo.Indicativo) {
                         if (OpPalabras.esEspecificamenteDesAumentable(formaADestransformar)) {
@@ -499,9 +497,8 @@ public class AMUtil {
         for (Iterator<?> it = lst.iterator(); it.hasNext();) {
             Object obj = it.next();
             if (obj instanceof ObjYDest) {
-                ObjYDest regDest = (ObjYDest) obj;
+                ObjYDest<T> regDest = (ObjYDest<T>) obj;
                 System.out.println(regDest.getRegistro());
-                // regDest.getRegistro().dumpBeta(columnasABeta);
                 DesTransformaciones dest = regDest.getDestransformacion();
                 System.out.println("  aumento=" + dest.getAumento() + " reduplicación=" + dest.isReduplicacion());
             }
@@ -537,17 +534,21 @@ public class AMUtil {
         System.out.println(salida.toString());
     }
 
+
+    
     /**
      * Imprime el la información de una colección de nodos que contienen
      * regdests
+     * (no entiendo bien por qué tengo que redeclarar T aquí. Si no lo hago, no toma la List<ObjYDest<T>> y el Set<ObjYDest<T>>
+     * como parámetros válidos al llamar a este método)
      * 
      * @param nodes
      * @param columnasBeta
      */
-    public void debugRegDes(Collection<ObjYDest> nodes, String[] columnasBeta) {
+    public <T extends TermRegVerbal> void debugRegDes(Collection<ObjYDest<T>> nodes, String[] columnasBeta) {
         Arrays.sort(columnasBeta);
         StringBuffer salida = new StringBuffer();
-        for (ObjYDest red : nodes) {
+        for (ObjYDest<T> red : nodes) {
             salida.append("es ObjYDest \n");
             salida.append("  bean:");
             Object bean = red.getRegistro();
