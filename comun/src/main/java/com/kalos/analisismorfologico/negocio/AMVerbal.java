@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
-
 import com.kalos.beans.IrrVerbo;
 import com.kalos.beans.ResultadoUniversal;
 import com.kalos.beans.TermRegInfinitivo;
@@ -58,7 +56,6 @@ import com.kalos.operaciones.DesTransformaciones;
 import com.kalos.operaciones.OpBeans;
 import com.kalos.operaciones.OpPalabras;
 import com.kalos.operaciones.TiposVerbo;
-import com.sun.msv.writer.relaxng.RELAXNGWriter;
 
 //import org.apache.log4j.Logger;
 
@@ -313,7 +310,6 @@ public class AMVerbal {
 	 *            el nodo del cual también se cuelgan otros nodos con los
 	 *            registros resultado
 	 */
-	@SuppressWarnings("unchecked")
 	private <T extends TermRegVerbal> void desarrollaTipoW(Set<T> setSiguiente, TermRegVerbal regW) {
 		String formaOriginal = regW.getFormaOriginal();
 		// todo lo que pued obtener de aqué estoy seguro que no es vocálico
@@ -330,7 +326,7 @@ public class AMVerbal {
 		// siempre puede ser una forma muy corta a la que la desinencia de tabla
 		// le come todo, y no queda letra unitiva
 		if (letraUnitiva != null) {
-			T aAgregar = (T) regW.clona();
+			T aAgregar = regW.clona();
 			// para épsilon y iota se generan nodos sin importar el aspecto
 			if (letraUnitiva.getLetraBase() == cUpsilonCorta || letraUnitiva.getLetraBase() == cUpsilonDieresisCorta
 					|| letraUnitiva.getLetraBase() == cIotaCorta || letraUnitiva.getLetraBase() == cIotaDieresisCorta) {
@@ -366,8 +362,7 @@ public class AMVerbal {
 	 * Expande los nodos de la lista anterior, creando o enganchando para cada
 	 * TIPO_DESINENCIA, uno o más tipos de verbo extendido.
 	 */
-	@SuppressWarnings("unchecked")
-	public <T extends TermRegVerbal> void extiendeTipos(Set<T> setOriginal, Set<T> setSiguiente, boolean debug) {
+	 public <T extends TermRegVerbal> void extiendeTipos(Set<T> setOriginal, Set<T> setSiguiente, boolean debug) {
 		for (Iterator<T> it = setOriginal.iterator(); it.hasNext();) {
 			T trv = it.next();
 			trv.setTerminacion(OpPalabras.strBetaACompleto(trv.getTerminacion()));
@@ -385,7 +380,7 @@ public class AMVerbal {
 			// los tipos de desinencia establecidos)
 			// sigo de largo a la espera de la búsqueda por temas
 			if (tipoDesinencia < 0) {
-				trvNuevo = (T) trv.clona();
+				trvNuevo = trv.clona();
 				trvNuevo.setTipoVerboExtendido(tipoDesinencia);
 				setSiguiente.add(trvNuevo);
 				continue;
@@ -395,7 +390,7 @@ public class AMVerbal {
 			// búsqueda de temas
 			FuerteDebil fuerte = trv.getFuerte();
 			if (tiempo == Tiempo.Aoristo && fuerte == FuerteDebil.Fuerte) {
-				trvNuevo = (T) trv.clona();
+				trvNuevo = trv.clona();
 				trvNuevo.setTipoVerboExtendido(tipoDesinencia);
 				setSiguiente.add(trvNuevo);
 				continue;
@@ -403,11 +398,11 @@ public class AMVerbal {
 
 			// mi, numi
 			if (tipoDesinencia == TipoVerbo.NoHojas.MI_PROPIAMENTE) {
-				trvNuevo = (T) trv.clona();
+				trvNuevo = trv.clona();
 				trvNuevo.setTipoVerboExtendido(TipoVerbo.MI_PROPIAMENTE_NORMAL);
 				setSiguiente.add(trvNuevo);
 			} else if (tipoDesinencia == TipoVerbo.NoHojas.NUMI) {
-				trvNuevo = (T) trv.clona();
+				trvNuevo = trv.clona();
 				trvNuevo.setTipoVerboExtendido(TipoVerbo.NUMI_NORMAL);
 				setSiguiente.add(trvNuevo);
 			}
@@ -430,22 +425,22 @@ public class AMVerbal {
 			// ya que es YEUSQ.., no YEUQ...
 			if (tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO && tiempo.valorEntero() > 2) {
 				if (trv.getTerminacion().charAt(0) == CompLetras.cSigma || trv.getVoz() != Voz.Pasiva) {
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DELTA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.THETA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DOBLE_SIGMA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DOBLE_TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DZETA_NORMAL);
 					setSiguiente.add(trvNuevo);
 				}
@@ -453,7 +448,7 @@ public class AMVerbal {
 
 			// confectivo y prefectivo de líquidos
 			if (tiempo.compareTo(Tiempo.Futuro) >= 0 && tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO) {
-				trvNuevo = (T) trv.clona();
+				trvNuevo = trv.clona();
 				trvNuevo.setTipoVerboExtendido(amUtil.tiempoExtendidoLetra(letraUnitiva.getCaracter()));
 				setSiguiente.add(trvNuevo);
 			}
@@ -464,52 +459,52 @@ public class AMVerbal {
 							|| tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_LABIALES
 							|| tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_DENTALES)) {
 				if (tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_GUTURALES) {// guturales
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.GAMMA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.JI_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.KAPPA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DOBLE_SIGMA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DOBLE_TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
 				} else if (tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_LABIALES) {
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.PI_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.FI_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.BETA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.PI_TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
 				} else if (tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_DENTALES) {
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DELTA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.THETA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DZETA_NORMAL);
 					setSiguiente.add(trvNuevo);
 				} // infectivo de los consonánticos líquidos -- la terminación
 					// se forma con la letra más las terminaciones básicas
 				else if (letraUnitiva != null && tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO
 						&& letraUnitiva.esLiquida() && (tiempo == Tiempo.Presente | tiempo == Tiempo.Imperfecto)) {
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(amUtil.tiempoExtendidoLetra(letraUnitiva.getCaracter()));
 					trvNuevo.setTerminacion(
 							new String(new char[] { letraUnitiva.getCaracter() }) + trv.getTerminacion());
@@ -525,7 +520,7 @@ public class AMVerbal {
 			else if (tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_CONTRACTO_ALFA
 					|| tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_CONTRACTO_EPSILON
 					|| tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_CONTRACTO_OMICRON) {
-				trvNuevo = (T) trv.clona();
+				trvNuevo = trv.clona();
 				switch (tipoDesinencia) {
 				case TipoVerbo.NoHojas.VOCALICO_CONTRACTO_ALFA:
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.VC_ALFA_NORMAL);

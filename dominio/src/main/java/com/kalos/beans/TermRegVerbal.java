@@ -77,7 +77,7 @@ public interface TermRegVerbal {
     
     Acento getAcento();	
 
-	TermRegVerbal clona();
+	<T extends TermRegVerbal> T clona();
 	
 	Silaba getSilaba();
 	
