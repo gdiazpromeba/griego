@@ -89,8 +89,6 @@ public class AnalisisMorfologicoConfig {
             ExtractorPrefijos extractorPrefijos, GerenteIrrVerbosIndividuales gerenteIrrVerbosIndividuales){
         
         AMVerbos service = new AMVerbos();
-        service.setAmUtil(amUtil);
-        service.setAmVerbal(amVerbal);
         service.setGerenteVerbos(gerenteVerbos);
         service.setVerbos(verbos);
         service.setGerenteTermRegVerbo(gerenteTermRegVerbo);

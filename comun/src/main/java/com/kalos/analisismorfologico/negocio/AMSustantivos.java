@@ -30,7 +30,6 @@ import com.kalos.enumeraciones.TipoPalabra;
 import com.kalos.flexion.declinacion.Declina;
 import com.kalos.flexion.declinacion.OcNominal;
 import com.kalos.operaciones.AACacheable;
-import com.kalos.operaciones.OpBeans;
 import com.kalos.operaciones.OpPalabras;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ public class AMSustantivos <T extends TermRegVerbal> implements AnalizadorMorfol
 	private GerenteIrrSustantivos gerenteIrrSustantivos;
 	private GerenteTiposSustantivo gerenteTiposSustantivo;
 	private Declina declina;
-	private boolean Y = false;
+	private boolean construido = false;
 	private ApplicationContext applicationContext;
 	private static String cadenaTiposHoja;
 	private final Set<Integer> setTipos = new HashSet<Integer>();
@@ -58,16 +57,14 @@ public class AMSustantivos <T extends TermRegVerbal> implements AnalizadorMorfol
 	}
 
 	private void paso1() {
-		if (!this.Y) {
-			this.gerenteTiposSustantivo = (GerenteTiposSustantivo) this.applicationContext
-					.getBean("gerenteTiposSustantivo");
+		if (!this.construido) {
+			this.gerenteTiposSustantivo = (GerenteTiposSustantivo) this.applicationContext.getBean("gerenteTiposSustantivo");
 			this.amNominal = (AMNominal) this.applicationContext.getBean("amNominal");
-			this.gerenteIrrSustantivos = (GerenteIrrSustantivos) this.applicationContext
-					.getBean("gerenteIrrSustantivos");
+			this.gerenteIrrSustantivos = (GerenteIrrSustantivos) this.applicationContext.getBean("gerenteIrrSustantivos");
 			this.gerenteSustantivos = (GerenteSustantivos) this.applicationContext.getBean("gerenteSustantivos");
 			this.declina = (Declina) this.applicationContext.getBean("declina");
 			constructorVago();
-			this.Y = true;
+			this.construido = true;
 		}
 	}
 
