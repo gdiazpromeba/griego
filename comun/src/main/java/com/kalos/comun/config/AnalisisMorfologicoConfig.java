@@ -118,7 +118,6 @@ public class AnalisisMorfologicoConfig {
             GerenteDesinSust gerenteDesinSust){
         
         AMNominal service = new AMNominal(gerenteTiposSustantivo, gerenteDesinSust);
-        service.setAmUtil(amUtil);
         service.setGerenteTermRegSustantivo(gerenteTermRegSustantivo);
         return service;
     }
