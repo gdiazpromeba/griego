@@ -66,9 +66,9 @@ import com.kalos.operaciones.TiposVerbo;
  *         utilizar por AMVerbos, AMParticipios y AMInfinitivos
  * 
  */
-public class AMVerbal {
+public class AMVerbal <T extends TermRegVerbal>{
 
-	private AMUtil amUtil;
+	private AMUtil<T> amUtil;
 	private ExtractorPrefijos extractorPrefijos;
 	private GerenteIrrVerbosIndividuales gerenteIrrVerbosIndividuales;
 	private GerenteVerbosCompuestos gerenteVerbosCompuestos;
@@ -112,11 +112,11 @@ public class AMVerbal {
 	 * @param serResultado
 	 * @param lstIrr
 	 */
-	public void comparaConTemasSemirreconstruidos(Set<ResultadoUniversal> setResultado, List<TermRegVerbal> lstIrr,
+	public void comparaConTemasSemirreconstruidos(Set<ResultadoUniversal> setResultado, List<T> lstIrr,
 			boolean infinitivo, boolean debug) {
-		Set<TermRegVerbal> setIrr = new HashSet<TermRegVerbal>(lstIrr);
+		Set<T> setIrr = new HashSet<>(lstIrr);
 		Map<String, VerboBean> mapEntradasVerbo = new HashMap<String, VerboBean>();
-		for (Iterator<TermRegVerbal> it = setIrr.iterator(); it.hasNext();) {
+		for (Iterator<T> it = setIrr.iterator(); it.hasNext();) {
 			TermRegVerbal regIrr = it.next();
 			String idVerbo = regIrr.getIdVerbo();
 			String formaAccidentada = regIrr.getFormaOriginal();
@@ -310,7 +310,7 @@ public class AMVerbal {
 	 *            el nodo del cual también se cuelgan otros nodos con los
 	 *            registros resultado
 	 */
-	private <T extends TermRegVerbal> void desarrollaTipoW(Set<T> setSiguiente, TermRegVerbal regW) {
+	private void desarrollaTipoW(Set<T> setSiguiente, TermRegVerbal regW) {
 		String formaOriginal = regW.getFormaOriginal();
 		// todo lo que pued obtener de aqué estoy seguro que no es vocálico
 		// contracto, así que
@@ -362,7 +362,7 @@ public class AMVerbal {
 	 * Expande los nodos de la lista anterior, creando o enganchando para cada
 	 * TIPO_DESINENCIA, uno o más tipos de verbo extendido.
 	 */
-	 public <T extends TermRegVerbal> void extiendeTipos(Set<T> setOriginal, Set<T> setSiguiente, boolean debug) {
+	 public void extiendeTipos(Set<T> setOriginal, Set<T> setSiguiente, boolean debug) {
 		for (Iterator<T> it = setOriginal.iterator(); it.hasNext();) {
 			T trv = it.next();
 			trv.setTerminacion(OpPalabras.strBetaACompleto(trv.getTerminacion()));
@@ -554,10 +554,9 @@ public class AMVerbal {
 	 *            "temaPropuesto"
 	 * @param debug
 	 */
-	public void incorporaTemaPropuestoReconstruidos(Collection<ObjYDest> reconstruidos,
-			Collection<ObjYDest> irregulares, boolean debug) {
-		for (Iterator<ObjYDest> it = reconstruidos.iterator(); it.hasNext();) {
-			ObjYDest regDest = it.next();
+	public void incorporaTemaPropuestoReconstruidos(Collection<ObjYDest<T>> reconstruidos, Collection<ObjYDest<T>> irregulares, boolean debug) {
+		for (Iterator<ObjYDest<T>> it = reconstruidos.iterator(); it.hasNext();) {
+			ObjYDest<T> regDest = it.next();
 			TermRegVerbal reg = regDest.getRegistro();
 			String formaDestransformada = reg.getFormaDestransformada();
 			String terminacion = reg.getTerminacion();
@@ -566,8 +565,7 @@ public class AMVerbal {
 			TiempoOAspecto toa = reg.getTiempoOAspecto();
 
 			if (TiposVerbo.esLiquido(reg.getTipoVerboExtendido())) {
-				it.remove(); // los líquidosno pueden seguir camino a la
-				// canonización, pero la paso a irregulares
+				it.remove(); // los líquidosno pueden seguir camino a la canonización, pero la paso a irregulares
 				if (TransformadorTiempoAspecto.comoTiempo(toa) == Tiempo.Futuro) {
 					temaPropuesto = formaDestransformada.substring(0,
 							formaDestransformada.length() - terminacion.length());
@@ -613,11 +611,11 @@ public class AMVerbal {
 	 *            los futuros áticos
 	 * @param debug
 	 */
-	public void incorporaTemaPropuestoIrregulares(Collection<ObjYDest> irregulares, boolean debug) {
-		for (Iterator<ObjYDest> it = irregulares.iterator(); it.hasNext();) {
+	public void incorporaTemaPropuestoIrregulares(Collection<ObjYDest<T>> irregulares, boolean debug) {
+		for (Iterator<ObjYDest<T>> it = irregulares.iterator(); it.hasNext();) {
 			Object obj = it.next();
 
-			ObjYDest regDest = (ObjYDest) obj;
+			ObjYDest<T> regDest = (ObjYDest<T>) obj;
 			TermRegVerbal bean = regDest.getRegistro();
 
 			String formaDestransformada = bean.getFormaDestransformada();
@@ -834,9 +832,9 @@ public class AMVerbal {
 	 * las terminaciones
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends TermRegVerbal> void envoltorioRestauraFormas(Set<ObjYDest> setPaso3, Set<T> setSiguiente,
+	public void envoltorioRestauraFormas(Set<ObjYDest<T>> setPaso3, Set<T> setSiguiente,
 			AACacheable cacheAA, boolean debug) {
-		for (ObjYDest red : setPaso3) {
+		for (ObjYDest<T> red : setPaso3) {
 			T bean = (T) red.getRegistro();
 			// si la desinencia de la que el proceso partió es fuerte, entonces
 			// es intrínsecamente irregular y
@@ -887,11 +885,11 @@ public class AMVerbal {
 	 *            map que puede contener queries ya hechos en IRR_VERBOS para un
 	 *            determinado tema.
 	 */
-	public void encuentraTemasTemprano(List<ObjYDest> lstTemas, List<? extends TermRegVerbal> resultadosIrr,
+	public void encuentraTemasTemprano(List<ObjYDest<T>> lstTemas, List<T> resultadosIrr,
 			Map<String, List<IrrVerbo>> busquedasHechas, boolean debug) {
 		StringBuffer sbDebug = new StringBuffer();
 
-		for (ObjYDest nodo : lstTemas) {
+		for (ObjYDest<T> nodo : lstTemas) {
 			encuentraTemasTempranoIndividual(nodo, resultadosIrr, busquedasHechas, sbDebug, debug);
 		}
 		if (debug) {
@@ -905,11 +903,10 @@ public class AMVerbal {
 		}
 	}
 
-	public void encuentraTemasTemprano(Set<ObjYDest> nodos, List<TermRegVerbal> resultadosIrr,
-			Map<String, List<IrrVerbo>> busquedasHechas, boolean debug) {
+	public void encuentraTemasTemprano(Set<ObjYDest<T>> nodos, List<T> resultadosIrr, Map<String, List<IrrVerbo>> busquedasHechas, boolean debug) {
 		StringBuffer sbDebug = new StringBuffer();
 
-		for (ObjYDest regDest : nodos) {
+		for (ObjYDest<T> regDest : nodos) {
 			encuentraTemasTempranoIndividual(regDest, resultadosIrr, busquedasHechas, sbDebug, debug);
 		}
 		if (debug) {
@@ -933,7 +930,7 @@ public class AMVerbal {
 	 * @param debug
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends TermRegVerbal> void encuentraTemasTempranoIndividual(ObjYDest regDest, List<T> resultadosIrr,
+	public <T extends TermRegVerbal> void encuentraTemasTempranoIndividual(ObjYDest<T> regDest, List<T> resultadosIrr,
 			Map<String, List<IrrVerbo>> busquedasHechas, StringBuffer sbDebug, boolean debug) {
 		TermRegVerbal regTemas = (TermRegVerbal) regDest.getRegistro();
 		DesTransformaciones desTrans = regDest.getDestransformacion();
@@ -1190,8 +1187,7 @@ public class AMVerbal {
 	 *            conjunto de entrada con temas irregulares
 	 * @param debug
 	 */
-	public void aplicaEncuentraTemasTemprano(Set<ObjYDest> setSiguiente, List<TermRegVerbal> resultadosIrr,
-			List<ObjYDest> aBuscarPorTema, boolean debug) {
+	public void aplicaEncuentraTemasTemprano(Set<ObjYDest<T>> setSiguiente, List<T> resultadosIrr, List<ObjYDest<T>> aBuscarPorTema, boolean debug) {
 		resultadosIrr.clear();
 		Map<String, List<IrrVerbo>> busquedasHechas = new HashMap<String, List<IrrVerbo>>();
 		encuentraTemasTemprano(setSiguiente, resultadosIrr, busquedasHechas, debug);
@@ -1215,7 +1211,7 @@ public class AMVerbal {
 	 * @param setSiguiente
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends TermRegVerbal> void averiguaPreposiciones(Collection<T> setOriginal, Set<T> setSiguiente,
+	public void averiguaPreposiciones(Collection<T> setOriginal, Set<T> setSiguiente,
 			int nivelPreposiciones, Map<Object[], TemaConPreps[]> cacheExtraccionPrefijos, boolean debug) {
 
 		// si el nivel de extractorPrefijos es 0, simplemente copio el set
@@ -1290,20 +1286,7 @@ public class AMVerbal {
 		}
 	}
 
-	/**
-	 * @return Returns the amUtil.
-	 */
-	public AMUtil getAmUtil() {
-		return amUtil;
-	}
 
-	/**
-	 * @param amUtil
-	 *            The amUtil to set.
-	 */
-	public void setAmUtil(AMUtil amUtil) {
-		this.amUtil = amUtil;
-	}
 
 	/**
 	 * @return Returns the gerenteIrrVerbos.

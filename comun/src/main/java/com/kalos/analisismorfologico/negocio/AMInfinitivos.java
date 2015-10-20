@@ -11,10 +11,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.kalos.beans.IrrInfinitivoBean;
 import com.kalos.beans.ResultadoUniversal;
 import com.kalos.beans.TermRegInfinitivo;
-import com.kalos.beans.TermRegVerbal;
 import com.kalos.beans.VerboBean;
 import com.kalos.datos.gerentes.GerenteIrrInfinitivos;
 import com.kalos.datos.gerentes.GerenteTermRegInfinitivo;
@@ -33,9 +34,11 @@ import com.kalos.operaciones.AnalisisAcento;
 import com.kalos.operaciones.OpBeans;
 import com.kalos.operaciones.OpPalabras;
 
-public class AMInfinitivos implements AnalizadorMorfologico {
-    private AMUtil amUtil;
-    private AMVerbal amVerbal;
+public class AMInfinitivos  implements AnalizadorMorfologico {
+    
+	@Autowired
+	private AMUtil<TermRegInfinitivo> amUtil;
+    private AMVerbal<TermRegInfinitivo> amVerbal;
     private GerenteTermRegInfinitivo gerenteTermRegInfinitivo;
     private GerenteIrrInfinitivos gerenteIrrInfinitivos;
     private GerenteVerbos gerenteVerbos;
@@ -43,17 +46,17 @@ public class AMInfinitivos implements AnalizadorMorfologico {
 
     public long buscaCanonica(String[] entradas, Set<ResultadoUniversal> resultados, AACacheable cacheAA,
 	    boolean paramBoolean1, boolean debug) {
-	Set<TermRegInfinitivo> setPaso1 = new LinkedHashSet<TermRegInfinitivo>();
-	Set<TermRegInfinitivo> termsRegInf = new LinkedHashSet<TermRegInfinitivo>();
-	Set<TermRegInfinitivo> triDespuesPreps = new LinkedHashSet<TermRegInfinitivo>();
-	Set<ObjYDest> destransformados = new LinkedHashSet<ObjYDest>();
+	Set<TermRegInfinitivo> setPaso1 = new LinkedHashSet<>();
+	Set<TermRegInfinitivo> termsRegInf = new LinkedHashSet<>();
+	Set<TermRegInfinitivo> triDespuesPreps = new LinkedHashSet<>();
+	Set<ObjYDest<TermRegInfinitivo>> destransformados = new LinkedHashSet<>();
 	Set<TermRegInfinitivo> setTemasPropuestos = new LinkedHashSet<TermRegInfinitivo>();
 	long l1 = System.currentTimeMillis();
 	Map<Object[], TemaConPreps[]> cacheExtraccionPrefijos = new HashMap<Object[], TemaConPreps[]>();
 	Map<TemaConPreps, HashSet<TermRegInfinitivo>> mapTemasPropuestos = new HashMap<TemaConPreps, HashSet<TermRegInfinitivo>>();
 	Set<String> setEntradas = new HashSet<String>(Arrays.asList(entradas));
-	List<ObjYDest> aBuscarPorTema = new ArrayList<ObjYDest>();
-	List<TermRegVerbal> localArrayList2 = new ArrayList<TermRegVerbal>();
+	List<ObjYDest<TermRegInfinitivo>> aBuscarPorTema = new ArrayList<>();
+	List<TermRegInfinitivo> localArrayList2 = new ArrayList<>();
 	paso1(setEntradas, setPaso1, cacheExtraccionPrefijos, cacheAA, debug);
 	//amUtil.conservaSolo(setPaso1, new String[]{"aspecto", "voz"}, new Object[]{Aspecto.Infectivo, Voz.Media});
 	this.amVerbal.extiendeTipos(setPaso1, termsRegInf, debug);
@@ -179,21 +182,9 @@ public class AMInfinitivos implements AnalizadorMorfologico {
 	}
     }
 
-    public AMUtil getAmUtil() {
-	return this.amUtil;
-    }
 
-    public void setAmUtil(AMUtil paramC) {
-	this.amUtil = paramC;
-    }
 
-    public AMVerbal getAmVerbal() {
-	return this.amVerbal;
-    }
 
-    public void setAmVerbal(AMVerbal paramP) {
-	this.amVerbal = paramP;
-    }
 
     public GerenteTermRegInfinitivo getGerenteTermRegInfinitivo() {
 	return this.gerenteTermRegInfinitivo;

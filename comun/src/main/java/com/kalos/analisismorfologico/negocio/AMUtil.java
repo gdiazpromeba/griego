@@ -95,9 +95,7 @@ public class AMUtil <T extends TermRegVerbal>{
         TiempoOAspecto toa = reg.getTiempoOAspecto();
         int tiempo = TransformadorTiempoAspecto.comoTiempo(toa).valorEntero();
         // los VC, tanto infectivos como no infectivos, comen la desinencia
-        // completa con
-        // vocal unitiva y todo para formar el tema, así que necesitan que
-        // se la restaure
+        // completa con vocal unitiva y todo para formar el tema, así que necesitan que se la restaure
         if (TiposVerbo.esVocalicoContracto(tipoVerboExt)) {
             if (tipoVerboExt == TipoVerbo.VC_ALFA_NORMAL) {
                 tema.append(cAlfaCorta);

@@ -20,6 +20,8 @@ import com.kalos.analisismorfologico.negocio.AMUtil;
 import com.kalos.analisismorfologico.negocio.AMVerbal;
 import com.kalos.analisismorfologico.negocio.AMVerbos;
 import com.kalos.analisismorfologico.negocio.ExtractorPrefijos;
+import com.kalos.beans.TermRegInfinitivo;
+import com.kalos.beans.TermRegVerbal;
 import com.kalos.datos.gerentes.GerenteAdjetivos;
 import com.kalos.datos.gerentes.GerenteAdjetivosComoNominales;
 import com.kalos.datos.gerentes.GerenteCubosTipoPart;
@@ -70,7 +72,6 @@ public class AnalisisMorfologicoConfig {
            ExtractorPrefijos extractorPrefijos, GerenteIrrVerbosIndividuales gerenteIrrVerbosIndividuales, GerenteIrrInfinitivos gerenteIrrInfinitivos ){
         
       AMVerbal service = new AMVerbal();
-      service.setAmUtil(amUtil);
       service.setGerenteVerbos(gerenteVerbos);
       service.setGerenteVerbosCompuestos(gerenteVerbosCompuestos);
       service.setGerenteIrrVerbos(gerenteIrrVerbos);
@@ -84,7 +85,7 @@ public class AnalisisMorfologicoConfig {
  
     @Bean
     @Autowired   
-    public AMVerbos amVerbos(AMUtil amUtil, AMVerbal amVerbal, GerenteVerbos gerenteVerbos, Verbos verbos, GerenteTermRegVerbo gerenteTermRegVerbo,  
+    public AMVerbos amVerbos(AMUtil<TermRegVerbal> amUtil, AMVerbal amVerbal, GerenteVerbos gerenteVerbos, Verbos verbos, GerenteTermRegVerbo gerenteTermRegVerbo,  
             ExtractorPrefijos extractorPrefijos, GerenteIrrVerbosIndividuales gerenteIrrVerbosIndividuales){
         
         AMVerbos service = new AMVerbos();
@@ -101,12 +102,10 @@ public class AnalisisMorfologicoConfig {
     
     @Bean
     @Autowired
-    public AMInfinitivos amInfinitivos(AMUtil amUtil, AMVerbal amVerbal, ExtractorPrefijos extractorPrefijos, GerenteTermRegInfinitivo gerenteTermRegInfinitivo,  
+    public AMInfinitivos amInfinitivos(AMUtil<TermRegInfinitivo> amUtil, AMVerbal amVerbal, ExtractorPrefijos extractorPrefijos, GerenteTermRegInfinitivo gerenteTermRegInfinitivo,  
             GerenteVerbos gerenteVerbos, GerenteIrrInfinitivos gerenteIrrInfinitivos){
         
         AMInfinitivos service = new AMInfinitivos();
-        service.setAmUtil(amUtil);
-        service.setAmVerbal(amVerbal);
         service.setExtractorPrefijos(extractorPrefijos);
         service.setGerenteTermRegInfinitivo(gerenteTermRegInfinitivo);
         service.setGerenteVerbos(gerenteVerbos);
@@ -154,7 +153,6 @@ public class AnalisisMorfologicoConfig {
     public AMSustantivos amSustantivos(AMUtil amUtil, AMNominal amNominal, GerenteIrrSustantivos gerenteIrrSustantivos, GerenteSustantivos gerenteSustantivos){
         
         AMSustantivos service = new AMSustantivos();
-        service.setAmUtil(amUtil);
         service.setAmNominal(amNominal);
         service.setGerenteIrrSustantivos(gerenteIrrSustantivos);
         service.setGerenteSustantivos(gerenteSustantivos);
