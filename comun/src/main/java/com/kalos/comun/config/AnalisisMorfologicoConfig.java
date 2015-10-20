@@ -161,7 +161,6 @@ public class AnalisisMorfologicoConfig {
             GerenteAdjetivos gerenteAdjetivos){
         
         AMAdjetivos service = new AMAdjetivos();
-        service.setAmUtil(amUtil);
         service.setAmNominal(amNominal);
         service.setGerenteAdjetivosComoNominales(gerenteAdjetivosComoNominales);
         service.setGerenteIrrAdjetivosIndividuales(gerenteIrrAdjetivosIndividuales);

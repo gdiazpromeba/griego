@@ -51,7 +51,7 @@ import org.springframework.context.ApplicationContextAware;
 
 public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAware {
 
-    private AMUtil amUtil;
+    private AMUtil<?> amUtil;
     private AMNominal amNominal;
     private GerenteAdjetivosComoNominales gerenteAdjetivosComoNominales;
     private GerenteAdjetivos gerenteAdjetivos;
@@ -83,7 +83,6 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
 			this.gerenteAdjetivos=(GerenteAdjetivos)contexto.getBean("gerenteAdjetivos");
 			this.gerenteAdjetivosComoNominales=(GerenteAdjetivosComoNominales)contexto.getBean("gerenteAdjetivosComoNominales");
 			this.gerenteIrrAdjetivosIndividuales=(GerenteIrrAdjetivosIndividuales)contexto.getBean("gerenteIrrAdjetivosIndividuales");
-			this.amUtil=(AMUtil)contexto.getBean("amUtil");
 			this.amNominal=(AMNominal)contexto.getBean("amNominal");
 			this.declinaAdjetivos=(DeclinaAdjetivos)contexto.getBean("declinaAdjetivos");
 			dependenciasCargadas=true;
@@ -499,19 +498,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
 
     }
 
-    /**
-     * @return Returns the amUtil.
-     */
-    public AMUtil getAmUtil() {
-        return amUtil;
-    }
 
-    /**
-     * @param amUtil The amUtil to set.
-     */
-    public void setAmUtil(AMUtil amUtil) {
-        this.amUtil = amUtil;
-    }
 
     /**
      * @return Returns the amNominal.
