@@ -61,7 +61,6 @@ public class AMSustantivos <T extends TermRegVerbal> implements AnalizadorMorfol
 		if (!this.Y) {
 			this.gerenteTiposSustantivo = (GerenteTiposSustantivo) this.applicationContext
 					.getBean("gerenteTiposSustantivo");
-			this.amUtil = (AMUtil<T>) this.applicationContext.getBean("amUtil");
 			this.amNominal = (AMNominal) this.applicationContext.getBean("amNominal");
 			this.gerenteIrrSustantivos = (GerenteIrrSustantivos) this.applicationContext
 					.getBean("gerenteIrrSustantivos");

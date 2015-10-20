@@ -38,7 +38,9 @@ public class AMInfinitivos  implements AnalizadorMorfologico {
     
 	@Autowired
 	private AMUtil<TermRegInfinitivo> amUtil;
+	@Autowired
     private AMVerbal<TermRegInfinitivo> amVerbal;
+	
     private GerenteTermRegInfinitivo gerenteTermRegInfinitivo;
     private GerenteIrrInfinitivos gerenteIrrInfinitivos;
     private GerenteVerbos gerenteVerbos;

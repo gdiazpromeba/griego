@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.kalos.beans.IrrVerbo;
 import com.kalos.beans.ResultadoUniversal;
 import com.kalos.beans.TermRegInfinitivo;
@@ -68,7 +70,9 @@ import com.kalos.operaciones.TiposVerbo;
  */
 public class AMVerbal <T extends TermRegVerbal>{
 
+	@Autowired
 	private AMUtil<T> amUtil;
+	
 	private ExtractorPrefijos extractorPrefijos;
 	private GerenteIrrVerbosIndividuales gerenteIrrVerbosIndividuales;
 	private GerenteVerbosCompuestos gerenteVerbosCompuestos;
