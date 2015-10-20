@@ -133,8 +133,6 @@ public class AnalisisMorfologicoConfig {
            GerenteTransParticipios gerenteTransParticipios){
         
         AMParticipios service = new AMParticipios();
-        service.setAmUtil(amUtil);
-        service.setAmVerbal(amVerbal);
         service.setAmNominal(amNominal);
         service.setParticipios(participios);
         service.setExtractorPrefijos(extractorPrefijos);

@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.kalos.beans.CubosTipoPartBean;
 import com.kalos.beans.IrrParticipioEntero;
 import com.kalos.beans.IrrParticipioSimpleBean;
@@ -28,6 +30,7 @@ import com.kalos.beans.ResultadoUniversal;
 import com.kalos.beans.TermRegNominal;
 import com.kalos.beans.TermRegParticipio;
 import com.kalos.beans.TermRegSustantivo;
+import com.kalos.beans.TermRegVerbal;
 import com.kalos.beans.TransParticipiosBean;
 import com.kalos.beans.VerbalizadorBean;
 import com.kalos.beans.VerboBean;
@@ -67,11 +70,16 @@ import com.kalos.operaciones.OpPalabras;
  * 
  * @author GDiaz
  */
-public class AMParticipios implements AnalizadorMorfologico {
+public class AMParticipios  implements AnalizadorMorfologico {
 
 	private AMNominal amNominal;
-	private AMUtil amUtil;
-	private AMVerbal amVerbal;
+	
+	@Autowired
+	private AMUtil<TermRegParticipio> amUtil;
+	
+	@Autowired
+	private AMVerbal<TermRegParticipio> amVerbal;
+	
 	private GerenteVerbos gerenteVerbos;
 	private GerenteIrrParticipiosEnteros gerenteIrrParticipiosEnteros;
 	private GerenteIrrParticipiosSimples gerenteIrrParticipiosSimples;
@@ -125,21 +133,6 @@ public class AMParticipios implements AnalizadorMorfologico {
 		this.gerenteVerbos = gerenteVerbos;
 	}
 
-	/**
-	 * @param amVerbal
-	 *            The amVerbal to set.
-	 */
-	public void setAmVerbal(AMVerbal amVerbal) {
-		this.amVerbal = amVerbal;
-	}
-
-	/**
-	 * @param amUtil
-	 *            The amUtil to set.
-	 */
-	public void setAmUtil(AMUtil amUtil) {
-		this.amUtil = amUtil;
-	}
 
 	/**
 	 * Punto de entrada de esta clase. La función tiene parámetros de entrada y
@@ -154,12 +147,12 @@ public class AMParticipios implements AnalizadorMorfologico {
 	public long buscaCanonica(String[] entradas, Set<ResultadoUniversal> setResultado, AACacheable cacheAA, boolean validaContraFlexion, boolean debug) {
 		// cargaDependencias();
 		Set<TermRegSustantivo> setPaso1 = new LinkedHashSet<TermRegSustantivo>();
-		Set<TermRegParticipio> setPaso2 = new LinkedHashSet<TermRegParticipio>();
-		Set<ObjYDest> setPaso3 = new LinkedHashSet<ObjYDest>();
-		Set<TermRegParticipio> setConCanonicasPropuestas = new LinkedHashSet<TermRegParticipio>();
-		List<ObjYDest> aBuscarPorTema = new ArrayList<ObjYDest>();
-		Set<TermRegSustantivo> nomGenDisponibles = new LinkedHashSet<TermRegSustantivo>();
-		List<TermRegParticipio> nomGenDisponiblesParticipio = new ArrayList<TermRegParticipio>();
+		Set<TermRegParticipio> setPaso2 = new LinkedHashSet<>();
+		Set<ObjYDest<TermRegParticipio>> setPaso3 = new LinkedHashSet<>();
+		Set<TermRegParticipio> setConCanonicasPropuestas = new LinkedHashSet<>();
+		List<ObjYDest<TermRegParticipio>> aBuscarPorTema = new ArrayList<>();
+		Set<TermRegSustantivo> nomGenDisponibles = new LinkedHashSet<>();
+		List<TermRegParticipio> nomGenDisponiblesParticipio = new ArrayList<>();
 		long tiempoInicial = System.currentTimeMillis(), lapsoEnMilis, tiempoFinal;
 
 		Set<String> setEntradas = new HashSet<String>();
@@ -167,8 +160,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 		// agrego las entradas al treeModel
 		for (int i = 0; i < entradas.length; i++) {
 			if (debug)
-				System.out.println("entrada="
-						+ OpPalabras.strCompletoABeta(entradas[i]));
+				System.out.println("entrada="+ OpPalabras.strCompletoABeta(entradas[i]));
 			setEntradas.add(entradas[i]);
 			revisaIrrPartIndividuales(setResultado, entradas[i], debug);
 		}
@@ -225,7 +217,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 		incorporaADestransformar(setPaso2, debug);
 		amUtil.desTransformacionesTemas(setPaso2, setPaso3, aBuscarPorTema,
 				debug); // des-reduplica los perfectivos
-		List<ObjYDest> temasABuscar = new ArrayList<ObjYDest>(); // lista de
+		List<ObjYDest<TermRegParticipio>> temasABuscar = new ArrayList<>(); // lista de
 																	// registros
 																	// conteniendo
 																	// temas que
@@ -235,10 +227,9 @@ public class AMParticipios implements AnalizadorMorfologico {
 																	// IRR_VERBOS,
 																	// más sus
 																	// destransformaciones
-		trataDescarteDestransformacion(aBuscarPorTema, temasABuscar, cacheAA,
-				debug); // pasa los temas descartados por des-transformaciones
-						// por TRANS_PARTICIPIOS, y agrega el resultado a
-						// temasABuscar
+		trataDescarteDestransformacion(aBuscarPorTema, temasABuscar, cacheAA,debug); // pasa los temas descartados por des-transformaciones
+						                                                             // por TRANS_PARTICIPIOS, y agrega el resultado a
+						                                                             // temasABuscar
 		temaPropuestoACanonica(setPaso3, setConCanonicasPropuestas,
 				temasABuscar, cacheAA, debug); // remplaza las terminaciones de
 												// nom. o gen. por las verbales
@@ -923,14 +914,13 @@ public class AMParticipios implements AnalizadorMorfologico {
 	 *            modificar)
 	 * @param debug
 	 */
-	private void temaPropuestoACanonica(Set<ObjYDest> setOriginal,
-			Set<TermRegParticipio> setSiguiente, List<ObjYDest> lstTemas,
+	private void temaPropuestoACanonica(Set<ObjYDest<TermRegParticipio>> setOriginal, Set<TermRegParticipio> setSiguiente, List<ObjYDest<TermRegParticipio>> lstTemas,
 			AACacheable cacheAA, boolean debug) {
 		Map<String, List<TransParticipiosBean>> busquedasOrig = new HashMap<String, List<TransParticipiosBean>>();
 		StringBuffer sbDebug = new StringBuffer();
 		sbDebug.append("hay " + setOriginal.size() + " registros a analizar");
-		for (ObjYDest regDest : setOriginal) {
-			TermRegParticipio reg = (TermRegParticipio) regDest.getRegistro();
+		for (ObjYDest<TermRegParticipio> regDest : setOriginal) {
+			TermRegParticipio reg =  regDest.getRegistro();
 			DesTransformaciones dest = regDest.getDestransformacion();
 
 			String formaDestransformada = null;
@@ -1039,7 +1029,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 					aAgregar.setContraccionComedora(tpb
 							.getContraccionComedora());
 
-					ObjYDest nuevaRegDest = new ObjYDest(aAgregar, dest);
+					ObjYDest<TermRegParticipio> nuevaRegDest = new ObjYDest<>(aAgregar, dest);
 					lstTemas.add(nuevaRegDest);
 				}
 			}
@@ -1072,23 +1062,19 @@ public class AMParticipios implements AnalizadorMorfologico {
 	 * @param lstTemasIrr
 	 * @param debug
 	 */
-	private void trataDescarteDestransformacion(
-			List<ObjYDest> temasDescartados, List<ObjYDest> lstTemasIrr,
-			AACacheable cacheAA, boolean debug) {
+	private void trataDescarteDestransformacion(List<ObjYDest<TermRegParticipio>> temasDescartados, List<ObjYDest<TermRegParticipio>> lstTemasIrr, AACacheable cacheAA, boolean debug) {
 		Map<String, List<TransParticipiosBean>> busquedasOrig = new HashMap<String, List<TransParticipiosBean>>();
 		StringBuffer sbDebug = new StringBuffer();
 
-		for (ObjYDest regDest : temasDescartados) {
-			TermRegParticipio reg = (TermRegParticipio) regDest.getRegistro();
+		for (ObjYDest<TermRegParticipio> regDest : temasDescartados) {
+			TermRegParticipio reg = regDest.getRegistro();
 			DesTransformaciones dest = regDest.getDestransformacion();
 
 			String formaDestransformada = null;
 
 			formaDestransformada = reg.getFormaDestransformada();
-			Espiritu espirituDestransf = OpPalabras
-					.getEspiritu(formaDestransformada);
-			AnalisisAcento aaDestr = cacheAA
-					.getAnalisisAcento(formaDestransformada);
+			Espiritu espirituDestransf = OpPalabras.getEspiritu(formaDestransformada);
+			AnalisisAcento aaDestr = cacheAA.getAnalisisAcento(formaDestransformada);
 
 			List<TransParticipiosBean> dm = null;
 			dm = busquedasOrig.get(formaDestransformada);
@@ -1104,8 +1090,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 			if (debug) {
 				sbDebug.append(filas
 						+ " filas para el registro registro reconstruible"
-						+ OpBeans.debugBean(reg, new String[] {
-								"formaOriginal", "terminacionVerbalizada",
+						+ OpBeans.debugBean(reg, new String[] {"formaOriginal", "terminacionVerbalizada",
 								"formaADestransformar", "formaDestransformada",
 								"genitivoPropuesto" }) + "\n");
 			}
@@ -1164,7 +1149,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 					aAgregar.setContraccionComedora(regDm
 							.getContraccionComedora());
 
-					lstTemasIrr.add(new ObjYDest(aAgregar, dest));
+					lstTemasIrr.add(new ObjYDest<TermRegParticipio>(aAgregar, dest));
 				}
 			}
 		}
@@ -1385,8 +1370,7 @@ public class AMParticipios implements AnalizadorMorfologico {
 	 * 
 	 * @param nomgen
 	 */
-	private void inyeccionCamposVerbales(List<TermRegParticipio> nomgen,
-			Set<TermRegParticipio> setSiguiente, boolean debug) {
+	private void inyeccionCamposVerbales(List<TermRegParticipio> nomgen, Set<TermRegParticipio> setSiguiente, boolean debug) {
 		// abro el DMTermRegPart independentemente. Se lo recorrerá en su
 		// totalidad
 		// en cada pasada
