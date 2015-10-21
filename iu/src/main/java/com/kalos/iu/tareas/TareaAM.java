@@ -1,18 +1,18 @@
 package com.kalos.iu.tareas;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import com.kalos.analisismorfologico.negocio.AnalizadorMorfologico;
 import com.kalos.beans.ResultadoUniversal;
 import com.kalos.operaciones.AACacheable;
-import com.kalos.recursos.Configuracion;
 
 import foxtrot.Task;
 
 public class TareaAM extends Task {
 
 	private String[] entradas;
-	private HashSet<ResultadoUniversal> resultado;
+	private Set<ResultadoUniversal> resultado;
 	private AACacheable cacheAA;
 	private AnalizadorMorfologico analizadorMorfologico;
 	public TareaAM(AnalizadorMorfologico analizador, String[] entradas, HashSet<ResultadoUniversal> resultado, AACacheable cacheAA) {
@@ -24,7 +24,7 @@ public class TareaAM extends Task {
 
 	@Override
 	public Object run() throws Exception {
-		analizadorMorfologico.buscaCanonica(entradas, resultado, cacheAA, true, false);
+		resultado = analizadorMorfologico.buscaCanonica(entradas, cacheAA, true, false);
 		return null;
 	}
 

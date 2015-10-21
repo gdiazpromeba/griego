@@ -54,13 +54,15 @@ public class AMAdverbios implements AnalizadorMorfologico, ApplicationContextAwa
 	
 	
 
-    public long buscaCanonica(String[] entradas, Set<ResultadoUniversal> setResultado, AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
+    public Set<ResultadoUniversal> buscaCanonica(String[] entradas,  AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
         cargaDependencias();
+        
+        Set<ResultadoUniversal> resultados = new HashSet<>();
 
         long tiempoInicial = System.currentTimeMillis();
         Set<String> setEntradas = new HashSet<String>(Arrays.asList(entradas));
 
-        buscaIndividuales(setEntradas, setResultado);
+        buscaIndividuales(setEntradas, resultados);
         
         long tiempoFinal = System.currentTimeMillis();
         long lapsoEnMilis = tiempoFinal - tiempoInicial;
@@ -70,7 +72,7 @@ public class AMAdverbios implements AnalizadorMorfologico, ApplicationContextAwa
             System.out.println("tardó " + lapso.get(Calendar.MINUTE) + " minutos " + lapso.get(Calendar.SECOND)
                     + " segundos " + lapso.get(Calendar.MILLISECOND) + " milisegundos");
         }
-        return lapsoEnMilis;
+        return resultados;
 
     }
     

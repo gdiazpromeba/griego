@@ -91,8 +91,10 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
 	
 	
 
-    public long buscaCanonica(String[] entradas, Set<ResultadoUniversal> setResultado, AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
-        cargaDependencias();
+    public Set<ResultadoUniversal> buscaCanonica(String[] entradas, AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
+        Set<ResultadoUniversal> resultados = new HashSet<>();
+    	
+    	cargaDependencias();
     	Set<TermRegSustantivo> setPaso1 = new HashSet<TermRegSustantivo>();
         Set<TermRegAdjetivo> termsAdj ;
         Set<TermRegAdjetivo> nomGenReconstruidos = new HashSet<TermRegAdjetivo>();
@@ -112,18 +114,18 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
         
        termsAdj=trataFemenino(setPaso1, debug);
 //        amUtil.conservaSolo(termsAdj, new String[]{"tipoSustantivo"}, new Object[]{131});
-        buscaNomGenDirecto(termsAdj, setResultado, debug);
+        buscaNomGenDirecto(termsAdj, resultados, debug);
         //reconstruye los temas en base a la desinencia propuesta
         amNominal.reconstruyeTemas(termsAdj, nomGenReconstruidos, cacheAA, debug); 
         //búsqueda contra las formas fáciles
-        buscaNomGenReconstruidos(nomGenReconstruidos, setResultado, debug); 
+        buscaNomGenReconstruidos(nomGenReconstruidos, resultados, debug); 
         
-        buscaEnInvariables(entradas, setResultado, debug);
-        buscaIndividuales(setEntradas, setResultado);
+        buscaEnInvariables(entradas, resultados, debug);
+        buscaIndividuales(setEntradas, resultados);
         
-        pueblaCanonicasAdjetivos(setResultado);
+        pueblaCanonicasAdjetivos(resultados);
         if (validaContraFlexion){
-            validaConFlexion(setResultado);
+            validaConFlexion(resultados);
           }
         
         long tiempoFinal = System.currentTimeMillis();
@@ -134,7 +136,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
             System.out.println("tardó " + lapso.get(Calendar.MINUTE) + " minutos " + lapso.get(Calendar.SECOND)
                     + " segundos " + lapso.get(Calendar.MILLISECOND) + " milisegundos");
         }
-        return lapsoEnMilis;
+        return resultados;
         
 
     }

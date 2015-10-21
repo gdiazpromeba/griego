@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import junit.framework.TestCase;
 
@@ -85,12 +86,9 @@ public class AMAdjetivosTest extends BaseAMTest {
 	 * @param conta         
 	 */
 	public boolean testGenerico(String formaDeclinada, String idAdjetivo, Caso caso, Genero genero, Numero numero, AACacheable cacheAA) {
-		System.out.print("forma declinada: ... " + formaDeclinada);
+		System.out.println("forma declinada: ... " + formaDeclinada);
 		String[] entradas = new String[] { OpPalabras.strBetaACompleto(formaDeclinada) };
-		HashSet<ResultadoUniversal> sRes = new HashSet<ResultadoUniversal>();
-		long tardo = amAdjetivos.buscaCanonica(entradas, sRes, cacheAA, false, false);
-		tiempoAcumulado += tardo;
-		System.out.print("  tardanza=" + tardo + " tiempo acumulado=" + tiempoAcumulado + "\n");
+		Set<ResultadoUniversal> sRes = amAdjetivos.buscaCanonica(entradas, cacheAA, false, false);
 		boolean encontroCodigo = false;
 		for (Iterator<ResultadoUniversal> it = sRes.iterator(); it.hasNext();) {
 			ResultadoUniversal regAux = it.next();

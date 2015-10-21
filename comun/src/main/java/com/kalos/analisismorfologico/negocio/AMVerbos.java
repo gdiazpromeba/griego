@@ -77,7 +77,7 @@ public class AMVerbos implements AnalizadorMorfologico{
 	 * @param debug             si debug es verdadero, imprimer mensajes de debug a System.out
 	 * @return
 	 */
-	public long buscaCanonica(String[] entradas, Set<ResultadoUniversal> setResultado, AACacheable cacheAA, boolean validarConFlexion, boolean debug)   {
+	public Set<ResultadoUniversal>  buscaCanonica(String[] entradas,  AACacheable cacheAA, boolean validarConFlexion, boolean debug)   {
 		long tiempoInicial=System.currentTimeMillis();
 		Set<TermRegVerbo> setPaso1=new LinkedHashSet<TermRegVerbo>();
 		Set<TermRegVerbo> setPaso2=new LinkedHashSet<TermRegVerbo>();
@@ -112,15 +112,16 @@ public class AMVerbos implements AnalizadorMorfologico{
 		amUtil.agrupaTemasEnSet(setPaso4, mapTemasPropuestos, debug);  //conversión del resultado en un set con el tema propuesto como clave
         setPaso1=null; setPaso2=null; setPaso2_5=null; setPaso3=null; setPaso4=null; temIrr=null;
         
-        amVerbal.buscaReconstruidaEnTablas(setResultado, mapTemasPropuestos, false, false, debug); //comprobación de las formas de diccionario obtenidas contra la base de datos
+        Set<ResultadoUniversal> resultados = new HashSet<>();
+        amVerbal.buscaReconstruidaEnTablas(resultados, mapTemasPropuestos, false, false, debug); //comprobación de las formas de diccionario obtenidas contra la base de datos
         
-		amVerbal.buscaReconstruidaEnTablas(setResultado, mapTemasPropuestos, true, false, debug);
-		amVerbal.comparaConTemasSemirreconstruidos(setResultado, resultadosIrr, false, debug);
+		amVerbal.buscaReconstruidaEnTablas(resultados, mapTemasPropuestos, true, false, debug);
+		amVerbal.comparaConTemasSemirreconstruidos(resultados, resultadosIrr, false, debug);
 //		entradas=agregaEntradaMi(entradas);
-		buscaIrrIndivConjugacion(setResultado, entradas, cacheAA, debug);
-		amVerbal.pueblaCanonicasVerbos(setResultado);
+		buscaIrrIndivConjugacion(resultados, entradas, cacheAA, debug);
+		amVerbal.pueblaCanonicasVerbos(resultados);
 		if (validarConFlexion){
-		  validaConFlexion(setResultado);
+		  validaConFlexion(resultados);
 		}
 		
 		long tiempoFinal=System.currentTimeMillis();
@@ -133,7 +134,7 @@ public class AMVerbos implements AnalizadorMorfologico{
 			lapso.setTimeInMillis(lapsoEnMilis);
 			System.out.println("tardó " + lapso.get(Calendar.MINUTE) +  " minutos " +  lapso.get(Calendar.SECOND) + " segundos " +  lapso.get(Calendar.MILLISECOND) + " milisegundos");
 		}
-		return lapsoEnMilis;
+		return resultados;
 			
 	}
 	

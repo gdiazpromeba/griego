@@ -4,6 +4,7 @@ package com.kalos.analisismorfologico;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -67,12 +68,10 @@ public class AMSustantivosTest extends BaseAMTest {
      * @param conta         
      */
     public boolean testGenerico(String formaDeclinada, String idSustantivo, Caso caso, Numero numero, AACacheable cacheAA) {
-        System.out.print("forma declinada: ... " + formaDeclinada);
+        System.out.println("forma declinada: ... " + formaDeclinada);
         String[] entradas = new String[] { OpPalabras.strBetaACompleto(formaDeclinada) };
-        HashSet<ResultadoUniversal> sRes = new HashSet<ResultadoUniversal>();
-        long tardo = amSustantivos.buscaCanonica(entradas, sRes, cacheAA, false, false);
-        tiempoAcumulado += tardo;
-        System.out.print("  tardanza=" + tardo + " tiempo acumulado=" + tiempoAcumulado + "\n");
+        Set<ResultadoUniversal> sRes = amSustantivos.buscaCanonica(entradas, cacheAA, false, false);
+
         boolean encontroCodigo = false;
         for (Iterator<ResultadoUniversal> it = sRes.iterator(); it.hasNext();) {
             ResultadoUniversal regAux = it.next();

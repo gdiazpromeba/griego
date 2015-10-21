@@ -68,8 +68,10 @@ public class AMSustantivos <T extends TermRegVerbal> implements AnalizadorMorfol
 		}
 	}
 
-	public long buscaCanonica(String[] formas, Set<ResultadoUniversal> paramHashSet, AACacheable paramB, boolean paramBoolean1, boolean paramBoolean2) {
-		paso1();
+	public Set<ResultadoUniversal>  buscaCanonica(String[] formas,  AACacheable paramB, boolean paramBoolean1, boolean paramBoolean2) {
+		
+	    paso1();
+	    Set<ResultadoUniversal> resultados = new HashSet<>();
 
 		Set<TermRegSustantivo> setPpal = new HashSet<TermRegSustantivo>();
 		Set<TermRegSustantivo> setTrs2 = new HashSet<TermRegSustantivo>();
@@ -80,14 +82,14 @@ public class AMSustantivos <T extends TermRegVerbal> implements AnalizadorMorfol
 		// "tipoSustantivo"}, new Object[]{Caso.Acusativo, Numero.Singular,
 		// 12});
 		this.amNominal.corrigePluralizados(setPpal);
-		revisaNomGen(setPpal, paramHashSet, paramBoolean2);
+		revisaNomGen(setPpal, resultados, paramBoolean2);
 		this.amNominal.reconstruyeTemas(setPpal, setTrs2, paramB, paramBoolean2);
-		paso2(setTrs2, paramHashSet, paramBoolean2);
-		paso3(formas, paramHashSet, paramBoolean2);
-		paso4(formas, paramHashSet, paramBoolean2);
-		paso5(paramHashSet);
+		paso2(setTrs2, resultados, paramBoolean2);
+		paso3(formas, resultados, paramBoolean2);
+		paso4(formas, resultados, paramBoolean2);
+		paso5(resultados);
 		if (paramBoolean1) {
-			paso6(paramHashSet);
+			paso6(resultados);
 		}
 		long l2 = System.currentTimeMillis();
 		long l3 = l2 - l1;
@@ -96,7 +98,7 @@ public class AMSustantivos <T extends TermRegVerbal> implements AnalizadorMorfol
 			localGregorianCalendar.setTimeInMillis(l3);
 			System.out.println("tardó " + localGregorianCalendar.get(12) + " minutos " + localGregorianCalendar.get(13)+ " segundos " + localGregorianCalendar.get(14) + " milisegundos");
 		}
-		return l3;
+		return resultados;
 	}
 
 	private void paso5(Collection<ResultadoUniversal> paramCollection) {
