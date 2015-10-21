@@ -1,7 +1,6 @@
 
 package com.kalos.analisismorfologico;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -32,10 +31,10 @@ import com.kalos.operaciones.OpPalabras;
 public class AMSustantivosTest extends BaseAMTest {
 
     private GerenteTestSustantivos gerenteTestSustantivos;
-    private AMSustantivos amSustantivos;
+    private AMSustantivos<?> amSustantivos;
     Logger logger = Logger.getLogger(this.getClass().getName());
 
-    private static long tiempoAcumulado = 0;
+
 
     public void testTabla() {
         try {
@@ -89,7 +88,7 @@ public class AMSustantivosTest extends BaseAMTest {
     @Override
     protected void setUp() throws Exception {
         ApplicationContext contexto = creaContexto();
-        amSustantivos = (AMSustantivos) contexto.getBean("amSustantivos");
+        amSustantivos = (AMSustantivos<?>) contexto.getBean("amSustantivos");
         amSustantivos.setApplicationContext(contexto);
         gerenteTestSustantivos = (GerenteTestSustantivos) contexto.getBean("gerenteTestSustantivos");
     }

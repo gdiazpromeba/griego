@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -222,12 +223,12 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
             panelProgreso = (PanelProgreso) contexto.getBean("panelProgreso");
             ventanaMolesta = (VentanaMolesta) contexto.getBean("ventanaMolesta");
             utilidadesTM = (UtilidadesTM) contexto.getBean("utilidadesTM");
-            amUtil = (AMUtil) contexto.getBean("amUtil");
+            amUtil = (AMUtil<?>) contexto.getBean("amUtil");
             gerenteSignificados = (GerenteSignificados) contexto.getBean("gerenteSignificados");
             amVerbos = (AMVerbos) contexto.getBean("amVerbos");
             amParticipios = (AMParticipios) contexto.getBean("amParticipios");
             amInfinitivos = (AMInfinitivos) contexto.getBean("amInfinitivos");
-            amSustantivos = (AMSustantivos) contexto.getBean("amSustantivos");
+            amSustantivos = (AMSustantivos<?>) contexto.getBean("amSustantivos");
             amAdjetivos = (AMAdjetivos) contexto.getBean("amAdjetivos");
             amConjunciones = (AMConjunciones) contexto.getBean("amConjunciones");
             amPreposiciones = (AMPreposiciones) contexto.getBean("amPreposiciones");
@@ -275,6 +276,7 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
 
     }
 
+    @SuppressWarnings("unchecked")
     private void proceder() {
         String cadenaCompleta = textoEntrada.getCadenaCompleta();
         try {
@@ -330,16 +332,16 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
                     return;
                 }
 
-                HashSet<ResultadoUniversal> resVerbos = new HashSet<ResultadoUniversal>();
-                HashSet<ResultadoUniversal> resSustantivos = new HashSet<ResultadoUniversal>();
-                HashSet<ResultadoUniversal> resInfinitivos = new HashSet<ResultadoUniversal>();
-                HashSet<ResultadoUniversal> resParticipios = new HashSet<ResultadoUniversal>();
-                HashSet<ResultadoUniversal> resAdjetivos = new HashSet<ResultadoUniversal>();
-                HashSet<ResultadoUniversal> resAdverbios = new HashSet<ResultadoUniversal>();
-                HashSet<ResultadoUniversal> resInterjecciones = new HashSet<ResultadoUniversal>();
-                HashSet<ResultadoUniversal> resConjunciones = new HashSet<ResultadoUniversal>();
-                HashSet<ResultadoUniversal> resPreposiciones = new HashSet<ResultadoUniversal>();
-                HashSet<ResultadoUniversal> resParticulas = new HashSet<ResultadoUniversal>();
+                Set<ResultadoUniversal> resVerbos = new HashSet<ResultadoUniversal>();
+                Set<ResultadoUniversal> resSustantivos = new HashSet<ResultadoUniversal>();
+                Set<ResultadoUniversal> resInfinitivos = new HashSet<ResultadoUniversal>();
+                Set<ResultadoUniversal> resParticipios = new HashSet<ResultadoUniversal>();
+                Set<ResultadoUniversal> resAdjetivos = new HashSet<ResultadoUniversal>();
+                Set<ResultadoUniversal> resAdverbios = new HashSet<ResultadoUniversal>();
+                Set<ResultadoUniversal> resInterjecciones = new HashSet<ResultadoUniversal>();
+                Set<ResultadoUniversal> resConjunciones = new HashSet<ResultadoUniversal>();
+                Set<ResultadoUniversal> resPreposiciones = new HashSet<ResultadoUniversal>();
+                Set<ResultadoUniversal> resParticulas = new HashSet<ResultadoUniversal>();
 
                 AACacheable cacheAA = new AACacheable();
 
@@ -350,47 +352,47 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
                 List<TipoPalabra> tiposAAnalizar = TipoPalabra.getTiposPalabra(tipoPalabra.getEnumsSeleccionadas());
                 if (tiposAAnalizar.contains(TipoPalabra.Verbo)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_verbos"));
-                    Worker.post(new TareaAM(amVerbos, entradas, resVerbos, cacheAA));
+                    resVerbos  =(Set<ResultadoUniversal>) Worker.post(new TareaAM(amVerbos, entradas, cacheAA));
                 }
 
                 if (tiposAAnalizar.contains(TipoPalabra.Sustantivo)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_sustantivos"));
-                    Worker.post(new TareaAM(amSustantivos, entradas, resSustantivos, cacheAA));
+                    resSustantivos = (Set<ResultadoUniversal>) Worker.post(new TareaAM(amSustantivos, entradas, cacheAA));
                 }
 
                 if (tiposAAnalizar.contains(TipoPalabra.Infinitivo)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_infinitivos"));
-                    Worker.post(new TareaAM(amInfinitivos, entradas, resInfinitivos, cacheAA));
+                    resInfinitivos = (Set<ResultadoUniversal>) Worker.post(new TareaAM(amInfinitivos, entradas, cacheAA));
                 }
 
                 if (tiposAAnalizar.contains(TipoPalabra.Participio)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_participios"));
-                    Worker.post(new TareaAM(amParticipios, entradas, resParticipios, cacheAA));
+                    resParticipios=  (Set<ResultadoUniversal>) Worker.post(new TareaAM(amParticipios, entradas, cacheAA));
                 }
 
                 if (tiposAAnalizar.contains(TipoPalabra.Adjetivo)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_adjetivos"));
-                    Worker.post(new TareaAM(amAdjetivos, entradas, resAdjetivos, cacheAA));
+                    resAdjetivos = (Set<ResultadoUniversal>) Worker.post(new TareaAM(amAdjetivos, entradas, cacheAA));
                 }
 
                 if (tiposAAnalizar.contains(TipoPalabra.Adverbio)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_adverbios"));
-                    Worker.post(new TareaAM(amAdverbios, entradas, resAdjetivos, cacheAA));
+                    resAdverbios = (Set<ResultadoUniversal>)  Worker.post(new TareaAM(amAdverbios, entradas, cacheAA));
                 }
 
                 if (tiposAAnalizar.contains(TipoPalabra.Interjeccion)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_interjecciones"));
-                    Worker.post(new TareaAM(amInterjecciones, entradas, resAdjetivos, cacheAA));
+                    resInterjecciones =  (Set<ResultadoUniversal>) Worker.post(new TareaAM(amInterjecciones, entradas, cacheAA));
                 }
 
                 if (tiposAAnalizar.contains(TipoPalabra.Conjuncion)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_conjunciones"));
-                    Worker.post(new TareaAM(amConjunciones, entradasQuePuedenNoTenerAcento, resConjunciones, cacheAA));
+                    resConjunciones = (Set<ResultadoUniversal>)  Worker.post(new TareaAM(amConjunciones, entradasQuePuedenNoTenerAcento,cacheAA));
                 }
 
                 if (tiposAAnalizar.contains(TipoPalabra.Preposicion)) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_preposiciones"));
-                    Worker.post(new TareaAM(amPreposiciones, entradasQuePuedenNoTenerAcento, resConjunciones, cacheAA));
+                    resPreposiciones = (Set<ResultadoUniversal>) Worker.post(new TareaAM(amPreposiciones, entradasQuePuedenNoTenerAcento, cacheAA));
                 }
 
                 boolean hayParticulas = tiposAAnalizar.contains(TipoPalabra.Articulo)
@@ -402,7 +404,7 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
 
                 if (hayParticulas) {
                     Worker.post(new TareaLeyenda(panelProgreso, "am.analizando_otros"));
-                    Worker.post(new TareaAM(amParticulas, entradasQuePuedenNoTenerAcento, resParticulas, cacheAA));
+                    resParticulas = (Set<ResultadoUniversal>) Worker.post(new TareaAM(amParticulas, entradasQuePuedenNoTenerAcento, cacheAA));
                 }
 
                 resultados.addAll(resVerbos);
@@ -559,53 +561,7 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
         this.gerenteSignificados = gerenteSignificados;
     }
 
-    /**
-     * @param amAdjetivos
-     *            The amAdjetivos to set.
-     */
-    public void setAmAdjetivos(AMAdjetivos amAdjetivos) {
-        this.amAdjetivos = amAdjetivos;
-    }
 
-    /**
-     * @param amInfinitivos
-     *            The amInfinitivos to set.
-     */
-    public void setAmInfinitivos(AMInfinitivos amInfinitivos) {
-        this.amInfinitivos = amInfinitivos;
-    }
-
-    /**
-     * @param amSustantivos
-     *            The amSustantivos to set.
-     */
-    public void setAmSustantivos(AMSustantivos amSustantivos) {
-        this.amSustantivos = amSustantivos;
-    }
-
-    /**
-     * @param amUtil
-     *            The amUtil to set.
-     */
-    public void setAmUtil(AMUtil amUtil) {
-        this.amUtil = amUtil;
-    }
-
-    /**
-     * @param amVerbos
-     *            The amVerbos to set.
-     */
-    public void setAmVerbos(AMVerbos amVerbos) {
-        this.amVerbos = amVerbos;
-    }
-
-    /**
-     * @param amParticipios
-     *            The amParticipios to set.
-     */
-    public void setAmParticipios(AMParticipios amParticipios) {
-        this.amParticipios = amParticipios;
-    }
 
     /**
      * indica si entre los tipos de palabra a buscar hay tipos partícula
