@@ -25,6 +25,8 @@ import com.kalos.iu.diccionario.PanelDiccionario;
 import com.kalos.iu.flexion.PanelFlexion;
 import com.kalos.recursos.Recursos;
 
+import foxtrot.Task;
+
 
 public class PanelPrincipal extends JPanel {
     
@@ -77,9 +79,24 @@ public class PanelPrincipal extends JPanel {
     }
     
     public void setResultadoUniversal(ResultadoUniversal reu){
-        EntradaDiccionario end = gerenteDiccionario.getEntradaDiccionario(reu);
-        this.entradaDiccionario = end;
-        etiquetaForma.setText(this.entradaDiccionario.getNormal());
+        
+        try {
+            new Task() {
+                
+                @Override
+                public Object run() throws Exception {
+                    EntradaDiccionario end = gerenteDiccionario.getEntradaDiccionario(reu);
+                    entradaDiccionario = end;
+                    etiquetaForma.setText(entradaDiccionario.getNormal());
+                    return null;
+                }
+            }.run();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+        
+
     }
     
     public EntradaDiccionario getEntradaDiccionario(){

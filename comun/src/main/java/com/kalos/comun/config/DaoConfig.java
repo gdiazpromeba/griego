@@ -1,11 +1,7 @@
 package com.kalos.comun.config;
 
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 
 import com.kalos.datos.dao.AdjetivoDAO;
 import com.kalos.datos.dao.AdjetivoDAOImpl;
@@ -92,8 +88,7 @@ public class DaoConfig {
     
     //private static Logger logger = Logger.getLogger(DaoConfig.class);
     
-     @Autowired
-     private Environment env;
+
 
     @Bean 
 	public FuenteDeDatosKalos kalosDataSource() {
