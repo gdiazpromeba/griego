@@ -20,6 +20,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.kalos.beans.AdjetivoBean;
 import com.kalos.beans.AdjetivoComoNominalBean;
@@ -165,26 +168,23 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
      * @param reus  Los resultados universales, en cualquier tipo de colección
      */
     private void pueblaCanonicasAdjetivos(Collection<ResultadoUniversal> reus){
-    	//creación de la lista de ids
-    	List<String> ids=new ArrayList<String>();
-    	for(ResultadoUniversal reu: reus){
-    		ids.add(reu.getId());
-    	}
-    	//obtención de la lista de entradas de adjetivo. Creo un mapita id-entrada.
+        
+        //creación de una lista de ids a partir de la lista de resultados universales
+        List<String> ids = reus.stream().map(reu -> reu.getId()).collect(Collectors.toList());
+        
+    	//obtención de la lista de entradas de adjetivo. Creo un mapita id-entradaAdjetivo.
     	List<AdjetivoBean> eas=gerenteAdjetivos.getBeans(ids);
-    	Map<String, AdjetivoBean> mapaEntradas=new HashMap<String, AdjetivoBean>();
-    	for (AdjetivoBean ea: eas){
-    		mapaEntradas.put(ea.getId(), ea);
-    	}
+    	Map<String, AdjetivoBean> mapaEntradas = eas.stream().collect(Collectors.toMap(AdjetivoBean::getId, Function.identity()));
 
     	//poblamiento de la forma canónica
-    	for(Iterator<ResultadoUniversal> it=reus.iterator(); it.hasNext(); ){
-    		ResultadoUniversal reu=it.next();
-    		AdjetivoBean ea=mapaEntradas.get(reu.getId());
-    		String canonica= ea.primerCampoNoVacio();
-    		canonica=OpPalabras.strBetaACompleto(canonica);
-    		reu.setFormaCanonica(canonica);
-    	}
+    	reus.stream().map(reu ->{
+    	    AdjetivoBean ea=mapaEntradas.get(reu.getId());
+            String canonica= ea.primerCampoNoVacio();
+            canonica=OpPalabras.strBetaACompleto(canonica);
+            reu.setFormaCanonica(canonica);
+            return reu;
+    	});
+  
     }
     
 
@@ -215,13 +215,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
         }
     }
     
-//    private String allHashes(Set set){
-//        StringBuffer sb=new StringBuffer();
-//        for (Object obj: set){
-//            sb.append(obj.hashCode() +",");
-//        }
-//        return sb.toString();
-//    }
+
     
     
 	/**
