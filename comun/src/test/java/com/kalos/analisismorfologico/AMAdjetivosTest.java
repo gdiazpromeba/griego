@@ -1,31 +1,23 @@
 package com.kalos.analisismorfologico;
 
-import java.io.File;
-import java.util.HashSet;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
-import junit.framework.TestCase;
+import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
 
 import com.kalos.analisismorfologico.negocio.AMAdjetivos;
 import com.kalos.beans.ResultadoUniversal;
 import com.kalos.beans.TestAdjetivosBean;
 import com.kalos.datos.gerentes.GerenteTestAdjetivos;
 import com.kalos.enumeraciones.Caso;
-import com.kalos.enumeraciones.CompLetras;
 import com.kalos.enumeraciones.Genero;
 import com.kalos.enumeraciones.Numero;
 import com.kalos.operaciones.AACacheable;
 import com.kalos.operaciones.OpPalabras;
-
-import org.apache.log4j.Logger;
-import org.apache.log4j.xml.DOMConfigurator;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 
 ;
 
@@ -41,7 +33,7 @@ import org.springframework.core.io.FileSystemResource;
 public class AMAdjetivosTest extends BaseAMTest {
 
 	private static Logger logger = Logger.getLogger(AMAdjetivosTest.class.getName());
-
+    
 	private GerenteTestAdjetivos gerenteTestAdjetivos;
 
 	private AMAdjetivos amAdjetivos;
@@ -53,6 +45,7 @@ public class AMAdjetivosTest extends BaseAMTest {
 
 	public void testTabla() {
 		try {
+		    LocalTime inicio= LocalTime.now();
 			List<TestAdjetivosBean> todos = gerenteTestAdjetivos.seleccionaTodos();
 			AACacheable cacheAA=null;
 			String idAdjetivoAnterior="";
@@ -73,6 +66,9 @@ public class AMAdjetivosTest extends BaseAMTest {
 					break;
 				}
 			}
+			LocalTime fin= LocalTime.now();
+			Duration duracion = Duration.between(inicio, fin);
+			logger.info("Duración del test de ánálisis morfológicos = " + duracion.getSeconds() + " segundos");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -85,12 +81,9 @@ public class AMAdjetivosTest extends BaseAMTest {
 	 * @param conta         
 	 */
 	public boolean testGenerico(String formaDeclinada, String idAdjetivo, Caso caso, Genero genero, Numero numero, AACacheable cacheAA) {
-		System.out.print("forma declinada: ... " + formaDeclinada);
+		System.out.println("forma declinada: ... " + formaDeclinada);
 		String[] entradas = new String[] { OpPalabras.strBetaACompleto(formaDeclinada) };
-		HashSet<ResultadoUniversal> sRes = new HashSet<ResultadoUniversal>();
-		long tardo = amAdjetivos.buscaCanonica(entradas, sRes, cacheAA, false, false);
-		tiempoAcumulado += tardo;
-		System.out.print("  tardanza=" + tardo + " tiempo acumulado=" + tiempoAcumulado + "\n");
+		Set<ResultadoUniversal> sRes = amAdjetivos.buscaCanonica(entradas, cacheAA, false, false);
 		boolean encontroCodigo = false;
 		for (Iterator<ResultadoUniversal> it = sRes.iterator(); it.hasNext();) {
 			ResultadoUniversal regAux = it.next();

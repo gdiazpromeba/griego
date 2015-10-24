@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kalos.beans.IrrVerbo;
 import com.kalos.beans.ResultadoUniversal;
@@ -58,7 +58,6 @@ import com.kalos.operaciones.DesTransformaciones;
 import com.kalos.operaciones.OpBeans;
 import com.kalos.operaciones.OpPalabras;
 import com.kalos.operaciones.TiposVerbo;
-import com.sun.msv.writer.relaxng.RELAXNGWriter;
 
 //import org.apache.log4j.Logger;
 
@@ -69,17 +68,17 @@ import com.sun.msv.writer.relaxng.RELAXNGWriter;
  *         utilizar por AMVerbos, AMParticipios y AMInfinitivos
  * 
  */
-public class AMVerbal {
+public class AMVerbal <T extends TermRegVerbal>{
 
-	private AMUtil amUtil;
+	@Autowired
+	private AMUtil<T> amUtil;
+	
 	private ExtractorPrefijos extractorPrefijos;
 	private GerenteIrrVerbosIndividuales gerenteIrrVerbosIndividuales;
 	private GerenteVerbosCompuestos gerenteVerbosCompuestos;
 	private GerenteIrrInfinitivos gerenteIrrInfinitivos;
 	private GerenteVerbos gerenteVerbos;
 	private GerenteIrrVerbos gerenteIrrVerbos;
-
-
 
 	/**
 	 * @return Returns the gerenteVerbos.
@@ -117,10 +116,11 @@ public class AMVerbal {
 	 * @param serResultado
 	 * @param lstIrr
 	 */
-	public void comparaConTemasSemirreconstruidos(Set<ResultadoUniversal> setResultado, List<TermRegVerbal> lstIrr, boolean infinitivo, boolean debug) {
-		Set<TermRegVerbal> setIrr = new HashSet<TermRegVerbal>(lstIrr);
+	public void comparaConTemasSemirreconstruidos(Set<ResultadoUniversal> setResultado, List<T> lstIrr,
+			boolean infinitivo, boolean debug) {
+		Set<T> setIrr = new HashSet<>(lstIrr);
 		Map<String, VerboBean> mapEntradasVerbo = new HashMap<String, VerboBean>();
-		for (Iterator<TermRegVerbal> it = setIrr.iterator(); it.hasNext();) {
+		for (Iterator<T> it = setIrr.iterator(); it.hasNext();) {
 			TermRegVerbal regIrr = it.next();
 			String idVerbo = regIrr.getIdVerbo();
 			String formaAccidentada = regIrr.getFormaOriginal();
@@ -141,26 +141,26 @@ public class AMVerbal {
 			Aspecto aspecto = null;
 			FuerteDebil fuerte = regIrr.getFuerte();
 			if (!infinitivo) {
-			    
-				modo =  ((TermRegVerbo)regIrr).getModo(); 
-				tiempo = ((TermRegVerbo)regIrr).getTiempo(); 
-				persona = ((TermRegVerbo)regIrr).getPersona(); 
+
+				modo = ((TermRegVerbo) regIrr).getModo();
+				tiempo = ((TermRegVerbo) regIrr).getTiempo();
+				persona = ((TermRegVerbo) regIrr).getPersona();
 			} else {
 				TiempoOAspecto toa = regIrr.getTiempoOAspecto();
 				aspecto = TransformadorTiempoAspecto.comoAspecto(toa);
 			}
 
-			ResultadoUniversal reu = new ResultadoUniversal(
-					infinitivo ? TipoPalabra.Infinitivo : TipoPalabra.Verbo,
-					idVerbo, null, particCanonica, particIrr, voz,
-					formaAccidentada, tiempo, aspecto, fuerte, persona, null,
-					null, null, modo, null, null, preposiciones, null);
+			ResultadoUniversal reu = new ResultadoUniversal(infinitivo ? TipoPalabra.Infinitivo : TipoPalabra.Verbo,
+					idVerbo, null, particCanonica, particIrr, voz, formaAccidentada, tiempo, aspecto, fuerte, persona,
+					null, null, null, modo, null, null, preposiciones, null);
 
 			setResultado.add(reu);
 		}
 		if (debug) {
-			System.out.println("así queda el resultado después del paso 6 (agregar los temas que habíamos encontrado tempranamente) **********************");
-			amUtil.debugBeans(setResultado, new String[] { "formaAccidentada", "formaCanonica", "temaPropuesto", "terminacion" });
+			System.out.println(
+					"así queda el resultado después del paso 6 (agregar los temas que habíamos encontrado tempranamente) **********************");
+			amUtil.debugBeans(setResultado,
+					new String[] { "formaAccidentada", "formaCanonica", "temaPropuesto", "terminacion" });
 		}
 	}
 
@@ -176,7 +176,7 @@ public class AMVerbal {
 	 * nodos
 	 */
 
-	public <T extends TermRegVerbal> void buscaReconstruidaEnTablas( Set<ResultadoUniversal> setResultado,
+	public <T extends TermRegVerbal> void buscaReconstruidaEnTablas(Set<ResultadoUniversal> setResultado,
 			Map<TemaConPreps, HashSet<T>> mapTemasPropuestos, boolean pasivar, boolean verboide, boolean debug) {
 		Set<TemaConPreps> keySet = mapTemasPropuestos.keySet();
 		StringBuffer sbDebug = new StringBuffer();
@@ -197,8 +197,7 @@ public class AMVerbal {
 			}
 
 			// recojo los las EntradaDiccionario
-			List<VerboBean> verbos = gerenteVerbos
-					.seleccionaPorVerboParaAM(temaPropuestoADB);
+			List<VerboBean> verbos = gerenteVerbos.seleccionaPorVerboParaAM(temaPropuestoADB);
 			for (VerboBean ev : verbos) {
 				// descarto los dibujados, ya que esto es reconstrucción
 				if (ev.isDibujado())
@@ -206,13 +205,11 @@ public class AMVerbal {
 				Set<T> valueListCanons = mapTemasPropuestos.get(clave);
 				for (Iterator<T> f = valueListCanons.iterator(); f.hasNext();) {
 					T beanCanonica = f.next();
-					String formaAccidentada = OpBeans.getPropiedad(
-							beanCanonica, "formaOriginalCompuesta");
+					String formaAccidentada = OpBeans.getPropiedad(beanCanonica, "formaOriginalCompuesta");
 					// String significado = ev.getSignificado();
 					Particularidad particCanonica = ev.getParticularidad();
 					Particularidad particIrr = null;
-					List<String> preposiciones = beanCanonica
-							.getPreposiciones();
+					List<String> preposiciones = beanCanonica.getPreposiciones();
 					Voz voz = beanCanonica.getVoz();
 					if (pasivar && voz.equals(Voz.Media))
 						voz = Voz.Activa;
@@ -221,32 +218,28 @@ public class AMVerbal {
 					Aspecto aspecto = null;
 					Persona persona = null;
 					if (!verboide) {
-						modo =  ((TermRegVerbo)beanCanonica).getModo(); 
-						tiempo = ((TermRegVerbo)beanCanonica).getTiempo(); 
-						persona = ((TermRegVerbo)beanCanonica).getPersona(); 
+						modo = ((TermRegVerbo) beanCanonica).getModo();
+						tiempo = ((TermRegVerbo) beanCanonica).getTiempo();
+						persona = ((TermRegVerbo) beanCanonica).getPersona();
 					} else {
 						aspecto = (Aspecto) beanCanonica.getTiempoOAspecto();
 					}
 
 					ResultadoUniversal reu = new ResultadoUniversal(
-							verboide ? TipoPalabra.Infinitivo
-									: TipoPalabra.Verbo, ev.getId(), null,
-							particCanonica, particIrr, voz, formaAccidentada,
-							tiempo, aspecto, FuerteDebil.Debil, persona, null,
-							null, null, modo, null, null, preposiciones, null);
+							verboide ? TipoPalabra.Infinitivo : TipoPalabra.Verbo, ev.getId(), null, particCanonica,
+							particIrr, voz, formaAccidentada, tiempo, aspecto, FuerteDebil.Debil, persona, null, null,
+							null, modo, null, null, preposiciones, null);
 
 					setResultado.add(reu);
 				}
 			}
 		}
 		if (debug) {
-			System.out
-					.println("AMVerbal.buscaReconstruidaEnTablas (comprobación contra formas de diccionario auténticas )*********************");
+			System.out.println(
+					"AMVerbal.buscaReconstruidaEnTablas (comprobación contra formas de diccionario auténticas )*********************");
 			System.out.println(sbDebug.toString());
-			System.out
-					.println("así queda el resultado   ***************************");
-			amUtil.debugBeans(setResultado, new String[] { "formaCanonica",
-					"formaOriginal" });
+			System.out.println("así queda el resultado   ***************************");
+			amUtil.debugBeans(setResultado, new String[] { "formaCanonica", "formaOriginal" });
 		}
 	}
 
@@ -260,24 +253,22 @@ public class AMVerbal {
 	public boolean silabaAcentoAceptables(String formaOriginal, TermRegVerbal beanDesinencia,
 			Map<Object[], TemaConPreps[]> cacheExtraccionPrefijos, AACacheable cacheAA) {
 		AnalisisAcento aaOrig = cacheAA.getAnalisisAcento(formaOriginal);
-		Silaba silaba =  beanDesinencia.getSilaba();
-		Acento acento =  beanDesinencia.getAcento();
+		Silaba silaba = beanDesinencia.getSilaba();
+		Acento acento = beanDesinencia.getAcento();
 
 		if (silaba == null)
 			return true;
-		if (silaba.equals(Silaba.ninguna)
-				&& acento.equals(Acento.Ninguno)
-				&& (aaOrig.actuales.silaba != aaOrig.sugeridos.silaba || aaOrig.actuales.tipoAcento != aaOrig.actuales.tipoAcento)) {
+		if (silaba.equals(Silaba.ninguna) && acento.equals(Acento.Ninguno)
+				&& (aaOrig.actuales.silaba != aaOrig.sugeridos.silaba
+						|| aaOrig.actuales.tipoAcento != aaOrig.actuales.tipoAcento)) {
 			// intento extraerle extractorPrefijos para excusar que no coincida
 			int hastaDondeAnalizo = aaOrig.actuales.indiceLetraAcentuada - 1;
 			if (hastaDondeAnalizo > 0) {
-				TemaConPreps[] tcp = extractorPrefijos.averiguaPrefijos(
-						formaOriginal, hastaDondeAnalizo,
+				TemaConPreps[] tcp = extractorPrefijos.averiguaPrefijos(formaOriginal, hastaDondeAnalizo,
 						cacheExtraccionPrefijos);
 				for (int i = 1; i < tcp.length; i++) { // el primero es siempre
 					// la forma original
-					AnalisisAcento aaResto = AnalisisAcento
-							.getAnalisisAcento(tcp[i].resto);
+					AnalisisAcento aaResto = AnalisisAcento.getAnalisisAcento(tcp[i].resto);
 					if (aaResto.actuales.silaba == aaResto.sugeridos.silaba
 							|| aaResto.actuales.tipoAcento == aaResto.actuales.tipoAcento)
 						return true;
@@ -289,12 +280,10 @@ public class AMVerbal {
 			}
 
 			return false;
-		} else if (silaba != Silaba.ninguna
-				&& !acento.equals(Acento.Ninguno)
+		} else if (silaba != Silaba.ninguna && !acento.equals(Acento.Ninguno)
 				&& (aaOrig.actuales.silaba != silaba.valorEntero() || !aaOrig.actuales.tipoAcento.equals(acento))) {
 			return false;
-		} else if (silaba != Silaba.ninguna
-				&& Silaba.getEnum(aaOrig.actuales.silaba) != silaba) {
+		} else if (silaba != Silaba.ninguna && Silaba.getEnum(aaOrig.actuales.silaba) != silaba) {
 			return false;
 		} else if (beanDesinencia.getTipoDesinencia() == TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO
 				&& silaba == Silaba.getEnum(aaOrig.actuales.silaba)) {
@@ -325,44 +314,34 @@ public class AMVerbal {
 	 *            el nodo del cual también se cuelgan otros nodos con los
 	 *            registros resultado
 	 */
-	@SuppressWarnings("unchecked")
-	private <T extends TermRegVerbal> void desarrollaTipoW(Set<T> setSiguiente,
-			TermRegVerbal regW) {
+	private void desarrollaTipoW(Set<T> setSiguiente, TermRegVerbal regW) {
 		String formaOriginal = regW.getFormaOriginal();
 		// todo lo que pued obtener de aqué estoy seguro que no es vocálico
 		// contracto, así que
 		// las reglas de acentuación "estrictas" se aplican
-		boolean esInfinitivo =  (regW instanceof Verboide);
+		boolean esInfinitivo = (regW instanceof Verboide);
 		if (!esInfinitivo && !esLicitoEstricto(formaOriginal))
 			return;
 
 		String desinencia = regW.getTerminacion();
-		String foMenosDes = OpPalabras.comeFinal(formaOriginal,
-				desinencia.length());
-		CarPos letraUnitiva = CarPos.getCarPos(formaOriginal,
-				formaOriginal.length() - 1 - desinencia.length());
+		String foMenosDes = OpPalabras.comeFinal(formaOriginal, desinencia.length());
+		CarPos letraUnitiva = CarPos.getCarPos(formaOriginal, formaOriginal.length() - 1 - desinencia.length());
 		// mudos, líquidos, dobles, en épsilon, en iota
 		// siempre puede ser una forma muy corta a la que la desinencia de tabla
 		// le come todo, y no queda letra unitiva
 		if (letraUnitiva != null) {
-			T aAgregar = (T) regW.clona();
+			T aAgregar = regW.clona();
 			// para épsilon y iota se generan nodos sin importar el aspecto
-			if (letraUnitiva.getLetraBase() == cUpsilonCorta
-					|| letraUnitiva.getLetraBase() == cUpsilonDieresisCorta
-					|| letraUnitiva.getLetraBase() == cIotaCorta
-					|| letraUnitiva.getLetraBase() == cIotaDieresisCorta) {
-				aAgregar.setTipoVerboExtendido(amUtil
-						.tiempoExtendidoLetra(letraUnitiva.getLetraBase()));
+			if (letraUnitiva.getLetraBase() == cUpsilonCorta || letraUnitiva.getLetraBase() == cUpsilonDieresisCorta
+					|| letraUnitiva.getLetraBase() == cIotaCorta || letraUnitiva.getLetraBase() == cIotaDieresisCorta) {
+				aAgregar.setTipoVerboExtendido(amUtil.tiempoExtendidoLetra(letraUnitiva.getLetraBase()));
 			} else {
 				TiempoOAspecto toa = regW.getTiempoOAspecto();
 				Tiempo tiempo = TransformadorTiempoAspecto.comoTiempo(toa);
 				if (tiempo.compareTo(Tiempo.Imperfecto) <= 0) {
 					// consonantes mudas, líquidas y dobles, iota, épsilon
-					if (letraUnitiva.esMuda() || letraUnitiva.esLiquida()
-							|| letraUnitiva.esDoble()) {
-						aAgregar.setTipoVerboExtendido(amUtil
-								.tiempoExtendidoLetra(letraUnitiva
-										.getLetraBase()));
+					if (letraUnitiva.esMuda() || letraUnitiva.esLiquida() || letraUnitiva.esDoble()) {
+						aAgregar.setTipoVerboExtendido(amUtil.tiempoExtendidoLetra(letraUnitiva.getLetraBase()));
 					} else if (foMenosDes.endsWith("SS")) {
 						aAgregar.setTipoVerboExtendido(TipoVerbo.DOBLE_SIGMA_NORMAL);
 					} else if (!foMenosDes.endsWith("TT")) {
@@ -370,10 +349,8 @@ public class AMVerbal {
 						// terminacion=new String(new char[]{cTau, cTau}) +
 						// desinencia;
 					} else {
-						throw new RuntimeException(
-								"incapaz de encontrar el tipoVerboExtendido para el siguiente tema "
-										+ OpPalabras
-												.strCompletoABeta(foMenosDes));
+						throw new RuntimeException("incapaz de encontrar el tipoVerboExtendido para el siguiente tema "
+								+ OpPalabras.strCompletoABeta(foMenosDes));
 					}
 				}
 			}
@@ -389,8 +366,7 @@ public class AMVerbal {
 	 * Expande los nodos de la lista anterior, creando o enganchando para cada
 	 * TIPO_DESINENCIA, uno o más tipos de verbo extendido.
 	 */
-	@SuppressWarnings("unchecked")
-	public <T extends TermRegVerbal> void extiendeTipos(Set<T> setOriginal, Set<T> setSiguiente, boolean debug) {
+	 public void extiendeTipos(Set<T> setOriginal, Set<T> setSiguiente, boolean debug) {
 		for (Iterator<T> it = setOriginal.iterator(); it.hasNext();) {
 			T trv = it.next();
 			trv.setTerminacion(OpPalabras.strBetaACompleto(trv.getTerminacion()));
@@ -400,7 +376,6 @@ public class AMVerbal {
 					formaOriginal.length() - 1 - trv.getTerminacion().length());
 			T trvNuevo = null;
 
-			
 			int tipoDesinencia = trv.getTipoDesinencia();
 			TiempoOAspecto toa = trv.getTiempoOAspecto();
 			Tiempo tiempo = TransformadorTiempoAspecto.comoTiempo(toa);
@@ -409,7 +384,7 @@ public class AMVerbal {
 			// los tipos de desinencia establecidos)
 			// sigo de largo a la espera de la búsqueda por temas
 			if (tipoDesinencia < 0) {
-				trvNuevo = (T) trv.clona();
+				trvNuevo = trv.clona();
 				trvNuevo.setTipoVerboExtendido(tipoDesinencia);
 				setSiguiente.add(trvNuevo);
 				continue;
@@ -419,7 +394,7 @@ public class AMVerbal {
 			// búsqueda de temas
 			FuerteDebil fuerte = trv.getFuerte();
 			if (tiempo == Tiempo.Aoristo && fuerte == FuerteDebil.Fuerte) {
-				trvNuevo = (T) trv.clona();
+				trvNuevo = trv.clona();
 				trvNuevo.setTipoVerboExtendido(tipoDesinencia);
 				setSiguiente.add(trvNuevo);
 				continue;
@@ -427,11 +402,11 @@ public class AMVerbal {
 
 			// mi, numi
 			if (tipoDesinencia == TipoVerbo.NoHojas.MI_PROPIAMENTE) {
-				trvNuevo = (T) trv.clona();
+				trvNuevo = trv.clona();
 				trvNuevo.setTipoVerboExtendido(TipoVerbo.MI_PROPIAMENTE_NORMAL);
 				setSiguiente.add(trvNuevo);
 			} else if (tipoDesinencia == TipoVerbo.NoHojas.NUMI) {
-				trvNuevo = (T) trv.clona();
+				trvNuevo = trv.clona();
 				trvNuevo.setTipoVerboExtendido(TipoVerbo.NUMI_NORMAL);
 				setSiguiente.add(trvNuevo);
 			}
@@ -453,24 +428,23 @@ public class AMVerbal {
 			// No agrego dental si es pasiva y la terminación no comienza con S,
 			// ya que es YEUSQ.., no YEUQ...
 			if (tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO && tiempo.valorEntero() > 2) {
-				if (trv.getTerminacion().charAt(0) == CompLetras.cSigma
-						|| trv.getVoz() != Voz.Pasiva) {
-					trvNuevo = (T) trv.clona();
+				if (trv.getTerminacion().charAt(0) == CompLetras.cSigma || trv.getVoz() != Voz.Pasiva) {
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DELTA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.THETA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DOBLE_SIGMA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DOBLE_TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DZETA_NORMAL);
 					setSiguiente.add(trvNuevo);
 				}
@@ -478,68 +452,66 @@ public class AMVerbal {
 
 			// confectivo y prefectivo de líquidos
 			if (tiempo.compareTo(Tiempo.Futuro) >= 0 && tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_LIQUIDO) {
-				trvNuevo = (T) trv.clona();
+				trvNuevo = trv.clona();
 				trvNuevo.setTipoVerboExtendido(amUtil.tiempoExtendidoLetra(letraUnitiva.getCaracter()));
 				setSiguiente.add(trvNuevo);
 			}
 
 			// consonánticos mudos en tiempos no infectivos
-			if (letraUnitiva != null
-					&& tiempo.compareTo(Tiempo.Futuro) >= 0
+			if (letraUnitiva != null && tiempo.compareTo(Tiempo.Futuro) >= 0
 					&& (tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_GUTURALES
-							|| tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_LABIALES || tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_DENTALES)) {
+							|| tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_LABIALES
+							|| tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_DENTALES)) {
 				if (tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_GUTURALES) {// guturales
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.GAMMA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.JI_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.KAPPA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DOBLE_SIGMA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DOBLE_TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
 				} else if (tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_LABIALES) {
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.PI_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.FI_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.BETA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.PI_TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
 				} else if (tipoDesinencia == TipoVerbo.NoHojas.CONSONANTICO_DENTALES) {
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DELTA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.THETA_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.TAU_NORMAL);
 					setSiguiente.add(trvNuevo);
-					trvNuevo = (T) trv.clona();
+					trvNuevo = trv.clona();
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.DZETA_NORMAL);
 					setSiguiente.add(trvNuevo);
-				}// infectivo de los consonánticos líquidos -- la terminación
+				} // infectivo de los consonánticos líquidos -- la terminación
 					// se forma con la letra más las terminaciones básicas
-				else if (letraUnitiva != null
-						&& tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO
-						&& letraUnitiva.esLiquida()
-						&& (tiempo == Tiempo.Presente | tiempo == Tiempo.Imperfecto)) {
-					trvNuevo = (T) trv.clona();
-					trvNuevo.setTipoVerboExtendido(amUtil
-							.tiempoExtendidoLetra(letraUnitiva.getCaracter()));
-					trvNuevo.setTerminacion(new String(new char[] { letraUnitiva.getCaracter() })+ trv.getTerminacion());
+				else if (letraUnitiva != null && tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_NO_CONTRACTO
+						&& letraUnitiva.esLiquida() && (tiempo == Tiempo.Presente | tiempo == Tiempo.Imperfecto)) {
+					trvNuevo = trv.clona();
+					trvNuevo.setTipoVerboExtendido(amUtil.tiempoExtendidoLetra(letraUnitiva.getCaracter()));
+					trvNuevo.setTerminacion(
+							new String(new char[] { letraUnitiva.getCaracter() }) + trv.getTerminacion());
 					if (formaOriginal.endsWith(trvNuevo.getTerminacion()))
 						setSiguiente.add(trvNuevo);
 				}
@@ -552,7 +524,7 @@ public class AMVerbal {
 			else if (tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_CONTRACTO_ALFA
 					|| tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_CONTRACTO_EPSILON
 					|| tipoDesinencia == TipoVerbo.NoHojas.VOCALICO_CONTRACTO_OMICRON) {
-				trvNuevo = (T) trv.clona();
+				trvNuevo = trv.clona();
 				switch (tipoDesinencia) {
 				case TipoVerbo.NoHojas.VOCALICO_CONTRACTO_ALFA:
 					trvNuevo.setTipoVerboExtendido(TipoVerbo.VC_ALFA_NORMAL);
@@ -569,7 +541,7 @@ public class AMVerbal {
 		}
 		if (debug) {
 			System.out.println("el setsigiente después de 2 (expansión a tipo-verbo-extendido) **********************");
-			amUtil.debugSet(setSiguiente, new String[] { "FORMA_ORIGINAL","GEN_PROPUESTO", "NOM_PROPUESTO" });
+			amUtil.debugSet(setSiguiente, new String[] { "FORMA_ORIGINAL", "GEN_PROPUESTO", "NOM_PROPUESTO" });
 		}
 	}
 
@@ -586,35 +558,27 @@ public class AMVerbal {
 	 *            "temaPropuesto"
 	 * @param debug
 	 */
-	public void incorporaTemaPropuestoReconstruidos(
-			Collection<ObjYDest> reconstruidos,
-			Collection<ObjYDest> irregulares, boolean debug) {
-		for (Iterator<ObjYDest> it = reconstruidos.iterator(); it.hasNext();) {
-			ObjYDest regDest = it.next();
+	public void incorporaTemaPropuestoReconstruidos(Collection<ObjYDest<T>> reconstruidos, Collection<ObjYDest<T>> irregulares, boolean debug) {
+		for (Iterator<ObjYDest<T>> it = reconstruidos.iterator(); it.hasNext();) {
+			ObjYDest<T> regDest = it.next();
 			TermRegVerbal reg = regDest.getRegistro();
 			String formaDestransformada = reg.getFormaDestransformada();
-			String terminacion = reg.getTerminacion(); 
+			String terminacion = reg.getTerminacion();
 			String temaPropuesto = null;
 
 			TiempoOAspecto toa = reg.getTiempoOAspecto();
 
 			if (TiposVerbo.esLiquido(reg.getTipoVerboExtendido())) {
-				it.remove(); // los líquidosno pueden seguir camino a la
-				// canonización, pero la paso a irregulares
+				it.remove(); // los líquidosno pueden seguir camino a la canonización, pero la paso a irregulares
 				if (TransformadorTiempoAspecto.comoTiempo(toa) == Tiempo.Futuro) {
-					temaPropuesto = formaDestransformada.substring(
-							0,
-							formaDestransformada.length()
-									- terminacion.length());
-					temaPropuesto = temaPropuesto.concat(OpPalabras
-							.strBetaACompleto("E"));
+					temaPropuesto = formaDestransformada.substring(0,
+							formaDestransformada.length() - terminacion.length());
+					temaPropuesto = temaPropuesto.concat(OpPalabras.strBetaACompleto("E"));
 				} else {
-					temaPropuesto = formaDestransformada.substring(
-							0,
-							formaDestransformada.length()
-									- terminacion.length());
+					temaPropuesto = formaDestransformada.substring(0,
+							formaDestransformada.length() - terminacion.length());
 				}
-				((TieneTemaPropuesto)reg).setTemaPropuesto(temaPropuesto);
+				((TieneTemaPropuesto) reg).setTemaPropuesto(temaPropuesto);
 				irregulares.add(regDest);
 			} else {
 				if (terminacion.length() > formaDestransformada.length()) {
@@ -622,25 +586,18 @@ public class AMVerbal {
 					continue;
 				}
 				temaPropuesto = formaDestransformada.substring(0, formaDestransformada.length() - terminacion.length());
-				((TieneTemaPropuesto)reg).setTemaPropuesto(temaPropuesto);
+				((TieneTemaPropuesto) reg).setTemaPropuesto(temaPropuesto);
 
 			}
 		}
 		if (debug) {
-			System.out
-					.println("AMVerbal.incorporaTemasPropuestoReconstruido ********");
-			System.out
-					.println(" el set 'regular' con 'temaPropuesto' poblado (si se pudo): ");
-			amUtil.debugSet(reconstruidos, new String[] { "FORMA_ORIGINAL",
-					"TERMINACION", "FORMA_DESTRANSFORMADA", "TEMA_PROPUESTO",
-					"NOM_PROPUESTO", "GEN_PROPUESTO", "TERM_VERBALIZADA",
-					"FORMA_A_DESTRANSFORMAR" });
-			System.out
-					.println(" el set 'irregular' con 'temaPropuesto' poblado (si se pudo): ");
-			amUtil.debugSet(irregulares, new String[] { "FORMA_ORIGINAL",
-					"TERMINACION", "FORMA_DESTRANSFORMADA", "TEMA_PROPUESTO",
-					"NOM_PROPUESTO", "GEN_PROPUESTO", "TERM_VERBALIZADA",
-					"FORMA_A_DESTRANSFORMAR" });
+			System.out.println("AMVerbal.incorporaTemasPropuestoReconstruido ********");
+			System.out.println(" el set 'regular' con 'temaPropuesto' poblado (si se pudo): ");
+			amUtil.debugSet(reconstruidos, new String[] { "FORMA_ORIGINAL", "TERMINACION", "FORMA_DESTRANSFORMADA",
+					"TEMA_PROPUESTO", "NOM_PROPUESTO", "GEN_PROPUESTO", "TERM_VERBALIZADA", "FORMA_A_DESTRANSFORMAR" });
+			System.out.println(" el set 'irregular' con 'temaPropuesto' poblado (si se pudo): ");
+			amUtil.debugSet(irregulares, new String[] { "FORMA_ORIGINAL", "TERMINACION", "FORMA_DESTRANSFORMADA",
+					"TEMA_PROPUESTO", "NOM_PROPUESTO", "GEN_PROPUESTO", "TERM_VERBALIZADA", "FORMA_A_DESTRANSFORMAR" });
 
 		}
 	}
@@ -658,26 +615,26 @@ public class AMVerbal {
 	 *            los futuros áticos
 	 * @param debug
 	 */
-	public void incorporaTemaPropuestoIrregulares(
-			Collection<ObjYDest> irregulares, boolean debug) {
-		for (Iterator<ObjYDest> it = irregulares.iterator(); it.hasNext();) {
+	public void incorporaTemaPropuestoIrregulares(Collection<ObjYDest<T>> irregulares, boolean debug) {
+		for (Iterator<ObjYDest<T>> it = irregulares.iterator(); it.hasNext();) {
 			Object obj = it.next();
 
-			ObjYDest regDest = (ObjYDest) obj;
+			ObjYDest<T> regDest = (ObjYDest<T>) obj;
 			TermRegVerbal bean = regDest.getRegistro();
 
 			String formaDestransformada = bean.getFormaDestransformada();
 			String terminacion = bean.getTerminacion();
-			boolean tieneTemaPropuesto = ((TieneTemaPropuesto)bean).getTemaPropuesto()!=null;
+			boolean tieneTemaPropuesto = ((TieneTemaPropuesto) bean).getTemaPropuesto() != null;
 			if (!tieneTemaPropuesto) { // porque algunas ya pueden haber
 				// sido agregadas por
 				// incorporaTemaPropuestoReconstruidos
 				String temaPropuesto;
 				boolean esLiquido = TiposVerbo.esLiquido(bean.getTipoDesinencia());
-				TiempoOAspecto toa =  bean.getTiempoOAspecto();
+				TiempoOAspecto toa = bean.getTiempoOAspecto();
 				boolean esFuturo = TransformadorTiempoAspecto.comoTiempo(toa) == Tiempo.Futuro;
 				if (esLiquido && esFuturo && bean.getVoz() != Voz.Pasiva) {
-					temaPropuesto = formaDestransformada.substring( 0, formaDestransformada.length() - terminacion.length());
+					temaPropuesto = formaDestransformada.substring(0,
+							formaDestransformada.length() - terminacion.length());
 					temaPropuesto = temaPropuesto.concat(OpPalabras.strBetaACompleto("E"));
 				} else {
 					// para verbos muy cortos (que son de todos modos
@@ -688,22 +645,18 @@ public class AMVerbal {
 						it.remove();
 						continue;
 					}
-					temaPropuesto = formaDestransformada.substring(
-							0,
-							formaDestransformada.length()
-									- terminacion.length());
+					temaPropuesto = formaDestransformada.substring(0,
+							formaDestransformada.length() - terminacion.length());
 				}
-				((TieneTemaPropuesto)bean).setTemaPropuesto(temaPropuesto);
+				((TieneTemaPropuesto) bean).setTemaPropuesto(temaPropuesto);
 			}
 
 		}
 
 		if (debug) {
 			System.out.println("*** incorporaTemaPropuestoIrregulares ***");
-			amUtil.debugBeans(irregulares, new String[] { "FORMA_ORIGINAL",
-					"TERMINACION", "FORMA_DESTRANSFORMADA", "TEMA_PROPUESTO",
-					"NOM_PROPUESTO", "GEN_PROPUESTO", "TERM_VERBALIZADA",
-					"FORMA_A_DESTRANSFORMAR" });
+			amUtil.debugBeans(irregulares, new String[] { "FORMA_ORIGINAL", "TERMINACION", "FORMA_DESTRANSFORMADA",
+					"TEMA_PROPUESTO", "NOM_PROPUESTO", "GEN_PROPUESTO", "TERM_VERBALIZADA", "FORMA_A_DESTRANSFORMAR" });
 		}
 	}
 
@@ -725,9 +678,8 @@ public class AMVerbal {
 	 * para los infinitivos. porque el campo "tiempoOAspecto" acepta el campo
 	 * TIEMPO de los verbos o el campo ASPECTO de los infinitivos
 	 */
-	public void restauraForma(Voz voz, TiempoOAspecto tiempoOAspecto,
-			int conjugacion, String terminacion, List<String> lstResultados,
-			String temaPropuesto, AACacheable cacheAA) {
+	public void restauraForma(Voz voz, TiempoOAspecto tiempoOAspecto, int conjugacion, String terminacion,
+			List<String> lstResultados, String temaPropuesto, AACacheable cacheAA) {
 		Tiempo tiempo = TransformadorTiempoAspecto.comoTiempo(tiempoOAspecto);
 		String sAux;
 		String sTema = OpPalabras.desacentuar(temaPropuesto);
@@ -742,20 +694,16 @@ public class AMVerbal {
 			// de saber si procede de un
 			// tema largo o corto
 			// Lo mismo si es un tema de perfectivo
-			boolean esPerfectivo = (tiempo.equals(Tiempo.Perfecto) || tiempo
-					.equals(Tiempo.Pluscuamperfecto));
+			boolean esPerfectivo = (tiempo.equals(Tiempo.Perfecto) || tiempo.equals(Tiempo.Pluscuamperfecto));
 			boolean esTemaPasivo = voz.equals(Voz.Pasiva)
-					&& (tiempo.equals(Tiempo.Futuro) || tiempo
-							.equals(Tiempo.Aoristo));
-			if ((terminacion.length() > 1 && OpPalabras.esDiptongo(
-					sTema.charAt(sTema.length() - 1), terminacion.charAt(0)))
-					|| esTemaPasivo || esPerfectivo) {
-				String formaFinal = OpPalabras.comeFinal(sTema, 1)
-						+ OpPalabras.strBetaACompleto("U/W");
+					&& (tiempo.equals(Tiempo.Futuro) || tiempo.equals(Tiempo.Aoristo));
+			if ((terminacion.length() > 1
+					&& OpPalabras.esDiptongo(sTema.charAt(sTema.length() - 1), terminacion.charAt(0))) || esTemaPasivo
+					|| esPerfectivo) {
+				String formaFinal = OpPalabras.comeFinal(sTema, 1) + OpPalabras.strBetaACompleto("U/W");
 				formaFinal = OpPalabras.acentua(formaFinal, -2, Acento.Agudo);
 				lstResultados.add(formaFinal);
-				formaFinal = OpPalabras.comeFinal(sTema, 1)
-						+ OpPalabras.strBetaACompleto("U_/W");
+				formaFinal = OpPalabras.comeFinal(sTema, 1) + OpPalabras.strBetaACompleto("U_/W");
 				formaFinal = OpPalabras.acentua(formaFinal, -2, Acento.Agudo);
 				lstResultados.add(formaFinal);
 
@@ -767,19 +715,14 @@ public class AMVerbal {
 			break;
 		case TipoVerbo.IOTA_NORMAL:
 			// idem que con la upsilon, primero verifico diptongo
-			if ((terminacion.length() > 1 && OpPalabras.esDiptongo(
-					sTema.charAt(sTema.length() - 1), terminacion.charAt(0)))
-					|| (voz == Voz.Pasiva
-							&& (tiempo.equals(Tiempo.Futuro) || tiempo
-									.equals(Tiempo.Aoristo)) || (tiempo
-							.equals(Tiempo.Perfecto) || tiempo
-							.equals(Tiempo.Pluscuamperfecto)))) {
-				String formaFinal = OpPalabras.comeFinal(sTema, 1)
-						+ OpPalabras.strBetaACompleto("I/W");
+			if ((terminacion.length() > 1
+					&& OpPalabras.esDiptongo(sTema.charAt(sTema.length() - 1), terminacion.charAt(0)))
+					|| (voz == Voz.Pasiva && (tiempo.equals(Tiempo.Futuro) || tiempo.equals(Tiempo.Aoristo))
+							|| (tiempo.equals(Tiempo.Perfecto) || tiempo.equals(Tiempo.Pluscuamperfecto)))) {
+				String formaFinal = OpPalabras.comeFinal(sTema, 1) + OpPalabras.strBetaACompleto("I/W");
 				formaFinal = OpPalabras.acentua(formaFinal, -2, Acento.Agudo);
 				lstResultados.add(formaFinal);
-				formaFinal = OpPalabras.comeFinal(sTema, 1)
-						+ OpPalabras.strBetaACompleto("I_/W");
+				formaFinal = OpPalabras.comeFinal(sTema, 1) + OpPalabras.strBetaACompleto("I_/W");
 				formaFinal = OpPalabras.acentua(formaFinal, -2, Acento.Agudo);
 				lstResultados.add(formaFinal);
 			} else {
@@ -833,8 +776,7 @@ public class AMVerbal {
 			// tratamiento similar para todos los verbos mudos, líquidos, dobles
 			// o en dzeta
 			// (es decir, todos los listados en tiempoExtendidoConsonante)
-			if (tiempo.equals(Tiempo.Presente)
-					|| tiempo.equals(Tiempo.Imperfecto)) { // infectivo
+			if (tiempo.equals(Tiempo.Presente) || tiempo.equals(Tiempo.Imperfecto)) { // infectivo
 				// para el infectivo
 				sAux = sTema.concat(OpPalabras.strBetaACompleto("W"));
 				AnalisisAcento aaAux = cacheAA.getAnalisisAcento(sAux);
@@ -844,18 +786,14 @@ public class AMVerbal {
 				}
 			} else { // no infectivo
 				// labiales
-				if (conjugacion == TipoVerbo.BETA_NORMAL
-						|| conjugacion == TipoVerbo.PI_NORMAL
-						|| conjugacion == TipoVerbo.FI_NORMAL
-						|| conjugacion == TipoVerbo.PI_TAU_NORMAL) {
+				if (conjugacion == TipoVerbo.BETA_NORMAL || conjugacion == TipoVerbo.PI_NORMAL
+						|| conjugacion == TipoVerbo.FI_NORMAL || conjugacion == TipoVerbo.PI_TAU_NORMAL) {
 					sAux = sTema.concat(OpPalabras.strBetaACompleto("W"));
 					sAux = OpPalabras.acentua(sAux);
 					lstResultados.add(sAux);
 					// guturales
-				} else if (conjugacion == TipoVerbo.GAMMA_NORMAL
-						|| conjugacion == TipoVerbo.KAPPA_NORMAL
-						|| conjugacion == TipoVerbo.JI_NORMAL
-						|| conjugacion == TipoVerbo.DOBLE_TAU_NORMAL
+				} else if (conjugacion == TipoVerbo.GAMMA_NORMAL || conjugacion == TipoVerbo.KAPPA_NORMAL
+						|| conjugacion == TipoVerbo.JI_NORMAL || conjugacion == TipoVerbo.DOBLE_TAU_NORMAL
 						|| conjugacion == TipoVerbo.DOBLE_SIGMA_NORMAL) {
 					sAux = sTema.concat(OpPalabras.strBetaACompleto("W"));
 					sAux = OpPalabras.acentua(sAux);
@@ -887,7 +825,7 @@ public class AMVerbal {
 					}
 
 				}
-			}// del if infectivo-no infectivo
+			} // del if infectivo-no infectivo
 			break;
 		}
 
@@ -898,10 +836,9 @@ public class AMVerbal {
 	 * las terminaciones
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends TermRegVerbal> void envoltorioRestauraFormas(
-			Set<ObjYDest> setPaso3, Set<T> setSiguiente, AACacheable cacheAA,
-			boolean debug) {
-		for (ObjYDest red : setPaso3) {
+	public void envoltorioRestauraFormas(Set<ObjYDest<T>> setPaso3, Set<T> setSiguiente,
+			AACacheable cacheAA, boolean debug) {
+		for (ObjYDest<T> red : setPaso3) {
 			T bean = (T) red.getRegistro();
 			// si la desinencia de la que el proceso partió es fuerte, entonces
 			// es intrínsecamente irregular y
@@ -911,28 +848,25 @@ public class AMVerbal {
 				continue;
 			List<String> lstResTemas = new ArrayList<String>();
 
-			TiempoOAspecto toa =  bean.getTiempoOAspecto();
+			TiempoOAspecto toa = bean.getTiempoOAspecto();
 			Voz voz = bean.getVoz();
 			int tipoVerboExtendido = bean.getTipoVerboExtendido();
-			String terminacion =bean.getTerminacion();
+			String terminacion = bean.getTerminacion();
 			String temaPropuesto = bean.getTemaPropuesto();
-			restauraForma(voz, toa, tipoVerboExtendido, terminacion,
-					lstResTemas, temaPropuesto, cacheAA);
+			restauraForma(voz, toa, tipoVerboExtendido, terminacion, lstResTemas, temaPropuesto, cacheAA);
 			for (int e = 0; e < lstResTemas.size(); e++) {
 				String formaRestaurada = lstResTemas.get(e);
-				T regNew =  (T)bean.clona();
-				((TieneTemaPropuesto)regNew).setTemaPropuesto(formaRestaurada);
+				T regNew = (T) bean.clona();
+				((TieneTemaPropuesto) regNew).setTemaPropuesto(formaRestaurada);
 				setSiguiente.add((T) regNew);
 			}
 		}
 		if (debug) {
-			System.out
-					.println("AMVerbal.envoltorioRestauraFormas (pegar el tema con la terminación) *************");
+			System.out.println("AMVerbal.envoltorioRestauraFormas (pegar el tema con la terminación) *************");
 			System.out.println("  el set de entrada mide " + setPaso3.size());
 			System.out.println("  el set de siguiente es ");
-			amUtil.debugBeans(setSiguiente, new String[] { "terminacion",
-					"formaOriginal", "temaPropuesto", "formaOriginalCompuesta",
-					"formaADestransformar", "formaDestransformada" });
+			amUtil.debugBeans(setSiguiente, new String[] { "terminacion", "formaOriginal", "temaPropuesto",
+					"formaOriginalCompuesta", "formaADestransformar", "formaDestransformada" });
 		}
 	}
 
@@ -955,45 +889,36 @@ public class AMVerbal {
 	 *            map que puede contener queries ya hechos en IRR_VERBOS para un
 	 *            determinado tema.
 	 */
-	public void encuentraTemasTemprano(List<ObjYDest> lstTemas,
-			List<? extends TermRegVerbal> resultadosIrr,
+	public void encuentraTemasTemprano(List<ObjYDest<T>> lstTemas, List<T> resultadosIrr,
 			Map<String, List<IrrVerbo>> busquedasHechas, boolean debug) {
 		StringBuffer sbDebug = new StringBuffer();
 
-		for (ObjYDest nodo : lstTemas) {
-			encuentraTemasTempranoIndividual(nodo, resultadosIrr,
-					busquedasHechas, sbDebug, debug);
+		for (ObjYDest<T> nodo : lstTemas) {
+			encuentraTemasTempranoIndividual(nodo, resultadosIrr, busquedasHechas, sbDebug, debug);
 		}
 		if (debug) {
-			System.out
-					.println("encuentraTemasTemprano <ObjYDest>******************************************************************");
+			System.out.println(
+					"encuentraTemasTemprano <ObjYDest>******************************************************************");
 			System.out.println(sbDebug.toString());
 			System.out.println("  así queda resultadosIrr: ");
-			amUtil.debugSet(resultadosIrr, new String[] { "terminacion",
-					"temaPropuesto", "terminacionVerbalizada", "formaOriginal",
-					"formaCompuesta", "formaADestransformar",
-					"formaDestransformada", "temaPropuesto" });
+			amUtil.debugSet(resultadosIrr,
+					new String[] { "terminacion", "temaPropuesto", "terminacionVerbalizada", "formaOriginal",
+							"formaCompuesta", "formaADestransformar", "formaDestransformada", "temaPropuesto" });
 		}
 	}
 
-	public void encuentraTemasTemprano(Set<ObjYDest> nodos,
-			List<TermRegVerbal> resultadosIrr,
-			Map<String, List<IrrVerbo>> busquedasHechas, boolean debug) {
+	public void encuentraTemasTemprano(Set<ObjYDest<T>> nodos, List<T> resultadosIrr, Map<String, List<IrrVerbo>> busquedasHechas, boolean debug) {
 		StringBuffer sbDebug = new StringBuffer();
 
-		for (ObjYDest regDest : nodos) {
-			encuentraTemasTempranoIndividual(regDest, resultadosIrr,
-					busquedasHechas, sbDebug, debug);
+		for (ObjYDest<T> regDest : nodos) {
+			encuentraTemasTempranoIndividual(regDest, resultadosIrr, busquedasHechas, sbDebug, debug);
 		}
 		if (debug) {
-			System.out
-					.println("AMVerbal.encuentraTemasTemprano *************************************");
+			System.out.println("AMVerbal.encuentraTemasTemprano *************************************");
 			System.out.println(sbDebug.toString());
 			System.out.println("  así queda resultadosIrr: ");
-			amUtil.debugBeans(resultadosIrr, new String[] { "terminacion",
-					"terminacionVerbalizada", "formaOriginal",
-					"formaCompuesta", "formaADestransformar",
-					"formaDestransformada", "temaPropuesto" });
+			amUtil.debugBeans(resultadosIrr, new String[] { "terminacion", "terminacionVerbalizada", "formaOriginal",
+					"formaCompuesta", "formaADestransformar", "formaDestransformada", "temaPropuesto" });
 		}
 	}
 
@@ -1009,10 +934,8 @@ public class AMVerbal {
 	 * @param debug
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends TermRegVerbal> void encuentraTemasTempranoIndividual(
-			ObjYDest regDest, List<T> resultadosIrr,
-			Map<String, List<IrrVerbo>> busquedasHechas, StringBuffer sbDebug,
-			boolean debug) {
+	public <T extends TermRegVerbal> void encuentraTemasTempranoIndividual(ObjYDest<T> regDest, List<T> resultadosIrr,
+			Map<String, List<IrrVerbo>> busquedasHechas, StringBuffer sbDebug, boolean debug) {
 		TermRegVerbal regTemas = (TermRegVerbal) regDest.getRegistro();
 		DesTransformaciones desTrans = regDest.getDestransformacion();
 		String temaPropuesto = regTemas.getTemaPropuesto();
@@ -1021,26 +944,23 @@ public class AMVerbal {
 		}
 		String tema = OpPalabras.desacentuar(temaPropuesto);
 		if (debug) {
-			sbDebug.append("  en encuentraTemasTemprano, averiguando por: "
-					+ OpPalabras.strCompletoABeta(tema) + "\n");
+			sbDebug.append("  en encuentraTemasTemprano, averiguando por: " + OpPalabras.strCompletoABeta(tema) + "\n");
 		}
 		TiempoOAspecto toa = regTemas.getTiempoOAspecto();
 		Tiempo tiempoReconstruido = TransformadorTiempoAspecto.comoTiempo(toa);
 		Voz voz = regTemas.getVoz();
 		boolean esVerboide = false;
 		Modo modoTemas = null;
-		if (regTemas instanceof TermRegInfinitivo
-				|| regTemas instanceof TermRegParticipio) {
+		if (regTemas instanceof TermRegInfinitivo || regTemas instanceof TermRegParticipio) {
 			esVerboide = true;
 		} else {
-			modoTemas = ((TermRegVerbo)regTemas).getModo();
+			modoTemas = ((TermRegVerbo) regTemas).getModo();
 		}
 
 		try {
 			tema = OpPalabras.desacentuar(tema);
 			HashMap<Object[], TemaConPreps[]> cacheExtraccionPrefijos = new HashMap<Object[], TemaConPreps[]>();
-			TemaConPreps[] arrTcp = extractorPrefijos.averiguaPrefijos(tema, 1,
-					cacheExtraccionPrefijos);
+			TemaConPreps[] arrTcp = extractorPrefijos.averiguaPrefijos(tema, 1, cacheExtraccionPrefijos);
 
 			for (TemaConPreps tcp : arrTcp) {
 				tema = tcp.resto;
@@ -1051,10 +971,9 @@ public class AMVerbal {
 					busquedasHechas.put(tema, irrvs);
 				}
 				if (debug && irrvs.size() > 0) {
-					sbDebug.append("    "
-							+ irrvs.size()
-							+ " a comparar con el reconstruido "
-							+ OpBeans.debugBean(regTemas, new String[] {"temaPropuesto", "formaOriginal", "formaADestransformar","formaOrignialCompuesta", "terminacion" })
+					sbDebug.append("    " + irrvs.size() + " a comparar con el reconstruido "
+							+ OpBeans.debugBean(regTemas, new String[] { "temaPropuesto", "formaOriginal",
+									"formaADestransformar", "formaOrignialCompuesta", "terminacion" })
 							+ "\n");
 				}
 				for (IrrVerbo irrVerbo : irrvs) {
@@ -1066,15 +985,11 @@ public class AMVerbal {
 					// si el modo del registro de temas reconstruidos no es el
 					// mismo o resultado de una propagación de
 					// irregularidades, no puedo usarlo
-					if (modoTemas != modoIrr
-							&& ( /* verboides */modoTemas != null || modoIrr != Modo.Indicativo)
-							&& (modoIrr != Modo.Indicativo || !propaga
-									.esDeModo())) {
+					if (modoTemas != modoIrr && ( /* verboides */modoTemas != null || modoIrr != Modo.Indicativo)
+							&& (modoIrr != Modo.Indicativo || !propaga.esDeModo())) {
 						if (debug) {
-							sbDebug.append("    rechazando porque el modo del registro reconstruido ("
-									+ modoTemas
-									+ ") no es igual que el de los registros de iregularidad ("
-									+ modoIrr
+							sbDebug.append("    rechazando porque el modo del registro reconstruido (" + modoTemas
+									+ ") no es igual que el de los registros de iregularidad (" + modoIrr
 									+ "), ni hay una propagación 'TodosLosModos' involucrada\n");
 						}
 						continue;
@@ -1083,29 +998,26 @@ public class AMVerbal {
 					// lo siguiente lo hago para asegurarme que no continúo con
 					// registros que una vez aumentados/reduplicados
 					// no coincidirían con mi forma
-					if (desTrans.isReduplicacion() != irrVerbo
-							.isReduplicacion()) {
+					if (desTrans.isReduplicacion() != irrVerbo.isReduplicacion()) {
 						if (debug) {
 							sbDebug.append("    uno rechazado por distinta reduplicación, registro destransformado="
-									+ desTrans.isReduplicacion()
-									+ " irrVerbo="
-									+ irrVerbo.isReduplicacion() + "\n");
+									+ desTrans.isReduplicacion() + " irrVerbo=" + irrVerbo.isReduplicacion() + "\n");
 						}
 						continue;
-					} else if (!esVerboide
-							&& (modoTemas == Modo.Indicativo
-									&& (tiempoReconstruido == Tiempo.Imperfecto || tiempoReconstruido == Tiempo.Aoristo) && desTrans
-									.getAumento() != irrVerbo.getAumento())) {
+					} else if (!esVerboide && (modoTemas == Modo.Indicativo
+							&& (tiempoReconstruido == Tiempo.Imperfecto || tiempoReconstruido == Tiempo.Aoristo)
+							&& desTrans.getAumento() != irrVerbo.getAumento())) {
 						if (debug) {
-							sbDebug.append("    uno rechazado por intentar reconstruir una destransformación aumentada de un no-indicativo\n");
+							sbDebug.append(
+									"    uno rechazado por intentar reconstruir una destransformación aumentada de un no-indicativo\n");
 						}
 						continue;
 					}
 					// fin del segmento comprobador
 					if (comparacionAceptable(regTemas, irrVerbo, sbDebug, debug)) {
-						T nuevoReconstruido = (T) regTemas.clona(); 
-						if (!esVerboide){
-							((TermRegVerbo)nuevoReconstruido).setPersona(((TermRegVerbo)regTemas).getPersona());
+						T nuevoReconstruido = (T) regTemas.clona();
+						if (!esVerboide) {
+							((TermRegVerbo) nuevoReconstruido).setPersona(((TermRegVerbo) regTemas).getPersona());
 						}
 						nuevoReconstruido.setIdVerbo(irrVerbo.getVerboId());
 						nuevoReconstruido.setParticularidad(irrVerbo.getPartic());
@@ -1113,14 +1025,11 @@ public class AMVerbal {
 						// modifico la voz y el modo cuando la irregularidad que
 						// encontró se debe a propagaciones
 
-						if (voz.equals(Voz.Media) && jvoz.equals(Voz.Activa)
-								&& propaga.esDeVoz())
+						if (voz.equals(Voz.Media) && jvoz.equals(Voz.Activa) && propaga.esDeVoz())
 							nuevoReconstruido.setVoz(voz);
-						if (nuevoReconstruido instanceof TermRegVerbo
-								&& modoTemas != Modo.Indicativo
-								&& modoIrr == Modo.Indicativo
-								&& propaga.esDeModo())
-							((TermRegVerbo)nuevoReconstruido).setModo(modoTemas);
+						if (nuevoReconstruido instanceof TermRegVerbo && modoTemas != Modo.Indicativo
+								&& modoIrr == Modo.Indicativo && propaga.esDeModo())
+							((TermRegVerbo) nuevoReconstruido).setModo(modoTemas);
 						nuevoReconstruido.setPreposiciones(tcp.preps);
 						if (tcp.preps != null && tcp.preps.size() > 0) {
 							nuevoReconstruido.setCompuesto(true);
@@ -1129,8 +1038,7 @@ public class AMVerbal {
 						}
 						if (debug) {
 							sbDebug.append("    se agrega al resultado="
-									+ OpBeans.debugBean(nuevoReconstruido,
-											new String[] {}) + "\n");
+									+ OpBeans.debugBean(nuevoReconstruido, new String[] {}) + "\n");
 						}
 						resultadosIrr.add(nuevoReconstruido);
 					}
@@ -1151,17 +1059,17 @@ public class AMVerbal {
 	 * @param irregularidad
 	 * @return
 	 */
-	private boolean comparacionAceptable(TermRegVerbal reconstruido,
-			IrrVerbo irregularidad, StringBuffer sbDebug, boolean debug) {
+	private boolean comparacionAceptable(TermRegVerbal reconstruido, IrrVerbo irregularidad, StringBuffer sbDebug,
+			boolean debug) {
 		TiempoOAspecto toaReconstruido = reconstruido.getTiempoOAspecto();
 		boolean fuerteReconstruido = reconstruido.getFuerte() == FuerteDebil.Fuerte;
-		Voz vozReconstruida = reconstruido.getVoz(); 
+		Voz vozReconstruida = reconstruido.getVoz();
 		// si no hay modo reconstruido, es que estamos reconstruyendo e partir
 		// de un infinitivo o un participo
 		Modo modo = null;
 		boolean esTermRegVerbo = reconstruido instanceof TermRegVerbo;
 		if (esTermRegVerbo)
-			modo = ((TermRegVerbo )reconstruido).getModo();
+			modo = ((TermRegVerbo) reconstruido).getModo();
 		Voz jvoz = irregularidad.getVozJuego();
 		Tiempo ntie = irregularidad.getTiempo();
 		boolean fuerte = irregularidad.getFuerte() == FuerteDebil.Fuerte;
@@ -1169,8 +1077,8 @@ public class AMVerbal {
 		Contraccion contraccion = irregularidad.getContraccion();
 		Propagacion propagacion = irregularidad.getPropagacion();
 		int tieneContComedora = 0;
-		if (reconstruido instanceof TermRegParticipio){  
-			tieneContComedora =   ((TermRegParticipio)reconstruido).getContraccionComedora();
+		if (reconstruido instanceof TermRegParticipio) {
+			tieneContComedora = ((TermRegParticipio) reconstruido).getContraccionComedora();
 		}
 		// tiempos: el reconstruido debe coincidir con el irregular, o el
 		// reconstruido ser infectivo de un irregular aoristo segundo
@@ -1186,8 +1094,7 @@ public class AMVerbal {
 
 		if (valorToa == ntie.valorEntero() && fuerte == fuerteReconstruido) {
 			tiemposOK = true;
-		} else if (valorToa == Tiempo.Imperfecto.valorEntero()
-				&& irregularidad.getTiempo().equals(Tiempo.Presente)
+		} else if (valorToa == Tiempo.Imperfecto.valorEntero() && irregularidad.getTiempo().equals(Tiempo.Presente)
 				&& irregularidad.isPats()) {
 			tiemposOK = true;
 		} else {
@@ -1199,8 +1106,7 @@ public class AMVerbal {
 		boolean vozOK = false;
 		if (vozReconstruida == jvoz)
 			vozOK = true;
-		else if (vozReconstruida == Voz.Media && jvoz.equals(Voz.Activa)
-				&& propagacion.esDeVoz())
+		else if (vozReconstruida == Voz.Media && jvoz.equals(Voz.Activa) && propagacion.esDeVoz())
 			vozOK = true;
 		else
 			vozOK = false;
@@ -1212,8 +1118,8 @@ public class AMVerbal {
 			modoOK = true;
 		else if (modo == modoIrr)
 			modoOK = true;
-		else if (esTermRegVerbo && modoIrr.equals(Modo.Indicativo)
-				&& !modo.equals(Modo.Indicativo) && propagacion.esDeModo())
+		else if (esTermRegVerbo && modoIrr.equals(Modo.Indicativo) && !modo.equals(Modo.Indicativo)
+				&& propagacion.esDeModo())
 			modoOK = true;
 		else
 			modoOK = false;
@@ -1226,7 +1132,7 @@ public class AMVerbal {
 		boolean juegoOK = true;
 		boolean reconstruidoTieneJuego = (reconstruido instanceof TieneJuego);
 		if (reconstruidoTieneJuego) {
-			int juegoReconstruido =  ((TieneJuego)reconstruido).getJuego();  
+			int juegoReconstruido = ((TieneJuego) reconstruido).getJuego();
 			if (juegoReconstruido != 0) {
 				int juegoIrr = irregularidad.getJuego();
 				if (juegoReconstruido != juegoIrr) {
@@ -1240,11 +1146,9 @@ public class AMVerbal {
 			if (!ntie.equals(Tiempo.Aoristo))
 				contraccionOK = true; // sólo en el aoristo funciona la
 			// contracción comedora
-			else if (tieneContComedora == 1
-					&& contraccion.equals(Contraccion.comePrimera))
+			else if (tieneContComedora == 1 && contraccion.equals(Contraccion.comePrimera))
 				contraccionOK = true;
-			else if (tieneContComedora == -1
-					&& !contraccion.equals(Contraccion.comePrimera))
+			else if (tieneContComedora == -1 && !contraccion.equals(Contraccion.comePrimera))
 				contraccionOK = true;
 			else if (tieneContComedora == 0)
 				contraccionOK = true;
@@ -1256,24 +1160,20 @@ public class AMVerbal {
 		if (!resultado && debug) {
 			if (!tiemposOK) {
 				sbDebug.append("    no coincide en el TIEMPO con el registro de IRR_VERBOS:  "
-						+ OpBeans.debugBean(irregularidad, new String[] {})
-						+ "\n");
+						+ OpBeans.debugBean(irregularidad, new String[] {}) + "\n");
 			} else if (!vozOK) {
 				sbDebug.append("    no coinciden en la VOZ con el registro de IRR_VERBOS:  "
-						+ OpBeans.debugBean(irregularidad, new String[] {})
-						+ "\n");
+						+ OpBeans.debugBean(irregularidad, new String[] {}) + "\n");
 			} else if (!modoOK) {
 				sbDebug.append("    no coinciden en el MODO con el registro de IRR_VERBOS:  "
-						+ OpBeans.debugBean(irregularidad, new String[] {})
-						+ "\n");
+						+ OpBeans.debugBean(irregularidad, new String[] {}) + "\n");
 			} else if (!juegoOK) {
 				sbDebug.append("    no coincide en el JUEGO REQUERIDO con el registro de IRR_VERBOS:  "
-						+ OpBeans.debugBean(irregularidad, new String[] {})
-						+ "\n");
+						+ OpBeans.debugBean(irregularidad, new String[] {}) + "\n");
 			} else if (!contraccionOK) {
-				sbDebug.append("    la especificación de COTRACCIÓN COMEDORA no coincide con el registro de IRR_VERBOS:  "
-						+ OpBeans.debugBean(irregularidad, new String[] {})
-						+ "\n");
+				sbDebug.append(
+						"    la especificación de COTRACCIÓN COMEDORA no coincide con el registro de IRR_VERBOS:  "
+								+ OpBeans.debugBean(irregularidad, new String[] {}) + "\n");
 			}
 
 		}
@@ -1291,23 +1191,15 @@ public class AMVerbal {
 	 *            conjunto de entrada con temas irregulares
 	 * @param debug
 	 */
-	public void aplicaEncuentraTemasTemprano(Set<ObjYDest> setSiguiente,
-			List<TermRegVerbal> resultadosIrr, List<ObjYDest> aBuscarPorTema,
-			boolean debug) {
+	public void aplicaEncuentraTemasTemprano(Set<ObjYDest<T>> setSiguiente, List<T> resultadosIrr, List<ObjYDest<T>> aBuscarPorTema, boolean debug) {
 		resultadosIrr.clear();
 		Map<String, List<IrrVerbo>> busquedasHechas = new HashMap<String, List<IrrVerbo>>();
-		encuentraTemasTemprano(setSiguiente, resultadosIrr, busquedasHechas,
-				debug);
-		encuentraTemasTemprano(aBuscarPorTema, resultadosIrr, busquedasHechas,
-				debug);
+		encuentraTemasTemprano(setSiguiente, resultadosIrr, busquedasHechas, debug);
+		encuentraTemasTemprano(aBuscarPorTema, resultadosIrr, busquedasHechas, debug);
 		if (debug) {
-			System.out
-					.println("AMVerbal.aplicaEncuentraTemasTemprano ********************");
-			System.out.println(" el conjunto regular de entrada medía "
-					+ setSiguiente.size());
-			System.out
-					.println(" el conjunto de temas irregulares de entrada medía "
-							+ aBuscarPorTema.size());
+			System.out.println("AMVerbal.aplicaEncuentraTemasTemprano ********************");
+			System.out.println(" el conjunto regular de entrada medía " + setSiguiente.size());
+			System.out.println(" el conjunto de temas irregulares de entrada medía " + aBuscarPorTema.size());
 			System.out.println(" el resultado es: ");
 			amUtil.debugBeans(resultadosIrr, new String[] {});
 		}
@@ -1323,9 +1215,9 @@ public class AMVerbal {
 	 * @param setSiguiente
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends TermRegVerbal> void averiguaPreposiciones(Collection<T> setOriginal, Set<T> setSiguiente,
+	public void averiguaPreposiciones(Collection<T> setOriginal, Set<T> setSiguiente,
 			int nivelPreposiciones, Map<Object[], TemaConPreps[]> cacheExtraccionPrefijos, boolean debug) {
-	    
+
 		// si el nivel de extractorPrefijos es 0, simplemente copio el set
 		if (nivelPreposiciones == ExtractorPrefijos.NADA) {
 			setSiguiente.addAll(setOriginal);
@@ -1335,11 +1227,11 @@ public class AMVerbal {
 			String formaOriginal = trv.getFormaOriginal();
 
 			String terminacion = trv.getTerminacion();
-			TemaConPreps[] arrTcp = extractorPrefijos.averiguaPrefijos(formaOriginal, terminacion.length(), cacheExtraccionPrefijos);
+			TemaConPreps[] arrTcp = extractorPrefijos.averiguaPrefijos(formaOriginal, terminacion.length(),
+					cacheExtraccionPrefijos);
 			for (int i = 0; i < arrTcp.length; i++) {
 				T trvNuevo = (T) trv.clona();
 				trvNuevo.setFormaOriginalCompuesta(formaOriginal);
-
 
 				// les caía en la preposición sean incluidas
 				trvNuevo.setFormaOriginal(arrTcp[i].resto);
@@ -1352,8 +1244,9 @@ public class AMVerbal {
 			}
 		}
 		if (debug) {
-			System.out.println("el set siguiente después de la extracción de extractorPrefijos  ***********************************");
-			amUtil.debugBeans(setSiguiente, new String[] { "formaOriginal","formaOriginalCompuesta", "terminacion" });
+			System.out.println(
+					"el set siguiente después de la extracción de extractorPrefijos  ***********************************");
+			amUtil.debugBeans(setSiguiente, new String[] { "formaOriginal", "formaOriginalCompuesta", "terminacion" });
 		}
 	}
 
@@ -1364,12 +1257,9 @@ public class AMVerbal {
 		for (Iterator<ResultadoUniversal> it = reus.iterator(); it.hasNext();) {
 			ResultadoUniversal reu = it.next();
 			List<String> preposiciones = reu.getPreposiciones();
-			boolean tienePreps = preposiciones != null
-					&& preposiciones.size() > 0;
+			boolean tienePreps = preposiciones != null && preposiciones.size() > 0;
 			if (tienePreps) {
-				String idCompuesto = gerenteVerbosCompuestos
-						.seleccionaPorVerboSimpleYPreps(reu.getId(),
-								preposiciones);
+				String idCompuesto = gerenteVerbosCompuestos.seleccionaPorVerboSimpleYPreps(reu.getId(), preposiciones);
 				reu.setIdCompuesto(idCompuesto);
 			}
 			if (tienePreps && reu.getIdCompuesto() == null) {
@@ -1400,20 +1290,7 @@ public class AMVerbal {
 		}
 	}
 
-	/**
-	 * @return Returns the amUtil.
-	 */
-	public AMUtil getAmUtil() {
-		return amUtil;
-	}
 
-	/**
-	 * @param amUtil
-	 *            The amUtil to set.
-	 */
-	public void setAmUtil(AMUtil amUtil) {
-		this.amUtil = amUtil;
-	}
 
 	/**
 	 * @return Returns the gerenteIrrVerbos.
@@ -1445,13 +1322,11 @@ public class AMVerbal {
 		this.extractorPrefijos = preposiciones;
 	}
 
-	public void setGerenteIrrVerbosIndividuales(
-			GerenteIrrVerbosIndividuales gerenteIrrVerbosIndividuales) {
+	public void setGerenteIrrVerbosIndividuales(GerenteIrrVerbosIndividuales gerenteIrrVerbosIndividuales) {
 		this.gerenteIrrVerbosIndividuales = gerenteIrrVerbosIndividuales;
 	}
 
-	public void setGerenteIrrInfinitivos(
-			GerenteIrrInfinitivos gerenteIrrInfinitivos) {
+	public void setGerenteIrrInfinitivos(GerenteIrrInfinitivos gerenteIrrInfinitivos) {
 		this.gerenteIrrInfinitivos = gerenteIrrInfinitivos;
 	}
 
@@ -1459,8 +1334,7 @@ public class AMVerbal {
 	 * @param gerenteVerbosCompuestos
 	 *            The gerenteVerbosCompuestos to set.
 	 */
-	public void setGerenteVerbosCompuestos(
-			GerenteVerbosCompuestos gerenteVerbosCompuestos) {
+	public void setGerenteVerbosCompuestos(GerenteVerbosCompuestos gerenteVerbosCompuestos) {
 		this.gerenteVerbosCompuestos = gerenteVerbosCompuestos;
 	}
 

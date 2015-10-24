@@ -2,13 +2,14 @@ package com.kalos.datos.gerentes;
 
 import java.util.List;
 
+import com.kalos.beans.TermRegNominal;
 import com.kalos.beans.TermRegSustantivo;
 import com.kalos.enumeraciones.Caso;
 import com.kalos.enumeraciones.Numero;
 
-public interface GerenteTermRegSustantivo {
+public interface GerenteTermRegSustantivo <T extends TermRegNominal> {
 
-	List<TermRegSustantivo> seleccionaPorTerminacion(String terminacion);
+	List<T> seleccionaPorTerminacion(String terminacion);
 	
 	/**
 	 * Usada para la generación de TERM_TEG_SUST. Selecciona el máximo subíndice que se haya generado

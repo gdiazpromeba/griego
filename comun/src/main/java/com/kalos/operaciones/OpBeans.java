@@ -145,7 +145,7 @@ public class OpBeans {
 			return set.contains(s);
 		} catch (Exception exception) {
 			throw new RuntimeException(
-					"error averiguando si el bean ten\355a una propiedad");
+					"error averiguando si el bean tenía una propiedad");
 		}
 	}
 
@@ -196,7 +196,7 @@ public class OpBeans {
 		}
 
 		throw new RuntimeException(
-				"al menos uno de los campos deber\355a ser no nulo");
+				"al menos uno de los campos debería ser no nulo");
 	}
 
 	public static void copiaPropiedades(Object obj, Object obj1) {

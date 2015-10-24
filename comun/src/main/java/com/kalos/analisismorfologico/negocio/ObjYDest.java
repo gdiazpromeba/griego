@@ -12,8 +12,8 @@ import com.kalos.operaciones.OpBeans;
  * Clase que agrupa a un registro con su des-transformación. 
  * Se usa como resultado de un desAumento o una desReduplicación
  */
-public class ObjYDest {
-	private TermRegVerbal registro;
+public class ObjYDest <T extends TermRegVerbal> {
+	private T registro;
 	private DesTransformaciones destransformacion;
 	
 	//hash
@@ -45,7 +45,7 @@ public class ObjYDest {
 	}
 	
 	
-	public ObjYDest(TermRegVerbal reg, DesTransformaciones dest){
+	public ObjYDest(T reg, DesTransformaciones dest){
 		this.registro=reg;
 		this.destransformacion=dest;
 	}
@@ -61,10 +61,10 @@ public class ObjYDest {
 	
 	
 	
-	public ObjYDest clona(){
-	    TermRegVerbal nuevo=registro.clona(); 
+	public ObjYDest<T> clona(){
+	    T nuevo=registro.clona(); 
 	    DesTransformaciones nueva=destransformacion.clona();
-	    ObjYDest nuevaRegDest=new ObjYDest(nuevo, nueva);
+	    ObjYDest<T> nuevaRegDest=new ObjYDest<T>(nuevo, nueva);
 	    return nuevaRegDest;
 	}
 	
@@ -83,7 +83,7 @@ public class ObjYDest {
 	/**
 	 * @return Returns the registro.
 	 */
-	public TermRegVerbal getRegistro() {
+	public T getRegistro() {
 		return registro;
 	}
 

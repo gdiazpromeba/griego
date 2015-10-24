@@ -20,6 +20,8 @@ import com.kalos.analisismorfologico.negocio.AMUtil;
 import com.kalos.analisismorfologico.negocio.AMVerbal;
 import com.kalos.analisismorfologico.negocio.AMVerbos;
 import com.kalos.analisismorfologico.negocio.ExtractorPrefijos;
+import com.kalos.beans.TermRegInfinitivo;
+import com.kalos.beans.TermRegVerbal;
 import com.kalos.datos.gerentes.GerenteAdjetivos;
 import com.kalos.datos.gerentes.GerenteAdjetivosComoNominales;
 import com.kalos.datos.gerentes.GerenteCubosTipoPart;
@@ -60,17 +62,16 @@ public class AnalisisMorfologicoConfig {
     
     @Bean
     @Autowired  
-    public AMUtil amUtil(){
-        return new AMUtil();
+    public AMUtil<?> amUtil(){
+        return new AMUtil<>();
     }
     
     @Bean
     @Autowired   
-    public AMVerbal amVerbal(AMUtil amUtil, GerenteVerbos gerenteVerbos, GerenteVerbosCompuestos gerenteVerbosCompuestos, GerenteIrrVerbos gerenteIrrVerbos, 
+    public AMVerbal<?> amVerbal(GerenteVerbos gerenteVerbos, GerenteVerbosCompuestos gerenteVerbosCompuestos, GerenteIrrVerbos gerenteIrrVerbos, 
            ExtractorPrefijos extractorPrefijos, GerenteIrrVerbosIndividuales gerenteIrrVerbosIndividuales, GerenteIrrInfinitivos gerenteIrrInfinitivos ){
         
-      AMVerbal service = new AMVerbal();
-      service.setAmUtil(amUtil);
+      AMVerbal<?> service = new AMVerbal<>();
       service.setGerenteVerbos(gerenteVerbos);
       service.setGerenteVerbosCompuestos(gerenteVerbosCompuestos);
       service.setGerenteIrrVerbos(gerenteIrrVerbos);
@@ -84,12 +85,10 @@ public class AnalisisMorfologicoConfig {
  
     @Bean
     @Autowired   
-    public AMVerbos amVerbos(AMUtil amUtil, AMVerbal amVerbal, GerenteVerbos gerenteVerbos, Verbos verbos, GerenteTermRegVerbo gerenteTermRegVerbo,  
+    public AMVerbos amVerbos(AMUtil<TermRegVerbal> amUtil, GerenteVerbos gerenteVerbos, Verbos verbos, GerenteTermRegVerbo gerenteTermRegVerbo,  
             ExtractorPrefijos extractorPrefijos, GerenteIrrVerbosIndividuales gerenteIrrVerbosIndividuales){
         
         AMVerbos service = new AMVerbos();
-        service.setAmUtil(amUtil);
-        service.setAmVerbal(amVerbal);
         service.setGerenteVerbos(gerenteVerbos);
         service.setVerbos(verbos);
         service.setGerenteTermRegVerbo(gerenteTermRegVerbo);
@@ -101,12 +100,10 @@ public class AnalisisMorfologicoConfig {
     
     @Bean
     @Autowired
-    public AMInfinitivos amInfinitivos(AMUtil amUtil, AMVerbal amVerbal, ExtractorPrefijos extractorPrefijos, GerenteTermRegInfinitivo gerenteTermRegInfinitivo,  
+    public AMInfinitivos amInfinitivos(AMUtil<TermRegInfinitivo> amUtil, ExtractorPrefijos extractorPrefijos, GerenteTermRegInfinitivo gerenteTermRegInfinitivo,  
             GerenteVerbos gerenteVerbos, GerenteIrrInfinitivos gerenteIrrInfinitivos){
         
         AMInfinitivos service = new AMInfinitivos();
-        service.setAmUtil(amUtil);
-        service.setAmVerbal(amVerbal);
         service.setExtractorPrefijos(extractorPrefijos);
         service.setGerenteTermRegInfinitivo(gerenteTermRegInfinitivo);
         service.setGerenteVerbos(gerenteVerbos);
@@ -117,25 +114,22 @@ public class AnalisisMorfologicoConfig {
 
     @Bean
     @Autowired   
-    public AMNominal amNominal(AMUtil amUtil, GerenteTermRegSustantivo gerenteTermRegSustantivo, GerenteTiposSustantivo gerenteTiposSustantivo, 
+    public AMNominal amNominal(GerenteTermRegSustantivo gerenteTermRegSustantivo, GerenteTiposSustantivo gerenteTiposSustantivo, 
             GerenteDesinSust gerenteDesinSust){
         
         AMNominal service = new AMNominal(gerenteTiposSustantivo, gerenteDesinSust);
-        service.setAmUtil(amUtil);
         service.setGerenteTermRegSustantivo(gerenteTermRegSustantivo);
         return service;
     }
     
     @Bean
     @Autowired
-    public AMParticipios amParticipios(AMUtil amUtil, AMVerbal amVerbal, AMNominal amNominal, Participios participios, ExtractorPrefijos extractorPrefijos,  
+    public AMParticipios amParticipios(AMNominal amNominal, Participios participios, ExtractorPrefijos extractorPrefijos,  
            GerenteVerbos gerenteVerbos, GerenteVerbalizadorParticipios gerenteVerbalizadorParticipios, GerenteVerbosCompuestos gerenteVerbosCompuestos, 
            GerenteIrrParticipiosEnteros gerenteIrrParticipiosEnteros, GerenteIrrParticipiosSimples gerenteIrrParticipiosSimples, GerenteCubosTipoPart gerenteCubosTipoPart, 
            GerenteTransParticipios gerenteTransParticipios){
         
         AMParticipios service = new AMParticipios();
-        service.setAmUtil(amUtil);
-        service.setAmVerbal(amVerbal);
         service.setAmNominal(amNominal);
         service.setParticipios(participios);
         service.setExtractorPrefijos(extractorPrefijos);
@@ -151,10 +145,9 @@ public class AnalisisMorfologicoConfig {
     
     @Bean
     @Autowired
-    public AMSustantivos amSustantivos(AMUtil amUtil, AMNominal amNominal, GerenteIrrSustantivos gerenteIrrSustantivos, GerenteSustantivos gerenteSustantivos){
+    public AMSustantivos<?> amSustantivos(AMNominal amNominal, GerenteIrrSustantivos gerenteIrrSustantivos, GerenteSustantivos gerenteSustantivos){
         
-        AMSustantivos service = new AMSustantivos();
-        service.setAmUtil(amUtil);
+        AMSustantivos<?> service = new AMSustantivos<>();
         service.setAmNominal(amNominal);
         service.setGerenteIrrSustantivos(gerenteIrrSustantivos);
         service.setGerenteSustantivos(gerenteSustantivos);
@@ -164,11 +157,10 @@ public class AnalisisMorfologicoConfig {
     
     @Bean
     @Autowired   
-    public AMAdjetivos amAdjetivos(AMUtil amUtil, AMNominal amNominal, GerenteAdjetivosComoNominales gerenteAdjetivosComoNominales, GerenteIrrAdjetivosIndividuales gerenteIrrAdjetivosIndividuales,  
+    public AMAdjetivos amAdjetivos(AMNominal amNominal, GerenteAdjetivosComoNominales gerenteAdjetivosComoNominales, GerenteIrrAdjetivosIndividuales gerenteIrrAdjetivosIndividuales,  
             GerenteAdjetivos gerenteAdjetivos){
         
         AMAdjetivos service = new AMAdjetivos();
-        service.setAmUtil(amUtil);
         service.setAmNominal(amNominal);
         service.setGerenteAdjetivosComoNominales(gerenteAdjetivosComoNominales);
         service.setGerenteIrrAdjetivosIndividuales(gerenteIrrAdjetivosIndividuales);

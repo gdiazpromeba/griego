@@ -45,7 +45,7 @@ public class ManejaDesinenciasSustantivo {
 	} else {
 	    StringBuffer stringbuffer = new StringBuffer("la desinencia pedida no existe:");
 	    stringbuffer.append((new StringBuilder()).append("  tipoSustantivo=").append(i).append("\n").toString());
-	    stringbuffer.append((new StringBuilder()).append("  n\372mero=").append(n1).append("\n").toString());
+	    stringbuffer.append((new StringBuilder()).append("  número=").append(n1).append("\n").toString());
 	    stringbuffer.append((new StringBuilder()).append("  caso=").append(a1).append("\n").toString());
 	    throw new RuntimeException(stringbuffer.toString());
 	}

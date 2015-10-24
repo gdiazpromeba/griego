@@ -105,7 +105,7 @@ public class DialogSelectorJerarquicoBeans extends DialogSelectorBeans {
 	} else {
 	    throw new RuntimeException(
 		    (new StringBuilder())
-			    .append("DialogSelectorJerarquico.setSeleccionado:  no encontr\363 nada al querer seleccionar la id ")
+			    .append("DialogSelectorJerarquico.setSeleccionado:  no encontró nada al querer seleccionar la id ")
 			    .append(s).toString());
 	}
     }

@@ -165,7 +165,7 @@ public class TipoLetra
         case 21445: 
             return 2;
         }
-        throw new RuntimeException((new StringBuilder()).append("Funci\363n TipoVocal: problemas para determinar qu\351 tipo de vocal es ").append(c1).append(" n\372mero ").append(c1).toString());
+        throw new RuntimeException((new StringBuilder()).append("Función TipoVocal: problemas para determinar qué tipo de vocal es ").append(c1).append(" número ").append(c1).toString());
     }
 
     public static ArticulacionConsonante getArticulacionConsonante(char c)

@@ -181,7 +181,7 @@ public class GerenteAdjetivosImpl implements GerenteAdjetivos
 	if (g.endsWith("seleccionaPorTipos")) {
 	    return seleccionaPorTipos((Integer[]) (Integer[]) e[0]);
 	} else {
-	    h.warn((new StringBuilder()).append("devolviendo reselecci\363n nula, ultimaSeleccion=").append(g)
+	    h.warn((new StringBuilder()).append("devolviendo reselección nula, ultimaSeleccion=").append(g)
 		    .toString());
 	    return null;
 	}

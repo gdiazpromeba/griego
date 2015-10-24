@@ -255,55 +255,66 @@ public class UtilidadesTM {
         }
     }
 
-    public void dejaSelect(DefaultTableModel paramDefaultTableModel, String[] paramArrayOfString,
-            Object[] paramArrayOfObject) {
+    /**
+     * deja sólo las filas de un tableModel cuyas celdas en las columnas dadas, tienen los valores dados.
+     * @param tableModel
+     * @param nombresColumna
+     * @param valoresCelda
+     */
+    public void dejaSelect(DefaultTableModel tableModel, String[] nombresColumna, Object[] valoresCelda) {
         int i = 0;
-        int[] arrayOfInt = A(paramDefaultTableModel, paramArrayOfString);
-        while (i < paramDefaultTableModel.getRowCount()) {
+        int[] indicesColumnas = indicesColumnas(tableModel, nombresColumna);
+        while (i < tableModel.getRowCount()) {
             int j = 1;
-            for (int k = 0; k < arrayOfInt.length; k++) {
-                Object localObject = paramDefaultTableModel.getValueAt(i, arrayOfInt[k]);
-                if (!localObject.equals(paramArrayOfObject[k])) {
+            for (int k = 0; k < indicesColumnas.length; k++) {
+                Object valorCelda = tableModel.getValueAt(i, indicesColumnas[k]);
+                if (!valorCelda.equals(valoresCelda[k])) {
                     j = 0;
                     break;
                 }
             }
             if (j == 0) {
-                paramDefaultTableModel.removeRow(i);
+                tableModel.removeRow(i);
             } else {
                 i++;
             }
         }
     }
 
-    private int[] A(DefaultTableModel paramDefaultTableModel, String[] paramArrayOfString) {
-        int[] arrayOfInt = new int[paramArrayOfString.length];
-        for (int i = 0; i < paramArrayOfString.length; i++) {
-            arrayOfInt[i] = paramDefaultTableModel.findColumn(paramArrayOfString[i]);
+    /**
+     * dado un tableModel, encuentra los índices de los nombres de columna dados
+     * @param tableModel
+     * @param nombresColumna
+     * @return
+     */
+    private int[] indicesColumnas(DefaultTableModel tableModel, String[] nombresColumna) {
+        int[] indicesColumna = new int[nombresColumna.length];
+        for (int i = 0; i < nombresColumna.length; i++) {
+            indicesColumna[i] = tableModel.findColumn(nombresColumna[i]);
         }
-        return arrayOfInt;
+        return indicesColumna;
     }
 
-    public void borraColumna(DefaultTableModel paramDefaultTableModel, int paramInt) {
-        if (paramInt == -1) {
-            StringBuffer localObject = new StringBuffer();
-            ((StringBuffer) localObject).append("error en borraColumna \n La columna índice " + paramInt);
-            ((StringBuffer) localObject).append("no existe en este TableModel. \n");
-            ((StringBuffer) localObject).append("Las columnas son: \n");
-            for (int i = 0; i < paramDefaultTableModel.getColumnCount(); i++) {
-                ((StringBuffer) localObject).append(paramDefaultTableModel.getColumnName(i) + "-");
+    public void borraColumna(DefaultTableModel tableModel, int indiceCol) {
+        if (indiceCol == -1) {
+            StringBuffer mensaje = new StringBuffer();
+            mensaje.append("error en borraColumna \n La columna índice " + indiceCol);
+            mensaje.append("no existe en este TableModel. \n");
+            mensaje.append("Las columnas son: \n");
+            for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                mensaje.append(tableModel.getColumnName(i) + "-");
             }
-            throw new RuntimeException(((StringBuffer) localObject).toString());
+            throw new RuntimeException(mensaje.toString());
         }
-        Object localObject = paramDefaultTableModel.getDataVector();
-        LinkedList localLinkedList = new LinkedList(Arrays.asList(getNombresColumna(paramDefaultTableModel)));
-        localLinkedList.remove(paramInt);
-        for (int j = 0; j < ((Vector) localObject).size(); j++) {
-            Vector localVector = (Vector) ((Vector) localObject).get(j);
-            localVector.removeElementAt(paramInt);
+        Vector<?> fila = tableModel.getDataVector();
+        List<String> localLinkedList = new LinkedList<>(Arrays.asList(getNombresColumna(tableModel)));
+        localLinkedList.remove(indiceCol);
+        for (int j = 0; j < fila.size(); j++) {
+            Vector<?> localVector = (Vector<?>) ((Vector<?>) fila).get(j);
+            localVector.removeElementAt(indiceCol);
         }
-        paramDefaultTableModel.setDataVector((Vector) localObject, new Vector(localLinkedList));
-        paramDefaultTableModel.fireTableStructureChanged();
+        tableModel.setDataVector((Vector<?>) fila, new Vector<>(localLinkedList));
+        tableModel.fireTableStructureChanged();
     }
 
     public void borraColumna(DefaultTableModel paramDefaultTableModel, String paramString) {
@@ -374,13 +385,13 @@ public class UtilidadesTM {
         } while (fila < tm.getRowCount());
     }
 
-    public void agrupaPorColumnaString2(DefaultTableModel paramDefaultTableModel, int[] paramArrayOfInt, int paramInt) {
+    public void agrupaPorColumnaString2(DefaultTableModel tableModel, int[] paramArrayOfInt, int paramInt) {
         int i = 0;
         Object[] arrayOfObject = new Object[paramArrayOfInt.length];
         do {
             int j = 1;
             for (int k = 0; k < paramArrayOfInt.length; k++) {
-                Object localObject1 = paramDefaultTableModel.getValueAt(i, paramArrayOfInt[k]);
+                Object localObject1 = tableModel.getValueAt(i, paramArrayOfInt[k]);
                 if (localObject1 == null) {
                     arrayOfObject[k] = null;
                 } else if (!localObject1.equals(arrayOfObject[k])) {
@@ -389,21 +400,21 @@ public class UtilidadesTM {
                 }
             }
             if (j == 0) {
-                Vector localVector = new Vector(paramDefaultTableModel.getColumnCount());
-                for (int m = 0; m < paramDefaultTableModel.getColumnCount(); m++) {
-                    localVector.add(null);
+                Vector<Object> columnas = new Vector<>(tableModel.getColumnCount());
+                for (int m = 0; m < tableModel.getColumnCount(); m++) {
+                    columnas.add(null);
                 }
                 for (int m = 0; m < paramArrayOfInt.length; m++) {
-                    Object localObject2 = paramDefaultTableModel.getValueAt(i, m);
-                    localVector.set(paramInt + m, localObject2);
+                    Object localObject2 = tableModel.getValueAt(i, m);
+                    columnas.set(paramInt + m, localObject2);
                 }
                 for (int m = 0; m < paramArrayOfInt.length; m++) {
-                    arrayOfObject[m] = paramDefaultTableModel.getValueAt(i, m);
+                    arrayOfObject[m] = tableModel.getValueAt(i, m);
                 }
-                paramDefaultTableModel.getDataVector().insertElementAt(localVector, i);
+                tableModel.getDataVector().insertElementAt(columnas, i);
             }
             i++;
-        } while (i < paramDefaultTableModel.getRowCount());
+        } while (i < tableModel.getRowCount());
     }
 
     public void agrupaPorColumnaString(DefaultTableModel paramDefaultTableModel, int paramInt1, int paramInt2) {

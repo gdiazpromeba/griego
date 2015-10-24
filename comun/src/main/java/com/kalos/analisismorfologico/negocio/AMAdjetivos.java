@@ -20,6 +20,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.kalos.beans.AdjetivoBean;
 import com.kalos.beans.AdjetivoComoNominalBean;
@@ -51,7 +54,7 @@ import org.springframework.context.ApplicationContextAware;
 
 public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAware {
 
-    private AMUtil amUtil;
+    private AMUtil<?> amUtil;
     private AMNominal amNominal;
     private GerenteAdjetivosComoNominales gerenteAdjetivosComoNominales;
     private GerenteAdjetivos gerenteAdjetivos;
@@ -83,7 +86,6 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
 			this.gerenteAdjetivos=(GerenteAdjetivos)contexto.getBean("gerenteAdjetivos");
 			this.gerenteAdjetivosComoNominales=(GerenteAdjetivosComoNominales)contexto.getBean("gerenteAdjetivosComoNominales");
 			this.gerenteIrrAdjetivosIndividuales=(GerenteIrrAdjetivosIndividuales)contexto.getBean("gerenteIrrAdjetivosIndividuales");
-			this.amUtil=(AMUtil)contexto.getBean("amUtil");
 			this.amNominal=(AMNominal)contexto.getBean("amNominal");
 			this.declinaAdjetivos=(DeclinaAdjetivos)contexto.getBean("declinaAdjetivos");
 			dependenciasCargadas=true;
@@ -92,8 +94,10 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
 	
 	
 
-    public long buscaCanonica(String[] entradas, Set<ResultadoUniversal> setResultado, AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
-        cargaDependencias();
+    public Set<ResultadoUniversal> buscaCanonica(String[] entradas, AACacheable cacheAA,  boolean validaContraFlexion, boolean debug) {
+        Set<ResultadoUniversal> resultados = new HashSet<>();
+    	
+    	cargaDependencias();
     	Set<TermRegSustantivo> setPaso1 = new HashSet<TermRegSustantivo>();
         Set<TermRegAdjetivo> termsAdj ;
         Set<TermRegAdjetivo> nomGenReconstruidos = new HashSet<TermRegAdjetivo>();
@@ -113,18 +117,18 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
         
        termsAdj=trataFemenino(setPaso1, debug);
 //        amUtil.conservaSolo(termsAdj, new String[]{"tipoSustantivo"}, new Object[]{131});
-        buscaNomGenDirecto(termsAdj, setResultado, debug);
+        buscaNomGenDirecto(termsAdj, resultados, debug);
         //reconstruye los temas en base a la desinencia propuesta
         amNominal.reconstruyeTemas(termsAdj, nomGenReconstruidos, cacheAA, debug); 
         //búsqueda contra las formas fáciles
-        buscaNomGenReconstruidos(nomGenReconstruidos, setResultado, debug); 
+        buscaNomGenReconstruidos(nomGenReconstruidos, resultados, debug); 
         
-        buscaEnInvariables(entradas, setResultado, debug);
-        buscaIndividuales(setEntradas, setResultado);
+        buscaEnInvariables(entradas, resultados, debug);
+        buscaIndividuales(setEntradas, resultados);
         
-        pueblaCanonicasAdjetivos(setResultado);
+        pueblaCanonicasAdjetivos(resultados);
         if (validaContraFlexion){
-            validaConFlexion(setResultado);
+            validaConFlexion(resultados);
           }
         
         long tiempoFinal = System.currentTimeMillis();
@@ -135,7 +139,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
             System.out.println("tardó " + lapso.get(Calendar.MINUTE) + " minutos " + lapso.get(Calendar.SECOND)
                     + " segundos " + lapso.get(Calendar.MILLISECOND) + " milisegundos");
         }
-        return lapsoEnMilis;
+        return resultados;
         
 
     }
@@ -164,26 +168,23 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
      * @param reus  Los resultados universales, en cualquier tipo de colección
      */
     private void pueblaCanonicasAdjetivos(Collection<ResultadoUniversal> reus){
-    	//creación de la lista de ids
-    	List<String> ids=new ArrayList<String>();
-    	for(ResultadoUniversal reu: reus){
-    		ids.add(reu.getId());
-    	}
-    	//obtención de la lista de entradas de adjetivo. Creo un mapita id-entrada.
+        
+        //creación de una lista de ids a partir de la lista de resultados universales
+        List<String> ids = reus.stream().map(reu -> reu.getId()).collect(Collectors.toList());
+        
+    	//obtención de la lista de entradas de adjetivo. Creo un mapita id-entradaAdjetivo.
     	List<AdjetivoBean> eas=gerenteAdjetivos.getBeans(ids);
-    	Map<String, AdjetivoBean> mapaEntradas=new HashMap<String, AdjetivoBean>();
-    	for (AdjetivoBean ea: eas){
-    		mapaEntradas.put(ea.getId(), ea);
-    	}
+    	Map<String, AdjetivoBean> mapaEntradas = eas.stream().collect(Collectors.toMap(AdjetivoBean::getId, Function.identity()));
 
     	//poblamiento de la forma canónica
-    	for(Iterator<ResultadoUniversal> it=reus.iterator(); it.hasNext(); ){
-    		ResultadoUniversal reu=it.next();
-    		AdjetivoBean ea=mapaEntradas.get(reu.getId());
-    		String canonica= ea.primerCampoNoVacio();
-    		canonica=OpPalabras.strBetaACompleto(canonica);
-    		reu.setFormaCanonica(canonica);
-    	}
+    	reus.stream().map(reu ->{
+    	    AdjetivoBean ea=mapaEntradas.get(reu.getId());
+            String canonica= ea.primerCampoNoVacio();
+            canonica=OpPalabras.strBetaACompleto(canonica);
+            reu.setFormaCanonica(canonica);
+            return reu;
+    	});
+  
     }
     
 
@@ -214,13 +215,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
         }
     }
     
-//    private String allHashes(Set set){
-//        StringBuffer sb=new StringBuffer();
-//        for (Object obj: set){
-//            sb.append(obj.hashCode() +",");
-//        }
-//        return sb.toString();
-//    }
+
     
     
 	/**
@@ -499,19 +494,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
 
     }
 
-    /**
-     * @return Returns the amUtil.
-     */
-    public AMUtil getAmUtil() {
-        return amUtil;
-    }
 
-    /**
-     * @param amUtil The amUtil to set.
-     */
-    public void setAmUtil(AMUtil amUtil) {
-        this.amUtil = amUtil;
-    }
 
     /**
      * @return Returns the amNominal.

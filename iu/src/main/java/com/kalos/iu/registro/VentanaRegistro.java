@@ -106,7 +106,7 @@ public class VentanaRegistro extends JDialog {
 			logger.debug("quitando molestia");
 			quitaMolestia();
 		} else {
-			logger.debug("no hubo activaci\363n");
+			logger.debug("no hubo activación");
 			JOptionPane.showMessageDialog(this, Recursos.getCadena("clave_incorrecta"));
 		}
 	}
