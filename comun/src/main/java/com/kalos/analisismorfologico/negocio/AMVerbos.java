@@ -20,6 +20,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,13 +97,13 @@ public class AMVerbos implements AnalizadorMorfologico{
 		
 		//utilizar la función "conservasolo"  para dejar una determinada rama del árbol solamente
 		paso1(setEntradas, setPaso1, cacheExtraccionPrefijos, cacheAA, debug);             //obtención de juegos voz-modo-tiempo-persona posibles según terminación
-//		amUtil.conservaSolo(setPaso1, new String[]{"voz", "modo", "tipoDesinencia"}, new Object[]{Voz.Media, Modo.Imperativo, 11});
+		//amUtil.conservaSolo(setPaso1, new String[]{"voz", "modo", "tiempo", "persona"}, new Object[]{Voz.Activa, Modo.Indicativo, Tiempo.Perfecto, Persona._2ps});
 		amVerbal.extiendeTipos(setPaso1, setPaso2, debug);   //expansión de los "nodos" de paso 1, según  pertenezcan a ciertas terminaciones
 //		amUtil.conservaSolo(setPaso2, new String[]{"tiempo", "tipoDesinencia"}, new Object[]{Tiempo.Pluscuamperfecto, 10 });
 		amVerbal.averiguaPreposiciones(setPaso2, setPaso2_5, ExtractorPrefijos.TODOS_LOS_NODOS,cacheExtraccionPrefijos, debug); //averiguación de preposiciones
 		amUtil.incorporaADestransformar(setPaso2_5, debug);
 		amUtil.desTransformacionesTemas(setPaso2_5, setPaso3, temIrr, debug); //des-transformación de aumentos y reduplicaciones
-		amVerbal.incorporaTemaPropuestoReconstruidos(setPaso3, temIrr, debug);
+		amVerbal.incorporaTemaPropuestoAReconstruidos(setPaso3, temIrr, debug);
 		amVerbal.incorporaTemaPropuestoIrregulares(temIrr, debug);
 		
 //		amUtil.conservaSolo(setPaso3, new String[]{"FORMA_ORIGINAL"}, new Object[]{OpPalabras.strBetaACompleto("E)/PEISQE")});
@@ -149,13 +150,7 @@ public class AMVerbos implements AnalizadorMorfologico{
 			ResultadoUniversal reu=(ResultadoUniversal)it.next();
 			VerboBean verbo=gerenteVerbos.seleccionaUno(reu.getIdSimpleOCompuesto());
 			Ocurrencia ocVerbo=verbos.conjuga(verbo, reu.getParticularidad());
-			List<String> formas=ocVerbo.getFormas(reu.getVoz(), reu.getModo(), reu.getTiempo(), 
-					reu.getFuerte(), reu.getPersona()); 
-			if (formas==null){
-				it.remove();
-				continue;
-			}
-			if (!formas.contains(reu.getFormaAccidentada())){
+			if (!ocVerbo.contieneForma(reu.getFormaAccidentada(), reu.getVoz(), reu.getModo(), reu.getTiempo(), reu.getFuerte(), reu.getPersona())){
 				it.remove();
 				continue;
 			}
@@ -175,32 +170,47 @@ public class AMVerbos implements AnalizadorMorfologico{
 	 * @param siguiente
 	 * @param debug
 	 */
-	private void paso1(Set<String> entradas, Set<TermRegVerbo> siguiente,  HashMap<Object[], TemaConPreps[]> cacheExtraccionPrefijos,  
-			AACacheable cacheAA, boolean debug){
+	private void paso1(Set<String> entradas, Set<TermRegVerbo> siguiente,  HashMap<Object[], TemaConPreps[]> cacheExtraccionPrefijos,  AACacheable cacheAA, boolean debug){
 		StringBuffer sbDebug=new StringBuffer();
 		for (String entrada: entradas){
 			String entradaBeta=OpPalabras.strCompletoABeta(entrada);
 			String entradaBetaDesacentuada=OpPalabras.strCompletoABeta(OpPalabras.desacentuar(entrada));
 			List<TermRegVerbo> terminaciones=gerenteTermRegVerbo.seleccionaPorTerminacion(entradaBetaDesacentuada);
-		    for (TermRegVerbo trv: terminaciones){
-				String regex=trv.getRegEx();
-				if (regex!=null && !entradaBeta.matches(regex)){
-					if (debug){
-						sbDebug.append("la terminación del tipo de desinencia " + trv.getTipoDesinencia()+  " es '" + trv.getTerminacion()  + "' y coincide,");
-						sbDebug.append(" pero no así la REGEXP "  + trv.getRegEx() + " \n");
+		    
+			Set<TermRegVerbo>  resultado = terminaciones.stream()
+			.filter(
+			  trv -> {
+					String regex=trv.getRegEx();
+					if (regex!=null && !entradaBeta.matches(regex)){
+						if (debug){
+							sbDebug.append("la terminación del tipo de desinencia " + trv.getTipoDesinencia()+  " es '" + trv.getTerminacion()  + "' y coincide,");
+							sbDebug.append(" pero no así la REGEXP "  + trv.getRegEx() + " \n");
+						}
+						return false;
 					}
-					continue;
-				}
-				if (!amVerbal.silabaAcentoAceptables(entrada, trv, cacheExtraccionPrefijos, cacheAA)){
-					if (debug){
-						sbDebug.append("la terminación del tipo de desinencia " + trv.getTipoDesinencia() + " es '" + trv.getTerminacion()  + "' y coincide,");
-						sbDebug.append(" pero no así los campos sílaba-acento \n");
+					return true;
+			  } 
+			)
+			.filter(
+			  trv ->{
+					if (!amVerbal.silabaAcentoAceptables(entrada, trv, cacheExtraccionPrefijos, cacheAA)){
+						if (debug){
+							sbDebug.append("la terminación del tipo de desinencia " + trv.getTipoDesinencia() + " es '" + trv.getTerminacion()  + "' y coincide,");
+							sbDebug.append(" pero no así los campos sílaba-acento \n");
+						}
+						return false;
 					}
-					continue;
-				}
-				trv.setFormaOriginal(entrada);
-				siguiente.add(trv);
-			}
+					return true;
+			  }
+			)
+			.map( trv -> {
+		      trv.setFormaOriginal(entrada);
+		      return trv;
+		     })
+			.collect(Collectors.toSet());
+			
+			siguiente.addAll(resultado);
+
 		}
 		if (debug){
 		  System.out.println("después de la búsqueda de terminaciones (paso 1) *********************");
@@ -281,8 +291,7 @@ public class AMVerbos implements AnalizadorMorfologico{
 //			if (cacheAA.getAnalisisAcento(entradas[i]).actuales.indiceLetraAcentuada > -1)
 //				respetarFinales = entradas[i].length()
 //						- cacheAA.getAnalisisAcento(entradas[i]).actuales.indiceLetraAcentuada;
-			TemaConPreps[] extracciones = extractorPrefijos.averiguaPrefijos(entradas[i], respetarFinales,
-					cacheExtraccionPreps);
+			TemaConPreps[] extracciones = extractorPrefijos.averiguaPrefijos(entradas[i], respetarFinales, cacheExtraccionPreps);
 			for (int j = 0; j < extracciones.length; j++) {
 				//si  el resto no tiene acento (por ejemplo, porque éste caía en al preposición), la acentúo
 				String entrada=extracciones[j].resto;
@@ -291,8 +300,9 @@ public class AMVerbos implements AnalizadorMorfologico{
 				  entrada=OpPalabras.acentua(entrada);
 				}
 				entrada=OpPalabras.strCompletoABeta(entrada);
-				if (debug)
+				if (debug){
 					System.out.println("buscando " + entrada);
+				}
 				List<IrrVerboIndividual> dm=encuentraFormasIndividuales(entrada, cacheAA);
 
 				Map<String, VerboBean> mapBusquedas = new HashMap<String, VerboBean>();
@@ -304,22 +314,9 @@ public class AMVerbos implements AnalizadorMorfologico{
 						entradaVerbo = gerenteVerbos.seleccionaIndividualSinSignificado(idVerbo);
 						mapBusquedas.put(idVerbo, entradaVerbo);
 					}
-					String formaAccidentada = entradas[i];
-					Particularidad particIrr =  bean.getPartic();
-					Particularidad particCanonica = entradaVerbo.getParticularidad();
-					Voz voz = bean.getVoz();
-					Aspecto aspecto = null;
-					Persona persona = null;
-					Tiempo tiempo = null;
-					Modo modo = null;
-					FuerteDebil fuerte = null;
-					modo = bean.getModo();
-					persona = bean.getPersona();;
-					tiempo = bean.getTiempo();
-					fuerte = bean.getFuerte();
 
-					ResultadoUniversal reu = new ResultadoUniversal(TipoPalabra.Verbo, idVerbo, null, particCanonica, particIrr, voz,
-							formaAccidentada, tiempo, aspecto, fuerte, persona, null, null, null, modo, null, null,
+					ResultadoUniversal reu = new ResultadoUniversal(TipoPalabra.Verbo, idVerbo, null, entradaVerbo.getParticularidad(),  bean.getPartic(), bean.getVoz(),
+							entradas[i], bean.getTiempo(), null, bean.getFuerte(), bean.getPersona(), null, null, null, bean.getModo(), null, null,
 							extracciones[j].preps, null);
 
 					setResultado.add(reu);

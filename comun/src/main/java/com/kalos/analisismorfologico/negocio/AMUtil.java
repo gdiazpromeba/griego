@@ -494,7 +494,10 @@ public class AMUtil <T extends TermRegVerbal>{
                 ObjYDest<T> regDest = (ObjYDest<T>) obj;
                 System.out.println(regDest.getRegistro());
                 DesTransformaciones dest = regDest.getDestransformacion();
-                System.out.println("  aumento=" + dest.getAumento() + " reduplicación=" + dest.isReduplicacion());
+                StringBuilder sb = new StringBuilder();
+                sb.append(" aumento=").append(dest.getAumento()!=null?dest.getAumento().name():null);
+                sb.append("reduplicacion=").append(dest.isReduplicacion());
+                System.out.println(sb.toString());
             }
         }
     }

@@ -66,7 +66,7 @@ public class AMInfinitivos implements AnalizadorMorfologico {
 		this.amVerbal.averiguaPreposiciones(termsRegInf, triDespuesPreps, 1, cacheExtraccionPrefijos, debug);
 		this.amUtil.incorporaADestransformar(triDespuesPreps, debug);
 		this.amUtil.desTransformacionesTemas(triDespuesPreps, destransformados, aBuscarPorTema, debug);
-		this.amVerbal.incorporaTemaPropuestoReconstruidos(destransformados, aBuscarPorTema, debug);
+		this.amVerbal.incorporaTemaPropuestoAReconstruidos(destransformados, aBuscarPorTema, debug);
 		this.amVerbal.incorporaTemaPropuestoIrregulares(aBuscarPorTema, debug);
 		this.amUtil.vocalUnitivaTemas(destransformados, aBuscarPorTema);
 		this.amVerbal.aplicaEncuentraTemasTemprano(destransformados, localArrayList2, aBuscarPorTema, debug);

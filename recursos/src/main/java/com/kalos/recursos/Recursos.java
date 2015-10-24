@@ -31,6 +31,11 @@ public class Recursos {
     private static ResourceBundle recursos;
 
     public static CargaRecursos cargador = new CargaRecursos();
+    
+    static{
+        locale=new Locale("en");
+        recursos = ResourceBundle.getBundle("Mensajes", locale);
+    }
 
     //	private static Font font = new Font("Kalos Greek", Font.PLAIN, 12);
     //	private static Font font = new Font("Arial Unicode MS", Font.PLAIN, 12);
@@ -44,6 +49,7 @@ public class Recursos {
      * @return
      */
     public static String getCadena(String clave) {
+        if (clave==null) return null;
         String ret = null;
         try {
             ret = recursos.getString(clave);

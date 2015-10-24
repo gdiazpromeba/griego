@@ -42,7 +42,7 @@ public class DesTransformaciones {
     public String toString(){
         StringBuffer sb=new StringBuffer("DesTransformaciones: ");
         sb.append(" redup=" + reduplicacion + " ");
-        sb.append(" aum:" + aumento + " ");
+        sb.append(" aum:").append(aumento!=null?aumento.name():"null").append(" ");
         if (desReduplicada!=null){
             sb.append("desRed=" + OpPalabras.strCompletoABeta(desReduplicada) + " "); 
         }else{

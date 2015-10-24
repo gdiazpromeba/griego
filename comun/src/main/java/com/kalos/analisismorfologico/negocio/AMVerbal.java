@@ -8,6 +8,9 @@ import static com.kalos.enumeraciones.CompLetras.cIotaCorta;
 import static com.kalos.enumeraciones.CompLetras.cIotaDieresisCorta;
 import static com.kalos.enumeraciones.CompLetras.cUpsilonCorta;
 import static com.kalos.enumeraciones.CompLetras.cUpsilonDieresisCorta;
+import static java.util.stream.Collectors.partitioningBy;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,7 +30,6 @@ import com.kalos.beans.TermRegParticipio;
 import com.kalos.beans.TermRegVerbal;
 import com.kalos.beans.TermRegVerbo;
 import com.kalos.beans.TieneJuego;
-import com.kalos.beans.TieneTemaPropuesto;
 import com.kalos.beans.VerboBean;
 import com.kalos.beans.Verboide;
 import com.kalos.datos.gerentes.GerenteIrrInfinitivos;
@@ -68,11 +70,11 @@ import com.kalos.operaciones.TiposVerbo;
  *         utilizar por AMVerbos, AMParticipios y AMInfinitivos
  * 
  */
-public class AMVerbal <T extends TermRegVerbal>{
+public class AMVerbal<T extends TermRegVerbal> {
 
 	@Autowired
 	private AMUtil<T> amUtil;
-	
+
 	private ExtractorPrefijos extractorPrefijos;
 	private GerenteIrrVerbosIndividuales gerenteIrrVerbosIndividuales;
 	private GerenteVerbosCompuestos gerenteVerbosCompuestos;
@@ -366,7 +368,7 @@ public class AMVerbal <T extends TermRegVerbal>{
 	 * Expande los nodos de la lista anterior, creando o enganchando para cada
 	 * TIPO_DESINENCIA, uno o más tipos de verbo extendido.
 	 */
-	 public void extiendeTipos(Set<T> setOriginal, Set<T> setSiguiente, boolean debug) {
+	public void extiendeTipos(Set<T> setOriginal, Set<T> setSiguiente, boolean debug) {
 		for (Iterator<T> it = setOriginal.iterator(); it.hasNext();) {
 			T trv = it.next();
 			trv.setTerminacion(OpPalabras.strBetaACompleto(trv.getTerminacion()));
@@ -558,38 +560,55 @@ public class AMVerbal <T extends TermRegVerbal>{
 	 *            "temaPropuesto"
 	 * @param debug
 	 */
-	public void incorporaTemaPropuestoReconstruidos(Collection<ObjYDest<T>> reconstruidos, Collection<ObjYDest<T>> irregulares, boolean debug) {
-		for (Iterator<ObjYDest<T>> it = reconstruidos.iterator(); it.hasNext();) {
-			ObjYDest<T> regDest = it.next();
-			TermRegVerbal reg = regDest.getRegistro();
-			String formaDestransformada = reg.getFormaDestransformada();
-			String terminacion = reg.getTerminacion();
-			String temaPropuesto = null;
-
+	public void incorporaTemaPropuestoAReconstruidos(Collection<ObjYDest<T>> reconstruidos, Collection<ObjYDest<T>> irregulares, boolean debug) {
+		
+		//separo en líquidos y no líquidos
+		Map<Boolean, List<ObjYDest<T>>> liqNoLiq = reconstruidos.stream().collect(
+		  partitioningBy(oyd->  TiposVerbo.esLiquido(oyd.getRegistro().getTipoVerboExtendido()))
+		);
+		
+		//los líquidos, los resto del original
+		List<ObjYDest<T>> liquidos = liqNoLiq.get(Boolean.TRUE);
+		reconstruidos.removeAll(liquidos);
+		
+		//luego les calculo (a los liquidos) su propio tema, y los agrego a irregulares, desde donde seguirán su camino a la canonización
+		liquidos = liquidos.stream().map( oyd -> {
+			T reg = oyd.getRegistro();
 			TiempoOAspecto toa = reg.getTiempoOAspecto();
-
-			if (TiposVerbo.esLiquido(reg.getTipoVerboExtendido())) {
-				it.remove(); // los líquidosno pueden seguir camino a la canonización, pero la paso a irregulares
-				if (TransformadorTiempoAspecto.comoTiempo(toa) == Tiempo.Futuro) {
-					temaPropuesto = formaDestransformada.substring(0,
-							formaDestransformada.length() - terminacion.length());
-					temaPropuesto = temaPropuesto.concat(OpPalabras.strBetaACompleto("E"));
-				} else {
-					temaPropuesto = formaDestransformada.substring(0,
-							formaDestransformada.length() - terminacion.length());
-				}
-				((TieneTemaPropuesto) reg).setTemaPropuesto(temaPropuesto);
-				irregulares.add(regDest);
+			String temaPropuesto;
+			if (TransformadorTiempoAspecto.comoTiempo(toa) == Tiempo.Futuro) {
+				temaPropuesto = reg.getFormaDestransformada().substring(0,reg.getFormaDestransformada().length() - reg.getTerminacion().length());
+				temaPropuesto = temaPropuesto.concat(OpPalabras.strBetaACompleto("E"));
 			} else {
-				if (terminacion.length() > formaDestransformada.length()) {
-					it.remove();
-					continue;
-				}
-				temaPropuesto = formaDestransformada.substring(0, formaDestransformada.length() - terminacion.length());
-				((TieneTemaPropuesto) reg).setTemaPropuesto(temaPropuesto);
-
+				temaPropuesto = reg.getFormaDestransformada().substring(0,reg.getFormaDestransformada().length() - reg.getTerminacion().length());
 			}
-		}
+			reg.setTemaPropuesto(temaPropuesto);
+			return oyd;
+		})
+		.collect(toList());
+		irregulares.addAll(liquidos);
+				
+        //a los no líquidos, les quito también las forma demasiado cortas
+		List<ObjYDest<T>> noLiq = liqNoLiq.get(Boolean.FALSE);
+		noLiq = noLiq.stream().filter(oyd -> {
+          	T reg = oyd.getRegistro();
+          	return reg.getTerminacion().length() <= reg.getFormaDestransformada().length(); 
+		})
+		.collect(toList());
+		
+		//finalmente, a los no líquidos también les doy su tema propuesto, y siguen camino a la canonización
+		noLiq = noLiq.stream().map( oyd->{
+			T reg = oyd.getRegistro();
+			String temaPropuesto = reg.getFormaDestransformada().substring(0, reg.getFormaDestransformada().length() - reg.getTerminacion().length());
+			reg.setTemaPropuesto(temaPropuesto);
+			return oyd;
+		})
+	    .collect(toList());
+		
+        //esto no hace falta porque las referencias de reconstruidos ya fueron modificadas
+		//		reconstruidos.clear();
+        //		reconstruidos.addAll(noLiq);
+
 		if (debug) {
 			System.out.println("AMVerbal.incorporaTemasPropuestoReconstruido ********");
 			System.out.println(" el set 'regular' con 'temaPropuesto' poblado (si se pudo): ");
@@ -601,64 +620,72 @@ public class AMVerbal <T extends TermRegVerbal>{
 
 		}
 	}
+	
+	
 
-	/**
-	 * 
-	 * Toma un set de registros que tienen FORMA_DESTRANSFORMADA, e inventa el
-	 * campo TEMA_PROPUESTO, cortándoles la terminación
-	 * 
-	 * @param destransformados
-	 *            la coleción inicial
-	 * @param seSuponeIrregular
-	 *            me da la pauta de que puedo experimentar con reconstrucciones
-	 *            de tema que sólo aparecerían en la tabla de IRR_VERBOS, como
-	 *            los futuros áticos
-	 * @param debug
-	 */
-	public void incorporaTemaPropuestoIrregulares(Collection<ObjYDest<T>> irregulares, boolean debug) {
-		for (Iterator<ObjYDest<T>> it = irregulares.iterator(); it.hasNext();) {
-			Object obj = it.next();
 
-			ObjYDest<T> regDest = (ObjYDest<T>) obj;
-			TermRegVerbal bean = regDest.getRegistro();
-
-			String formaDestransformada = bean.getFormaDestransformada();
-			String terminacion = bean.getTerminacion();
-			boolean tieneTemaPropuesto = ((TieneTemaPropuesto) bean).getTemaPropuesto() != null;
-			if (!tieneTemaPropuesto) { // porque algunas ya pueden haber
-				// sido agregadas por
-				// incorporaTemaPropuestoReconstruidos
-				String temaPropuesto;
-				boolean esLiquido = TiposVerbo.esLiquido(bean.getTipoDesinencia());
-				TiempoOAspecto toa = bean.getTiempoOAspecto();
-				boolean esFuturo = TransformadorTiempoAspecto.comoTiempo(toa) == Tiempo.Futuro;
-				if (esLiquido && esFuturo && bean.getVoz() != Voz.Pasiva) {
-					temaPropuesto = formaDestransformada.substring(0,
-							formaDestransformada.length() - terminacion.length());
-					temaPropuesto = temaPropuesto.concat(OpPalabras.strBetaACompleto("E"));
-				} else {
-					// para verbos muy cortos (que son de todos modos
-					// irregulares), la terminación
-					// puede ser igual de larga que la forma, así que considero
-					// eso
-					if (formaDestransformada.length() <= terminacion.length()) {
-						it.remove();
-						continue;
-					}
-					temaPropuesto = formaDestransformada.substring(0,
-							formaDestransformada.length() - terminacion.length());
-				}
-				((TieneTemaPropuesto) bean).setTemaPropuesto(temaPropuesto);
-			}
-
-		}
+	public void incorporaTemaPropuestoIrregulares(List<ObjYDest<T>> irregulares, boolean debug) {
+		
+		//actuo sólo sobre los que no tienen tema propuesto ya
+		//(a algunos, se los pudo haber agregado incorporaRemaPropuestoAReconstruidos)
+		List<ObjYDest<T>> sinTP = irregulares.stream().filter( oyd->{
+		  T trv = oyd.getRegistro();
+		  return trv.getTemaPropuesto()==null;
+		})
+	    .collect(toList());
+		
+		//este grupo de elementos a poblar se divide en dos: los futuros líquidos no pasivos, y todo el resto
+		Map<Boolean, List<ObjYDest<T>>> futLiqNopOResto = sinTP.stream().collect(
+		  partitioningBy( oyd->{
+			  T trv = oyd.getRegistro();
+			  boolean esLiquido = TiposVerbo.esLiquido(trv.getTipoDesinencia());
+			  TiempoOAspecto toa = trv.getTiempoOAspecto();
+			  boolean esFuturo = TransformadorTiempoAspecto.comoTiempo(toa) == Tiempo.Futuro;
+			  return (esLiquido && esFuturo && trv.getVoz() != Voz.Pasiva);
+		  })
+		);
+	    List<ObjYDest<T>> futLiqNop = futLiqNopOResto.get(Boolean.TRUE);
+	    List<ObjYDest<T>> resto = futLiqNopOResto.get(Boolean.FALSE);
+	    
+	    //les aplico su transformación a los futuros líquidos no pasivos
+	    futLiqNop.stream().map(oyd->{
+	    	T trv = oyd.getRegistro();
+	    	String temaPropuesto = trv.getFormaDestransformada().substring(0, trv.getFormaDestransformada().length() - trv.getTerminacion().length());
+			temaPropuesto = temaPropuesto.concat(OpPalabras.strBetaACompleto("E"));
+	    	trv.setTemaPropuesto(temaPropuesto);
+	    	return oyd;
+	    })
+	    .collect(toList());
+	    
+	    //del resto, primero elimino los muy cortos (que son de todos modos irregulares)
+	    //permito que la terminación sea hasta igual de larga que la forma
+	    List<ObjYDest<T>> restoCortos = resto.stream().filter(oyd->{
+	    	T trv = oyd.getRegistro();
+	    	return trv.getFormaDestransformada().length() <= trv.getTerminacion().length();
+	    })
+	    .collect(toList());
+	    //eliminarlos significa restarlos de irregulares
+	    irregulares.removeAll(restoCortos);
+		
+	    
+	    //al resto no cortos, les aplico la transformación que puebla el tema propuesto.
+	    //Esta sería la transformación "normal"
+	    resto.removeAll(restoCortos);
+	    resto.stream().map(oyd->{
+	    	T trv = oyd.getRegistro();
+	    	String temaPropuesto = trv.getFormaDestransformada().substring(0, trv.getFormaDestransformada().length() - trv.getTerminacion().length());
+	    	trv.setTemaPropuesto(temaPropuesto);
+	    	return oyd;
+	    })
+	    .collect(toList());	    
 
 		if (debug) {
 			System.out.println("*** incorporaTemaPropuestoIrregulares ***");
 			amUtil.debugBeans(irregulares, new String[] { "FORMA_ORIGINAL", "TERMINACION", "FORMA_DESTRANSFORMADA",
 					"TEMA_PROPUESTO", "NOM_PROPUESTO", "GEN_PROPUESTO", "TERM_VERBALIZADA", "FORMA_A_DESTRANSFORMAR" });
 		}
-	}
+	}	
+
 
 	/**
 	 * Se aplica a una forma verbal que ya sé que no es de un vocálico contracto
@@ -678,25 +705,25 @@ public class AMVerbal <T extends TermRegVerbal>{
 	 * para los infinitivos. porque el campo "tiempoOAspecto" acepta el campo
 	 * TIEMPO de los verbos o el campo ASPECTO de los infinitivos
 	 */
-	public void restauraForma(Voz voz, TiempoOAspecto tiempoOAspecto, int conjugacion, String terminacion,
-			List<String> lstResultados, String temaPropuesto, AACacheable cacheAA) {
+	public void restauraForma(T trv,  List<String> lstResultados, AACacheable cacheAA) {
+		Voz voz = trv.getVoz();
+		TiempoOAspecto tiempoOAspecto = trv.getTiempoOAspecto();
+		String temaPropuesto = trv.getTemaPropuesto();
 		Tiempo tiempo = TransformadorTiempoAspecto.comoTiempo(tiempoOAspecto);
+		String terminacion = trv.getTerminacion();
+		int conjugacion = trv.getTipoVerboExtendido();
 		String sAux;
 		String sTema = OpPalabras.desacentuar(temaPropuesto);
 		switch (conjugacion) {
 		case TipoVerbo.UPSILON_NORMAL:
-			// si la forma termina en diptongo, por ejemplo E)/LUON, no tengo
-			// manera de saber si
-			// el tema era originalmente con vocal breve (LU/W) o con vocal
-			// larga (LU_/W) , de modo
+			// si la forma termina en diptongo, por ejemplo E)/LUON, no tengo manera de saber si
+			// el tema era originalmente con vocal breve (LU/W) o con vocal larga (LU_/W) , de modo
 			// que agrego las dos posibilidades.
-			// Lo mismo pasa si el tema es pasivo, se acorta y no tengo manera
-			// de saber si procede de un
+			// Lo mismo pasa si el tema es pasivo, se acorta y no tengo manera de saber si procede de un
 			// tema largo o corto
 			// Lo mismo si es un tema de perfectivo
 			boolean esPerfectivo = (tiempo.equals(Tiempo.Perfecto) || tiempo.equals(Tiempo.Pluscuamperfecto));
-			boolean esTemaPasivo = voz.equals(Voz.Pasiva)
-					&& (tiempo.equals(Tiempo.Futuro) || tiempo.equals(Tiempo.Aoristo));
+			boolean esTemaPasivo = voz.equals(Voz.Pasiva) && (tiempo.equals(Tiempo.Futuro) || tiempo.equals(Tiempo.Aoristo));
 			if ((terminacion.length() > 1
 					&& OpPalabras.esDiptongo(sTema.charAt(sTema.length() - 1), terminacion.charAt(0))) || esTemaPasivo
 					|| esPerfectivo) {
@@ -715,8 +742,7 @@ public class AMVerbal <T extends TermRegVerbal>{
 			break;
 		case TipoVerbo.IOTA_NORMAL:
 			// idem que con la upsilon, primero verifico diptongo
-			if ((terminacion.length() > 1
-					&& OpPalabras.esDiptongo(sTema.charAt(sTema.length() - 1), terminacion.charAt(0)))
+			if ((terminacion.length() > 1 && OpPalabras.esDiptongo(sTema.charAt(sTema.length() - 1), terminacion.charAt(0)))
 					|| (voz == Voz.Pasiva && (tiempo.equals(Tiempo.Futuro) || tiempo.equals(Tiempo.Aoristo))
 							|| (tiempo.equals(Tiempo.Perfecto) || tiempo.equals(Tiempo.Pluscuamperfecto)))) {
 				String formaFinal = OpPalabras.comeFinal(sTema, 1) + OpPalabras.strBetaACompleto("I/W");
@@ -836,34 +862,27 @@ public class AMVerbal <T extends TermRegVerbal>{
 	 * las terminaciones
 	 */
 	@SuppressWarnings("unchecked")
-	public void envoltorioRestauraFormas(Set<ObjYDest<T>> setPaso3, Set<T> setSiguiente,
-			AACacheable cacheAA, boolean debug) {
-		for (ObjYDest<T> red : setPaso3) {
-			T bean = (T) red.getRegistro();
-			// si la desinencia de la que el proceso partió es fuerte, entonces
-			// es intrínsecamente irregular y
-			// no tiene sentido tratar de recomponer una forma canónica
-			FuerteDebil fuerte = bean.getFuerte();
-			if (fuerte == FuerteDebil.Fuerte)
-				continue;
-			List<String> lstResTemas = new ArrayList<String>();
-
-			TiempoOAspecto toa = bean.getTiempoOAspecto();
-			Voz voz = bean.getVoz();
-			int tipoVerboExtendido = bean.getTipoVerboExtendido();
-			String terminacion = bean.getTerminacion();
-			String temaPropuesto = bean.getTemaPropuesto();
-			restauraForma(voz, toa, tipoVerboExtendido, terminacion, lstResTemas, temaPropuesto, cacheAA);
-			for (int e = 0; e < lstResTemas.size(); e++) {
-				String formaRestaurada = lstResTemas.get(e);
-				T regNew = (T) bean.clona();
-				((TieneTemaPropuesto) regNew).setTemaPropuesto(formaRestaurada);
-				setSiguiente.add((T) regNew);
-			}
-		}
+	public void envoltorioRestauraFormas(Set<ObjYDest<T>> setOriginal, Set<T> setSiguiente, AACacheable cacheAA, boolean debug) {
+		//descarto los fuertes, ya que son intrínsicamente irregulares
+	  setOriginal = setOriginal.stream()
+				.filter(oyd -> oyd.getRegistro().getFuerte()!= FuerteDebil.Fuerte)
+				.collect(toSet());
+		
+		setOriginal.stream().forEach( oyd ->{
+				T trv =  oyd.getRegistro();
+				List<String> lstResTemas = new ArrayList<String>();
+				restauraForma(trv, lstResTemas, cacheAA);
+				Set<T> nuevos = lstResTemas.stream().map(s->{
+				  T regNew = trv.clona();
+				  regNew.setTemaPropuesto(s);
+			    return regNew;	  
+				}).collect(toSet());
+				setSiguiente.addAll(nuevos);
+		});
+		
 		if (debug) {
 			System.out.println("AMVerbal.envoltorioRestauraFormas (pegar el tema con la terminación) *************");
-			System.out.println("  el set de entrada mide " + setPaso3.size());
+			System.out.println("  el set de entrada mide " + setOriginal.size());
 			System.out.println("  el set de siguiente es ");
 			amUtil.debugBeans(setSiguiente, new String[] { "terminacion", "formaOriginal", "temaPropuesto",
 					"formaOriginalCompuesta", "formaADestransformar", "formaDestransformada" });
@@ -907,7 +926,8 @@ public class AMVerbal <T extends TermRegVerbal>{
 		}
 	}
 
-	public void encuentraTemasTemprano(Set<ObjYDest<T>> nodos, List<T> resultadosIrr, Map<String, List<IrrVerbo>> busquedasHechas, boolean debug) {
+	public void encuentraTemasTemprano(Set<ObjYDest<T>> nodos, List<T> resultadosIrr,
+			Map<String, List<IrrVerbo>> busquedasHechas, boolean debug) {
 		StringBuffer sbDebug = new StringBuffer();
 
 		for (ObjYDest<T> regDest : nodos) {
@@ -1059,8 +1079,7 @@ public class AMVerbal <T extends TermRegVerbal>{
 	 * @param irregularidad
 	 * @return
 	 */
-	private boolean comparacionAceptable(TermRegVerbal reconstruido, IrrVerbo irregularidad, StringBuffer sbDebug,
-			boolean debug) {
+	private boolean comparacionAceptable(TermRegVerbal reconstruido, IrrVerbo irregularidad, StringBuffer sbDebug, boolean debug) {
 		TiempoOAspecto toaReconstruido = reconstruido.getTiempoOAspecto();
 		boolean fuerteReconstruido = reconstruido.getFuerte() == FuerteDebil.Fuerte;
 		Voz vozReconstruida = reconstruido.getVoz();
@@ -1191,7 +1210,8 @@ public class AMVerbal <T extends TermRegVerbal>{
 	 *            conjunto de entrada con temas irregulares
 	 * @param debug
 	 */
-	public void aplicaEncuentraTemasTemprano(Set<ObjYDest<T>> setSiguiente, List<T> resultadosIrr, List<ObjYDest<T>> aBuscarPorTema, boolean debug) {
+	public void aplicaEncuentraTemasTemprano(Set<ObjYDest<T>> setSiguiente, List<T> resultadosIrr,
+			List<ObjYDest<T>> aBuscarPorTema, boolean debug) {
 		resultadosIrr.clear();
 		Map<String, List<IrrVerbo>> busquedasHechas = new HashMap<String, List<IrrVerbo>>();
 		encuentraTemasTemprano(setSiguiente, resultadosIrr, busquedasHechas, debug);
@@ -1215,8 +1235,8 @@ public class AMVerbal <T extends TermRegVerbal>{
 	 * @param setSiguiente
 	 */
 	@SuppressWarnings("unchecked")
-	public void averiguaPreposiciones(Collection<T> setOriginal, Set<T> setSiguiente,
-			int nivelPreposiciones, Map<Object[], TemaConPreps[]> cacheExtraccionPrefijos, boolean debug) {
+	public void averiguaPreposiciones(Collection<T> setOriginal, Set<T> setSiguiente, int nivelPreposiciones,
+			Map<Object[], TemaConPreps[]> cacheExtraccionPrefijos, boolean debug) {
 
 		// si el nivel de extractorPrefijos es 0, simplemente copio el set
 		if (nivelPreposiciones == ExtractorPrefijos.NADA) {
@@ -1289,8 +1309,6 @@ public class AMVerbal <T extends TermRegVerbal>{
 			reu.setFormaCanonica(canonica);
 		}
 	}
-
-
 
 	/**
 	 * @return Returns the gerenteIrrVerbos.
