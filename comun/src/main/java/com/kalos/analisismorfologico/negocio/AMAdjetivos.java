@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collector;
@@ -198,21 +199,13 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
             ResultadoUniversal reu=it.next();
             
             EnumMap<Particularidad, OcAdjetivo> mapaOcurrencias= declinaAdjetivos.declina(reu.getId());
-            OcAdjetivo ocurrencia=mapaOcurrencias.get(reu.getParticularidad());
-            if (ocurrencia==null){
-                it.remove();
-                continue;
+            Optional<OcAdjetivo> ocurrencia=  Optional.ofNullable(mapaOcurrencias.get(reu.getParticularidad()));
+            
+            if (!ocurrencia.isPresent() || !ocurrencia.get().contieneForma(reu.getFormaAccidentada(), reu.getGrado(), reu.getGenero(), reu.getCaso(), reu.getNumero())){
+            	it.remove();
+            	continue;
             }
-            List<String> formas=ocurrencia.getForm(reu.getGrado(), reu.getGenero(), reu.getCaso(), reu.getNumero());
-            if (formas==null){
-                it.remove();
-                continue;
-            }
-            if (!formas.contains(reu.getFormaAccidentada())){
-                it.remove();
-                continue;
-            }
-        }
+         }
     }
     
 

@@ -8,7 +8,7 @@ import com.kalos.datos.dao.TermRegSustantivoDAO;
 import com.kalos.enumeraciones.Caso;
 import com.kalos.enumeraciones.Numero;
 
-public class GerenteTermRegSustantivoImpl <T extends TermRegNominal> implements GerenteTermRegSustantivo   {
+public class GerenteTermRegSustantivoImpl  implements GerenteTermRegSustantivo   {
 
 	
 	private TermRegSustantivoDAO termRegSustantivoDAO;
@@ -18,8 +18,8 @@ public class GerenteTermRegSustantivoImpl <T extends TermRegNominal> implements 
 	/* (non-Javadoc)
 	 * @see com.kalos.datos.gerentes.GerenteTermRegSustantivo#seleccionaPorTerminacion(java.lang.String)
 	 */
-	public List<T> seleccionaPorTerminacion(String terminacion) {
-		List<T> resultado= termRegSustantivoDAO.seleccionaPorTerminacion(terminacion);
+	public List<TermRegSustantivo> seleccionaPorTerminacion(String terminacion) {
+		List<TermRegSustantivo> resultado= termRegSustantivoDAO.seleccionaPorTerminacion(terminacion);
 		return resultado;
 	}
 
