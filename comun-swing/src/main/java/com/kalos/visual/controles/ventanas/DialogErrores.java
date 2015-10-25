@@ -204,11 +204,6 @@ public class DialogErrores extends JDialog {
       	StringBuffer sb=new StringBuffer();
       	sb.append("KALÓS version " + Configuracion.getVersionNumero() + " \n");
       	sb.append("Copyright SIR MV Incorporated \n");
-      	if (Configuracion.getNombre()==null){
-      		sb.append(Recursos.getCadena("usuario_no_registrado"));
-      	}else{
-      		sb.append(Recursos.getCadena("dueño_registrado") + ": "  + Configuracion.getNombre());	
-      	}
       	JOptionPane.showMessageDialog(comp,  sb.toString(), Recursos.getCadena("acerca_de"), JOptionPane.PLAIN_MESSAGE);
       }
 

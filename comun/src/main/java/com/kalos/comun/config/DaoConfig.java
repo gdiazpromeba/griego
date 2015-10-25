@@ -49,8 +49,6 @@ import com.kalos.datos.dao.PreposicionesDAO;
 import com.kalos.datos.dao.PreposicionesDAOImpl;
 import com.kalos.datos.dao.PreposicionesEnVerbosDAO;
 import com.kalos.datos.dao.PreposicionesEnVerbosDAOImpl;
-import com.kalos.datos.dao.SeguridadDAO;
-import com.kalos.datos.dao.SeguridadDAOImpl;
 import com.kalos.datos.dao.SignificadoDAO;
 import com.kalos.datos.dao.SignificadoDAOImpl;
 import com.kalos.datos.dao.SubstractorPrefijosDAO;
@@ -270,13 +268,7 @@ public class DaoConfig {
         return dao;
     }   
     
- 
-    @Bean
-    public SeguridadDAO seguridadDAO(){
-        SeguridadDAOImpl dao= new SeguridadDAOImpl();
-        dao.setDataSource(kalosDataSource());
-        return dao;
-    } 
+
 
 
     @Bean

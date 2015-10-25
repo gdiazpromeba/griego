@@ -10,7 +10,6 @@ import com.kalos.comun.config.SwingConfig;
 import com.kalos.datos.dao.CombosDAO;
 import com.kalos.datos.gerentes.GerenteAdjetivos;
 import com.kalos.datos.gerentes.GerenteDiccionario;
-import com.kalos.datos.gerentes.GerenteSeguridad;
 import com.kalos.datos.gerentes.GerenteSustantivos;
 import com.kalos.datos.gerentes.GerenteTiposAdjetivo;
 import com.kalos.datos.gerentes.GerenteTiposSustantivo;
@@ -25,8 +24,6 @@ import com.kalos.iu.diccionario.PanelDiccionario;
 import com.kalos.iu.flexion.PanelFlexion;
 import com.kalos.iu.flexion.ParametrosReporte;
 import com.kalos.iu.jasper.UtilidadJasper;
-import com.kalos.iu.registro.VentanaMolesta;
-import com.kalos.iu.registro.VentanaRegistro;
 import com.kalos.visual.controles.FabricaControles;
 
 @Lazy
@@ -90,21 +87,9 @@ public class IuConfig {
     }
     
     
-	@Bean
-	@Autowired
-    public VentanaMolesta ventanaMolesta(GerenteSeguridad gerenteSeguridad){
-    	VentanaMolesta panel = new VentanaMolesta(gerenteSeguridad);
-    	return panel;
-    }
+
     
-    
-    
-	@Bean
-	@Autowired
-    public VentanaRegistro ventanaRegistro(GerenteSeguridad gerenteSeguridad){
-    	VentanaRegistro panel = new VentanaRegistro(gerenteSeguridad);
-    	return panel;
-    }
+
     
     
     

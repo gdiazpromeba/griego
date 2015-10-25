@@ -28,7 +28,6 @@ import com.kalos.datos.dao.IrrVerbosIndividualesDAO;
 import com.kalos.datos.dao.ParticulasDAO;
 import com.kalos.datos.dao.PreposicionesDAO;
 import com.kalos.datos.dao.PreposicionesEnVerbosDAO;
-import com.kalos.datos.dao.SeguridadDAO;
 import com.kalos.datos.dao.SignificadoDAO;
 import com.kalos.datos.dao.SubstractorPrefijosDAO;
 import com.kalos.datos.dao.SustantivosDAO;
@@ -89,8 +88,6 @@ import com.kalos.datos.gerentes.GerentePreposiciones;
 import com.kalos.datos.gerentes.GerentePreposicionesEnVerbos;
 import com.kalos.datos.gerentes.GerentePreposicionesEnVerbosImpl;
 import com.kalos.datos.gerentes.GerentePreposicionesImpl;
-import com.kalos.datos.gerentes.GerenteSeguridad;
-import com.kalos.datos.gerentes.GerenteSeguridadImpl;
 import com.kalos.datos.gerentes.GerenteSignificados;
 import com.kalos.datos.gerentes.GerenteSignificadosImpl;
 import com.kalos.datos.gerentes.GerenteSubstractorPrefijos;
@@ -334,14 +331,6 @@ public class ServicesConfig   {
     public GerentePreposicionesEnVerbos gerentePreposicionesEnVerbos(PreposicionesEnVerbosDAO preposicionesEnVerbosDAO){
         GerentePreposicionesEnVerbosImpl service = new GerentePreposicionesEnVerbosImpl();
         service.setPreposicionesEnVerbosDAO(preposicionesEnVerbosDAO);
-        return service;
-    }
-    
-    @Bean 
-    @Autowired   
-    public GerenteSeguridad gerenteSeguridad(SeguridadDAO seguridadDAO){
-        GerenteSeguridadImpl service = new GerenteSeguridadImpl();
-        service.setSeguridadDAO(seguridadDAO);
         return service;
     }
     

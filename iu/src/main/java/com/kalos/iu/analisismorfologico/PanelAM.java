@@ -54,7 +54,6 @@ import com.kalos.flexion.UtilidadesTM;
 import com.kalos.iu.EscuchaSolapa;
 import com.kalos.iu.PanelPrincipal;
 import com.kalos.iu.PanelProgreso;
-import com.kalos.iu.registro.VentanaMolesta;
 import com.kalos.iu.tareas.TareaAM;
 import com.kalos.iu.tareas.TareaDibujoTablemodel;
 import com.kalos.iu.tareas.TareaHabilitaComponentes;
@@ -116,7 +115,6 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
     private GerenteSignificados gerenteSignificados;
     private UtilidadesTM utilidadesTM;
     private PanelProgreso panelProgreso = new PanelProgreso();
-    private VentanaMolesta ventanaMolesta;
     private Deslizador deslizador = new Deslizador();
     private ApplicationContext contexto;
     private JTabbedPane tab = new JTabbedPane();
@@ -221,7 +219,6 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
 
         public void run() {
             panelProgreso = (PanelProgreso) contexto.getBean("panelProgreso");
-            ventanaMolesta = (VentanaMolesta) contexto.getBean("ventanaMolesta");
             utilidadesTM = (UtilidadesTM) contexto.getBean("utilidadesTM");
             amUtil = (AMUtil<?>) contexto.getBean("amUtil");
             gerenteSignificados = (GerenteSignificados) contexto.getBean("gerenteSignificados");
@@ -344,10 +341,6 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
                 Set<ResultadoUniversal> resParticulas = new HashSet<ResultadoUniversal>();
 
                 AACacheable cacheAA = new AACacheable();
-
-                if (Configuracion.getNombre().equals(Recursos.getCadena("usuario_no_registrado"))) {
-                    ventanaMolesta.muestraMolestia(this);
-                }
 
                 List<TipoPalabra> tiposAAnalizar = TipoPalabra.getTiposPalabra(tipoPalabra.getEnumsSeleccionadas());
                 if (tiposAAnalizar.contains(TipoPalabra.Verbo)) {
@@ -485,9 +478,7 @@ public class PanelAM extends JPanel implements ApplicationContextAware, Tipograf
 
         public Object run() {
             JFrame fra = (JFrame) SwingUtilities.getWindowAncestor(panelProgreso);
-            if (Configuracion.getNombre() == null) {
-                fra.repaint();
-            }
+            fra.repaint();
             return null;
         }
 

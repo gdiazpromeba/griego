@@ -19,12 +19,10 @@ import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.kalos.datos.gerentes.GerenteSeguridad;
 import com.kalos.iu.analisismorfologico.PanelAM;
 import com.kalos.iu.config.IuConfig;
 import com.kalos.iu.diccionario.PanelDiccionario;
 import com.kalos.iu.flexion.PanelFlexion;
-import com.kalos.iu.registro.VentanaRegistro;
 import com.kalos.recursos.Configuracion;
 import com.kalos.recursos.Recursos;
 import com.kalos.visual.GerenteDeApariencias;
@@ -103,7 +101,6 @@ public class Comienzo {
                 panelAM.setApplicationContext(applicationContext);
                 panelProgreso = (PanelProgreso) applicationContext.getBean("panelProgreso");
                 panelFlexion = (PanelFlexion) applicationContext.getBean("panelTablaFlexion");
-                ventanaRegistro = (VentanaRegistro) applicationContext.getBean("ventanaRegistro");
                 panelFlexion.setApplicationContext(applicationContext);
                 panelPrincipal = (PanelPrincipal) applicationContext.getBean("panelPrincipal");
                 //referencia al panel principal (manual, para evitar configuración circular)
@@ -117,19 +114,10 @@ public class Comienzo {
                 caratula.comboIdiomaEtiquetas.setEnabled(true);
                 caratula.comboItiomaContenidos.setEnabled(true);
                 caratula.setMensajeProgreso("");
-                Comienzo.obtieneNombre();
             }
 
         }.start();
         caratula.repaint();  //este repaint es para que se redibuje el nombre de usuario
-    }
-
-    private static void obtieneNombre() {
-        GerenteSeguridad gerenteSeguridad = (GerenteSeguridad) applicationContext.getBean("gerenteSeguridad");
-        String nombre = gerenteSeguridad.getNombre();
-        if (nombre == null || nombre.trim().equals("") ){
-            Configuracion.setNombre(Recursos.getCadena("usuario_no_registrado"));
-        }
     }
 
     private static void idiomaEtiquetas() {
@@ -307,9 +295,6 @@ public class Comienzo {
         return Comienzo.frame;
     }
 
-    static VentanaRegistro getVentanaRegistro() {
-        return Comienzo.ventanaRegistro;
-    }
 
 
 
@@ -321,7 +306,6 @@ public class Comienzo {
     private static Caratula caratula;
     private static JFrame frame;
     private static ApplicationContext applicationContext;
-    private static VentanaRegistro ventanaRegistro;
     public static PanelPrincipal panelPrincipal;
 
 }

@@ -8,10 +8,11 @@ package com.kalos.analisismorfologico.negocio;
  * @author Mariana Esplugas and Gonzalo Díaz
  * @version 1.0
  */
+import static java.util.stream.Collectors.toSet;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.EnumMap;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -22,8 +23,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
+import org.apache.commons.lang.StringUtils;
+//import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import com.kalos.beans.AdjetivoBean;
 import com.kalos.beans.AdjetivoComoNominalBean;
@@ -46,12 +51,6 @@ import com.kalos.operaciones.AACacheable;
 import com.kalos.operaciones.AnalisisAcento;
 import com.kalos.operaciones.OpBeans;
 import com.kalos.operaciones.OpPalabras;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-//import org.apache.log4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
 public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAware {
 
@@ -168,7 +167,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
      * puebla la forma canónica de los resultados universales
      * @param reus  Los resultados universales, en cualquier tipo de colección
      */
-    private void pueblaCanonicasAdjetivos(Collection<ResultadoUniversal> reus){
+    private void pueblaCanonicasAdjetivos(Set<ResultadoUniversal> reus){
         
         //creación de una lista de ids a partir de la lista de resultados universales
         List<String> ids = reus.stream().map(reu -> reu.getId()).collect(Collectors.toList());
@@ -184,7 +183,7 @@ public class AMAdjetivos implements AnalizadorMorfologico, ApplicationContextAwa
             canonica=OpPalabras.strBetaACompleto(canonica);
             reu.setFormaCanonica(canonica);
             return reu;
-    	});
+    	}).collect(toSet());
   
     }
     
