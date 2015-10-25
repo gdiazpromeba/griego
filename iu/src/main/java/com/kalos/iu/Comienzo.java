@@ -94,6 +94,7 @@ public class Comienzo {
             public void run() {
                 caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_contexto"));
                 applicationContext = Comienzo.creaContextoClasspath();
+                Recursos.setApplicationContext(applicationContext);
                 logger.info("application context created");
                 caratula.setMensajeProgreso(Recursos.getCadena("progreso.creando_controles_visuales"));
                 panelAM = (PanelAM) applicationContext.getBean("panelResultadosAM");
