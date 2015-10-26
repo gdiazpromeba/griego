@@ -46,6 +46,23 @@ public interface TermRegNominal {
 	OrigenTema getOrigenTema();
 	
 	void setOrigenTema(OrigenTema origenTema);
+	
+	/**
+	 * puebla el nominativo o el genitivo propuesto
+	 * @param caso
+	 * @param forma
+	 */
+	default void setFormaPropuesta(Caso caso, String forma){
+	    switch(caso){
+	    case Nominativo:
+	        setNominativoPropuesto(forma);
+	        break;
+	    case Genitivo:
+	        setGenitivoPropuesto(forma);
+	        break;
+	    default:
+	    }
+	}
 
 
 	/**
