@@ -1247,13 +1247,13 @@ public class AMParticipios implements AnalizadorMorfologico {
         for (Iterator<TermRegParticipio> it = setSiguiente.iterator(); it.hasNext();) {
             TermRegParticipio reg = it.next();
             Genero genero = reg.getGenero();
-            if (!genero.equals(Genero.Neutro) && amNominal.todosTiposSonDelGenero(reg.getTiposHoja(), amNominal.tiposNeutros)) {
+            if (!genero.equals(Genero.Neutro) && amNominal.todosTiposPertenecen(reg.getTiposHoja(), amNominal.tiposNeutros)) {
                 if (debug) {
                     sbDebug.append("  quitando el siguiente registro porque el género no es neutro: \n");
                     sbDebug.append("    " + OpBeans.debugBean(reg, new String[] { "formaOriginal", "nominativoPropuesto", "genitivoPropuesto" }) + "\n");
                 }
                 it.remove();
-            } else if ((!genero.equals(Genero.Masculino) && !genero.equals(Genero.Femenino)) && amNominal.todosTiposSonDelGenero(reg.getTiposHoja(), amNominal.tiposNoNeutros)) {
+            } else if ((!genero.equals(Genero.Masculino) && !genero.equals(Genero.Femenino)) && amNominal.todosTiposPertenecen(reg.getTiposHoja(), amNominal.tiposNoNeutros)) {
                 if (debug) {
                     sbDebug.append("  quitando el siguiente registro porque el género no es masc/fem: \n");
                     sbDebug.append("    " + OpBeans.debugBean(reg, new String[] { "formaOriginal", "nominativoPropuesto", "genitivoPropuesto" }) + "\n");
