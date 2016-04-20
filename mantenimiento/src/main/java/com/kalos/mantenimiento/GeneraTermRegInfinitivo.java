@@ -72,7 +72,7 @@ public class GeneraTermRegInfinitivo implements CompLetras{
 	public static void main(String[] args) {
 		try {
 			contexto=creaContexto();
-			DataSource kalosDataSource = (DataSource) contexto.getBean("kalosDataSource");
+			DataSource kalosDataSource = (DataSource) contexto.getBean("mysqlDataSource");
 			con=kalosDataSource.getConnection();
 			con.setAutoCommit(false);
 			ApplicationContext contexto = creaContexto();

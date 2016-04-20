@@ -77,7 +77,7 @@ public class GeneraTermRegSustantivos {
 	public static void main(String[] args) {
 		try {
 			ApplicationContext contexto = creaContexto();
-			DataSource kalosDataSource = (DataSource) contexto.getBean("kalosDataSource");
+			DataSource kalosDataSource = (DataSource) contexto.getBean("mysqlDataSource");
 			con=kalosDataSource.getConnection();
 			gerenteTiposSustantivo = (GerenteTiposSustantivo) contexto.getBean("gerenteTiposSustantivo");
 			gerenteDesinSust = (GerenteDesinSust) contexto.getBean("gerenteDesinSust");

@@ -2,6 +2,8 @@
 kalos_comun/**
 **/.settings/**
 **/.classpath
+**/.idea
+**/*.iml
 kalos_utilidades/*
 .metadata
 .recommenders

@@ -87,7 +87,7 @@ public class GeneraTemasTermRegNominal {
 
 	public static void main(String[] args) throws Exception {
 		ApplicationContext contexto = creaContexto();
-		DataSource kalosDataSource = (DataSource) contexto.getBean("kalosDataSource");
+		DataSource kalosDataSource = (DataSource) contexto.getBean("mysqlDataSource");
 		con=kalosDataSource.getConnection();
 		con.setAutoCommit(false);
 		gerenteTiposSustantivo = (GerenteTiposSustantivo) contexto.getBean("gerenteTiposSustantivo");

@@ -68,7 +68,7 @@ public class CompactaTodo {
 
     public static void main(String[] args) throws Exception {
         contexto = creaContexto();
-        DataSource kalosDataSource = (DataSource) contexto.getBean("kalosDataSource");
+        DataSource kalosDataSource = (DataSource) contexto.getBean("mysqlDataSource");
         con = kalosDataSource.getConnection();
         
         Statement stm = con.createStatement();

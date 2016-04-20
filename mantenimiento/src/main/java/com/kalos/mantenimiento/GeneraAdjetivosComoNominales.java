@@ -88,7 +88,7 @@ public class GeneraAdjetivosComoNominales {
                     .getBean("gerenteAdjetivosComoNominales");
             gerenteIrrAdjetivosEnteros = (GerenteIrrAdjetivosEnteros) contexto.getBean("gerenteIrrAdjetivosEnteros");
 
-            DataSource kalosDataSource = (DataSource) contexto.getBean("kalosDataSource");
+            DataSource kalosDataSource = (DataSource) contexto.getBean("mysqlDataSource");
             Connection con = kalosDataSource.getConnection();
 
             quitaIndices(con);
