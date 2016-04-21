@@ -2,9 +2,12 @@
 package com.kalos.mantenimiento;
 
 import com.kalos.beans.AdjetivoBean;
+import com.kalos.beans.AdverbioBean;
 import com.kalos.beans.VerboBean;
 import com.kalos.comun.config.DaoConfig;
 import com.kalos.datos.dao.AdjetivoDAO;
+import com.kalos.datos.dao.AdjetivosComoNominalesDAO;
+import com.kalos.datos.dao.AdverbiosDAO;
 import com.kalos.datos.dao.VerbosDAO;
 import com.kalos.enumeraciones.Beta;
 import com.kalos.mantenimiento.config.MySqlDaoConfig;
@@ -38,7 +41,8 @@ public class MigracionMysql {
     public static void main(String[] args) throws Exception {
         contexto = creaContexto();
         //migraVerbos();
-        migraAdjetivos();
+        //migraAdjetivos();
+        migraAdverbios();
     }
 
     private static void migraVerbos(){
@@ -67,11 +71,48 @@ public class MigracionMysql {
             logger.info("inserting letter=" + c);
             ids.forEach(id -> {
                 AdjetivoBean bean = dao.getInidvidual(id);
-                logger.info(" inserting adjective " + bean.getMasculino());
+                if (bean.getCodigo()==-1) return;
+                logger.info(" inserting adjective " + bean.getMasculino() + " id=" + id);
                 daoMySql.inserta(bean);
             });
         }
     }
+
+    private static void migraAdverbios(){
+
+        AdverbiosDAO dao = (AdverbiosDAO) contexto.getBean("adverbiosDAO");
+        AdverbiosDAO daoMySql = (AdverbiosDAO) contexto.getBean("adverbiosDAOMySql");
+
+        for (char c : Beta.arrBeta) {
+            List<String> ids = dao.seleccionaPorLetra(String.valueOf(c));
+            logger.info("inserting letter=" + c);
+            ids.forEach(id -> {
+                AdverbioBean bean = dao.getInidvidual(id);
+                if (bean.getCodigo()==-1) return;
+                logger.info(" inserting adverb " + bean.getAdverbio() + " id=" + id);
+                daoMySql.inserta(bean);
+            });
+        }
+    }
+
+    private static void migraAdjetivosComoNominales(){
+
+        AdjetivosComoNominalesDAO dao = (AdjetivosComoNominalesDAO) contexto.getBean("adjetivosComoNominales");
+        AdjetivosComoNominalesDAO daoMySql = (AdjetivosComoNominalesDAO) contexto.getBean("adjetivosComoNominalesMySql");
+
+        for (char c : Beta.arrBeta) {
+            List<String> ids = dao.seleccionaPorLetra(String.valueOf(c));
+            logger.info("inserting letter=" + c);
+            ids.forEach(id -> {
+                AdverbioBean bean = dao.getInidvidual(id);
+                if (bean.getCodigo()==-1) return;
+                logger.info(" inserting adverb " + bean.getAdverbio() + " id=" + id);
+                daoMySql.inserta(bean);
+            });
+        }
+    }
+
+
 
 
 

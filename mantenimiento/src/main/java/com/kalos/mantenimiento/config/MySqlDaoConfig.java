@@ -110,64 +110,66 @@ public class MySqlDaoConfig {
 		return dao;
 	}
 	
-/*
-	@Bean
+
+	@Bean (name = "adverbiosDAOMySql")
 	public AdverbiosDAO adverbiosDAOMySql(){
 		AdverbiosDAOImpl dao= new AdverbiosDAOImpl();
 		dao.setDataSource(mysqlDataSource());
 		return dao;
 	}
+
+
 	
-	@Bean
+	@Bean (name = "adjetivosComoNominalesDAOMySql")
 	public AdjetivosComoNominalesDAO adjetivosComoNominalesDAOMySql(){
 		AdjetivosComoNominalesDAOImpl dao= new AdjetivosComoNominalesDAOImpl();
 		dao.setDataSource(mysqlDataSource());
 		return dao;
 	}
-	
-	
-	@Bean
-	public CombosDAO combosDAOMySql(){
-		CombosDAOImpl dao= new CombosDAOImpl();
-		dao.setDataSource(mysqlDataSource());
-		return dao;
-	}	
-	
-	@Bean
-	public ConjuncionesDAO conjuncionesDAOMySql(){
-		ConjuncionesDAOImpl dao= new ConjuncionesDAOImpl();
-		dao.setDataSource(mysqlDataSource());
-		return dao;
-	}	
-	
-	
-	@Bean
-	public CubosTipoPartDAO cubosTipoPartDAOMySql(){
-		CubosTipoPartDAOImpl dao= new CubosTipoPartDAOImpl();
-		dao.setDataSource(mysqlDataSource());
-		return dao;
-	}	
-	
-	@Bean
-	public DesinSustDAO desinSustDAOMySql(){
-		DesinSustDAOImpl dao= new DesinSustDAOImpl();
-		dao.setDataSource(mysqlDataSource());
-		return dao;
-	}
 
-	@Bean
-	public DesinInfinitivosDAO desinInfinitivosDAOMySql(){
-		DesinInfintivosDAOImpl dao= new DesinInfintivosDAOImpl();
-		dao.setDataSource(mysqlDataSource());
-		return dao;
-	}
+	/*
+    @Bean
+    public CombosDAO combosDAOMySql(){
+        CombosDAOImpl dao= new CombosDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
 
-	@Bean
-	public DesinVerbosDAO desinVerbosDAOMySql(){
-		DesinVerbosDAOImpl dao= new DesinVerbosDAOImpl();
-		dao.setDataSource(mysqlDataSource());
-		return dao;
-	}
+    @Bean
+    public ConjuncionesDAO conjuncionesDAOMySql(){
+        ConjuncionesDAOImpl dao= new ConjuncionesDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
+
+
+    @Bean
+    public CubosTipoPartDAO cubosTipoPartDAOMySql(){
+        CubosTipoPartDAOImpl dao= new CubosTipoPartDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
+
+    @Bean
+    public DesinSustDAO desinSustDAOMySql(){
+        DesinSustDAOImpl dao= new DesinSustDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
+
+    @Bean
+    public DesinInfinitivosDAO desinInfinitivosDAOMySql(){
+        DesinInfintivosDAOImpl dao= new DesinInfintivosDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
+
+    @Bean
+    public DesinVerbosDAO desinVerbosDAOMySql(){
+        DesinVerbosDAOImpl dao= new DesinVerbosDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
 
     @Bean
     public DiccionarioDAO diccionarioDAOMySql(){
