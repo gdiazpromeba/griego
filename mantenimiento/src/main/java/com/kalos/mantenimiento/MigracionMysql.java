@@ -1,14 +1,9 @@
 
 package com.kalos.mantenimiento;
 
-import com.kalos.beans.AdjetivoBean;
-import com.kalos.beans.AdverbioBean;
-import com.kalos.beans.VerboBean;
+import com.kalos.beans.*;
 import com.kalos.comun.config.DaoConfig;
-import com.kalos.datos.dao.AdjetivoDAO;
-import com.kalos.datos.dao.AdjetivosComoNominalesDAO;
-import com.kalos.datos.dao.AdverbiosDAO;
-import com.kalos.datos.dao.VerbosDAO;
+import com.kalos.datos.dao.*;
 import com.kalos.enumeraciones.Beta;
 import com.kalos.mantenimiento.config.MySqlDaoConfig;
 import org.apache.log4j.Logger;
@@ -42,7 +37,9 @@ public class MigracionMysql {
         contexto = creaContexto();
         //migraVerbos();
         //migraAdjetivos();
-        migraAdverbios();
+        //migraAdverbios();
+        //migraAdjetivosComoNominales();
+        migraCubosTipoPart();
     }
 
     private static void migraVerbos(){
@@ -97,19 +94,34 @@ public class MigracionMysql {
 
     private static void migraAdjetivosComoNominales(){
 
-        AdjetivosComoNominalesDAO dao = (AdjetivosComoNominalesDAO) contexto.getBean("adjetivosComoNominales");
-        AdjetivosComoNominalesDAO daoMySql = (AdjetivosComoNominalesDAO) contexto.getBean("adjetivosComoNominalesMySql");
+        AdjetivosComoNominalesDAO dao = (AdjetivosComoNominalesDAO) contexto.getBean("adjetivosComoNominalesDAO");
+        AdjetivosComoNominalesDAO daoMySql = (AdjetivosComoNominalesDAO) contexto.getBean("adjetivosComoNominalesDAOMySql");
+        daoMySql.setAutocommit(false);
+        int i=0;
 
-        for (char c : Beta.arrBeta) {
-            List<String> ids = dao.seleccionaPorLetra(String.valueOf(c));
-            logger.info("inserting letter=" + c);
-            ids.forEach(id -> {
-                AdverbioBean bean = dao.getInidvidual(id);
-                if (bean.getCodigo()==-1) return;
-                logger.info(" inserting adverb " + bean.getAdverbio() + " id=" + id);
+            List<AdjetivoComoNominalBean> beans = dao.seleccionaTodos();
+            beans.forEach(bean -> {
+                logger.info(" inserting ACN id adj=" + bean.getIdAdjetivo() );
                 daoMySql.inserta(bean);
             });
-        }
+            if (i++ % 100 == 0) daoMySql.commit();
+
+    }
+
+    private static void migraCubosTipoPart(){
+
+        CubosTipoPartDAO dao = (CubosTipoPartDAO) contexto.getBean("cubosTipoPartDAO");
+        CubosTipoPartDAO daoMySql = (CubosTipoPartDAO) contexto.getBean("cubosTipoPartDAOMySql");
+        daoMySql.setAutocommit(false);
+        int i=0;
+
+            List<CubosTipoPartBean> beans = dao.seleccionaTodos();
+            beans.forEach(bean -> {
+                logger.info(" inserting CTP nom=" + bean.getNominativo() );
+                daoMySql.inserta(bean);
+            });
+            if (i++ % 100 == 0) daoMySql.commit();
+
     }
 
 

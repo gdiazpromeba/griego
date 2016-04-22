@@ -56,6 +56,22 @@ public class CubosTipoPartDAOImpl extends JdbcDaoSupport implements CubosTipoPar
 		SELECCION_TODOS_SQL = sb.toString();
 	}
 
+	public void setAutocommit(boolean flag) {
+		try {
+			getDataSource().getConnection().setAutoCommit(flag);
+		} catch (Exception exception) {
+			throw new RuntimeException("error poblando el valor autocommit");
+		}
+	}
+
+	public void commit() {
+		try {
+			getDataSource().getConnection().commit();
+		} catch (Exception exception) {
+			throw new RuntimeException("error ejecutando commit");
+		}
+	}
+
 	//general select
 	abstract class SeleccionAbstracta extends MappingSqlQuery {
 		public SeleccionAbstracta(DataSource dataSource, String sql) {

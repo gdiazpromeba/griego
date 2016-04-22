@@ -22,4 +22,6 @@ public interface AdjetivosComoNominalesDAO {
 
 	void commit();
 
+	public List<AdjetivoComoNominalBean> seleccionaTodos() ;
+
 }

@@ -8,4 +8,11 @@ public interface CubosTipoPartDAO {
 
 	List<CubosTipoPartBean> seleccionaTodos();
 
+	public void inserta(CubosTipoPartBean ea);
+
+	void setAutocommit(boolean flag);
+
+	void commit() ;
+
+
 }

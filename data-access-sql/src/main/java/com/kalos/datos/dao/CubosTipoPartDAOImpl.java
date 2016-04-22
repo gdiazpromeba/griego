@@ -18,6 +18,7 @@ package com.kalos.datos.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -28,8 +29,10 @@ import com.kalos.enumeraciones.FuerteDebil;
 import com.kalos.enumeraciones.Genero;
 import com.kalos.enumeraciones.Voz;
 
+import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.object.MappingSqlQuery;
+import org.springframework.jdbc.object.SqlUpdate;
 
 /**
  * @author <a href="mailto:gonzalo.diaz@turner.com">Gonzalo Diaz</a>
@@ -39,6 +42,7 @@ import org.springframework.jdbc.object.MappingSqlQuery;
 public class CubosTipoPartDAOImpl extends JdbcDaoSupport implements CubosTipoPartDAO  {
 
 	private static String SELECCION_TODOS_SQL;
+    private static String INSERCION_SQL;
 	
 	private void puebla() {
 		StringBuffer sb = new StringBuffer(200);
@@ -54,6 +58,35 @@ public class CubosTipoPartDAOImpl extends JdbcDaoSupport implements CubosTipoPar
 		sb.append("  CUBOS_TIPO_PART   \n");
 
 		SELECCION_TODOS_SQL = sb.toString();
+
+        sb = new StringBuffer(200);
+        sb.append("INSERT INTO CUBOS_TIPO_PART (  \n");
+        sb.append("  NOMINATIVO,   \n");
+        sb.append("  GENITIVO,   \n");
+        sb.append("  GENERO,   \n");
+        sb.append("  ASPECTO,   \n");
+        sb.append("  VOZ,     \n");
+        sb.append("  FUERTE,     \n");
+        sb.append("  TIPO_SUSTANTIVO     \n");
+        sb.append(")VALUES  \n");
+        sb.append(" (?,?,?,?,?,?,?) \n");
+        INSERCION_SQL = sb.toString();
+	}
+
+	public void setAutocommit(boolean flag) {
+		try {
+			getDataSource().getConnection().setAutoCommit(flag);
+		} catch (Exception exception) {
+			throw new RuntimeException("error poblando el valor autocommit");
+		}
+	}
+
+	public void commit() {
+		try {
+			getDataSource().getConnection().commit();
+		} catch (Exception exception) {
+			throw new RuntimeException("error ejecutando commit" + exception.getMessage());
+		}
 	}
 
 	//general select
@@ -75,6 +108,36 @@ public class CubosTipoPartDAOImpl extends JdbcDaoSupport implements CubosTipoPar
 		}
 	}
 
+    class Insercion extends SqlUpdate {
+        public Insercion(DataSource datasource) {
+
+            super(datasource, INSERCION_SQL);
+            declareParameter(new SqlParameter(Types.VARCHAR));
+            declareParameter(new SqlParameter(Types.VARCHAR));
+            declareParameter(new SqlParameter(Types.CHAR));
+            declareParameter(new SqlParameter(Types.INTEGER));
+            declareParameter(new SqlParameter(Types.INTEGER));
+            declareParameter(new SqlParameter(Types.INTEGER));
+            declareParameter(new SqlParameter(Types.INTEGER));
+        }
+    }
+
+
+
+    @Override
+    public void inserta(CubosTipoPartBean ea) {
+        String pk = com.kalos.datos.util.DBUtil.getHashableId();
+        insercion.update(new Object[] {
+                ea.getNominativo(),
+                ea.getGenitivo(),
+                ea.getGenero().valorLetra(),
+                ea.getAspecto().valorEntero(),
+                ea.getVoz().valorEntero(),
+                ea.getFuerte().valorEntero(),
+                ea.getTipoSustantivo()
+        });
+    }
+
 	//selección de todos 
 	class SeleccionTodos extends SeleccionAbstracta {
 		public SeleccionTodos(DataSource dataSource) {
@@ -83,6 +146,7 @@ public class CubosTipoPartDAOImpl extends JdbcDaoSupport implements CubosTipoPar
 	}
 
 	private SeleccionTodos seleccionTodos;
+    private Insercion insercion;
 
 
 	/* (non-Javadoc)
@@ -96,6 +160,7 @@ public class CubosTipoPartDAOImpl extends JdbcDaoSupport implements CubosTipoPar
 		super.initDao();
 		puebla();
 		seleccionTodos= new SeleccionTodos(getDataSource());
+        insercion = new Insercion(getDataSource());
 	}
 
 }

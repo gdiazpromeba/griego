@@ -142,6 +142,7 @@ public class MySqlDaoConfig {
         return dao;
     }
 
+    */
 
     @Bean
     public CubosTipoPartDAO cubosTipoPartDAOMySql(){
@@ -150,6 +151,8 @@ public class MySqlDaoConfig {
         return dao;
     }
 
+
+	/*
     @Bean
     public DesinSustDAO desinSustDAOMySql(){
         DesinSustDAOImpl dao= new DesinSustDAOImpl();
