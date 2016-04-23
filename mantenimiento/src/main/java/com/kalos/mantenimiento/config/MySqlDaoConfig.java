@@ -187,6 +187,8 @@ return dao;
   return dao;
   }
 
+
+*/
   @Bean
   public EncParticulasDAO encParticulasDAOMySql(){
   EncParticulasDAOImpl dao= new EncParticulasDAOImpl();
