@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.kalos.beans.DesinSust;
 
-public interface DesinSustDAO  {
+public interface DesinSustDAO  extends Committable{
 
 
 	/**
@@ -58,5 +58,9 @@ public interface DesinSustDAO  {
     
     
     public List<DesinSust> getRegistros(List<String> ids);
+
+	public List<DesinSust> seleccionaTodos();
+
+
 
 }

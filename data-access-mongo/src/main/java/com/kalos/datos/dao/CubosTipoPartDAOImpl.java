@@ -39,7 +39,12 @@ import org.springframework.jdbc.object.MappingSqlQuery;
 public class CubosTipoPartDAOImpl extends JdbcDaoSupport implements CubosTipoPartDAO  {
 
 	private static String SELECCION_TODOS_SQL;
-	
+
+	@Override
+	public void inserta(CubosTipoPartBean ea) {
+		throw new RuntimeException("not implemented");
+	}
+
 	private void puebla() {
 		StringBuffer sb = new StringBuffer(200);
 		sb.append("SELECT   \n");

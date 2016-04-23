@@ -20,4 +20,6 @@ public interface DesinInfinitivosDAO {
 	 */
 	public abstract List<DesinInfinitivo> seleccionaTodas();
 
+	void inserta(DesinInfinitivo desinInfinitivo);
+
 }

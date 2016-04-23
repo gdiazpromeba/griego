@@ -104,6 +104,10 @@ public class DesinInfintivosDAOImpl extends JdbcDaoSupport  implements DesinInfi
 			return bean;
 		}
 	}
+
+	public void inserta(DesinInfinitivo desinInfinitivo){
+		throw new RuntimeException("not implemented");
+	}
 	
 	class SeleccionRestringidas extends SeleccionAbstracta{
 		public SeleccionRestringidas(DataSource dataSource){

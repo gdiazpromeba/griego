@@ -73,21 +73,7 @@ public class CubosTipoPartDAOImpl extends JdbcDaoSupport implements CubosTipoPar
         INSERCION_SQL = sb.toString();
 	}
 
-	public void setAutocommit(boolean flag) {
-		try {
-			getDataSource().getConnection().setAutoCommit(flag);
-		} catch (Exception exception) {
-			throw new RuntimeException("error poblando el valor autocommit");
-		}
-	}
 
-	public void commit() {
-		try {
-			getDataSource().getConnection().commit();
-		} catch (Exception exception) {
-			throw new RuntimeException("error ejecutando commit" + exception.getMessage());
-		}
-	}
 
 	//general select
 	abstract class SeleccionAbstracta extends MappingSqlQuery {

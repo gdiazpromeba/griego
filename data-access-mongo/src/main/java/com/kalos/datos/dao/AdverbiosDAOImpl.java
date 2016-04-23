@@ -297,11 +297,7 @@ public class AdverbiosDAOImpl extends JdbcDaoSupport implements AdverbiosDAO {
 	}
 
 	public AdverbioBean getInidvidual(String s) {
-		List list = seleccion.execute(new Object[] { s });
-		if (list.size() == 0)
-			return null;
-		else
-			return (AdverbioBean) list.get(0);
+      throw new RuntimeException("not implemented");
 	}
 
 	public void modificaCodigoIndividual(int j, String s) {
@@ -367,7 +363,7 @@ public class AdverbiosDAOImpl extends JdbcDaoSupport implements AdverbiosDAO {
 	private SeleccionPorAdverbio seleccionIdPorAdverbio;
 	private SeleccionPorLetra seleccionPorLetra;
 	private SeleccionIdPorAdverbio seleccionPorAdverbio;
-	private SeleccionI seleccionPorIds;
+	private SeleccionPorIds seleccionPorIds;
 	private ModificaCodigoIndividual modificaCodigoIndividual;
 	private Insercion insercion;
 	private Modificacion modificacion;

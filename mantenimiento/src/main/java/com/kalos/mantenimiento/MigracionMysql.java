@@ -39,7 +39,9 @@ public class MigracionMysql {
         //migraAdjetivos();
         //migraAdverbios();
         //migraAdjetivosComoNominales();
-        migraCubosTipoPart();
+        //migraCubosTipoPart();
+        //mmigraDesinSust();
+        migraDesinInfinitivos();
     }
 
     private static void migraVerbos(){
@@ -121,6 +123,36 @@ public class MigracionMysql {
                 daoMySql.inserta(bean);
             });
             if (i++ % 100 == 0) daoMySql.commit();
+
+    }
+
+    private static void mmigraDesinSust(){
+
+        DesinSustDAO dao = (DesinSustDAO) contexto.getBean("desinSustDAO");
+        DesinSustDAO daoMySql = (DesinSustDAO) contexto.getBean("desinSustDAOMySql");
+        daoMySql.setAutocommit(false);
+
+        List<DesinSust> beans = dao.seleccionaTodos();
+        beans.forEach(bean -> {
+            logger.info(" inserting Desin sust id=" + bean.getId() );
+            daoMySql.inserta(bean);
+        });
+        daoMySql.commit();
+
+    }
+
+    private static void migraDesinInfinitivos(){
+
+        DesinInfinitivosDAO dao = (DesinInfinitivosDAO) contexto.getBean("desinInfinitivosDAO");
+        DesinInfinitivosDAO daoMySql = (DesinInfinitivosDAO) contexto.getBean("desinInfinitivosDAOMySql");
+
+
+        List<DesinInfinitivo> beans = dao.seleccionaTodas();
+        beans.forEach(bean -> {
+            logger.info(" inserting Desin sust id=" + bean.getDesinencia() );
+            daoMySql.inserta(bean);
+        });
+
 
     }
 
