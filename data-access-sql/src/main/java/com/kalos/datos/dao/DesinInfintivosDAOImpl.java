@@ -153,7 +153,7 @@ public class DesinInfintivosDAOImpl extends JdbcDaoSupport  implements DesinInfi
 	private SeleccionTodas seleccionTodas;
 	
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.dao.DesinVerbosDAO#seleccionaTodas()
+	 * @see com.kalos.datos.dao.DesinVerbosDAO#seleccionaTodasOrdenNoNulo()
 	 */
 	public List<DesinInfinitivo> seleccionaTodas() {
 		List<DesinInfinitivo> resultado = seleccionTodas.execute(new Object[] {}); 

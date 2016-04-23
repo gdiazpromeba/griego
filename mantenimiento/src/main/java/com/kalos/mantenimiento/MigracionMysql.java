@@ -10,10 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.List;
 
 public class MigracionMysql {
@@ -41,7 +38,8 @@ public class MigracionMysql {
         //migraAdjetivosComoNominales();
         //migraCubosTipoPart();
         //mmigraDesinSust();
-        migraDesinInfinitivos();
+        //migraDesinInfinitivos();
+        migraDesinverbos();
     }
 
     private static void migraVerbos(){
@@ -150,6 +148,21 @@ public class MigracionMysql {
         List<DesinInfinitivo> beans = dao.seleccionaTodas();
         beans.forEach(bean -> {
             logger.info(" inserting Desin sust id=" + bean.getDesinencia() );
+            daoMySql.inserta(bean);
+        });
+
+
+    }
+
+    private static void migraDesinverbos(){
+
+        DesinVerbosDAO dao = (DesinVerbosDAO) contexto.getBean("desinVerbosDAO");
+        DesinVerbosDAO daoMySql = (DesinVerbosDAO) contexto.getBean("desinVerbosDAOMySql");
+
+
+        List<DesinVerbo> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting Desin vebos id=" + bean.getDesinencia() );
             daoMySql.inserta(bean);
         });
 

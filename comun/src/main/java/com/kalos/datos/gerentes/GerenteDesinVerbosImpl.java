@@ -10,10 +10,10 @@ public class GerenteDesinVerbosImpl implements GerenteDesinVerbos {
 	private DesinVerbosDAO desinVerbosDAO;
 	
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteDesinVerbos#seleccionaTodas()
+	 * @see com.kalos.datos.gerentes.GerenteDesinVerbos#seleccionaTodasOrdenNoNulo()
 	 */
 	public List<DesinVerbo> seleccionaTodas(){
-		return desinVerbosDAO.seleccionaTodas();
+		return desinVerbosDAO.seleccionaTodasOrdenNoNulo();
 	}
 	
 	/* (non-Javadoc)

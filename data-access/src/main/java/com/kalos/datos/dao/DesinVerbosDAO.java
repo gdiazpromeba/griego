@@ -8,6 +8,10 @@ public interface DesinVerbosDAO {
 
     public abstract List<DesinVerbo> seleccionaRestringidas();
 
-    public abstract List<DesinVerbo> seleccionaTodas();
+    public abstract List<DesinVerbo> seleccionaTodasOrdenNoNulo();
+
+    List<DesinVerbo> seleccionaTodo();
+
+    public void inserta(DesinVerbo m1);
 
 }
