@@ -50,6 +50,7 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 
 	private static String SELECCION_POR_VERBO_PARTIC;
 	private static String SELECCION_IDS_POR_VERBO_PARTIC;
+	private static String SELECCION_TODO;
 	private static String SELECCION_POR_TEMA;
 	private static String SELECCION_POR_VERBO_PARA_PARTCIPIOS;
 	private static String SELECCION_POR_VERBO_PARTIC_PARA_INFINITIVOS_SQL;
@@ -90,7 +91,33 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 		sb.append("  SUBPART \n");
 
 		SELECCION_POR_VERBO_PARTIC = sb.toString();
-		
+
+		sb = new StringBuffer(200);
+		sb.append("SELECT \n");
+		sb.append("  TEMA, \n");
+		sb.append("  PARTIC, \n");
+		sb.append("  SUBPART, \n");
+		sb.append("  MODO, \n");
+		sb.append("  NTIE, \n");
+		sb.append("  NVOZ, \n");
+		sb.append("  FUERTE, \n");
+		sb.append("  CONT, \n");
+		sb.append("  AUM, \n");
+		sb.append("  REDUP, \n");
+		sb.append("  JUEGO, \n");
+		sb.append("  JTIE, \n");
+		sb.append("  JVOZ, \n");
+		sb.append("  PROPAGA, \n");
+		sb.append("  PATS, \n");
+		sb.append("  VERBO_ID, \n");
+		sb.append("  IRR_VERBO_ID \n");
+		sb.append("FROM  \n");
+		sb.append("  IRR_VERBOS \n");
+		sb.append("ORDER BY \n");
+		sb.append("  SUBPART \n");
+
+		SELECCION_TODO = sb.toString();
+
 		sb = new StringBuffer(200);
 		sb.append("SELECT \n");
 		sb.append("  IRR_VERBO_ID \n");
@@ -400,8 +427,20 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 		List<IrrVerbo> resultado = seleccionPorTema.execute(new Object[] { tema });
 		return resultado;
 	}
-	
-	
+
+	//seleccion de todo
+	class SeleccionTodo extends SeleccionAbstracta {
+		public SeleccionTodo(DataSource dataSource) {
+			super(dataSource, SELECCION_TODO);
+		}
+	}
+
+	private SeleccionTodo seleccionTodo;
+
+	public List<IrrVerbo> seleccionaTodo() {
+		List<IrrVerbo> resultado = seleccionTodo.execute(new Object[] {});
+		return resultado;
+	}
 
 	/* (non-Javadoc)
 	 * @see kalos.dao.IrrVerbosDAO#seleccionaPorVerboPartic(java.lang.String, java.lang.String)
@@ -634,6 +673,7 @@ public class IrrVerbosDAOImpl extends JdbcDaoSupport implements IrrVerbosDAO {
 		seleccionPorTema=new SeleccionPorTema(getDataSource());
 		seleccionIndividual = new SeleccionIndividual(getDataSource());
 		seleccionPartics = new SeleccionPartics(getDataSource());
+		seleccionTodo = new SeleccionTodo(getDataSource());
 		insercion = new Insercion(getDataSource());
 		borrado = new Borrado(getDataSource(), BORRADO_SQL);
 		modificacion = new Modificacion(getDataSource());

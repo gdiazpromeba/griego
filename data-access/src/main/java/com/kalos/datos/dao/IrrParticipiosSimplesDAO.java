@@ -8,4 +8,6 @@ public interface IrrParticipiosSimplesDAO {
 
 	List<IrrParticipioSimpleBean> seleccionaPorVerbo(String verboId);
 	List<IrrParticipioSimpleBean> seleccionaPorForma(String forma);
+	public void inserta(IrrParticipioSimpleBean bean) ;
+    public List<IrrParticipioSimpleBean> seleccionaTodo();
 }

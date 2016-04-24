@@ -23,4 +23,6 @@ public interface IrrSustantivosDAO {
     
     void inserta(IrrSustantivoBean bean);
 
+	public List<IrrSustantivoBean> seleccionaTodo() ;
+
 }

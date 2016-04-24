@@ -27,8 +27,10 @@ public class IrrParticipiosEnterosDAOImpl extends JdbcDaoSupport implements
     private static String SEL_POR_VERBO_SQL;
     private static String SEL_POR_NOMINATIVO_SQL;
     private static String SEL_POR_GENITIVO;
+    private static String SEL_TODO;
     private static String INSERCION_SQL;
     private SelPorVerbo selPorVerbo;
+    private SelTodo selTodo;
     private SelPorNominativo selPorNominativo;
     private SelPorGenitivo selPorGenitivo;
 
@@ -81,6 +83,20 @@ public class IrrParticipiosEnterosDAOImpl extends JdbcDaoSupport implements
         sql.append("ORDER BY               \n");
         sql.append("  IPE.PARTIC, IPE.SUBPART, IPE.VOZ, IPE.ASPECTO, IPE.FUERTE, IPE.GENERO    \n");
         SEL_POR_VERBO_SQL = sql.toString();
+
+        sql = new StringBuffer();
+        sql.append("SELECT \n");
+        sql.append("  IRR_PARTICIPIO_ENTERO_ID, \n");
+        sql.append("  IPE.VERBO_ID, \n");
+        sql.append("  IPE.PARTIC, IPE.SUBPART,   \n");
+        sql.append("  IPE.VOZ, IPE.ASPECTO, IPE.FUERTE, IPE.GENERO,   \n");
+        sql.append("  IPE.NOMINATIVO, IPE.GENITIVO,   \n");
+        sql.append("  IPE.TIPO_SUSTANTIVO    \n");
+        sql.append("FROM   \n");
+        sql.append("  IRR_PARTICIPIOS_ENTEROS  IPE  \n");
+        sql.append("ORDER BY               \n");
+        sql.append("  IPE.PARTIC, IPE.SUBPART, IPE.VOZ, IPE.ASPECTO, IPE.FUERTE, IPE.GENERO    \n");
+        SEL_TODO = sql.toString();
 
         sql = new StringBuffer();
         sql.append("SELECT \n");
@@ -161,6 +177,12 @@ public class IrrParticipiosEnterosDAOImpl extends JdbcDaoSupport implements
         return localList;
     }
 
+    public List<IrrParticipioEntero> seleccionaTodo() {
+        List localList = this.selTodo
+                .execute(new Object[] {  });
+        return localList;
+    }
+
     public List<IrrParticipioEntero> seleccionaPorGenitivo(String paramString) {
         List localList = this.selPorGenitivo
                 .execute(new Object[] { paramString });
@@ -173,6 +195,7 @@ public class IrrParticipiosEnterosDAOImpl extends JdbcDaoSupport implements
         this.selPorVerbo = new SelPorVerbo(getDataSource());
         this.selPorNominativo = new SelPorNominativo(getDataSource());
         this.selPorGenitivo = new SelPorGenitivo(getDataSource());
+        selTodo = new SelTodo(getDataSource());
         insercion = new Insercion(getDataSource());
     }
 
@@ -197,6 +220,13 @@ public class IrrParticipiosEnterosDAOImpl extends JdbcDaoSupport implements
         public SelPorVerbo(DataSource paramDataSource) {
             super(paramDataSource, SEL_POR_VERBO_SQL);
             declareParameter(new SqlParameter(12));
+        }
+    }
+
+    class SelTodo extends SeleccionAbstracta {
+
+        public SelTodo(DataSource paramDataSource) {
+            super(paramDataSource, SEL_TODO);
         }
     }
 

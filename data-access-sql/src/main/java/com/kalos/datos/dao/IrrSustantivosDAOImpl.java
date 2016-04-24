@@ -26,6 +26,7 @@ public class IrrSustantivosDAOImpl extends JdbcDaoSupport implements IrrSustanti
     private static String SEL_POR_SUSTANTIVOS_SQL;
     private static String SEL_POR_SUST_Y_PARTIC_SQL;
     private static String SEL_POR_FORMA_SQL;
+    private static String SEL_TODO_SQL;
     private static String SEL_PARTICS_POR_SUST_SQL;
     private static String INSERT_SQL;
     private static String UPDATE_SQL;
@@ -34,108 +35,123 @@ public class IrrSustantivosDAOImpl extends JdbcDaoSupport implements IrrSustanti
     private SeleccionPorIdYPartic seleccionPorIdYPartic;
     private SeleccionPorForma seleccionPorForma;
     private SeleccionPartics seleccionPartics;
+    private SeleccionTodo seleccionTodo;
     private Insercion insercion;
     private Modificacion modificacion;
     private Borrado borrado;
 
     private void puebla() {
-        StringBuffer localStringBuffer = new StringBuffer(200);
-        localStringBuffer.append("SELECT   \n");
-        localStringBuffer.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
-        localStringBuffer.append("  IRR.SUSTANTIVO_ID,   \n");
-        localStringBuffer.append("  IRR.PARTICULARIDAD,   \n");
-        localStringBuffer.append("  IRR.CASO,   \n");
-        localStringBuffer.append("  IRR.NUMERO,   \n");
-        localStringBuffer.append("  IRR.SUBINDICE,   \n");
-        localStringBuffer.append("  IRR.FORMA   \n");
-        localStringBuffer.append("FROM        \n");
-        localStringBuffer.append("  IRR_SUSTANTIVOS IRR       \n");
-        localStringBuffer.append("WHERE  \n");
-        localStringBuffer.append("  IRR.SUSTANTIVO_ID=?    \n");
-        SEL_POR_SUSTANTIVO_SQL = localStringBuffer.toString();
-        localStringBuffer = new StringBuffer(200);
-        localStringBuffer.append("SELECT   \n");
-        localStringBuffer.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
-        localStringBuffer.append("  IRR.SUSTANTIVO_ID,   \n");
-        localStringBuffer.append("  IRR.PARTICULARIDAD,   \n");
-        localStringBuffer.append("  IRR.CASO,   \n");
-        localStringBuffer.append("  IRR.NUMERO,   \n");
-        localStringBuffer.append("  IRR.SUBINDICE,   \n");
-        localStringBuffer.append("  IRR.FORMA   \n");
-        localStringBuffer.append("FROM        \n");
-        localStringBuffer.append("  IRR_SUSTANTIVOS IRR       \n");
-        localStringBuffer.append("WHERE  \n");
-        localStringBuffer.append("  IRR.IRR_SUSTANTIVO_ID IN (?)    \n");
-        SEL_POR_SUSTANTIVOS_SQL = localStringBuffer.toString();
-        localStringBuffer = new StringBuffer(200);
-        localStringBuffer.append("SELECT   \n");
-        localStringBuffer.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
-        localStringBuffer.append("  IRR.SUSTANTIVO_ID,   \n");
-        localStringBuffer.append("  IRR.PARTICULARIDAD,   \n");
-        localStringBuffer.append("  IRR.CASO,   \n");
-        localStringBuffer.append("  IRR.NUMERO,   \n");
-        localStringBuffer.append("  IRR.SUBINDICE,   \n");
-        localStringBuffer.append("  IRR.FORMA   \n");
-        localStringBuffer.append("FROM        \n");
-        localStringBuffer.append("  IRR_SUSTANTIVOS IRR       \n");
-        localStringBuffer.append("WHERE  \n");
-        localStringBuffer.append("  IRR.SUSTANTIVO_ID=?    \n");
-        localStringBuffer.append("  AND IRR.PARTICULARIDAD=?    \n");
-        SEL_POR_SUST_Y_PARTIC_SQL = localStringBuffer.toString();
-        localStringBuffer = new StringBuffer(200);
-        localStringBuffer.append("SELECT   \n");
-        localStringBuffer.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
-        localStringBuffer.append("  IRR.SUSTANTIVO_ID,   \n");
-        localStringBuffer.append("  IRR.PARTICULARIDAD,   \n");
-        localStringBuffer.append("  IRR.CASO,   \n");
-        localStringBuffer.append("  IRR.NUMERO,   \n");
-        localStringBuffer.append("  IRR.SUBINDICE,   \n");
-        localStringBuffer.append("  IRR.FORMA   \n");
-        localStringBuffer.append("FROM        \n");
-        localStringBuffer.append("  IRR_SUSTANTIVOS IRR       \n");
-        localStringBuffer.append("WHERE  \n");
-        localStringBuffer.append("  IRR.FORMA=?    \n");
-        SEL_POR_FORMA_SQL = localStringBuffer.toString();
-        localStringBuffer = new StringBuffer(200);
-        localStringBuffer.append("SELECT DISTINCT  \n");
-        localStringBuffer.append("  IRR.PARTICULARIDAD  \n");
-        localStringBuffer.append("FROM  \n");
-        localStringBuffer.append("  IRR_SUSTANTIVOS IRR  \n");
-        localStringBuffer.append("  INNER JOIN PARTICULARIDADES PAR ON IRR.PARTICULARIDAD=PAR.PARTIC  \n");
-        localStringBuffer.append("WHERE   \n");
-        localStringBuffer.append("  SUSTANTIVO_ID=? \n");
-        localStringBuffer.append("ORDER BY \n");
-        localStringBuffer.append("  PAR.ORDEN \n");
-        SEL_PARTICS_POR_SUST_SQL = localStringBuffer.toString();
-        localStringBuffer = new StringBuffer(200);
-        localStringBuffer.append("INSERT INTO IRR_SUSTANTIVOS (   \n");
-        localStringBuffer.append("  IRR_SUSTANTIVO_ID,   \n");
-        localStringBuffer.append("  SUSTANTIVO_ID,   \n");
-        localStringBuffer.append("  PARTICULARIDAD,   \n");
-        localStringBuffer.append("  CASO,   \n");
-        localStringBuffer.append("  NUMERO,   \n");
-        localStringBuffer.append("  SUBINDICE,   \n");
-        localStringBuffer.append("  FORMA   \n");
-        localStringBuffer.append(") VALUES (        \n");
-        localStringBuffer.append("  ?,?,?,?,?,?,?      \n");
-        localStringBuffer.append(")  \n");
-        INSERT_SQL = localStringBuffer.toString();
-        localStringBuffer = new StringBuffer(200);
-        localStringBuffer.append("UPDATE IRR_SUSTANTIVOS SET   \n");
-        localStringBuffer.append("  SUSTANTIVO_ID=?,   \n");
-        localStringBuffer.append("  PARTICULARIDAD=?,   \n");
-        localStringBuffer.append("  CASO=?,   \n");
-        localStringBuffer.append("  NUMERO=?,   \n");
-        localStringBuffer.append("  SUBINDICE=?,   \n");
-        localStringBuffer.append("  FORMA=?   \n");
-        localStringBuffer.append("WHERE    \n");
-        localStringBuffer.append("  IRR_SUSTANTIVO_ID=?   \n");
-        UPDATE_SQL = localStringBuffer.toString();
-        localStringBuffer = new StringBuffer(200);
-        localStringBuffer.append("DELETE FROM IRR_SUSTANTIVOS \n");
-        localStringBuffer.append("WHERE    \n");
-        localStringBuffer.append("  IRR_SUSTANTIVO_ID=?   \n");
-        DELETE_SQL = localStringBuffer.toString();
+        StringBuffer sql = new StringBuffer(200);
+        sql.append("SELECT   \n");
+        sql.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
+        sql.append("  IRR.SUSTANTIVO_ID,   \n");
+        sql.append("  IRR.PARTICULARIDAD,   \n");
+        sql.append("  IRR.CASO,   \n");
+        sql.append("  IRR.NUMERO,   \n");
+        sql.append("  IRR.SUBINDICE,   \n");
+        sql.append("  IRR.FORMA   \n");
+        sql.append("FROM        \n");
+        sql.append("  IRR_SUSTANTIVOS IRR       \n");
+        sql.append("WHERE  \n");
+        sql.append("  IRR.SUSTANTIVO_ID=?    \n");
+        SEL_POR_SUSTANTIVO_SQL = sql.toString();
+        sql = new StringBuffer(200);
+        sql.append("SELECT   \n");
+        sql.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
+        sql.append("  IRR.SUSTANTIVO_ID,   \n");
+        sql.append("  IRR.PARTICULARIDAD,   \n");
+        sql.append("  IRR.CASO,   \n");
+        sql.append("  IRR.NUMERO,   \n");
+        sql.append("  IRR.SUBINDICE,   \n");
+        sql.append("  IRR.FORMA   \n");
+        sql.append("FROM        \n");
+        sql.append("  IRR_SUSTANTIVOS IRR       \n");
+        sql.append("WHERE  \n");
+        sql.append("  IRR.IRR_SUSTANTIVO_ID IN (?)    \n");
+        SEL_POR_SUSTANTIVOS_SQL = sql.toString();
+
+        sql = new StringBuffer(200);
+        sql.append("SELECT   \n");
+        sql.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
+        sql.append("  IRR.SUSTANTIVO_ID,   \n");
+        sql.append("  IRR.PARTICULARIDAD,   \n");
+        sql.append("  IRR.CASO,   \n");
+        sql.append("  IRR.NUMERO,   \n");
+        sql.append("  IRR.SUBINDICE,   \n");
+        sql.append("  IRR.FORMA   \n");
+        sql.append("FROM        \n");
+        sql.append("  IRR_SUSTANTIVOS IRR       \n");
+        SEL_TODO_SQL = sql.toString();
+
+        sql = new StringBuffer(200);
+        sql.append("SELECT   \n");
+        sql.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
+        sql.append("  IRR.SUSTANTIVO_ID,   \n");
+        sql.append("  IRR.PARTICULARIDAD,   \n");
+        sql.append("  IRR.CASO,   \n");
+        sql.append("  IRR.NUMERO,   \n");
+        sql.append("  IRR.SUBINDICE,   \n");
+        sql.append("  IRR.FORMA   \n");
+        sql.append("FROM        \n");
+        sql.append("  IRR_SUSTANTIVOS IRR       \n");
+        sql.append("WHERE  \n");
+        sql.append("  IRR.SUSTANTIVO_ID=?    \n");
+        sql.append("  AND IRR.PARTICULARIDAD=?    \n");
+        SEL_POR_SUST_Y_PARTIC_SQL = sql.toString();
+        sql = new StringBuffer(200);
+        sql.append("SELECT   \n");
+        sql.append("  IRR.IRR_SUSTANTIVO_ID,   \n");
+        sql.append("  IRR.SUSTANTIVO_ID,   \n");
+        sql.append("  IRR.PARTICULARIDAD,   \n");
+        sql.append("  IRR.CASO,   \n");
+        sql.append("  IRR.NUMERO,   \n");
+        sql.append("  IRR.SUBINDICE,   \n");
+        sql.append("  IRR.FORMA   \n");
+        sql.append("FROM        \n");
+        sql.append("  IRR_SUSTANTIVOS IRR       \n");
+        sql.append("WHERE  \n");
+        sql.append("  IRR.FORMA=?    \n");
+        SEL_POR_FORMA_SQL = sql.toString();
+        sql = new StringBuffer(200);
+        sql.append("SELECT DISTINCT  \n");
+        sql.append("  IRR.PARTICULARIDAD  \n");
+        sql.append("FROM  \n");
+        sql.append("  IRR_SUSTANTIVOS IRR  \n");
+        sql.append("  INNER JOIN PARTICULARIDADES PAR ON IRR.PARTICULARIDAD=PAR.PARTIC  \n");
+        sql.append("WHERE   \n");
+        sql.append("  SUSTANTIVO_ID=? \n");
+        sql.append("ORDER BY \n");
+        sql.append("  PAR.ORDEN \n");
+        SEL_PARTICS_POR_SUST_SQL = sql.toString();
+        sql = new StringBuffer(200);
+        sql.append("INSERT INTO IRR_SUSTANTIVOS (   \n");
+        sql.append("  IRR_SUSTANTIVO_ID,   \n");
+        sql.append("  SUSTANTIVO_ID,   \n");
+        sql.append("  PARTICULARIDAD,   \n");
+        sql.append("  CASO,   \n");
+        sql.append("  NUMERO,   \n");
+        sql.append("  SUBINDICE,   \n");
+        sql.append("  FORMA   \n");
+        sql.append(") VALUES (        \n");
+        sql.append("  ?,?,?,?,?,?,?      \n");
+        sql.append(")  \n");
+        INSERT_SQL = sql.toString();
+        sql = new StringBuffer(200);
+        sql.append("UPDATE IRR_SUSTANTIVOS SET   \n");
+        sql.append("  SUSTANTIVO_ID=?,   \n");
+        sql.append("  PARTICULARIDAD=?,   \n");
+        sql.append("  CASO=?,   \n");
+        sql.append("  NUMERO=?,   \n");
+        sql.append("  SUBINDICE=?,   \n");
+        sql.append("  FORMA=?   \n");
+        sql.append("WHERE    \n");
+        sql.append("  IRR_SUSTANTIVO_ID=?   \n");
+        UPDATE_SQL = sql.toString();
+        sql = new StringBuffer(200);
+        sql.append("DELETE FROM IRR_SUSTANTIVOS \n");
+        sql.append("WHERE    \n");
+        sql.append("  IRR_SUSTANTIVO_ID=?   \n");
+        DELETE_SQL = sql.toString();
     }
 
     public List<String> seleccionaPartics(String paramString) {
@@ -174,6 +190,13 @@ public class IrrSustantivosDAOImpl extends JdbcDaoSupport implements IrrSustanti
         return localList;
     }
 
+    public List<IrrSustantivoBean> seleccionaTodo() {
+        List localList = this.seleccionTodo.execute(new Object[] {  });
+        return localList;
+    }
+
+
+
     public void inserta(IrrSustantivoBean paramU) {
         String str = com.kalos.datos.util.DBUtil.getHashableId();
         this.insercion.update(new Object[] { str, paramU.getSustantivoId(),
@@ -203,6 +226,7 @@ public class IrrSustantivosDAOImpl extends JdbcDaoSupport implements IrrSustanti
         this.seleccionPorForma = new SeleccionPorForma(getDataSource());
         this.seleccionPartics = new SeleccionPartics(getDataSource());
         this.seleccionPorIdYPartic = new SeleccionPorIdYPartic(getDataSource());
+        seleccionTodo = new SeleccionTodo(getDataSource());
     }
 
     private class Modificacion extends SqlUpdate {
@@ -251,6 +275,13 @@ public class IrrSustantivosDAOImpl extends JdbcDaoSupport implements IrrSustanti
         public SeleccionPorForma(DataSource paramDataSource) {
             super(paramDataSource, SEL_POR_FORMA_SQL);
             declareParameter(new SqlParameter(12));
+        }
+    }
+
+    private class SeleccionTodo extends SeleccionAbstracta {
+
+        public SeleccionTodo(DataSource paramDataSource) {
+            super(paramDataSource, SEL_TODO_SQL);
         }
     }
 

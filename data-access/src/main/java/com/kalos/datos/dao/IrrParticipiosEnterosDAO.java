@@ -14,4 +14,6 @@ public interface IrrParticipiosEnterosDAO {
 
 	void inserta(IrrParticipioEntero bean);
 
+	public List<IrrParticipioEntero> seleccionaTodo();
+
 }

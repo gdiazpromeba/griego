@@ -29,4 +29,6 @@ public interface IrrVerbosDAO {
 
 	void borra(String irrVerboId);
 
+	List<IrrVerbo> seleccionaTodo();
+
 }

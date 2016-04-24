@@ -44,7 +44,11 @@ public class MigracionMysql {
         //migraInterjecciones();
         //migraIrrAdjetivosEnteros();
         //migraIrrAdjetivosIndividuales();
-        migraIrrInfinitivos();
+        //migraIrrInfinitivos();
+        //migraIrrParticipiosEnteros();
+        //migraIrrParticipiosSimples();
+        //migraIrrSustantivos();
+        migraIrrVerbos();
 
     }
 
@@ -245,6 +249,53 @@ public class MigracionMysql {
             daoMySql.inserta(bean);
         });
 
+    }
+
+    private static void migraIrrParticipiosEnteros(){
+        IrrParticipiosEnterosDAO dao = (IrrParticipiosEnterosDAO) contexto.getBean("irrParticipiosEnterosDAO");
+        IrrParticipiosEnterosDAO daoMySql = (IrrParticipiosEnterosDAO) contexto.getBean("irrParticipiosEnterosDAOMySql");
+
+        List<IrrParticipioEntero> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting IPE=" + bean.getId() );
+            daoMySql.inserta(bean);
+        });
+
+    }
+
+    private static void migraIrrParticipiosSimples(){
+        IrrParticipiosSimplesDAO dao = (IrrParticipiosSimplesDAO) contexto.getBean("irrParticipiosSimplesDAO");
+        IrrParticipiosSimplesDAO daoMySql = (IrrParticipiosSimplesDAO) contexto.getBean("irrParticipiosSimplesDAOMySql");
+
+        List<IrrParticipioSimpleBean> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting IPS=" + bean.getId() );
+            daoMySql.inserta(bean);
+        });
+
+    }
+
+    private static void migraIrrSustantivos(){
+        IrrSustantivosDAO dao = (IrrSustantivosDAO) contexto.getBean("irrSustantivosDAO");
+        IrrSustantivosDAO daoMySql = (IrrSustantivosDAO) contexto.getBean("irrSustantivosDAOMySql");
+
+        List<IrrSustantivoBean> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting IrrSust=" + bean.getId() );
+            daoMySql.inserta(bean);
+        });
+
+    }
+
+    private static void migraIrrVerbos(){
+        IrrVerbosDAO dao = (IrrVerbosDAO) contexto.getBean("irrVerbosDAO");
+        IrrVerbosDAO daoMySql = (IrrVerbosDAO) contexto.getBean("irrVerbosDAOMySql");
+
+        List<IrrVerbo> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting IrrVerbos=" + bean.getId() );
+            daoMySql.inserta(bean);
+        });
 
     }
 

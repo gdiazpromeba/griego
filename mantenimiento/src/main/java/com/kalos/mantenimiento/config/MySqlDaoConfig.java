@@ -234,7 +234,6 @@ public class MySqlDaoConfig {
   }
 
 
-        /*
   @Bean
   public IrrParticipiosEnterosDAO irrParticipiosEnterosDAOMySql(){
   IrrParticipiosEnterosDAOImpl dao= new IrrParticipiosEnterosDAOImpl();
@@ -242,50 +241,60 @@ public class MySqlDaoConfig {
   return dao;
   }
 
+
+
+
   @Bean
-  public IrrParticipiosSimplesDAO irrParticipiosSimplesDAO(){
+  public IrrParticipiosSimplesDAO irrParticipiosSimplesDAOMySql(){
   IrrParticipiosSimplesDAOImpl dao= new IrrParticipiosSimplesDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
+
+
   @Bean
-  public IrrSustantivosDAO irrSustantivosDAOMysql(){
+  public IrrSustantivosDAO irrSustantivosDAOMySql(){
   IrrSustantivosDAOImpl dao= new IrrSustantivosDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
+
+
   @Bean
-  public IrrVerbosDAO irrVerbosDAOMysql(){
+  public IrrVerbosDAO irrVerbosDAOMySql(){
   IrrVerbosDAOImpl dao= new IrrVerbosDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
+        /*
+
+
   @Bean
-  public IrrVerbosIndividualesDAO irrVerbosIndividualesDAOMysql(){
+  public IrrVerbosIndividualesDAO irrVerbosIndividualesDAOMySql(){
   IrrVerbosIndividualesDAOImpl dao= new IrrVerbosIndividualesDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
   @Bean
-  public ParticulasDAO particulasDAOMysql(){
+  public ParticulasDAO particulasDAOMySql(){
   ParticulasDAOImpl dao= new ParticulasDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
   @Bean
-  public PreposicionesDAO preposicionesDAOMysql(){
+  public PreposicionesDAO preposicionesDAOMySql(){
   PreposicionesDAOImpl dao= new PreposicionesDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
   @Bean
-  public PreposicionesEnVerbosDAO preposicionesEnVerbosDAOMysql(){
+  public PreposicionesEnVerbosDAO preposicionesEnVerbosDAOMySql(){
   PreposicionesEnVerbosDAOImpl dao= new PreposicionesEnVerbosDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
@@ -295,7 +304,7 @@ public class MySqlDaoConfig {
 
 
   @Bean
-  public SignificadoDAO significadoDAOMysql(){
+  public SignificadoDAO significadoDAOMySql(){
   SignificadoDAOImpl dao= new SignificadoDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
@@ -303,14 +312,14 @@ public class MySqlDaoConfig {
 
 
   @Bean
-  public SubstractorPrefijosDAO substractorPrefijosDAOMysql(){
+  public SubstractorPrefijosDAO substractorPrefijosDAOMySql(){
   SubstractorPrefijosDAOImpl dao= new SubstractorPrefijosDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
   @Bean
-  public SustantivosDAO sustantivosDAOMysql(){
+  public SustantivosDAO sustantivosDAOMySql(){
   SustantivosDAOImpl dao= new SustantivosDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
@@ -318,28 +327,28 @@ public class MySqlDaoConfig {
 
 
   @Bean
-  public TemasTermRegNominalDAO temasTermRegNominalDAOMysql(){
+  public TemasTermRegNominalDAO temasTermRegNominalDAOMySql(){
   TemasTermRegNominalDAOImpl dao= new TemasTermRegNominalDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
   @Bean
-  public TermRegSustantivoDAO termRegSustantivoDAOMysql(){
+  public TermRegSustantivoDAO termRegSustantivoDAOMySql(){
   TermRegSustantivoDAOImpl dao= new TermRegSustantivoDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
   @Bean
-  public TermRegVerboDAO termRegVerboDAOMysql(){
+  public TermRegVerboDAO termRegVerboDAOMySql(){
   TermRegVerboDAOImpl dao= new TermRegVerboDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
   @Bean
-  public TermRegInfinitivoDAO termRegInfinitivoDAOMysql(){
+  public TermRegInfinitivoDAO termRegInfinitivoDAOMySql(){
   TermRegInfinitivoDAOImpl dao= new TermRegInfinitivoDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
@@ -347,35 +356,35 @@ public class MySqlDaoConfig {
 
 
   @Bean
-  public TransParticipiosDAO transParticipiosDAOMysql(){
+  public TransParticipiosDAO transParticipiosDAOMySql(){
   TransParticipiosDAOImpl dao= new TransParticipiosDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
   @Bean
-  public TiposAdjetivoDAO tiposAdjetivoDAOMysql(){
+  public TiposAdjetivoDAO tiposAdjetivoDAOMySql(){
   TiposAdjetivoDAOImpl dao= new TiposAdjetivoDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
   @Bean
-  public TiposSustantivoDAO tiposSustantivoDAOMysql(){
+  public TiposSustantivoDAO tiposSustantivoDAOMySql(){
   TiposSustantivoDAOImpl dao= new TiposSustantivoDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
   @Bean
-  public TiposVerboDAO tiposVerboDAOMysql(){
+  public TiposVerboDAO tiposVerboDAOMySql(){
   TiposVerboDAOImpl dao= new TiposVerboDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
 
   @Bean
-  public VerbalizadorParticipiosDAO verbalizadorParticipiosDAOMysql(){
+  public VerbalizadorParticipiosDAO verbalizadorParticipiosDAOMySql(){
   VerbalizadorParticipiosDAOImpl dao= new VerbalizadorParticipiosDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
@@ -384,14 +393,14 @@ public class MySqlDaoConfig {
 
 
   @Bean (name = "verbosDAOMySql")
-  public VerbosDAO verbosDAOMysql(){
+  public VerbosDAO verbosDAOMySql(){
     VerbosDAOImpl dao= new VerbosDAOImpl();
     dao.setDataSource(mysqlDataSource());
     return dao;
   }
     /*
     @Bean
-    public VerbosCompuestosDAO verbosCompuestosDAOMysql(){
+    public VerbosCompuestosDAO verbosCompuestosDAOMySql(){
         VerbosCompuestosDAOImpl dao= new VerbosCompuestosDAOImpl();
         dao.setDataSource(mysqlDataSource());
         return dao;
