@@ -75,8 +75,7 @@ public class InterjeccionesDAOImpl extends JdbcDaoSupport implements Interjeccio
     }
 
     private void puebla() {
-        StringBuffer sql = new StringBuffer(200);
-        sql = new StringBuffer(200);
+        StringBuffer sql  = new StringBuffer(200);
         sql.append("SELECT   \n");
         sql.append("  ITJ.INTERJECCION_ID,   \n");
         sql.append("  ITJ.LETRA,   \n");
@@ -97,27 +96,7 @@ public class InterjeccionesDAOImpl extends JdbcDaoSupport implements Interjeccio
         sql.append(" ITJ.CODIGO \n");
         SELECCION_TODOS_CON_SIGNIFICADO_SQL = sql.toString();
 
-        sql = new StringBuffer(200);
-        sql = new StringBuffer(200);
-        sql.append("SELECT   \n");
-        sql.append("  ITJ.INTERJECCION_ID,   \n");
-        sql.append("  ITJ.LETRA,   \n");
-        sql.append("  ITJ.CODIGO,   \n");
-        sql.append("  ITJ.INTERJECCION,   \n");
-        sql.append("  ITJ.PARTIC,   \n");
-        sql.append("  SIG.SIGNIFICADO_ID,   \n");
-        sql.append("  SIG.VALOR   \n");
-        sql.append("FROM        \n");
-        sql.append("    INTERJECCIONES ITJ       \n");
-        sql.append("    LEFT JOIN SIGNIFICADOS SIG                 \n");
-        sql.append("      ON ITJ.INTERJECCION_ID=SIG.REFERENTE_ID       \n");
-        sql.append("WHERE  \n");
-        sql.append("  ITJ.INTERJECCION_ID IN (?)    \n");
-        sql.append("  AND (SIG.IDIOMA IS NULL OR SIG.IDIOMA='").append(Configuracion.getIdiomaSignificados()).append("')    \n");
-        sql.append("ORDER BY \n");
-        sql.append(" ITJ.LETRA, \n");
-        sql.append(" ITJ.CODIGO \n");
-        SELECCION_TODOS_CON_SIGNIFICADO_SQL = sql.toString();
+
 
         sql = new StringBuffer(200);
         sql.append("SELECT   \n");
@@ -186,7 +165,7 @@ public class InterjeccionesDAOImpl extends JdbcDaoSupport implements Interjeccio
         SELECCION_IDS_POR_CANONICA = sql.toString();
 
         sql = new StringBuffer(200);
-        sql.append("INSERT INTO INTERJECCIONES SET(   \n");
+        sql.append("INSERT INTO INTERJECCIONES (   \n");
         sql.append("  INTERJECCION_ID,   \n");
         sql.append("  LETRA,   \n");
         sql.append("  CODIGO,   \n");

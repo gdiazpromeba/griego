@@ -12,6 +12,8 @@ public interface IrrAdjetivosEnterosDAO {
 	
 	List<String> seleccionaPartics(String idAdjetivo);
 
+	public List<IrrAdjetivoEntero> seleccionaTodo() ;
+
 	abstract void inserta(IrrAdjetivoEntero iae);
 
 	abstract void modifica(IrrAdjetivoEntero bean);

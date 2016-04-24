@@ -6,6 +6,8 @@ import com.kalos.beans.IrrAdjetivoIndividual;
 
 public interface IrrAdjetivosIndividualesDAO {
 
+    public List<IrrAdjetivoIndividual> seleccionaTodo();
+
     public abstract List<IrrAdjetivoIndividual> seleccionaPorForma(String forma);
 
     /* (non-Javadoc)

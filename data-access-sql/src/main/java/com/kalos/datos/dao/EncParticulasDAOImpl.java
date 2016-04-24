@@ -47,6 +47,7 @@ public class EncParticulasDAOImpl extends JdbcDaoSupport implements EncParticula
         sql.append("  PARTICULA_ENCABEZADO_ID,   \n");
         sql.append("  TIPO_PALABRA,   \n");
         sql.append("  FORMA   \n");
+        sql.append(") VALUES (   \n");
         sql.append("  ?,?,?   \n");
         sql.append(" )   \n");
         INSERT_SQL = sql.toString();

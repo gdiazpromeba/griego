@@ -10,4 +10,8 @@ public interface IrrInfinitivosDAO {
 	List<IrrInfinitivoBean> seleccionaPorVerbopartic(String verboId, Particularidad partic);
 
 	List<IrrInfinitivoBean> seleccionaPorForma(String forma);
+
+	public List<IrrInfinitivoBean> seleccionaTodo();
+
+	public void inserta(IrrInfinitivoBean iae);
 }

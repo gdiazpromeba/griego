@@ -83,49 +83,49 @@ import com.kalos.recursos.Configuracion;
 
 @Configuration
 public class MySqlDaoConfig {
-    
-    //private static Logger logger = Logger.getLogger(DaoConfig.class);
-    
+
+  //private static Logger logger = Logger.getLogger(DaoConfig.class);
 
 
-    @Bean 
-	public BasicDataSource mysqlDataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost/kalos");
-        dataSource.setUsername("root");
-        dataSource.setPassword("");
+
+  @Bean
+  public BasicDataSource mysqlDataSource() {
+    BasicDataSource dataSource = new BasicDataSource();
+    dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+    dataSource.setUrl("jdbc:mysql://localhost/kalos");
+    dataSource.setUsername("root");
+    dataSource.setPassword("");
 //        String databasePath = Configuracion.getProperty("database_path");
 //        if (databasePath !=null){
 //          dataSource.addConnectionProperty("database_path", Configuracion.getProperty("database_path"));
 //        }
-    	return dataSource;
-	}
+    return dataSource;
+  }
 
 
-	@Bean
-	public AdjetivoDAO adjetivoDAOMySql(){
-		AdjetivoDAOImpl dao= new AdjetivoDAOImpl();
-		dao.setDataSource(mysqlDataSource());
-		return dao;
-	}
-	
-
-	@Bean (name = "adverbiosDAOMySql")
-	public AdverbiosDAO adverbiosDAOMySql(){
-		AdverbiosDAOImpl dao= new AdverbiosDAOImpl();
-		dao.setDataSource(mysqlDataSource());
-		return dao;
-	}
+  @Bean
+  public AdjetivoDAO adjetivoDAOMySql(){
+    AdjetivoDAOImpl dao= new AdjetivoDAOImpl();
+    dao.setDataSource(mysqlDataSource());
+    return dao;
+  }
 
 
-	
-	@Bean (name = "adjetivosComoNominalesDAOMySql")
-	public AdjetivosComoNominalesDAO adjetivosComoNominalesDAOMySql(){
-		AdjetivosComoNominalesDAOImpl dao= new AdjetivosComoNominalesDAOImpl();
-		dao.setDataSource(mysqlDataSource());
-		return dao;
-	}
+  @Bean (name = "adverbiosDAOMySql")
+  public AdverbiosDAO adverbiosDAOMySql(){
+    AdverbiosDAOImpl dao= new AdverbiosDAOImpl();
+    dao.setDataSource(mysqlDataSource());
+    return dao;
+  }
+
+
+
+  @Bean (name = "adjetivosComoNominalesDAOMySql")
+  public AdjetivosComoNominalesDAO adjetivosComoNominalesDAOMySql(){
+    AdjetivosComoNominalesDAOImpl dao= new AdjetivosComoNominalesDAOImpl();
+    dao.setDataSource(mysqlDataSource());
+    return dao;
+  }
 
 	/*
     @Bean
@@ -144,38 +144,38 @@ public class MySqlDaoConfig {
 
     */
 
-    @Bean
-    public CubosTipoPartDAO cubosTipoPartDAOMySql(){
-        CubosTipoPartDAOImpl dao= new CubosTipoPartDAOImpl();
-        dao.setDataSource(mysqlDataSource());
-        return dao;
-    }
+  @Bean
+  public CubosTipoPartDAO cubosTipoPartDAOMySql(){
+    CubosTipoPartDAOImpl dao= new CubosTipoPartDAOImpl();
+    dao.setDataSource(mysqlDataSource());
+    return dao;
+  }
 
 
 
-    @Bean
-    public DesinSustDAO desinSustDAOMySql(){
-        DesinSustDAOImpl dao= new DesinSustDAOImpl();
-        dao.setDataSource(mysqlDataSource());
-        return dao;
-    }
+  @Bean
+  public DesinSustDAO desinSustDAOMySql(){
+    DesinSustDAOImpl dao= new DesinSustDAOImpl();
+    dao.setDataSource(mysqlDataSource());
+    return dao;
+  }
 
 
 
-@Bean
-public DesinInfinitivosDAO desinInfinitivosDAOMySql(){
+  @Bean
+  public DesinInfinitivosDAO desinInfinitivosDAOMySql(){
     DesinInfintivosDAOImpl dao= new DesinInfintivosDAOImpl();
     dao.setDataSource(mysqlDataSource());
     return dao;
-}
+  }
 
 
-@Bean
-public DesinVerbosDAO desinVerbosDAOMySql(){
-DesinVerbosDAOImpl dao= new DesinVerbosDAOImpl();
-dao.setDataSource(mysqlDataSource());
-return dao;
-}
+  @Bean
+  public DesinVerbosDAO desinVerbosDAOMySql(){
+    DesinVerbosDAOImpl dao= new DesinVerbosDAOImpl();
+    dao.setDataSource(mysqlDataSource());
+    return dao;
+  }
 
 
     /*
@@ -187,14 +187,15 @@ return dao;
   return dao;
   }
 
-
 */
+
   @Bean
   public EncParticulasDAO encParticulasDAOMySql(){
-  EncParticulasDAOImpl dao= new EncParticulasDAOImpl();
-  dao.setDataSource(mysqlDataSource());
-  return dao;
+    EncParticulasDAOImpl dao= new EncParticulasDAOImpl();
+    dao.setDataSource(mysqlDataSource());
+    return dao;
   }
+
 
 
   @Bean
@@ -204,12 +205,17 @@ return dao;
   return dao;
   }
 
+
+
+
   @Bean
   public IrrAdjetivosEnterosDAO irrAdjetivosEnterosDAOMySql(){
   IrrAdjetivosEnterosDAOImpl dao= new IrrAdjetivosEnterosDAOImpl();
   dao.setDataSource(mysqlDataSource());
   return dao;
   }
+
+
 
   @Bean
   public IrrAdjetivosIndividualesDAO irrAdjetivosIndividualesDAOMySql(){
@@ -219,6 +225,7 @@ return dao;
   }
 
 
+
   @Bean
   public IrrInfinitivosDAO irrInfinitivosDAOMySql(){
   IrrInfinitivosDAOImpl dao= new IrrInfinitivosDAOImpl();
@@ -226,6 +233,8 @@ return dao;
   return dao;
   }
 
+
+        /*
   @Bean
   public IrrParticipiosEnterosDAO irrParticipiosEnterosDAOMySql(){
   IrrParticipiosEnterosDAOImpl dao= new IrrParticipiosEnterosDAOImpl();
@@ -372,12 +381,14 @@ return dao;
   return dao;
   }
   */
-    @Bean (name = "verbosDAOMySql")
-    public VerbosDAO verbosDAOMysql(){
-        VerbosDAOImpl dao= new VerbosDAOImpl();
-        dao.setDataSource(mysqlDataSource());
-        return dao;
-    }
+
+
+  @Bean (name = "verbosDAOMySql")
+  public VerbosDAO verbosDAOMysql(){
+    VerbosDAOImpl dao= new VerbosDAOImpl();
+    dao.setDataSource(mysqlDataSource());
+    return dao;
+  }
     /*
     @Bean
     public VerbosCompuestosDAO verbosCompuestosDAOMysql(){

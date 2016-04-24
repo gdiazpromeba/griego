@@ -45,6 +45,7 @@ public class IrrAdjetivosEnterosDAOImpl extends JdbcDaoSupport implements IrrAdj
 
 	private static String SELECCION_POR_ADJETIVO_SQL;
 	private static String SELECCION_INDIVIDUAL_SQL;
+	private static String SELECCION_TODO_SQL;
 	private static String SELECCION_POR_IDS_SQL;
 	private static String SELECCION_PARTICS_SQL;
 	private static String INSERCION_SQL;
@@ -90,6 +91,24 @@ public class IrrAdjetivosEnterosDAOImpl extends JdbcDaoSupport implements IrrAdj
 		sb.append("  IAE.IRR_ADJETIVOS_ENTEROS_ID=?   \n");
 
 		SELECCION_INDIVIDUAL_SQL = sb.toString();
+
+		sb = new StringBuffer(200);
+		sb.append("SELECT   \n");
+		sb.append("  IAE.IRR_ADJETIVOS_ENTEROS_ID,   \n");
+		sb.append("  IAE.ADJETIVO_ID,   \n");
+		sb.append("  IAE.GENERO,   \n");
+		sb.append("  IAE.GRADO,   \n");
+		sb.append("  IAE.PARTICULARIDAD,   \n");
+		sb.append("  IAE.SUBINDICE,   \n");
+		sb.append("  IAE.NOMINATIVO,   \n");
+		sb.append("  IAE.GENITIVO,   \n");
+		sb.append("  IAE.SOLO_SINGULAR,   \n");
+		sb.append("  IAE.TIPO_SUSTANTIVO_ID,   \n");
+		sb.append("  IAE.TIPO_SUSTANTIVO   \n");
+		sb.append("FROM        \n");
+		sb.append("   IRR_ADJETIVOS_ENTEROS IAE       \n");
+
+		SELECCION_TODO_SQL = sb.toString();
 		
 		
 		sb = new StringBuffer(200);
@@ -247,6 +266,24 @@ public class IrrAdjetivosEnterosDAOImpl extends JdbcDaoSupport implements IrrAdj
 				adjetivoId
 		});
 		return ids;
+	}
+
+	//selección de todo
+	class SeleccionTodo extends SeleccionAbstracta {
+		public SeleccionTodo(DataSource dataSource) {
+			super(dataSource, SELECCION_TODO_SQL);
+
+		}
+	}
+
+	SeleccionTodo seleccionTodo;
+
+	/* (non-Javadoc)
+	 * @see kalos.dao.IrrAdjetivosEnterosDAO#seleccionaPorAdjetivo(java.lang.String)
+	 */
+	public List<IrrAdjetivoEntero> seleccionaTodo() {
+		List<IrrAdjetivoEntero> beans=seleccionTodo.execute(new Object[] {});
+		return beans;
 	}
 
 
@@ -412,6 +449,7 @@ public class IrrAdjetivosEnterosDAOImpl extends JdbcDaoSupport implements IrrAdj
 		seleccionPorAdjetivo= new SeleccionPorAdjetivo(getDataSource());
 		seleccionIndividual = new SeleccionIndividual(getDataSource());
 		seleccionPartics=new SeleccionPartics(getDataSource());
+		seleccionTodo = new SeleccionTodo(getDataSource());
 		insercion = new Insercion(getDataSource());
 		borrado = new Borrado(getDataSource(), BORRADO_SQL);
 		borradoAdjetivos=new BorradoAdjetivos(getDataSource());

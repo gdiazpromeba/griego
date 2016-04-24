@@ -15,7 +15,6 @@
 		<module>recursos</module>
 		<module>data-access</module>
 		<module>data-access-sql</module>
-		<module>data-access-mongo</module>
 		<module>comun</module>
 		<module>comun-swing</module>
 		<module>iu</module>

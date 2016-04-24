@@ -39,7 +39,13 @@ public class MigracionMysql {
         //migraCubosTipoPart();
         //mmigraDesinSust();
         //migraDesinInfinitivos();
-        migraDesinverbos();
+        //migraDesinverbos();
+        //migraEncParticulas();
+        //migraInterjecciones();
+        //migraIrrAdjetivosEnteros();
+        //migraIrrAdjetivosIndividuales();
+        migraIrrInfinitivos();
+
     }
 
     private static void migraVerbos(){
@@ -163,6 +169,79 @@ public class MigracionMysql {
         List<DesinVerbo> beans = dao.seleccionaTodo();
         beans.forEach(bean -> {
             logger.info(" inserting Desin vebos id=" + bean.getDesinencia() );
+            daoMySql.inserta(bean);
+        });
+
+
+    }
+
+    private static void migraEncParticulas(){
+
+        EncParticulasDAO dao = (EncParticulasDAO) contexto.getBean("encParticulasDAO");
+        EncParticulasDAO daoMySql = (EncParticulasDAO) contexto.getBean("encParticulasDAOMySql");
+
+
+        List<EncParticulaBean> beans = dao.seleccionaEncParticulasTodos();
+        beans.forEach(bean -> {
+            logger.info(" inserting particula=" + bean.getForma() );
+            daoMySql.inserta(bean);
+        });
+
+
+    }
+
+    private static void migraInterjecciones(){
+
+        InterjeccionesDAO dao = (InterjeccionesDAO) contexto.getBean("interjeccionesDAO");
+        InterjeccionesDAO daoMySql = (InterjeccionesDAO) contexto.getBean("interjeccionesDAOMySql");
+
+
+        List<InterjeccionBean> beans = dao.seleccionaTodos();
+        beans.forEach(bean -> {
+            logger.info(" inserting particula=" + bean.getInterjeccion() );
+            daoMySql.inserta(bean);
+        });
+
+
+    }
+
+    private static void migraIrrAdjetivosEnteros(){
+
+        IrrAdjetivosEnterosDAO dao = (IrrAdjetivosEnterosDAO) contexto.getBean("irrAdjetivosEnterosDAO");
+        IrrAdjetivosEnterosDAO daoMySql = (IrrAdjetivosEnterosDAO) contexto.getBean("irrAdjetivosEnterosDAOMySql");
+
+
+        List<IrrAdjetivoEntero> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting IAE=" + bean.getId() );
+            daoMySql.inserta(bean);
+        });
+
+
+    }
+
+    private static void migraIrrAdjetivosIndividuales(){
+
+        IrrAdjetivosIndividualesDAO dao = (IrrAdjetivosIndividualesDAO) contexto.getBean("irrAdjetivosIndividualesDAO");
+        IrrAdjetivosIndividualesDAO daoMySql = (IrrAdjetivosIndividualesDAO) contexto.getBean("irrAdjetivosIndividualesDAOMySql");
+
+
+        List<IrrAdjetivoIndividual> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting IAI=" + bean.getId() );
+            daoMySql.inserta(bean);
+        });
+
+
+    }
+
+    private static void migraIrrInfinitivos(){
+        IrrInfinitivosDAO dao = (IrrInfinitivosDAO) contexto.getBean("irrInfinitivosDAO");
+        IrrInfinitivosDAO daoMySql = (IrrInfinitivosDAO) contexto.getBean("irrInfinitivosDAOMySql");
+
+        List<IrrInfinitivoBean> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting IAI=" + bean.getId() );
             daoMySql.inserta(bean);
         });
 

@@ -29,6 +29,16 @@ public class IrrInfinitivoBean {
 
 	private String forma;
 
+	public boolean isRespetarPosicionAcento() {
+		return respetarPosicionAcento;
+	}
+
+	public void setRespetarPosicionAcento(boolean respetarPosicionAcento) {
+		this.respetarPosicionAcento = respetarPosicionAcento;
+	}
+
+	private boolean respetarPosicionAcento;
+
 	/**
 	 * @return Returns the aspecto.
 	 */
