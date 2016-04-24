@@ -7,7 +7,7 @@ import com.kalos.beans.TestParticipiosBean;
 public interface GerenteTestParticipios {
 
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteTestVerbos#seleccionaTodos()
+	 * @see com.kalos.datos.gerentes.GerenteTestVerbos#seleccionaTodo()
 	 */
 	List<TestParticipiosBean> seleccionaTodos();
 

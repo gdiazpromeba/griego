@@ -15,7 +15,7 @@ public interface TiposSustantivoDAO {
 	 * Devuelve todos los tipos de sustantivo
 	 * @return
 	 */
-	List<TipoSustantivo> getTodos();
+	List<TipoSustantivo> seleccionaTodo();
 	
 	
 	/**
@@ -25,4 +25,6 @@ public interface TiposSustantivoDAO {
     public abstract TipoSustantivo seleccionaIndividual(int tipoEntero);
     
     public abstract TipoSustantivo seleccionaIndividual(String id);
+
+	void inserta(TipoSustantivo bean);
 }

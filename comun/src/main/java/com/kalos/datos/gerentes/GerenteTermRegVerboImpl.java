@@ -12,7 +12,7 @@ public class GerenteTermRegVerboImpl implements GerenteTermRegVerbo  {
 
 	
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteTiposVerbo#getTodos()
+	 * @see com.kalos.datos.gerentes.GerenteTiposVerbo#seleccionaTodo()
 	 */
 	/* (non-Javadoc)
 	 * @see com.kalos.datos.gerentes.GerenteTermRegVerbo#seleccionaPorTerminacion(java.lang.String)

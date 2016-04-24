@@ -383,10 +383,10 @@ public class AdjetivoDAOImpl extends JdbcDaoSupport implements AdjetivoDAO {
 	private SeleccionTodos selectTodos;
 
 	/* (non-Javadoc)
-	 * @see kalos.dao.AdjetivoDAO#getTodos()
+	 * @see kalos.dao.AdjetivoDAO#seleccionaTodo()
 	 */
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.dao.AdjetivoDAO#getTodos()
+	 * @see com.kalos.datos.dao.AdjetivoDAO#seleccionaTodo()
 	 */
 	@Override
 	public List<AdjetivoBean> getTodos() {

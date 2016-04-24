@@ -16,12 +16,23 @@ public class TipoJerarquico {
 	/**
 	 * un valor más manejable que la clave primaria, pero también único
 	 */
-	private int valorEntero;
+	private int codigo;
 	
 	/**
 	 * referencia al tipo adjetivo padre
 	 */
 	private String padreId;
+
+
+	public int getPadreCodigo() {
+		return padreCodigo;
+	}
+
+	public void setPadreCodigo(int padreCodigo) {
+		this.padreCodigo = padreCodigo;
+	}
+
+	private int padreCodigo;
 	
 	/**
 	 * clave del recurso String que describe a este tipo de adjetivo
@@ -52,12 +63,12 @@ public class TipoJerarquico {
 		this.padreId = padreId;
 	}
 
-	public int getValorEntero() {
-		return valorEntero;
+	public int getCodigo() {
+		return codigo;
 	}
 
-	public void setValorEntero(int valorEntero) {
-		this.valorEntero = valorEntero;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	
 	public boolean equals(TipoJerarquico tij){

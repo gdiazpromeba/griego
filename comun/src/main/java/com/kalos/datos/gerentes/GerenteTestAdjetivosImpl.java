@@ -33,7 +33,7 @@ public class GerenteTestAdjetivosImpl implements GerenteTestAdjetivos {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteTestAdjetivos#seleccionaTodos()
+	 * @see com.kalos.datos.gerentes.GerenteTestAdjetivos#seleccionaTodo()
 	 */
 	public List<TestAdjetivosBean> seleccionaTodos() {
 		return testAdjetivosDAO.seleccionaTodos();

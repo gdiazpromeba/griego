@@ -56,7 +56,11 @@ public class MigracionMysql {
         //migraSignificados();
         //migraVerbosSimplesCompuestos();
         //migraVerbalizadorParticipios();
-        migraSubstractorPrefijos();
+        //migraSubstractorPrefijos();
+        //migraTipoVerbos();
+        //migraTiposAdjetivo();
+        migraTiposSustantivo();
+
     }
 
     private static void migraVerbos(){
@@ -397,6 +401,42 @@ public class MigracionMysql {
         for (int i=0; i<beans.size(); i++){
             SubstractorPrefijosBean bean = beans.get(i);
             logger.info(" inserting id=" + bean.getPrefijo());
+            daoMySql.inserta(bean);
+        };
+    }
+
+    private static void migraTipoVerbos(){
+        TiposVerboDAO dao = (TiposVerboDAO) contexto.getBean("tiposVerboDAO");
+        TiposVerboDAO daoMySql = (TiposVerboDAO) contexto.getBean("tiposVerboDAOMySql");
+
+        List<TipoJerarquico> beans = dao.seleccionaTodo();
+        for (int i=0; i<beans.size(); i++){
+            TipoJerarquico bean = beans.get(i);
+            logger.info(" inserting id=" + bean.getId());
+            daoMySql.inserta(bean);
+        };
+    }
+
+    private static void migraTiposAdjetivo(){
+        TiposAdjetivoDAO dao = (TiposAdjetivoDAO) contexto.getBean("tiposAdjetivoDAO");
+        TiposAdjetivoDAO daoMySql = (TiposAdjetivoDAO) contexto.getBean("tiposAdjetivoDAOMySql");
+
+        List<TipoJerarquico> beans = dao.seleccionaTodo();
+        for (int i=0; i<beans.size(); i++){
+            TipoJerarquico bean = beans.get(i);
+            logger.info(" inserting id=" + bean.getId());
+            daoMySql.inserta(bean);
+        };
+    }
+
+    private static void migraTiposSustantivo(){
+        TiposSustantivoDAO dao = (TiposSustantivoDAO) contexto.getBean("tiposSustantivoDAO");
+        TiposSustantivoDAO daoMySql = (TiposSustantivoDAO) contexto.getBean("tiposSustantivoDAOMySql");
+
+        List<TipoSustantivo> beans = dao.seleccionaTodo();
+        for (int i=0; i<beans.size(); i++){
+            TipoSustantivo bean = beans.get(i);
+            logger.info(" inserting id=" + bean.getId());
             daoMySql.inserta(bean);
         };
     }

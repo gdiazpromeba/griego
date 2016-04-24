@@ -7,7 +7,7 @@ import com.kalos.beans.TestInfinitivoBean;
 public interface TestInfinitivosDAO {
 
 	/* (non-Javadoc)
-	 * @see kalos.dao.TestVerbo#seleccionaTodos()
+	 * @see kalos.dao.TestVerbo#seleccionaTodo()
 	 */
 	List<TestInfinitivoBean> seleccionaTodos();
 

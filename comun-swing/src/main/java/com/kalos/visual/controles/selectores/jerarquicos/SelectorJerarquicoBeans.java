@@ -89,7 +89,7 @@ public class SelectorJerarquicoBeans extends SelectorActivoBeans {
     public int getEnteroSeleccionado() {
 	jerarquiaBeans.getPK();
 	TipoJerarquico e1 = (TipoJerarquico) getBeanSeleccionado();
-	return e1.getValorEntero();
+	return e1.getCodigo();
     }
 
     public List getSeleccionadoEHijos() {

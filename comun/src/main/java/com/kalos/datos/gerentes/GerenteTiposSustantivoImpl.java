@@ -20,21 +20,21 @@ import com.kalos.datos.dao.TiposSustantivoDAO;
 public class GerenteTiposSustantivoImpl implements GerenteTiposSustantivo {
 
     public List<TipoSustantivo> getTodos() {
-	List<TipoSustantivo> list = tipoSustantivoDAO.getTodos();
+	List<TipoSustantivo> list = tipoSustantivoDAO.seleccionaTodo();
 	return list;
     }
 
     public boolean esPluralizado(int i) {
 	if (mapaTs == null) {
 	    mapaTs = new HashMap<Integer, TipoSustantivo>();
-	    List<TipoSustantivo> list = tipoSustantivoDAO.getTodos();
+	    List<TipoSustantivo> list = tipoSustantivoDAO.seleccionaTodo();
 	    Iterator<TipoSustantivo> iterator = list.iterator();
 	    do {
 		if (!iterator.hasNext())
 		    break;
 		TipoSustantivo ts =  iterator.next();
 		if (ts.isPluralizado())
-		    mapaTs.put(Integer.valueOf(ts.getValorEntero()), ts);
+		    mapaTs.put(Integer.valueOf(ts.getCodigo()), ts);
 	    } while (true);
 	}
 	return mapaTs.keySet().contains(Integer.valueOf(i));
@@ -46,10 +46,10 @@ public class GerenteTiposSustantivoImpl implements GerenteTiposSustantivo {
     }
 
     public Map<Integer, String> getMapaTiposID() {
-	List<TipoSustantivo> list = tipoSustantivoDAO.getTodos();
+	List<TipoSustantivo> list = tipoSustantivoDAO.seleccionaTodo();
 	Map<Integer, String> hashmap = new HashMap<Integer, String>();
 	TipoSustantivo o1;
-	for (Iterator<TipoSustantivo> iterator = list.iterator(); iterator.hasNext(); hashmap.put(Integer.valueOf(o1.getValorEntero()),
+	for (Iterator<TipoSustantivo> iterator = list.iterator(); iterator.hasNext(); hashmap.put(Integer.valueOf(o1.getCodigo()),
 		o1.getId()))
 	    o1 =  iterator.next();
 

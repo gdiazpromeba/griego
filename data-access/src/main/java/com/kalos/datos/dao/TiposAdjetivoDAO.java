@@ -6,11 +6,9 @@ import com.kalos.beans.TipoJerarquico;
 
 public interface TiposAdjetivoDAO {
 
-	/**
-	 * Obtiene una lista con todos los beans "AdjetivoBean"
-	 * @return
-	 */
-	List<TipoJerarquico> getTodos();
+	List<TipoJerarquico> seleccionaTodo();
+
+	public void inserta(TipoJerarquico si) ;
 
 
 }

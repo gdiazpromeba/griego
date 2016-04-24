@@ -6,7 +6,6 @@
  */
 package com.kalos.mantenimiento;
 
-import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,21 +33,12 @@ import com.kalos.datos.gerentes.GerenteDesinSust;
 import com.kalos.datos.gerentes.GerenteSustantivos;
 import com.kalos.datos.gerentes.GerenteTemasTermRegNominal;
 import com.kalos.datos.gerentes.GerenteTiposSustantivo;
-import com.kalos.datos.util.DBUtil;
-import com.kalos.enumeraciones.Caso;
-import com.kalos.enumeraciones.Numero;
 import com.kalos.enumeraciones.OrigenTema;
 import com.kalos.flexion.declinacion.Declina;
 import com.kalos.operaciones.OpPalabras;
 
-import org.apache.log4j.xml.DOMConfigurator;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 
 /**
  * Generación de los temas ficticios contractos usados para generar las
@@ -196,13 +186,13 @@ public class GeneraTemasTermRegNominal {
 				AdaptadorGerenteSustantivos ags=new AdaptadorGerenteSustantivos(gerenteSustantivos);
 				TipoSustantivo tis=gerenteTiposSustantivo.seleccionIndividual(hoja);
 				//temas provenientes de la lista de sustantivos
-				List<String> ids = gerenteSustantivos.seleccionaPorTipos(new Integer[] { tis.getValorEntero() });
+				List<String> ids = gerenteSustantivos.seleccionaPorTipos(new Integer[] { tis.getCodigo() });
 				List<SustantivoBean> sustantivos = new ArrayList<SustantivoBean>(ags.getBeans(ids));
 				for (SustantivoBean es : sustantivos) {
 					pueblaTemas(temas, es, origenTema);
 				}
 				//temas provenientes de la lista de adjetivos-como-nominales
-				List<AdjetivoComoNominalBean> acns=gerenteAdjetivosComoNominales.seleccionaPorTipos(new Integer[]{tis.getValorEntero()});
+				List<AdjetivoComoNominalBean> acns=gerenteAdjetivosComoNominales.seleccionaPorTipos(new Integer[]{tis.getCodigo()});
 				for (AdjetivoComoNominalBean bean : acns) {
 					pueblaTemas(temas, bean, origenTema);
 				}

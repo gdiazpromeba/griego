@@ -74,7 +74,7 @@ public class TestVerbosDAOImpl extends JdbcDaoSupport implements TestVerbosDAO {
 	private SeleccionTodos seleccionTodos;
 	
 	/* (non-Javadoc)
-	 * @see kalos.dao.TestVerbo#seleccionaTodos()
+	 * @see kalos.dao.TestVerbo#seleccionaTodo()
 	 */
 	public List<TestVerboBean> seleccionaTodos() {
 		return seleccionTodos.execute();

@@ -10,7 +10,7 @@ public class GerenteTransParticipiosImpl implements GerenteTransParticipios {
 	private TransParticipiosDAO transParticipiosDAO;
 	
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteTransParticipios#seleccionaTodos()
+	 * @see com.kalos.datos.gerentes.GerenteTransParticipios#seleccionaTodo()
 	 */
 	public List<TransParticipiosBean> seleccionaTodos(){
 		return transParticipiosDAO.getTodos();

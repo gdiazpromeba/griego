@@ -7,7 +7,7 @@ import com.kalos.beans.TestAdjetivosBean;
 public interface TestAdjetivosDAO {
 
 	/* (non-Javadoc)
-	 * @see kalos.dao.TestSustantivosDAO#seleccionaTodos()
+	 * @see kalos.dao.TestSustantivosDAO#seleccionaTodo()
 	 */
 	List<TestAdjetivosBean> seleccionaTodos();
 

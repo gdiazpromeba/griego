@@ -31,10 +31,6 @@ import com.kalos.datos.gerentes.GerenteTemasTermRegNominal;
 import com.kalos.datos.gerentes.GerenteTermRegSustantivo;
 import com.kalos.datos.gerentes.GerenteTiposSustantivo;
 import com.kalos.enumeraciones.Acento;
-import com.kalos.enumeraciones.AcentoConcuerda;
-import com.kalos.enumeraciones.Caso;
-import com.kalos.enumeraciones.Numero;
-import com.kalos.enumeraciones.PosicionConcuerda;
 import com.kalos.enumeraciones.Silaba;
 import com.kalos.operaciones.OpPalabras;
 
@@ -228,7 +224,7 @@ public class GeneraTermRegSustantivos {
 		List<TipoJerarquico> tijHoja = gerenteTiposSustantivo.getTiposHoja(tipoId);
 		StringBuffer sb = new StringBuffer("-");
 		for (TipoJerarquico tij : tijHoja) {
-			sb.append(tij.getValorEntero());
+			sb.append(tij.getCodigo());
 			sb.append("-");
 		}
 		return sb.toString();

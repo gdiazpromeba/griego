@@ -13,7 +13,7 @@ public class GerenteTestVerbosImpl implements GerenteTestVerbos {
     private String ultimaSeleccion;
 
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteTestVerbos#seleccionaTodos()
+	 * @see com.kalos.datos.gerentes.GerenteTestVerbos#seleccionaTodo()
 	 */
 	public List<TestVerboBean> seleccionaTodos() {
 		return testVerbosDAO.seleccionaTodos();

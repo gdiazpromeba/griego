@@ -7,7 +7,7 @@ import com.kalos.beans.TestInfinitivoBean;
 public interface GerenteTestInfinitivos {
 
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteTestVerbos#seleccionaTodos()
+	 * @see com.kalos.datos.gerentes.GerenteTestVerbos#seleccionaTodo()
 	 */
 	List<TestInfinitivoBean> seleccionaTodos();
 

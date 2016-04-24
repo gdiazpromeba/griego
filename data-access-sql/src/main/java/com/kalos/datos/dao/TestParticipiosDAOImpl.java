@@ -76,10 +76,10 @@ public class TestParticipiosDAOImpl extends JdbcDaoSupport implements TestPartic
 	private SeleccionTodos seleccionTodos;
 	
 	/* (non-Javadoc)
-	 * @see kalos.dao.TestVerbo#seleccionaTodos()
+	 * @see kalos.dao.TestVerbo#seleccionaTodo()
 	 */
 	/* (non-Javadoc)
-	 * @see kalos.dao.TestInfinitivosDAO#seleccionaTodos()
+	 * @see kalos.dao.TestInfinitivosDAO#seleccionaTodo()
 	 */
 	public List<TestParticipiosBean> seleccionaTodos() {
 		return seleccionTodos.execute();

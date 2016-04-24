@@ -32,7 +32,7 @@ public class GerenteEncParticulasImpl implements InitializingBean, Seleccionador
 
 
     /* (non-Javadoc)
-     * @see com.kalos.datos.gerentes.GerenteEncParticulasImpl#getTodos()
+     * @see com.kalos.datos.gerentes.GerenteEncParticulasImpl#seleccionaTodo()
      */
     @Override
     public List<EncParticulaBean> getTodos() {

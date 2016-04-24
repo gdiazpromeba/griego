@@ -1,7 +1,6 @@
 package com.kalos.datos.gerentes;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,8 +13,6 @@ import com.kalos.datos.dao.SustantivosDAO;
 import com.kalos.enumeraciones.LugarSubcadena;
 import com.kalos.enumeraciones.Particularidad;
 import com.kalos.enumeraciones.TipoPalabra;
-import com.kalos.operaciones.OpBeans;
-import com.kalos.operaciones.comparadores.ComparadorBeansGriegos;
 
 public class GerenteSustantivosImpl implements GerenteSustantivos {
     private SustantivosDAO sustantivosDAO;
@@ -105,7 +102,7 @@ public class GerenteSustantivosImpl implements GerenteSustantivos {
 	Integer[] arrayOfInteger = new Integer[paramList.size()];
 	for (int i = 0; i < arrayOfInteger.length; i++) {
 	    TipoJerarquico locale = paramList.get(i);
-	    arrayOfInteger[i] = Integer.valueOf(locale.getValorEntero());
+	    arrayOfInteger[i] = Integer.valueOf(locale.getCodigo());
 	}
 	List<String> localList = this.sustantivosDAO.getPorTipos(arrayOfInteger);
 	return localList;

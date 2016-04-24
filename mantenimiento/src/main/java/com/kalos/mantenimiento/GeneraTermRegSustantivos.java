@@ -6,7 +6,6 @@
  */
 package com.kalos.mantenimiento;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,24 +32,13 @@ import com.kalos.datos.gerentes.GerenteDesinSust;
 import com.kalos.datos.gerentes.GerenteTemasTermRegNominal;
 import com.kalos.datos.gerentes.GerenteTermRegSustantivo;
 import com.kalos.datos.gerentes.GerenteTiposSustantivo;
-import com.kalos.datos.util.DBUtil;
 import com.kalos.enumeraciones.Acento;
-import com.kalos.enumeraciones.AcentoConcuerda;
-import com.kalos.enumeraciones.Caso;
-import com.kalos.enumeraciones.Numero;
-import com.kalos.enumeraciones.PosicionConcuerda;
 import com.kalos.enumeraciones.Silaba;
 import com.kalos.operaciones.OpPalabras;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.xml.DOMConfigurator;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.GenericApplicationContext;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 
 /**
  * Esta clase puebla la tabla de "terminaciones regulares de sustantivos", la cual se usa para 
@@ -233,7 +221,7 @@ public class GeneraTermRegSustantivos {
 		List<TipoJerarquico> tijHoja = gerenteTiposSustantivo.getTiposHoja(tipoId);
 		StringBuffer sb = new StringBuffer("-");
 		for (TipoJerarquico tij : tijHoja) {
-			sb.append(tij.getValorEntero());
+			sb.append(tij.getCodigo());
 			sb.append("-");
 		}
 		return sb.toString();

@@ -10,7 +10,7 @@ public class GerenteCubosTipoPartImpl implements GerenteCubosTipoPart  {
 	private CubosTipoPartDAO cubosTipoPartDAO;
 
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteCubosTipoPart#seleccionaTodos()
+	 * @see com.kalos.datos.gerentes.GerenteCubosTipoPart#seleccionaTodo()
 	 */
 	public List<CubosTipoPartBean> seleccionaTodos(){
 		return cubosTipoPartDAO.seleccionaTodos();

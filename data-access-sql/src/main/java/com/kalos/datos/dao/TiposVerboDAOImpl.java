@@ -18,6 +18,7 @@ package com.kalos.datos.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -25,8 +26,11 @@ import javax.sql.DataSource;
 import com.kalos.beans.TipoJerarquico;
 import com.kalos.beans.TipoSustantivo;
 
+
+import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.object.MappingSqlQuery;
+import org.springframework.jdbc.object.SqlUpdate;
 
 /**
  * @author <a href="mailto:gonzalo.diaz@turner.com">Gonzalo Diaz</a>
@@ -36,6 +40,7 @@ import org.springframework.jdbc.object.MappingSqlQuery;
 public class TiposVerboDAOImpl extends JdbcDaoSupport implements TiposVerboDAO {
 
 	private static String SELECCION_TODOS_SQL;
+	private static String INSERCION_SQL;
 	
 	
 	private void puebla() {
@@ -49,9 +54,52 @@ public class TiposVerboDAOImpl extends JdbcDaoSupport implements TiposVerboDAO {
 		sb.append("FROM        \n");
 		sb.append("  TIPOS_VERBO TIV       \n");
 		SELECCION_TODOS_SQL = sb.toString();
+
+		sb = new StringBuffer(200);
+		sb.append("INSERT INTO TIPOS_VERBO (   \n");
+		sb.append("  TIPO_VERBO_ID,   \n");
+		sb.append("  TIPO_VERBO_COD,   \n");
+		sb.append("  PADRE_ID,           \n");
+		sb.append("  PADRE,           \n");
+		sb.append("  TIPO_VERBO_DES_CLAVE    \n");
+		sb.append(")VALUES (        \n");
+		sb.append("  ?,?,?,?,?       \n");
+		sb.append(")       \n");
+		INSERCION_SQL = sb.toString();
 		
 
 	}
+
+
+
+	//inserción
+	class Insercion extends SqlUpdate {
+		public Insercion(DataSource dataSource) {
+			super(dataSource, INSERCION_SQL);
+			declareParameter(new SqlParameter(Types.CHAR));
+			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.CHAR));
+			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.VARCHAR));
+		}
+	}
+
+	private Insercion insercion;
+
+
+	@Override
+	public void inserta(TipoJerarquico si) {
+		String pk = com.kalos.datos.util.DBUtil.getHashableId();
+		insercion.update(new Object[] {
+				si.getId(),
+				si.getCodigo(),
+				si.getPadreId(),
+				si.getPadreCodigo(),
+				si.getDesClave()
+		});
+		si.setId(pk);
+	}
+
 
 	//general select
 	abstract class SeleccionAbstracta extends MappingSqlQuery {
@@ -59,11 +107,12 @@ public class TiposVerboDAOImpl extends JdbcDaoSupport implements TiposVerboDAO {
 			super(dataSource, sql);
 		}
 
-		protected Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-			TipoSustantivo taj= new TipoSustantivo();
+		protected TipoJerarquico mapRow(ResultSet rs, int rowNum) throws SQLException {
+			TipoJerarquico taj= new TipoJerarquico();
 			taj.setId(rs.getString("TIPO_VERBO_ID"));
 			taj.setPadreId(rs.getString("PADRE_ID"));
-			taj.setValorEntero(rs.getInt("TIPO_VERBO_COD"));
+			taj.setCodigo(rs.getInt("TIPO_VERBO_COD"));
+            taj.setPadreCodigo(rs.getInt("PADRE"));
 			taj.setDesClave(rs.getString("TIPO_VERBO_DES_CLAVE"));
 			return taj;
 		}
@@ -81,9 +130,9 @@ public class TiposVerboDAOImpl extends JdbcDaoSupport implements TiposVerboDAO {
 
 
 	/* (non-Javadoc)
-	 * @see kalos.dao.TiposVerboDAO#getTodos()
+	 * @see kalos.dao.TiposVerboDAO#seleccionaTodo()
 	 */
-	public List<TipoJerarquico> getTodos() {
+	public List<TipoJerarquico> seleccionaTodo() {
 		return selectTodos.execute(new Object[] {});
 	}
 
@@ -91,6 +140,7 @@ public class TiposVerboDAOImpl extends JdbcDaoSupport implements TiposVerboDAO {
 		super.initDao();
 		puebla();
 		selectTodos = new SeleccionTodos(getDataSource());
+        insercion = new Insercion(getDataSource());
 	}
 
 }

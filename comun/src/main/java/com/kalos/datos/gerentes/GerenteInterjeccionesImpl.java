@@ -75,7 +75,7 @@ public class GerenteInterjeccionesImpl implements GerenteInterjecciones {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteInterjecciones#seleccionaTodos()
+	 * @see com.kalos.datos.gerentes.GerenteInterjecciones#seleccionaTodo()
 	 */
 	@Override
 	public List<InterjeccionBean> seleccionaTodos(){

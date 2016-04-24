@@ -12,10 +12,10 @@ public class GerenteTiposVerboImpl implements GerenteTiposVerbo {
 	private TiposVerboDAO tiposVerboDAO;
 	
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteTiposVerbo#getTodos()
+	 * @see com.kalos.datos.gerentes.GerenteTiposVerbo#seleccionaTodo()
 	 */
 	public List<TipoJerarquico> getTodos() {
-		List<TipoJerarquico> tipos=tiposVerboDAO.getTodos();
+		List<TipoJerarquico> tipos=tiposVerboDAO.seleccionaTodo();
 		return tipos;
 	}
 	
@@ -23,10 +23,10 @@ public class GerenteTiposVerboImpl implements GerenteTiposVerbo {
 	 * @see com.kalos.datos.gerentes.GerenteTiposVerbo#getMapaTiposID()
 	 */
 	public Map<Integer, String> getMapaTiposID(){
-		List<TipoJerarquico> tipos=tiposVerboDAO.getTodos();
+		List<TipoJerarquico> tipos=tiposVerboDAO.seleccionaTodo();
 		Map<Integer, String> resultado=new HashMap<Integer, String>();
 		for (TipoJerarquico tij: tipos){
-			resultado.put(tij.getValorEntero(), tij.getId());
+			resultado.put(tij.getCodigo(), tij.getId());
 		}
 		return  resultado;
 	}

@@ -320,12 +320,12 @@ public class MySqlDaoConfig {
 
 
 
-  @Bean
-  public SubstractorPrefijosDAO substractorPrefijosDAOMySql(){
-  SubstractorPrefijosDAOImpl dao= new SubstractorPrefijosDAOImpl();
-  dao.setDataSource(mysqlDataSource());
-  return dao;
-  }
+    @Bean
+    public SubstractorPrefijosDAO substractorPrefijosDAOMySql(){
+        SubstractorPrefijosDAOImpl dao= new SubstractorPrefijosDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
 
     /*
 
@@ -373,27 +373,33 @@ dao.setDataSource(mysqlDataSource());
 return dao;
 }
 
-@Bean
-public TiposAdjetivoDAO tiposAdjetivoDAOMySql(){
-TiposAdjetivoDAOImpl dao= new TiposAdjetivoDAOImpl();
-dao.setDataSource(mysqlDataSource());
-return dao;
-}
-
-@Bean
-public TiposSustantivoDAO tiposSustantivoDAOMySql(){
-TiposSustantivoDAOImpl dao= new TiposSustantivoDAOImpl();
-dao.setDataSource(mysqlDataSource());
-return dao;
-}
-
-@Bean
-public TiposVerboDAO tiposVerboDAOMySql(){
-TiposVerboDAOImpl dao= new TiposVerboDAOImpl();
-dao.setDataSource(mysqlDataSource());
-return dao;
-}
 */
+
+    @Bean
+    public TiposAdjetivoDAO tiposAdjetivoDAOMySql(){
+        TiposAdjetivoDAOImpl dao= new TiposAdjetivoDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
+
+
+
+    @Bean
+    public TiposSustantivoDAO tiposSustantivoDAOMySql(){
+        TiposSustantivoDAOImpl dao= new TiposSustantivoDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
+
+
+
+    @Bean
+    public TiposVerboDAO tiposVerboDAOMySql(){
+        TiposVerboDAOImpl dao= new TiposVerboDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
+
     @Bean
     public VerbalizadorParticipiosDAO verbalizadorParticipiosDAOMySql(){
         VerbalizadorParticipiosDAOImpl dao= new VerbalizadorParticipiosDAOImpl();

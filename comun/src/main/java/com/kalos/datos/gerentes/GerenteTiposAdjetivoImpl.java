@@ -14,23 +14,23 @@ public class GerenteTiposAdjetivoImpl implements GerenteTiposAdjetivo{
 	private TiposAdjetivoDAO tiposAdjetivoDAO;
 	
 	public List<TipoJerarquico> getTodos() {
-		List<TipoJerarquico> tipos=tiposAdjetivoDAO.getTodos();
-		setUltimaSeleccion("getTodos");
+		List<TipoJerarquico> tipos=tiposAdjetivoDAO.seleccionaTodo();
+		setUltimaSeleccion("seleccionaTodo");
 		setUltimosParametros(new Object[]{});
 		return tipos;
 	}
 	
 	public Map<Integer, String> getMapaTiposID(){
-		List<TipoJerarquico> tipos=tiposAdjetivoDAO.getTodos();
+		List<TipoJerarquico> tipos=tiposAdjetivoDAO.seleccionaTodo();
 		Map<Integer, String> resultado=new HashMap<Integer, String>();
 		for (TipoJerarquico tij: tipos){
-			resultado.put(tij.getValorEntero(), tij.getId());
+			resultado.put(tij.getCodigo(), tij.getId());
 		}
 		return  resultado;
 	}
 	
 	public List<TipoJerarquico> reseleccionar(){
-		if (ultimaSeleccion.endsWith("getTodos")){
+		if (ultimaSeleccion.endsWith("seleccionaTodo")){
 			return getTodos();
 		}else{
 			return null;

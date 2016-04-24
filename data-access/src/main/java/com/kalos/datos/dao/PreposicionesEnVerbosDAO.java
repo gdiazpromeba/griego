@@ -7,7 +7,7 @@ import java.util.List;
 public interface PreposicionesEnVerbosDAO {
 
 	/* (non-Javadoc)
-	 * @see kalos.dao.AdjetivoDAO#getTodos()
+	 * @see kalos.dao.AdjetivoDAO#seleccionaTodo()
 	 */
 	List<String> seleccionaPorVerbo(String idVerbo);
     

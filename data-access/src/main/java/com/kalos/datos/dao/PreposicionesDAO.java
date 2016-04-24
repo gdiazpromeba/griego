@@ -7,7 +7,7 @@ import com.kalos.beans.PreposicionBean;
 public interface PreposicionesDAO {
 
 	/* (non-Javadoc)
-	 * @see kalos.dao.AdjetivoDAO#getTodos()
+	 * @see kalos.dao.AdjetivoDAO#seleccionaTodo()
 	 */
 	List<PreposicionBean> getTodas();
 	List<String> seleccionaTodosLosIds();

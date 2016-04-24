@@ -9,7 +9,7 @@ public interface AdjetivoDAO {
 	public abstract List<AdjetivoBean> getRegistros(List<String> ids);
 
 	/* (non-Javadoc)
-	 * @see kalos.dao.AdjetivoDAO#getTodos()
+	 * @see kalos.dao.AdjetivoDAO#seleccionaTodo()
 	 */
 	public abstract List<AdjetivoBean> getTodos();
 

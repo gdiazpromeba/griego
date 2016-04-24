@@ -136,7 +136,7 @@ public class CubosTipoPartDAOImpl extends JdbcDaoSupport implements CubosTipoPar
 
 
 	/* (non-Javadoc)
-	 * @see kalos.dao.CubosTipoPartDAO#seleccionaTodos()
+	 * @see kalos.dao.CubosTipoPartDAO#seleccionaTodo()
 	 */
 	public List<CubosTipoPartBean> seleccionaTodos() {
 		return seleccionTodos.execute(new Object[] {});

@@ -159,7 +159,7 @@ public class AMSustantivos <T extends TermRegVerbal> implements AnalizadorMorfol
 				Iterator<TipoJerarquico> localIterator = tiposHoja.iterator();
 				while (localIterator.hasNext()) {
 					TipoJerarquico locale = localIterator.next();
-					localHashSet.add(Integer.valueOf(locale.getValorEntero()));
+					localHashSet.add(Integer.valueOf(locale.getCodigo()));
 				}
 			}
 		}
@@ -180,7 +180,7 @@ public class AMSustantivos <T extends TermRegVerbal> implements AnalizadorMorfol
 			TipoSustantivo ts = itTipSust.next();
 			TipoPalabra tipPalabra = ts.getTipoPalabra();
 			if ((tipPalabra == TipoPalabra.Interjeccion) || (tipPalabra == TipoPalabra.Conjuncion)) {
-				this.setTipos.add(Integer.valueOf(ts.getValorEntero()));
+				this.setTipos.add(Integer.valueOf(ts.getCodigo()));
 			}
 		}
 	}

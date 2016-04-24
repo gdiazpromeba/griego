@@ -10,10 +10,10 @@ public class GerenteTestInfinitivosImpl implements GerenteTestInfinitivos  {
     private TestInfinitivosDAO testInfinitivosDAO;
 
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteTestVerbos#seleccionaTodos()
+	 * @see com.kalos.datos.gerentes.GerenteTestVerbos#seleccionaTodo()
 	 */
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteTestInfinitivos#seleccionaTodos()
+	 * @see com.kalos.datos.gerentes.GerenteTestInfinitivos#seleccionaTodo()
 	 */
 	public List<TestInfinitivoBean> seleccionaTodos() {
 		return testInfinitivosDAO.seleccionaTodos();

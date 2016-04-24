@@ -67,10 +67,10 @@ public class TestInfinitivosDAOImpl extends JdbcDaoSupport implements TestInfini
 	private SeleccionTodos seleccionTodos;
 	
 	/* (non-Javadoc)
-	 * @see kalos.dao.TestVerbo#seleccionaTodos()
+	 * @see kalos.dao.TestVerbo#seleccionaTodo()
 	 */
 	/* (non-Javadoc)
-	 * @see kalos.dao.TestInfinitivosDAO#seleccionaTodos()
+	 * @see kalos.dao.TestInfinitivosDAO#seleccionaTodo()
 	 */
 	public List<TestInfinitivoBean> seleccionaTodos() {
 		return seleccionTodos.execute();

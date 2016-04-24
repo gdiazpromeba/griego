@@ -14,12 +14,10 @@ import com.kalos.datos.adaptadores.AdaptadorGerenteDesinSust;
 import com.kalos.datos.gerentes.GerenteDesinSust;
 import com.kalos.datos.gerentes.GerenteTiposSustantivo;
 import com.kalos.enumeraciones.Acento;
-import com.kalos.enumeraciones.AcentoConcuerda;
 import com.kalos.enumeraciones.Caso;
 import com.kalos.enumeraciones.Contraccion;
 import com.kalos.enumeraciones.Numero;
 import com.kalos.enumeraciones.OrigenTema;
-import com.kalos.enumeraciones.PosicionConcuerda;
 import com.kalos.operaciones.OpPalabras;
 
 // Referenced classes of package kalos.H.C:
@@ -89,7 +87,7 @@ public class ManejaDesinenciasSustantivo {
 	for (Iterator<TipoJerarquico> iterator = list1.iterator(); iterator.hasNext();) {
 	    TipoSustantivo e1 = (TipoSustantivo) iterator.next();
 	    String s = e1.getId();
-	    int i = e1.getValorEntero();
+	    int i = e1.getCodigo();
 	    List<TipoJerarquico> regYAncestros = a1.getRegistroYAncestros(s);
 	    String idsTipos[] = idsTipos(regYAncestros);
 	    AdaptadorGerenteDesinSust agds = new AdaptadorGerenteDesinSust(gerenteDesinSust);

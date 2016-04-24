@@ -64,7 +64,7 @@ public class TestSustantivosDAOImpl extends JdbcDaoSupport implements TestSustan
 	
 
 	/* (non-Javadoc)
-	 * @see kalos.dao.TestSustantivosDAO#seleccionaTodos()
+	 * @see kalos.dao.TestSustantivosDAO#seleccionaTodo()
 	 */
 	public List<TestSustantivoBean> seleccionaTodos() {
 		return seleccionTodos.execute();

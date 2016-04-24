@@ -11,7 +11,7 @@ public class GerenteTestSustantivosImpl implements GerenteTestSustantivos   {
 
 
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteTestSustantivos#seleccionaTodos()
+	 * @see com.kalos.datos.gerentes.GerenteTestSustantivos#seleccionaTodo()
 	 */
 	public List<TestSustantivoBean> seleccionaTodos() {
 		return testSustantivosDAO.seleccionaTodos();

@@ -11,7 +11,7 @@ public class GerenteTemasTermRegNominalImpl implements GerenteTemasTermRegNomina
 	
 	
 	/* (non-Javadoc)
-	 * @see com.kalos.datos.gerentes.GerenteTemasTermRegNominal#seleccionaTodos()
+	 * @see com.kalos.datos.gerentes.GerenteTemasTermRegNominal#seleccionaTodo()
 	 */
 	public List<TemaTermRegNominal> seleccionaTodos(){
 		return temasTermRegNominalDAO.seleccionaTodos();

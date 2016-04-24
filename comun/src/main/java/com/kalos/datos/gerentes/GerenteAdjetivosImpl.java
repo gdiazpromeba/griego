@@ -4,7 +4,6 @@
 
 package com.kalos.datos.gerentes;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,8 +11,6 @@ import com.kalos.beans.AdjetivoBean;
 import com.kalos.beans.TipoJerarquico;
 import com.kalos.datos.dao.IrrAdjetivosEnterosDAO;
 import com.kalos.datos.dao.IrrAdjetivosIndividualesDAO;
-import com.kalos.operaciones.OpBeans;
-import com.kalos.operaciones.comparadores.ComparadorBeansGriegos;
 
 import org.apache.log4j.Logger;
 
@@ -112,7 +109,7 @@ public class GerenteAdjetivosImpl implements GerenteAdjetivos
 	Integer ainteger[] = new Integer[list.size()];
 	for (int j = 0; j < ainteger.length; j++) {
 	    TipoJerarquico e1 = (TipoJerarquico) list.get(j);
-	    ainteger[j] = Integer.valueOf(e1.getValorEntero());
+	    ainteger[j] = Integer.valueOf(e1.getCodigo());
 	}
 
 	List<String> list1 = adjetivoDAO.getPorTipos(ainteger);
