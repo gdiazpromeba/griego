@@ -10,4 +10,8 @@ public interface VerbalizadorParticipiosDAO {
 
 	List<VerbalizadorBean> seleccionaPorTerminacionGenitivo(String terminacionGenitivo);
 
+	public List<VerbalizadorBean> seleccionaTodo();
+
+	public void inserta(VerbalizadorBean bean);
+
 }

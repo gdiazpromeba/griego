@@ -56,6 +56,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 
 
 	private static String SELECCION_POR_TIPO_SQL;
+	private static String SELECCION_TODO_SQL;
 	private static String SELECCION_POR_ENCABEZADO_SQL;
 	private static String SELECCION_INDIVIDUAL_SQL;
 	private static String SELECCION_POR_FORMA_SQL;	
@@ -96,8 +97,6 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 		SELECCION_POR_TIPO_SQL = sb.toString();
 		
 		sb = new StringBuffer(200);
-
-		sb = new StringBuffer(200);
 		sb.append("SELECT   \n");
 		sb.append("  PART.PARTICULA_ID,   \n");
 		sb.append("  PART.PARTICULA_ENCABEZADO_ID,   \n");
@@ -115,11 +114,29 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 		sb.append("  INNER JOIN PARTICULA_ENCABEZADOS ENC on PART.PARTICULA_ENCABEZADO_ID=ENC.PARTICULA_ENCABEZADO_ID  \n");
 		sb.append("WHERE   \n");
 		sb.append("  PART.PARTICULA_ENCABEZADO_ID=?   \n");
-		
+		SELECCION_POR_ENCABEZADO_SQL = sb.toString();
 
-		SELECCION_POR_ENCABEZADO_SQL = sb.toString();		
-		
-        sb = new StringBuffer(200);
+
+		sb = new StringBuffer(200);
+		sb.append("SELECT   \n");
+		sb.append("  PART.PARTICULA_ID,   \n");
+		sb.append("  PART.PARTICULA_ENCABEZADO_ID,   \n");
+		sb.append("  PART.TIPO_PALABRA,   \n");
+		sb.append("  PART.PARTICULARIDAD,   \n");
+		sb.append("  PART.CASO,   \n");
+		sb.append("  PART.PERSONA,   \n");
+		sb.append("  PART.SUBINDICE,   \n");
+		sb.append("  PART.GENERO,   \n");
+		sb.append("  PART.NUMERO,   \n");
+		sb.append("  PART.FORMA,   \n");
+		sb.append("  ENC.FORMA AS ENC_FORMA   \n");
+		sb.append("FROM   \n");
+		sb.append("  PARTICULAS PART   \n");
+		sb.append("  INNER JOIN PARTICULA_ENCABEZADOS ENC on PART.PARTICULA_ENCABEZADO_ID=ENC.PARTICULA_ENCABEZADO_ID  \n");
+		SELECCION_TODO_SQL = sb.toString();
+
+
+		sb = new StringBuffer(200);
         sb.append("SELECT   \n");
         sb.append("  PART.PARTICULA_ID,   \n"); 
         sb.append("  PART.PARTICULA_ENCABEZADO_ID,   \n");
@@ -402,6 +419,12 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 			declareParameter(new SqlParameter(Types.CHAR)); //tipo
 		}
 	}
+
+	class SeleccionTodo extends SeleccionAbstractaSinSignificado {
+		public SeleccionTodo(DataSource dataSource) {
+			super(dataSource, SELECCION_TODO_SQL);
+		}
+	}
 	
 	class SeleccionPorEncabezado extends SeleccionAbstractaSinSignificado {
 		public SeleccionPorEncabezado(DataSource dataSource) {
@@ -434,10 +457,17 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 	}
 
 
+	private SeleccionTodo seleccionTodo;
+
 	private SeleccionPorTipo seleccionPorTipo;
 	
 	public List<ParticulaBean> seleccionaParticulasDadoTipoSinSignificado(TipoPalabra tipo) {
 		return seleccionPorTipo.execute(new Object[] {tipo.getAbreviatura()});
+	}
+
+
+	public List<ParticulaBean> seleccionaTodo() {
+		return seleccionTodo.execute(new Object[] {});
 	}
 	
 	private SeleccionIndividual seleccionIndividual;
@@ -651,6 +681,7 @@ public class ParticulasDAOImpl extends JdbcDaoSupport implements ParticulasDAO  
 		seleccionTodosIds=new SeleccionTodosIds(getDataSource());
 		seleccionIdsPorTipo=new SeleccionIdsPorTipo(getDataSource());
 		seleccionIdsPorEncabezado=new SeleccionIdsPorEncabezado(getDataSource());
+		seleccionTodo =new SeleccionTodo(getDataSource());
 		insercion=new Insercion(getDataSource());
 		modificacion=new Modificacion(getDataSource());
 		borrado = new Borrado(getDataSource(), BORRADO_SQL);

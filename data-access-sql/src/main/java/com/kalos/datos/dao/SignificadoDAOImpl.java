@@ -39,6 +39,7 @@ public class SignificadoDAOImpl extends JdbcDaoSupport implements  SignificadoDA
 
 	private static String SELECCION_POR_REFERENTE_SQL;
 	private static String SELECCION_INDIVIDUAL_SQL;
+	private static String SELECCION_TODOS_SQL;
 	private static String INSERCION_SQL;
 	private static String MODIFICACION_SQL;
 	private static String BORRADO_SQL;
@@ -58,6 +59,19 @@ public class SignificadoDAOImpl extends JdbcDaoSupport implements  SignificadoDA
 		sb.append("  SIG.IDIOMA   \n");
 
 		SELECCION_POR_REFERENTE_SQL = sb.toString();
+
+		 sb = new StringBuffer(200);
+		sb.append("SELECT   \n");
+		sb.append("  SIG.SIGNIFICADO_ID,   \n");
+		sb.append("  SIG.IDIOMA,   \n");
+		sb.append("  SIG.REFERENTE_ID,   \n");
+		sb.append("  SIG.VALOR   \n");
+		sb.append("FROM        \n");
+		sb.append("  SIGNIFICADOS SIG       \n");
+		sb.append("ORDER BY  \n");
+		sb.append("  SIG.IDIOMA   \n");
+
+		SELECCION_TODOS_SQL = sb.toString();
 
 		sb = new StringBuffer(200);
 		sb.append("SELECT   \n");
@@ -128,7 +142,16 @@ public class SignificadoDAOImpl extends JdbcDaoSupport implements  SignificadoDA
 		}
 	}
 
+	//selección de todos
+	class SeleccionTodo extends SeleccionAbstracta {
+		public SeleccionTodo(DataSource dataSource) {
+			super(dataSource, SELECCION_TODOS_SQL);
+		}
+	}
+
 	private SeleccionPorReferente seleccionPorReferente;
+
+	private SeleccionTodo seleccionTodo;
 
 	/* (non-Javadoc)
 	 * @see kalos.dao.SignificadoDAO#getPorReferente(java.lang.String)
@@ -139,6 +162,10 @@ public class SignificadoDAOImpl extends JdbcDaoSupport implements  SignificadoDA
 	@Override
 	public List<Significado> getPorReferente(String referenteId) {
 		return seleccionPorReferente.execute(new Object[] { referenteId });
+	}
+
+	public List<Significado> seleccionaTodo() {
+		return seleccionTodo.execute(new Object[] {});
 	}
 
 	//selección individual
@@ -245,6 +272,7 @@ public class SignificadoDAOImpl extends JdbcDaoSupport implements  SignificadoDA
 		puebla();
 		seleccionPorReferente = new SeleccionPorReferente(getDataSource());
 		seleccionIndividual = new SeleccionIndividual(getDataSource());
+		seleccionTodo = new SeleccionTodo(getDataSource());
 		insercion = new Insercion(getDataSource());
 		borrado = new Borrado(getDataSource());
 		modificacion = new Modificacion(getDataSource());

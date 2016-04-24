@@ -22,6 +22,8 @@ public interface IrrVerbosIndividualesDAO {
 	void borra(String pk);
 	
 	List<IrrVerboIndividual> getRegistros(List<String> ids);
+
+	public List seleccionaTodo();
 	
 
 

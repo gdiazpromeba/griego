@@ -1,5 +1,7 @@
 package com.kalos.datos.dao;
 
+import com.kalos.beans.PreposicionEnVerbo;
+
 import java.util.List;
 
 public interface PreposicionesEnVerbosDAO {
@@ -17,5 +19,9 @@ public interface PreposicionesEnVerbosDAO {
      * @param preposiciones
      */
     public void inserta(String idVerbo, List<String> preposiciones);
+
+    public void inserta(PreposicionEnVerbo bean);
+
+    public List<PreposicionEnVerbo> seleccionaTodo();
 
 }

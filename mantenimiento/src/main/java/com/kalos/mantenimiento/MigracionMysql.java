@@ -48,8 +48,15 @@ public class MigracionMysql {
         //migraIrrParticipiosEnteros();
         //migraIrrParticipiosSimples();
         //migraIrrSustantivos();
-        migraIrrVerbos();
-
+        //migraIrrVerbos();
+        //migraIrrVerbosIndividuales();
+        //migraParticulas();
+        //migraPreposiciones();
+        //migraPreposicionesEnVerbos();
+        //migraSignificados();
+        //migraVerbosSimplesCompuestos();
+        //migraVerbalizadorParticipios();
+        migraSubstractorPrefijos();
     }
 
     private static void migraVerbos(){
@@ -296,11 +303,103 @@ public class MigracionMysql {
             logger.info(" inserting IrrVerbos=" + bean.getId() );
             daoMySql.inserta(bean);
         });
+    }
 
+    private static void migraIrrVerbosIndividuales(){
+        IrrVerbosIndividualesDAO dao = (IrrVerbosIndividualesDAO) contexto.getBean("irrVerbosIndividualesDAO");
+        IrrVerbosIndividualesDAO daoMySql = (IrrVerbosIndividualesDAO) contexto.getBean("irrVerbosIndividualesDAOMySql");
+
+        List<IrrVerboIndividual> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting IrrVerbosIndividuales=" + bean.getId() );
+            daoMySql.inserta(bean);
+        });
+    }
+
+    private static void migraParticulas(){
+        ParticulasDAO dao = (ParticulasDAO) contexto.getBean("particulasDAO");
+        ParticulasDAO daoMySql = (ParticulasDAO) contexto.getBean("particulasDAOMySql");
+
+        List<ParticulaBean> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting id=" + bean.getId() );
+            daoMySql.inserta(bean);
+        });
+    }
+
+    private static void migraPreposiciones(){
+        PreposicionesDAO dao = (PreposicionesDAO) contexto.getBean("preposicionesDAO");
+        PreposicionesDAO daoMySql = (PreposicionesDAO) contexto.getBean("preposicionesDAOMySql");
+
+        List<PreposicionBean> beans = dao.getTodas();
+        beans.forEach(bean -> {
+            logger.info(" inserting id=" + bean.getId() );
+            daoMySql.inserta(bean);
+        });
+    }
+
+    private static void migraPreposicionesEnVerbos(){
+        PreposicionesEnVerbosDAO dao = (PreposicionesEnVerbosDAO) contexto.getBean("preposicionesEnVerbosDAO");
+        PreposicionesEnVerbosDAO daoMySql = (PreposicionesEnVerbosDAO) contexto.getBean("preposicionesEnVerbosDAOMySql");
+
+        List<PreposicionEnVerbo> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting id=" + bean.getVerboId() );
+            daoMySql.inserta(bean);
+        });
+    }
+
+    private static void migraSignificados(){
+        SignificadoDAO dao = (SignificadoDAO) contexto.getBean("significadoDAO");
+        SignificadoDAO daoMySql = (SignificadoDAO) contexto.getBean("significadoDAOMySql");
+        //daoMySql.setAutocommit(false);
+
+        List<Significado> beans = dao.seleccionaTodo();
+        for (int i=0; i<beans.size(); i++){
+            //if (i%100 ==0) daoMySql.commit();
+            Significado bean = beans.get(i);
+            logger.info(" inserting id=" + bean.getId() );
+            daoMySql.inserta(bean);
+        };
+        //daoMySql.commit();
+    }
+
+    private static void migraVerbosSimplesCompuestos(){
+        VerbosCompuestosDAO dao = (VerbosCompuestosDAO) contexto.getBean("verbosCompuestosDAO");
+        VerbosCompuestosDAO daoMySql = (VerbosCompuestosDAO) contexto.getBean("verbosCompuestosDAOMySql");
+
+        List<VerboSimpleCompuesto> beans = dao.seleccionaTodo();
+        for (int i=0; i<beans.size(); i++){
+            VerboSimpleCompuesto bean = beans.get(i);
+            logger.info(" inserting id=" + bean.getIdVerboCompuesto() );
+            daoMySql.inserta(bean);
+        };
+    }
+
+    private static void migraVerbalizadorParticipios(){
+        VerbalizadorParticipiosDAO dao = (VerbalizadorParticipiosDAO) contexto.getBean("verbalizadorParticipiosDAO");
+        VerbalizadorParticipiosDAO daoMySql = (VerbalizadorParticipiosDAO) contexto.getBean("verbalizadorParticipiosDAOMySql");
+
+        List<VerbalizadorBean> beans = dao.seleccionaTodo();
+        for (int i=0; i<beans.size(); i++){
+            VerbalizadorBean bean = beans.get(i);
+            logger.info(" inserting id=" + bean.getTerminacionNominativo());
+            daoMySql.inserta(bean);
+        };
     }
 
 
+    private static void migraSubstractorPrefijos(){
+        SubstractorPrefijosDAO dao = (SubstractorPrefijosDAO) contexto.getBean("substractorPrefijosDAO");
+        SubstractorPrefijosDAO daoMySql = (SubstractorPrefijosDAO) contexto.getBean("substractorPrefijosDAOMySql");
 
+        List<SubstractorPrefijosBean> beans = dao.seleccionaTodo();
+        for (int i=0; i<beans.size(); i++){
+            SubstractorPrefijosBean bean = beans.get(i);
+            logger.info(" inserting id=" + bean.getPrefijo());
+            daoMySql.inserta(bean);
+        };
+    }
 
 
 

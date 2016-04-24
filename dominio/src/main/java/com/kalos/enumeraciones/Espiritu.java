@@ -12,7 +12,7 @@ package com.kalos.enumeraciones;
 public enum Espiritu {
 	Ninguno, Aspero, Suave;
 	
-	public int getInt(Espiritu espiritu){
+	public static int getInt(Espiritu espiritu){
 		switch(espiritu){
 		case Ninguno:
 			return 0;

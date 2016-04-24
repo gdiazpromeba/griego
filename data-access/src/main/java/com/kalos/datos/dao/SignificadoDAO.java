@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.kalos.beans.Significado;
 
-public interface SignificadoDAO {
+public interface SignificadoDAO extends Committable {
 
     /* (non-Javadoc)
      * @see kalos.dao.SignificadoDAO#getPorReferente(java.lang.String)
@@ -30,5 +30,7 @@ public interface SignificadoDAO {
      * @see kalos.dao.SignificadoDAO#borra(java.lang.String)
      */
     public abstract void borra(String significadoId);
+
+    public List<Significado> seleccionaTodo();
 
 }

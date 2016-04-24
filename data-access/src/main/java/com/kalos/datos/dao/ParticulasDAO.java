@@ -20,7 +20,8 @@ public interface ParticulasDAO  {
 	ParticulaBean seleccionaIndividual(String id);
 	
 	List<ParticulaBean> seleccionaParticulasDadaFormaSinSignificado(String forma);
-	
+
+	public List<ParticulaBean> seleccionaTodo() ;
 
 	
 	List<ParticulaBean> seleccionaParticulasNoAcentuablesSinSignificado();

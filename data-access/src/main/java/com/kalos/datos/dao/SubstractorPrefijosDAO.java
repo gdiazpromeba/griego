@@ -8,4 +8,8 @@ public interface SubstractorPrefijosDAO {
 
 	List<SubstractorPrefijosBean> seleccionaPorForma(String forma);
 
+    List<SubstractorPrefijosBean> seleccionaTodo();
+
+	void inserta(SubstractorPrefijosBean si) ;
+
 }

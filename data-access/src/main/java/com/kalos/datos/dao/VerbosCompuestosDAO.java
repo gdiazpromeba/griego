@@ -21,4 +21,6 @@ public interface VerbosCompuestosDAO {
 
 	public abstract void borraPorVerboCompuesto(String idVerboCompuesto);
 
+	public List<VerboSimpleCompuesto> seleccionaTodo();
+
 }
