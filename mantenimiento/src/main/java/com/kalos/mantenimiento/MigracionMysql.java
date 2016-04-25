@@ -32,34 +32,42 @@ public class MigracionMysql {
 
     public static void main(String[] args) throws Exception {
         contexto = creaContexto();
-        //migraVerbos();
-        //migraAdjetivos();
-        //migraAdverbios();
-        //migraAdjetivosComoNominales();
-        //migraCubosTipoPart();
-        //mmigraDesinSust();
-        //migraDesinInfinitivos();
-        //migraDesinverbos();
-        //migraEncParticulas();
-        //migraInterjecciones();
-        //migraIrrAdjetivosEnteros();
-        //migraIrrAdjetivosIndividuales();
-        //migraIrrInfinitivos();
-        //migraIrrParticipiosEnteros();
-        //migraIrrParticipiosSimples();
-        //migraIrrSustantivos();
-        //migraIrrVerbos();
-        //migraIrrVerbosIndividuales();
-        //migraParticulas();
-        //migraPreposiciones();
-        //migraPreposicionesEnVerbos();
-        //migraSignificados();
-        //migraVerbosSimplesCompuestos();
-        //migraVerbalizadorParticipios();
-        //migraSubstractorPrefijos();
-        //migraTipoVerbos();
-        //migraTiposAdjetivo();
+        migraVerbos();
+        migraAdjetivos();
+        migraAdverbios();
+        migraAdjetivosComoNominales();
+        migraCubosTipoPart();
+        mmigraDesinSust();
+        migraDesinInfinitivos();
+        migraDesinverbos();
+        migraEncParticulas();
+        migraInterjecciones();
+        migraIrrAdjetivosEnteros();
+        migraIrrAdjetivosIndividuales();
+        migraIrrInfinitivos();
+        migraIrrParticipiosEnteros();
+        migraIrrParticipiosSimples();
+        migraIrrSustantivos();
+        migraIrrVerbos();
+        migraIrrVerbosIndividuales();
+        migraParticulas();
+        migraPreposiciones();
+        migraPreposicionesEnVerbos();
+        migraSignificados();
+        migraVerbosSimplesCompuestos();
+        migraVerbalizadorParticipios();
+        migraSubstractorPrefijos();
+        migraTipoVerbos();
+        migraTiposAdjetivo();
         migraTiposSustantivo();
+        migraSustantivos();
+        migraTemasTermRegNominal();
+        migraTemasTermRegSust();
+        migraTermRegVerbo();
+        migraTermRegInfinitivo();
+        migraTransParticipios();
+        migraConjunciones();
+
 
     }
 
@@ -439,6 +447,98 @@ public class MigracionMysql {
             logger.info(" inserting id=" + bean.getId());
             daoMySql.inserta(bean);
         };
+    }
+
+
+    private static void migraSustantivos(){
+        SustantivosDAO dao = (SustantivosDAO) contexto.getBean("sustantivosDAO");
+        SustantivosDAO daoMySql = (SustantivosDAO) contexto.getBean("sustantivosDAOMySql");
+
+
+            List<SustantivoBean> beans = dao.seleccionaTodo();
+            beans.forEach(bean -> {
+                logger.info(" inserting id=" + bean.getId());
+                daoMySql.inserta(bean);
+            });
+
+    }
+
+    private static void migraTemasTermRegNominal(){
+        TemasTermRegNominalDAO dao = (TemasTermRegNominalDAO) contexto.getBean("temasTermRegNominalDAO");
+        TemasTermRegNominalDAO daoMySql = (TemasTermRegNominalDAO) contexto.getBean("temasTermRegNominalDAOMySql");
+
+
+        List<TemaTermRegNominal> beans = dao.seleccionaTodos();
+        beans.forEach(bean -> {
+            logger.info(" inserting id=" + bean.getIdTipoNominal());
+            daoMySql.inserta(bean);
+        });
+
+    }
+
+    private static void migraTemasTermRegSust(){
+        TermRegSustantivoDAO dao = (TermRegSustantivoDAO) contexto.getBean("termRegSustantivoDAO");
+        TermRegSustantivoDAO daoMySql = (TermRegSustantivoDAO) contexto.getBean("termRegSustantivoDAOMySql");
+
+
+        List<TermRegSustantivo> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting id=" + bean.getTerminacion());
+            daoMySql.inserta(bean);
+        });
+
+    }
+
+    private static void migraTermRegVerbo(){
+        TermRegVerboDAO dao = (TermRegVerboDAO) contexto.getBean("termRegVerboDAO");
+        TermRegVerboDAO daoMySql = (TermRegVerboDAO) contexto.getBean("termRegVerboDAOMySql");
+
+
+        List<TermRegVerbo> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting id=" + bean.getTerminacion());
+            daoMySql.inserta(bean);
+        });
+
+    }
+
+    private static void migraTermRegInfinitivo(){
+        TermRegInfinitivoDAO dao = (TermRegInfinitivoDAO) contexto.getBean("termRegInfinitivoDAO");
+        TermRegInfinitivoDAO daoMySql = (TermRegInfinitivoDAO) contexto.getBean("termRegInfinitivoDAOMySql");
+
+
+        List<TermRegInfinitivo> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting id=" + bean.getTerminacion());
+            daoMySql.inserta(bean);
+        });
+
+    }
+
+    private static void migraTransParticipios(){
+        TransParticipiosDAO dao = (TransParticipiosDAO) contexto.getBean("transParticipiosDAO");
+        TransParticipiosDAO daoMySql = (TransParticipiosDAO) contexto.getBean("transParticipiosDAOMySql");
+
+
+        List<TransParticipiosBean> beans = dao.seleccionaTodo();
+        beans.forEach(bean -> {
+            logger.info(" inserting id=" + bean.getId());
+            daoMySql.inserta(bean);
+        });
+
+    }
+
+    private static void migraConjunciones(){
+        ConjuncionesDAO dao = (ConjuncionesDAO) contexto.getBean("conjuncionesDAO");
+        ConjuncionesDAO daoMySql = (ConjuncionesDAO) contexto.getBean("conjuncionesDAOMySql");
+
+
+        List<ConjuncionBean> beans = dao.seleccionaTodos();
+        beans.forEach(bean -> {
+            logger.info(" inserting id=" + bean.getId());
+            daoMySql.inserta(bean);
+        });
+
     }
 
 

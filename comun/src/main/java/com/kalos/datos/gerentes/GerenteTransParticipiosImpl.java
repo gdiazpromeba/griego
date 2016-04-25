@@ -13,7 +13,7 @@ public class GerenteTransParticipiosImpl implements GerenteTransParticipios {
 	 * @see com.kalos.datos.gerentes.GerenteTransParticipios#seleccionaTodo()
 	 */
 	public List<TransParticipiosBean> seleccionaTodos(){
-		return transParticipiosDAO.getTodos();
+		return transParticipiosDAO.seleccionaTodo();
 	}
 	
 	public List<TransParticipiosBean> seleccionaPorSubstraer(String forma){

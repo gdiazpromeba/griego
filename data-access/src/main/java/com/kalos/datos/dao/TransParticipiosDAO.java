@@ -7,7 +7,8 @@ import com.kalos.beans.TransParticipiosBean;
 public interface TransParticipiosDAO {
 
 
-	List<TransParticipiosBean> getTodos();
+	List<TransParticipiosBean> seleccionaTodo();
     List<TransParticipiosBean> seleccionaPorSubstraer(String forma);
+    public void inserta(TransParticipiosBean bean);
 
 }

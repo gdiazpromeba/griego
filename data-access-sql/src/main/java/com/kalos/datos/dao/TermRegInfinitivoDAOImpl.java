@@ -44,6 +44,7 @@ import org.springframework.jdbc.object.SqlUpdate;
 public class TermRegInfinitivoDAOImpl extends JdbcDaoSupport implements TermRegInfinitivoDAO  {
 
 	private static String SELECCION_POR_TERMINACION_SQL;
+    private static String SELECCION_TODO_SQL;
 	private static String INSERCION_SQL;
 	private static String BORRA_TODO;
 
@@ -59,12 +60,27 @@ public class TermRegInfinitivoDAOImpl extends JdbcDaoSupport implements TermRegI
 		sb.append("   REGEX_TERM,    \n");
 		sb.append("   SILABA,      \n");
 		sb.append("   ACENTO,    \n");
-		sb.append("   CONTRACCION_GENERADORA \n");    
+		sb.append("   CONTRACCION_GENERADORA \n");
 		sb.append("FROM \n");
 		sb.append("   TERM_REG_INFIN \n");
 		sb.append("WHERE \n");
 		sb.append(" SUBSTRING(?, LENGTH(?)-LENGTH(TERMINACION)+1, LENGTH(?))=TERMINACION \n");
 		SELECCION_POR_TERMINACION_SQL = sb.toString();
+
+		sb = new StringBuffer(200);
+		sb.append("SELECT \n");
+		sb.append("   VOZ,  \n");
+		sb.append("   ASPECTO,  \n");
+		sb.append("   FUERTE,  \n");
+		sb.append("   TIPO_DESINENCIA,  \n");
+		sb.append("   TERMINACION,     \n");
+		sb.append("   REGEX_TERM,    \n");
+		sb.append("   SILABA,      \n");
+		sb.append("   ACENTO,    \n");
+		sb.append("   CONTRACCION_GENERADORA \n");
+		sb.append("FROM \n");
+		sb.append("   TERM_REG_INFIN \n");
+		SELECCION_TODO_SQL = sb.toString();
 		
 		sb = new StringBuffer(200);
 		sb.append("INSERT INTO TERM_REG_INFIN ( \n");
@@ -119,8 +135,16 @@ public class TermRegInfinitivoDAOImpl extends JdbcDaoSupport implements TermRegI
 		}
 	}
 
+    //selección de todo
+    class SeleccionTodo extends SeleccionAbstracta {
+        public SeleccionTodo(DataSource dataSource) {
+            super(dataSource, SELECCION_TODO_SQL);
+        }
+    }
+
 
 	private SeleccionPorTerminacion seleccionPorTerminacion;
+    private SeleccionTodo seleccionTodo;
 
 	/* (non-Javadoc)
 	 * @see kalos.dao.TermRegInfinitivoDAO#seleccionaPorTerminacion(java.lang.String)
@@ -129,10 +153,15 @@ public class TermRegInfinitivoDAOImpl extends JdbcDaoSupport implements TermRegI
 	 * @see kalos.dao.TermRegInfinitivoDAO#seleccionaPorTerminacion(java.lang.String)
 	 */
 	public List<TermRegInfinitivo> seleccionaPorTerminacion(String terminacion) {
-		List<TermRegInfinitivo> lstAux = seleccionPorTerminacion.execute(new Object[] {
-				terminacion, terminacion, terminacion});
-		return lstAux;
-	}
+        List<TermRegInfinitivo> lstAux = seleccionPorTerminacion.execute(new Object[] {
+                terminacion, terminacion, terminacion});
+        return lstAux;
+    }
+
+    public List<TermRegInfinitivo> seleccionaTodo() {
+        List<TermRegInfinitivo> lstAux = seleccionTodo.execute();
+        return lstAux;
+    }
 
 	
 	private class Insercion extends SqlUpdate {
@@ -160,7 +189,7 @@ public class TermRegInfinitivoDAOImpl extends JdbcDaoSupport implements TermRegI
 				bean.getTipoDesinencia(),
 				bean.getTerminacion(),
 				bean.getRegEx(),
-				bean.getSilaba(),
+				bean.getSilaba().valorEntero(),
 				bean.getAcento().valorEntero(),
 				bean.getContraccionGeneradora().valorEntero()
 		});
@@ -182,6 +211,7 @@ public class TermRegInfinitivoDAOImpl extends JdbcDaoSupport implements TermRegI
 		super.initDao();
 		puebla();
 		seleccionPorTerminacion = new SeleccionPorTerminacion(getDataSource());
+        seleccionTodo = new SeleccionTodo(getDataSource());
 		insercion=new Insercion(getDataSource());
 		borraTodo=new BorraTodo(getDataSource());
 	}

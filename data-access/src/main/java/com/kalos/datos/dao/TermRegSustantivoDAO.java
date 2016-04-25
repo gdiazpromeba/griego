@@ -29,4 +29,7 @@ public interface TermRegSustantivoDAO {
 	 */
 	public void inserta(TermRegSustantivo bean);
 
+
+	public List<TermRegSustantivo> seleccionaTodo();
+
 }

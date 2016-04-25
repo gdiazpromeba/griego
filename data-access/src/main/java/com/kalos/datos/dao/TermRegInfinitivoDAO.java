@@ -10,7 +10,8 @@ public interface TermRegInfinitivoDAO {
 	 * @see kalos.dao.TermRegInfinitivoDAO#seleccionaPorTerminacion(java.lang.String)
 	 */
 	List<TermRegInfinitivo> seleccionaPorTerminacion(String terminacion);
-	
+
+	public List<TermRegInfinitivo> seleccionaTodo();
 	
 	void inserta(TermRegInfinitivo bean);
 	

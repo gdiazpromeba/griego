@@ -134,7 +134,7 @@ public class MySqlDaoConfig {
         dao.setDataSource(mysqlDataSource());
         return dao;
     }
-
+*/
     @Bean
     public ConjuncionesDAO conjuncionesDAOMySql(){
         ConjuncionesDAOImpl dao= new ConjuncionesDAOImpl();
@@ -142,7 +142,6 @@ public class MySqlDaoConfig {
         return dao;
     }
 
-    */
 
     @Bean
     public CubosTipoPartDAO cubosTipoPartDAOMySql(){
@@ -327,53 +326,62 @@ public class MySqlDaoConfig {
         return dao;
     }
 
-    /*
-
-@Bean
-public SustantivosDAO sustantivosDAOMySql(){
-SustantivosDAOImpl dao= new SustantivosDAOImpl();
-dao.setDataSource(mysqlDataSource());
-return dao;
-}
 
 
-@Bean
-public TemasTermRegNominalDAO temasTermRegNominalDAOMySql(){
-TemasTermRegNominalDAOImpl dao= new TemasTermRegNominalDAOImpl();
-dao.setDataSource(mysqlDataSource());
-return dao;
-}
-
-@Bean
-public TermRegSustantivoDAO termRegSustantivoDAOMySql(){
-TermRegSustantivoDAOImpl dao= new TermRegSustantivoDAOImpl();
-dao.setDataSource(mysqlDataSource());
-return dao;
-}
-
-@Bean
-public TermRegVerboDAO termRegVerboDAOMySql(){
-TermRegVerboDAOImpl dao= new TermRegVerboDAOImpl();
-dao.setDataSource(mysqlDataSource());
-return dao;
-}
-
-@Bean
-public TermRegInfinitivoDAO termRegInfinitivoDAOMySql(){
-TermRegInfinitivoDAOImpl dao= new TermRegInfinitivoDAOImpl();
-dao.setDataSource(mysqlDataSource());
-return dao;
-}
+    @Bean
+    public SustantivosDAO sustantivosDAOMySql(){
+        SustantivosDAOImpl dao= new SustantivosDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
 
 
-@Bean
-public TransParticipiosDAO transParticipiosDAOMySql(){
-TransParticipiosDAOImpl dao= new TransParticipiosDAOImpl();
-dao.setDataSource(mysqlDataSource());
-return dao;
-}
 
-*/
+    @Bean
+    public TemasTermRegNominalDAO temasTermRegNominalDAOMySql(){
+        TemasTermRegNominalDAOImpl dao= new TemasTermRegNominalDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
+
+
+
+    @Bean
+    public TermRegSustantivoDAO termRegSustantivoDAOMySql(){
+        TermRegSustantivoDAOImpl dao= new TermRegSustantivoDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
+
+
+
+    @Bean
+    public TermRegVerboDAO termRegVerboDAOMySql(){
+        TermRegVerboDAOImpl dao= new TermRegVerboDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
+
+
+
+    @Bean
+    public TermRegInfinitivoDAO termRegInfinitivoDAOMySql(){
+        TermRegInfinitivoDAOImpl dao= new TermRegInfinitivoDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
+
+
+
+
+    @Bean
+    public TransParticipiosDAO transParticipiosDAOMySql(){
+        TransParticipiosDAOImpl dao= new TransParticipiosDAOImpl();
+        dao.setDataSource(mysqlDataSource());
+        return dao;
+    }
+
+
 
     @Bean
     public TiposAdjetivoDAO tiposAdjetivoDAOMySql(){

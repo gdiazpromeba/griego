@@ -24,6 +24,12 @@ public interface SustantivosDAO {
 	List<SustantivoBean> seleccionaPorGenitivoParaAM(String genitivo);
 	
 	List<SustantivoBean> getRegistros(List<String> ids);
+
+	/**
+	 * todos los registros de la tabla, sin significado (para migraciones solamente)
+	 * @return
+     */
+	public List<SustantivoBean> seleccionaTodo();
 	
 	/* (non-Javadoc)
 	 * @see kalos.dao.AdjetivoDAO#inserta(kalos.beans.AdjetivoBean)
